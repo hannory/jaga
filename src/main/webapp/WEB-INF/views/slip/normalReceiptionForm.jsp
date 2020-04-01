@@ -15,7 +15,7 @@
 
 	<main>
 	<div class="container-fluid">
-		<h1 class="mt-4">일반전표입력</h1>
+		<h1 class="mt-4">일반전표입력     aaa</h1>
 		<ol class="breadcrumb mb-4">
 			<li class="breadcrumb-item"><a href="index.html">끨끨끨</a></li>
 			<li class="breadcrumb-item active">희희희희희희희희희</li>

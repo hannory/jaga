@@ -3,16 +3,38 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
-<head>
+<head>    
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
 <title>자가경리</title>
-        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <link href="${ contextPath }/resources/css/styles.css" rel="stylesheet" />
         <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" crossorigin="anonymous"></script>
+        
+        <script>
+        	window.onload=function(){
+        		console.log(self);
+        		/* self.name = "aaa"; */
+        		/* if(self.name == "aaa"){
+        			self.name = "zz";
+	        		setTimeout(() => {
+	        			location.reload();
+	        		 console.log("재시작");
+	        		}, 2000);
+        		} */
+        		if (!location.hash) { 
+
+        			location.hash = '#reload';
+
+        			location.href = location.href;
+        			console.log("ㅋㅋㅋㅋㅋ");
+
+        		}
+        	}
+        </script>
 </head>
 <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -59,12 +81,35 @@
                                     <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div></a>
                                     <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-parent="#sidenavAccordionPages">
                                         <nav class="sb-sidenav-menu-nested nav">
-	                                        <a class="nav-link" href="login.html">일반전표입력</a>
+	                                       <a class="nav-link" href="normalReceiption.vi">일반전표입력</a>
 	                                        <a class="nav-link" href="register.html">매입매출전표입력</a>
 	                                        <a class="nav-link" href="password.html">세금계산서발행</a>
 	                                        <a class="nav-link" href="password.html">매입매출전표조회</a>
                                         </nav>
                                     </div>
+                                    
+                                  <!--  <script>
+                                    function test(){
+                                    	
+                                    	$("#abcd").submit();
+                                    	
+                                    	
+                                    	
+                                    	/* $.ajax({
+                                    		
+                                    			url:"normalReceiption.vi",
+                                    			type:"post",
+                                    			data:{},
+                                    			success: function(data){
+                                    				alert("asdfadfa");
+                                    			},
+                                    			error: function(status){
+                                    				console.log(status);
+                                    			}
+                                    	}
+                                    	) */
+                                    }
+                                    </script> -->
                                     
                                     
                                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
@@ -117,7 +162,7 @@
                             
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="layout-static.html">세금계산서합계표</a>
+                                <a class="nav-link" href="sumTableTax.vi">세금계산서합계표</a>
                                 <a class="nav-link" href="layout-sidenav-light.html">계산서합계표</a>
                                 <a class="nav-link" href="layout-sidenav-light.html">신용카드등수령명세서</a>
                                 <a class="nav-link" href="layout-sidenav-light.html">신용카드등발행명세서</a>
