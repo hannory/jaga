@@ -35,6 +35,16 @@ public class ViewController {
 	   public String showViewCeateCompanyId() {
 	      System.out.println("showViewCeateCompanyId 메소드 호출됨 ㅎ");
 	      return "createCompanyId/createCompanyId";
-	   }
+	}
+	@GetMapping("/creditCardSalesSlipGap.vi")
++	public String creditCardSalesSlipGap() {
++		System.out.println(ts.abcd());
++		return "bugagachi/CreditCardSalesSlipGap";
++	}
++	@GetMapping("/billTotalTable.vi")
++	public String billTotalTable() {
++		System.out.println(ts.abcd());
++		return "bugagachi/billTotalTable";
++	} 
 
 }
