@@ -16,13 +16,25 @@ public class ViewController {
 
 	@GetMapping("/normalReceiption.vi")
 	public String normalReceiption() {
-		System.out.println(ts.abcd());
 		return "slip/normalReceiptionForm";
 	}
 	
 	@GetMapping("/sumTableTax.vi")
 	public String sumTableTax() {
-		System.out.println(ts.abcd());
 		return "bugagachi/sumTableOfTaxInvoices";
 	}
+	@GetMapping("/tranHis.vi")
+	public String transectionHistory() {
+		return "slip/transectionHistory";
+	}
+	@GetMapping("/receiption.vi")
+	public String reciptionForm() {
+		return "slip/receiptionForm";
+	}
+	@GetMapping("showViewCeateCompanyId.vi")
+	   public String showViewCeateCompanyId() {
+	      System.out.println("showViewCeateCompanyId 메소드 호출됨 ㅎ");
+	      return "createCompanyId/createCompanyId";
+	   }
+
 }
