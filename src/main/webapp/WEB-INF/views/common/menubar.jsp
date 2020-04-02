@@ -13,8 +13,17 @@
         <link href="${ contextPath }/resources/css/styles.css" rel="stylesheet" />
         <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" crossorigin="anonymous"></script>
+
+<!-- jquery UI calendar-->
+<script
+   src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+   integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+   crossorigin="anonymous"></script>
+   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         
-        <script>
+       <!--  <script>
         	window.onload=function(){
         		console.log(self);
         		/* self.name = "aaa"; */
@@ -25,16 +34,16 @@
 	        		 console.log("재시작");
 	        		}, 2000);
         		} */
-        		if (!location.hash) { 
+        		/* if (!location.hash) { 
 
         			location.hash = '#reload';
 
         			location.href = location.href;
         			console.log("ㅋㅋㅋㅋㅋ");
 
-        		}
+        		} */
         	}
-        </script>
+        </script> -->
 </head>
 <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -82,34 +91,12 @@
                                     <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-parent="#sidenavAccordionPages">
                                         <nav class="sb-sidenav-menu-nested nav">
 	                                       <a class="nav-link" href="normalReceiption.vi">일반전표입력</a>
-	                                        <a class="nav-link" href="register.html">매입매출전표입력</a>
+	                                        <a class="nav-link" href="receiption.vi">매입매출전표입력</a>
 	                                        <a class="nav-link" href="password.html">세금계산서발행</a>
-	                                        <a class="nav-link" href="password.html">매입매출전표조회</a>
+	                                        <a class="nav-link" href="tranHis.vi">매입매출전표조회</a>
                                         </nav>
                                     </div>
                                     
-                                  <!--  <script>
-                                    function test(){
-                                    	
-                                    	$("#abcd").submit();
-                                    	
-                                    	
-                                    	
-                                    	/* $.ajax({
-                                    		
-                                    			url:"normalReceiption.vi",
-                                    			type:"post",
-                                    			data:{},
-                                    			success: function(data){
-                                    				alert("asdfadfa");
-                                    			},
-                                    			error: function(status){
-                                    				console.log(status);
-                                    			}
-                                    	}
-                                    	) */
-                                    }
-                                    </script> -->
                                     
                                     
                                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
@@ -213,7 +200,7 @@
                             
                             <div class="collapse" id="collapseC" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="layout-static.html">종합소득세신고서</a>
+                                <a class="nav-link" href="showViewCeateCompanyId.vi">종합소득세신고서</a>
                                 </nav>
                             </div>
                    

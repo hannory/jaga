@@ -11,11 +11,11 @@
 <body>
 	<jsp:include page="../common/menubar.jsp" />
 	<c:set var="contextPath"
-		value="${ pageContext.servletContext.contextPath }"
-		scope="application" />
+      value="${ pageContext.servletContext.contextPath }"
+      scope="application" />
 	<main>
 	<div class="container-fluid">
-		<h1 class="mt-4">대시보드</h1>
+		<h2 class="mt-4">대시보드</h2>
 		<ol class="breadcrumb mb-4">
 			<li class="breadcrumb-item"><a href="index.html">끨끨끨</a></li>
 			<li class="breadcrumb-item active">희희희희희희희희희</li>
