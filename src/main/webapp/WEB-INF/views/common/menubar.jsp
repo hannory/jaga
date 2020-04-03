@@ -151,7 +151,7 @@
                                 <nav class="sb-sidenav-menu-nested nav">
                                 <a class="nav-link" href="sumTableTax.vi">세금계산서합계표</a>
                                 <a class="nav-link" href="billTotalTable.vi">계산서합계표</a>
-+                               <a class="nav-link" href="creditCardSalesSlipGap.vi">신용카드등수령명세서</a>
+                                <a class="nav-link" href="creditCardSalesSlipGap.vi">신용카드등수령명세서</a>
                                 <a class="nav-link" href="layout-sidenav-light.html">신용카드등발행명세서</a>
                                 <a class="nav-link" href="layout-sidenav-light.html">의제매입신고서</a>
                                 <a class="nav-link" href="layout-sidenav-light.html">부가가치세신고서</a>

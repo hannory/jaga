@@ -37,14 +37,14 @@ public class ViewController {
 	      return "createCompanyId/createCompanyId";
 	}
 	@GetMapping("/creditCardSalesSlipGap.vi")
-+	public String creditCardSalesSlipGap() {
-+		System.out.println(ts.abcd());
-+		return "bugagachi/CreditCardSalesSlipGap";
-+	}
-+	@GetMapping("/billTotalTable.vi")
-+	public String billTotalTable() {
-+		System.out.println(ts.abcd());
-+		return "bugagachi/billTotalTable";
-+	} 
+	public String creditCardSalesSlipGap() {
+		System.out.println(ts.abcd());
+		return "bugagachi/CreditCardSalesSlipGap";
+	}
+	@GetMapping("/billTotalTable.vi")
+	public String billTotalTable() {
+		System.out.println(ts.abcd());
+		return "bugagachi/billTotalTable";
+	} 
 
 }
