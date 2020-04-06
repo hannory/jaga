@@ -75,6 +75,11 @@
 	    height:25px;
 	}
 	
+	#phone{
+		width:370px;
+	    height:25px;
+	}
+	
 	#userName{
 		width:370px;
 		height:25px;		
@@ -132,6 +137,11 @@
 	}
 	
 	#empName{
+		width:370px;
+		height:25px;
+	}
+	
+	#personalNum{
 		width:370px;
 		height:25px;
 	}
@@ -243,7 +253,7 @@
 		<tr>
             <td class="firstLine"><b>비밀번호확인</b></td>
             <td class="secondLine">
-           	<input type="password" maxlength="13" name="userPwd2" id="userPwd2"></td>
+           	<input type="password" maxlength="13" name="companyPwd" id="userPwd2"></td>
             <td class="thirdLine"></td>
         </tr>
         
@@ -266,12 +276,11 @@
         </tr>
         
         <tr>
-            <td class="firstLine"><b>회사명</b></td>
-            <td class="secondLine">
-           	<input type="text" maxlength="30" name="gongsi" id="gongsi"></td>
-            <td class="thirdLine"></td>
+        	<td class="firstLine">전화번호</td>
+        	<td class="secondLine">
+        	<input type="tel" maxlength="30" name="phone" id="phone"></td>
+        	<td class="thirdLine"></td>
         </tr>
-        
         
 			<tr class="licenseTriger">
                		<td class="firstLine"><b>사업자 등록증</b></td>
@@ -308,7 +317,7 @@
 			</tr>
             <tr class="licenseTriger">
                <td class="firstLine"><b>회사명(상호) </b></td>
-               <td class="secondLine"><input type="text" id="inputCorpName" name="corpName" placeholder="사업자 등록증을 인증해주세요"></td>
+               <td class="secondLine"><input type="text" id="inputCorpName" name="bizName" placeholder="사업자 등록증을 인증해주세요"></td>
                <td class="thirdLine"></td>
             </tr>
             <tr class="hidesub">
@@ -318,7 +327,7 @@
 			</tr>
             <tr class="licenseTriger">
                <td class="firstLine"><b>대표자명</b></td>
-               <td class="secondLine"><input type="text" id="inputCeoName" name="ceoName" placeholder="사업자 등록증을 인증해주세요"></td>
+               <td class="secondLine"><input type="text" id="inputCeoName" name="bossName" placeholder="사업자 등록증을 인증해주세요"></td>
                <td class="thirdLine"></td>
             </tr>
             <tr class="hidesub">
@@ -333,6 +342,14 @@
 				<td></td>
 			</tr>
 			
+		 <tr>
+            <td class="firstLine"><b>주민등록번호</b></td>
+            <td class="secondLine">
+           	<input type="text" maxlength="30" name="personalNum" id="personalNum"></td>
+            <td class="thirdLine"></td>
+        </tr>
+        
+        
             <tr class="licenseTriger">
                <td class="firstLine"><b>회사/점포주소</b></td>
                <td class="secondLine">
