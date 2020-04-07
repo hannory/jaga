@@ -14,6 +14,10 @@
 		color:white;
 		width:200px;
 		height:50px;
+		border-top-left-radius:10px;
+		border-top-right-radius:10px;
+		text-align:center;
+		line-height:50px;
 	}
 	.div-menuTap:hover{
 		cursor:pointer;
@@ -48,6 +52,17 @@
 		border-radius:10px;
 		border:2px solid green;
 	}
+	.formBtn{
+		width:100px;
+		border-radius:10px;
+		border:1px solid green;
+	}
+	.div-menuTap-no{
+		opacity:50%;
+	}
+	.div-menuTap-no:hover{
+		opacity:80%;
+	}
 	
 </style>
 </head>
@@ -68,7 +83,7 @@
 		
 		
 		<div class="div-menuTap"><span>직원 계정 생성</span></div>
-		<div class="div-menuTap" onclick="selectId()" style="opacity:50%"><span>직원 계정 조회</span></div>
+		<div class="div-menuTap div-menuTap-no" onclick="selectId()"><span>직원 계정 조회</span></div>
 		<script>
 			function selectId(){
 				location.href="showViewSelectId.vi";
@@ -152,8 +167,8 @@
 			<input type="file" id="fileBtn" style="display:none;">
 		
 			<div align="center" style="margin-top:100px;">
-			<button type="submit">생성</button>
-			<button type="reset">취소</button>
+			<button class="formBtn" type="submit">생성</button>
+			<button class="formBtn" type="reset">취소</button>
 			</div>
 		
 		</div>
