@@ -9,6 +9,9 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
 <title>자가경리</title>
+<c:set var="contextPath"
+      value="${ pageContext.servletContext.contextPath }"
+      scope="application" />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <link href="${ contextPath }/resources/css/styles.css" rel="stylesheet" />
         <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
@@ -22,33 +25,21 @@
    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-        
-       <!--  <script>
-        	window.onload=function(){
-        		console.log(self);
-        		/* self.name = "aaa"; */
-        		/* if(self.name == "aaa"){
-        			self.name = "zz";
-	        		setTimeout(() => {
-	        			location.reload();
-	        		 console.log("재시작");
-	        		}, 2000);
-        		} */
-        		/* if (!location.hash) { 
-
-        			location.hash = '#reload';
-
-        			location.href = location.href;
-        			console.log("ㅋㅋㅋㅋㅋ");
-
-        		} */
-        	}
-        </script> -->
+  
+<style>
+	#printBtn {
+		background: none;
+		border: none;
+		outline: none;
+	}
+</style>
 </head>
 <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <a class="navbar-brand" href="index.html"><img src="${ contextPath }/resources/images/logo_vertical.PNG" width="90%"></a><button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button
-            ><!-- Navbar Search-->
+            >
+            <button id="printBtn" onclick="print();" style="color:#296355; font-weight: bold;"><img src="${ contextPath }/resources/images/print.PNG" width="30px"> 인쇄</button>
+            <!-- Navbar Search-->
             <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
                 <div class="input-group">
                     <input class="form-control" type="text" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" />
@@ -74,8 +65,6 @@
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
                         <div class="nav">
-                        
-                        
                         
                                  <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
                             <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
@@ -128,9 +117,7 @@
                                         </nav>
                                     </div>
                                     
-                                    <a class="nav-link collapsed" href="#" data-toggle="collapse" aria-expanded="false" aria-controls="pagesCollapseError">
-                                    재무제표
-                                        </a>
+                                    <a class="nav-link collapsed" href="compoundTrialBalance.vi" aria-expanded="false" aria-controls="pagesCollapseError">재무제표</a>
                                         
                                     <a class="nav-link collapsed" href="#" data-toggle="collapse" aria-expanded="false" aria-controls="pagesCollapseError">
                                    지출결의서
@@ -204,9 +191,29 @@
                                 </nav>
                             </div>
                    
+                            
+                            
+                            
+                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseD" aria-expanded="false" aria-controls="collapseLayouts"
+                                ><div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                설정
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div
+                            ></a>
+                            
+                            <div class="collapse" id="collapseD" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="showViewCeateCompanyId.vi">계정생성</a>
+                                <a class="nav-link" href="showViewCeateCompanyId.vi">계정생성</a>
+                                <a class="nav-link" href="showViewCeateCompanyId.vi">계정생성</a>
+                                <a class="nav-link" href="showViewCeateCompanyId.vi">계정생성</a>
+                                </nav>
+                            </div>
+                   
 
                         </div>
                     </div>
+                    
+                            
                     <div class="sb-sidenav-footer">
                         <div class="small">Logged in as:</div>
                         Start Bootstrap
