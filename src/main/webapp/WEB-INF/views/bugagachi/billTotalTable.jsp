@@ -60,6 +60,11 @@
         }
         #Tex_bill_code{
             border: 1px solid black;
+            height: 100px; 
+            margin-left: auto; 
+            margin-right: auto; 
+            margin-top: 3px;
+            margin-bottom: 3px;
         }
         .breadcrumb>li{
         	margin: auto auto;
@@ -93,6 +98,9 @@
    		.cho_sumTableMainTable{
    			width:100%;
    		}
+   		.Tex_bill_code_p{
+   			font-size:23px;
+   		}
    	
     </style>
 </head>
@@ -109,7 +117,7 @@
 			<li><button id="deadlineBtn">마감</button></li>
 			<li>1기예정</li>
             <li>조회기간:
-            	<input type="date"> ~ <input type="date">
+            	<input type="text" class="datepicker"> ~ <input type="text" class="datepicker">
             </li>
 			
 		</ol>
@@ -452,8 +460,8 @@
         <tr>
             <td colspan="9">
             <!-- 코드영역 -->
-                <div id="Tex_bill_code" style="height: 100px; margin-left: auto; margin-right: auto; margin-top: 3px;margin-bottom: 3px;">
-                    <h4></h4>
+                <div id="Tex_bill_code">
+                    <p class="Tex_bill_code_p">[확인]전성일자가 없는 거래는 전자세금계산서 발급분으로 반영 되므로 국세청 e세로 전송 세금계산서와 반드시 확인합니다.</p>
                 </div>
             </td>
         </tr>
@@ -839,8 +847,8 @@
         <tr>
             <td colspan="9">
             <!-- 코드영역 -->
-                <div id="Tex_bill_code" style="height: 100px; margin-left: auto; margin-right: auto; margin-top: 3px;margin-bottom: 3px;">
-                    <h4></h4>
+                 <div id="Tex_bill_code">
+                    <p class="Tex_bill_code_p">[확인]전성일자가 없는 거래는 전자세금계산서 발급분으로 반영 되므로 국세청 e세로 전송 세금계산서와 반드시 확인합니다.</p>
                 </div>
             </td>
         </tr>
@@ -848,6 +856,23 @@
     </table>
 	</div>
 	<!-- 매입영역끝 -->
+	<script>
+	/* 날짜 input jquery ui */
+		$.datepicker.setDefaults({
+			showOn : "both",
+			buttonImageOnly : true,
+			buttonImage : "${contextPath}/resources/images/calendar.png",
+			dateFormat : 'yy-mm-dd'
+
+		});
+		$(function() {
+			$(".datepicker").datepicker({});
+			/* 달력버튼 */
+			$("img.ui-datepicker-trigger")
+					.attr("style","margin-left:2px; vertical-align:middle; cursor: Pointer; width:20px; height:20px");
+
+		});
+	 </script>
 	</main>
 	<jsp:include page="../common/menubar2.jsp" />
 

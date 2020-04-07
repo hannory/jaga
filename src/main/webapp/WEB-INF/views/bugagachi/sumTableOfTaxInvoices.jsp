@@ -60,6 +60,11 @@
         }
         #Tex_bill_code{
             border: 1px solid black;
+            height: 100px; 
+            margin-left: auto; 
+            margin-right: auto; 
+            margin-top: 3px;
+            margin-bottom: 3px;
         }
         .breadcrumb>li{
         	margin: auto auto;
@@ -108,7 +113,7 @@
                     <option>2.수정신고</option>
                 </select></li>
             <li>조회기간:
-            	<input type="date"> ~ <input type="date">
+            	<input type="text" class="datepicker"> ~ <input type="text" class="datepicker">
             </li>
 			
 		</ol>
@@ -458,7 +463,7 @@
         <!-- 상세리스트끝 -->
         <tr>
             <td colspan="9">
-                <div id="Tex_bill_code" style="height: 100px; margin-left: auto; margin-right: auto; margin-top: 3px;margin-bottom: 3px;">
+                <div id="Tex_bill_code">
                     <h4>※[확인] 전성일자가 없는 거래는 전자세금계산서 발급분으로 반영 되므로 국세청 e세로 전송 세금계산서와 반드시 확인합니다.</h4>
                 </div>
             </td>
@@ -584,6 +589,12 @@
 	
 	
 	
+	
+	
+	
+	
+	
+	
 	<!-- 매입영역 -->
 	<div class="container-fluid" id="purchase">
 		 <table align="center">
@@ -631,8 +642,8 @@
                     </tr>
                     <tr>
                         <td rowspan="3" style="width: 25%;" id="green">과세기간 종료일 다음달<br>11일 까지 전송된<br>
-                        전자세금계산서 발급분</td>
-                        <td style="width: 25%;" id="green">사업자 번호 발급분</td>
+                        전자세금계산서 발급받은분</td>
+                        <td style="width: 25%;" id="green">사업자 번호 발급받은분</td>
                         <td style="width: 15%;"> </td>
                         <td style="width: 10%;"> </td>
                         <td style="width: 15%;"> </td>
@@ -640,7 +651,7 @@
 
                     </tr>
                     <tr>
-                        <td style="width: 25%;" id="green">주민등록 번호 발급분</td>
+                        <td style="width: 25%;" id="green">주민등록 번호 발급받은분</td>
                         <td style="width: 15%;"> </td>
                         <td style="width: 10%;"> </td>
                         <td style="width: 15%;"> </td>
@@ -657,9 +668,9 @@
                     </tr>
 
                     <tr>
-                        <td rowspan="3" style="width: 25%;" id="green">위 전자세금계산서 외의<br>발급분(종이발급분+과세기간<br>
+                        <td rowspan="3" style="width: 25%;" id="green">위 전자세금계산서 외의<br>발급받은분(종이발급분+과세기간<br>
                         종료일 다움달 12일 이후분)</td>
-                        <td style="width: 25%;" id="green">사업자 번호 발급분</td>
+                        <td style="width: 25%;" id="green">사업자 번호 발급받은분</td>
                         <td style="width: 15%;"> </td>
                         <td style="width: 10%;"> </td>
                         <td style="width: 15%;"> </td>
@@ -667,7 +678,7 @@
 
                     </tr>
                     <tr>
-                        <td style="width: 25%;" id="green">주민등록 번호 발급분</td>
+                        <td style="width: 25%;" id="green">주민등록 번호 발급받은분</td>
                         <td style="width: 15%;"> </td>
                         <td style="width: 10%;"> </td>
                         <td style="width: 15%;"> </td>
@@ -905,8 +916,8 @@
         <!-- 상세리스트끝 -->
         <tr>
             <td colspan="9">
-                <div id="Tex_bill_code" style="height: 100px; margin-left: auto; margin-right: auto; margin-top: 3px;margin-bottom: 3px;">
-                    <h4>※[확인] 전성일자가 없는 거래는 전자세금계산서 발급분으로 반영 되므로 국세청 e세로 전송 세금계산서와 반드시 확인합니다.</h4>
+                 <div id="Tex_bill_code">
+                    <p class="Tex_bill_code_p">[확인]전성일자가 없는 거래는 전자세금계산서 발급분으로 반영 되므로 국세청 e세로 전송 세금계산서와 반드시 확인합니다.</p>
                 </div>
             </td>
         </tr>
@@ -914,6 +925,23 @@
     </table>
 	</div>
 	<!-- 매입영역 -->
+	<script>
+	/* 날짜 input jquery ui */
+		$.datepicker.setDefaults({
+			showOn : "both",
+			buttonImageOnly : true,
+			buttonImage : "${contextPath}/resources/images/calendar.png",
+			dateFormat : 'yy-mm-dd'
+
+		});
+		$(function() {
+			$(".datepicker").datepicker({});
+			/* 달력버튼 */
+			$("img.ui-datepicker-trigger")
+					.attr("style","margin-left:2px; vertical-align:middle; cursor: Pointer; width:20px; height:20px");
+
+		});
+	 </script>
 	</main>
 	<jsp:include page="../common/menubar2.jsp" />
 
