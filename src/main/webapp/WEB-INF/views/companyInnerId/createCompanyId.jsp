@@ -21,14 +21,34 @@
 	}
 	
 	.div-subjectName{
-		background: darkgreen;
-		color:white;
+		/* background: darkgreen; */
+		color:black;
 		width:200px;
 		height:30px;
 	}
 	input{
 		width:200px;
+		border-radius:10px;
 	}
+	select{
+		border-radius:10px;
+	}
+	.div-box-area{
+		/* background:red; */
+		width:80%;
+		height:50%;
+		border:2px solid green;
+	}
+	.div-input-area{
+		/* background:pink; */
+		margin:50px;
+	}
+	.div-subjectName{
+		text-align:center;
+		border-radius:10px;
+		border:2px solid green;
+	}
+	
 </style>
 </head>
 <body>
@@ -46,7 +66,7 @@
 		</div>
 		
 		
-		<form action="" method="post">
+		
 		<div class="div-menuTap"><span>직원 계정 생성</span></div>
 		<div class="div-menuTap" onclick="selectId()" style="opacity:50%"><span>직원 계정 조회</span></div>
 		<script>
@@ -56,7 +76,10 @@
 			
 		</script>
 		
-		<table border="1" style="text-align:center">
+		<form action="zzzzzzzzzzzzz" method="post">
+		<div class="div-box-area">
+		<div class="div-input-area">
+		<table cellpadding="20px">
 		
 			<tr>
 				<td>
@@ -65,27 +88,7 @@
 					</div>
 				</td>
 				<td><input type="text" name="companyInnerId"></td>
-			</tr>
-			
-			<tr>
-				<td>
-					<div class="div-subjectName">
-						<label>비밀번호</label>
-					</div>
-				</td>
-				<td><input type="password" name="companyInnerPwd"></td>
-			</tr>
-			
-			<tr>
-				<td>
-					<div class="div-subjectName">
-						<label>비밀번호 확인</label>
-					</div>
-				</td>
-				<td><input type="password" name="companyInnerPwd2"></td>
-			</tr>
-			
-			<tr>
+				
 				<td>
 					<div class="div-subjectName">
 						<label>이메일</label>
@@ -97,6 +100,13 @@
 			<tr>
 				<td>
 					<div class="div-subjectName">
+						<label>비밀번호</label>
+					</div>
+				</td>
+				<td><input type="password" name="companyInnerPwd"></td>
+				
+					<td>
+					<div class="div-subjectName">
 						<label>이름</label>
 					</div>
 				</td>
@@ -104,6 +114,13 @@
 			</tr>
 			
 			<tr>
+				<td>
+					<div class="div-subjectName">
+						<label>비밀번호 확인</label>
+					</div>
+				</td>
+				<td><input type="password" name="companyInnerPwd2"></td>
+				
 				<td>
 					<div class="div-subjectName">
 						<label>직급</label>
@@ -118,13 +135,45 @@
 				</td>
 			</tr>
 			
+			<tr>
+				<td>
+					<div class="div-subjectName">
+						<label>서명 또는 도장</label>
+					</div>
+				</td>
+				
+				<td>
+					<div id="fileArea" style="width:100px; height:100px; border:1px solid black;"></div>
+				</td>
+			</tr>
+			
 		</table>
-		<div align="center" style="margin-top:100px;">
-		<button type="submit">생성</button>
-		<button type="reset">취소</button>
-		</div>
+			
+			<input type="file" id="fileBtn">
 		
+			<div align="center" style="margin-top:100px;">
+			<button type="submit">생성</button>
+			<button type="reset">취소</button>
+			</div>
+		
+		</div>
+		</div>
 		</form>
+		
+		<script>
+			window.onload = function(){
+				var fileArea = document.getElementById("fileArea");
+				console.log(fileArea);
+				fileBtn.onclick = function(event){
+					console.log(event);
+					console.log(fileBtn);
+				}
+			}
+		</script>
+		
+		
+		
+		
 	<!-- //작업공간 -->
 	</div>
 	</main>
