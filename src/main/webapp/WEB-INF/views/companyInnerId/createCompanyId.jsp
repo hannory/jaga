@@ -35,7 +35,7 @@
 	}
 	.div-box-area{
 		/* background:red; */
-		width:80%;
+		width:85%;
 		height:50%;
 		border:2px solid green;
 	}
@@ -149,7 +149,7 @@
 			
 		</table>
 			
-			<input type="file" id="fileBtn">
+			<input type="file" id="fileBtn" style="display:none;">
 		
 			<div align="center" style="margin-top:100px;">
 			<button type="submit">생성</button>
@@ -163,10 +163,8 @@
 		<script>
 			window.onload = function(){
 				var fileArea = document.getElementById("fileArea");
-				console.log(fileArea);
-				fileBtn.onclick = function(event){
-					console.log(event);
-					console.log(fileBtn);
+				fileArea.onclick = function(event){
+					fileBtn.click();
 				}
 			}
 		</script>
