@@ -10,9 +10,6 @@
 </head>
 <body>
 	<jsp:include page="../common/menubar.jsp" />
-	<c:set var="contextPath"
-      value="${ pageContext.servletContext.contextPath }"
-      scope="application" />
 	<main>
 	<div class="container-fluid">
 		<h2 class="mt-4">대시보드</h2>
