@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.jaga.common.CommonsUtils;
@@ -53,7 +54,8 @@ public class CompanyController {
 	public String showMemberJoinView() {
 		return "company/companyJoin";
 	}
-
+	
+	//회원가입
 	@RequestMapping("insert.co")
 	public String insertCompany(Model model, Company c, HttpServletRequest request, @RequestParam MultipartFile photo) {
 
@@ -81,4 +83,12 @@ public class CompanyController {
 			return "common/errorPage";
 		}
 	}
+	
+	@RequestMapping("logout.me")
+	public String logout(SessionStatus status) {
+		status.setComplete();
+		
+		return "redirect:index.jsp";
+	}
+	
 }

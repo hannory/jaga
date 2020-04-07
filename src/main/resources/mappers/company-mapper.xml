@@ -10,6 +10,14 @@
   
   <result property="companyId" column="COM_ID"/>
   <result property="companyPwd" column="PWD"/>
+  <result property="email" column="EMAIL"/>
+  <result property="phone" column="PHONE"/>
+  <result property="bizName" column="BIZ_NAME"/>
+  <result property="bizNum" column="BIZ_NUM"/>
+  <result property="bossName" column="BOSS_NAME"/>
+  <result property="personalNum" column="PERSONAL_NUM"/>
+  <result property="bizType" column="TYPE_OF_BIZ"/>
+  <result property="bizLocation" column="BIZ_LOCATION"/>
   </resultMap>
 
   <select id="selectLoginCompany" resultMap="companyResultSet" parameterType="Company">
@@ -35,8 +43,8 @@
 	</select>
 	
 	<insert id="insertCompany" parameterType="Company">
-		INSERT INTO COMPANY(COM_CODE,PWD,COM_ID)
-		VALUES (COMPANY_SEQ.NEXTVAL,#{companyPwd},#{companyId})
+		INSERT INTO COMPANY(COM_CODE,PWD,COM_ID,EMAIL,PHONE,BIZ_NAME,BIZ_NUM,BOSS_NAME,PERSONAL_NUM,TYPE_OF_BIZ,BIZ_LOCATION)
+		VALUES (COMPANY_SEQ.NEXTVAL,#{companyPwd},#{companyId},#{email},#{phone},#{bizName},#{bizNum},#{bossName},#{personalNum},#{bizType},#{bizLocation})
 	</insert>
 	
   

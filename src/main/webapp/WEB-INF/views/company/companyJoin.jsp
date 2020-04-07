@@ -336,7 +336,7 @@
 			
         <tr class="licenseTriger">
                <td class="firstLine"><b>회사명(상호) </b></td>
-               <td class="secondLine"><input type="text" id="inputCorpName" name="bizName" placeholder="사업자 등록증을 인증해주세요"></td>
+               <td class="secondLine"><input type="text" id="inputCorpName" name="bizName" placeholder="회사명(상호)을 입력해주세요"></td>
                <td class="thirdLine"></td>
         </tr>
             
@@ -348,7 +348,7 @@
 			
          <tr class="licenseTriger">
                <td class="firstLine"><b>대표자명</b></td>
-               <td class="secondLine"><input type="text" id="inputCeoName" name="bossName" placeholder="사업자 등록증을 인증해주세요"></td>
+               <td class="secondLine"><input type="text" id="inputCeoName" name="bossName" placeholder="대표자명을 입력해주세요"></td>
                <td class="thirdLine"></td>
         </tr>
             
@@ -386,11 +386,24 @@
             
            <tr class="licenseTriger">
                <td class="firstLine"></td>
-               <td class="secondLine"><input type="text" id="address2" name="address2" placeholder="상세주소"></td>
+               <td class="secondLine"><input type="text" id="address2" name="bizLocation" placeholder="상세주소"></td>
                <td class="thirdLine"></td>
            </tr>
             
             <tr class="hidesub">
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+		
+		    <tr class="licenseTriger">
+               <td class="firstLine">업종코드</td>
+               <td class="secondLine"><input type="text" id="address2" name="bizType" placeholder="업종코드"></td>
+               <td class="thirdLine"></td>
+           </tr>	
+			
+			
+		   <tr class="hidesub">
 				<td></td>
 				<td></td>
 				<td></td>

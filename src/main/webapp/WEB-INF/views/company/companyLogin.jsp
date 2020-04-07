@@ -136,10 +136,15 @@
 
 	 	<c:if test="${!empty sessionScope.loginCompany }">
 			<h3 align="right"><c:out value="${sessionScope.loginCompany.companyId }님 환영합니다."></c:out></h3> 
- 			<button>정보수정</button>
-			<button onclick="">로그아웃</button> 
+			<button onclick="logout()">로그아웃</button> 
  		</c:if> 
 	</div>
+	
+	<script>
+		function logout(){
+			location.href="${contextPath}/logout.me"
+		}
+	</script>
 	
 </body>
 </html>
