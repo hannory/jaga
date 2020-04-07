@@ -11,13 +11,11 @@ public class CompanyDaoImpl implements CompanyDao {
 
 	@Override
 	public Company loginCheck(SqlSessionTemplate sqlSession, Company c) throws LoginException {
-		System.out.println("Dao다");
 		
 		Company loginCompany = sqlSession.selectOne("Company.loginCheck",c);
 		
-		System.out.println("dao로그인되었니"+loginCompany);
-		
 		if(loginCompany ==null) {
+			
 			throw new LoginException("로그인 정보가 존재하지 않습니다.");
 		}
 		
@@ -36,9 +34,6 @@ public class CompanyDaoImpl implements CompanyDao {
 
 	@Override
 	public int insertCompany(SqlSessionTemplate sqlSession, Company c) {
-		
-		System.out.println("dao");
-
 		return sqlSession.insert("Company.insertCompany",c);
 	}
 

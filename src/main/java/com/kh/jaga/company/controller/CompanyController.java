@@ -40,14 +40,13 @@ public class CompanyController {
 			loginCompany = cs.loginCompany(c);
 			model.addAttribute("loginCompany",loginCompany);
 
-
 			return "redirect:index.jsp";
 
 		} catch (LoginException e) {
 			model.addAttribute("msg",e.getMessage());
+			
 			return "common/errorPage";
 		}
-
 	}
 
 	@GetMapping("companyJoinView.co")
@@ -80,7 +79,6 @@ public class CompanyController {
 			model.addAttribute("msg","회원가입실패!");
 			e.printStackTrace();
 			return "common/errorPage";
-
 		}
 	}
 }

@@ -15,6 +15,7 @@ public class CompanyServiceImpl implements CompanyService {
 
 	@Autowired
 	private SqlSessionTemplate sqlSession;
+	
 	@Autowired
 	private CompanyDao cd;
 	
@@ -26,10 +27,11 @@ public class CompanyServiceImpl implements CompanyService {
 	
 	@Override
 	public Company loginCompany(Company c) throws LoginException {
-		System.out.println("서비스");
+		
 		Company loginCompany = null;
 		
 		String encPassword = cd.selectEncPassword(sqlSession,c);
+		
 		if(!passwordEncoder.matches(c.getCompanyPwd(),encPassword)) {
 			throw new LoginException("로그인실패!");
 		}else {
@@ -40,10 +42,7 @@ public class CompanyServiceImpl implements CompanyService {
 
 	@Override
 	public int insertCompany(Company c) {
-		
+
 		return cd.insertCompany(sqlSession,c);
 	}
-
-
-
 }

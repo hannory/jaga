@@ -206,17 +206,19 @@
 </head>
 <body>
 <jsp:include page="../common/menubar.jsp" />
+	
 	<div class="main">
+	
 	<div id="imglogo" align="center">
 	<img src="${contextPath}/resources/images/jagalogo.PNG" width="350px">
 	</div>
+
 	<div id="line">
 
 		<div class="innerLine"></div>
 		<br>
 		
 		<form id="joinForm" method="post" action="insert.co" encType="multipart/form-data">
-		
 		<table class="tableJoin" align="center">
 		<tr>
 			<td class="subLine">
@@ -242,7 +244,8 @@
 		<tr> 
 			<td class="firstLine"><b>비밀번호</b></td>
 			<td class="secondLine">
-			<input type="password" maxlength="13" name="companyPwd" id="userPwd" placeholder="6~16자 영문, 숫자, 특수문자 입력"></td>
+			<input type="password" maxlength="13" name="companyPwd" id="userPwd" placeholder="6~16자 영문, 숫자, 특수문자 입력">
+			</td>
 			<td class="thirdLine"></td>	
 		</tr>
 		
@@ -256,7 +259,7 @@
             <td class="secondLine">
            	<input type="password" maxlength="13" name="companyPwd2" id="userPwd2"></td>
             <td class="thirdLine"></td>
-        </tr>
+       </tr>
         
         <tr class="subLine">
 			<td></td>
@@ -266,105 +269,127 @@
 		
 		<tr>
             <td class="firstLine"><b>이메일</b></td>
+            
             <td class="secondLine">
-           	<input type="text" maxlength="13" name="email" id="email1"></td>
-           <td> <select name="email2" id="email2">
+           	<input type="text" maxlength="13" name="email" id="email1">
+           	</td>
+           	
+          	<td> 
+          	<select name="email2" id="email2">
             <option value="1">@yaho.co.kr</option>
             <option value="2">@naver.com</option>
             <option value="3">@daum.net</option>
             <option value="4">@gmail.com</option>
-            </select></td>
+            </select>
+            </td>
         </tr>
         
         <tr>
         	<td class="firstLine">전화번호</td>
         	<td class="secondLine">
-        	<input type="tel" maxlength="30" name="phone" id="phone"></td>
+        	<input type="tel" maxlength="30" name="phone" id="phone">
+        	</td>
         	<td class="thirdLine"></td>
         </tr>
         
-			<tr class="licenseTriger">
-               		<td class="firstLine"><b>사업자 등록증</b></td>
-               		<td class="secondLine">
-               		<div id="licenseImgArea">
-               		<img id="fake-fileUp" name="upload" width="150" height="200">
-               		</div></td>
-               		<td class="thirdLine">
-               		<input type="file" id="input-fileUp" name="photo" onchange="loadImg(this, 2);">
-               		<button type="button" id="uploadBtn">등록증 인증</button></td>
-            	</tr>
-            <tr class="hidesub">
+		<tr class="licenseTriger">
+		
+            <td class="firstLine"><b>사업자 등록증</b></td>
+               		
+            <td class="secondLine">
+             <div id="licenseImgArea">
+             <img id="fake-fileUp" name="upload" width="150" height="200">
+             </div>
+            </td>
+               		
+            <td class="thirdLine">
+              <input type="file" id="input-fileUp" name="photo" onchange="loadImg(this, 2);">
+              <button type="button" id="uploadBtn">등록증 인증</button>
+            </td>
+        </tr>
+        
+        <tr class="hidesub">
 				<td></td>
 				<td></td>
 				<td></td>
-			</tr>
-            	<tr class="licenseTriger">
-               		<td class="firstLine"><b>사업자 등록번호</b></td>
-               		<td class="secondLine">
-                  	<input type="text" id="inputBizNum" maxlength="13" name="bizNum" placeholder="사업자 등록증을 인증해주세요">
-               		</td>
-               		<td class="thirdLine"><label id="nnResult"></label></td>
-            	</tr>
-            <tr class="hidesub">
-				<td></td>
-				<td></td>
-				<td></td>
-			</tr>
+		</tr>
             	
-            <tr class="hidesub">
+         <tr class="licenseTriger">
+               <td class="firstLine"><b>사업자 등록번호</b></td>
+               <td class="secondLine">
+               <input type="text" id="inputBizNum" maxlength="13" name="bizNum" placeholder="사업자 등록증을 인증해주세요">
+               </td>
+               <td class="thirdLine"><label id="nnResult"></label></td>
+         </tr>
+         
+         <tr class="hidesub">
 				<td></td>
 				<td></td>
 				<td></td>
-			</tr>
-            <tr class="licenseTriger">
+		</tr>
+            	
+        <tr class="hidesub">
+				<td></td>
+				<td></td>
+				<td></td>
+		</tr>
+			
+        <tr class="licenseTriger">
                <td class="firstLine"><b>회사명(상호) </b></td>
                <td class="secondLine"><input type="text" id="inputCorpName" name="bizName" placeholder="사업자 등록증을 인증해주세요"></td>
                <td class="thirdLine"></td>
-            </tr>
-            <tr class="hidesub">
+        </tr>
+            
+        <tr class="hidesub">
 				<td></td>
 				<td></td>
 				<td></td>
-			</tr>
-            <tr class="licenseTriger">
+		</tr>
+			
+         <tr class="licenseTriger">
                <td class="firstLine"><b>대표자명</b></td>
                <td class="secondLine"><input type="text" id="inputCeoName" name="bossName" placeholder="사업자 등록증을 인증해주세요"></td>
                <td class="thirdLine"></td>
-            </tr>
-            <tr class="hidesub">
+        </tr>
+            
+         <tr class="hidesub">
 				<td></td>
 				<td></td>
 				<td></td>
-			</tr>
+		</tr>
 			
 		 <tr class="hidesub">
 				<td></td>
 				<td></td>
 				<td></td>
-			</tr>
+		</tr>
 			
 		 <tr>
             <td class="firstLine"><b>주민등록번호</b></td>
             <td class="secondLine">
            	<input type="text" maxlength="30" name="personalNum" id="personalNum"></td>
             <td class="thirdLine"></td>
-        </tr>
+         </tr>
         
         
-            <tr class="licenseTriger">
+          <tr class="licenseTriger">
                <td class="firstLine"><b>회사/점포주소</b></td>
                <td class="secondLine">
                <input type="text" id="postcode" name="postcode" placeholder="우편번호">
                <input type="text" id="address1" name="address1" placeholder="주소">
                </td>
+               
                <td class="thirdLine">
-               <input type="button" onclick="sample2_execDaumPostcode()" id="location-btn" value="주소 검색"></td>
-            </tr>
-            <tr class="licenseTriger">
+               <input type="button" onclick="sample2_execDaumPostcode()" id="location-btn" value="주소 검색">
+               </td>
+          </tr>
+            
+           <tr class="licenseTriger">
                <td class="firstLine"></td>
                <td class="secondLine"><input type="text" id="address2" name="address2" placeholder="상세주소"></td>
                <td class="thirdLine"></td>
-            </tr>
+           </tr>
+            
             <tr class="hidesub">
 				<td></td>
 				<td></td>
@@ -373,14 +398,12 @@
 
 		</table>
 		
-				<div align="center">
+		<div align="center">
 			<button type="reset">작성취소</button>
 			<button type="submit">가입하기</button>
-		
 		</div>
 		</form>
 	</div>
-	
 	
 	</div>
 	<jsp:include page="../common/menubar2.jsp" />
