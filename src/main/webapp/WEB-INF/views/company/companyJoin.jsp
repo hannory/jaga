@@ -136,7 +136,7 @@
 		height:25px;
 	}
 	
-	#empName{
+	#empName{ 
 		width:370px;
 		height:25px;
 	}
@@ -205,6 +205,7 @@
 </style>
 </head>
 <body>
+<jsp:include page="../common/menubar.jsp" />
 	<div class="main">
 	<div id="imglogo" align="center">
 	<img src="${contextPath}/resources/images/jagalogo.PNG" width="350px">
@@ -253,7 +254,7 @@
 		<tr>
             <td class="firstLine"><b>비밀번호확인</b></td>
             <td class="secondLine">
-           	<input type="password" maxlength="13" name="companyPwd" id="userPwd2"></td>
+           	<input type="password" maxlength="13" name="companyPwd2" id="userPwd2"></td>
             <td class="thirdLine"></td>
         </tr>
         
@@ -382,5 +383,6 @@
 	
 	
 	</div>
+	<jsp:include page="../common/menubar2.jsp" />
 </body>
 </html>

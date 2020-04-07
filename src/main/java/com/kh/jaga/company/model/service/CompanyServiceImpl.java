@@ -26,10 +26,10 @@ public class CompanyServiceImpl implements CompanyService {
 	
 	@Override
 	public Company loginCompany(Company c) throws LoginException {
+		System.out.println("서비스");
 		Company loginCompany = null;
 		
 		String encPassword = cd.selectEncPassword(sqlSession,c);
-		
 		if(!passwordEncoder.matches(c.getCompanyPwd(),encPassword)) {
 			throw new LoginException("로그인실패!");
 		}else {
@@ -41,9 +41,6 @@ public class CompanyServiceImpl implements CompanyService {
 	@Override
 	public int insertCompany(Company c) {
 		
-		System.out.println("insertMember 호출됨");
-		System.out.println("아이디"+c.getCompanyId());
-		System.out.println("비번"+c.getCompanyPwd());
 		return cd.insertCompany(sqlSession,c);
 	}
 

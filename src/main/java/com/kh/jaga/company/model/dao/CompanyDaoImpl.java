@@ -11,9 +11,12 @@ public class CompanyDaoImpl implements CompanyDao {
 
 	@Override
 	public Company loginCheck(SqlSessionTemplate sqlSession, Company c) throws LoginException {
+		System.out.println("Dao다");
+		
 		Company loginCompany = sqlSession.selectOne("Company.loginCheck",c);
 		
-		System.out.println("memberDao:"+loginCompany);
+		System.out.println("dao로그인되었니"+loginCompany);
+		
 		if(loginCompany ==null) {
 			throw new LoginException("로그인 정보가 존재하지 않습니다.");
 		}
@@ -23,14 +26,12 @@ public class CompanyDaoImpl implements CompanyDao {
 	
 	@Override
 	public String selectEncPassword(SqlSessionTemplate sqlSession, Company c) {
-	
 		return sqlSession.selectOne("Company.selectPwd",c.getCompanyId());
 	}
 
 	@Override
 	public Company selectCompany(SqlSessionTemplate sqlSession, Company c) {
 		return sqlSession.selectOne("Company.selectLoginCompany",c);
-		
 	}
 
 	@Override
@@ -39,8 +40,6 @@ public class CompanyDaoImpl implements CompanyDao {
 		System.out.println("dao");
 
 		return sqlSession.insert("Company.insertCompany",c);
-		
-		
 	}
 
 }

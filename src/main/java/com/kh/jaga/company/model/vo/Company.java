@@ -8,6 +8,7 @@ public class Company implements java.io.Serializable {
 	
 	private int companyCode;
 	private String companyPwd;
+	private String companyPwd2;
 	private String companyId;
 	private String email;
 	private String phone;
@@ -23,12 +24,14 @@ public class Company implements java.io.Serializable {
 	private Date modifyDate;
 	private String payStatus;
 	private String enrollStatus;
-	public Company(int companyCode, String companyPwd, String companyId, String email, String phone, String bizName,
-			String bizNum, String bossName, String personalNum, Date openDay, String bizLocation, String bossAddress,
-			String bizType, Date enrollDate, Date modifyDate, String payStatus, String enrollStatus) {
+	public Company(int companyCode, String companyPwd, String companyPwd2, String companyId, String email, String phone,
+			String bizName, String bizNum, String bossName, String personalNum, Date openDay, String bizLocation,
+			String bossAddress, String bizType, Date enrollDate, Date modifyDate, String payStatus,
+			String enrollStatus) {
 		super();
 		this.companyCode = companyCode;
 		this.companyPwd = companyPwd;
+		this.companyPwd2 = companyPwd2;
 		this.companyId = companyId;
 		this.email = email;
 		this.phone = phone;
@@ -56,6 +59,12 @@ public class Company implements java.io.Serializable {
 	}
 	public void setCompanyPwd(String companyPwd) {
 		this.companyPwd = companyPwd;
+	}
+	public String getCompanyPwd2() {
+		return companyPwd2;
+	}
+	public void setCompanyPwd2(String companyPwd2) {
+		this.companyPwd2 = companyPwd2;
 	}
 	public String getCompanyId() {
 		return companyId;
@@ -149,12 +158,15 @@ public class Company implements java.io.Serializable {
 	}
 	@Override
 	public String toString() {
-		return "Company [companyCode=" + companyCode + ", companyPwd=" + companyPwd + ", companyId=" + companyId
-				+ ", email=" + email + ", phone=" + phone + ", bizName=" + bizName + ", bizNum=" + bizNum
-				+ ", bossName=" + bossName + ", personalNum=" + personalNum + ", openDay=" + openDay + ", bizLocation="
-				+ bizLocation + ", bossAddress=" + bossAddress + ", bizType=" + bizType + ", enrollDate=" + enrollDate
-				+ ", modifyDate=" + modifyDate + ", payStatus=" + payStatus + ", enrollStatus=" + enrollStatus + "]";
+		return "Company [companyCode=" + companyCode + ", companyPwd=" + companyPwd + ", companyPwd2=" + companyPwd2
+				+ ", companyId=" + companyId + ", email=" + email + ", phone=" + phone + ", bizName=" + bizName
+				+ ", bizNum=" + bizNum + ", bossName=" + bossName + ", personalNum=" + personalNum + ", openDay="
+				+ openDay + ", bizLocation=" + bizLocation + ", bossAddress=" + bossAddress + ", bizType=" + bizType
+				+ ", enrollDate=" + enrollDate + ", modifyDate=" + modifyDate + ", payStatus=" + payStatus
+				+ ", enrollStatus=" + enrollStatus + "]";
 	}
+	
+	
 
 	
 }

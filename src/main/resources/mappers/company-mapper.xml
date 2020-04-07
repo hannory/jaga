@@ -12,12 +12,12 @@
   <result property="companyPwd" column="PWD"/>
   </resultMap>
 
-  <select id="loginCheck" resultMap="companyResultSet" parameterType="Company">
-  SELECT *
-  FROM COMPANY
-  WHERE COM_ID = #{companyId}
-  AND PWD = #{comPwd}
-  
+  <select id="selectLoginCompany" resultMap="companyResultSet" parameterType="Company">
+  		SELECT *
+  		FROM COMPANY
+  		WHERE COM_ID = #{companyId}
+  		AND PWD = #{companyPwd}
+
   </select>
   
   	<select id="selectPwd" resultType="java.lang.String" parameterType="java.lang.String">
@@ -28,17 +28,15 @@
 	</select>
 	
 	<select id="selectLoginUser" resultMap="companyResultSet" parameterType="Company">
-	SELECT *
-	FROM COMPANY
-	WHERE COM_ID =#{companyId}
+		SELECT *
+		FROM COMPANY
+		WHERE COM_ID =#{companyId}
 
 	</select>
 	
 	<insert id="insertCompany" parameterType="Company">
-	INSERT INTO COMPANY(COM_CODE,PWD,COM_ID)
-	VALUES (COMPANY_SEQ.NEXTVAL,#{companyPwd},#{companyId})
-	
-	
+		INSERT INTO COMPANY(COM_CODE,PWD,COM_ID)
+		VALUES (COMPANY_SEQ.NEXTVAL,#{companyPwd},#{companyId})
 	</insert>
 	
   
