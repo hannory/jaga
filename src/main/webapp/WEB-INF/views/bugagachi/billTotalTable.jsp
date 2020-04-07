@@ -109,7 +109,7 @@
 			<li><button id="deadlineBtn">마감</button></li>
 			<li>1기예정</li>
             <li>조회기간:
-            	<input type="date"> ~ <input type="date">
+            	<input type="text" class="datepicker"> ~ <input type="text" class="datepicker">
             </li>
 			
 		</ol>
@@ -848,6 +848,23 @@
     </table>
 	</div>
 	<!-- 매입영역끝 -->
+	<script>
+	/* 날짜 input jquery ui */
+		$.datepicker.setDefaults({
+			showOn : "both",
+			buttonImageOnly : true,
+			buttonImage : "${contextPath}/resources/images/calendar.png",
+			dateFormat : 'yy-mm-dd'
+
+		});
+		$(function() {
+			$(".datepicker").datepicker({});
+			/* 달력버튼 */
+			$("img.ui-datepicker-trigger")
+					.attr("style","margin-left:2px; vertical-align:middle; cursor: Pointer; width:20px; height:20px");
+
+		});
+	 </script>
 	</main>
 	<jsp:include page="../common/menubar2.jsp" />
 
