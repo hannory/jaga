@@ -46,5 +46,16 @@ public class ViewController {
 		System.out.println(ts.abcd());
 		return "bugagachi/billTotalTable";
 	} 
+	
+    @GetMapping("compoundTrialBalance.vi")
+    public String compoundTrialBalance() {
+       return "financialStatements/compoundTrialBalance";
+    }
+    
+    @GetMapping("/showViewSelectId.vi")
+    public String showViewSelectId() {
+       System.out.println("사내계정조회 페이지 보여주세요");
+       return "companyInnerId/selectCompanyId";
+    }
 
 }
