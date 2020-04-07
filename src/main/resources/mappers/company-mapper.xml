@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="Company">
+  
+  <resultMap type="Company" id="companyResultSet">
+  <id property ="companyCode" column="COM_CODE"/>
+  
+  <result property="companyId" column="COM_ID"/>
+  <result property="companyPwd" column="PWD"/>
+  <result property="email" column="EMAIL"/>
+  <result property="phone" column="PHONE"/>
+  <result property="bizName" column="BIZ_NAME"/>
+  <result property="bizNum" column="BIZ_NUM"/>
+  <result property="bossName" column="BOSS_NAME"/>
+  <result property="personalNum" column="PERSONAL_NUM"/>
+  <result property="bizType" column="TYPE_OF_BIZ"/>
+  <result property="bizLocation" column="BIZ_LOCATION"/>
+  </resultMap>
+
+  <select id="selectLoginCompany" resultMap="companyResultSet" parameterType="Company">
+  		SELECT *
+  		FROM COMPANY
+  		WHERE COM_ID = #{companyId}
+  		AND PWD = #{companyPwd}
+
+  </select>
+  
+  	<select id="selectPwd" resultType="java.lang.String" parameterType="java.lang.String">
+		SELECT PWD
+		FROM COMPANY
+		WHERE COM_ID = #{companyId}
+
+	</select>
+	
+	<select id="selectLoginUser" resultMap="companyResultSet" parameterType="Company">
+		SELECT *
+		FROM COMPANY
+		WHERE COM_ID =#{companyId}
+
+	</select>
+	
+	<insert id="insertCompany" parameterType="Company">
+		INSERT INTO COMPANY(COM_CODE,PWD,COM_ID,EMAIL,PHONE,BIZ_NAME,BIZ_NUM,BOSS_NAME,PERSONAL_NUM,TYPE_OF_BIZ,BIZ_LOCATION)
+		VALUES (COMPANY_SEQ.NEXTVAL,#{companyPwd},#{companyId},#{email},#{phone},#{bizName},#{bizNum},#{bossName},#{personalNum},#{bizType},#{bizLocation})
+	</insert>
+	
+  
+  
+  
+  </mapper>
