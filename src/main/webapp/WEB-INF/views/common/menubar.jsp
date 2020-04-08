@@ -27,10 +27,21 @@
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   
 <style>
-	#printBtn {
+	#printWinBtn {
 		background: none;
 		border: none;
 		outline: none;
+	}
+	#helpBtn {
+		background: none;
+		border: none;
+		outline: none;
+	}
+	#helpPersonBtn {
+		background: none;
+		border: none;
+		outline: none;
+		float: right;
 	}
 </style>
 </head>
@@ -38,8 +49,10 @@
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <a class="navbar-brand" href="index.html"><img src="${ contextPath }/resources/images/logo_vertical.PNG" width="90%"></a><button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button
             >
-            <button id="printBtn" onclick="print();" style="color:#296355; font-weight: bold;"><img src="${ contextPath }/resources/images/print.PNG" width="30px"> 인쇄</button>
+            <button id="helpBtn" style="color:#296355; font-weight: bold;"><img src="${ contextPath }/resources/images/help.PNG" width="30px"> 도움!</button>
+            <button id="printWinBtn" style="color:#296355; font-weight: bold;"><img src="${ contextPath }/resources/images/print.PNG" width="30px"> 인쇄</button>
             <!-- Navbar Search-->
+            <button id="helpPersonBtn" style="color:#296355; font-weight: bold;"><img src="${ contextPath }/resources/images/고객센터.PNG" width="30px"> 고객센터</button>
             <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
                 <div class="input-group">
                     <input class="form-control" type="text" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" />
@@ -59,7 +72,10 @@
                     </div>
                 </li>
             </ul>
+            
         </nav>
+        
+        
         <div id="layoutSidenav">
             <div id="layoutSidenav_nav">
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
@@ -81,7 +97,7 @@
                                         <nav class="sb-sidenav-menu-nested nav">
 	                                       <a class="nav-link" href="normalReceiption.vi">일반전표입력</a>
 	                                        <a class="nav-link" href="receiption.vi">매입매출전표입력</a>
-	                                        <a class="nav-link" href="password.html">세금계산서발행</a>
+	                                        <a class="nav-link" href="taxInvoice.vi">세금계산서발행</a>
 	                                        <a class="nav-link" href="tranHis.vi">매입매출전표조회</a>
                                         </nav>
                                     </div>
@@ -107,7 +123,7 @@
                                         
                                     <div class="collapse" id="pagesCollapseA" aria-labelledby="headingOne" data-parent="#sidenavAccordionPages">
                                         <nav class="sb-sidenav-menu-nested nav">
-	                                        <a class="nav-link" href="401.html">매입매출장</a>
+	                                        <a class="nav-link" href="purchase.vi">매입매출장</a>
 	                                        <a class="nav-link" href="404.html">총계정원장</a>
 	                                        <a class="nav-link" href="500.html">계정별원장</a>
 	                                        <a class="nav-link" href="500.html">거래처원장</a>
@@ -125,7 +141,7 @@
                                       
                                 </nav>
                             </div>
-                            
+                        
                              
                             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts"
                                 ><div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
@@ -139,8 +155,8 @@
                                 <a class="nav-link" href="sumTableTax.vi">세금계산서합계표</a>
                                 <a class="nav-link" href="billTotalTable.vi">계산서합계표</a>
                                 <a class="nav-link" href="creditCardSalesSlipGap.vi">신용카드등수령명세서</a>
-                                <a class="nav-link" href="layout-sidenav-light.html">신용카드등발행명세서</a>
-                                <a class="nav-link" href="layout-sidenav-light.html">의제매입신고서</a>
+                                <a class="nav-link" href="creditCardPurchaseSilp.vi">신용카드등발행명세서</a>
+                                <a class="nav-link" href="deemedInputTax.vi">의제매입신고서</a>
                                 <a class="nav-link" href="layout-sidenav-light.html">부가가치세신고서</a>
                                 </nav>
                             </div>
