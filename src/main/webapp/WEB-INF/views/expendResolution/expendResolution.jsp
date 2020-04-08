@@ -8,36 +8,15 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-	.div-menuTap{
-		display: inline-block;
-		background: darkgreen;
-		color:white;
-		width:200px;
-		height:50px;
-		border-top-left-radius:10px;
-		border-top-right-radius:10px;
-		text-align:center;
-		line-height:50px;
+	.confirmTable{
+		background:gray;
+		float:right;
 	}
-	.div-menuTap:hover{
-		cursor:pointer;
-		opacity:80%;
+	.topArea{
+		background:aqua;
 	}
-	
-	.div-subjectName{
-		background: darkgreen;
-		color:white;
-		width:200px;
-		height:30px;
-	}
-	input{
-		width:200px;
-	}
-	.div-menuTap-no{
-		opacity:50%;
-	}
-	.div-menuTap-no:hover{
-		opacity:80%;
+	.botArea{
+		background:red;
 	}
 </style>
 </head>
@@ -53,9 +32,42 @@
 		<h2 class="mt-4">지출결의서</h2>
 		
 		
+		<table class="confirmTable">
+			<tr class="topArea">
+				<td>11</td>
+				<td>12</td>
+			</tr>
+			
+			<tr class="botArea">
+				<td>21</td>
+				<td>22</td>
+			</tr>
+		</table>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	<!-- //작업공간 -->
 	</div>
 	</main>
 	<jsp:include page="../common/menubar2.jsp" />
 </body>
 </html>
+
+
+
+
+
+
