@@ -23,24 +23,29 @@ public class ViewController {
 	public String sumTableTax() {
 		return "bugagachi/sumTableOfTaxInvoices";
 	}
+	
 	@GetMapping("/tranHis.vi")
 	public String transectionHistory() {
 		return "slip/transectionHistory";
 	}
+	
 	@GetMapping("/receiption.vi")
 	public String reciptionForm() {
 		return "slip/receiptionForm";
 	}
+	
 	@GetMapping("showViewCeateCompanyId.vi")
-	   public String showViewCeateCompanyId() {
-	      System.out.println("showViewCeateCompanyId 메소드 호출됨 ㅎ");
-	      return "createCompanyId/createCompanyId";
+    public String showViewCeateCompanyId() {
+       System.out.println("showViewCeateCompanyId 메소드 호출됨 ㅎ");
+       return "companyInnerId/createCompanyId";
 	}
+	
 	@GetMapping("/creditCardSalesSlipGap.vi")
 	public String creditCardSalesSlipGap() {
 		System.out.println(ts.abcd());
 		return "bugagachi/CreditCardSalesSlipGap";
 	}
+	
 	@GetMapping("/billTotalTable.vi")
 	public String billTotalTable() {
 		System.out.println(ts.abcd());
@@ -56,6 +61,26 @@ public class ViewController {
     public String showViewSelectId() {
        System.out.println("사내계정조회 페이지 보여주세요");
        return "companyInnerId/selectCompanyId";
+    }
+    
+    @GetMapping("/taxInvoice.vi")
+    public String taxInvoiceIssue() {
+    	return "slip/taxInvoiceIssue";
+    }
+    
+    @GetMapping("/creditCardPurchaseSilp.vi")
+    public String creditCardPurchaseSilp() {
+       return "bugagachi/CreditCardPurchaseSilp";
+    }
+    
+    @GetMapping("/purchase.vi")
+    public String purchase() {
+    	return "accountBook/purchase";
+    }
+    
+    @GetMapping("/deemedInputTax.vi")
+    public String deemedInputTax() {
+       return "bugagachi/deemedInputTax";
     }
 
 }
