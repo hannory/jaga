@@ -12,9 +12,6 @@
         *{
             font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
         }
-        #titleArea{
-            width: 50%;
-        }
         .middleMenu{
             background-color: #24574A;
             color: white;
@@ -27,20 +24,24 @@
             text-align: center;
             margin-top: 15px;
             margin-bottom:40px;
+            width:100%;
+        }
+        #totalSum tr{
+        	height: 80px;
         }
         #totalSum td{
             border: 1px solid #C9CACE; 
-            height: 23px;
-            width:25%;
+            
         }
-        #green{
+       .green{
             background-color: #D9EAD3;
             font-weight: 700;
+        }  
+        .green_value{
+        	background-color: #F3F4F6;
+        	width:18%;
+        	
         }
-        #cho_nav1{
-            background-color: #1B5748;
-            color: white;
-        }   
         #Tex_bill_detailList{
             margin-top: 25px;
             margin-bottom: 25px;
@@ -49,8 +50,12 @@
             width: 98%;
             text-align: center;
         }
+        #Tex_bill_detailList tr{
+        	height: 50px;
+        }
         #Tex_bill_detailList td{
             border: 1px solid #C9CACE; 
+            width: 20%;
         }
         .Tex_bill_th{
             background-color:#E7E6E6;
@@ -65,29 +70,6 @@
         .breadcrumb>li{
         	margin: auto auto;
         }
-        /* td{ border: 1px solid red;} */
-        .cho_nav{
-        	height: 35px;
-        	border: 1px solid #C9CACE;
-        	border-radius: 5pt;
-        	background-color:#8DABA3;
-        	color: white;
-        }
-        .cho_nav>p{
-        	margin-left:5px;
-        	margin-right: 5px;
-        	margin-top:3px;
-        }
-        .sumTableSales{
-        	width: 20%;
-        	padding-left:5%;
-        }
-   		#List_detail td{
-   			border:1px solid #D2D2D6;
-   		}
-   		#List_detail{
-   			text-align: center;
-   		}
    		.cc_year{
    			width:50px;
    			height: 30px;
@@ -102,6 +84,19 @@
    		.billMainTable{
    			width:100%;
    		}
+		.table-justify3 {
+			width: 150px;
+			display: flex;
+			justify-content: space-between;
+		}
+		#tax_pur{
+			align: center;
+			text-align: center;
+			width: 100%;
+			height: 70px;
+			margin-bottom: 40px;
+			margin-top: 20px;
+		}
     </style>
 </head>
 <body>
@@ -111,7 +106,7 @@
 		scope="application" />
 	<main>
 	<div class="container-fluid">
-			<h2 class="mt-4">신용카드매출전표등 수령명세서(갑)(을)</h2>
+			<h2 class="mt-4">신용카드매출전표등 발행금액 집계표</h2>
 	<ol class="breadcrumb mb-4">
 			<li><button id="deadlineBtn">마감</button></li>
 			<li>1기예정</li>
@@ -158,140 +153,112 @@
         <tr>
             <td colspan="10">
                 <div class="middleMenu">
-                    <h4>2.신용카드 등 매입내역 합계</h4>
+                    <h4>1.인적사항</h4>
                 </div>
             </td>
         </tr>
-        <!-- 매출세금계산서 총합계 표 -->
+        <!-- 1.인적사항 표 -->
         <tr>
             <td colspan="10">
-                <table align="center" id="totalSum" style="width: 99%;">
-                    <tr style="background-color: #E7E6E6;font-weight: 700;">
-                        <td>구  분</td>
-                        <td>거래건수</td>
-                        <td>공급가액</td>
-                        <td>세  액</td>
+                <table align="center" id="totalSum">
+                    <tr>
+                        <td class="green">상호</td>
+                        <td class="green_value"></td>
+                        <td class="green">성명</td>
+                        <td class="green_value"></td>
+                        <td class="green">사업등록번호</td>
+                        <td class="green_value"></td>
                     </tr>
                     <tr>
-                        <td> </td>
-                        <td> </td>
-                        <td> </td>
-                        <td> </td>
+                    	<td class="green">사업장소재지</td>
+                    	<td class="green_value" colspan="5"></td>
                     </tr>
-                     <tr>
-                        <td> </td>
-                        <td> </td>
-                        <td> </td>
-                        <td> </td>
-                    </tr>
-                     <tr>
-                        <td> </td>
-                        <td> </td>
-                        <td> </td>
-                        <td> </td>
-                    </tr>
-                     <tr>
-                        <td> </td>
-                        <td> </td>
-                        <td> </td>
-                        <td> </td>
-                    </tr>
-                    
+                   
                 </table>
 
             </td>
             
         </tr>
-        <!-- 매출세금계산서 총합계 표 끝 -->
+        <!-- 1.인적사항 표 끝 -->
         <tr>
             <td colspan="10">
                 <div class="middleMenu">
-                    <h4>3.거래내역입력</h4>
+                    <h4>2.신용카드매출전표 등 발행금액 현황</h4>
                 </div>
             </td>
         </tr>
-        <!-- 상세리스트 -->
+        <!--2.신용카드매출전표등 발행 금액 현황 표 시작 -->
         <tr>
             <td colspan="10">
                 <div>
                     <table id="Tex_bill_detailList">
                         <tr class="Tex_bill_th" style="font-weight: 800; height: 25px;">
-                            <td rowspan="2" id="Text_billNo">no</td>
-                            <td rowspan="2">월/일</td>
-                            <td rowspan="2">구분</td>
-                            <td rowspan="2" style="width:20%;">공급자</td>
-                            <td rowspan="2" style="width:20%;">공급자(가맹점)<br>사업자등록번호</td>
-                            <td rowspan="2">카드호원번호</td>
-                            <td colspan="3">그 밖의 신용카드 등 거래내역 합계</td>
+                            <td id="Text_billNo">구 분</td>
+                            <td>합 계</td>
+                            <td>신용/직불/기명식/선불카드</td>
+                            <td style="width:20%;">현금영수증</td>
+                            <td style="width:20%;">직불전자지금 수단 및<br>기명식선불 전자지급수단</td>  
                         </tr>
-                        <tr class="Tex_bill_th" onclick="PopModalTexList()" style="font-weight: 800; height: 25px;">
-                           
-                            <td> 거래건수</td>
-                            <td> 공급가액</td>
-                            <td> 세액</td>
-                        </tr>
-                        <tr onclick="PopModalTexList()">
-                            <td id="Text_billNo"> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                        </tr>
-                         <tr onclick="PopModalTexList()">
-                            <td id="Text_billNo"> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                        </tr>
-                        <tr onclick="PopModalTexList()">
-                            <td id="Text_billNo"> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                        </tr>
-                        <tr onclick="PopModalTexList()">
-                            <td id="Text_billNo"> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                        </tr>
-                        <tr class="Tex_bill_th" style="font-weight: 600;">
-                            <td colspan="6"> 합계 </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                  
-                        </tr>
+ 						<tr>
+ 							<td class="green" align="center"><div class="table-justify3"><div>합</div><div>계</div></td>
+ 							<td class="green_value"></td>
+ 							<td class="green_value"></td>
+ 							<td class="green_value"></td>
+ 							<td class="green_value"></td>
+ 						</tr>
+ 						<tr>
+ 							<td class="green" align="center"><div class="table-justify3"><div>과</div><div>세</div><div>매</div><div>출</div><div>분</div></td>
+ 							<td class="green_value"></td>
+ 							<td></td>
+ 							<td></td>
+ 							<td></td>
+ 						</tr>
+ 						<tr>
+ 							<td class="green" align="center"><div class="table-justify3"><div>면</div><div>세</div><div>매</div><div>출</div><div>분</div></td>
+ 							<td class="green_value"></td>
+ 							<td></td>
+ 							<td></td>
+ 							<td></td>
+ 						</tr>
+ 						<tr>
+ 							<td class="green" align="center"><div class="table-justify3"><div>봉</div><div>사</div><div>료</div></td>
+ 							<td class="green_value"></td>
+ 							<td></td>
+ 							<td></td>
+ 							<td></td>
+ 						</tr>
                         
                     </table>
                 </div>
             </td>
         </tr>
-        <!-- 상세리스트끝 -->
+        <!--2.신용카드매출전표등 발행 금액 현황 표 끝 -->
+        <!--3.신용카드매출전표 등 발행금액총 세금계산서 교부내역  -->
+        <tr>
+        	<td colspan="10">
+                <div class="middleMenu">
+                    <h4>3.신용카드매출전표 등 발행금액 중 세금계산서 교부내역</h4>
+                </div>
+            </td>
+        </tr>
+        <tr>
+        	<table id="tax_pur">
+        		<tr>
+        			<td class="green">세금계산서발급금액</td>
+        			<td class="green_value" style="width: 30%"></td>
+        			<td class="green">계산서발급금액</td>
+        			<td class="green_value" style="width: 30%"></td>
+        		</tr>
+        	
+        	</table>
+        	
+        </tr>
+        <!--3.신용카드매출전표 등 발행금액총 세금계산서 교부내역  -->
         <tr>
             <td colspan="9">
             <!-- 코드영역 -->
                 <div id="Tex_bill_code">
-                     <p class="Tex_bill_code_p">[확인]전성일자가 없는 거래는 전자세금계산서 발급분으로 반영 되므로 국세청 e세로 전송 세금계산서와 반드시 확인합니다.</p>
+                     <p class="Tex_bill_code_p" style="height: 70px;"></p>
                 </div>
             </td>
         </tr>

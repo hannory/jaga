@@ -24,12 +24,12 @@
         #middleMenu>h4{
             padding: 8px;
         }
-        #totalSum{
+        .totalSum{
             text-align: center;
             margin-top: 15px;
             margin-bottom:40px;
         }
-        #totalSum td{
+        .totalSum td{
             border: 1px solid #C9CACE; 
         }
         #green{
@@ -92,6 +92,12 @@
    		#List_detail{
    			text-align: center;
    		}
+   		.mainTable{
+   			width:100%;
+   		}
+   		.Tex_bill_code_p{
+   			font-size:23px;
+   		}
     </style>
 </head>
 <body>
@@ -108,14 +114,15 @@
 			<li><button id="deadlineBtn">마감</button></li>
 			<li>1기예정</li>
 			<li>신고구분: 
-                <select>
+                <select name="report_type">
                     <option>1.정기신고</option>
                     <option>2.수정신고</option>
                 </select></li>
             <li>조회기간:
-            	<input type="text" class="datepicker"> ~ <input type="text" class="datepicker">
+            	<input type="text" name="search_st" class="datepicker"> ~ <input type="text" name="search_ed"class="datepicker">
             </li>
-			
+			<li><input type="button" name="search" value="조회"></li>
+			<li><input type="button" name="report" value="신고서미리보기"></li>
 		</ol>
 		
     <script>
@@ -144,7 +151,7 @@
 	
 	</script>
 	<div id="sales">
-    <table align="center">
+    <table align="center" class="mainTable">
         
         <tr>
             <td><div class="sumTableSales" onclick="showsumTable_sales()" id="showsumTable_sales"><h4>매출</h4></div></td>            
@@ -172,7 +179,7 @@
         <!-- 매출세금계산서 총합계 표 -->
         <tr>
             <td colspan="10">
-                <table align="center" id="totalSum" style="width: 99%;">
+                <table align="center" class="totalSum" style="width: 99%;">
                     <tr style="background-color: #E7E6E6;font-weight: 700;">
                         <td colspan="2" style="width: 45%;">구  분</td>
                         <td style="width: 15%;">매출처수</td>
@@ -462,9 +469,10 @@
         </tr>
         <!-- 상세리스트끝 -->
         <tr>
-            <td colspan="9">
+           <td colspan="9">
+            <!-- 코드영역 -->
                 <div id="Tex_bill_code">
-                    <h4>※[확인] 전성일자가 없는 거래는 전자세금계산서 발급분으로 반영 되므로 국세청 e세로 전송 세금계산서와 반드시 확인합니다.</h4>
+                     <p class="Tex_bill_code_p">[확인]전성일자가 없는 거래는 전자세금계산서 발급분으로 반영 되므로 국세청 e세로 전송 세금계산서와 반드시 확인합니다.</p>
                 </div>
             </td>
         </tr>
@@ -597,7 +605,7 @@
 	
 	<!-- 매입영역 -->
 	<div class="container-fluid" id="purchase">
-		 <table align="center">
+		 <table align="center" class="mainTable">
         
         <tr>
             <td><div class="sumTableSales" onclick="showsumTable_sales()" ><h4>매출</h4></div></td>            
@@ -625,7 +633,7 @@
         <!-- 매출세금계산서 총합계 표 -->
         <tr>
             <td colspan="10">
-                <table align="center" id="totalSum" style="width: 99%;">
+                <table align="center" class="totalSum" style="width: 99%;">
                     <tr style="background-color: #E7E6E6;font-weight: 700;">
                         <td colspan="2" style="width: 45%;">구  분</td>
                         <td style="width: 15%;">매출처수</td>
