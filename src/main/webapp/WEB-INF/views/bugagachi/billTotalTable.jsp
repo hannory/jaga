@@ -117,8 +117,10 @@
 			<li><button id="deadlineBtn">마감</button></li>
 			<li>1기예정</li>
             <li>조회기간:
-            	<input type="text" class="datepicker"> ~ <input type="text" class="datepicker">
+            	<input type="text" name="search_st" class="datepicker"> ~ <input type="text" name="serach_ed" class="datepicker">
             </li>
+            <li><input type="button" name="search" value="조회"></li>
+            <li><input type="button" name="report" value="신고서미리보기"></li>
 			
 		</ol>
 		
