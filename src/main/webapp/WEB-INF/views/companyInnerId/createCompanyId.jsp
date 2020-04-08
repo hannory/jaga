@@ -125,7 +125,7 @@
 						<label>이름</label>
 					</div>
 				</td>
-				<td><input type="text" name="name"></td>
+				<td><input type="text" name="personName"></td>
 			</tr>
 			
 			<tr>
