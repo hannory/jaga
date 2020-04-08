@@ -158,13 +158,15 @@
 				</td>
 				
 				<td>
-					<div id="fileArea" style="width:100px; height:100px; border:1px solid black;"></div>
+					<div id="fileArea" style="width:100px; height:100px; border:1px solid black;">
+					<img id="imgArea" style="width:100%; height:100%;">
+					</div>
 				</td>
 			</tr>
 			
 		</table>
 			
-			<input type="file" id="fileBtn" style="display:none;">
+			<input type="file" id="fileBtn" name="sign" onchange="loadImg(this)" style="display:none;">
 		
 			<div align="center" style="margin-top:100px;">
 			<button class="formBtn" type="submit">생성</button>
@@ -182,6 +184,23 @@
 					fileBtn.click();
 				}
 			}
+			
+			
+			
+			function loadImg(fileTag){
+				if(fileTag.files && fileTag.files[0]){
+					var reader = new FileReader();
+					
+					reader.onload = function(event){
+						imgArea.setAttribute("src", event.target.result);
+					}
+					reader.readAsDataURL(fileTag.files[0]);
+				}
+			}
+			 
+			
+			
+			
 		</script>
 		
 		
