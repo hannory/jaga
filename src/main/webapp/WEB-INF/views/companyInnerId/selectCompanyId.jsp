@@ -14,6 +14,10 @@
 		color:white;
 		width:200px;
 		height:50px;
+		border-top-left-radius:10px;
+		border-top-right-radius:10px;
+		text-align:center;
+		line-height:50px;
 	}
 	.div-menuTap:hover{
 		cursor:pointer;
@@ -28,6 +32,12 @@
 	}
 	input{
 		width:200px;
+	}
+	.div-menuTap-no{
+		opacity:50%;
+	}
+	.div-menuTap-no:hover{
+		opacity:80%;
 	}
 </style>
 </head>
@@ -55,7 +65,7 @@
 		</select>
 		
 		</div>
-		<div class="div-menuTap" onclick="createId()" style="opacity:50%"><span>직원 계정 생성</span></div>
+		<div class="div-menuTap div-menuTap-no" onclick="createId()"><span>직원 계정 생성</span></div>
 		<div class="div-menuTap"><span>직원 계정 조회</span></div>
 		<script>
 			function createId(){
