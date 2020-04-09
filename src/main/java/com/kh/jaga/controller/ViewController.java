@@ -82,5 +82,34 @@ public class ViewController {
     public String deemedInputTax() {
        return "bugagachi/deemedInputTax";
     }
+    
+    @GetMapping("/taxInvoicePrint.vi")
+    public String taxInvoicePrint() {
+    	return "slip/taxInvoicePrint";
+    }
 
+    @GetMapping("/showExpendResolution.vi")
+    public String showExpendResolution() {
+       return "expendResolution/expendResolution";
+    }
+    
+    @GetMapping("/generalLedger.vi")
+    public String generalLedger() {
+    	return "accountBook/generalLedger";
+    }
+    
+    @GetMapping("/businessPayment.vi")
+    public String businessPayment() {
+    	return "payment/businessPayment";
+    }
+    
+    @GetMapping("/vatReport.vi")
+    public String vatReport() {
+       return "bugagachi/vatReport";
+    }
+    
+    @GetMapping("/retirement.vi")
+    public String retirement() {
+    	return "payment/retirement";
+    }
 }
