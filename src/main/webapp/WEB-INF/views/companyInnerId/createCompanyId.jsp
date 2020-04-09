@@ -10,14 +10,14 @@
 <style>
 	.div-menuTap{
 		display: inline-block;
-		background: darkgreen;
+		background: #8DABA3;
 		color:white;
 		width:200px;
-		height:50px;
+		height:30px;
 		border-top-left-radius:10px;
 		border-top-right-radius:10px;
 		text-align:center;
-		line-height:50px;
+		line-height:30px;
 	}
 	.div-menuTap:hover{
 		cursor:pointer;
@@ -41,7 +41,7 @@
 		/* background:red; */
 		width:85%;
 		height:50%;
-		border:2px solid green;
+		border:1px solid #C9CACE;
 	}
 	.div-input-area{
 		/* background:pink; */
