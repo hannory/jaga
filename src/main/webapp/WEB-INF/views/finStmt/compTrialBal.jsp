@@ -56,6 +56,11 @@
 	padding:1px;
 	padding-right:3px;
 }
+.modal-head {
+	border: 1px solid #a6a6a6;
+	background: #e7e6e6;
+	text-align: center;
+}
 </style>
 <title></title>
 </head>
@@ -69,7 +74,7 @@
 		<table width="1100px">
 			<tr>
 				<td><h2 class="mt-4">재무제표</h2></td>
-				<td width="50%" align="right"><span>조회기간&nbsp;&nbsp;&nbsp;&nbsp;</span><input type="text" id="datepicker"> ~ <input type="text" id="datepicker1">	</td>
+				<td width="50%" align="right"><span>조회기간&nbsp;&nbsp;&nbsp;&nbsp;</span><input type="text" id="datepicker"> ~ <input type="text" id="datepicker1"></td>
 			</tr>
 		</table>
 		
@@ -86,10 +91,10 @@
 		<table style="margin-bottom:15px">
 			<tr>
 				<td><span class="subtitle" style="border-bottom:1px solid #24574A">합계잔액시산표</span></td>
-				<td><span class="subtitle">재무상태표</span></td>
-				<td><span class="subtitle">손익계산서</span></td>
-				<td><span class="subtitle">제조원가명세서</span></td>
-				<td><span class="subtitle">현금흐름표</span></td>
+				<td><span class="subtitle"><a href="stmtOfFinPos.fs">재무상태표</a></span></td>
+				<td><span class="subtitle"><a href="incomeStmt.fs">손익계산서</a></span></td>
+				<td><span class="subtitle"><a href="mfrgCostsStmt.fs">제조원가명세서</a></span></td>
+				<td><span class="subtitle"><a href="stmtOfCashFlow.fs">현금흐름표</a></span></td>
 				<td align="right" style="width:180px;"><div id="foldBtn"><img id="foldImg" src="${contextPath}/resources/images/fold.PNG"></div></td>
 			</tr>
 		</table>
@@ -105,7 +110,7 @@
 				<td class="table-head" width="18%">합계</td>
 				<td class="table-head" width="18%">잔액</td>
 			</tr>
-			<tr>
+			<tr ondblclick="PopSlipModal()">
 				<td class="table-title"></td>
 				<td class="table-title"></td>
 				<td class="table-title" align="center"><div class="table-justify1"><div>1. 유</div><div>동</div><div>자</div><div>산 <label class="hidden-right">.1</label></div></div></td>
@@ -399,6 +404,83 @@
 				the top of the page. This is the end of the static navigation demo.</div>
 		</div>
 	</div>
+	
+	<!-- 원장조회 모달 -->
+	<script>
+		function PopSlipModal() {
+			$("#slip").modal();
+		};
+	</script>
+	
+  	<div class="modal fade" id="slip" role="dialog">
+    	<div class="modal-dialog modal-lg">
+	      <div class="modal-content">
+	        <div class="modal-header" style="background-color:#1B5748">
+	        	<h4 class="modal-title" style="color:white;">원장조회</h4>
+	        	<button type="button" class="close" data-dismiss="modal">&times;</button>
+	        </div>
+	        <div class="modal-body">
+		    	<table style="margin-left:auto; margin-right: auto;">
+		        	<tr>
+		        		<td>계정과목</td>
+		        		<td><input style="width:100px;" type="text" readonly></td>
+		        		<td>거래처명</td>
+		        		<td><input style="width:150px;" name="companyName" type="text" readonly></td>
+		        		<td><input style="width:150px;" name="personName" type="text" readonly></td>
+		        		<td><input style="width:150px;" name="companyCode" type="text" readonly></td>
+		        	</tr>
+		        </table>
+		        <div>
+		        	<table id="List_detail" style=" width:100%; margin-left:auto; margin-right: auto;">
+		        		<tr>
+		        			<td class="modal-head">일자</td>
+		        			<td class="modal-head">번호</td>
+		        			<td class="modal-head">적요</td>
+		        			<td class="modal-head">코드</td>
+		        			<td class="modal-head">거래처</td>
+		        			<td class="modal-head">차변</td>
+		        			<td class="modal-head">대변</td>
+		        			<td class="modal-head">잔액</td>
+		        		</tr>
+		        		<tr class="modal_detail" style="height: 25px;">
+		        			<td style="text-align:center;">03-31</td>
+		        			<td style="text-align:center;">00005</td>
+		        			<td></td>
+		        			<td style="text-align:center;">01003</td>
+		        			<td style="text-align:center;">마음전자</td>
+		        			<td style="text-align:right;">550,000</td>
+		        			<td style="text-align:right;"></td>
+		        			<td style="text-align:right;">550,000</td>
+		        		</tr>
+		        		<tr>
+		        			<td class="modal-head"></td>
+		        			<td class="modal-head"></td>
+		        			<td class="modal-head" style="text-align:left;">[월&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;계]</td>
+		        			<td class="modal-head"></td>
+		        			<td class="modal-head"></td>
+		        			<td class="modal-head"></td>
+		        			<td class="modal-head"></td>
+		        			<td class="modal-head"></td>
+		        		</tr>
+		        		<tr>
+		        			<td class="modal-head"></td>
+		        			<td class="modal-head"></td>
+		        			<td class="modal-head" style="text-align:left;">[누&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;계]</td>
+		        			<td class="modal-head"></td>
+		        			<td class="modal-head"></td>
+		        			<td class="modal-head"></td>
+		        			<td class="modal-head"></td>
+		        			<td class="modal-head"></td>
+		        		</tr>
+		        	</table>
+		        </div>
+		        <div class="modal-footer">
+		          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		        </div>
+	        </div>
+		</div>
+	</div>
+  
 	</main>
 	<script>
 	/* 날짜 input jquery ui */
@@ -416,6 +498,14 @@
 		$("img.ui-datepicker-trigger")
 				.attr("style","margin-left:2px; vertical-align:middle; cursor: Pointer; width:20px; height:20px");
 		
+		/* 표에서 하늘색 hover 주기 */
+		$("#contentTable td").hover(function() {
+			$(this).parent().css("background", "#DDEBF7");
+		});
+		
+		$("#contentTable td").mouseout(function() {
+			$(this).parent().css("background", "white");
+		});		
 	});
 	</script>
 	<jsp:include page="../common/menubar2.jsp" />
