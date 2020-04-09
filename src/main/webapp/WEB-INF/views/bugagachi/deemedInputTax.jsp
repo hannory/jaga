@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
      <style>
         *{
@@ -18,42 +18,48 @@
         .middleMenu{
             background-color: #24574A;
             color: white;
-            height: 40px;
+            height: 30px;
         }
-        .middleMenu>h4{
-            padding: 8px;
+        .middleMenu>h5{
+            padding: 5px;
         }
-        #totalSum{
+        .totalSum{
             text-align: center;
+          	  margin-top: 15px;
+            margin-bottom:40px;
+        }
+        #deemed{
+        	text-align: center;
             margin-top: 15px;
             margin-bottom:40px;
         }
-        #totalSum td{
-            border: 1px solid #C9CACE; 
+        #deemed td{
+        	 /* border: 1px solid #C9CACE;  */
             height: 23px;
             width:25%;
         }
-        #green{
+        .totalSum td{
+            border: 1px solid #C9CACE; 
+            height: 23px;
+        }
+        .green{
             background-color: #D9EAD3;
             font-weight: 700;
+        }
+        .green_value{
+        	background-color: #F3F4F6;
+        	
         }
         #cho_nav1{
             background-color: #1B5748;
             color: white;
         }   
-        #Tex_bill_detailList{
-            margin-top: 25px;
-            margin-bottom: 25px;
-            margin-left: auto;
-            margin-right: auto;
-            width: 98%;
-            text-align: center;
-        }
-        #Tex_bill_detailList td{
-            border: 1px solid #C9CACE; 
-        }
         .Tex_bill_th{
             background-color:#E7E6E6;
+        }
+        .Tex_bill_td{
+            background-color:#E7E6E6;
+            width: 10px;
         }
         #Text_billNo{
             background-color:#E7E6E6;
@@ -69,9 +75,10 @@
         .cho_nav{
         	height: 35px;
         	border: 1px solid #C9CACE;
-        	border-radius: 5pt;
         	background-color:#8DABA3;
         	color: white;
+			border-top-left-radius:10px;
+			border-top-right-radius:10px;
         }
         .cho_nav>p{
         	margin-left:5px;
@@ -99,8 +106,38 @@
    		.Tex_bill_code_p{
    			font-size:23px;
    		}
-   		.billMainTable{
+   		/* .billMainTable{
    			width:100%;
+   		} */
+   		.total_deemed{
+   			text-align: center;
+   			width: 99%;
+   			border:1px solid #C9CACE;
+   		}
+   		#total_deemed_div1{
+   			align:center;
+   		 	width: 99%;
+   		 	float: left;
+   		}
+   		#total_deemed_div2{
+   			align:center;
+   		 	width: 99%;
+   		 	float: left;
+   		}
+   		#total_deemed_div3{
+   			align:center;
+   		 	width: 99%;
+   		 	float: left;
+   		}
+   		#tax1{
+   		 	width:100%; 
+   		 	border:2px solid #C9CACE;
+   	  	 	padding:8px;
+   		}
+   		#tax2{
+   			width:100%; 
+   		 	border:2px solid #C9CACE;
+   	  	 	padding:8px;
    		}
     </style>
 </head>
@@ -111,7 +148,7 @@
 		scope="application" />
 	<main>
 	<div class="container-fluid">
-			<h2 class="mt-4">신용카드매출전표등 수령명세서(갑)(을)</h2>
+			<h2 class="mt-4">의제매입세액공제 신고서</h2>
 	<ol class="breadcrumb mb-4">
 			<li><button id="deadlineBtn">마감</button></li>
 			<li>1기예정</li>
@@ -154,172 +191,341 @@
             <li><input type="button" name="report" value="신고서미리보기"></li>
 			
 		</ol>
-			<table align="center" class="billMainTable">   
+			<!-- <table align="center" class="billMainTable">   
+        매출세금계산서 총합계 표
         <tr>
-            <td colspan="10">
-                <div class="middleMenu">
-                    <h4>2.신용카드 등 매입내역 합계</h4>
-                </div>
-            </td>
-        </tr>
-        <!-- 매출세금계산서 총합계 표 -->
-        <tr>
-            <td colspan="10">
-                <table align="center" id="totalSum" style="width: 99%;">
-                    <tr style="background-color: #E7E6E6;font-weight: 700;">
-                        <td>구  분</td>
-                        <td>거래건수</td>
-                        <td>공급가액</td>
-                        <td>세  액</td>
-                    </tr>
-                    <tr>
-                        <td> </td>
-                        <td> </td>
-                        <td> </td>
-                        <td> </td>
-                    </tr>
-                     <tr>
-                        <td> </td>
-                        <td> </td>
-                        <td> </td>
-                        <td> </td>
-                    </tr>
-                     <tr>
-                        <td> </td>
-                        <td> </td>
-                        <td> </td>
-                        <td> </td>
-                    </tr>
-                     <tr>
-                        <td> </td>
-                        <td> </td>
-                        <td> </td>
-                        <td> </td>
-                    </tr>
-                    
-                </table>
-
-            </td>
+        공급자 정보표 시작
+            <td colspan="3" style="vertical-align: top;"> -->
+            	<div style="height:825px; width: 28%; float:left; border:1px solid #D2D2D6;">
+	               	 <table align="center" class="totalSum" style="width: 99%;">
+	                    <tr style="background-color: #24574A; color: white;  font-weight: 700;">
+	                        <td>공급자</td>
+	                        <td>사업자(주민)등록번호</td>
+	                    </tr>
+	                  	<tr>
+	                  		<td></td>
+	                  		<td></td>
+	                  	</tr>
+	                  	<tr>
+	                  		<td></td>
+	                  		<td></td>
+	                  	</tr>
+	                  	<tr>
+	                  		<td></td>
+	                  		<td></td>
+	                  	</tr>
+	                  	<tr>
+	                  		<td></td>
+	                  		<td></td>
+	                  	</tr>
+	                  	<tr>
+	                  		<td></td>
+	                  		<td></td>
+	                  	</tr>
+	                  	
+	                  	<tr>
+	                  		<td></td>
+	                  		<td></td>
+	                  	</tr>
+	                    
+	                </table>
+				</div><!-- table01 ---------------------->
+            <!-- 공급자 정보표 끝-->
             
-        </tr>
-        <!-- 매출세금계산서 총합계 표 끝 -->
-        <tr>
-            <td colspan="10">
-                <div class="middleMenu">
-                    <h4>3.거래내역입력</h4>
-                </div>
-            </td>
-        </tr>
-        <!-- 상세리스트 -->
-        <tr>
-            <td colspan="10">
-                <div>
-                    <table id="Tex_bill_detailList">
-                        <tr class="Tex_bill_th" style="font-weight: 800; height: 25px;">
-                            <td rowspan="2" id="Text_billNo">no</td>
-                            <td rowspan="2">월/일</td>
-                            <td rowspan="2">구분</td>
-                            <td rowspan="2" style="width:20%;">공급자</td>
-                            <td rowspan="2" style="width:20%;">공급자(가맹점)<br>사업자등록번호</td>
-                            <td rowspan="2">카드호원번호</td>
-                            <td colspan="3">그 밖의 신용카드 등 거래내역 합계</td>
-                        </tr>
-                        <tr class="Tex_bill_th" onclick="PopModalTexList()" style="font-weight: 800; height: 25px;">
-                           
-                            <td> 거래건수</td>
-                            <td> 공급가액</td>
-                            <td> 세액</td>
-                        </tr>
-                        <tr onclick="PopModalTexList()">
-                            <td id="Text_billNo"> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                        </tr>
-                         <tr onclick="PopModalTexList()">
-                            <td id="Text_billNo"> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                        </tr>
-                        <tr onclick="PopModalTexList()">
-                            <td id="Text_billNo"> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                        </tr>
-                        <tr onclick="PopModalTexList()">
-                            <td id="Text_billNo"> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                        </tr>
-                        <tr class="Tex_bill_th" style="font-weight: 600;">
-                            <td colspan="6"> 합계 </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                  
-                        </tr>
-                        
-                    </table>
-                </div>
-            </td>
-        </tr>
-        <!-- 상세리스트끝 -->
-        <tr>
-            <td colspan="9">
-            <!-- 코드영역 -->
-                <div id="Tex_bill_code">
-                     <p class="Tex_bill_code_p">[확인]전성일자가 없는 거래는 전자세금계산서 발급분으로 반영 되므로 국세청 e세로 전송 세금계산서와 반드시 확인합니다.</p>
-                </div>
-            </td>
-        </tr>
-        
-    </table>
-    </div>
+            
+            
+            
+            
+            
+            
+    <div style="width: 72%; float:left; border:1px solid #D2D2D6;"><!-- 오른쪽 영역 -->
+            
+  				<div id="total_deemed_div1"><!-- 의제매입 합계표div -->
+  				
+  				<table border="1" align="center" class="total_deemed totalSum">
+	            				<tr class="Tex_bill_th" style="font-weight: 800;">
+	            					<td colspan="2">구 분</td>
+	            					<td>매입처수</td>
+	            					<td>건  수</td>
+	            					<td>매입가액</td>
+	            					<td>공제율</td>
+	            					<td>의제매입세액</td>
+	            				</tr>
+	            				
+	            				<tr>
+	            					<td colspan="2" class="green">합  계</td>
+	            					<td class="green_value"></td>
+	            					<td class="green_value"></td>
+	            					<td class="green_value"></td>
+	            					<td class="green_value">8/108</td>
+	            					<td class="green_value"></td>	
+	            				</tr>
+	            				<tr>
+	            					<td rowspan="2" class="green">사업자로부터의 <br>매입분</td>
+	            					<td class="green">계산서</td>
+	            					<td class="green_value"></td>
+	            					<td class="green_value"></td>
+	            					<td class="green_value"></td>
+	            					<td class="green_value">8/108</td>
+	            					<td class="green_value"></td>	
+	            				</tr>
+	            				<tr>
+	            					<td class="green">신용카드</td>
+	            					<td class="green_value"></td>
+	            					<td class="green_value"></td>
+	            					<td class="green_value"></td>
+	            					<td class="green_value">8/108</td>
+	            					<td class="green_value"></td>	
+	            				</tr>
+	            				<tr>
+	            					<td colspan="2" class="green">농어민으로부터의 매입분</td>
+	            					<td class="green_value"></td>
+	            					<td class="green_value"></td>
+	            					<td class="green_value"></td>
+	            					<td class="green_value">8/108</td>
+	            					<td class="green_value"></td>	
+	            				</tr>
+	            			
+	            			</table>
+  				</div><!-- 의제매입 합계표div 끝 -->
+  				
+  				<div id="total_deemed_div2">
+  					<table border="1" align="center" class="totalSum" style="width: 99%">
+	            					<tr class="Tex_bill_th" style="font-weight: 800;">
+	            						<td class="Tex_bill_td" rowspan="3"></td>
+	            						<td colspan="6">농 어민 등으로부터의 매입분에 대한 명세</td>
+	            					</tr>
+	            					<tr class="Tex_bill_th" style="font-weight: 800;">
+	            						<td colspan="2">면세농산물 등을 공급한 농 어민등</td>
+	            						<td rowspan="2">건 수</td>
+	            						<td rowspan="2">품 명</td>
+	            						<td rowspan="2">수 량</td>
+	            						<td rowspan="2">매입가액</td>
+	            					</tr>
+	            					<tr class="Tex_bill_th" style="font-weight: 800;">
+	            						<td>성 명</td>
+	            						<td>사업자 번호</td>
+	            					</tr>
+	            					<tr>
+	            						<td class="Tex_bill_td"></td>
+	            						<td></td>
+	            						<td></td>
+	            						<td></td>
+	            						<td></td>
+	            						<td></td>
+	            						<td></td>
+	            					</tr>
+	            					<tr>
+	            						<td class="Tex_bill_td"></td>
+	            						<td></td>
+	            						<td></td>
+	            						<td></td>
+	            						<td></td>
+	            						<td></td>
+	            						<td></td>
+	            					</tr>
+	            					<tr>
+	            						<td class="Tex_bill_td"></td>
+	            						<td></td>
+	            						<td></td>
+	            						<td></td>
+	            						<td></td>
+	            						<td></td>
+	            						<td></td>
+	            					</tr>
+	            					<tr class="Tex_bill_th">
+	            						<td class="Tex_bill_td"></td>
+	            						<td colspan="2">합 계</td>
+	            						<td></td>
+	            						<td></td>
+	            						<td></td>
+	            						<td></td>
+	            					</tr>
+	            				
+	            				</table>
+  				
+  				</div>
+  				
+  				
+  				
+  				
+  				<!-- 하든 면세농산물등/ 제조업면세농산물등 영역!!!!!!!!!!!!! -->
+		   <script>/* 버튼 스크립트 */
+		        $(function(){
+		        	$("#tax2").css("display","none");
+		            $(".cho_nav").click(function(){
+		            	$(".cho_nav").css("background","#8DABA3");
+		            	$(this).css("background","#1B5748");
+		            	$(this).css("color","white");
+		            });
+		        });
+		    </script>
+			<script type="text/javascript">/* div 히든, 쇼 */
+			function showTax1(){
+		    	$("#tax2").hide();
+		    	$("#tax1").show();
+		    };
+		    function showTax2(){
+		    	$("#tax2").show();
+		    	$("#tax1").hide();
+		    }
+			
+			</script>
+  		<div><!-- 면세농산물등/ 제조업 면세농산물등 -->
+  					
+  					<div id="total_deemed_div3" style="margin-left: 6px; margin-bottom: 10px;">
+	                    <ul class="nav nav-pills">
+	                        <li class="click_li"><div class="cho_nav" id="cho_nav1" onclick="showTax1()"><p>면세농산물등</p></div></li>
+	                        <li class="click_li"><div class="cho_nav" id="cho_nav2" onclick="showTax2()"><p>제조업면세농산물등</p></div></li>     
+	                    </ul>
+	  				
+		                <div id="tax1">
+		                	<div class="middleMenu" style="margin-top: 20px;">
+		                    <h5>가.과세기간 과세표준 및 공제가능한 금액등</h5>
+		                	</div>
+		  					<table border="1" style=" text-align:center; width: 100%; margin-top: 20px; margin-bottom: 40px; margin-left: auto; margin-right: auto;">
+		  						<tr class="Tex_bill_th" style="font-weight: 800;">
+		  							<td colspan="3">과세 표준</td>
+		  							<td colspan="2">대상액 한도계산</td>
+		  							<td rowspan="2">B. 단기매입액</td>
+		  							<td rowspan="2">공제대상금액<br>[MIN{A,B}]</td>	
+		  						</tr>
+		  						<tr class="green">
+		  							<td>합계</td>
+		  							<td>예정분</td>
+		  							<td>확정분</td>
+		  							<td>한도율</td>
+		  							<td>A.한도액</td>
+		  							
+		  						</tr>
+		  						<tr>
+		  							<td class="green_value"></td>
+		  							<td></td>
+		  							<td>asdfasd</td>
+		  							<td></td>
+		  							<td class="green_value"></td>
+		  							<td></td>
+		  							<td class="green_value"></td>
+		  						</tr>
+		  					
+		  					</table>
+		  					
+		  					<div class="middleMenu" style="margin-top: 20px;">
+		                    <h5>나.과세기간 공제할 세액</h5>
+		                	</div>
+		                	<table border="1" style="text-align:center; width: 100%; margin-left: auto; margin-right:auto; margin-top: 20px; margin-bottom: 10px;">
+		  						<tr class="Tex_bill_th" style="font-weight: 800;">
+		  							<td colspan="2">과세 표준</td>
+		  							<td colspan="3">대상액 한도계산</td>
+		  							<td rowspan="2">공제(납부)할세액액<br>(C-D)</td>
+		  						</tr>
+		  						<tr class="green">
+		  							<td>공제율</td>
+		  							<td>C.공제대상금액</td>
+		  							<td>D.합계</td>
+		  							<td>예정신고분</td>
+		  							<td>월별초기분</td>
+		  							
+		  						</tr>
+		  						<tr>
+		  							<td></td>
+		  							<td></td>
+		  							<td class="green_value">asdfasd</td>
+		  							<td></td>
+		  							<td></td>
+		  							<td class="green_value"></td>
+		  						</tr>
+		  					
+		  					</table>
+		  				</div>
+		  				<!-- 제조업면세 농산물등 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
+		  				<div id="tax2">
+		  					<div class="middleMenu" style="margin-top: 20px;">
+		                    <h5>가.1역년 과세표준 및 제 2기 과세기간 공제 가능한 금액등</h5>
+		                	</div>
+		  					<table border="1" style=" text-align:center; width: 100%; margin-top: 20px; margin-bottom: 40px; margin-left: auto; margin-right: auto;">
+		  						<tr class="Tex_bill_th" style="font-weight: 800;">
+		  							<td colspan="3">과세 표준</td>
+		  							<td colspan="2">대상액 한도계산</td>
+		  							<td colspan="3">1역년 매입액</td>
+		  							<td rowspan="2">공제대상금액<br>[MIN{A,B}]</td>	
+		  						</tr>
+		  						<tr class="green">
+		  							<td>B.합계</td>
+		  							<td>제1기</td>
+		  							<td>제2기</td>
+		  							<td>한도율</td>
+		  							<td>A.한도액</td>
+		  							<td>B.합계</td>
+		  							<td>제1기</td>
+		  							<td>제2기</td>
+		  							
+		  						</tr>
+		  						<tr>
+		  							<td class="green_value"></td>
+		  							<td></td>
+		  							<td></td>
+		  							<td></td>
+		  							<td class="green_value">asdfasd</td>
+		  							<td class="green_value"></td>
+		  							<td></td>
+		  							<td></td>
+		  							<td class="green_value"></td>
+		  						</tr>
+		  					
+		  					</table>
+		  					
+		  					<div class="middleMenu" style="margin-top: 20px;">
+		                    <h5>나.과세기간 공제할 세액</h5>
+		                	</div>
+		                	<table border="1" style="text-align:center; width: 100%; margin-left: auto; margin-right:auto; margin-top: 20px; margin-bottom: 10px;">
+		  						<tr class="Tex_bill_th" style="font-weight: 800;">
+		  							<td colspan="2">공제대상세액</td>
+		  							<td colspan="5">이미 공제받은 금액</td>
+		  							<td rowspan="3">공제(납부)할세액<br>(C-D)</td>
+		  						</tr>
+		  						<tr class="green">
+		  							<td rowspan="2">공제율</td>
+		  							<td rowspan="2">C.공제대상금액</td>
+		  							<td rowspan="2">D.총 합계</td>
+		  							<td rowspan="2">제1기</td>
+		  							<td colspan="3">제2기</td>
+		  							
+		  						</tr>
+		  						<tr class="green">
+		  							<td>합계</td>
+		  							<td>예정신고분</td>
+		  							<td>월별조기분</td>
+		  						</tr>
+		  						<tr>
+		  							<td></td>
+		  							<td> asdf</td>
+		  							<td class="green_value"></td>
+		  							<td></td>
+		  							<td class="green_value">asdf</td>
+		  							<td></td>
+		  							<td></td>
+		  							<td class="green_value"></td>
+		  						</tr>
+		  					
+		  					</table>
+		  					
+		  				
+		  				</div>
+  				
+  				
+  				
+  				
+  	  			   </div>
+	            
+   
+    </div><!-- 면세농산물등/ 제조업 면세농산물등 끝-->
+ </div><!-- 오른쪽 전체 div -->
 
 		<div style="height: 100vh;"></div>
 		
  
 	
-	<script>
-	/* 날짜 input jquery ui */
-		$.datepicker.setDefaults({
-			showOn : "both",
-			buttonImageOnly : true,
-			buttonImage : "${contextPath}/resources/images/calendar.png",
-			dateFormat : 'yy-mm-dd'
-
-		});
-		$(function() {
-			$(".datepicker").datepicker({});
-			/* 달력버튼 */
-			$("img.ui-datepicker-trigger")
-					.attr("style","margin-left:2px; vertical-align:middle; cursor: Pointer; width:20px; height:20px");
-
-		});
-	 </script>
 	</main>
 	<jsp:include page="../common/menubar2.jsp" />
 </body>
