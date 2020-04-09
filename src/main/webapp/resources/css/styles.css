@@ -159,14 +159,20 @@ sup {
 }
 
 a {
-  color: #007bff;
+  /* color: #007bff; */
   text-decoration: none;
   background-color: transparent;
 }
-a:hover {
+a:link {
+	color:black;
+}
+a:visited {
+	color:black;
+}
+/* a:hover {
   color: #0056b3;
   text-decoration: underline;
-}
+} */
 
 a:not([href]) {
   color: inherit;
@@ -5297,12 +5303,12 @@ a.badge-dark:focus, a.badge-dark.focus {
   font-size: 1.5rem;
   font-weight: 700;
   line-height: 1;
-  color: #000;
+  color: #fff;
   text-shadow: 0 1px 0 #fff;
   opacity: 0.5;
 }
 .close:hover {
-  color: #000;
+  color: #fff;
   text-decoration: none;
 }
 .close:not(:disabled):not(.disabled):hover, .close:not(:disabled):not(.disabled):focus {
