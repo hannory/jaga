@@ -485,8 +485,8 @@
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header" style="background-color:#1B5748">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4 class="modal-title" style="color:white;">전표조회</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         <div class="modal-body">
         <table style="margin-left:auto; margin-right: auto;">
