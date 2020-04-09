@@ -52,7 +52,7 @@
             <button id="helpBtn" style="color:#296355; font-weight: bold;"><img src="${ contextPath }/resources/images/help.PNG" width="30px"> 도움!</button>
             <button id="printWinBtn" style="color:#296355; font-weight: bold;"><img src="${ contextPath }/resources/images/print.PNG" width="30px"> 인쇄</button>
             <!-- Navbar Search-->
-            <button id="helpPersonBtn" style="color:#296355; font-weight: bold;"><img src="${ contextPath }/resources/images/고객센터.PNG" width="30px"> 고객센터</button>
+            <button id="helpPersonBtn" style="color:#296355; font-weight: bold;"><img src="${ contextPath }/resources/images/cs.PNG" width="30px"> 고객센터</button>
             <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
                 <div class="input-group">
                     <input class="form-control" type="text" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" />
@@ -124,7 +124,7 @@
                                     <div class="collapse" id="pagesCollapseA" aria-labelledby="headingOne" data-parent="#sidenavAccordionPages">
                                         <nav class="sb-sidenav-menu-nested nav">
 	                                        <a class="nav-link" href="purchase.vi">매입매출장</a>
-	                                        <a class="nav-link" href="404.html">총계정원장</a>
+	                                        <a class="nav-link" href="generalLedger.vi">총계정원장</a>
 	                                        <a class="nav-link" href="500.html">계정별원장</a>
 	                                        <a class="nav-link" href="500.html">거래처원장</a>
 	                                        <a class="nav-link" href="500.html">거래처별계정과목별원장</a>
@@ -133,11 +133,9 @@
                                         </nav>
                                     </div>
                                     
-                                    <a class="nav-link collapsed" href="compoundTrialBalance.vi" aria-expanded="false" aria-controls="pagesCollapseError">재무제표</a>
+                                    <a class="nav-link collapsed" href="compTrialBal.fs" aria-expanded="false" aria-controls="pagesCollapseError">재무제표</a>
                                         
-                                    <a class="nav-link collapsed" href="#" data-toggle="collapse" aria-expanded="false" aria-controls="pagesCollapseError">
-                                   지출결의서
-                                        </a>
+                                    <a class="nav-link collapsed" href="showExpendResolution.vi" aria-expanded="false" aria-controls="pagesCollapseError">지출결의서</a>
                                       
                                 </nav>
                             </div>
@@ -157,7 +155,7 @@
                                 <a class="nav-link" href="creditCardSalesSlipGap.vi">신용카드등수령명세서</a>
                                 <a class="nav-link" href="creditCardPurchaseSilp.vi">신용카드등발행명세서</a>
                                 <a class="nav-link" href="deemedInputTax.vi">의제매입신고서</a>
-                                <a class="nav-link" href="layout-sidenav-light.html">부가가치세신고서</a>
+                                <a class="nav-link" href="vatReport.vi">부가가치세신고서</a>
                                 </nav>
                             </div>
                             
@@ -174,7 +172,7 @@
                                 <nav class="sb-sidenav-menu-nested nav">
                                 <a class="nav-link" href="layout-static.html">직원관리</a>
                                 <a class="nav-link" href="layout-sidenav-light.html">급여대장</a>
-                                <a class="nav-link" href="layout-sidenav-light.html">사업소득자<br>자료입력</a>
+                                <a class="nav-link" href="businessPayment.vi">사업소득자<br>자료입력</a>
                                 <a class="nav-link" href="layout-sidenav-light.html">일용직<br>급여자료입력</a>
                                 <a class="nav-link" href="layout-sidenav-light.html">일용직<br>급여명세서</a>
                                 
@@ -184,7 +182,7 @@
                                         
                                     <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-parent="#sidenavAccordionPages">
                                         <nav class="sb-sidenav-menu-nested nav">
-	                                        <a class="nav-link" href="401.html">퇴직금계산</a>
+	                                        <a class="nav-link" href="retirement.vi">퇴직금계산</a>
 	                                        <a class="nav-link" href="404.html">퇴직소득원천징수영수증</a>
                                         </nav>
                                     </div>

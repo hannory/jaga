@@ -143,7 +143,7 @@
 			});
 			
 			$("#printBtn").click(function(){
-				console.log("버튼버튼");
+				location.href="${ contextPath }/taxInvoicePrint.vi";
 			});
 
 		});
