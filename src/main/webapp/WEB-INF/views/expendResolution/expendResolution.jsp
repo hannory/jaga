@@ -73,6 +73,9 @@
 	.color-green{
 		background:green;
 	}
+	.label-sign:hover{
+		background:gray;
+	}
 </style>
 </head>
 <body>
@@ -129,11 +132,12 @@
 		<div class="div-menuTap div-menuTap-no" onclick="showExpendResolutionList()">
 			<span>지출결의서 목록</span>
 		</div>
+		
 		<script>
+		/* 지출결의서 조회 탭으로 이동 */
 			function showExpendResolutionList(){
 				alert("asd");
 			}
-			
 		</script>
 
 
@@ -235,14 +239,10 @@
 					<input type="text" maxlength="2" style="width:50px; text-align:right; border:1px solid white; border-bottom:1px solid black">일
 					<br>
 					<label>작성자</label><input type="text" style="text-align:right; border:1px solid white; border-bottom:1px solid black;">
-					<label onclick="fileBtnClick()">(인)</label>
+					<label class="label-sign" for="signInput">(인)</label>
+					<input id="signInput" type="file" style="display:none" onchange="loadFileName()">
 					<br>
-					<label>선택된 파일(서명)명 넣을 자리</label>
-					<script>
-						function fileBtnClick(){
-							alert("zzz");
-						}
-					</script>
+					<label id="signFileName" for="signInput">서명 파일을 업로드하세요</label>
 				</div>
 			</div><!-- //두개 묶어주기 위한 div -->
 			<div class="buttonArea" style="margin-top:70px; margin-left:500px;">
@@ -250,6 +250,16 @@
 				<button type="reset">취소</button>
 			</div>
 			<br><br><br>
+			
+			<script>
+			/* 파일이름 읽어와서 라벨에 넣어주기 */
+				function loadFileName(){
+					var Reader = new FileReader();
+					reader.readAsDataURL();
+					
+					
+				}
+			</script>
 			
 			
 			
