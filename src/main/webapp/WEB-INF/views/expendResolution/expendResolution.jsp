@@ -73,6 +73,22 @@
 	.color-green{
 		background:green;
 	}
+	.label-sign:hover{
+		background:gray;
+	}
+	
+	/* 모달 */
+	.test{
+		width:300px;
+		height:300px;
+		background:red;
+		
+	}
+	.test:hover{
+		width:500px;
+		height:500px;
+		duration:300;
+	}
 </style>
 </head>
 <body>
@@ -115,7 +131,6 @@
 				nodeBot.appendChild(textnodeBot);
 				document.getElementById("confirmBotRow").appendChild(nodeBot);
 				
-				.classList.add("topTd");
 			}
 		</script>
 		<!-- //우측상단 결재 관련 -->
@@ -129,11 +144,12 @@
 		<div class="div-menuTap div-menuTap-no" onclick="showExpendResolutionList()">
 			<span>지출결의서 목록</span>
 		</div>
+		
 		<script>
+		/* 지출결의서 조회 탭으로 이동 */
 			function showExpendResolutionList(){
 				alert("asd");
 			}
-			
 		</script>
 
 
@@ -212,7 +228,7 @@
 				<td colspan="2'"><input type="radio" name="receptionType" value="tax">세금계산서</td>
 				<td><input type="radio" name="receptionType" value="cash">현금영수증</td>
 				<td><input type="radio" name="receptionType" value="card">카드영수증</td>
-				<td>증빙파일명 </td>
+				<td><label id="receptionLabel"></label> </td>
 			</tr>
 		</table>
 		<!-- //테이블 3번 -->
@@ -235,14 +251,10 @@
 					<input type="text" maxlength="2" style="width:50px; text-align:right; border:1px solid white; border-bottom:1px solid black">일
 					<br>
 					<label>작성자</label><input type="text" style="text-align:right; border:1px solid white; border-bottom:1px solid black;">
-					<label onclick="fileBtnClick()">(인)</label>
+					<label class="label-sign" for="signInput">(인)</label>
+					<input id="signInput" type="file" style="display:none" onchange="loadFileName(this)">
 					<br>
-					<label>선택된 파일(서명)명 넣을 자리</label>
-					<script>
-						function fileBtnClick(){
-							alert("zzz");
-						}
-					</script>
+					<label id="signFileName" for="signInput" style="float:right;">서명 파일을 업로드하세요</label>
 				</div>
 			</div><!-- //두개 묶어주기 위한 div -->
 			<div class="buttonArea" style="margin-top:70px; margin-left:500px;">
@@ -250,6 +262,35 @@
 				<button type="reset">취소</button>
 			</div>
 			<br><br><br>
+			<input type="file" id="receptionFile" style="display:none;">
+			
+			<script>
+			/* 파일이름 읽어와서 라벨에 넣어주기 */
+				function loadFileName(signFileTag){
+					if(signFileTag.files && signFileTag.files[0]){
+						var signInput = document.getElementById("signInput");
+						var signFileName = document.getElementById("signFileName");
+						signFileName.innerHTML = signInput.value.substring(signInput.value.lastIndexOf("\\") + 1);
+					}
+				}
+			
+			/* 체크박스 클릭 시 파일 선택창 클릭 */
+			window.onload = function(){
+				$("input[name=receptionType]").click(function(){
+					$("#receptionFile").click();
+				});
+			}
+			
+			/* 영수증 파일 선택 완료 시 파일 명  표시 */
+			$(function(){
+				$("#receptionFile").change(function(e){
+					var receptionFileName = e.target.value.substring(e.target.value.lastIndexOf("\\") + 1);
+					$("#receptionLabel").text(receptionFileName);
+				});
+			});
+			</script>
+			
+			
 			
 			
 			
@@ -264,6 +305,10 @@
 		
 		
 		</form>
+		
+		<div class="test">
+			zzzzzzzzzzzzzzzzzzzzzzzzz
+		</div>
 		
 	<!-- //작업공간 -->
 	</div>
