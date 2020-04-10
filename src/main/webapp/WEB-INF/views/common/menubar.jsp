@@ -47,7 +47,7 @@
 </head>
 <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-            <a class="navbar-brand" href="index.html"><img src="${ contextPath }/resources/images/logo_vertical.PNG" width="90%"></a><button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button
+            <a class="navbar-brand" href="index.jsp"><img src="${ contextPath }/resources/images/logo_vertical.PNG" width="90%"></a><button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button
             >
             <button id="helpBtn" style="color:#296355; font-weight: bold;"><img src="${ contextPath }/resources/images/help.PNG" width="30px"> 도움!</button>
             <button id="printWinBtn" style="color:#296355; font-weight: bold;"><img src="${ contextPath }/resources/images/print.PNG" width="30px"> 인쇄</button>
@@ -129,7 +129,7 @@
 	                                        <a class="nav-link" href="500.html">거래처원장</a>
 	                                        <a class="nav-link" href="500.html">거래처별계정과목별원장</a>
 	                                        <a class="nav-link" href="500.html">현금출납장</a>
-	                                        <a class="nav-link" href="500.html">일(월)계표</a>
+	                                        <a class="nav-link" href="dailyTable.ab">일(월)계표</a>
                                         </nav>
                                     </div>
                                     
