@@ -254,7 +254,7 @@
 	<script>
 		$(function() {
 			/* 표에서 하늘색 hover 주기 */
-			$("#contentTable td").hover(function() {
+			$("#contentTable td").mouseover(function() {
 				$(this).parent().css("background", "#DDEBF7");
 			});
 			

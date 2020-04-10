@@ -246,7 +246,7 @@
 				.attr("style","margin-left:2px; vertical-align:middle; cursor: Pointer; width:20px; height:20px");
 		
 		/* 표에서 하늘색 hover 주기 */
-		$("#contentTable td").hover(function() {
+		$("#contentTable td").mouseover(function() {
 			$(this).parent().css("background", "#DDEBF7");
 		});
 		
