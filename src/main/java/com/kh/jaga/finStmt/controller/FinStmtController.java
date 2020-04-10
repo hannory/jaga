@@ -1,4 +1,4 @@
-package com.kh.jaga.financialStmt.controller;
+package com.kh.jaga.finStmt.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
  * @createDate 2020. 4. 8.
  */
 @Controller
-public class finStmtController {
+public class FinStmtController {
 	@GetMapping("compTrialBal.fs")
     public String showCompTrialBal() {
        return "compTrialBal";
@@ -33,5 +33,5 @@ public class finStmtController {
 	@GetMapping("stmtOfCashFlow.fs")
 	public String showStmtOfCashFlow() {
 		return "stmtOfCashFlow";
-	}
+	}	
 }
