@@ -71,7 +71,6 @@
         .breadcrumb>li{
         	margin: auto auto;
         }
-        /* td{ border: 1px solid red;} */
         .cho_nav{
         	height: 35px;
         	border: 1px solid #C9CACE;
@@ -106,9 +105,6 @@
    		.Tex_bill_code_p{
    			font-size:23px;
    		}
-   		/* .billMainTable{
-   			width:100%;
-   		} */
    		.total_deemed{
    			text-align: center;
    			width: 99%;
@@ -144,6 +140,28 @@
    		.yellow{
    			background-color: #EFD5B9;
    		}
+   		#vat_mainDiv{
+   			width: 50%; 
+   			float: left; 
+   			margin-right: 2px;
+   		}
+   		#vat_subDiv1{
+   		 	width: 100%; 
+   		 	float: left;
+   		}
+   		#vat_subDiv2{
+   			width: 100%;
+   		}
+   		#vat_subDiv3{
+   			width: 100%;
+   		}
+   		.mainSubDiv{
+	   		width: 100%; 
+	   		text-align: center;
+   		}
+   		.mainSubDiv td{
+   			border:1px solid #D2D2D6;
+   		}
     </style>
 </head>
 <body>
@@ -172,11 +190,22 @@
 			
 		</ol>
 		
+			<script type="text/javascript">
+				function showsumTable_purchase(){
+			    	$("#sales").hide();
+			    	$("#purchase").show();
+			    };
+			    function showsumTable_sales(){
+			    	$("#sales").show();
+			    	$("#purchase").hide();
+			    }
+				
+			</script>
 		
 		<div style="width: 100%;"><!-- 전체 div start -->
 		
-			<div style="width: 50%; float: left; margin-right: 2px;"><!-- vat_main div start -->
-				<table border="1" style="width: 100%; text-align: center;">
+			<div id="vat_mainDiv"><!-- vat_main div start -->
+				<table class="mainSubDiv">
 					<tr class="Tex_bill_th">
 						<td colspan="5"></td>
 						<td colspan="3">정기 신고 금액</td>
@@ -402,8 +431,8 @@
 			
 			
 		<div style="float: left; width: 49%; border: 1px solid red;"><!-- 오른쪽 서브 영역 -->
-			<div style="width: 100%; float: left;"><!--7,12,14 vat_sub1 start -->
-				<table border="1" style="width: 100%; text-align: center;">
+			<div id="vat_subDiv1"><!--7,12,14 vat_sub1 start -->
+				<table class="mainSubDiv">
 					<tr class="Tex_bill_th">
 						<td colspan="5">구분</td>
 						<td>금액</td>
@@ -449,13 +478,13 @@
 						<td class="pink">37</td>
 						<td class="numberArea green"></td>
 						<td class="green"></td>
-						<td class="numberArea"></td>
+						<td class="numberArea green"></td>
 					</tr>
 					<tr>
 						<td colspan="8" class="green textArea">12.매입(예정신고누락분)</td>
 					</tr>
 					<tr>
-						<td rowspan="12" style="width:4%;">예정누락분</td>
+						<td rowspan="12" style="width:4%;" class="yellow">예정누락분</td>
 						<td colspan="3" class="green_value textArea">세금계산서발급분</td>
 						<td class="blue">38</td>
 						<td class="numberArea"></td>
@@ -481,7 +510,7 @@
 						<td class="green_value textArea">일반매입</td>
 						<td class="green_value"></td>
 						<td class="numberArea"></td>
-						<td class="green_value textArea"></td>
+						<td class="green_value"></td>
 						<td class="numberArea"></td>
 					</tr>
 					<tr>
@@ -495,365 +524,365 @@
 						<td colspan="3" class="green_value textArea">의제매입세액</td>
 						<td class="green_value"></td>
 						<td class="numberArea"></td>
-						<td></td>
+						<td class="green"></td>
 						<td class="numberArea"></td>
 					</tr>
 					<tr>
 						<td colspan="3" class="green_value textArea">재활용폐자원등매입세액</td>
 						<td class="green_value"></td>
 						<td class="numberArea"></td>
-						<td></td>
+						<td class="green"></td>
 						<td class="numberArea"></td>
 					</tr>
 					<tr>
 						<td colspan="3" class="green_value textArea">과세사업전환매입세액</td>
 						<td class="green_value"></td>
-						<td class="numberArea"></td>
-						<td></td>
-						<td class="numberArea"></td>
-					</tr>
-					<tr>
-						<td colspan="3">재고매입세액</td>
-						<td></td>
-						<td class="numberArea"></td>
-						<td></td>
+						<td class="numberArea green"></td>
+						<td class="green"></td>
 						<td class="numberArea"></td>
 					</tr>
 					<tr>
-						<td colspan="3">변제대손세액</td>
-						<td></td>
-						<td class="numberArea"></td>
-						<td></td>
-						<td class="numberArea"></td>
-					</tr>
-					<tr>
-						<td colspan="3">외국인관광객에대한 환급세액</td>
-						<td></td>
-						<td class="numberArea"></td>
-						<td></td>
+						<td colspan="3" class="green_value textArea">재고매입세액</td>
+						<td class="green_value"></td>
+						<td class="numberArea green"></td>
+						<td class="green"></td>
 						<td class="numberArea"></td>
 					</tr>
 					<tr>
-						<td colspan="3">합계</td>
-						<td></td>
-						<td class="numberArea"></td>
-						<td></td>
-						<td class="numberArea"></td>
-					</tr>
-					<tr>
-						<td colspan="8">14.그 밖의 공제매입세액</td>
-					</tr>
-					<tr>
-						<td rowspan="2" colspan="3">신용카드매출수령금액합계표</td>
-						<td>일반매입</td>
-						<td>41</td>
-						<td class="numberArea"></td>
-						<td></td>
+						<td colspan="3" class="green_value textArea">변제대손세액</td>
+						<td class="green_value"></td>
+						<td class="numberArea green"></td>
+						<td class="green"></td>
 						<td class="numberArea"></td>
 					</tr>
 					<tr>
-						<td>고정매입</td>
-						<td>42</td>
-						<td class="numberArea"></td>
-						<td></td>
-						<td class="numberArea"></td>
-					</tr>
-					<tr>
-						<td colspan="4">의제매입세액</td>
-						<td>43</td>
-						<td class="numberArea"></td>
-						<td>뒤쪽</td>
+						<td colspan="3" class="green_value textArea">외국인관광객에대한 환급세액</td>
+						<td class="green_value"></td>
+						<td class="numberArea green"></td>
+						<td class="green"></td>
 						<td class="numberArea"></td>
 					</tr>
 					<tr>
-						<td colspan="4">재활용폐자원등매입세액</td>
-						<td>44</td>
+						<td colspan="3" class="green_value">합계</td>
+						<td class="green_value"></td>
+						<td class="numberArea green"></td>
+						<td class="green"></td>
+						<td class="numberArea green"></td>
+					</tr>
+					<tr>
+						<td colspan="8" class="green textArea">14.그 밖의 공제매입세액</td>
+					</tr>
+					<tr>
+						<td rowspan="2" colspan="3" class="green_value textArea">신용카드매출수령금액합계표</td>
+						<td class="green_value textArea">일반매입</td>
+						<td class="blue">41</td>
 						<td class="numberArea"></td>
-						<td>뒤쪽</td>
+						<td class="green_value"></td>
 						<td class="numberArea"></td>
 					</tr>
 					<tr>
-						<td colspan="4">과세사업전환매입세액</td>
-						<td>45</td>
+						<td class="green_value textArea">고정매입</td>
+						<td class="blue">42</td>
 						<td class="numberArea"></td>
-						<td></td>
-						<td class="numberArea"></td>
-					</tr>
-					<tr>
-						<td colspan="4">재고매입세액</td>
-						<td>46</td>
-						<td class="numberArea"></td>
-						<td></td>
+						<td class="green_value"></td>
 						<td class="numberArea"></td>
 					</tr>
 					<tr>
-						<td colspan="4">변제대손세액</td>
-						<td>47</td>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
-					<tr>
-						<td colspan="4">외국인관광객에대한환급세액</td>
-						<td>48</td>
+						<td colspan="4" class="green_value textArea">의제매입세액</td>
+						<td class="blue">43</td>
 						<td class="numberArea"></td>
-						<td></td>
+						<td class="green">뒤쪽</td>
 						<td class="numberArea"></td>
 					</tr>
 					<tr>
-						<td colspan="4">합계</td>
-						<td>49</td>
+						<td colspan="4" class="green_value textArea">재활용폐자원등매입세액</td>
+						<td class="blue">44</td>
 						<td class="numberArea"></td>
-						<td></td>
+						<td class="green">뒤쪽</td>
 						<td class="numberArea"></td>
+					</tr>
+					<tr>
+						<td colspan="4" class="green_value textArea">과세사업전환매입세액</td>
+						<td class="blue">45</td>
+						<td class="numberArea green"></td>
+						<td class="green"></td>
+						<td class="numberArea"></td>
+					</tr>
+					<tr>
+						<td colspan="4" class="green_value textArea">재고매입세액</td>
+						<td class="blue">46</td>
+						<td class="numberArea green"></td>
+						<td class="green"></td>
+						<td class="numberArea"></td>
+					</tr>
+					<tr>
+						<td colspan="4" class="green_value textArea">변제대손세액</td>
+						<td class="blue">47</td>
+						<td class="green numberArea"></td>
+						<td class="green"></td>
+						<td class="numberArea"></td>
+					</tr>
+					<tr>
+						<td colspan="4" class="green_value textArea">외국인관광객에대한환급세액</td>
+						<td class=blue>48</td>
+						<td class="numberArea green"></td>
+						<td class="green"></td>
+						<td class="numberArea"></td>
+					</tr>
+					<tr>
+						<td colspan="4" class="green_value">합계</td>
+						<td class="blue">49</td>
+						<td class="numberArea green"></td>
+						<td class="green"></td>
+						<td class="numberArea green"></td>
 					</tr>
 					
 				</table>
 			</div><!--7,12,14 vat_sub1 end -->
 			
 			
-			<div style="width: 100%;"><!--16,18 vat_sub2 start  -->
-				<table border="1" style="width: 100%; text-align: center;">
-					<tr>
+			<div id="vat_subDiv2"><!--16,18 vat_sub2 start  -->
+				<table class="mainSubDiv">
+					<tr class="green_value">
 						<td colspan="5">구분</td>
 						<td>금액</td>
 						<td>세율</td>
 						<td>세액</td>
 					</tr>
-					<tr>
+					<tr class="green teatArea">
 						<td colspan="8">16.공제받지 못할 매입세액</td>
 					</tr>
 					<tr>
-						<td colspan="4">공제받지못할 매입세액</td>
-						<td>50</td>
-						<td></td>
-						<td></td>
-						<td></td>
+						<td colspan="4" class="green_value textArea">공제받지못할 매입세액</td>
+						<td class="green_value">50</td>
+						<td class="numberArea"></td>
+						<td class="green"></td>
+						<td class="numberArea"></td>
 					</tr>
 					<tr>
-						<td colspan="4">공통매입세액면세등사업분</td>
-						<td>51</td>
-						<td></td>
-						<td></td>
-						<td></td>
+						<td colspan="4" class="green_value textArea">공통매입세액면세등사업분</td>
+						<td class="green_value">51</td>
+						<td class="numberArea"></td>
+						<td class="green"></td>
+						<td class="numberArea"></td>
 					</tr>
 					<tr>
-						<td colspan="4">대손처분받은세액</td>
-						<td>52</td>
-						<td></td>
-						<td></td>
-						<td></td>
+						<td colspan="4" class="green_value textArea">대손처분받은세액</td>
+						<td class="green_value">52</td>
+						<td class="numberArea"></td>
+						<td class="green"></td>
+						<td class="numberArea"></td>
 					</tr>
-					<tr>
-						<td colspan="4">합계</td>
+					<tr class="green_value">
+						<td colspan="4" class="textArea">합계</td>
 						<td>53</td>
+						<td class="numberArea"></td>
 						<td></td>
-						<td></td>
-						<td></td>
+						<td class="numberArea"></td>
 					</tr>
-					<tr>
+					<tr class="green textArea">
 						<td colspan="8">18.그 밖의 경감/공제세액</td>
 					</tr>
 					<tr>
-						<td colspan="4">전자신고세액공제</td>
-						<td>54</td>
-						<td></td>
-						<td></td>
-						<td></td>
+						<td colspan="4" class="green_value textArea">전자신고세액공제</td>
+						<td class="green_value">54</td>
+						<td class="green numberArea"></td>
+						<td class="green"></td>
+						<td class="numberArea"></td>
 					</tr>
 					<tr>
-						<td colspan="4">전자세금계산서발급세액공제</td>
-						<td>55</td>
-						<td></td>
-						<td></td>
-						<td></td>
+						<td colspan="4" class="green_value textArea">전자세금계산서발급세액공제</td>
+						<td class="green_value">55</td>
+						<td class="green numberArea"></td>
+						<td class="green"></td>
+						<td class="numberArea"></td>
 					</tr>
 					<tr>
-						<td colspan="4">택시운송사업자경감세액</td>
-						<td>56</td>
-						<td></td>
-						<td></td>
-						<td></td>
+						<td colspan="4" class="green_value textArea">택시운송사업자경감세액</td>
+						<td class="green_value">56</td>
+						<td class="numberArea green"></td>
+						<td class="green"></td>
+						<td class="numberArea"></td>
 					</tr>
 					<tr>
-						<td colspan="4">대리납부세액공제</td>
-						<td>57</td>
-						<td></td>
-						<td></td>
-						<td></td>
+						<td colspan="4" class="green_value textArea">대리납부세액공제</td>
+						<td class="green_value">57</td>
+						<td class="green numberArea"></td>
+						<td class="green"></td>
+						<td class="numberArea"></td>
 					</tr>
 					<tr>
-						<td colspan="4">현금영수증사업자세액공제</td>
-						<td>58</td>
-						<td></td>
-						<td></td>
-						<td></td>
+						<td colspan="4" class="green_value textArea">현금영수증사업자세액공제</td>
+						<td class="green_value">58</td>
+						<td class="green numberArea"></td>
+						<td class="green"></td>
+						<td class="numberArea"></td>
 					</tr>
 					<tr>
-						<td colspan="4">기타</td>
-						<td>59</td>
-						<td></td>
-						<td></td>
-						<td></td>
+						<td colspan="4" class="green_value textArea">기타</td>
+						<td class="green_value">59</td>
+						<td class="green numberArea"></td>
+						<td class="green"></td>
+						<td class="numberArea"></td>
 					</tr>
 					<tr>
-						<td colspan="4">합계</td>
-						<td>60</td>
-						<td></td>
-						<td></td>
-						<td></td>
+						<td colspan="4" class="green_value">합계</td>
+						<td class="green_value">60</td>
+						<td class="green numberArea"></td>
+						<td class="green"></td>
+						<td class="green_value"></td>
 					</tr>
 				</table>
 			</div><!--16,18 vat_sub2 end -->
-			<div style="width: 100%;"><!--25 vat_sub3 start  -->
-				<table border="1" style="width: 100%; text-align: center;">
-					<tr>
+			<div id="vat_subDiv3"><!--25 vat_sub3 start  -->
+				<table class="mainSubDiv">
+					<tr class="green_value">
 						<td colspan="5">구분</td>
 						<td>금액</td>
 						<td>세율</td>
 						<td>세액</td>
 					</tr>
 					<tr>
-						<td colspan="8">25.가산세명세</td>
+						<td colspan="8" class="green textArea">25.가산세명세</td>
 					</tr>
 					<tr>
-						<td colspan="4">사업자미등록등</td>
-						<td>61</td>
-						<td></td>
-						<td>1/100</td>
-						<td></td>
+						<td colspan="4" class="green_value textArea">사업자미등록등</td>
+						<td class="green_value">61</td>
+						<td class="numberArea"></td>
+						<td class="green">1/100</td>
+						<td class="numberArea"></td>
 					</tr>
 					<tr>
-						<td colspan="3" rowspan="3">세금<br>계산서</td>
-						<td>자연발급 등</td>
-						<td>62</td>
-						<td></td>
-						<td>1/100</td>
-						<td></td>
+						<td colspan="3" rowspan="3" class="green_value">세금<br>계산서</td>
+						<td class="green_value textArea">자연발급 등</td>
+						<td class="green_value">62</td>
+						<td class="numberArea"></td>
+						<td class="green">1/100</td>
+						<td class="numberArea"></td>
 						
 					</tr>
 					<tr>
-						<td>자연수취</td>
-						<td>63</td>
-						<td></td>
-						<td>5/1,000</td>
-						<td></td>
+						<td class="green_value textArea">자연수취</td>
+						<td class="green_value">63</td>
+						<td class="numberArea"></td>
+						<td class="green">5/1,000</td>
+						<td class="numberArea"></td>
 					</tr>
 					<tr>
-						<td>미발급 등</td>
-						<td>64</td>
-						<td></td>
-						<td>뒤쪽참조</td>
-						<td></td>
+						<td class="green_value textArea">미발급 등</td>
+						<td class="green_value">64</td>
+						<td class="numberArea"></td>
+						<td class="green">뒤쪽참조</td>
+						<td class="numberArea"></td>
 					</tr>
 					<tr>
-						<td colspan="3" rowspan="2">전자세금<br>발급명세</td>
-						<td>자연전송</td>
-						<td>65</td>
-						<td></td>
-						<td>3/1,100</td>
-						<td></td>
+						<td colspan="3" rowspan="2" class="green_value">전자세금<br>발급명세</td>
+						<td class="green_value textArea">자연전송</td>
+						<td class="green_value">65</td>
+						<td class="numberArea"></td>
+						<td class="green">3/1,100</td>
+						<td class="numberArea"></td>
 					</tr>
 					<tr>
-						<td>자연전송</td>
-						<td>66</td>
-						<td></td>
-						<td>5/1,000</td>
-						<td></td>
+						<td class="green_value textArea">자연전송</td>
+						<td class="green_value">66</td>
+						<td class="numberArea"></td>
+						<td class="green">5/1,000</td>
+						<td class="numberArea"></td>
 					</tr>
 					<tr>
-						<td colspan="3" rowspan="2">세금계산서<br>합계표</td>
-						<td>제출불성실</td>
-						<td>67</td>
-						<td></td>
-						<td>5/1,100</td>
-						<td></td>
+						<td colspan="3" rowspan="2" class="green_value">세금계산서<br>합계표</td>
+						<td class="green_value textArea">제출불성실</td>
+						<td class="green_value">67</td>
+						<td class="numberArea"></td>
+						<td class="green">5/1,100</td>
+						<td class="numberArea"></td>
 					</tr>
 					<tr>
-						<td>지연제출</td>
-						<td>68</td>
-						<td></td>
-						<td>3/1,000</td>
-						<td></td>
+						<td class="green_value textArea">지연제출</td>
+						<td class="green_value">68</td>
+						<td class="numberArea"></td>
+						<td class="green">3/1,000</td>
+						<td class=""></td>
 					</tr>
 					<tr>
-						<td colspan="3" rowspan="4">신고<br>불성실</td>
-						<td>무신고(일반)</td>
-						<td>69</td>
-						<td></td>
-						<td>뒤쪽</td>
-						<td></td>
+						<td colspan="3" rowspan="4" class="green_value">신고<br>불성실</td>
+						<td class="green_value textArea">무신고(일반)</td>
+						<td class="green_value">69</td>
+						<td class="numberArea"></td>
+						<td class="green">뒤쪽</td>
+						<td class="numberArea"></td>
 						
 					</tr>
 					<tr>
-						<td>무신고(부당)</td>
-						<td>70</td>
-						<td></td>
-						<td>뒤쪽</td>
-						<td></td>
+						<td class="green_value textArea">무신고(부당)</td>
+						<td class="green_value">70</td>
+						<td class="numberArea"></td>
+						<td class="green">뒤쪽</td>
+						<td class="numberArea"></td>
 					</tr>
 					<tr>
-						<td>과소,초과환급(일반)</td>
-						<td>71</td>
-						<td></td>
-						<td>뒤쪽</td>
-						<td></td>
+						<td class="green_value textArea">과소,초과환급(일반)</td>
+						<td class="green_value">71</td>
+						<td class="numberArea"></td>
+						<td class="green">뒤쪽</td>
+						<td class="numberArea"></td>
 					</tr>
 					<tr>
-						<td>과소,초과환급(부당)</td>
-						<td>72</td>
-						<td></td>
-						<td>뒤쪽</td>
-						<td></td>
+						<td class="green_value textArea">과소,초과환급(부당)</td>
+						<td class="green_value">72</td>
+						<td class="numberArea"></td>
+						<td class="green">뒤쪽</td>
+						<td class="numberArea"></td>
 					</tr>
 					<tr>
-						<td colspan="4">납부불성실</td>
-						<td>73</td>
-						<td></td>
-						<td>뒤쪽</td>
-						<td></td>
+						<td colspan="4" class="green_value textArea">납부불성실</td>
+						<td class="green_value">73</td>
+						<td class="numberArea"></td>
+						<td class="green">뒤쪽</td>
+						<td class="numberArea"></td>
 					</tr>
 					<tr>
-						<td colspan="4">영세율과세표준신고불성실</td>
-						<td>74</td>
-						<td></td>
-						<td>5/1,000</td>
-						<td></td>
+						<td colspan="4" class="green_value textArea">영세율과세표준신고불성실</td>
+						<td class="green_value">74</td>
+						<td class="numberArea"></td>
+						<td class="green">5/1,000</td>
+						<td class="numberArea"></td>
 					</tr>
 					<tr>
-						<td colspan="4">현금매출명세서불성실</td>
-						<td>74</td>
-						<td></td>
-						<td>1/100</td>
-						<td></td>
+						<td colspan="4" class="green_value textArea">현금매출명세서불성실</td>
+						<td class="green_value">74</td>
+						<td class="numberArea"></td>
+						<td class="green">1/100</td>
+						<td class="numberArea"></td>
 					</tr>
 					<tr>
-						<td colspan="4">부동산임대공급가액명세서</td>
-						<td>76</td>
-						<td></td>
-						<td>1/100</td>
-						<td></td>
+						<td colspan="4" class="green_value textArea">부동산임대공급가액명세서</td>
+						<td class="green_value">76</td>
+						<td class="numberArea"></td>
+						<td class="green">1/100</td>
+						<td class="numberArea"></td>
 					</tr>
 					<tr>
-						<td colspan="3" rowspan="2">매입자<br>납부특례</td>
-						<td>거래계좌미사용</td>
-						<td>77</td>
-						<td></td>
-						<td>뒤쪽</td>
-						<td></td>
+						<td colspan="3" rowspan="2" class="green_value">매입자<br>납부특례</td>
+						<td class="green_value textArea">거래계좌미사용</td>
+						<td class="green_value">77</td>
+						<td class="numberArea"></td>
+						<td class="green">뒤쪽</td>
+						<td class="numberArea"></td>
 					</tr>
 					<tr>
-						<td>거래계좌 지연입금</td>
-						<td>78</td>
-						<td></td>
-						<td>뒤쪽</td>
-						<td></td>
+						<td class="green_value textArea">거래계좌 지연입금</td>
+						<td class="green_value">78</td>
+						<td class="numberArea"></td>
+						<td class="green">뒤쪽</td>
+						<td class="numberArea"></td>
 					</tr>
-					<tr>
-						<td colspan="4">합계</td>
+					<tr class="green_value">
+						<td colspan="4" class="textArea">합계</td>
 						<td>79</td>
 						<td></td>
-						<td></td>
+						<td class="green"></td>
 						<td></td>
 					</tr>
 					</table>
