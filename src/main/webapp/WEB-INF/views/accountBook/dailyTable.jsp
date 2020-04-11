@@ -66,6 +66,11 @@
 #inputNum::-webkit-outer-spin-button {
 	-webkit-appearance:none;
 }
+.modal-head {
+	border: 1px solid #a6a6a6;
+	background: #e7e6e6;
+	text-align: center;
+}
 </style>
 <title>자가 경리</title>
 </head>
@@ -79,7 +84,7 @@
 		<table width="1100px">
 			<tr>
 				<td><h2 class="mt-4">일계표(월계표)</h2></td>
-				<td width="50%" align="right"><span>조회기간&nbsp;&nbsp;&nbsp;&nbsp;</span><input type="text" id="datepicker"> ~ <input type="text" id="datepicker1"></td>
+				<td width="50%" align="right"><span>조회기간&nbsp;&nbsp;&nbsp;&nbsp;</span><input type="text" id="datepicker1"> ~ <input type="text" id="datepicker2"></td>
 			</tr>
 		</table>
 		<div>
@@ -382,7 +387,146 @@
 			<div class="card-body">일계표란 자금및 물품의 출납을 밝히기 위해서 그날그날 기재하는 표 형식의 문서를 말한다. 즉 일계표는 현금의 수입, 지출, 거래 등에 관한 일별 현황을 기재하는 장부를 말한다.</div>
 		</div>
 	</div>
+
+	<!-- 원장조회 모달 -->
+	<script>
+		function PopSlipModal() {
+			$("#slip").modal();
+		};
+	</script>
+	
+  	<div class="modal fade" id="slip" role="dialog">
+    	<div class="modal-dialog modal-lg">
+	      <div class="modal-content">
+	        <div class="modal-header" style="background-color:#1B5748">
+	        	<h4 class="modal-title" style="color:white;">원장조회</h4>
+	        	<button type="button" class="close" data-dismiss="modal">&times;</button>
+	        </div>
+	        <div class="modal-body">
+		    	<table style="width:100%; margin-bottom:5px;">
+		        	<tr>
+		        		<td>계정과목&nbsp;&nbsp;&nbsp;&nbsp;<input style="width:100px;" type="text"></td>
+		        		<td align="right"><span>조회기간&nbsp;&nbsp;&nbsp;&nbsp;</span><input type="text" id="datepicker3"> ~ <input type="text" id="datepicker4"></td>
+		        	</tr>
+		        </table>
+		        <script>
+		        		/* 날짜 input jquery ui */
+		        		$.datepicker.setDefaults({
+		        			showOn : "both",
+		        			buttonImageOnly : true,
+		        			buttonImage : "${contextPath}/resources/images/calendar.png",
+		        			dateFormat : 'yy-mm-dd'
+
+		        		});
+		        		$(function() {
+		        			$("#datepicker3").datepicker({});
+		        			$("#datepicker4").datepicker({});
+		        			/* 달력버튼 */
+		        			$("img.ui-datepicker-trigger")
+		        					.attr("style","margin-left:2px; vertical-align:middle; cursor: Pointer; width:20px; height:20px");
+		        		});
+		        </script>
+		        <div>
+		        	<table id="List_detail" style=" width:100%; margin-left:auto; margin-right: auto;">
+		        		<tr>
+		        			<td class="modal-head">일자</td>
+		        			<td class="modal-head">번호</td>
+		        			<td class="modal-head">적요</td>
+		        			<td class="modal-head">코드</td>
+		        			<td class="modal-head">거래처</td>
+		        			<td class="modal-head">차변</td>
+		        			<td class="modal-head">대변</td>
+		        			<td class="modal-head">잔액</td>
+		        		</tr>
+		        		<tr class="modal_detail" style="height: 25px;">
+		        			<td style="text-align:center;">03-31</td>
+		        			<td style="text-align:center;">00005</td>
+		        			<td></td>
+		        			<td style="text-align:center;">01003</td>
+		        			<td style="text-align:center;">마음전자</td>
+		        			<td style="text-align:right;">550,000</td>
+		        			<td style="text-align:right;"></td>
+		        			<td style="text-align:right;">550,000</td>
+		        		</tr>
+		        		<tr class="modal_detail" style="height: 25px;">
+		        			<td style="text-align:center;">03-31</td>
+		        			<td style="text-align:center;">00005</td>
+		        			<td></td>
+		        			<td style="text-align:center;">01003</td>
+		        			<td style="text-align:center;">마음전자</td>
+		        			<td style="text-align:right;">550,000</td>
+		        			<td style="text-align:right;"></td>
+		        			<td style="text-align:right;">550,000</td>
+		        		</tr>
+		        		<tr>
+		        			<td class="modal-head"></td>
+		        			<td class="modal-head"></td>
+		        			<td class="modal-head" style="text-align:left;">[월&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;계]</td>
+		        			<td class="modal-head"></td>
+		        			<td class="modal-head"></td>
+		        			<td class="modal-head"></td>
+		        			<td class="modal-head"></td>
+		        			<td class="modal-head"></td>
+		        		</tr>
+		        		<tr>
+		        			<td class="modal-head"></td>
+		        			<td class="modal-head"></td>
+		        			<td class="modal-head" style="text-align:left;">[누&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;계]</td>
+		        			<td class="modal-head"></td>
+		        			<td class="modal-head"></td>
+		        			<td class="modal-head"></td>
+		        			<td class="modal-head"></td>
+		        			<td class="modal-head"></td>
+<!-- 		        		</tr> -->
+		        	</table>
+		        </div>
+		        <table style="width:100%; margin-top:16px; margin-bottom:5px;">
+		        	<tr>
+		        		<td>매입매출전표 2020-02-22 (50001)</td>
+		        		<td align="right">수정취소</td>
+		        	</tr>
+		        </table>
+		        <div>
+		        	<table style="width:100%; margin-top:5px; text-align:center;">
+		        		<tr>
+		        			<td class="modal-head" style="width:60px"></td>
+		        			<td class="modal-head">월</td>
+		        			<td class="modal-head">일</td>
+		        			<td class="modal-head">번호</td>
+		        			<td class="modal-head">구분</td>
+		        			<td class="modal-head" colspan="2">계정과목</td>
+		        			<td class="modal-head" colspan="2">거래처</td>
+		        			<td class="modal-head">차변</td>
+		        			<td class="modal-head">대변</td>
+		        			<td class="modal-head" colspan="2">좌표</td>
+		        		</tr>
+		        		<tr>
+		        			<td>1</td>
+		        			<td>3</td>
+		        			<td>9</td>
+		        			<td>00002</td>
+		        			<td>출금</td>
+		        			<td>0253</td>
+		        			<td>미지급금</td>
+		        			<td>01023</td>
+		        			<td>(주)컴피아</td>
+		        			<td>5,000,000</td>
+		        			<td>(현금)</td>
+		        			<td>1</td>
+		        			<td>차량할부미지급금 반제</td>
+		        		</tr>
+		        	</table>
+		        </div>	
+		        <div class="modal-footer">
+		          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		        </div>
+	        </div>
+		</div>
+	</div>
+	<!-- 원장조회 모달 끝 -->	
+	
 	</main>
+	
 	<script>
 	/* 날짜 input jquery ui */
 	$.datepicker.setDefaults({
@@ -393,8 +537,8 @@
 
 	});
 	$(function() {
-		$("#datepicker").datepicker({});
 		$("#datepicker1").datepicker({});
+		$("#datepicker2").datepicker({});
 		/* 달력버튼 */
 		$("img.ui-datepicker-trigger")
 				.attr("style","margin-left:2px; vertical-align:middle; cursor: Pointer; width:20px; height:20px");
@@ -409,6 +553,7 @@
 		});		
 	});
 	</script>
+	
 	<jsp:include page="../common/menubar2.jsp" />
 </body>
 </html>

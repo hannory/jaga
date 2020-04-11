@@ -5304,7 +5304,7 @@ a.badge-dark:focus, a.badge-dark.focus {
   font-weight: 700;
   line-height: 1;
   color: #fff;
-  text-shadow: 0 1px 0 #fff;
+  text-shadow: 0 2px 1px black;
   opacity: 0.5;
 }
 .close:hover {
@@ -5552,7 +5552,7 @@ a.close.disabled {
 @media (min-width: 992px) {
   .modal-lg,
 .modal-xl {
-    max-width: 800px;
+    max-width: 1200px;
   }
 }
 @media (min-width: 1200px) {
@@ -10061,7 +10061,7 @@ body {
   z-index: 1039;
 }
 .sb-nav-fixed #layoutSidenav #layoutSidenav_nav {
-  width: 225px;
+  width: 250px;
   height: 100vh;
   z-index: 1038;
 }
@@ -10072,7 +10072,7 @@ body {
   overflow-y: auto;
 }
 .sb-nav-fixed #layoutSidenav #layoutSidenav_content {
-  padding-left: 225px;
+  padding-left: 250px;
   top: 56px;
 }
 
