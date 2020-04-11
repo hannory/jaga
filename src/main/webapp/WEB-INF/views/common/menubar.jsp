@@ -127,7 +127,7 @@
 	                                        <a class="nav-link" href="generalLedger.vi">총계정원장</a>
 	                                        <a class="nav-link" href="500.html">계정별원장</a>
 	                                        <a class="nav-link" href="500.html">거래처원장</a>
-	                                        <a class="nav-link" href="500.html">거래처별계정과목별원장</a>
+	                                        <a class="nav-link" href="500.html">거래처별<br>계정과목별원장</a>
 	                                        <a class="nav-link" href="500.html">현금출납장</a>
 	                                        <a class="nav-link" href="dailyTable.ab">일(월)계표</a>
                                         </nav>
