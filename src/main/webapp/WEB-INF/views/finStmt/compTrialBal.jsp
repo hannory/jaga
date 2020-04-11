@@ -415,22 +415,38 @@
   	<div class="modal fade" id="slip" role="dialog">
     	<div class="modal-dialog modal-lg">
 	      <div class="modal-content">
-	        <div class="modal-header" style="background-color:#1B5748">
+	        <div class="modal-header" style="background-color:#1B5748;">
 	        	<h4 class="modal-title" style="color:white;">원장조회</h4>
 	        	<button type="button" class="close" data-dismiss="modal">&times;</button>
 	        </div>
 	        <div class="modal-body">
-		    	<table style="margin-left:auto; margin-right: auto;">
+		    	<table width="100%" style="margin-bottom:5px">
 		        	<tr>
-		        		<td>계정과목</td>
-		        		<td><input style="width:100px;" type="text" readonly></td>
-		        		<td>거래처명</td>
-		        		<td><input style="width:150px;" name="companyName" type="text" readonly></td>
-		        		<td><input style="width:150px;" name="personName" type="text" readonly></td>
-		        		<td><input style="width:150px;" name="companyCode" type="text" readonly></td>
+		        		<td>계정과목&nbsp;&nbsp;&nbsp;&nbsp;<input style="width:100px;" type="text"></td>
+		        		<td align="right"><span>조회기간&nbsp;&nbsp;&nbsp;&nbsp;</span><input type="text" id="datepicker3"> ~ <input type="text" id="datepicker4"></td>
 		        	</tr>
 		        </table>
-		        <div>
+				<script>
+						/* 날짜 input jquery ui */
+						$.datepicker
+								.setDefaults({
+									showOn : "both",
+									buttonImageOnly : true,
+									buttonImage : "${contextPath}/resources/images/calendar.png",
+									dateFormat : 'yy-mm-dd'
+
+								});
+						$(function() {
+							$("#datepicker3").datepicker({});
+							$("#datepicker4").datepicker({});
+							/* 달력버튼 */
+							$("img.ui-datepicker-trigger")
+									.attr(
+											"style",
+											"margin-left:2px; vertical-align:middle; cursor: Pointer; width:20px; height:20px");
+						});
+				</script>
+				<div>
 		        	<table id="List_detail" style=" width:100%; margin-left:auto; margin-right: auto;">
 		        		<tr>
 		        			<td class="modal-head">일자</td>
@@ -480,6 +496,7 @@
 	        </div>
 		</div>
 	</div>
+	<!-- 원장조회 모달 끝 -->
   
 	</main>
 	<script>
