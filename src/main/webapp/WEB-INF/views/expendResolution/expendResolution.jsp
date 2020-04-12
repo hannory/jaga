@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
-      <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -162,8 +161,10 @@
 		<table class="table01" border="1">
 			<tr>
 				<td style="width:15%" class="color-green">발의일</td>
-				<td style="width:25%">2000-04-09</td>
-				<td style="width:10%">달력</td>
+				<td style="width:25%"><input id="datepicker01"></td>
+				<td style="width:10%"><span id="dateTestBtn">
+				<img src="${contextPath}/resources/images/calendar.png" style="width:25px; height:25px;">
+				</span></td>
 				<td style="width:15%" class="color-green">지출일</td>
 				<td style="width:25%">2000-04-04</td>
 				<td style="width:10%">달력</td>			
@@ -228,7 +229,7 @@
 				<td colspan="2'"><input type="radio" name="receptionType" value="tax">세금계산서</td>
 				<td><input type="radio" name="receptionType" value="cash">현금영수증</td>
 				<td><input type="radio" name="receptionType" value="card">카드영수증</td>
-				<td><label id="receptionLabel"></label> </td>
+				<td><span id="receptionLabel">증빙파일을 선택하세요</span> </td>
 			</tr>
 		</table>
 		<!-- //테이블 3번 -->
@@ -305,11 +306,47 @@
 		
 		
 		</form>
+		<input id="datepicker">
+		<script>
 		
+		$(function(){
+			$("#dateTestBtn").click(function(){
+				$("img.ui-datepicker-trigger").click();
+			});
+		});
+		
+	/* 날짜 input jquery ui */
+		$.datepicker.setDefaults({
+			showOn : "both",
+			buttonImageOnly : true,
+			buttonImage : "${contextPath}/resources/images/calendar.png",
+			dateFormat : 'yy-mm-dd'
+
+		});
+		$(function() {
+			$("#datepicker01").datepicker({});
+			/* 달력버튼 */
+			$("img.ui-datepicker-trigger")
+					.attr("style","margin-left:2px; vertical-align:middle; cursor: Pointer; width:20px; height:20px; display:none;");
+		
+			
+			   $('.ui-datepicker ').css({ "margin-left" : "250px", "margin-top": "0px"});  //달력(calendar) 위치
+
+		
+		});
+	 </script>
 		<div class="test">
 			zzzzzzzzzzzzzzzzzzzzzzzzz
 		</div>
 		
+		
+		<!-- footer -->
+		<div class="card mb-4">
+			<div class="card-body">
+			도움말입니다. 읽어주세요*^^*
+			</div>
+		</div>
+		<!-- ///footer -->
 	<!-- //작업공간 -->
 	</div>
 	</main>
