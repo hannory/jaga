@@ -6,6 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>자가경리</title>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <style>
 	#normalReTable {
 		width:100%;
@@ -43,6 +45,11 @@
 	#searchReTable {
 		width: 100%;
 	}
+	
+	.modal-header{
+		background: #24574A;
+		color: white;
+	}
 </style>
 </head>
 <body>
@@ -55,7 +62,9 @@
 			<table id="searchReTable">
 				<tr>
 					<td>전표일자 : </td>
-					<td><input type="text" id="datepicker">~<input type="text" id="datepicker1"></td>
+					<td>
+						<input type="text" id="datepicker">~<input type="text" id="datepicker1">&nbsp;
+						<button onclick="dateSearch();">검색</button></td>
 					<td><div style="color:red;">대차차액 : </div></td>
 				</tr>
 			</table>
@@ -154,8 +163,46 @@
 				the top of the page. This is the end of the static navigation demo.</div>
 		</div>
 	</div>
+	 <!-- 모달 시작-->
+      <!-- Modal 계정과목 -->
+  <div class="modal fade" id="accountModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">계정과목검색</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <p>1.「매출처별,매입처별 세금계산서합계표 합계」</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+      <!-- Modal 거래처 -->
+  <div class="modal fade" id="clientModel" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">거래처검색</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <p>1.「매출처별,매입처별 세금계산서합계표 합계」</p>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
 	</main>
 	
+	
+	
+  
+  
 	<script>
 	/* 날짜 input jquery ui */
 		$.datepicker.setDefaults({
@@ -178,7 +225,6 @@
 				$("#normalReTable td").css("background", "white");
 				$("#normalReTable tr").css("background", "white"); 
 				
-				console.log($(this).parent().parent());
 				$(this).parent().parent().children().css("background", "#DDEBF7");
 				$(this).parent().parent().children().children().css("background", "#DDEBF7");
 				$(this).parent().children().css("background", "#DDEBF7");
@@ -186,10 +232,71 @@
 				$(this).parent().children().css("background", "#b3cfe4");
 				
 				
+			});
 			
-				
+			
+			$("#normalReTable td:nth-child(6)").children().focus(function(){
+				$(this).keydown(function(key){
+					if(key.keyCode == 113){
+		    		  $("div#accountModal").modal();
+					}
+				})
+			});
+			$("#normalReTable td:nth-child(8)").children().focus(function(){
+				$(this).keydown(function(key){
+					if(key.keyCode == 113){
+		    		  $("div#clientModel").modal();
+					}
+				})
+			});
+			
+			$("input").keydown(function(key){
+			key.value = comma(uncomma(key.value));
+				if(key.keyCode == 187){
+					
+				}
 			})
+			
+			/* 콤마 찍기 */
+		function comma(str) {
+			str = String(str);
+			return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, "$1,");
+		}
+		
+		/* 콤마 등 숫자 이외의 입력값 제거 */
+		function uncomma(str) {
+			str = String(str);
+			return str.replace(/[^\d]+/g, "");
+		}
+		
+		/* 값 입력시 콤마 찍기 */
+		function inputNumberFormat(str) {
+			str.value = comma(uncomma(str.value));
+		}
+
 		});
+		
+		function dateSearch(){
+			var date1 = $("#datepicker").val();
+			var date2 = $("#datepicker1").val();
+			
+			console.log("date1 : " + date1);
+			console.log("date2 : " + date2);
+			
+			$.ajax({
+				url:"normalReceipSearch.nr",
+				type:"get",
+				data:{
+					date1 : date1,
+					date2 : date2
+				},
+				success:function(data){
+					console.log(data);
+				}
+			})
+		};
+		
+		
 	 </script>
 	<jsp:include page="../common/menubar2.jsp" />
 </body>

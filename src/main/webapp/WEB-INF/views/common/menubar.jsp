@@ -150,12 +150,14 @@
                             
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
+                                 <a class="nav-link" href="vatReport.vi">부가가치세신고서</a>
                                 <a class="nav-link" href="sumTableTax.vi">세금계산서합계표</a>
                                 <a class="nav-link" href="billTotalTable.vi">계산서합계표</a>
                                 <a class="nav-link" href="creditCardSalesSlipGap.vi">신용카드등수령명세서</a>
                                 <a class="nav-link" href="creditCardPurchaseSilp.vi">신용카드등발행명세서</a>
                                 <a class="nav-link" href="deemedInputTax.vi">의제매입신고서</a>
-                                <a class="nav-link" href="vatReport.vi">부가가치세신고서</a>
+                                <a class="nav-link" href="updatePurchaseSTMT.vi">과세표준및세액<br>결정(경정)청구서</a>
+                                <a class="nav-link" href="updateSalseSTMT.vi">과세표준수정신고서및<br>추가자진납부</a>
                                 </nav>
                             </div>
                             
@@ -183,7 +185,7 @@
                                     <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-parent="#sidenavAccordionPages">
                                         <nav class="sb-sidenav-menu-nested nav">
 	                                        <a class="nav-link" href="retirement.vi">퇴직금계산</a>
-	                                        <a class="nav-link" href="404.html">퇴직소득원천징수영수증</a>
+	                                        <a class="nav-link" href="retirementReceipt.vi">퇴직소득원천징수영수증</a>
                                         </nav>
                                     </div>
                                     

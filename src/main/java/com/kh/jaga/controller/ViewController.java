@@ -112,4 +112,18 @@ public class ViewController {
     public String retirement() {
     	return "payment/retirement";
     }
+    
+    @GetMapping("/retirementReceipt.vi")
+    public String retirementReceipt() {
+    	return "payment/retirementReceipt";
+    }
+    
+    @GetMapping("/updatePurchaseSTMT.vi")
+    public String updatePurchaseSTMT() {
+       return "bugagachi/updatePurchaseSTMT";
+    }
+    @GetMapping("/updateSalseSTMT.vi")
+    public String updateSalseSTMT() {
+       return "bugagachi/updateSalseSTMT";
+    }
 }
