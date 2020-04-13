@@ -285,7 +285,7 @@ color: #4C4C4C;
 
 /* 8. 입금 계좌 번호  account-num*/
 
-account-num{
+#account-num{
 position: absolute;
 width: 104px;
 height: 24px;
@@ -914,7 +914,17 @@ border-radius: 5px;
 
 </style>
 <body>
-
+	<jsp:include page="../common/menubar.jsp" />
+	<div id="main">
+	<div class="container-fluid">
+		<h2 class="mt-4">거래처 신규등록</h2>
+		<ol class="breadcrumb mb-4">
+		</ol>
+<!--  		<div class="card mb-4">
+			<div class="card-body">
+			<div id="main">
+		<div id="table-total"> -->
+		 
 <!-- <table> -->
 		<tr>
 			<td><b id="vender-info">거래처 신규등록</b></td>
@@ -998,7 +1008,13 @@ border-radius: 5px;
 			<td><button id="okay" style="color:white">확인</button></td>
 		</tr>
 
-
+		<div style="height: 100vh;"></div>
+		<div class="card mb-4">
+			<div class="card-body">When scrolling, the navigation stays at
+				the top of the page. This is the end of the static navigation demo.</div>
+		</div>
+	</main>
+	<jsp:include page="../common/menubar2.jsp" />
 <!-- </table> -->
 </body>
 </html>

@@ -412,10 +412,7 @@ background:white;
 		<h2 class="mt-4">계정과목등록</h2>
 		<ol class="breadcrumb mb-4">
 		</ol>
-<!--  		<div class="card mb-4">
-			<div class="card-body">
-			<div id="main">
-		<div id="table-total"> -->
+
 		 
 		<div id= "table1">
 		<table>

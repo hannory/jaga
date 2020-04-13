@@ -63,124 +63,208 @@
 	#userId{
 		width:370px;
 		height:25px;
+		background: #FFFFFF;
+		border: 1px solid #C4C4C4;
+		box-sizing: border-box;
+		border-radius: 5px;
 	}
 	
 	#userPwd{
 		width:370px;
 		height:25px;
+		background: #FFFFFF;
+		border: 1px solid #C4C4C4;
+		box-sizing: border-box;
+		border-radius: 5px;
 	}
 	
 	#userPwd2{
 		width:370px;
 	    height:25px;
+	    background: #FFFFFF;
+		border: 1px solid #C4C4C4;
+		box-sizing: border-box;
+		border-radius: 5px;
 	}
 	
 	#phone{
 		width:370px;
 	    height:25px;
+	    background: #FFFFFF;
+		border: 1px solid #C4C4C4;
+		box-sizing: border-box;
+		border-radius: 5px;
 	}
 	
 	#userName{
 		width:370px;
 		height:25px;		
+		background: #FFFFFF;
+		border: 1px solid #C4C4C4;
+		box-sizing: border-box;
+		border-radius: 5px;
 	}
 	
 
 	#email1{
 		width:370px;
-		height:25px;		
+		height:25px;
+		background: #FFFFFF;
+		border: 1px solid #C4C4C4;
+		box-sizing: border-box;
+		border-radius: 5px;		
 	}
 	
 	#email2{
 		width:150px;
-		height:30px;
+		height:25px;
+		background: #FFFFFF;
+		border: 1px solid #C4C4C4;
+		box-sizing: border-box;
+		border-radius: 5px;
 	}
 	
 	#gongsi{
 		width:370px;
 		height:25px;
+		background: #FFFFFF;
+		border: 1px solid #C4C4C4;
+		box-sizing: border-box;
+		border-radius: 5px;
 	}
 		
 	#inputBizNum{
 		width:370px;
 		height:25px;
+		background: #FFFFFF;
+		border: 1px solid #C4C4C4;
+		box-sizing: border-box;
+		border-radius: 5px;
 	}
 	
 	#inputCorpNum{
 		width:370px;
 		height:25px;
+		background: #FFFFFF;
+		border: 1px solid #C4C4C4;
+		box-sizing: border-box;
+		border-radius: 5px;		
 	}
 	
 	#inputCorpName{
 		width:370px;
 		height:25px;
+		background: #FFFFFF;
+		border: 1px solid #C4C4C4;
+		box-sizing: border-box;
+		border-radius: 5px;		
 	}
 	
 	#inputCeoName{
 		width:370px;
 		height:25px;
+		background: #FFFFFF;
+		border: 1px solid #C4C4C4;
+		box-sizing: border-box;
+		border-radius: 5px;		
 	}
 	
 	#postcode{
 		width:90px;
 		height:25px;
+		background: #FFFFFF;
+		border: 1px solid #C4C4C4;
+		box-sizing: border-box;
+		border-radius: 5px;		
 	}
 	
 	#address1{
 		width:370px;
 		height:25px;
+		background: #FFFFFF;
+		border: 1px solid #C4C4C4;
+		box-sizing: border-box;
+		border-radius: 5px;		
 	}
 	
 	#address2{
 		width:370px;
 		height:25px;
+		background: #FFFFFF;
+		border: 1px solid #C4C4C4;
+		box-sizing: border-box;
+		border-radius: 5px;		
 	}
 	
 	#empName{ 
 		width:370px;
 		height:25px;
+		background: #FFFFFF;
+		border: 1px solid #C4C4C4;
+		box-sizing: border-box;
+		border-radius: 5px;		
 	}
 	
 	#personalNum{
 		width:370px;
 		height:25px;
+		background: #FFFFFF;
+		border: 1px solid #C4C4C4;
+		box-sizing: border-box;
+		border-radius: 5px;		
 	}
 	
 	#idCheck{
-		width:150px;
+		width:130px;
 		background-color:#1B5748;
 		border-color:black;
 		border:0;
 		height:30px;
 		color:white;
+		border: 1px solid #C4C4C4;
+		box-sizing: border-box;
+		border-radius: 5px;		
 	}
 	
 	#idCheck:hover{
 		background-color:lightgray;
 		cursor:pointer;
+		border: 1px solid #C4C4C4;
+		box-sizing: border-box;
+		border-radius: 5px;		
 	}
 	
 	#uploadBtn{
-		width:150px;
+		width:130px;
 		background-color:#1B5748;
 		border-color:black;
 		border:0;
 		height:30px;
 		color:white;
+		border: 1px solid #C4C4C4;
+		box-sizing: border-box;
+		border-radius: 5px;		
 	}
 	
 	#uploadBtn:hover{
 		background-color:lightgray;
 		cursor:pointer;
+		border: 1px solid #C4C4C4;
+		box-sizing: border-box;
+		border-radius: 5px;
 	}
 
 	#emailCheck{
-		width:150px;
+		width:130px;
 		background-color:#1B5748;
 		border-color:black;
 		border:0;
 		height:30px;
 		color:white;
+		background: #FFFFFF;
+		border: 1px solid #C4C4C4;
+		box-sizing: border-box;
+		border-radius: 5px;
 	}
 	
 	#emailCheck:hover{
@@ -190,12 +274,15 @@
 	
 	
 	#location-btn{
-		width:150px;
+		width:130px;
 		background-color:#1B5748;
 		border-color:black;
 		border:0;
 		height:30px;
 		color:white;
+		border: 1px solid #C4C4C4;
+		box-sizing: border-box;
+		border-radius: 5px;		
 	}
 	#location-btn:hover{
 		background:lightgray;
@@ -205,20 +292,31 @@
 </style>
 </head>
 <body>
-<jsp:include page="../common/menubar.jsp" />
+	<jsp:include page="../common/menubar.jsp" />
+	<div id="main">
+	<div class="container-fluid">
+		<h2 class="mt-4">회원가입</h2>
+		<ol class="breadcrumb mb-4">
+		</ol>
+  		<div class="card mb-4">
+			<div class="card-body">
+			<div id="main">
+		<div id="table-total"> 
+
 	
 	<div class="main">
 	
 	<div id="imglogo" align="center">
-	<img src="${contextPath}/resources/images/jagalogo.PNG" width="350px">
+	<img src="${contextPath}/resources/images/logo_vertical.PNG" width="350px">
 	</div>
 
-	<div id="line">
-
-		<div class="innerLine"></div>
+<!-- 	<div id="line"> -->
+<!-- 
+		<div class="innerLine"></div> -->
 		<br>
 		
 		<form id="joinForm" method="post" action="insert.co" encType="multipart/form-data">
+		<div align="center">
 		<table class="tableJoin" align="center">
 		<tr>
 			<td class="subLine">
@@ -410,8 +508,8 @@
 			</tr>
 
 		</table>
-		
-		<div align="center">
+		</div>
+		<div style="margin-left:500px; margin-top:80px">
 			<button type="reset">작성취소</button>
 			<button type="submit">가입하기</button>
 		</div>
@@ -419,6 +517,12 @@
 	</div>
 	
 	</div>
+		<div style="height: 100vh;"></div>
+		<div class="card mb-4">
+			<div class="card-body">When scrolling, the navigation stays at
+				the top of the page. This is the end of the static navigation demo.</div>
+		</div>
+	</main>
 	<jsp:include page="../common/menubar2.jsp" />
 </body>
 </html>

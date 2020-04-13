@@ -12,9 +12,9 @@
 
     /*  거래처 리스트 전체 컨테이너 */
     .vender-list-main-contain {
-        width:1330px;
+        width:1380px;
         height:1500px;
-        margin-left:270px;
+        margin-left:70px;
     }
 
 
@@ -48,6 +48,7 @@
         color:white; 
         height:40px;
         text-align: center;
+   		margin-left:10px;
     }
 
 
@@ -81,11 +82,23 @@
 
 </style>
 <body>
+
+	<jsp:include page="../common/menubar.jsp" />
+	<div id="main">
+	<div class="container-fluid">
+		<h2 class="mt-4">거래처 리스트</h2>
+		<ol class="breadcrumb mb-4">
+		</ol>
+ 		<div class="card mb-4">
+			<div class="card-body">
+			<div id="main">
+		<div id="table-total"> 
+		 
 		 <div class="vender-list-main-contain">
 
         <div style="margin-top:50px; width:1000px; float:left;">
-            <div style="margin-left:50px; font-size:25px;" class="thick" id="trlist">거래처 리스트</span>
-        </div>
+<!--             <div style="margin-left:50px; font-size:25px;" class="thick" id="trlist">거래처 리스트</span>
+ -->        </div>
         
         <div class="vender-list-main-table-margin" style="margin-top: 10px;"> 
             <table border="0" class="table table-hover vender-list-main-table-2nd" id="listArea2">
@@ -124,7 +137,13 @@
         
         <div id="space"></div>
         
-    
+    		<div style="height: 100vh;"></div>
+		<div class="card mb-4">
+			<div class="card-body">When scrolling, the navigation stays at
+				the top of the page. This is the end of the static navigation demo.</div>
+		</div>
+	</main>
+	<jsp:include page="../common/menubar2.jsp" />
     
     <script>
 
