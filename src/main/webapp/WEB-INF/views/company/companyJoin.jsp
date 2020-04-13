@@ -215,7 +215,7 @@
 	}
 	
 	#idCheck{
-		width:130px;
+		width:120px;
 		background-color:#1B5748;
 		border-color:black;
 		border:0;
@@ -235,7 +235,7 @@
 	}
 	
 	#uploadBtn{
-		width:130px;
+		width:120px;
 		background-color:#1B5748;
 		border-color:black;
 		border:0;
@@ -255,7 +255,7 @@
 	}
 
 	#emailCheck{
-		width:130px;
+		width:120px;
 		background-color:#1B5748;
 		border-color:black;
 		border:0;
@@ -274,7 +274,7 @@
 	
 	
 	#location-btn{
-		width:130px;
+		width:120px;
 		background-color:#1B5748;
 		border-color:black;
 		border:0;
@@ -514,6 +514,12 @@
 			<button type="submit">가입하기</button>
 		</div>
 		</form>
+		</div>
+		</div>
+		</div>
+		</div>
+		</div>
+		
 	</div>
 	
 	</div>
