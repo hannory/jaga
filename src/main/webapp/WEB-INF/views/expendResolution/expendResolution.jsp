@@ -76,7 +76,7 @@
 		background:gray;
 	}
 	
-	/* 모달 */
+	/* duration test //삭제할것 */
 	.test{
 		width:300px;
 		height:300px;
@@ -88,6 +88,33 @@
 		height:500px;
 		duration:300;
 	}
+	
+	/* 모달 전체영역(회색처리) */
+	.modal-layer{
+		position:fixed;
+		width:1335px;
+		height:730px;
+		background:gray;
+		z-index: 1;
+		display:none;
+		background:rgba(150, 150, 150, 0.5);
+		margin-left:-25px;
+	}
+	.modal-section{
+		z-index: -1;
+		width:50%;
+		height:70%;
+		background:blue;
+		margin:auto;
+		margin-top:10%;
+		border:3px solid green;
+	}
+	.modal-dept-top{
+		width:100%;
+		height:10%;
+		background:pink;
+	}
+	
 </style>
 </head>
 <body>
@@ -98,6 +125,65 @@
 	<main>
 	<div class="container-fluid">
 	<!-- 작업공간 -->
+	
+	<!-- 모달창 영역 -->
+		<div class="modal-layer" id="modalLayer"><!-- 회색영역 -->
+			<button onclick="modalClose()" style="float:right;">X</button>
+			
+			<!-- 모달 내 작업영역 -->
+			<div class="modal-section">
+
+		
+			<div class="modal-dept-top"><h3 style="margin-left:270px; line-height:50px;">부서검색</h3></div>				
+				<table>
+					<tr>
+						<td><span>직원검색</span></td>
+						<td><input type="text"></td>
+						<td><button class="searchBtn">돋보기</button></td>
+					</tr>
+				</table>
+			</div>
+			<!-- //모달 내 작업영역 -->
+		
+		
+		
+		</div><!-- //회색영역 -->
+		
+		
+		
+		
+		<!-- 버튼 -->
+		<button id="showModalBtn" onclick="showModal()">showModalBtn</button>
+	<!-- //모달창 영역 -->
+	
+	
+	<script>
+	/* 모달 보여주기 */
+	function showModal(){
+		console.log($("#modalLayer"));
+		$("#modalLayer").css("display","block");
+	}
+	/* 모달 닫기 */
+	function modalClose(){
+		$("#modalLayer").css("display","none");
+	}
+	</script>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 		<form action="zzzzz" method="post">
 		<!-- 우측상단 결재 관련 -->
 		<h2 class="mt-4">지출결의서</h2>
@@ -117,21 +203,6 @@
 			</tr>
 			
 		</table>
-		<script>
-			function addBtn(){
-
-				var nodeTop = document.createElement("td");                 
-				var textnodeTop = document.createTextNode("품의자");         
-				nodeTop.appendChild(textnodeTop);                              
-				document.getElementById("confirmTopRow").appendChild(nodeTop);
-				
-				var nodeBot = document.createElement("td");
-				var textnodeBot = document.createTextNode("싸인");
-				nodeBot.appendChild(textnodeBot);
-				document.getElementById("confirmBotRow").appendChild(nodeBot);
-				
-			}
-		</script>
 		<!-- //우측상단 결재 관련 -->
 		
 		
@@ -161,13 +232,17 @@
 		<table class="table01" border="1">
 			<tr>
 				<td style="width:15%" class="color-green">발의일</td>
-				<td style="width:25%"><input id="datepicker01"></td>
-				<td style="width:10%"><span id="dateTestBtn">
-				<img src="${contextPath}/resources/images/calendar.png" style="width:25px; height:25px;">
+				<td style="width:25%"><input id="datepicker01" style="width:100%; text-align:center;"></td>
+				<td style="width:10%"><span>
+				<img id="dateTestBtn01" src="${contextPath}/resources/images/calendar.png" style="width:25px; height:25px;">
 				</span></td>
 				<td style="width:15%" class="color-green">지출일</td>
-				<td style="width:25%">2000-04-04</td>
-				<td style="width:10%">달력</td>			
+				<td style="width:25%"><input id="datepicker02" style="width:100%; text-align:center;"></td>
+				<td style="width:10%"><span>
+				<img id="dateTestBtn02" src="${contextPath}/resources/images/calendar.png" style="width:25px; height:25px;">
+				</span>
+				
+				</td>			
 			</tr>
 			<tr>
 				<td class="color-green">담당부서</td>
@@ -300,22 +375,41 @@
 		
 		
 		
-		
-		
-		
-		
-		
 		</form>
 		<input id="datepicker">
-		<script>
 		
+		<script>
+		/* 우측상단 결재박스 늘리기 */
+			function addBtn(){
+
+				var nodeTop = document.createElement("td");                 
+				var textnodeTop = document.createTextNode("품의자");         
+				nodeTop.appendChild(textnodeTop);                              
+				document.getElementById("confirmTopRow").appendChild(nodeTop);
+				
+				var nodeBot = document.createElement("td");
+				var textnodeBot = document.createTextNode("싸인");
+				nodeBot.appendChild(textnodeBot);
+				document.getElementById("confirmBotRow").appendChild(nodeBot);
+				
+			}
+		</script>
+		
+		
+		
+		<script>
+		/* btn01 클릭하면 달력 나옴 */
 		$(function(){
-			$("#dateTestBtn").click(function(){
-				$("img.ui-datepicker-trigger").click();
+			$("#dateTestBtn01").click(function(){
+				$("#datepicker01").focus();
 			});
 		});
-		
-	/* 날짜 input jquery ui */
+		$(function(){
+			$("#dateTestBtn02").click(function(){
+				$("#datepicker02").focus();
+			});
+		});
+		/* 날짜 input jquery ui */
 		$.datepicker.setDefaults({
 			showOn : "both",
 			buttonImageOnly : true,
@@ -323,18 +417,42 @@
 			dateFormat : 'yy-mm-dd'
 
 		});
+		/* datepicker 동작하게 설정 */
 		$(function() {
 			$("#datepicker01").datepicker({});
 			/* 달력버튼 */
 			$("img.ui-datepicker-trigger")
 					.attr("style","margin-left:2px; vertical-align:middle; cursor: Pointer; width:20px; height:20px; display:none;");
-		
-			
-			   $('.ui-datepicker ').css({ "margin-left" : "250px", "margin-top": "0px"});  //달력(calendar) 위치
-
-		
+			   $('.ui-datepicker ').css({ "margin-left" : "0px", "margin-top": "0px"});  //달력(calendar) 위치
+		});
+		$(function() {
+			$("#datepicker02").datepicker({});
+			/* 달력버튼 */
+			$("img.ui-datepicker-trigger")
+					.attr("style","margin-left:2px; vertical-align:middle; cursor: Pointer; width:20px; height:20px; display:none;");
+			   $('.ui-datepicker ').css({ "margin-left" : "0px", "margin-top": "0px"});  //달력(calendar) 위치
 		});
 	 </script>
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
 		<div class="test">
 			zzzzzzzzzzzzzzzzzzzzzzzzz
 		</div>
