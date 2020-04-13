@@ -15,7 +15,7 @@ position: absolute;
 width: 1350px;
 height: 1500px;
 left: 286px;
-top: 153px;
+top: 107px;
 
 border: 1px solid #C4C4C4;
 box-sizing: border-box;
@@ -184,8 +184,13 @@ margin-top:60px;
 </style>
 </head>
 <body>
+	<jsp:include page="../common/menubar.jsp" />
+	<div id="main">
+	<div class="container-fluid">
+		<h2 class="mt-4">일반근로자관리</h2>
+
+
 <div id="main">
-<div id="employee-manage">일반근로자관리</div>
 <div id="border">
 <div id="border2">
  <div id="vertical"> </div> 
@@ -280,7 +285,13 @@ margin-top:60px;
 
 </div>
 </div>
-
+		<div style="height: 100vh;"></div>
+		<div class="card mb-4">
+			<div class="card-body">When scrolling, the navigation stays at
+				the top of the page. This is the end of the static navigation demo.</div>
+		</div>
+	</main>
+	<jsp:include page="../common/menubar2.jsp" />
 
 </body>
 </html>
