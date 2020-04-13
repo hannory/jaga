@@ -86,6 +86,20 @@
 		<url-pattern>*.ab</url-pattern>
 	</servlet-mapping>
 	
+
+	<servlet>
+		<servlet-name>normalReceiption</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/config/normalReceiption-servlet.xml</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>normalReceiption</servlet-name>
+		<url-pattern>*.nr</url-pattern>
+	</servlet-mapping>
+	
 	<!-- 인코딩 필터 추가 -->
 	<filter>
 		<filter-name>encodingFilter</filter-name>

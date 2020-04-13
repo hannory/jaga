@@ -16,20 +16,19 @@
 	float: right;
 	width: 70%;
 }
+
 #bonusArea {
-	width: 110%;
-	background: yellow;
+	width: 100%;
 }
+
 #wrapp3 {
-	float: left;
+	display: inline-block;
 	width: 35%;
-	background: red;
 }
 
 #wrapp4 {
-	float : left;
+	display: inline-block;
 	width: 60%;
-	background: green;
 }
 
 #wrapp5 {
@@ -38,13 +37,34 @@
 }
 
 #wrapp6 {
+	margin-left: 30px;
 	float: left;
 	width: 25%;
 }
 
 #wrapp7 {
+
+	float: right;
+	width: 45%;
+	margin-bottom: 25px;
+}
+
+#wrapp8 {
 	float: left;
-	width: 50%;
+	width: 35%;
+}
+
+#wrapp9 {
+	margin-left: 30px;
+	float: right;
+	width: 60%;
+}
+
+#wrapp10 {
+	margin-left: 30px;
+	margin-top: 30px;
+	float: right;
+	width: 60%;
 }
 
 #taxArea {
@@ -59,12 +79,63 @@ main tr {
 	height: 30px;
 }
 
+#empList {
+	width: 100%;
+	font-weight: bold;
+	color: #4C4C4C;
+}
+
+#empList tr {
+	border-bottom: 1px solid black;
+	padding: 10px;
+}
+
+#empList td {
+	padding: 10px;
+}
+
 #infoTable {
 	width: 100%;
 }
 
+#infoTable td {
+	padding-left: 5px;
+	padding-bottom: 10px;
+	padding-top: 10px;
+}
+
+#infoTable th:first-child {
+	text-align: right;
+	color: #4C4C4C;
+	padding-right: 5px;
+}
+
+#infoTable th:nth-child(3) {
+	text-align: right;
+	color: #4C4C4C;
+	padding-right: 5px;
+}
+
 #retireTable {
 	width: 100%;
+}
+
+#retireTable td {
+	padding-left: 5px;
+	padding-bottom: 10px;
+	padding-top: 10px;
+}
+
+#retireTable th:first-child {
+	text-align: right;
+	color: #4C4C4C;
+	padding-right: 5px;
+}
+
+#retireTable th:nth-child(3) {
+	text-align: right;
+	color: #4C4C4C;
+	padding-right: 5px;
 }
 
 #tabList {
@@ -79,6 +150,11 @@ main tr {
 
 #salaryTable {
 	width: 60%;
+}
+
+#salaryTable th {
+	background: #D9E3E3;
+	text-align: center;
 }
 
 #bonustable {
@@ -105,6 +181,25 @@ main tr {
 
 #boundary {
 	width: 100%;
+	padding-bottom: 25px;
+}
+
+#taxArea th {
+	background: #D9E3E3;
+	text-align: center;
+}
+
+#boundaryTable {
+	width: 100%;
+}
+#boundTable1 {
+	width: 100%;
+}
+#boundTable2 {
+	width: 100%;
+}
+#boundTable3 {
+	width: 100%;
 }
 
 input {
@@ -113,6 +208,20 @@ input {
 	border-bottom-left-radius: 5px;
 	border-bottom-right-radius: 5px;
 	border: 1px solid lightgray;
+}
+
+#bonustable th {
+	background: #D9E3E3;
+	text-align: center;
+}
+
+
+
+#taxArea {
+	display: none;
+}
+#bonusArea {
+	display: none;
 }
 </style>
 </head>
@@ -132,7 +241,7 @@ input {
 						</button>
 					</form>
 					<br>
-					<table id="empList" style="text-align: center;" border="1">
+					<table id="empList" style="text-align: center;">
 						<tr>
 							<td><input type="checkbox" id="checkk"></td>
 							<td>10001</td>
@@ -143,7 +252,7 @@ input {
 				</div>
 
 				<div id="wrapp2">
-					<table id="infoTable" border="1">
+					<table id="infoTable">
 						<tr>
 							<th>입사(정산시작)일</th>
 							<td><input type="text"></td>
@@ -167,13 +276,13 @@ input {
 					</table>
 
 					<div id="tabList">
-						<button>퇴직금 계산</button>
-						<button>소득세 계산</button>
-						<button>중간정산내역</button>
+						<button id="retireBtn">퇴직금 계산</button>
+						<button id="taxBtn">소득세 계산</button>
+						<button id="middleBtn">중간정산내역</button>
 					</div>
 
 					<div id="retireArea">
-						<table id="retireTable" border="1">
+						<table id="retireTable">
 							<tr>
 								<th rowspan="2">급여산정</th>
 								<td colspan="3">①기간 <input type="date"> ~ <input
@@ -193,8 +302,8 @@ input {
 						</table>
 
 						<div id="detailList">
-							<button>급여내역</button>
-							<button>상여내역</button>
+							<button id="salaryBtn">급여내역</button>
+							<button id="bonusBtn">상여내역</button>
 						</div>
 
 						<div id="salaryArea">
@@ -364,9 +473,9 @@ input {
 
 							<div id="wrapp4">
 
-								<table id="caculTable" border="1">
+								<table id="caculTable">
 									<tr>
-										<th colspan="2">※ 예상퇴직금 계산식</th>
+										<th colspan="2" style="background: #D9E3E3;">※ 예상퇴직금 계산식</th>
 									</tr>
 									<tr>
 										<th>1.</th>
@@ -477,7 +586,7 @@ input {
 						<div id="wrapp7">
 							<table id="calculDateTable" border="1">
 								<tr>
-									<th>근속연수 계산</th>
+									<th style="background: #24574A; color: white;">근속연수 계산</th>
 								</tr>
 								<tr>
 									<td>1. 전체 근속연수<br> 개월 = 년 개월 = 년<br> 2.
@@ -487,32 +596,197 @@ input {
 								</tr>
 							</table>
 						</div>
-
-						<table id="boundary" border="1">
-							<tr>
-								<th>소득세 산출</th>
-							</tr>
-						</table>
-
-						<table>
-							<tr>
-								<th colspan="2">퇴직과세표준계산(종전규정)</th>
-							</tr>
-							<tr>
-								<th>퇴직소득</th>
-								<td></td>
-							</tr>
-						</table>
+						
+						<div id="boundary">
+	
+							<table id="boundaryTable" border="1">
+								<tr>
+									<th style="background: #24574A; color: white;">소득세 산출</th>
+								</tr>
+							</table>
+						
+						</div>
+						
+						<div id="wrapp8">
+							<table id="boundTable1" border="1">
+							<colgroup>
+								<col width="50%">
+								<col width="50%">
+							</colgroup>
+								<tr>
+									<th colspan="2">퇴직과세표준계산(종전규정)</th>
+								</tr>
+								<tr>
+									<th>퇴직소득</th>
+									<td></td>
+								</tr>
+								<tr>
+									<th>퇴직소득정률공제</th>
+									<td></td>
+								</tr>
+								<tr>
+									<th>근속연수공제</th>
+									<td></td>
+								</tr>
+								<tr>
+									<th>퇴직소득과세표준</th>
+									<td></td>
+								</tr>
+								<tr>
+									<th colspan="2">퇴직과세표준계산(개정규정)</th>
+								</tr>
+								<tr>
+									<th>퇴직소득</th>
+									<td></td>
+								</tr>
+								<tr>
+									<th>근속연수공제</th>
+									<td></td>
+								</tr>
+								<tr>
+									<th>환산급여</th>
+									<td></td>
+								</tr>
+								<tr>
+									<th>환산급여별공제</th>
+									<td></td>
+								</tr>
+								<tr>
+									<th>퇴직소득과세표준</th>
+									<td></td>
+								</tr>
+							</table>
+						</div>
+						
+						<div id="wrapp9">
+							<table id="boundTable2" border="1">
+							<colgroup>
+								<col width="25%">
+								<col width="25%">
+								<col width="25%">
+									<col width="25%">
+							</colgroup>
+								<tr>
+									<th>퇴직소득세액계산</th>
+									<th>12.12.31 이전</th>
+									<th>12.12.31 이후</th>
+									<th>합계</th>
+								</tr>
+								<tr>
+									<th>과세표준안분</th>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr>
+									<th>연평균과세표준</th>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr>
+									<th>환산과세표준</th>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr>
+									<th>환산산출세액</th>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr>
+									<th>연평균산출세액</th>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr>
+									<th>산출세액</th>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+							</table>
+						</div>
+						
+						<div id="wrapp10">
+							<table id="boundTable3" border="1">
+							<colgroup>
+								<col width="50%">
+								<col width="50%">
+							</colgroup>
+								<tr>
+									<th colspan="2">개정규정에 따른 계산방법</th>
+								</tr>
+								<tr>
+									<th>환산산출세액</th>
+									<td></td>
+								</tr>
+								<tr>
+									<th>환산산출세액</th>
+									<td></td>
+								</tr>
+								<tr>
+									<th colspan="2">퇴직소득 세액계산</th>
+								</tr>
+								<tr>
+									<th>과세연도</th>
+									<td></td>
+								</tr>
+								<tr>
+									<th>퇴직소득세 산출세액</th>
+									<td></td>
+								</tr>
+							</table>
+						</div>
 					</div>
 
-					<div id="middleArea"></div>
+					<div id="middleArea">
+					
+					</div>
 				</div>
 
 			</div>
 		</div>
 		
 		
-		
+		<script>
+			$(function(){
+				$("#retireBtn").click(function(){
+					$("#retireArea").css("display", "block");
+					$("#taxArea").css("display", "none");
+					$("#middleArea").css("display", "none");
+					$("#salaryArea").css("display", "block");
+					$("#bonusArea").css("display", "none");
+				});
+				$("#taxBtn").click(function(){
+					$("#retireArea").css("display", "none");
+					$("#taxArea").css("display", "block");
+					$("#middleArea").css("display", "none");
+				});
+				$("#middleBtn").click(function(){
+					$("#retireArea").css("display", "none");
+					$("#taxArea").css("display", "none");
+					$("#middleArea").css("display", "block");
+				});
+				$("#salaryBtn").click(function(){
+					$("#retireArea").css("display", "block");
+					$("#taxArea").css("display", "none");
+					$("#middleArea").css("display", "none");
+					$("#salaryArea").css("display", "block");
+					$("#bonusArea").css("display", "none");
+				});
+				$("#bonusBtn").click(function(){
+					$("#retireArea").css("display", "block");
+					$("#taxArea").css("display", "none");
+					$("#middleArea").css("display", "none");
+					$("#salaryArea").css("display", "none");
+					$("#bonusArea").css("display", "block");
+				});
+			});
+		</script>
 		
 		
 		
