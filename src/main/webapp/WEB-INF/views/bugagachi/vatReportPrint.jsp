@@ -1,132 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <link href="${ contextPath }/resources/css/styles.css" rel="stylesheet" />
+        <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-     <style>
-        *{
-            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-        }
-        #titleArea{
-            width: 50%;
-        }
-        .middleMenu{
-            background-color: #24574A;
-            color: white;
-            height: 30px;
-        }
-        .middleMenu>h5{
-            padding: 5px;
-        }
-        .totalSum{
-            text-align: center;
-          	  margin-top: 15px;
-            margin-bottom:40px;
-        }
-        #deemed{
-        	text-align: center;
-            margin-top: 15px;
-            margin-bottom:40px;
-        }
-        #deemed td{
-        	 /* border: 1px solid #C9CACE;  */
-            height: 23px;
-            width:25%;
-        }
-        .totalSum td{
-            border: 1px solid #C9CACE; 
-            height: 23px;
-        }
-        .green{
-            background-color: #D9EAD3;
-            font-weight: 700;
-        }
-        .green_value{
-        	background-color: #F3F4F6;
-        	
-        }
-        #cho_nav1{
-            background-color: #1B5748;
-            color: white;
-        }   
-        .Tex_bill_th{
-            background-color:#E7E6E6;
-        }
-        .Tex_bill_td{
-            background-color:#E7E6E6;
-            width: 10px;
-        }
-        #Text_billNo{
-            background-color:#E7E6E6;
-            height: 25px;
-        }
-        #Tex_bill_code{
-            border: 1px solid black;
-        }
-        .breadcrumb>li{
-        	margin: auto auto;
-        }
-        .cho_nav{
-        	height: 35px;
-        	border: 1px solid #C9CACE;
-        	background-color:#8DABA3;
-        	color: white;
-			border-top-left-radius:10px;
-			border-top-right-radius:10px;
-        }
-        .cho_nav>p{
-        	margin-left:5px;
-        	margin-right: 5px;
-        	margin-top:3px;
-        }
-        .sumTableSales{
-        	width: 20%;
-        	padding-left:5%;
-        }
-   		#List_detail td{
-   			border:1px solid #D2D2D6;
-   		}
-   		#List_detail{
-   			text-align: center;
-   		}
-   		.cc_year{
-   			width:50px;
-   			height: 30px;
-   		}
-   		.cc_month{
-   			width:50px; 
-   			height: 30px;
-   		}
-   		.Tex_bill_code_p{
-   			font-size:23px;
-   		}
-   		.total_deemed{
-   			text-align: center;
-   			width: 99%;
-   			border:1px solid #C9CACE;
-   		}
-   		.textArea{
+<style >
+.textArea{
    			text-align: left;
    		}
    		.numberArea{
    			text-align: right;
    		}
-   		.pink{
-   			background-color: #F4CCCC; 
-   		}
-   		.blue{
-   			background-color: #CFE2F3; 
-   		}
-   		.yellow{
-   			background-color: #EFD5B9;
-   		}
    		#vat_mainDiv{
-   			width: 50%; 
    			float: left; 
    			margin-right: 2px;
    		}
@@ -143,84 +35,86 @@
    		.mainSubDiv{
 	   		width: 100%; 
 	   		text-align: center;
+	   		
    		}
    		.mainSubDiv td{
-   			border:1px solid #D2D2D6;
+   			border-bottom:1px solid #D2D2D6;
    		}
-   		.subTable{
-   			display: none;
+   		#vat_title{
+   			font-weight: 900;
+   			width: 100%;
+   			font-size: 20px;
    		}
+   		#vat_title td{
+   			 width:33%;
+   		}
+   		.numBiz{
+   			width:20px;
+   			text-align: center;
+   		}
+   		#writerInfo{
+   			width:100%;
+   			margin-bottom: 10px;
+   			text-align: center;
+   		}
+   		
     </style>
 </head>
 <body>
-<jsp:include page="../common/menubar.jsp" />
-	<c:set var="contextPath"
-		value="${ pageContext.servletContext.contextPath }"
-		scope="application" />
-	<main>
-	<script type="text/javascript">
-function pri_VATReport(){
-	console.log("프린트 버튼누름")
-	var vatReport=window.open("vatReportPrint.vi","","width=1200,height=1000");
-	
-}
+<script type="text/javascript">
+	$(function(){/* 테이블 선정리 */
+		$("#writerInfo tr td").css("border","1px solid black");
+		$("#writerInfo tr td").css("border-left","");
+		$("#writerInfo tr td:last-child").css("border-right","");
+		$(".mainSubDiv tr td").css("border","1px solid black");
+		$(".mainSubDiv tr td").css("border-left","");
+		$(".mainSubDiv tr td:last-child").css("border-right","");
+		});
 </script>
-	<div class="container-fluid">
-			<h2 class="mt-4">부가가치세 신고서</h2>
-	<ol class="breadcrumb mb-4">
-			<li><button id="deadlineBtn">마감</button></li>
-			<li>1기예정</li>
-			<li>신고구분: 
-                <select name="report_type">
-                    <option>1.정기신고</option>
-                    <option>2.수정신고</option>
-                </select></li>
-            <li>신고차수: <input type="text" name="report_order" style="width: 40px;"></li>
-            <li>조회기간:
-            	<input type="text" name="search_st" class="datepicker"> ~ <input type="text" name="search_ed"class="datepicker">
-            </li>
-			<li><input type="button" name="search" value="조회"></li>
-			<li>부가율: <input type="text" name="vatRate" readonly style="width: 50px;">
-			<input type="text" name="vatRateDiv" readonly  style="width: 50px; background-color:#D9EAD3 "> </li>
-			<li><input type="button" name="report" value="신고서미리보기" onclick="pri_VATReport()"></li>
-			
-		</ol>
-		
-			<script type="text/javascript">/* subTable 보이게하기  */
-				function showsubTable1(){
-			    	$("#vat_subDiv2").hide();
-			    	$("#vat_subDiv3").hide();
-			    	$("#vat_subDiv1").show();
-			    };
-			    function showsubTable2(){
-			    	$("#vat_subDiv1").hide();
-			    	$("#vat_subDiv3").hide();
-			    	$("#vat_subDiv2").show();
-			    }
-			    function showsubTable3(){
-			    	$("#vat_subDiv2").hide();
-			    	$("#vat_subDiv1").hide();
-			    	$("#vat_subDiv3").show();
-			    }
-				
-			</script>
-		
-		<div style="width: 100%;"><!-- 전체 div start -->
+<div style="width: 90%; margin-right:auto; margin-left:auto;"><!-- 전체 div start -->
 		
 			<div id="vat_mainDiv"><!-- vat_main div start -->
+			<p style="float:left">■ 부가가치세법 시행규칙 [별지 제21호서식] < 개정 2018. 3. 19. > </p>
+			<p style="float:right">홈텍스(www.hometax.go.kr)에서도 신청할 수 있습니다.</p>
+			<table id="vat_title"><!-- 신고서 명 영역 시작 -->
+					<tr> <td rowspan="3" style="text-align: right">일반과세자 부가가치세</td>
+					<td colspan="2" style="text-align: center;">[ ]예정 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  [ ]확정</td>
+					<td rowspan="3" style="text-align:left;">신고서</td>
+				</tr>
+				<tr><td colspan="2"style="text-align: center;">[ ]기한후 과세표준</td></tr>
+				<tr><td colspan="2"style="text-align: center;">[ ]영세율 등 조기환급</td></tr>
+			</table><!-- 신고서 명 영역 끝 -->
+			<p style="float:right">(4쪽 중 제 1쪽)</p><br>
+			
+			<table id="writerInfo"><!-- 신고자 상세 정보 시작 -->
+				<tr style="background-color: #E7E6E6">
+					<td colspan="6" style="text-align: left;">관리번호</td>
+					<td colspan="13" style="text-align: left;">처리기간      즉시</td>
+				</tr>
+				<tr><td colspan="19" style="text-align:left;">신고 기간:  2019년 제 2기 (7 월 1 일 ~ 12 월 31일)</td></tr>
+				<tr><td rowspan="4">사업자</td><td>상 호<br>(법인명)</td><td> 상호명띄우는 부분</td>
+					<td>성    명<br>(대표자명)</td><td>대표자이름</td>
+					<td colspan="2">사업자등록번호</td><td class="numBiz">1</td><td class="numBiz">2</td><td class="numBiz">3</td><td class="numBiz">-</td>
+					<td class="numBiz">4</td><td class="numBiz">5</td><td class="numBiz">-</td><td class="numBiz">6</td><td class="numBiz">7</td><td class="numBiz">8</td><td class="numBiz">9</td><td class="numBiz">10</td>
+				</tr>
+				<tr><td rowspan="2">생년월일</td><td rowspan="2" colspan="2">0000.00.00</td><td rowspan="2">전화번호</td>
+					<td colspan="2">사업장</td><td colspan="6">주소지</td><td colspan="6">휴대전화</td>
+				</tr>
+				<tr><td colspan="2">사업장전화번호임</td><td colspan="6">주소지 전화번호</td><td colspan="6">폰번임</td></tr>
+				<tr><td>사업장 주소</td><td colspan="3">주소</td><td colspan="2">전자우편주소</td><td colspan="12">이메일 쓰는곳</td></tr>
+			</table><!-- 신고자 상세 정보 끝 -->
 				<table class="mainSubDiv">
 					<tr class="Tex_bill_th">
-						<td colspan="5"></td>
-						<td colspan="3">정기 신고 금액</td>
+						<td colspan="8" style="font-weight:1000; font-size: 17px;">① 신   고   내   용</td>
 					</tr>
 					<tr class="Tex_bill_th">
-						<td colspan="5">구분</td>
+						<td colspan="5" style="width:40%">구분</td>
 						<td>금액</td>
-						<td>세율</td>
+						<td style="width:10%">세율</td>
 						<td>세액</td>
 					</tr>
-					<tr onclick="showsubTable1()">
-						<td rowspan="9" style="background-color: #F4CCCC; width:4%; ">과세표준및매출세액</td>
+					<tr>
+						<td rowspan="9" style=" width:4%; ">과세표준및매출세액</td>
 						<td rowspan="4" style="width:10%;" class="green_value">과세</td>
 						<td colspan="2" class="green_value textArea">세금계산서발급분</td>
 						<td class="pink">1</td>
@@ -228,27 +122,27 @@ function pri_VATReport(){
 						<td class="green_value">10/100</td>
 						<td class="numberArea"></td>
 					</tr>
-					<tr onclick="showsubTable1()">
+					<tr>
 						<td colspan="2" class="green_value textArea">매입자발행세금계산서</td>
 						<td class="pink">2</td>
 						<td class="numberArea"></td>
 						<td class="green_value">10/100</td>
 						<td class="numberArea"></td>
 					</tr>
-					<tr onclick="showsubTable1()">
+					<tr>
 						<td colspan="2" class="green_value textArea">신용카드/현금 영수증 발행분</td>
 						<td class="pink">3</td>
 						<td class="numberArea"></td>
 						<td rowspan="2" class="green_value">10/100</td>
 						<td class="numberArea"></td>
 					</tr>
-					<tr onclick="showsubTable1()">
+					<tr>
 						<td colspan="2" class="green_value textArea">기타(정규영수증외매출분)</td>
 						<td class="pink">4</td>
 						<td class="numberArea"></td>
 						<td class="numberArea"></td>
 					</tr>
-					<tr onclick="showsubTable1()">
+					<tr>
 						<td rowspan="2" style="width:10%;" class="green_value">영세</td>
 						<td colspan="2" class="green_value textArea">세금계산서발급분</td>
 						<td class="pink">5</td>
@@ -256,35 +150,35 @@ function pri_VATReport(){
 						<td class="green_value">0/100</td>
 						<td class="green numberArea"></td>
 					</tr>
-					<tr onclick="showsubTable1()">
+					<tr>
 						<td colspan="2" class="green_value textArea">기타</td>
 						<td class="pink">6</td>
 						<td class="numberArea"></td>
 						<td class="green_value">0/100</td>
 						<td class="green numberArea"></td>
 					</tr>
-					<tr onclick="showsubTable1()">
+					<tr>
 						<td colspan="3" class="green_value textArea">예정신고누락분</td>
 						<td class="pink">7</td>
 						<td class="numberArea"></td>
 						<td class="green"></td>
 						<td class="numberArea"></td>
 					</tr>
-					<tr onclick="showsubTable1()">
+					<tr>
 						<td colspan="3" class="green_value textArea">대손세액가감</td>
 						<td class="pink">8</td>
 						<td class="green numberArea"></td>
 						<td class="green"></td>
 						<td class="numberArea"></td>
 					</tr>
-					<tr onclick="showsubTable1()">
+					<tr>
 						<td colspan="3" class="green_value textArea">합계</td>
 						<td class="pink">9</td>
 						<td class="green numberArea"></td>
 						<td class="green_value">㉮</td>
 						<td class="green numberArea"></td>
 					</tr>
-					<tr onclick="showsubTable1()">
+					<tr>
 						<td rowspan="9" style="width:4%;" class="blue">매입세액</td>
 						<td rowspan="3" colspan="2" style="width:10%;" class="green_value">세금계산서 수취분</td>
 						<td class="green_value textArea">일반매입</td>
@@ -293,7 +187,7 @@ function pri_VATReport(){
 						<td class="green_value"></td>
 						<td class="numberArea"></td>
 					</tr>
-					<tr onclick="showsubTable1()">
+					<tr>
 						<td class="green_value textArea">수출기업수입분납부유예</td>
 						<td class="blue">10</td>
 						<td class="numberArea"></td>
@@ -314,14 +208,14 @@ function pri_VATReport(){
 						<td class="green_value"></td>
 						<td class="numberArea"></td>
 					</tr>
-					<tr onclick="showsubTable1()">
+					<tr>
 						<td colspan="3" class="green_value textArea">매입자발행세금계산서</td>
 						<td class="blue">13</td>
 						<td class="numberArea"></td>
 						<td class="green_value"></td>
 						<td class="numberArea"></td>
 					</tr>
-					<tr onclick="showsubTable1()">
+					<tr>
 						<td colspan="3" class="green_value textArea">그 밖의 공제매입세액</td>
 						<td class="blue">14</td>
 						<td class="numberArea"></td>
@@ -335,7 +229,7 @@ function pri_VATReport(){
 						<td class="green_value"></td>
 						<td class="green numberArea"></td>
 					</tr>
-					<tr onclick="showsubTable2()">
+					<tr>
 						<td colspan="3" class="green_value textArea">공제받지못할매입세액</td>
 						<td class="blue">16</td>
 						<td class="numberArea"></td>
@@ -362,56 +256,56 @@ function pri_VATReport(){
 						<td class="green_value"></td>
 						<td class="green numberArea"></td>
 					</tr>
-					<tr onclick="showsubTable2()">
+					<tr>
 						<td class="green_value textArea">신용카드매출전표등 발행공제등</td>
 						<td class="green_value">19</td>
 						<td class="numberArea"></td>
 						<td class="green_value"></td>
 						<td class="numberArea"></td>
 					</tr>
-					<tr onclick="showsubTable2()">
+					<tr>
 						<td class="green_value textArea">합계</td>
 						<td class="green_value">20</td>
 						<td class="green numberArea"></td>
 						<td class="green_value">㉱</td>
 						<td class="numberArea"></td>
 					</tr>
-					<tr onclick="showsubTable2()">
+					<tr>
 						<td colspan="4" class="green_value textArea">예정신고미환급세액</td>
 						<td class="green_value">21</td>
 						<td class="green numberArea"></td>
 						<td class="green_value">㉲</td>
 						<td class="numberArea"></td>
 					</tr>
-					<tr onclick="showsubTable2()">
+					<tr>
 						<td colspan="4" class="green_value textArea">예정고지세액</td>
 						<td class="green_value">22</td>
 						<td class="green numberArea"></td>
 						<td class="green_value">㉳</td>
 						<td class="numberArea"></td>
 					</tr>
-					<tr onclick="showsubTable2()">
+					<tr>
 						<td colspan="4" class="green_value textArea">사업양수자의 대리납부 기납부세액</td>
 						<td class="green_value">23</td>
 						<td class="green numberArea"></td>
 						<td class="green_value">㉴</td>
 						<td class="numberArea"></td>
 					</tr>
-					<tr onclick="showsubTable3()">
+					<tr>
 						<td colspan="4" class="green_value textArea">매입자 납부특례 기납부세액</td>
 						<td class="green_value">24</td>
 						<td class="green numberArea"></td>
 						<td class="green_value">㉵</td>
 						<td class="numberArea"></td>
 					</tr>
-					<tr onclick="showsubTable3()">
+					<tr>
 						<td colspan="4" class="green_value textArea">신용카드업자의 대리납부 기납부세액</td>
 						<td class="green_value">25</td>
 						<td class="numberArea"></td>
 						<td class="green_value">㉶</td>
 						<td class="numberArea"></td>
 					</tr>
-					<tr onclick="showsubTable3()">
+					<tr>
 						<td colspan="4" class="green_value textArea">가산세액계</td>
 						<td class="green_value">26</td>
 						<td class="green numberArea"></td>
@@ -423,7 +317,7 @@ function pri_VATReport(){
 						<td class="green_value">27</td>
 						<td class="green numberArea"></td>
 					</tr>
-					<tr onclick="showsubTable3()">
+					<tr>
 						<td colspan="6" class="green_value textArea">총괄납부사업자가 납부할 세액(환급받을 세액)</td>
 						<td class="green_value"></td>
 						<td class="numberArea"></td>
@@ -433,13 +327,13 @@ function pri_VATReport(){
 			</div><!-- vat_main div end -->
 			
 			
-		<div style="float: left; width: 49%;"><!-- 오른쪽 서브 영역 !!!!!!!!!!!!!!!!!!!!!!!!!!1-->
+		<div style="float: left;"><!-- 오른쪽 서브 영역 !!!!!!!!!!!!!!!!!!!!!!!!!!1-->
 			<div class="subTable" id="vat_subDiv1"><!--7,12,14 vat_sub1 start-->
 				<table class="mainSubDiv">
 					<tr class="Tex_bill_th">
-						<td colspan="5">구분</td>
+						<td colspan="5"style="width:40%">구분</td>
 						<td>금액</td>
-						<td>세율</td>
+						<td style="width:10%">세율</td>
 						<td>세액</td>
 					</tr>
 					<tr class="green textArea">
@@ -647,9 +541,9 @@ function pri_VATReport(){
 			<div class="subTable" id="vat_subDiv2"><!--16,18 vat_sub2 start  -->
 				<table class="mainSubDiv">
 					<tr class="green_value">
-						<td colspan="5">구분</td>
+						<td colspan="5"style="width:40%">구분</td>
 						<td>금액</td>
-						<td>세율</td>
+						<td style="width:10%">세율</td>
 						<td>세액</td>
 					</tr>
 					<tr class="green teatArea">
@@ -740,9 +634,9 @@ function pri_VATReport(){
 			<div  class="subTable" id="vat_subDiv3"><!--25 vat_sub3 start  -->
 				<table class="mainSubDiv">
 					<tr class="green_value">
-						<td colspan="5">구분</td>
+						<td colspan="5"style="width:40%">구분</td>
 						<td>금액</td>
-						<td>세율</td>
+						<td style="width:10%">세율</td>
 						<td>세액</td>
 					</tr>
 					<tr>
@@ -893,13 +787,5 @@ function pri_VATReport(){
 			</div><!--25 vat_sub3 end  -->
 	</div><!-- 오른쪽 서브영역 -->
 		</div><!-- 전체 div end -->
-            
-
-		<div style="height: 100vh;"></div>
-		
- 
-	</div>
-	</main>
-	<jsp:include page="../common/menubar2.jsp" />
 </body>
 </html>
