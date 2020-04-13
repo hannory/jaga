@@ -17,6 +17,7 @@
 
 <%--    <jsp:forward page="WEB-INF/views/withholding_Tax/withholdingBill.jsp"/>   --%>
 <%--     <jsp:forward page="WEB-INF/views/employee/paySlip.jsp"/>    --%>
-    <jsp:forward page="WEB-INF/views/employee/paySlipList.jsp"/>   
+<%--     <jsp:forward page="WEB-INF/views/employee/paySlipList.jsp"/>  --%>  
+     <jsp:forward page="WEB-INF/views/calendar/calendar.jsp"/> 
 </body>
 </html>
