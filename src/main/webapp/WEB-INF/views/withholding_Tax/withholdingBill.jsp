@@ -51,6 +51,15 @@ width:150px;
 </head>
 
 <body>
+
+	<jsp:include page="../common/menubar.jsp" />
+	<div id="main">
+	<div class="container-fluid">
+		<h2 class="mt-4">원천징수이행상황신고서</h2>
+		<ol class="breadcrumb mb-4">
+		</ol>
+
+		 
 <!-- 7*21 표 맹글기 -->
 <table border="1">
 	<tr>
@@ -258,5 +267,12 @@ width:150px;
 	
 
 </table>
+		<div style="height: 100vh;"></div>
+		<div class="card mb-4">
+			<div class="card-body">When scrolling, the navigation stays at
+				the top of the page. This is the end of the static navigation demo.</div>
+		</div>
+	</main>
+	<jsp:include page="../common/menubar2.jsp" />
 </body>
 </html>
