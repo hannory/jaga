@@ -179,6 +179,69 @@
 	
 	
 	
+	<!-- 모달창 영역(계정과목 검색) -->
+		<div class="modal-layer" id="modalLayerSubject"><!-- 회색영역 -->
+			
+			<!-- 모달 내 작업영역 -->
+			<div class="modal-section">
+			<button onclick="closeModalSubject()" style="float:right;">X</button>
+		
+				<table border="1" style="margin-top:50px; margin-left:140px; text-align:center;">
+					<tr>
+						<td style="width:100px; background:green;"><span>직원검색</span></td>
+						<td><input type="text" style="width:100%; height:100%;"></td>
+						<td style="width:100px;">
+						<div class="searchBtnSubject" onclick="searchSubject()">
+						<img style="width:30px; height:30px;" src="${contextPath}/resources/images/search.PNG">
+						</div>
+						</td>
+					</tr>
+					<tr style="background:green;">
+						<td>코드</td>
+						<td>계정과목명</td>
+						<td>비고</td>
+					</tr>
+					<tr>
+						<td>923</td>
+						<td>접대비</td>
+						<td></td>
+					</tr>
+				</table>
+			</div>
+			<!-- //모달 내 작업영역 -->
+		</div><!-- //회색영역 -->
+	<!-- //모달창 영역 -->
+	<script>
+	/* 담당부서 검색 */
+	/* 모달 보여주기 */
+	function showModalSubject(){
+		$("#modalLayerSubject").fadeIn(200);
+	}
+	/* 모달 닫기 */
+	function closeModalSubject(){
+		$("#modalLayerSubject").fadeOut(200);
+	}
+	function searchSubject(){
+		alert("searchSubjectMethodExecute");
+	}
+	
+	$(function(){
+		$("#inputSubject").focus(function(e){
+			e.target.blur();
+			showModalSubject();
+			
+		});
+	});
+	/* --담당부서 검색 끝--*/
+	</script>
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
@@ -253,7 +316,7 @@
 				<td><input readonly id="inputDept" type="text" style="width:100%; height:100%; text-align:center;"></td>
 				<td onclick="showModalDept()"><img style="width:20px; height:20px;" src="${contextPath}/resources/images/search.PNG"></td>
 				<td class="color-green">계정과목</td>
-				<td>접대비</td>
+				<td><input readonly id="inputSubject" type="text" style="width:100%; height:100%; text-align:center;"></td>
 				<td onclick="showModalSubject()"><img style="width:20px; height:20px;" src="${contextPath}/resources/images/search.PNG"></td>			
 			</tr>
 			<tr>
@@ -261,7 +324,7 @@
 				<td>홍길동(개발팀)</td>
 				<td>돋보기</td>
 				<td class="color-green">지출합계</td>
-				<td colspan="2" style="text-align:right">140,000</td>
+				<td colspan="2" style="text-align:right"><input type="text" style="width:100%; height:100%; text-align:right;"></td>
 			</tr>
 			<tr>
 				<td class="color-green">지출목적</td>
