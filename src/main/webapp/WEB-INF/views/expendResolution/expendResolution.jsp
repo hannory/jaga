@@ -232,7 +232,72 @@
 			
 		});
 	});
-	/* --담당부서 검색 끝--*/
+	/* --계정과목 검색 끝--*/
+	</script>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<!-- 모달창 영역(담당자 검색) -->
+		<div class="modal-layer" id="modalLayerEmployee"><!-- 회색영역 -->
+			
+			<!-- 모달 내 작업영역 -->
+			<div class="modal-section">
+			<button onclick="closeModalEmployee()" style="float:right;">X</button>
+		
+				<table border="1" style="margin-top:50px; margin-left:140px; text-align:center;">
+					<tr>
+						<td style="width:100px; background:green;"><span>직원검색</span></td>
+						<td><input type="text" style="width:100%; height:100%;"></td>
+						<td style="width:100px;">
+						<div class="searchBtnEmployee" onclick="searchEmployee()">
+						<img style="width:30px; height:30px;" src="${contextPath}/resources/images/search.PNG">
+						</div>
+						</td>
+					</tr>
+					<tr style="background:green;">
+						<td>직원코드</td>
+						<td>직원명</td>
+						<td>직급</td>
+					</tr>
+					<tr>
+						<td>923</td>
+						<td>홍길동</td>
+						<td>팀장</td>
+					</tr>
+				</table>
+			</div>
+			<!-- //모달 내 작업영역 -->
+		</div><!-- //회색영역 -->
+	<!-- //모달창 영역 -->
+	<script>
+	/* 담당부서 검색 */
+	/* 모달 보여주기 */
+	function showModalEmployee(){
+		$("#modalLayerEmployee").fadeIn(200);
+	}
+	/* 모달 닫기 */
+	function closeModalEmployee(){
+		$("#modalLayerEmployee").fadeOut(200);
+	}
+	function searchEmployee(){
+		alert("searchEmployeeMethodExecute");
+	}
+	
+	$(function(){
+		$("#inputEmployee").focus(function(e){
+			e.target.blur();
+			showModalEmployee();
+			
+		});
+	});
+	/* --담당자 검색 끝--*/
 	</script>
 	
 	
@@ -321,10 +386,10 @@
 			</tr>
 			<tr>
 				<td class="color-green">담당자</td>
-				<td>홍길동(개발팀)</td>
-				<td>돋보기</td>
+				<td><input type="text" style="width:100%; height:100%; text-align:center;"></td>
+				<td onclick="showModalEmployee()"><img style="width:20px; height:20px;" src="${contextPath}/resources/images/search.PNG"></td>
 				<td class="color-green">지출합계</td>
-				<td colspan="2" style="text-align:right"><input type="text" style="width:100%; height:100%; text-align:right;"></td>
+				<td colspan="2" style="text-align:right"><input id="totalExpend" type="text" style="width:100%; height:100%; text-align:right;"></td>
 			</tr>
 			<tr>
 				<td class="color-green">지출목적</td>
@@ -460,6 +525,27 @@
 				
 			}
 		</script>
+		
+		
+		
+		<script>
+		/* 지출합계에 숫자 3개마다 콤마 찍기 */
+		window.onload = function(){
+			$("#totalExpend").blur(function(){
+				var num = $("#totalExpend").val();
+				$("#totalExpend").val(num.toLocaleString());	
+			});
+			
+		}
+		
+
+		
+		
+		</script>
+		
+		
+		
+		
 		
 		
 		
