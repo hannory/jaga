@@ -105,8 +105,8 @@
 	<c:set var="contextPath"
 		value="${ pageContext.servletContext.contextPath }"
 		scope="application" />
-
 	<main>
+
 	<!-- 매출영역 -->
 	<div class="container-fluid">
 	<h2 class="mt-4">세금계산서 합계표</h2>
@@ -122,7 +122,7 @@
             	<input type="text" name="search_st" class="datepicker"> ~ <input type="text" name="search_ed"class="datepicker">
             </li>
 			<li><input type="button" name="search" value="조회"></li>
-			<li><input type="button" name="report" value="신고서미리보기"></li>
+			<li><input type="button" name="report" value="신고서미리보기" onclick="print()"></li>
 		</ol>
 		
     <script>
