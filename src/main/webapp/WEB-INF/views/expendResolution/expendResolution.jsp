@@ -76,20 +76,7 @@
 		background:gray;
 	}
 	
-	/* duration test //삭제할것 */
-	.test{
-		width:300px;
-		height:300px;
-		background:red;
-		
-	}
-	.test:hover{
-		width:500px;
-		height:500px;
-		duration:300;
-	}
-	
-	/* 모달 전체영역(회색처리) */
+	/* 모달(담당부서) */
 	.modal-layer{
 		position:fixed;
 		width:1335px;
@@ -99,21 +86,24 @@
 		display:none;
 		background:rgba(150, 150, 150, 0.5);
 		margin-left:-25px;
+		animation: fadein 2s;
 	}
 	.modal-section{
 		z-index: -1;
 		width:50%;
 		height:70%;
-		background:blue;
+		background:white;
 		margin:auto;
 		margin-top:10%;
-		border:3px solid green;
+		border:1px solid white;
 	}
 	.modal-dept-top{
 		width:100%;
 		height:10%;
 		background:pink;
-	}
+	}/* 모달(담당부서) 끝 */
+	
+	
 	
 </style>
 </head>
@@ -126,48 +116,62 @@
 	<div class="container-fluid">
 	<!-- 작업공간 -->
 	
-	<!-- 모달창 영역 -->
+	<!-- 모달창 영역(담당부서 검색) -->
 		<div class="modal-layer" id="modalLayer"><!-- 회색영역 -->
-			<button onclick="modalClose()" style="float:right;">X</button>
 			
 			<!-- 모달 내 작업영역 -->
 			<div class="modal-section">
-
+			<button onclick="closeModal()" style="float:right;">X</button>
 		
-			<div class="modal-dept-top"><h3 style="margin-left:270px; line-height:50px;">부서검색</h3></div>				
-				<table>
+				<table border="1" style="margin-top:50px; margin-left:140px; text-align:center;">
 					<tr>
-						<td><span>직원검색</span></td>
-						<td><input type="text"></td>
-						<td><button class="searchBtn">돋보기</button></td>
+						<td style="width:100px; background:green;"><span>직원검색</span></td>
+						<td><input type="text" style="width:100%; height:100%;"></td>
+						<td style="width:100px;">
+						<div class="searchBtn" onclick="searchDept()">
+						<img style="width:30px; height:30px;" src="${contextPath}/resources/images/search.PNG">
+						</div>
+						</td>
+					</tr>
+					<tr style="background:green;">
+						<td>사번</td>
+						<td>이름</td>
+						<td>직책</td>
+					</tr>
+					<tr>
+						<td>20130872</td>
+						<td>홍길동</td>
+						<td>팀장</td>
 					</tr>
 				</table>
 			</div>
 			<!-- //모달 내 작업영역 -->
-		
-		
-		
 		</div><!-- //회색영역 -->
-		
-		
-		
-		
-		<!-- 버튼 -->
-		<button id="showModalBtn" onclick="showModal()">showModalBtn</button>
 	<!-- //모달창 영역 -->
-	
-	
 	<script>
+	/* 담당부서 검색 */
 	/* 모달 보여주기 */
-	function showModal(){
-		console.log($("#modalLayer"));
-		$("#modalLayer").css("display","block");
+	function showModalDept(){
+		$("#modalLayer").fadeIn(200);
 	}
 	/* 모달 닫기 */
-	function modalClose(){
-		$("#modalLayer").css("display","none");
+	function closeModal(){
+		$("#modalLayer").fadeOut(200);
 	}
+	function searchDept(){
+		alert("zzasd");
+	}
+	
+	$(function(){
+		$("#inputDept").focus(function(e){
+			e.target.blur();
+			showModalDept();
+			
+		});
+	});
+	/* --담당부서 검색 끝--*/
 	</script>
+	
 	
 	
 	
@@ -232,12 +236,12 @@
 		<table class="table01" border="1">
 			<tr>
 				<td style="width:15%" class="color-green">발의일</td>
-				<td style="width:25%"><input id="datepicker01" style="width:100%; text-align:center;"></td>
+				<td style="width:25%"><input readonly id="datepicker01" style="width:100%; text-align:center;"></td>
 				<td style="width:10%"><span>
 				<img id="dateTestBtn01" src="${contextPath}/resources/images/calendar.png" style="width:25px; height:25px;">
 				</span></td>
 				<td style="width:15%" class="color-green">지출일</td>
-				<td style="width:25%"><input id="datepicker02" style="width:100%; text-align:center;"></td>
+				<td style="width:25%"><input readonly id="datepicker02" style="width:100%; text-align:center;"></td>
 				<td style="width:10%"><span>
 				<img id="dateTestBtn02" src="${contextPath}/resources/images/calendar.png" style="width:25px; height:25px;">
 				</span>
@@ -246,11 +250,11 @@
 			</tr>
 			<tr>
 				<td class="color-green">담당부서</td>
-				<td>경영지원팀</td>
-				<td>돋보기</td>
+				<td><input readonly id="inputDept" type="text" style="width:100%; height:100%; text-align:center;"></td>
+				<td onclick="showModalDept()"><img style="width:20px; height:20px;" src="${contextPath}/resources/images/search.PNG"></td>
 				<td class="color-green">계정과목</td>
 				<td>접대비</td>
-				<td>돋보기</td>			
+				<td onclick="showModalSubject()"><img style="width:20px; height:20px;" src="${contextPath}/resources/images/search.PNG"></td>			
 			</tr>
 			<tr>
 				<td class="color-green">담당자</td>
@@ -293,17 +297,17 @@
 		<table class="table03" border="1">
 			<tr>
 				<td class="color-green" style="width:10%">결제구분</td>
-				<td style="width:10%;">현금</td>
-				<td style="width:10%;">카드</td>
+				<td style="width:10%;"><input type="radio" name="paymentType" value="cash" id="radioCash"><label for="radioCash">현금</label></td>
+				<td style="width:10%;"><input type="radio" name="paymentType" value="card" id="radioCard"><label for="radioCard">카드</label></td>
 				<td style="width:10%; border-top:1px solid white;"></td>
 				<td style="width:10%;"class="color-green">합계</td>
 				<td style="width:20%;">140,000</td>
 			</tr>
 			<tr>
 				<td class="color-green">관련증빙</td>
-				<td colspan="2'"><input type="radio" name="receptionType" value="tax">세금계산서</td>
-				<td><input type="radio" name="receptionType" value="cash">현금영수증</td>
-				<td><input type="radio" name="receptionType" value="card">카드영수증</td>
+				<td colspan="2'"><input type="radio" name="receptionType" value="taxReception" id="radiotaxReception"><label for="radiotaxReception">세금계산서</label></td>
+				<td><input type="radio" name="receptionType" value="cashReception" id="radiocashReception"><label for="radiocashReception">현금영수증</label></td>
+				<td><input type="radio" name="receptionType" value="cardReception" id="radiocardReception"><label for="radiocardReception">카드영수증</label></td>
 				<td><span id="receptionLabel">증빙파일을 선택하세요</span> </td>
 			</tr>
 		</table>
@@ -376,7 +380,6 @@
 		
 		
 		</form>
-		<input id="datepicker">
 		
 		<script>
 		/* 우측상단 결재박스 늘리기 */
@@ -453,9 +456,6 @@
 	 
 	 
 	 
-		<div class="test">
-			zzzzzzzzzzzzzzzzzzzzzzzzz
-		</div>
 		
 		
 		<!-- footer -->
