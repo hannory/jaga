@@ -110,7 +110,7 @@
 				<td class="table-head" width="18%">합계</td>
 				<td class="table-head" width="18%">잔액</td>
 			</tr>
-			<tr ondblclick="PopSlipModal()">
+			<tr ondblclick="popSlipModal()">
 				<td class="table-title"></td>
 				<td class="table-title"></td>
 				<td class="table-title" align="center"><div class="table-justify1"><div>1. 유</div><div>동</div><div>자</div><div>산 <label class="hidden-right">.1</label></div></div></td>
@@ -407,9 +407,13 @@
 	
 	<!-- 원장조회 모달 -->
 	<script>
-		function PopSlipModal() {
+		function popSlipModal() {
 			$("#slip").modal();
 		};
+		
+		function popAccountList() {
+			$("#accountList").modal();
+		}
 	</script>
 	
   	<div class="modal fade" id="slip" role="dialog">
@@ -422,7 +426,100 @@
 	        <div class="modal-body">
 		    	<table width="100%" style="margin-bottom:5px">
 		        	<tr>
-		        		<td>계정과목&nbsp;&nbsp;&nbsp;&nbsp;<input style="width:100px;" type="text"></td>
+		        		<td>계정과목&nbsp;&nbsp;&nbsp;&nbsp;<input style="width:100px;" type="text">&nbsp;&nbsp;
+		        			<img src="${contextPath}/resources/images/bubble.png" style="width:30px; height:26px;" onclick="popAccountList();">
+		        		</td>
+		        		<td align="right"><span>조회기간&nbsp;&nbsp;&nbsp;&nbsp;</span><input type="text" id="datepicker3"> ~ <input type="text" id="datepicker4"></td>
+		        	</tr>
+		        </table>
+				<script>
+						/* 날짜 input jquery ui */
+						$.datepicker
+								.setDefaults({
+									showOn : "both",
+									buttonImageOnly : true,
+									buttonImage : "${contextPath}/resources/images/calendar.png",
+									dateFormat : 'yy-mm-dd'
+
+								});
+						$(function() {
+							$("#datepicker3").datepicker({});
+							$("#datepicker4").datepicker({});
+							/* 달력버튼 */
+							$("img.ui-datepicker-trigger")
+									.attr(
+											"style",
+											"margin-left:2px; vertical-align:middle; cursor: Pointer; width:20px; height:20px");
+						});
+						
+						
+				</script>
+				<div>
+		        	<table id="List_detail" style=" width:100%; margin-left:auto; margin-right: auto;">
+		        		<tr>
+		        			<td class="modal-head">일자</td>
+		        			<td class="modal-head">번호</td>
+		        			<td class="modal-head">적요</td>
+		        			<td class="modal-head">코드</td>
+		        			<td class="modal-head">거래처</td>
+		        			<td class="modal-head">차변</td>
+		        			<td class="modal-head">대변</td>
+		        			<td class="modal-head">잔액</td>
+		        		</tr>
+		        		<tr class="modal_detail" style="height: 25px;">
+		        			<td style="text-align:center;">03-31</td>
+		        			<td style="text-align:center;">00005</td>
+		        			<td></td>
+		        			<td style="text-align:center;">01003</td>
+		        			<td style="text-align:center;">마음전자</td>
+		        			<td style="text-align:right;">550,000</td>
+		        			<td style="text-align:right;"></td>
+		        			<td style="text-align:right;">550,000</td>
+		        		</tr>
+		        		<tr>
+		        			<td class="modal-head"></td>
+		        			<td class="modal-head"></td>
+		        			<td class="modal-head" style="text-align:left;">[월&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;계]</td>
+		        			<td class="modal-head"></td>
+		        			<td class="modal-head"></td>
+		        			<td class="modal-head"></td>
+		        			<td class="modal-head"></td>
+		        			<td class="modal-head"></td>
+		        		</tr>
+		        		<tr>
+		        			<td class="modal-head"></td>
+		        			<td class="modal-head"></td>
+		        			<td class="modal-head" style="text-align:left;">[누&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;계]</td>
+		        			<td class="modal-head"></td>
+		        			<td class="modal-head"></td>
+		        			<td class="modal-head"></td>
+		        			<td class="modal-head"></td>
+		        			<td class="modal-head"></td>
+		        		</tr>
+		        	</table>
+		        </div>
+		        <div class="modal-footer">
+		          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		        </div>
+	        </div>
+		</div>
+	</div>
+	<!-- 원장조회 모달 끝 -->
+	
+	<!-- 계정조회 모달 -->
+	<div class="modal fade" id="accountList" role="dialog" style="top: 300px;">
+    	<div class="modal-dialog modal-lg">
+	      <div class="modal-content">
+	        <div class="modal-header" style="background-color:#1B5748;">
+	        	<h4 class="modal-title" style="color:white;">원장조회</h4>
+	        	<button type="button" class="close" data-dismiss="modal">&times;</button>
+	        </div>
+	        <div class="modal-body">
+		    	<table width="100%" style="margin-bottom:5px">
+		        	<tr>
+		        		<td>계정과목&nbsp;&nbsp;&nbsp;&nbsp;<input style="width:100px;" type="text">&nbsp;&nbsp;
+		        			<img src="${contextPath}/resources/images/bubble.png" style="width:30px; height:26px;" onclick="popAccountList();">
+		        		</td>
 		        		<td align="right"><span>조회기간&nbsp;&nbsp;&nbsp;&nbsp;</span><input type="text" id="datepicker3"> ~ <input type="text" id="datepicker4"></td>
 		        	</tr>
 		        </table>
@@ -496,7 +593,7 @@
 	        </div>
 		</div>
 	</div>
-	<!-- 원장조회 모달 끝 -->
+	<!-- 계정조회 모달 끝 -->
   
 	</main>
 	<script>
