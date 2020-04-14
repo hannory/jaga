@@ -401,7 +401,7 @@
 		<hr>
 
 		<!-- 테이블 2번 -->
-			<table class="table02" border="1">
+			<table class="table02" id="detailListTable" border="1">
 				<tr>
 					<td class="color-green">일자</td>
 					<td class="color-green">적요</td>
@@ -413,9 +413,24 @@
 					<td>111</td>
 					<td>222</td>
 					<td>333</td>
-					<td>444</td>
+					<td><input type="text" class="price"></td>
 					<td>555</td>
 				</tr>
+				<tr>
+					<td>111</td>
+					<td>222</td>
+					<td>333</td>
+					<td><input type="text" class="price"></td>
+					<td>555</td>
+				</tr>
+				<tr>
+					<td>111</td>
+					<td>222</td>
+					<td>333</td>
+					<td><input type="text" class="price"></td>
+					<td>555</td>
+				</tr>
+				
 			</table>
 		<!-- //테이블 2번 -->
 
@@ -586,6 +601,29 @@
 		});
 	 </script>
 	 
+	 
+	 
+	 
+	 
+	 <script>
+	 /* 상세내역 금액 총 합을 지출합계 항목으로 넣어준다 */
+	 $(function(){
+		 $(".price").blur(function(e){
+			 
+			 var value = e.target.value;
+			 
+			 var regExp = /^[0-9]+$/;
+			 
+			 if(!regExp.test(value)){
+				 //문자 ㅇㅇ
+				 e.target.value = "";
+			 }
+			 
+		 });
+		 	 
+	 });
+	 	
+	 </script>
 	 
 	 
 	 
