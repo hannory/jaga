@@ -1,11 +1,16 @@
 package com.kh.jaga.companyInnerId.model.service;
 
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.jaga.companyInnerId.model.dto.CreateCompanyInnerIdDto;
 
 @Service
 public class CompanyInnerIdServiceImpl implements CompanyInnerIdService {
+	
+	@Autowired
+	SqlSessionTemplate sqlSession;
 
 	@Override
 	public int insertComInnerId(CreateCompanyInnerIdDto data) {

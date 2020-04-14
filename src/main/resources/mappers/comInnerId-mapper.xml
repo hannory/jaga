@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="comInnerId">
+  
+  <insert id="insertComInnerId" parameterType="CreateCompanyInnerDto">
+  
+  INSERT INTO COM_INNER_ID(
+  		COM_INNER_ID_NUM
+  	,	COM_CODE
+  	,	POSITION_CODE
+  	,	ID
+  	,	PWD
+  	,	EMAIL
+  	,	NAME
+  	)
+  	VALUES(
+  		#{id}
+  	,	#{pwd}
+  	,	#{email}
+  	,	#{name}
+  	,	#{position}
+  	,	#{sign}
+  	)
+  
+  </insert>
+  
+  </mapper>
+
+
+  
+  
+  

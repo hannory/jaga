@@ -6,16 +6,18 @@
   <configuration>
   
   <typeAliases>
-  	<typeAlias type="com.kh.jaga.company.model.vo.Company" alias="Company"/>
-  	<typeAlias type="com.kh.jaga.vender.model.vo.Vender" alias="Vender"/>
-  <typeAlias type="com.kh.jaga.slip.model.vo.Receiption" alias="Receiption"/>
+     <typeAlias type="com.kh.jaga.company.model.vo.Company" alias="Company"/>
+  	 <typeAlias type="com.kh.jaga.vender.model.vo.Vender" alias="Vender"/>
+ 	 <typeAlias type="com.kh.jaga.slip.model.vo.Receiption" alias="Receiption"/>
      <typeAlias type="com.kh.jaga.slip.model.vo.Vender" alias="VenderR"/>
+     <typeAlias type="com.kh.jaga.companyInnerId.model.dto.CreateCompanyInnerDto" alias="CreateCompanyInnerDto"/>
   </typeAliases>
   
   
   <mappers>
   	<mapper resource="mappers/vender-mapper.xml"/>
   	<mapper resource="mappers/receiption-mapper.xml"/>
+  	<mapper resource="mappers/company-mapper.xml"/>
   </mappers>
   
   </configuration>

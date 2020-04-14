@@ -27,6 +27,6 @@ public class CompanyInnerIdController {
 		
 		
 		
-		return "redirect:temp.jsp";
+		return "redirect:index.jsp";
 	}
 }
