@@ -37,7 +37,7 @@
 	display: flex;
 	justify-content: space-between;
 }
-/* table-justify1과 같은 레벨인데 번호가 2자리인 경우 */
+/* table-justify1과 같은 레벨인데 번호가 2자리인 경우  */
 .table-justify4 {
 	width: 200px;
 	display: flex;

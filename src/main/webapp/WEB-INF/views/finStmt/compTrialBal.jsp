@@ -400,7 +400,7 @@
 		</table>
 		<div style="height: 10vh;"></div>
 		<div class="card mb-4">
-			<div class="card-body">When scrolling, the navigation stays at
+			<div class="card-body">When scrolling, the navigation stays at 
 				the top of the page. This is the end of the static navigation demo.</div>
 		</div>
 	</div>
@@ -427,7 +427,7 @@
 		    	<table width="100%" style="margin-bottom:5px">
 		        	<tr>
 		        		<td>계정과목&nbsp;&nbsp;&nbsp;&nbsp;<input style="width:100px;" type="text">&nbsp;&nbsp;
-		        			<img src="${contextPath}/resources/images/bubble.png" style="width:30px; height:26px;" onclick="popAccountList();">
+		        			<img src="${contextPath}/resources/images/bubble.PNG" style="width:30px; height:26px;" onclick="popAccountList();">
 		        		</td>
 		        		<td align="right"><span>조회기간&nbsp;&nbsp;&nbsp;&nbsp;</span><input type="text" id="datepicker3"> ~ <input type="text" id="datepicker4"></td>
 		        	</tr>
