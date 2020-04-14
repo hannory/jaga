@@ -1,5 +1,5 @@
 package com.kh.jaga.bugagachi.model.vo;
-
+ 
 public class CcSalesSilpGap {//신용카드 등 수령명세서
 
 	private String rcptstmtCode; //수령명세서 코드
