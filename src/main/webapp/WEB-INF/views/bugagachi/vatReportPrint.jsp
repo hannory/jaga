@@ -35,7 +35,27 @@
    		.mainSubDiv{
 	   		width: 100%; 
 	   		text-align: center;
-	   		
+	   		margin-bottom: 10px;
+   		}
+   		#closure{
+	   		width: 100%; 
+	   		text-align: center;
+	   		margin-bottom: 10px;	
+   		}
+   		#account_bank{
+   			width: 100%; 
+	   		text-align: center;
+	   		margin-bottom: 10px;
+   		}
+   		#taxStad{
+   			width: 100%; 
+	   		text-align: center;
+	   		margin-bottom: 10px;
+   		}
+   		#semu{
+   			width: 100%; 
+	   		text-align: center;
+	   		margin-bottom: 10px;
    		}
    		.mainSubDiv td{
    			border-bottom:1px solid #D2D2D6;
@@ -57,6 +77,10 @@
    			margin-bottom: 10px;
    			text-align: center;
    		}
+   		.category_num{
+   			 font-weight:1000; 
+   			 font-size: 17px;
+   		}
    		
     </style>
 </head>
@@ -69,11 +93,23 @@
 		$(".mainSubDiv tr td").css("border","1px solid black");
 		$(".mainSubDiv tr td").css("border-left","");
 		$(".mainSubDiv tr td:last-child").css("border-right","");
+		$("#closure tr td").css("border","1px solid black");
+		$("#closure tr td").css("border-left","");
+		$("#closure tr td:last-child").css("border-right","");
+		$("#account_bank tr td").css("border","1px solid black");
+		$("#account_bank tr td").css("border-left","");
+		$("#account_bank tr td:last-child").css("border-right","");
+		$("#taxStad tr td").css("border","1px solid black");
+		$("#taxStad tr td").css("border-left","");
+		$("#taxStad tr td:last-child").css("border-right","");
+		$("#semu tr td").css("border","1px solid black");
+		$("#semu tr td").css("border-left","");
+		$("#semu tr td:last-child").css("border-right","");
 		});
 </script>
 <div style="width: 90%; margin-right:auto; margin-left:auto;"><!-- 전체 div start -->
 		
-			<div id="vat_mainDiv"><!-- vat_main div start -->
+			<div id="vat_mainDiv"><!-- vat_main첫번째 페이지 div start -->
 			<p style="float:left">■ 부가가치세법 시행규칙 [별지 제21호서식] < 개정 2018. 3. 19. > </p>
 			<p style="float:right">홈텍스(www.hometax.go.kr)에서도 신청할 수 있습니다.</p>
 			<table id="vat_title"><!-- 신고서 명 영역 시작 -->
@@ -105,7 +141,7 @@
 			</table><!-- 신고자 상세 정보 끝 -->
 				<table class="mainSubDiv">
 					<tr class="Tex_bill_th">
-						<td colspan="8" style="font-weight:1000; font-size: 17px;">① 신   고   내   용</td>
+						<td colspan="8" class="category_num">① 신   고   내   용</td>
 					</tr>
 					<tr class="Tex_bill_th">
 						<td colspan="5" style="width:40%">구분</td>
@@ -318,35 +354,141 @@
 						<td class="green numberArea"></td>
 					</tr>
 					<tr>
-						<td colspan="6" class="green_value textArea">총괄납부사업자가 납부할 세액(환급받을 세액)</td>
+						<td colspan="6" class="green_value">총괄납부사업자가 납부할 세액(환급받을 세액)</td>
 						<td class="green_value"></td>
 						<td class="numberArea"></td>
 					</tr>
 				</table>
-
-			</div><!-- vat_main div end -->
+				<table id="account_bank"><!-- 은행 입력 테이블 시작 -->
+					<tr><td class="category_num" style="width: 29%">②국세환급금 계좌신고<p style="font-size:13px;">(환급세액이 2천만원 미만인 경우)</p></td>
+						<td style="width: 13%;">거래은행</td>
+						<td style="width: 25%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;은행&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;지점</td>
+						<td>계좌번호</td>
+						<td style="width: 20%"></td>
+					</tr>	
+				</table><!-- 은행 입력 테이블 끝 -->
+				<table id="closure"><!-- 폐업신고 테이블 시작 -->
+					<tr><td class="category_num">③폐  업   신  고</td>
+						<td>폐업일</td>
+						<td style="width:30%"></td>
+						<td>폐업사유</td>
+						<td style="width:30%"></td>
+					</tr>
+				</table><!-- 폐업신고 테이블 끝 -->
+				<table id="taxStad"><!-- 과세표준명세 테이블 시작-->
+					<tr><td colspan="10" class="category_num">④과 세 표 준 명 세</td>
+						<td rowspan="3" style="width:50%;">「부가가치세법」 제 48조 ,제49조 또는 제 59조의 「국세 기본법」 제45조의 3에 따라 위의
+							내용을 신고하며, <b>위 내용을 충분히검토하였고 신고인이 알고 있느 사실 그대로를 정확하게 적었음을 확인합니다.</b>
+							<div><p style="float:right; color:red;">2020년 00월 00일</p></div>
+							<br><br>
+							<div><p style="float:right;">신고인:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(서명 또는 인)</p></div>
+						</td>
+					</tr>
+					<tr>
+						<td style="width: 10%;">업 태</td>
+						<td>종목</td>
+						<td>생산요소</td>
+						<td colspan="6">업종코드</td>
+						<td>금액</td>
+								
+					</tr>
+					<tr>
+						<td><p style="float: left;">(28)</p></td>
+						<td></td>
+						<td></td>
+						<td></td><!-- 업종코드 -->
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td><!-- 업종코드 끝 -->
+						<td></td><!-- 금액 -->
+						
+					</tr>
+					<tr>
+						<td><p style="float: left;">(29)</p></td>
+						<td></td>
+						<td></td>
+						<td></td><!-- 업종코드 -->
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td><!-- 업종코드 끝 -->
+						<td></td><!-- 금액 -->
+						<td rowspan="2"><b>세무대리인은 조세전문자격자로서 위 신고서를 성실하고 공정하게 작성하였음을 확인합니다.</b><br>
+						<p style="float:right;">세무대리인:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(서명 또는 인)</p></td>
+						
+					</tr>
+					<tr>
+						<td><p style="float: left;">(30)</p></td>
+						<td></td>
+						<td></td>
+						<td></td><!-- 업종코드 -->
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td><!-- 업종코드 끝 -->
+						<td></td><!-- 금액 -->
+						
+					</tr>
+					<tr>
+						<td><p style="float: left;">(31)</p></td>
+						<td></td>
+						<td></td>
+						<td></td><!-- 업종코드 -->
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td><!-- 업종코드 끝 -->
+						<td></td><!-- 금액 -->
+						<td><p style="float:left;"><b>종로세무서장</b> 귀하 </td>
+					</tr>
+					<tr>
+						<td><p style="float: left;">(32) 합계</p></td>
+						<td></td>
+						<td></td>
+						<td colspan="6"></td><!-- 업종코드 -->
+						<td></td><!-- 금액 -->
+						<td><p style="float:left;">첨부서류 | 뒤쪽참조 </td>
+					</tr>
+				</table><!--  과세표준명세 테이블 끝 -->
+				<table id="semu"><!-- 세무대리인 정보테이블 시작 -->
+					<tr>
+						<td>세무대리인</td>
+						<td>성명</td>
+						<td style="width: 10%;"></td>
+						<td>사업자등록번호</td>
+						<td style="width: 20%;"></td>
+						<td>전화번호</td>
+						<td style="width: 30%;"></td>
+					</tr>
+				</table>
+				
+			</div><!-- vat_main첫번째 페이지 div end -->
 			
 			
 		<div style="float: left;"><!-- 오른쪽 서브 영역 !!!!!!!!!!!!!!!!!!!!!!!!!!1-->
-			<div class="subTable" id="vat_subDiv1"><!--7,12,14 vat_sub1 start-->
+			<div class="subTable" id="vat_subDiv1"><!--7,12 vat_sub1 start-->
 				<table class="mainSubDiv">
 					<tr class="Tex_bill_th">
-						<td colspan="5"style="width:40%">구분</td>
+						<td rowspan="9" style="width: 10%">예정신고 누락분 명세</td>
+						<td rowspan="6" style="width: 10%">(7)매출</td>
+						<td colspan="4"style="width:40%">구분</td>
 						<td>금액</td>
 						<td style="width:10%">세율</td>
 						<td>세액</td>
 					</tr>
-					<tr class="green textArea">
-						<td colspan="8">7.매출(예정신고누락분)</td>
-					</tr>
+					
 					<tr>
-						<td rowspan="5" style="width:4%;" class="yellow">예정누락분</td>
 						<td rowspan="2" style="width:10%;"class="green_value">과세</td>
-						<td colspan="2" class="green_value textArea">세금계산서발급분</td>
-						<td class="pink">33</td>
-						<td class="numberArea"></td>
+						<td colspan="2" class="green_value textArea" style="width: 15%;">세금계산서</td>
+						<td class="pink" style="width: 5%;">33</td>
+						<td class="numberArea" style="width: 20%;"></td>
 						<td class="green_value">10/100</td>
-						<td class="numberArea"></td>
+						<td class="numberArea" style="width: 20%;"></td>
 					</tr>
 					<tr>
 						<td colspan="2" class="green_value textArea">기타</td>
@@ -356,8 +498,8 @@
 						<td class="numberArea"></td>
 					</tr>
 					<tr>
-						<td rowspan="2" style="width:10%;" class="green_value">영세</td>
-						<td colspan="2" class="green_value textArea">세금계산서발급분</td>
+						<td rowspan="2" style="width:10%;" class="green_value">영세율</td>
+						<td colspan="2" class="green_value textArea">세금계산서</td>
 						<td class="pink">35</td>
 						<td class="numberArea"></td>
 						<td class="green_value">0/100</td>
@@ -378,11 +520,8 @@
 						<td class="numberArea green"></td>
 					</tr>
 					<tr>
-						<td colspan="8" class="green textArea">12.매입(예정신고누락분)</td>
-					</tr>
-					<tr>
-						<td rowspan="12" style="width:4%;" class="yellow">예정누락분</td>
-						<td colspan="3" class="green_value textArea">세금계산서발급분</td>
+						<td rowspan="3" class="green">(12)매입</td>
+						<td colspan="3" class="green_value textArea">세금계산서</td>
 						<td class="blue">38</td>
 						<td class="numberArea"></td>
 						<td class="green_value"></td>
@@ -402,73 +541,17 @@
 						<td class="green"></td>
 						<td class="numberArea green"></td>
 					</tr>
+					</table><!-- 7,12 vat_sub1 end -->
+					<table class="mainSubDiv"><!-- 14vat_sub st -->
+					
 					<tr>
-						<td  colspan="2" rowspan="2"  class="green_value">신용카드매출<br>수령금액합계</td>
-						<td class="green_value textArea">일반매입</td>
-						<td class="green_value"></td>
-						<td class="numberArea"></td>
-						<td class="green_value"></td>
-						<td class="numberArea"></td>
+						<td rowspan="11">(14)그밖의 공제 매입세액 명세</td>
+						<td colspan="3">구분</td>
+						<td>금액</td>
+						<td>세율</td>
+						<td>세액</td>
 					</tr>
-					<tr>
-						<td class="green_value textArea">고정매입</td>
-						<td class="green_value"></td>
-						<td class="numberArea"></td>
-						<td class="green_value"></td>
-						<td class="numberArea"></td>
-					</tr>
-					<tr>
-						<td colspan="3" class="green_value textArea">의제매입세액</td>
-						<td class="green_value"></td>
-						<td class="numberArea"></td>
-						<td class="green"></td>
-						<td class="numberArea"></td>
-					</tr>
-					<tr>
-						<td colspan="3" class="green_value textArea">재활용폐자원등매입세액</td>
-						<td class="green_value"></td>
-						<td class="numberArea"></td>
-						<td class="green"></td>
-						<td class="numberArea"></td>
-					</tr>
-					<tr>
-						<td colspan="3" class="green_value textArea">과세사업전환매입세액</td>
-						<td class="green_value"></td>
-						<td class="numberArea green"></td>
-						<td class="green"></td>
-						<td class="numberArea"></td>
-					</tr>
-					<tr>
-						<td colspan="3" class="green_value textArea">재고매입세액</td>
-						<td class="green_value"></td>
-						<td class="numberArea green"></td>
-						<td class="green"></td>
-						<td class="numberArea"></td>
-					</tr>
-					<tr>
-						<td colspan="3" class="green_value textArea">변제대손세액</td>
-						<td class="green_value"></td>
-						<td class="numberArea green"></td>
-						<td class="green"></td>
-						<td class="numberArea"></td>
-					</tr>
-					<tr>
-						<td colspan="3" class="green_value textArea">외국인관광객에대한 환급세액</td>
-						<td class="green_value"></td>
-						<td class="numberArea green"></td>
-						<td class="green"></td>
-						<td class="numberArea"></td>
-					</tr>
-					<tr>
-						<td colspan="3" class="green_value">합계</td>
-						<td class="green_value"></td>
-						<td class="numberArea green"></td>
-						<td class="green"></td>
-						<td class="numberArea green"></td>
-					</tr>
-					<tr>
-						<td colspan="8" class="green textArea">14.그 밖의 공제매입세액</td>
-					</tr>
+					
 					<tr>
 						<td rowspan="2" colspan="3" class="green_value textArea">신용카드매출수령금액합계표</td>
 						<td class="green_value textArea">일반매입</td>
@@ -782,7 +865,9 @@
 						<td class="green"></td>
 						<td></td>
 					</tr>
-					</table>
+					</table><!--  -->
+					
+					
 			
 			</div><!--25 vat_sub3 end  -->
 	</div><!-- 오른쪽 서브영역 -->

@@ -110,6 +110,7 @@
 		value="${ pageContext.servletContext.contextPath }"
 		scope="application" />
 	<main>
+	<form action="ccSalesSilpGap.bu" method="post">
 	<div class="container-fluid">
 			<h2 class="mt-4">신용카드매출전표등 수령명세서(갑)(을)</h2>
 	<ol class="breadcrumb mb-4">
@@ -320,6 +321,7 @@
 
 		});
 	 </script>
+	 </form>
 	</main>
 	<jsp:include page="../common/menubar2.jsp" />
 </body>
