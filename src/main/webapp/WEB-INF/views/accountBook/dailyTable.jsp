@@ -37,7 +37,7 @@
 	display: flex;
 	justify-content: space-between;
 }
-/* table-justify1과 같은 레벨인데 번호가 2자리인 경우 */
+/* table-justify1과 같은 레벨인데 번호가 2자리인 경우  */
 .table-justify4 {
 	width: 200px;
 	display: flex;
@@ -70,6 +70,15 @@
 	border: 1px solid #a6a6a6;
 	background: #e7e6e6;
 	text-align: center;
+}
+.normal-btn {
+	display: inline-block;
+	width: 85px;
+	margin-left: 7px;
+	padding: 3px;
+	background-color: #1B5748;
+	text-align: center;
+	color: white;
 }
 </style>
 <title>자가 경리</title>
@@ -416,14 +425,34 @@
 		        			buttonImageOnly : true,
 		        			buttonImage : "${contextPath}/resources/images/calendar.png",
 		        			dateFormat : 'yy-mm-dd'
-
 		        		});
+		        		
 		        		$(function() {
 		        			$("#datepicker3").datepicker({});
 		        			$("#datepicker4").datepicker({});
 		        			/* 달력버튼 */
 		        			$("img.ui-datepicker-trigger")
 		        					.attr("style","margin-left:2px; vertical-align:middle; cursor: Pointer; width:20px; height:20px");
+
+		        			$("#modify-table").hide();
+		        		});
+		        		
+		        		function showModify() {
+		        			$("#modify-table").show();
+		        		};
+		        		
+		        		$(document).on("dblclick", '.modal_detail', function() {
+		        			var clicks = $(this).data('clicks');
+		        			
+		        			console.log("clicks : " + clicks);
+		        			
+		        			if(clicks) {
+		        				$("#modify-table").hide();
+		        			} else {
+		        				$("#modify-table").show();
+		        			}
+		        			
+		        			$(this).data('clicks', !clicks);
 		        		});
 		        </script>
 		        <div>
@@ -438,7 +467,7 @@
 		        			<td class="modal-head">대변</td>
 		        			<td class="modal-head">잔액</td>
 		        		</tr>
-		        		<tr class="modal_detail" style="height: 25px;">
+		        		<tr class="modal_detail" style="height: 25px;" data-clicks="false">
 		        			<td style="text-align:center;">03-31</td>
 		        			<td style="text-align:center;">00005</td>
 		        			<td></td>
@@ -480,43 +509,45 @@
 <!-- 		        		</tr> -->
 		        	</table>
 		        </div>
-		        <table style="width:100%; margin-top:16px; margin-bottom:5px;">
-		        	<tr>
-		        		<td>매입매출전표 2020-02-22 (50001)</td>
-		        		<td align="right">수정취소</td>
-		        	</tr>
-		        </table>
-		        <div>
-		        	<table style="width:100%; margin-top:5px; text-align:center;">
-		        		<tr>
-		        			<td class="modal-head" style="width:60px"></td>
-		        			<td class="modal-head">월</td>
-		        			<td class="modal-head">일</td>
-		        			<td class="modal-head">번호</td>
-		        			<td class="modal-head">구분</td>
-		        			<td class="modal-head" colspan="2">계정과목</td>
-		        			<td class="modal-head" colspan="2">거래처</td>
-		        			<td class="modal-head">차변</td>
-		        			<td class="modal-head">대변</td>
-		        			<td class="modal-head" colspan="2">좌표</td>
-		        		</tr>
-		        		<tr>
-		        			<td>1</td>
-		        			<td>3</td>
-		        			<td>9</td>
-		        			<td>00002</td>
-		        			<td>출금</td>
-		        			<td>0253</td>
-		        			<td>미지급금</td>
-		        			<td>01023</td>
-		        			<td>(주)컴피아</td>
-		        			<td>5,000,000</td>
-		        			<td>(현금)</td>
-		        			<td>1</td>
-		        			<td>차량할부미지급금 반제</td>
-		        		</tr>
-		        	</table>
-		        </div>	
+		        <div id="modify-table">
+			        <table style="width:100%; margin-top:16px; margin-bottom:5px;btn">
+			        	<tr>
+			        		<td>매입매출전표 2020-02-22 (50001)</td>
+			        		<td align="right"><div class="normal-btn">수정취소</div><div class="normal-btn">삭제</div><div class="normal-btn">저장</div></td>
+			        	</tr>
+			        </table>
+			        <div>
+			        	<table style="width:100%; margin-top:5px; text-align:center;">
+			        		<tr>
+			        			<td class="modal-head" style="width:60px"></td>
+			        			<td class="modal-head">월</td>
+			        			<td class="modal-head">일</td>
+			        			<td class="modal-head">번호</td>
+			        			<td class="modal-head">구분</td>
+			        			<td class="modal-head" colspan="2">계정과목</td>
+			        			<td class="modal-head" colspan="2">거래처</td>
+			        			<td class="modal-head">차변</td>
+			        			<td class="modal-head">대변</td>
+			        			<td class="modal-head" colspan="2">좌표</td>
+			        		</tr>
+			        		<tr>
+			        			<td>1</td>
+			        			<td>3</td>
+			        			<td>9</td>
+			        			<td>00002</td>
+			        			<td>출금</td>
+			        			<td>0253</td>
+			        			<td>미지급금</td>
+			        			<td>01023</td>
+			        			<td>(주)컴피아</td>
+			        			<td>5,000,000</td>
+			        			<td>(현금)</td>
+			        			<td>1</td>
+			        			<td>차량할부미지급금 반제</td>
+			        		</tr>
+			        	</table>
+			        </div>	
+		        </div>
 		        <div class="modal-footer">
 		          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 		        </div>
