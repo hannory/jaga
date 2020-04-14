@@ -8,6 +8,7 @@
 <title>자가경리</title>
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
 <style>
 	#normalReTable {
 		width:100%;
@@ -46,11 +47,18 @@
 		width: 100%;
 	}
 	
+	main td {
+		height: 50px;
+	}
+	
 	.modal-header{
 		background: #24574A;
 		color: white;
 	}
+	
+	
 </style>
+
 </head>
 <body>
 	<jsp:include page="../common/menubar.jsp" />
@@ -71,62 +79,40 @@
 		</ol>
 		<div class="card mb-4">
 			<div class="card-body">
-				<table id="normalReTable" border="1">
-				<colgroup>
-					<col width="3%"/>
-					<col width="4%"/>
-					<col width="4%"/>
-					<col width="7%"/>
-					<col width="7%"/>
-					<col width="5%"/>
-					<col/>
-					<col width="5%"/>
-					<col/>
-					<col width="5%"/>
-				</colgroup>
-					<tr>
-						<th><input type="checkbox"></th>
-						<th>월</th>
-						<th>일</th>
-						<th>번호</th>
-						<th>구분</th>
-						<th colspan="2">계정과목</th>
-						<th colspan="2">거래처</th>
-						<th colspan="2">적요</th>
-						<th>차변</th>
-						<th>대변</th>
-					</tr>
-					<tr>
-						<td align="center"><input type="checkbox"></td>
-						<td><input type="text" style="width:100%;"></td>
-						<td><input type="text" style="width:100%;"></td>
-						<td><input type="text" style="width:100%;"></td>
-						<td><input type="text" style="width:100%;"></td>
-						<td><input type="text" style="width:100%;"></td>
-						<td><input type="text" style="width:100%;"></td>
-						<td><input type="text" style="width:100%;"></td>
-						<td><input type="text" style="width:100%;"></td>
-						<td><input type="text" style="width:100%;"></td>
-						<td><input type="text" style="width:100%;"></td>
-						<td><input type="text" style="width:100%;"></td>
-						<td><input type="text" style="width:100%;"></td>
-					</tr>
-					<tr>
-						<td align="center"><input type="checkbox"></td>
-						<td><input type="text" style="width:100%;"></td>
-						<td><input type="text" style="width:100%;"></td>
-						<td><input type="text" style="width:100%;"></td>
-						<td><input type="text" style="width:100%;"></td>
-						<td><input type="text" style="width:100%;"></td>
-						<td><input type="text" style="width:100%;"></td>
-						<td><input type="text" style="width:100%;"></td>
-						<td><input type="text" style="width:100%;"></td>
-						<td><input type="text" style="width:100%;"></td>
-						<td><input type="text" style="width:100%;"></td>
-						<td><input type="text" style="width:100%;"></td>
-						<td><input type="text" style="width:100%;"></td>
-					</tr>
-				</table>
+				<button id="addRow">클릭</button>
+			<form action="normalValue.nr" method="post">
+					<table id="normalReTable" border="1">
+					<colgroup>
+						<col width="3%"/>
+						<col width="4%"/>
+						<col width="4%"/>
+						<col width="7%"/>
+						<col width="7%"/>
+						<col width="5%"/>
+						<col/>
+						<col width="5%"/>
+						<col/>
+						<col width="5%"/>
+					</colgroup>
+					<thead>
+						<tr>
+							<th><input type="checkbox"></th>
+							<th>월</th>
+							<th>일</th>
+							<th>번호</th>
+							<th>구분</th>
+							<th>코드</th>
+							<th>계정과목</th>
+							<th>코드</th>
+							<th>거래처</th>
+							<th>번호</th>
+							<th>적요</th>
+							<th>차변</th>
+							<th>대변</th>
+						</tr>
+					</thead>
+					</table>
+				</form>
 			</div>
 		</div>	
 		<div class="card mb-4">
@@ -218,9 +204,67 @@
 			/* 달력버튼 */
 			$("img.ui-datepicker-trigger")
 					.attr("style","margin-left:2px; vertical-align:middle; cursor: Pointer; width:20px; height:20px");
-
-			$("#normalReTable input").focus(function(){
+			
+			$("#normalReTable").DataTable({
+				// 표시 건수기능 숨기기
+				lengthChange: false,
+				// 검색 기능 숨기기
+				searching: false,
+				// 정렬 기능 숨기기
+				ordering: false,
+				// 정보 표시 숨기기
+				info: false,
+				// 페이징 기능 숨기기
+				paging: false
 				
+			});
+			
+			
+			
+			var t = $('#normalReTable').DataTable();
+		    var counter = 1;
+		 	var $checkbox = "<input type='checkbox'>";
+		 	var $inputText = "<input type='text' value='";
+		 	var $inputText2 = "' style='width:100%;'>"
+		    $('#addRow').on( 'click', function () {
+		        t.row.add( [
+		            $checkbox,
+		            $inputText + counter + $inputText2,
+		            $inputText + counter + $inputText2,
+		            $inputText + counter + $inputText2,
+		            $inputText + counter + $inputText2,
+		            $inputText + counter + $inputText2,
+		            $inputText + counter + $inputText2,
+		            $inputText + counter + $inputText2,
+		            $inputText + counter + $inputText2,
+		            $inputText + counter + $inputText2,
+		            $inputText + counter + $inputText2,
+		            $inputText + counter + $inputText2,
+		            $inputText + counter + $inputText2
+		        ] ).draw( false );
+		 
+		        counter++;
+			
+		        
+		        $("input").focus(function(){
+					console.log("dddddddddddd");
+					$("#normalReTable input").css("background", "white");
+					$("#normalReTable td").css("background", "white");
+					$("#normalReTable tr").css("background", "white"); 
+					
+					$(this).parent().parent().children().css("background", "#DDEBF7");
+					$(this).parent().parent().children().children().css("background", "#DDEBF7");
+					$(this).parent().children().css("background", "#DDEBF7");
+					$(this).parent().css("background", "#b3cfe4");
+					$(this).parent().children().css("background", "#b3cfe4");
+					
+					
+				});
+		    } );
+			
+			
+			$("input").focus(function(){
+				console.log("dddddddddddd");
 				$("#normalReTable input").css("background", "white");
 				$("#normalReTable td").css("background", "white");
 				$("#normalReTable tr").css("background", "white"); 
@@ -298,6 +342,9 @@
 		
 		
 	 </script>
+	 <script>
+
+</script>
 	<jsp:include page="../common/menubar2.jsp" />
 </body>
 </html>
