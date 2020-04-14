@@ -91,7 +91,7 @@
 			
 		</script>
 		
-		<form action="zzzzzzzzzzzzz" method="post">
+		<form action="createComInnerId.companyInnerId" method="post">
 		<div class="div-box-area">
 		<div class="div-input-area">
 		<table cellpadding="20px">
@@ -102,7 +102,7 @@
 						<label>아이디</label>
 					</div>
 				</td>
-				<td><input type="text" name="companyInnerId"></td>
+				<td><input type="text" name="id"></td>
 				
 				<td>
 					<div class="div-subjectName">
@@ -118,14 +118,14 @@
 						<label>비밀번호</label>
 					</div>
 				</td>
-				<td><input type="password" name="companyInnerPwd"></td>
+				<td><input type="password" name="pwd"></td>
 				
 					<td>
 					<div class="div-subjectName">
 						<label>이름</label>
 					</div>
 				</td>
-				<td><input type="text" name="personName"></td>
+				<td><input type="text" name="name"></td>
 			</tr>
 			
 			<tr>
@@ -134,7 +134,7 @@
 						<label>비밀번호 확인</label>
 					</div>
 				</td>
-				<td><input type="password" name="companyInnerPwd2"></td>
+				<td><input type="password" name="pwd2"></td>
 				
 				<td>
 					<div class="div-subjectName">
