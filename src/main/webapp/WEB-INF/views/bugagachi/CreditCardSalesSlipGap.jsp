@@ -115,43 +115,23 @@
 			<h2 class="mt-4">신용카드매출전표등 수령명세서(갑)(을)</h2>
 	<ol class="breadcrumb mb-4">
 			<li><button id="deadlineBtn">마감</button></li>
-			<li>1기예정</li>
+			<li>1기확정</li>
             <li>조회기간:
             	<input type="text" name="search_ye1" class="cc_year">
             	<select class="cc_month" name="search_mon1">
             		<option value="">월</option>
             		<option value="1">1</option>
-            		<option value="1">2</option>
-            		<option value="1">3</option>
-            		<option value="1">4</option>
-            		<option value="1">5</option>
-            		<option value="1">6</option>
-            		<option value="1">7</option>
-            		<option value="1">8</option>
-            		<option value="1">9</option>
-            		<option value="1">10</option>
-            		<option value="1">11</option>
-            		<option value="1">12</option>
+            		<option value="7">7</option>
             	</select> 
             	~ 
             	<input type="text" name="search_ye2" class="cc_year">
-            	<select class="cc_month" name="search_mon1">
+            	<select class="cc_month" name="search_mon2">
             		<option value="">월</option>
-            		<option value="1">1</option>
-            		<option value="1">2</option>
-            		<option value="1">3</option>
-            		<option value="1">4</option>
-            		<option value="1">5</option>
-            		<option value="1">6</option>
-            		<option value="1">7</option>
-            		<option value="1">8</option>
-            		<option value="1">9</option>
-            		<option value="1">10</option>
-            		<option value="1">11</option>
-            		<option value="1">12</option>
+            		<option value="6">6</option>
+            		<option value="12">12</option>
             	</select> 
             </li>
-            <li><input type="button" name="search" value="조회"></li>
+            <li><input type="submit" name="search" value="조회"></li>
             <li><input type="button" name="report" value="신고서미리보기"></li>
 			
 		</ol>
