@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="Vender">
+  
+  <resultMap type="Vender" id="venderResultSet">
+  <id property ="venderCode" column="VENDER_CODE"/>
+  
+  <result property="comCode" column="COM_CODE"/>
+  <result property="bizRegNum" column="BIZ_REG_NUM"/>
+  <result property="venderName" column="VENDER_NAME"/>
+  <result property="bossName" column="BOSS_NAME"/>
+  <result property="sellWay" column="SELL_WAY"/>
+  <result property="sellTarget" column="SELL_TARGET"/>
+  <result property="venderAddress" column="VENDER_ADDRESS"/>
+  <result property="venderTel" column="VENDER_TEL"/>
+  <result property="departmentIncharge" column="DEPARTMENT_INCHARGE"/>
+  <result property="comManagerTel" column="COM_MANAGER_TEL"/>
+  <result property="remarks" column="REMARKS"/>
+  <result property="status" column="STATUS"/>
+  <result property="venderFax" column="VENDER_FAX"/>
+  <result property="accountHolder" column="ACCOUNT_HOLDER"/>
+  <result property="accountNum" column="ACCOUNT_NUM"/>
+  <result property="personalNum" column="PERSONAL_NUM"/>
+  <result property="comManagerEmail" column="COM_MANAGER_EMAIL"/>
+  <result property="bankCode" column="BANK_CODE"/>
+  <result property="farmers_status" column="FARMERS_STATUS"/>
+  </resultMap>
+
+  <select id="selectLoginCompany" resultMap="companyResultSet" parameterType="Company">
+  		SELECT *
+  		FROM COMPANY
+  		WHERE COM_ID = #{companyId}
+  		AND PWD = #{companyPwd}
+
+  </select>
+  
+  	<select id="selectPwd" resultType="java.lang.String" parameterType="java.lang.String">
+		SELECT PWD
+		FROM COMPANY
+		WHERE COM_ID = #{companyId}
+
+	</select>
+	
+	<select id="selectLoginUser" resultMap="companyResultSet" parameterType="Company">
+		SELECT *
+		FROM COMPANY
+		WHERE COM_ID =#{companyId}
+
+	</select>
+	
+	<insert id="insertCompany" parameterType="Company">
+		INSERT INTO COMPANY(COM_CODE,PWD,COM_ID,EMAIL,PHONE,BIZ_NAME,BIZ_NUM,BOSS_NAME,PERSONAL_NUM,TYPE_OF_BIZ,BIZ_LOCATION)
+		VALUES (COMPANY_SEQ.NEXTVAL,#{companyPwd},#{companyId},#{email},#{phone},#{bizName},#{bizNum},#{bossName},#{personalNum},#{bizType},#{bizLocation})
+	</insert>
+	
+  
+  
+  
+  </mapper>

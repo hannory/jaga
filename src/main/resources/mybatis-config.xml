@@ -7,9 +7,15 @@
   
   <typeAliases>
   	<typeAlias type="com.kh.jaga.company.model.vo.Company" alias="Company"/>
+  	<typeAlias type="com.kh.jaga.company.model.vo.Vender" alias="Vender"/>
+  <typeAlias type="com.kh.jaga.slip.model.vo.Receiption" alias="Receiption"/>
+     <typeAlias type="com.kh.jaga.slip.model.vo.VenderR" alias="VenderR"/>
   </typeAliases>
+  
+  
   <mappers>
-  	<mapper resource="mappers/company-mapper.xml"/>
+  	<mapper resource="mappers/vender-mapper.xml"/>
+  	<mapper resource="mappers/receiption-mapper.xml"/>
   </mappers>
   
   </configuration>
