@@ -26,6 +26,11 @@
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   
+  
+      <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+  
+  
 <style>
 	#printWinBtn {
 		background: none;
@@ -203,7 +208,7 @@
                             
                             <div class="collapse" id="collapseC" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="showViewCeateCompanyId.vi">종합소득세신고서</a>
+                                <a class="nav-link" href="showViewAggregate.vi">종합소득세신고서</a>
                                 </nav>
                             </div>
                    

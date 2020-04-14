@@ -126,4 +126,14 @@ public class ViewController {
     public String updateSalseSTMT() {
        return "bugagachi/updateSalseSTMT";
     }
+    
+    @GetMapping("/showViewAggregate.vi")
+    public String showViewAggregate() {
+       return "aggregateIncomeTax/aggregateIncomeTax";
+    }
+    
+    @GetMapping("/vatReportPrint.vi")
+    public String vatReportPrint() {
+       return "bugagachi/vatReportPrint";
+    }
 }

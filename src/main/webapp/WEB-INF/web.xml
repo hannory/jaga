@@ -86,7 +86,7 @@
 		<url-pattern>*.ab</url-pattern>
 	</servlet-mapping>
 	
-
+	<!-- 새우 -->
 	<servlet>
 		<servlet-name>normalReceiption</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -99,6 +99,63 @@
 		<servlet-name>normalReceiption</servlet-name>
 		<url-pattern>*.nr</url-pattern>
 	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>receiption</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/config/receiption-servlet.xml</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>receiption</servlet-name>
+		<url-pattern>*.rp</url-pattern>
+	</servlet-mapping>
+	
+	<!-- 1Dragon -->
+	<servlet>
+      <servlet-name>companyInnerId</servlet-name>
+      <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+      <init-param>
+         <param-name>contextConfigLocation</param-name>
+         <param-value>/WEB-INF/config/companyInnerId-servlet.xml</param-value>
+      </init-param>
+   </servlet>
+   <servlet-mapping>
+      <servlet-name>companyInnerId</servlet-name>
+      <url-pattern>*.companyInnerId</url-pattern>
+   </servlet-mapping>
+   
+   <!-- 브랜치 -->
+   <servlet>
+      <servlet-name>bugagachi</servlet-name>
+      <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+      <init-param>
+         <param-name>contextConfigLocation</param-name>
+         <param-value>/WEB-INF/config/bugagachi-servlet.xml</param-value>
+      </init-param>
+   </servlet>
+   <servlet-mapping>
+      <servlet-name>bugagachi</servlet-name>
+      <url-pattern>*.bu</url-pattern>
+   </servlet-mapping>
+   
+   
+   <!-- 백곰 -->
+    <servlet>
+      <servlet-name>vender</servlet-name>
+      <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+      <init-param>
+         <param-name>contextConfigLocation</param-name>
+         <param-value>/WEB-INF/config/vender-servlet.xml</param-value>
+      </init-param>
+   </servlet>
+   <servlet-mapping>
+      <servlet-name>vender</servlet-name>
+      <url-pattern>*.ve</url-pattern>
+   </servlet-mapping> 
+   
 	
 	<!-- 인코딩 필터 추가 -->
 	<filter>

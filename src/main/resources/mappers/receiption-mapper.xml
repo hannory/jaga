@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="Receiption">
+  	<resultMap type="Vender" id="venderResultMap">
+  		<id property="VENDER_CODE" column="COM_CODE"/>
+  		<result property="" column="BIZ_REG_NUM"/>
+  		<result property="" column="VENDER_NAME"/>
+  		<result property="" column="BOSS_NAME"/>
+  		<result property="" column="SELL_WAY"/>
+  		<result property="" column="SELL_TARGET"/>
+  		<result property="" column="VENDER_ADDRESS"/>
+  		<result property="" column="VENDER_TEL"/>
+  		<result property="" column="DEPARTMENT_INCHARGE"/>
+  		<result property="" column="COM_MANAGER_TEL"/>
+  		<result property="" column="REMARKS"/>
+  		<result property="" column="STATUS"/>
+  		<result property="" column="VENDER_FAX"/>
+  		<result property="" column="ACCOUNT_HOLDER"/>
+  		<result property="" column="ACCOUNT_NUM"/>
+  		<result property="" column="PERSONAL_NUM"/>
+  		<result property="" column="COM_MANAGER_EMAIL"/>
+  		<result property="" column="BANK_CODE"/>
+  		<result property="" column="FARMERS_STATUS"/>
+		
+  	
+ 	</resultMap>
+  
+  <select id="selectVenderList" resultMap="venderResultMap" parameterType="Vender">
+  	SELECT *
+  	FROM VENDER;
+  </select>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </mapper>
