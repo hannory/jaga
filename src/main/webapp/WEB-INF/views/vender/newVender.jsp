@@ -928,26 +928,26 @@ border-radius: 5px;
 <!-- <table> -->
 		<tr>
 			<td><b id="vender-info">거래처 신규등록</b></td>
-			<td><b id="vender-name">거래처명</b><input type="text" name="" id="vender-name-surr"></td>
+			<td><b id="vender-name">거래처명</b><input type="text" name="" id="vender-name-surr" name="venderName"></td>
 		</tr>
 		
 		<tr>
 			<td><b id="biz-num">1.사업자등록번호</b>
-			<input type="text" name="" id="biz-reg-num-surr">
+			<input type="text" name="bizRegNum" id="biz-reg-num-surr">
 			<!-- <button>사업자등록상태조회</button></td> -->
 		</tr>
 
 
 		<tr>
 			<td><b id="boss-name">2.대표자성명</b>
-			<input type="text" name="" id="boss-name-surr"></td>
+			<input type="text" name="bossName" id="boss-name-surr"></td>
 		</tr>
 		
 		<tr>
 			<td>
-				<b id="sell">3.업종</b> <b id="sell-way">업태</b> <input type="text" name="" id="sell-way-surr" >
-				<b id="sell-target">종목</b> <input type="text" name="" id="sell-target-surr">
-				<b id="farmers-status">농어민</b><input type="checkbox" id="farmers-status-surr">
+				<b id="sell">3.업종</b> <b id="sell-way">업태</b> <input type="text" name="sellWay" id="sell-way-surr" >
+				<b id="sell-target">종목</b> <input type="text" name="sellTarget" id="sell-target-surr">
+				<b id="farmers-status">농어민</b><input type="checkbox" id="farmers-status-surr" name="farmersStatus">
 			</td>
 		</tr>
 		
