@@ -12,5 +12,5 @@ public class VenderDaoImpl implements VenderDao{
 
 		return sqlSession.insert("Vender.insertVender",v);
 	}
-
+  
 }
