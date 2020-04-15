@@ -6,7 +6,7 @@ public class Company implements java.io.Serializable {
 
 	public Company() {}
 	
-	private int companyCode;
+	private String companyCode;
 	private String companyPwd;
 	private String companyPwd2;
 	private String companyId;
@@ -24,7 +24,7 @@ public class Company implements java.io.Serializable {
 	private Date modifyDate;
 	private String payStatus;
 	private String enrollStatus;
-	public Company(int companyCode, String companyPwd, String companyPwd2, String companyId, String email, String phone,
+	public Company(String companyCode, String companyPwd, String companyPwd2, String companyId, String email, String phone,
 			String bizName, String bizNum, String bossName, String personalNum, Date openDay, String bizLocation,
 			String bossAddress, String bizType, Date enrollDate, Date modifyDate, String payStatus,
 			String enrollStatus) {
@@ -48,10 +48,10 @@ public class Company implements java.io.Serializable {
 		this.payStatus = payStatus;
 		this.enrollStatus = enrollStatus;
 	}
-	public int getCompanyCode() {
+	public String getCompanyCode() {
 		return companyCode;
 	}
-	public void setCompanyCode(int companyCode) {
+	public void setCompanyCode(String companyCode) {
 		this.companyCode = companyCode;
 	}
 	public String getCompanyPwd() {

@@ -52,10 +52,6 @@ public class ViewController {
 		return "bugagachi/billTotalTable";
 	} 
 	
-    @GetMapping("compoundTrialBalance.vi")
-    public String compoundTrialBalance() {
-       return "financialStatements/compoundTrialBalance";
-    }
     
     @GetMapping("/showViewSelectId.vi")
     public String showViewSelectId() {
@@ -135,5 +131,15 @@ public class ViewController {
     @GetMapping("/vatReportPrint.vi")
     public String vatReportPrint() {
        return "bugagachi/vatReportPrint";
+    }
+    
+    @GetMapping("vender.vi")
+    public String vender(){
+    return "vender/newVender";
+    }
+    
+    @GetMapping("account_title.vi")
+    public String account_title() {
+    return "account_title/account_title";
     }
 }

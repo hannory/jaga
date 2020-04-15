@@ -24,7 +24,7 @@
   		SELECT *
   		FROM COMPANY
   		WHERE COM_ID = #{companyId}
-  		AND PWD = #{companyPwd}
+<!--   		AND PWD = #{companyPwd} -->
 
   </select>
   
