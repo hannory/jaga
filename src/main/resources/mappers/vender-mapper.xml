@@ -29,34 +29,14 @@
   <result property="farmers_status" column="FARMERS_STATUS"/>
   </resultMap>
 
-  <select id="selectLoginCompany" resultMap="companyResultSet" parameterType="Company">
-  		SELECT *
-  		FROM COMPANY
-  		WHERE COM_ID = #{companyId}
-  		AND PWD = #{companyPwd}
 
-  </select>
-  
-  	<select id="selectPwd" resultType="java.lang.String" parameterType="java.lang.String">
-		SELECT PWD
-		FROM COMPANY
-		WHERE COM_ID = #{companyId}
-
-	</select>
 	
-	<select id="selectLoginUser" resultMap="companyResultSet" parameterType="Company">
-		SELECT *
-		FROM COMPANY
-		WHERE COM_ID =#{companyId}
-
-	</select>
-	
-	<insert id="insertCompany" parameterType="Company">
-		INSERT INTO COMPANY(COM_CODE,PWD,COM_ID,EMAIL,PHONE,BIZ_NAME,BIZ_NUM,BOSS_NAME,PERSONAL_NUM,TYPE_OF_BIZ,BIZ_LOCATION)
-		VALUES (COMPANY_SEQ.NEXTVAL,#{companyPwd},#{companyId},#{email},#{phone},#{bizName},#{bizNum},#{bossName},#{personalNum},#{bizType},#{bizLocation})
+	<insert id="insertVender" parameterType="Vender">
+		INSERT INTO VENDER(VENDER_CODE,COM_CODE,BIZ_REG_NUM,VENDER_NAME,BOSS_NAME,SELL_WAY,SELL_TARGET,VENDER_ADDRESS,VENDER_TEL,
+		DEPARTMENT_INCHARGE,COM_MANAGER_TEL,REMARKS,STATUS,VENDER_FAX,ACCOUNT_HOLDER,ACCOUNT_NUM,BANK_CODE,FARMERS_STATUS)
+		VALUES (VENDER_SEQ.NEXTVAL,#{comCode},#{bizRegNum},#{venderName},#{bossName},#{sellWay},#{sellTarget},#{venderAddress},#{venderTel},#{departmentIncharge},#{comManagerTel},#{remarks},#{status},#{venderFax},#{accountHolder},#{accountNum},#{bankCode},#{farmersStatus})
 	</insert>
 	
-  
-  
+
   
   </mapper>

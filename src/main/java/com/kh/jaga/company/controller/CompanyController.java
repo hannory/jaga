@@ -39,6 +39,7 @@ public class CompanyController {
 		try {
 
 			loginCompany = cs.loginCompany(c);
+			System.out.println(loginCompany+"로그인컴퍼니다");
 			model.addAttribute("loginCompany",loginCompany);
 
 			return "redirect:index.jsp";

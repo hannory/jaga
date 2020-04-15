@@ -6,12 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.context.annotation.SessionScope;
 
 import com.kh.jaga.vender.model.service.VenderService;
 import com.kh.jaga.vender.model.vo.Vender;
 
 @Controller
-/* @SessionAttributes("loginCompany") */
+ @SessionAttributes("loginCompany") 
 public class VenderController {
 	
 	@Autowired
@@ -20,9 +22,10 @@ public class VenderController {
 	@RequestMapping("insert.ve")
 	public String insertVender(Model model, Vender v, HttpServletRequest request) {
 		
+		System.out.println(v);
 		vs.insertVender(v);
 		
-		return "";
+		return "redirect:index.jsp";
 		
 	}
 }

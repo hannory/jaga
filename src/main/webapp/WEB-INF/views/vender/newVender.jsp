@@ -651,12 +651,10 @@ border-radius: 5px;
 
 #com-manager1-tel-surr{
 position: absolute;
-width: 82px;
+width: 190px;
 height: 27px;
-left: 545px;
+left: 460px;
 top: 544px;
-
-background: #D9E3E3;
 border: 1px solid #C4C4C4;
 box-sizing: border-box;
 border-radius: 5px;
@@ -914,21 +912,23 @@ border-radius: 5px;
 
 </style>
 <body>
+	
 	<jsp:include page="../common/menubar.jsp" />
 	<div id="main">
 	<div class="container-fluid">
 		<h2 class="mt-4">거래처 신규등록</h2>
-		<ol class="breadcrumb mb-4">
-		</ol>
-<!--  		<div class="card mb-4">
-			<div class="card-body">
+<!-- 		<ol class="breadcrumb mb-4">
+		</ol> -->
+<!--   		<div class="card mb-4"> - -->
+	 	<div class="card-body"> 
 			<div id="main">
-		<div id="table-total"> -->
+		<div id="table-total"> 
 		 
 <!-- <table> -->
+	<form id="joinForm" method="post" action="insert.ve">
 		<tr>
 			<td><b id="vender-info">거래처 신규등록</b></td>
-			<td><b id="vender-name">거래처명</b><input type="text" name="" id="vender-name-surr" name="venderName"></td>
+			<td><b id="vender-name">거래처명</b><input type="text" name="venderName" id="vender-name-surr" name="venderName"></td>
 		</tr>
 		
 		<tr>
@@ -947,14 +947,14 @@ border-radius: 5px;
 			<td>
 				<b id="sell">3.업종</b> <b id="sell-way">업태</b> <input type="text" name="sellWay" id="sell-way-surr" >
 				<b id="sell-target">종목</b> <input type="text" name="sellTarget" id="sell-target-surr">
-				<b id="farmers-status">농어민</b><input type="checkbox" id="farmers-status-surr" name="farmersStatus">
+				<b id="farmers-status">농어민</b><input type="checkbox" value="1" id="farmers-status-surr" name="farmersStatus">
 			</td>
 		</tr>
 		
 		<tr>
 			<td><b id="address">4.주소</b>
 			<input type="text" name="" id="vender-address1-surr"><input type="text" id="vender-address2-surr"></td>
-			<td><input type="text" name="" id="vender-address3-surr"></td>
+			<td><input type="text" name="venderAddress" id="vender-address3-surr"></td>
 		</tr>
 		
 		<tr>
@@ -963,8 +963,8 @@ border-radius: 5px;
 
 		<tr>
 			<td><b id="phone">5.연 락 처</b> 
-			<b id="vender-tel">전화번호</b> <input type="tel" name="" id="vender-tell-surr">
-			<b id="vender-fax">팩스번호</b> <input type="tel" name="" id="vender-fax-surr">
+			<b id="vender-tel">전화번호</b> <input type="tel" name="venderTel" id="vender-tell-surr">
+			<b id="vender-fax">팩스번호</b> <input type="tel" name="venderFax" id="vender-fax-surr">
 			</td>
 			<td></td>
 		</tr>
@@ -972,42 +972,44 @@ border-radius: 5px;
 		<tr>
 			<td><b id="department-incharge">6.담당(부서)사원</b>
 			`<input type="text" id="department-incharge1-surr">
-			`<input type="text" id="department-incharge2-surr">
+			`<input type="text" name="departmentIncharge" id="department-incharge2-surr">
 			</td>
 		</tr>
 		
  		<tr>
 			<td><b id="account-income-num">7.입금 계좌 번호</b>
-				<b id=bank>은행</b><input type="text" id="bank-code-surr"><input type="text" id="bank-code-name-surr">
+				<b id=bank>은행</b><input type="text" id="bank-code-surr" name="bankCode"><input type="text" id="bank-code-name-surr">
 			</td>
-			<td><b id="account-holder"> 예금주 </b><input type="text" name="" id="account-holder-surr">
-				<b id="account-num">계좌번호</b><input type="text" name="" id="account-num-surr">
+			<td><b id="account-holder"> 예금주 </b><input type="text" name="accountHolder" id="account-holder-surr">
+				<b id="account-num">계좌번호</b><input type="text" name="accountNum" id="account-num-surr">
 			</td>
 		</tr>
 		
 		<tr>
-			<td><b id="com-manage-tel"> 8.업체담당자연락처 </b><button id="btn-okay" style="font-size:8px">조회/등록</button>
-				<input type="text" name="" id="com-manager1-tel-surr">
-				<input type="text" name="" id="com-manager2-tel-surr">
+			<td><b id="com-manage-tel"> 8.업체담당자연락처 </b>
+				<input type="text" name="comManagerTel" id="com-manager1-tel-surr" placeholder="숫자만 입력">
+
 			</td>
-			<td></td>
+		 <td><input type="hidden" value="${sessionScope.loginCompany.companyCode}" name="comCode"></td> 
+			
 		</tr>
 		<tr>
 			<td><b id="remarks">비    고</b>
-			<input type="text" name="" id="remarks-surr"></td>
+			<input type="text" name="remarks" id="remarks-surr"></td>
 			<td></td>
 		</tr>
 		<tr>
 			<td><b id="status">사 용 여 부</b>
-			<input type="text" name="" id="zero-one-surr">
+			<input type="text" name="status" id="zero-one-surr">
 			<b id="zero-one">0:부 1:여</b></td>
 			<td></td>
 		</tr>
 		
 		<tr>
-			<td><button id="okay" style="color:white">확인</button></td>
+			<td><button id="okay" type="submit" style="color:white">확인</button></td>
 		</tr>
 
+		</form>
 		<div style="height: 100vh;"></div>
 		<div class="card mb-4">
 			<div class="card-body">When scrolling, the navigation stays at

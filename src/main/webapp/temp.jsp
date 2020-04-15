@@ -23,9 +23,10 @@
 일정관리 /
 4대보험관리대장 / 
  -->
-  <jsp:forward page="WEB-INF/views/vender/newVender.jsp"/>  
+  
+<%--     <jsp:forward page="WEB-INF/views/vender/newVender.jsp"/>   --%>
 <%--   <jsp:forward page="WEB-INF/views/vender/venderList.jsp"/>   --%>
-<%-- <jsp:forward page="WEB-INF/views/company/companyLogin.jsp"/> --%>
+   <jsp:forward page="WEB-INF/views/company/companyLogin.jsp"/>   
 <%--  <jsp:forward page="WEB-INF/views/vender/vender.jsp"/> --%>
 <%--  <jsp:forward page="WEB-INF/views/account_title/account_title.jsp"/> --%>
 <%--    <jsp:forward page="WEB-INF/views/company/companyJoin.jsp"/>   --%>

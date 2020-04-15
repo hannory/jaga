@@ -129,6 +129,8 @@
 					<td class="join_id_pwd"><a href="companyJoinView.co"> 회원가입 </a></td> 
 					<td class="join_id_pwd2"><a href="/WEB-INF/views/member/memberJoin.jsp"> 아이디찾기  </a></td> 
 					<td class="join_id_pwd3"><a href="/WEB-INF/views/member/memberJoin.jsp"> 비밀번호찾기 </a></td>
+					
+<!-- 					<td><a href="/WEB-INF/views/vender/newVender.jsp">임시거래처등록세션확인</a></td> -->
 				</tr>
 			</table>
 		</form>

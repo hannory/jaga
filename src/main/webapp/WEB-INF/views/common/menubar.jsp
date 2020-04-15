@@ -115,8 +115,8 @@
                                         
                                     <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-parent="#sidenavAccordionPages">
                                         <nav class="sb-sidenav-menu-nested nav">
-	                                        <a class="nav-link" href="401.html">거래처등록</a>
-	                                        <a class="nav-link" href="404.html">계정과목 및<br> 적요등록</a>
+											<a class="nav-link" href="vender.vi">거래처등록</a>
+	                                        <a class="nav-link" href="account_title.vi">계정과목 및<br> 적요등록</a>
 	                                        <a class="nav-link" href="500.html">부서등록</a>
 	                                        <a class="nav-link" href="500.html">부서등록</a>
                                         </nav>
