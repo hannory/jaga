@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
      <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+     
 <!DOCTYPE html>
 <html>
 <head>
@@ -110,28 +111,77 @@
 		value="${ pageContext.servletContext.contextPath }"
 		scope="application" />
 	<main>
-	<form action="ccSalesSilpGap.bu" method="post">
 	<div class="container-fluid">
 			<h2 class="mt-4">신용카드매출전표등 수령명세서(갑)(을)</h2>
+			 <script type="text/javascript">
+	 	function search_cssg(){
+	 		var search_ye1= $("#search_ye1").val();
+	 		var search_mon1= $("#search_mon1").val();
+	 		var search_mon2= $("#search_mon2").val();
+	 		console.log(search_ye1);
+	 		console.log(search_mon1);
+	 		console.log(search_mon2);
+	 		
+	 		$.ajax({
+	 			url:"ccSalesSilpGap.bu",
+	 			type:"post",
+	 			data:{search_ye1:search_ye1, search_mon1:search_mon1, search_mon2:search_mon2},
+	 			success: function(data){
+	 				console.log(data);
+	 			/* 	//1111111111111111111111111111111111111
+	 				var $replySelectTable = $("#replySelectTable");
+					$replySelectTable.html('');
+					
+					for(var key in data) {
+						var $tr = $("<tr>");
+						var $writerTd = $("<td>").text(data[key].nickName).css("width", "100px");
+						var $contentTd = $("<td>").text(data[key].bContent).css("width", "400px");
+						var $dateTd = $("<td>").text(data[key].bDate).css("width", "200px");
+						
+						$tr.append($writerTd);
+						$tr.append($contentTd);
+						$tr.append($dateTd);
+						
+						$replySelectTable.append($tr);
+					}//1111111111111111111111111111111111111 */
+	 				console.log("list넣기 전");
+	 				var cssgList=data.cssgList;
+	 				console.log("list 넣은 후");
+	 				for(var key in cssgList){
+	 					console.log(cssgList[key].eventDiv);
+	 					if(cssgList[key].eventDiv.equal("합계")){
+	 						$("sum").text("합계");
+	 						$("sumDeal").text(cssgList[key].dealCount);
+	 					}
+	 					console.log("for문");
+	 				}
+	 				
+	 			},
+	 			error:function(error){
+	 				console.log(error);
+	 			}
+	 		});
+	 	}
+	 
+	 </script>
 	<ol class="breadcrumb mb-4">
 			<li><button id="deadlineBtn">마감</button></li>
 			<li>1기확정</li>
             <li>조회기간:
-            	<input type="text" name="search_ye1" class="cc_year">
-            	<select class="cc_month" name="search_mon1">
+            	<input type="text" id="search_ye1" maxlength="4" class="cc_year">
+            	<select class="cc_month" id="search_mon1">
             		<option value="">월</option>
-            		<option value="1">1</option>
-            		<option value="7">7</option>
+            		<option value="01">1</option>
+            		<option value="07">7</option>
             	</select> 
             	~ 
-            	<input type="text" name="search_ye2" class="cc_year">
-            	<select class="cc_month" name="search_mon2">
+            	<select class="cc_month" id="search_mon2">
             		<option value="">월</option>
-            		<option value="6">6</option>
+            		<option value="06">6</option>
             		<option value="12">12</option>
             	</select> 
             </li>
-            <li><input type="submit" name="search" value="조회"></li>
+            <li><input type="button" onclick="search_cssg()" name="search" value="조회"></li>
             <li><input type="button" name="report" value="신고서미리보기"></li>
 			
 		</ol>
@@ -153,25 +203,31 @@
                         <td>공급가액</td>
                         <td>세  액</td>
                     </tr>
-                    <tr>
+                    <tr><!-- 합계영역  -->
+                        <td id="sum"> </td>
+                        <td id="sumDeal"> </td>
+                        <td id="sumVos"> </td>
+                        <td id="sumTax"> </td>
+                    </tr>
+                     <tr><!-- 현금영수증  -->
                         <td> </td>
                         <td> </td>
                         <td> </td>
                         <td> </td>
                     </tr>
-                     <tr>
+                     <tr><!-- 화물운전자 복지카드 -->
                         <td> </td>
                         <td> </td>
                         <td> </td>
                         <td> </td>
                     </tr>
-                     <tr>
+                     <tr><!-- 사업용 신용카드 -->
                         <td> </td>
                         <td> </td>
                         <td> </td>
                         <td> </td>
                     </tr>
-                     <tr>
+                    <tr><!-- 그 밖의 신용카드 -->
                         <td> </td>
                         <td> </td>
                         <td> </td>
@@ -301,7 +357,7 @@
 
 		});
 	 </script>
-	 </form>
+	
 	</main>
 	<jsp:include page="../common/menubar2.jsp" />
 </body>
