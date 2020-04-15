@@ -143,9 +143,9 @@
 				</td>
 				<td>
 					<select name="position" style="width:200px;">
-						<option value="sajang">사장</option>
-						<option value="bujang">부장</option>
-						<option value="gwajang">과장</option>					
+						<option value="001">사장</option>
+						<option value=002>부장</option>
+						<option value="003">과장</option>					
 					</select>
 				</td>
 			</tr>

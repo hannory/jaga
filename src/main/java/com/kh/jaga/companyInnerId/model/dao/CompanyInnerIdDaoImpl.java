@@ -11,9 +11,10 @@ public class CompanyInnerIdDaoImpl implements CompanyInnerIdDao {
 	public int insertComInnerId(
 			CreateCompanyInnerIdDto data, SqlSessionTemplate sqlSession) {
 		
-		System.out.println("dao 호출됨 ㅎ");
+		System.out.println("dao 호출됨 ㅎ,,이제 쿼리문 실행할 거");
+		System.out.println("받아온 id, pwd 값  : " + data.getId() + ",,," + data.getPwd());
 
-		int result = sqlSession.insert("", data);
+		int result = sqlSession.insert("comInnerId.insertComInnerId", data);
 		
 		System.out.println("쿼리문 실행 직후 result : " + result);
 		

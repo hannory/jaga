@@ -5,8 +5,33 @@
   
   <mapper namespace="comInnerId">
   
-  <insert id="insertComInnerId" parameterType="CreateCompanyInnerDto">
+  <insert id="insertComInnerId" parameterType="CreateCompanyInnerIdDto">
   
+   INSERT INTO COM_INNER_ID(
+  		COM_INNER_ID_NUM
+  	,	COM_CODE
+  	,	POSITION_CODE
+  	,	ID
+  	,	PWD
+  	,	EMAIL
+  	,	NAME
+  	)
+  	VALUES(
+  		SEQ_SWY_SEQUENCE.NEXTVAL
+  	,	'10'
+  	,	#{position}	
+  	,	#{id}
+  	,	#{pwd}
+  	,	#{email}
+    ,   #{name}
+  	) 
+  
+  </insert>
+  
+  </mapper>
+
+
+  <!-- 
   INSERT INTO COM_INNER_ID(
   		COM_INNER_ID_NUM
   	,	COM_CODE
@@ -17,19 +42,14 @@
   	,	NAME
   	)
   	VALUES(
-  		#{id}
-  	,	#{pwd}
-  	,	#{email}
-  	,	#{name}
-  	,	#{position}
-  	,	#{sign}
-  	)
-  
-  </insert>
-  
-  </mapper>
-
-
-  
+  		'929'
+  	,	'10'
+  	,	'001'
+  	,	'test04142019'
+  	,	'pass01!'
+  	,	'email@naver.com'
+    ,   'swy'
+  	) 
+  	-->
   
   
