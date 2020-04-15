@@ -44,7 +44,7 @@ public class BugagachiController {
 		cssg.setTermDiv(term);
 		//신용카드매출전표가지고와서 가지고 온값으로 거래내역 조회해야함
 		List<CcSalesSlipGap> cssg2=csser.selectCssg(cssg);
-		mv.addObject("cssgList",cssg2);
+		mv.addObject("cssgList",cssg2); 
 		mv.setViewName("jsonView");
 		
 		//없으면 값 불러오기

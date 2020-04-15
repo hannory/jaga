@@ -9,7 +9,7 @@ public class CcSalesSlipGap {//신용카드 등 수령명세서
 	private int dealCount;		 //거래건수
 	private int valOfSupply;	 //공급가액
 	private int tax;			 //세액
-	
+	 
 	public CcSalesSlipGap() {}
 	
 	public CcSalesSlipGap(String rcptstmtCode, int yearOfAttr, String termDiv, String eventDiv, int dealCount,

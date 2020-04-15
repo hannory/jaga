@@ -18,7 +18,7 @@ public class CcSalesSlipGapServiceImpl implements CcSalesSlipGapService{
 	private CcSalesSlipGapDao cd;
 	
 	//신용카드 등 수령명세서 id받아오기
-	@Override
+	@Override 
 	public List<CcSalesSlipGap> selectCssg(CcSalesSlipGap cssg) {
 		
 		List<CcSalesSlipGap> cssg2=null;

@@ -10,7 +10,7 @@ import com.kh.jaga.bugagachi.model.vo.CcSalesSlipGap;
 @Repository
 public class CcSalesSlipGapDaoImpl implements CcSalesSlipGapDao{
 
-	@Override
+	@Override  
 	public List<CcSalesSlipGap> selectCssg(SqlSessionTemplate sqlSession, CcSalesSlipGap cssg) {
 		List<CcSalesSlipGap> cssg2=sqlSession.selectList("CcSalesSlipGap.selectCcSalesSlipGap", cssg);
 		System.out.println("출력후 작업 CcSalesSlipGapDaoImpl: "+cssg2);

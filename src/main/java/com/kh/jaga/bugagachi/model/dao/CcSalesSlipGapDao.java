@@ -9,7 +9,7 @@ import com.kh.jaga.bugagachi.model.vo.CcSalesSlipGap;
 
 @Repository
 public interface CcSalesSlipGapDao {
-
+  
 	List<CcSalesSlipGap> selectCssg(SqlSessionTemplate sqlSession, CcSalesSlipGap cssg);
 
 }

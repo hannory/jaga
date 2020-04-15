@@ -19,7 +19,7 @@ public class TnxHis {//거래내역
 			int valOfSupply, int tax, String rcptstmtCode) {
 		super();
 		this.slipCode = slipCode;
-		this.silpDate = silpDate;
+		this.silpDate = silpDate; 
 		this.division = division;
 		this.producer = producer;
 		this.cardmemNum = cardmemNum;

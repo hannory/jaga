@@ -12,5 +12,5 @@ public interface CcSalesSlipGapService {
 
 	List<CcSalesSlipGap> selectCssg(CcSalesSlipGap cssg);
 
-	
+	 
 }

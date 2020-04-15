@@ -145,7 +145,7 @@
 						$replySelectTable.append($tr);
 					}//1111111111111111111111111111111111111 */
 	 				console.log("list넣기 전");
-	 				var cssgList=data.cssgList;
+	 				var cssgList=data.cssgList; 
 	 				console.log("list 넣은 후");
 	 				for(var key in cssgList){
 	 					console.log(cssgList[key].eventDiv);

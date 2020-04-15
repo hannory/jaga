@@ -15,7 +15,7 @@
   <result property="valOfSupply" column="VAL_OF_SUPPLY"/>
   <result property="tax" column="TAX"/>
 
-  </resultMap>
+  </resultMap> 
 
   <select id="selectCcSalesSlipGap" resultMap="CcSalesSlipGapResultSet" parameterType="CcSalesSlipGap">
   		SELECT *
