@@ -91,7 +91,7 @@
 			
 		</script>
 		
-		<form action="createComInnerId.companyInnerId" method="post">
+		<form action="createComInnerId.comInId" method="post" enctype="multipart/form-data">
 		<div class="div-box-area">
 		<div class="div-input-area">
 		<table cellpadding="20px">
@@ -143,9 +143,9 @@
 				</td>
 				<td>
 					<select name="position" style="width:200px;">
-						<option value="sajang">사장</option>
-						<option value="bujang">부장</option>
-						<option value="gwajang">과장</option>					
+						<option value="001">사장</option>
+						<option value=002>부장</option>
+						<option value="003">과장</option>					
 					</select>
 				</td>
 			</tr>
@@ -166,7 +166,7 @@
 			
 		</table>
 			
-			<input type="file" id="fileBtn" name="sign" onchange="loadImg(this)" style="display:none;">
+			<input type="file" id="fileBtn" name="signFile" onchange="loadImg(this)" style="display:none;">
 		
 			<div align="center" style="margin-top:100px;">
 			<button class="formBtn" type="submit">생성</button>
