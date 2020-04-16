@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="CcSalesSlipGap">
+  
+  <resultMap type="CcSalesSlipGap" id="CcSalesSlipGapResultSet">
+  <id property ="rcptstmtCode" column="RCPTSTMT_CODE"/>
+
+  <result property="yearOfAttr" column="YEAR_OF_ATTR"/>
+  <result property="termDiv" column="TERM_DIV"/>
+  <result property="eventDiv" column="EVENT_DIV"/>
+  <result property="dealCount" column="DEAL_COUNT"/>
+  <result property="valOfSupply" column="VAL_OF_SUPPLY"/>
+  <result property="tax" column="TAX"/>
+
+  </resultMap> 
+
+  <select id="selectCcSalesSlipGap" resultMap="CcSalesSlipGapResultSet" parameterType="CcSalesSlipGap">
+  		SELECT *
+  		FROM CC_RCPT_STMT
+  		WHERE YEAR_OF_ATTR= #{yearOfAttr}
+  		AND TERM_DIV = #{termDiv}
+  </select>
+
+	
+	
+  
+  
+  
+  </mapper>

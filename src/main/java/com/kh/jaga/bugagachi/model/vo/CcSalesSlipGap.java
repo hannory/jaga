@@ -1,6 +1,6 @@
 package com.kh.jaga.bugagachi.model.vo;
  
-public class CcSalesSilpGap {//신용카드 등 수령명세서
+public class CcSalesSlipGap {//신용카드 등 수령명세서
 
 	private String rcptstmtCode; //수령명세서 코드
 	private int yearOfAttr;		 //귀속연도
@@ -9,10 +9,10 @@ public class CcSalesSilpGap {//신용카드 등 수령명세서
 	private int dealCount;		 //거래건수
 	private int valOfSupply;	 //공급가액
 	private int tax;			 //세액
+	 
+	public CcSalesSlipGap() {}
 	
-	public CcSalesSilpGap() {}
-	
-	public CcSalesSilpGap(String rcptstmtCode, int yearOfAttr, String termDiv, String eventDiv, int dealCount,
+	public CcSalesSlipGap(String rcptstmtCode, int yearOfAttr, String termDiv, String eventDiv, int dealCount,
 			int valOfSupply, int tax) {
 		super();
 		this.rcptstmtCode = rcptstmtCode;
