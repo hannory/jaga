@@ -6,6 +6,7 @@ import java.util.Calendar;
 
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -23,6 +24,8 @@ public class CompanyInnerIdController {
 	
 	@Autowired
 	private CompanyInnerIdService cs;
+	@Autowired
+	private BCryptPasswordEncoder pwdEncoder;
 	
 	
 	//위에는 오토와이어드 및 세션어트리뷰트 설정을 해야겠다.
@@ -49,6 +52,8 @@ public class CompanyInnerIdController {
 		try {
 			signFile.transferTo(new File(filePath + "\\" + newFileName + ext));
 			data.setSign(newFileName + ext);
+			
+			data.setPwd(pwdEncoder.encode(data.getPwd()));
 			
 			int result = cs.insertComInnerId(data);
 			
