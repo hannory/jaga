@@ -86,7 +86,7 @@
 		<div class="div-menuTap div-menuTap-no" onclick="selectId()"><span>직원 계정 조회</span></div>
 		<script>
 			function selectId(){
-				location.href="showViewSelectId.vi";
+				location.href="showViewComInnerIdList.comInId";
 			}
 			
 		</script>

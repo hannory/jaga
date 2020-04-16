@@ -3,6 +3,7 @@ package com.kh.jaga.companyInnerId.controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.Calendar;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +20,16 @@ import com.kh.jaga.common.CommonsUtils;
 import com.kh.jaga.companyInnerId.model.dto.CreateCompanyInnerIdDto;
 import com.kh.jaga.companyInnerId.model.service.CompanyInnerIdService;
 
+/**
+ * @author SWY
+ * @comment 사내계정생성 페이지 (생성/조회) 
+ * @createDate 2020. 4. 14.
+ */
 @Controller
 public class CompanyInnerIdController {
 	
 	@Autowired
-	private CompanyInnerIdService cs;
+	private CompanyInnerIdService service;
 	@Autowired
 	private BCryptPasswordEncoder pwdEncoder;
 	
@@ -55,65 +61,40 @@ public class CompanyInnerIdController {
 			
 			data.setPwd(pwdEncoder.encode(data.getPwd()));
 			
-			int result = cs.insertComInnerId(data);
+			int result = service.insertComInnerId(data);
 			
 			System.out.println("ctrl > result ::: " + result);
 			
-			
-			
-			
 			return "redirect:index.jsp";
-			
+
 		} catch (IllegalStateException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		
-		
-		
-		
-		
-		
-		
-
-		
-		
-		//////////삭제할 영역//////////////
-		//받아온 데이터 디비에 저장해보자
-		//int result = comInnerIdservice.insertComInnerId(data);
-		//System.out.println("result : " + result);
-		//////////삭제할 영역//////////////
-		
 		return "redirect:index.jsp";
-		
 		
 	}//method
 	
 	
 	
-	
-//	
-//	@RequestMapping("createComInnerId.comInId")
-//	public String createComInnerId(
-//				CreateCompanyInnerIdDto idInfo
-////			,	@RequestParam MultipartFile sign
-//			) 							
-//	//method body 시작
-//	{
-//		
-//		System.out.println("컨트롤러 ㅋㅋ");
-//		
-//		System.out.println("idInfo : " + idInfo);
-////		System.out.println("sign : " + sign);
-//		
-//		//계정 생성 후 어디로 보낼까 ? // 일단 index로 보내자 // 추후 수정하기
-//		return "redirect:index.jsp";
-//	}
-//	
-//	
-//	
-	
+	//페이지 보여주는 메소드(직원 계정 조회)
+	@RequestMapping(value = "showViewComInnerIdList.comInId")
+	public String selectComInIdList(HttpServletRequest request) {
+		
+		System.out.println("showViewComInnerIdList.comInId 호출됨..");
+		
+		List list = service.selectComInIdList();
+		request.setAttribute("list", list);
+		
+		
+		System.out.println("ctrl > return list : " + list);
+		
+		
+		
+		return "selectCompanyId";
+	}
 	
 	
 	

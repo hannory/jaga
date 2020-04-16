@@ -1,5 +1,7 @@
 package com.kh.jaga.companyInnerId.model.dao;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -18,6 +20,16 @@ public class CompanyInnerIdDaoImpl implements CompanyInnerIdDao {
 		System.out.println("쿼리문 실행 직후 result : " + result);
 		
 		return result;
+	}
+
+	@Override
+	public List selectComInIdList(SqlSessionTemplate sqlSession) {
+
+		System.out.println("dao 호출됨 ㅎ");
+		List list = sqlSession.selectList("comInnerId.selectComInIdList"); 
+		
+		
+		return list;
 	}
 
 }
