@@ -1,7 +1,9 @@
 package com.kh.jaga.companyInnerId.controller;
 
-import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.util.Calendar;
 
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.jaga.common.CommonsUtils;
 import com.kh.jaga.companyInnerId.model.dto.CreateCompanyInnerIdDto;
 import com.kh.jaga.companyInnerId.model.service.CompanyInnerIdServiceImpl;
 
@@ -34,26 +37,23 @@ public class CompanyInnerIdController {
 		String root = request.getSession().getServletContext().getRealPath("resources");
 		String filePath = root + "\\uploadFiles";
 		
-		//파일명 변경 //기존 이름은 필요 없음
+		//파일명 변경 //랜덤문자열+timemillis추가해서 써야지(뒤에서 4개) //기존 이름은 필요 없음
 		String originFileName = signFile.getOriginalFilename();
-		System.out.println(originFileName);
+		String ext = originFileName.substring(originFileName.lastIndexOf("."));
+		String newFileName = 
+				CommonsUtils.getRandomString() + new CommonsUtils().getMillisec(4);
+		
+		System.out.println(newFileName);
+		
+		new File(filePath + "\\" + newFileName + ext);
 		
 		
 		
-		//참고용,, 다 하고 삭제
-//		String root = request.getSession().getServletContext().getRealPath("resources");
-//		System.out.println("root : " + root);
-//		
-//		String filePath = root + "\\uploadFiles";
-//		
-//		
-//		//----------------------------------------------------------------------------------
-//		//파일명 변경
-//		String originFileName = photo.getOriginalFilename();
-//		String ext = originFileName.substring(originFileName.lastIndexOf("."));
-//		String changeName = CommonsUtils.getRandomString();
-//		//----------------------------------------------------------------------------------
 		
+		
+		
+		
+
 		
 		
 		//////////삭제할 영역//////////////
