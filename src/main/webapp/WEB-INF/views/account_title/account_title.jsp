@@ -403,6 +403,12 @@ height:1000px;
 width:1800px;
 background:white;
 } 
+
+
+
+
+
+
 </style>
 </head>
 <body>
@@ -712,7 +718,7 @@ background:white;
 				<b id="brief-no-surr" > 적요 NO </b>
 			</td>
 			<td>
-				<b id="brief-surr" style="color:white"> 적 요 </b>
+				<b id="brief-surr" style="color:white"> 현금 적 요 </b>
 			</td>
 		</tr>
 		
@@ -731,6 +737,8 @@ background:white;
 			<td><input type="text" name="" id="blank6"></td>
 		</tr>
 <!-- 		</table> -->
+
+
 	</div>
 			
 		<div style="height: 100vh;"></div>

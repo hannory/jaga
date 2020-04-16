@@ -142,4 +142,9 @@ public class ViewController {
     public String account_title() {
     return "account_title/account_title";
     }
+    
+    @GetMapping("employee.vi")
+    public String employee() {
+    	return "employee/newEmployee";
+    }
 }
