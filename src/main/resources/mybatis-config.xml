@@ -11,11 +11,10 @@
  	 <typeAlias type="com.kh.jaga.slip.model.vo.Receiption" alias="Receiption"/>
      <typeAlias type="com.kh.jaga.slip.model.vo.Vender" alias="VenderR"/>
      <typeAlias type="com.kh.jaga.companyInnerId.model.dto.CreateCompanyInnerIdDto" alias="CreateCompanyInnerIdDto"/>
-     <!-- 
      <typeAlias type="com.kh.jaga.finStmt.model.vo.IncomeStmt" alias="IncomeStmt"/>
      <typeAlias type="com.kh.jaga.bugagachi.model.vo.CcSalesSlipGap" alias="CcSalesSlipGap"/>
-      -->
   </typeAliases>
+  
   
     
   <mappers>
@@ -23,10 +22,8 @@
   	<mapper resource="mappers/receiption-mapper.xml"/>
   	<mapper resource="mappers/company-mapper.xml"/>
   	<mapper resource="mappers/comInnerId-mapper.xml"/>
-  	<!-- 
   	<mapper resource="mappers/finStmt-mapper.xml"/>
   	<mapper resource="mappers/CcSalesSlipGap-mapper.xml"/>
-  	 -->
   </mappers>
   
   </configuration>
