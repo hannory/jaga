@@ -1,6 +1,7 @@
 package com.kh.jaga.companyInnerId.controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Calendar;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,13 +16,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.jaga.common.CommonsUtils;
 import com.kh.jaga.companyInnerId.model.dto.CreateCompanyInnerIdDto;
-import com.kh.jaga.companyInnerId.model.service.CompanyInnerIdServiceImpl;
+import com.kh.jaga.companyInnerId.model.service.CompanyInnerIdService;
 
 @Controller
 public class CompanyInnerIdController {
 	
 	@Autowired
-	private CompanyInnerIdServiceImpl comInnerIdservice;
+	private CompanyInnerIdService cs;
 	
 	
 	//위에는 오토와이어드 및 세션어트리뷰트 설정을 해야겠다.
@@ -41,11 +42,28 @@ public class CompanyInnerIdController {
 		String originFileName = signFile.getOriginalFilename();
 		String ext = originFileName.substring(originFileName.lastIndexOf("."));
 		String newFileName = 
-				CommonsUtils.getRandomString() + new CommonsUtils().getMillisec(4);
+				"sign"+ CommonsUtils.getRandomString().substring(8) + new CommonsUtils().getMillisec(4);
 		
 		System.out.println(newFileName);
 		
-		new File(filePath + "\\" + newFileName + ext);
+		try {
+			signFile.transferTo(new File(filePath + "\\" + newFileName + ext));
+			data.setSign(newFileName + ext);
+			
+			int result = cs.insertComInnerId(data);
+			
+			System.out.println("ctrl > result ::: " + result);
+			
+			
+			
+			
+			return "redirect:index.jsp";
+			
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
 		
 		
@@ -63,6 +81,8 @@ public class CompanyInnerIdController {
 		//////////삭제할 영역//////////////
 		
 		return "redirect:index.jsp";
+		
+		
 	}//method
 	
 	
