@@ -60,6 +60,7 @@
 		<url-pattern>*.co</url-pattern>
 	</servlet-mapping>
 	
+	<!-- 술쟁이로봇 -->
 	<servlet>
 		<servlet-name>finStmt</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -124,7 +125,7 @@
    </servlet>
    <servlet-mapping>
       <servlet-name>companyInnerId</servlet-name>
-      <url-pattern>*.companyInnerId</url-pattern>
+      <url-pattern>*.comInId</url-pattern>
    </servlet-mapping>
    
    <!-- 브랜치 -->
@@ -142,6 +143,20 @@
    </servlet-mapping>
    
    
+      <servlet>
+      <servlet-name>CcSalesSlipGap</servlet-name>
+      <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+      <init-param>
+         <param-name>contextConfigLocation</param-name>
+         <param-value>/WEB-INF/config/CcSalesSlipGap-servlet.xml</param-value>
+      </init-param>
+   </servlet>
+   <servlet-mapping>
+      <servlet-name>CcSalesSlipGap</servlet-name>
+      <url-pattern>*.cssg</url-pattern>
+   </servlet-mapping>
+   
+   
    <!-- 백곰 -->
     <servlet>
       <servlet-name>vender</servlet-name>
@@ -156,6 +171,9 @@
       <url-pattern>*.ve</url-pattern>
    </servlet-mapping> 
    
+   
+   
+   
 	
 	<!-- 인코딩 필터 추가 -->
 	<filter>
@@ -164,6 +182,10 @@
 		<init-param>
 			<param-name>encoding</param-name>
 			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+		    <param-name>forceEncoding</param-name>
+		    <param-value>true</param-value>
 		</init-param>
 	</filter>
 	
