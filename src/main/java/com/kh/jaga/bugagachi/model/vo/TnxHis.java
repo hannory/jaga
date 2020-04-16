@@ -18,15 +18,15 @@ public class TnxHis {//거래내역
 	public TnxHis(String slipCode, Date silpDate, String division, String producer, String cardmemNum, int numOfTxn,
 			int valOfSupply, int tax, String rcptstmtCode) {
 		super();
-		this.slipCode = slipCode;
-		this.silpDate = silpDate; 
-		this.division = division;
-		this.producer = producer;
-		this.cardmemNum = cardmemNum;
-		this.numOfTxn = numOfTxn;
-		this.valOfSupply = valOfSupply;
-		this.tax = tax;
-		this.rcptstmtCode = rcptstmtCode;
+		this.slipCode = slipCode;           //전표번호
+		this.silpDate = silpDate; 			//거래날짜
+		this.division = division;			//구분(1:현금,2:복지,3:사업,4:신용)
+		this.producer = producer;			//공급자
+		this.cardmemNum = cardmemNum;		//카드회원번호
+		this.numOfTxn = numOfTxn;			//거래건수
+		this.valOfSupply = valOfSupply;		//공급가액
+		this.tax = tax;						//세액
+		this.rcptstmtCode = rcptstmtCode;	//수령명세서 코드
 	}
 
 	public String getSlipCode() {

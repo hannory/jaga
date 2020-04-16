@@ -123,12 +123,12 @@
 	 		console.log(search_mon2);
 	 		
 	 		$.ajax({
-	 			url:"ccSalesSilpGap.bu",
+	 			url:"ccSalesSilpGap.cssg",
 	 			type:"post",
 	 			data:{search_ye1:search_ye1, search_mon1:search_mon1, search_mon2:search_mon2},
 	 			success: function(data){
 	 				console.log(data);
-	 			/* 	//1111111111111111111111111111111111111
+	 			/* 	//1111111111111111111111111111111111111111111111111111111111
 	 				var $replySelectTable = $("#replySelectTable");
 					$replySelectTable.html('');
 					
@@ -143,17 +143,38 @@
 						$tr.append($dateTd);
 						
 						$replySelectTable.append($tr);
-					}//1111111111111111111111111111111111111 */
-	 				console.log("list넣기 전");
+					}//1111111111111111111111111111111111111
+					 
+                  */
 	 				var cssgList=data.cssgList; 
-	 				console.log("list 넣은 후");
 	 				for(var key in cssgList){
 	 					console.log(cssgList[key].eventDiv);
-	 					if(cssgList[key].eventDiv.equal("합계")){
-	 						$("sum").text("합계");
-	 						$("sumDeal").text(cssgList[key].dealCount);
+	 					if(cssgList[key].eventDiv =="합계"){
+	 						$("#sum").text("합계");
+	 						$("#sumDeal").text(cssgList[key].dealCount);
+	 						$("#sumVos").text(cssgList[key].valOfSupply);
+	 						$("#sumTax").text(cssgList[key].tax);
+	 					}else if(cssgList[key].eventDiv =="현금영수증"){
+	 						$("#cash").text("현금영수증");
+	 						$("#cashDeal").text(cssgList[key].dealCount);
+	 						$("#cashVos").text(cssgList[key].valOfSupply);
+	 						$("#cashTax").text(cssgList[key].tax);
+	 					}else if(cssgList[key].eventDiv =="화물운전자복지카드"){
+	 						$("#driver").text("화물운전자복지카드");
+	 						$("#driverDeal").text(cssgList[key].dealCount);
+	 						$("#driverVos").text(cssgList[key].valOfSupply);
+	 						$("#driverTax").text(cssgList[key].tax);
+	 					}else if(cssgList[key].eventDiv =="사업용신용카드"){
+	 						$("#bCard").text("사업용신용카드");
+	 						$("#bCardDeal").text(cssgList[key].dealCount);
+	 						$("#bCardVos").text(cssgList[key].valOfSupply);
+	 						$("#bCardTax").text(cssgList[key].tax);
+	 					}else if(cssgList[key].eventDiv =="그밖의신용카드"){
+	 						$("#oCard").text("그밖의신용카드");
+	 						$("#oCardDeal").text(cssgList[key].dealCount);
+	 						$("#oCardVos").text(cssgList[key].valOfSupply);
+	 						$("#oCardTax").text(cssgList[key].tax);
 	 					}
-	 					console.log("for문");
 	 				}
 	 				
 	 			},
@@ -210,28 +231,28 @@
                         <td id="sumTax"> </td>
                     </tr>
                      <tr><!-- 현금영수증  -->
-                        <td> </td>
-                        <td> </td>
-                        <td> </td>
-                        <td> </td>
+                        <td id="cash"> </td>
+                        <td id="cashDeal"> </td>
+                        <td id="cashVos"> </td>
+                        <td id="cashTax"> </td>
                     </tr>
                      <tr><!-- 화물운전자 복지카드 -->
-                        <td> </td>
-                        <td> </td>
-                        <td> </td>
-                        <td> </td>
+                        <td id="driver"> </td>
+                        <td id="driverDeal"> </td>
+                        <td id="driverVos"> </td>
+                        <td id="driverTax"> </td>
                     </tr>
                      <tr><!-- 사업용 신용카드 -->
-                        <td> </td>
-                        <td> </td>
-                        <td> </td>
-                        <td> </td>
+                        <td id="bCard"> </td>
+                        <td id="bCardDeal"> </td>
+                        <td id="bCardVos"> </td>
+                        <td id="bCardTax"> </td>
                     </tr>
                     <tr><!-- 그 밖의 신용카드 -->
-                        <td> </td>
-                        <td> </td>
-                        <td> </td>
-                        <td> </td>
+                        <td id="oCard"> </td>
+                        <td id="oCardDeal"> </td>
+                        <td id="oCardVos"> </td>
+                        <td id="oCardTax"> </td>
                     </tr>
                     
                 </table>
