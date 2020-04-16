@@ -36,13 +36,13 @@ public class CompanyInnerIdController {
 
 		//파일 저장할 경로 설정
 		String root = request.getSession().getServletContext().getRealPath("resources");
-		String filePath = root + "\\uploadFiles";
+		String filePath = root + "\\uploadFiles\\signs";
 		
 		//파일명 변경 //랜덤문자열+timemillis추가해서 써야지(뒤에서 4개) //기존 이름은 필요 없음
 		String originFileName = signFile.getOriginalFilename();
 		String ext = originFileName.substring(originFileName.lastIndexOf("."));
 		String newFileName = 
-				"sign"+ CommonsUtils.getRandomString().substring(8) + new CommonsUtils().getMillisec(4);
+				CommonsUtils.getRandomString().substring(8) + new CommonsUtils().getMillisec(4);
 		
 		System.out.println(newFileName);
 		

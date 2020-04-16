@@ -14,8 +14,7 @@ public class CompanyInnerIdDaoImpl implements CompanyInnerIdDao {
 		System.out.println("dao 호출됨 ㅎ,,이제 쿼리문 실행할 거");
 		System.out.println("받아온 data 값  : " + data);
 
-//		int result = sqlSession.insert("comInnerId.insertComInnerId", data);
-		int result = -99;
+		int result = sqlSession.insert("comInnerId.insertComInnerId", data);
 		System.out.println("쿼리문 실행 직후 result : " + result);
 		
 		return result;

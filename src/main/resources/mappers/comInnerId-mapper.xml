@@ -15,6 +15,7 @@
   	,	PWD
   	,	EMAIL
   	,	NAME
+  	,	FILE_NAME
   	)
   	VALUES(
   		SEQ_SWY_SEQUENCE.NEXTVAL
@@ -24,6 +25,7 @@
   	,	#{pwd}
   	,	#{email}
     ,   #{name}
+    ,	#{sign}
   	) 
   
   </insert>
