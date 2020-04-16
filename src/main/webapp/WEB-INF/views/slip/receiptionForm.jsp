@@ -118,6 +118,10 @@
         	width:100%;
         	height:50px;
         	background:#6E00AB;
+        }
+        
+        .modal-header {
+        	background: #296355;
         } 
 	
 </style>
@@ -138,9 +142,10 @@
 				</colgroup>
 					<tr>
 						<td>전표일자</td>
-						<td><input type="text" id="datepicker"></td>
+						<td><input type="text" id="datepicker" name="slipDate"></td>
 						<td>구분</td>
 						<td>
+							<input type="hidden" name="comCode" value="1">
 							&nbsp;
 							<input type="radio" name="division" id="sale" value="sale" checked><label for="sale">매출</label>&nbsp;
 							<input type="radio" name="division" id="buy" value="buy"><label for="buy">매입</label>
@@ -149,7 +154,7 @@
 					<tr>
 						<td>부가세유형</td>
 						<td colspan="3">
-							<select name="evidence1" id="evidence1">
+							<select name="evidenceCode" id="evidence1">
 								<option value="10">세금계산서</option>
 								<option value="20">계산서</option>
 								<option value="30">영세율</option>
@@ -164,7 +169,7 @@
 								<option value="80">현금영수증(면세)</option>
 								<option value="90">현금영수증(영세)</option>
 							</select>
-							<select name="evidence2" id="evidence2">
+							<select name="evidenceCode" id="evidence2">
 								<option value="10">세금계산서</option>
 								<option value="20">계산서</option>
 								<option value="30">영세율</option>
@@ -200,16 +205,22 @@
 									<img alt="" src="${contextPath}/resources/images/search.PNG" width="20px" height="20px">
 								</button>
 							
-							<input name="venderName" type="text">
+							<input name="venderName" type="text" id="venderName">
+						</td>
+					</tr>
+					<tr>
+						<td>공급대가</td>
+						<td colspan="3">
+							<input type="number" name="supplydeaga" id="supplydeaga" placeholder="부가세포함금액">
 						</td>
 					</tr>
 					<tr>
 						<td>공급가액</td>
-						<td colspan="3"><input type="number" name="supplyValue"></td>
+						<td colspan="3"><input type="number" name="supplyValue" id="supplyValue"></td>
 					</tr>
 					<tr>
 						<td>부가세</td>
-						<td colspan="3"><input type="number" name="valueTax"></td>
+						<td colspan="3"><input type="number" name="valueTax" id="valueTax"></td>
 					</tr>
 					<tr>
 						<td>적요</td>
@@ -218,28 +229,29 @@
 					<tr>
 						<td>계정과목</td>
 						<td colspan="3">
-							<input type="text" name="accountCode">
+							<input type="text" id="accountCode">
 								<button type="button" id="searchBtn3">
 									<img alt="" src="${contextPath}/resources/images/search.PNG" width="20px" height="20px">
 								</button>
 							
-							<input type="text" name="accountName">
+							<input type="text" name="accountName" id="accountName">
+							<input type="hidden" name="">
 						</td>
 					</tr>
 					<tr>
 						<td>출금계정과목</td>
 						<td colspan="3">
-							<input type="text" >
+							<input type="text" id="accountCode2">
 								<button type="button" id="searchBtn4">
 									<img alt="" src="${contextPath}/resources/images/search.PNG" width="20px" height="20px">
 								</button>
-							<input type="text">
+							<input type="text" name="accountName2" id="accountName2">
 						</td>
 					</tr>
 					<tr>
 						<td>수수료</td>
 						<td colspan="3">
-							<input type="text">
+							<input type="text" id="abc">
 						</td>
 					</tr>
 				</table>
@@ -258,18 +270,17 @@
 					<col width=25%;>
 					<col width=25%;>
 				</colgroup>
+				<thead>
 					<tr>
 						<th>계정과목</th>
 						<th>거래처</th>
 						<th>차변</th>
 						<th>대변</th>
 					</tr>
-					<tr>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
+				</thead>
+				<tbody>
+				
+				</tbody>
 				</table>
 				<br>
 				<input type="button" value="의제">
@@ -297,7 +308,17 @@
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         <div class="modal-body">
-          
+          	<table id="venderTable">
+          		<thead>
+	          		<tr>
+	          			<th>거래처코드</th>
+	          			<th>거래처명</th>
+	          		</tr>
+          		</thead>
+          		<tbody>
+          		
+          		</tbody>
+          	</table>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -326,27 +347,86 @@
 					.attr("style","margin-left:2px; vertical-align:middle; cursor: Pointer; width:20px; height:20px");
 			
 			/* 라디오버튼 이벤트 */
+			var divisionn = 'sale';
 			$("input").filter("[name='division']").click(function(){
 				if($(this).val() == 'buy'){
 					/* 매입 */
+					divisionn = 'buy';
 					$("#insertReTable tr").eq(8).children().eq(0).text("입금계정과목");
 					$("#evidence2").css("display", "block");
 					$("#evidence1").css("display", "none");
 				}else if($(this).val() == 'sale'){
 					/* 매출 */
+					divisionn = 'sale';
 					$("#insertReTable tr").eq(8).children().eq(0).text("출금계정과목");
 					$("#evidence1").css("display", "block");
 					$("#evidence2").css("display", "none");
 				}
-			})
+			});
+			
+			$("#supplydeaga").blur(function(){
+				var supply = $(this).val();
+				$.ajax({
+					url:"calculTax.rp",
+					type:"post",
+					data:{supplydeaga : supply},
+					success:function(data){
+						var value = data.value;
+						var tax = data.tax;
+						
+						$("#supplyValue").val(value);
+						$("#valueTax").val(tax);
+					}
+				});
+			});
 			
 			/* 전표미리보기 이벤트 */
 			$("#preview").click(function(){
 				$("#hideArea").css("display", "block");
+				//108 외상 매출금 / 401 상품 
+				//255 부가세예수금
+				var accountCode = $("#accountCode").val();
+				var accountCode2 = $("#accountCode2").val();
+				var accName = $("#accountName").val();
+				var accName2 = $("#accountName2").val();
+				var venderName = $("#venderName").val();
+				var supplydeaga = $("#supplydeaga").val();	//공급대가
+				var supplyValue = $("#supplyValue").val();	//공급가액
+				var valueTax = $("#valueTax").val();	//부가세
+				
+				console.log("acc : " + accName);
+				console.log("venN : " + venderName);
+				console.log("supp : " + supplyValue);
+				console.log("valT : " + valueTax);
+				
+				if(divisionn == 'buy'){
+					/* 매입 */
+					/* 135부가세대급금 */
+					
+				}else{
+					/* 매출 */
+					/* 255 부가세예수금 */
+					var $resultTable = $("#resultReTable");
+					var $tr = $("<tr>");
+					
+					var accCo = $("<input type='hidden' name='accountCode'>").val(255);
+					var $bugaYeah = $("<td>").html($("<input type='text' name='price'>").val(valueTax));
+					var $vender = $("<td>").html($("<input type='text'>").val(venderName));
+					var $accN = $("<td>").html($("<input type='text'>").val('부가세예수금'));
+					
+					$tr.append($accN);
+					$tr.append($vender);
+					$tr.append($bugaYeah);
+					$tr.append($("<td>"));
+					$resultTable.append($tr);
+					
+				}
+				
 			});
 			
 			
 			$("#searchBtn2").click(function(){
+				var $tbody = $("#venderTable tbody");
 				 $.ajax({
 						url:"venderSearch.rp",
 						type:"post",
@@ -354,6 +434,21 @@
 						},
 						success:function(data){
 							console.log(data);
+							var list = data.venderList;
+							
+							console.log(list.length);
+							
+							for(var i = 0; i < list.length; i++){
+								
+								var $tr = $("<tr>");
+								var $codeTd = $("<td>").text(list[i].venderCode);
+								var $nameTd = $("<td>").text(list[i].venderName);
+								
+								$tr.append($codeTd);
+								$tr.append($nameTd);
+								$tbody.append($tr);
+							}
+							
 						}
 					})
 				 $("div#accountModal").modal();

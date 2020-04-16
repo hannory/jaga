@@ -4,49 +4,34 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
   <mapper namespace="Receiption">
-  	<resultMap type="Vender" id="venderResultMap">
-  		<id property="VENDER_CODE" column="COM_CODE"/>
-  		<result property="" column="BIZ_REG_NUM"/>
-  		<result property="" column="VENDER_NAME"/>
-  		<result property="" column="BOSS_NAME"/>
-  		<result property="" column="SELL_WAY"/>
-  		<result property="" column="SELL_TARGET"/>
-  		<result property="" column="VENDER_ADDRESS"/>
-  		<result property="" column="VENDER_TEL"/>
-  		<result property="" column="DEPARTMENT_INCHARGE"/>
-  		<result property="" column="COM_MANAGER_TEL"/>
-  		<result property="" column="REMARKS"/>
-  		<result property="" column="STATUS"/>
-  		<result property="" column="VENDER_FAX"/>
-  		<result property="" column="ACCOUNT_HOLDER"/>
-  		<result property="" column="ACCOUNT_NUM"/>
-  		<result property="" column="PERSONAL_NUM"/>
-  		<result property="" column="COM_MANAGER_EMAIL"/>
-  		<result property="" column="BANK_CODE"/>
-  		<result property="" column="FARMERS_STATUS"/>
+  	<resultMap type="VenderR" id="venderResultMap">
+  		<id property="venderCode" column="VENDER_CODE"/>
+  		<result property="comCode" column="COM_CODE"/>
+  		<result property="bizRegNum" column="BIZ_REG_NUM"/>
+  		<result property="venderName" column="VENDER_NAME"/>
+  		<result property="bossName" column="BOSS_NAME"/>
+  		<result property="sellWay" column="SELL_WAY"/>
+  		<result property="sellTarget" column="SELL_TARGET"/>
+  		<result property="venderAddress" column="VENDER_ADDRESS"/>
+  		<result property="venderTel" column="VENDER_TEL"/>
+  		<result property="departmentIncharge" column="DEPARTMENT_INCHARGE"/>
+  		<result property="comManagerTel" column="COM_MANAGER_TEL"/>
+  		<result property="remarks" column="REMARKS"/>
+  		<result property="status" column="STATUS"/>
+  		<result property="venderFax" column="VENDER_FAX"/>
+  		<result property="accountHolder" column="ACCOUNT_HOLDER"/>
+  		<result property="accountNum" column="ACCOUNT_NUM"/>
+  		<result property="personalNum" column="PERSONAL_NUM"/>
+  		<result property="comManagerEmail" column="COM_MANAGER_EMAIL"/>
+  		<result property="bankCode" column="BANK_CODE"/>
+  		<result property="farmersStatus" column="FARMERS_STATUS"/>
 		
-  	
  	</resultMap>
   
-  <select id="selectVenderList" resultMap="venderResultMap" parameterType="Vender">
+  <select id="selectVenderList" resultMap="venderResultMap" parameterType="VenderR">
   	SELECT *
-  	FROM VENDER;
+  	FROM VENDER
   </select>
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   

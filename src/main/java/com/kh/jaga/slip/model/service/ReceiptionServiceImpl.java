@@ -19,13 +19,14 @@ public class ReceiptionServiceImpl implements ReceiptionService{
 	private ReceiptionDao receiptionDao;
 	
 	@Override
-	public List<Vender> selectVenderList() {
+	public List<Vender> selectVenderList() throws receiptionException {
 		List<Vender> list = null;
 		
 		list = receiptionDao.selectVenderList(sqlSession);
 		
 		if(list == null) {
-			new receiptionException("거래처 불러오기 실패!");
+			throw new receiptionException("거래처 불러오기 실패!");
+			
 		}
 		
 		return list;
