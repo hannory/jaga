@@ -59,7 +59,7 @@
 		scope="application" />
 	<main>
 	<div class="container-fluid">
-		<table width="1100px">
+		<table style="width:100%; max-width:1100px;">
 			<tr>
 				<td><h2 class="mt-4">재무제표</h2></td>
 				<td width="50%" align="right"><span>조회기간&nbsp;&nbsp;&nbsp;&nbsp;</span><input type="number" style="width:70px"> 년&nbsp;&nbsp;&nbsp;&nbsp;
@@ -90,160 +90,171 @@
 				<td align="right" style="width:180px;"><div id="foldBtn"><img id="foldImg" src="${ contextPath }/resources/images/fold.PNG"></div></td>
 			</tr>
 		</table>
-		<div style="margin-bottom:10px; color:red;"><img src="${ contextPath }/resources/images/pencil.PNG">기말상품재고액을 입력하세요</div>
-		<table id="contentTable" width="1100px" style="text-align:center;">
+		<table style="width:100%; max-width:1100px;">
 			<tr>
-				<td class="table-head" width="28%" rowspan="2">과&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;목</td>
-				<td class="table-head" colspan="2">제 14(당)기 2020.03.25 현재</td>
-				<td class="table-head" colspan="2">제 13(전)기 2019.12.31 현재</td>
-			</tr>
-			<tr>
-				<td class="table-head" width="18%">잔액</td>
-				<td class="table-head" width="18%">합계</td>
-				<td class="table-head" width="18%">잔액</td>
-				<td class="table-head" width="18%">합계</td>
-			</tr>
-			<tr>
-				<td class="table-title">Ⅰ. 매출액</td>
-				<td class="table-title"></td>
-				<td class="table-title"></td>
-				<td class="table-title"></td>
-				<td class="table-title"></td>
-			</tr>
-			<tr>
-				<td class="table-subSubTitle">상품매출</td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-			</tr>
-			<tr>
-				<td class="table-subSubTitle">제품매출</td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-			</tr>
-			<tr>
-				<td class="table-title">Ⅱ. 매출원가</td>
-				<td class="table-title"></td>
-				<td class="table-title"></td>
-				<td class="table-title"></td>
-				<td class="table-title"></td>
-			</tr>
-			<tr>
-				<td class="table-subTitle">상품매출원가</td>
-				<td class="table-subTitle"></td>
-				<td class="table-subTitle"></td>
-				<td class="table-subTitle"></td>
-				<td class="table-subTitle"></td>
-			</tr>
-			<tr>
-				<td class="table-subSubTitle">기초상품재고액</td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-			</tr>
-			<tr>
-				<td class="table-subSubTitle">당기상품재고액</td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-			</tr>
-			<tr>
-				<td class="table-subSubTitle">기말상품재고액</td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-			</tr>
-			<tr>
-				<td class="table-subTitle">제품매출원가</td>
-				<td class="table-subTitle"></td>
-				<td class="table-subTitle"></td>
-				<td class="table-subTitle"></td>
-				<td class="table-subTitle"></td>
-			</tr>
-			<tr>
-				<td class="table-subSubTitle">기초제품재고액</td>
-				<td><input type="text" id="inputNum" onkeyup="inputNumberFormat(this)"></td>
-				<td></td>
-				<td></td>
-				<td></td>
-			</tr>
-			<tr>
-				<td class="table-subSubTitle">당기제품재고액</td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-			</tr>
-			<tr>
-				<td class="table-subSubTitle">기말제품재고액</td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-			</tr>
-			<tr>
-				<td class="table-title">Ⅲ. 매출총이익</td>
-				<td class="table-title"></td>
-				<td class="table-title"></td>
-				<td class="table-title"></td>
-				<td class="table-title"></td>
-			</tr>
-			<tr>
-				<td class="table-title">Ⅳ. 판매비와관리비</td>
-				<td class="table-title"></td>
-				<td class="table-title"></td>
-				<td class="table-title"></td>
-				<td class="table-title"></td>
-			</tr>
-			<tr>
-				<td class="table-title">Ⅴ. 영업이익</td>
-				<td class="table-title"></td>
-				<td class="table-title"></td>
-				<td class="table-title"></td>
-				<td class="table-title"></td>
-			</tr>
-			<tr>
-				<td class="table-title">Ⅵ. 영업외수익</td>
-				<td class="table-title"></td>
-				<td class="table-title"></td>
-				<td class="table-title"></td>
-				<td class="table-title"></td>
-			</tr>
-			<tr>
-				<td class="table-title">Ⅶ. 영업외비용</td>
-				<td class="table-title"></td>
-				<td class="table-title"></td>
-				<td class="table-title"></td>
-				<td class="table-title"></td>
-			</tr>
-			<tr>
-				<td class="table-title">Ⅷ. 법인세차감전이익</td>
-				<td class="table-title"></td>
-				<td class="table-title"></td>
-				<td class="table-title"></td>
-				<td class="table-title"></td>
-			</tr>
-			<tr>
-				<td class="table-title">Ⅸ. 법인세등</td>
-				<td class="table-title"></td>
-				<td class="table-title"></td>
-				<td class="table-title"></td>
-				<td class="table-title"></td>
-			</tr>
-			<tr>
-				<td class="table-title">Ⅹ. 당기순이익</td>
-				<td class="table-title"></td>
-				<td class="table-title"></td>
-				<td class="table-title"></td>
-				<td class="table-title"></td>
+				<td>
+					<div style="margin-bottom:10px; color:red;"><img src="${ contextPath }/resources/images/pencil.PNG">기말상품재고액을 입력하세요</div>		
+				</td>
+				<td align="right">
+					<button type="button" onclick="insertIncomeStmt();">마감</button>
+				</td>
 			</tr>
 		</table>
+		<form id="contentForm" action="insertIncomeStmt.fs" method="post">		
+			<table id="contentTable" width="1100px" style="text-align:center;">
+				<tr>
+					<td class="table-head" width="28%" rowspan="2">과&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;목</td>
+					<td class="table-head" colspan="2">제 14(당)기 2020.03.25 현재</td>
+					<td class="table-head" colspan="2">제 13(전)기 2019.12.31 현재</td>
+				</tr>
+				<tr>
+					<td class="table-head" width="18%">잔액</td>
+					<td class="table-head" width="18%">합계</td>
+					<td class="table-head" width="18%">잔액</td>
+					<td class="table-head" width="18%">합계</td>
+				</tr>
+				<tr>
+					<td class="table-title">Ⅰ. 매출액</td>
+					<td class="table-title"></td>
+					<td class="table-title"></td>
+					<td class="table-title"></td>
+					<td class="table-title"></td>
+				</tr>
+				<tr>
+					<td class="table-subSubTitle">상품매출</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td class="table-subSubTitle">제품매출</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td class="table-title">Ⅱ. 매출원가</td>
+					<td class="table-title"></td>
+					<td class="table-title"></td>
+					<td class="table-title"></td>
+					<td class="table-title"></td>
+				</tr>
+				<tr>
+					<td class="table-subTitle">상품매출원가</td>
+					<td class="table-subTitle"></td>
+					<td class="table-subTitle"></td>
+					<td class="table-subTitle"></td>
+					<td class="table-subTitle"></td>
+				</tr>
+				<tr>
+					<td class="table-subSubTitle">기초상품재고액</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td class="table-subSubTitle">당기상품재고액</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td class="table-subSubTitle">기말상품재고액</td>
+					<td><input type="text" id="inputNum" name="endingInvOfMdse" onkeyup="inputNumberFormat(this);"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td class="table-subTitle">제품매출원가</td>
+					<td class="table-subTitle"></td>
+					<td class="table-subTitle"></td>
+					<td class="table-subTitle"></td>
+					<td class="table-subTitle"></td>
+				</tr>
+				<tr>
+					<td class="table-subSubTitle">기초제품재고액</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td class="table-subSubTitle">당기제품재고액</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td class="table-subSubTitle">기말제품재고액</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td class="table-title">Ⅲ. 매출총이익</td>
+					<td class="table-title"></td>
+					<td class="table-title"></td>
+					<td class="table-title"></td>
+					<td class="table-title"></td>
+				</tr>
+				<tr>
+					<td class="table-title">Ⅳ. 판매비와관리비</td>
+					<td class="table-title"></td>
+					<td class="table-title"></td>
+					<td class="table-title"></td>
+					<td class="table-title"></td>
+				</tr>
+				<tr>
+					<td class="table-title">Ⅴ. 영업이익</td>
+					<td class="table-title"></td>
+					<td class="table-title"></td>
+					<td class="table-title"></td>
+					<td class="table-title"></td>
+				</tr>
+				<tr>
+					<td class="table-title">Ⅵ. 영업외수익</td>
+					<td class="table-title"></td>
+					<td class="table-title"></td>
+					<td class="table-title"></td>
+					<td class="table-title"></td>
+				</tr>
+				<tr>
+					<td class="table-title">Ⅶ. 영업외비용</td>
+					<td class="table-title"></td>
+					<td class="table-title"></td>
+					<td class="table-title"></td>
+					<td class="table-title"></td>
+				</tr>
+				<tr>
+					<td class="table-title">Ⅷ. 법인세차감전이익</td>
+					<td class="table-title"></td>
+					<td class="table-title"></td>
+					<td class="table-title"></td>
+					<td class="table-title"></td>
+				</tr>
+				<tr>
+					<td class="table-title">Ⅸ. 법인세등</td>
+					<td class="table-title"></td>
+					<td class="table-title"></td>
+					<td class="table-title"></td>
+					<td class="table-title"></td>
+				</tr>
+				<tr>
+					<td class="table-title">Ⅹ. 당기순이익</td>
+					<td class="table-title"></td>
+					<td class="table-title"></td>
+					<td class="table-title"></td>
+					<td class="table-title"></td>
+				</tr>
+			</table>
+		</form>
 		<div style="height: 10vh;"></div>
 		<div class="card mb-4">
 			<div class="card-body">When scrolling, the navigation stays at
@@ -279,7 +290,34 @@
 		function inputNumberFormat(str) {
 			str.value = comma(uncomma(str.value));
 		}
+		
+		/* 마감버튼 입력시 */
+		function insertIncomeStmt() {
+			console.log("마감 버튼 입력");
+			
+			num = uncomma($("#inputNum").val());
+			console.log("num : " + num);
+			
+			$("#inputNum").val(uncomma($("#inputNum").val()));
+			
+			$("#contentForm").submit();
+		}
 	</script>
 	<jsp:include page="../common/menubar2.jsp" />
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -594,6 +594,11 @@
 		</div>
 	</div>
 	<!-- 계정조회 모달 끝 -->
+	
+	<!-- jModal -->
+	<div id='modal'>
+		
+	</div>	
   
 	</main>
 	<script>
@@ -621,6 +626,10 @@
 			$(this).parent().css("background", "white");
 		});		
 	});
+	
+	$.modal = function(modalContent, size) {
+		$('#modal')
+	}
 	</script>
 	<jsp:include page="../common/menubar2.jsp" />
 </body>
