@@ -3,10 +3,9 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-  <mapper namespace="comInnerId">
+  <mapper namespace="ComInnerId">
   
   <insert id="insertComInnerId" parameterType="CreateCompanyInnerIdDto">
-  
    INSERT INTO COM_INNER_ID(
   		COM_INNER_ID_NUM
   	,	COM_CODE
@@ -15,6 +14,7 @@
   	,	PWD
   	,	EMAIL
   	,	NAME
+  	,	FILE_NAME
   	)
   	VALUES(
   		SEQ_SWY_SEQUENCE.NEXTVAL
@@ -24,32 +24,48 @@
   	,	#{pwd}
   	,	#{email}
     ,   #{name}
+    ,	#{sign}
   	) 
-  
   </insert>
+  
+  
+  
+  <!-- com.kh.jaga.companyInnerId.vo.SelectCompanyIdVo -->
+  <select id="selectComInIdList" resultMap="SelectCompanyIdVo">
+  	SELECT COM_INNER_ID_NUM, COM_CODE, POSITION_CODE, ID, PWD, EMAIL, NAME, FILE_NAME
+  	FROM COM_INNER_ID
+  </select>
+  
+  
+  
+  
+  <!-- 트랜잭션 테스트용 -->
+  <insert id="insertTest">
+  	INSERT INTO SWY_TEMP VALUES(SEQ_TX_TEST.NEXTVAL, SYSDATE);
+  </insert>
+  
+  
+  <!-- @@@@@@@@@@     resultMap     @@@@@@@@@@ -->
+  
+  <!-- 사내계정 vo -->
+  <resultMap type="com.kh.jaga.companyInnerId.model.vo.SelectCompanyIdVo" id="SelectCompanyIdVo">
+  	<id property="comInnerIdNum" column="COM_INNER_ID_NUM"/>
+  	<result property="comCode" column="COM_CODE" />
+  	<result property="positionCode" column="POSITION_CODE" />
+  	<result property="id" column="ID" />
+  	<result property="pwd" column="PWD" />
+  	<result property="email" column="EMAIL" />
+  	<result property="name" column="NAME" />
+  	<result property="fileName" column="FILE_NAME" />
+  </resultMap>
+  
+  
+  
+  
+  
   
   </mapper>
 
 
-  <!-- 
-  INSERT INTO COM_INNER_ID(
-  		COM_INNER_ID_NUM
-  	,	COM_CODE
-  	,	POSITION_CODE
-  	,	ID
-  	,	PWD
-  	,	EMAIL
-  	,	NAME
-  	)
-  	VALUES(
-  		'929'
-  	,	'10'
-  	,	'001'
-  	,	'test04142019'
-  	,	'pass01!'
-  	,	'email@naver.com'
-    ,   'swy'
-  	) 
-  	-->
   
   

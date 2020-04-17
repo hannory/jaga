@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="com.kh.jaga.companyInnerId.model.vo.SelectCompanyIdVo"%>
     
-      <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -107,6 +107,19 @@
 			<button>></button>
 			<button>>></button>
 		</div>
+		
+		<h1>zzz</h1>
+		
+		<c:forEach var="target" items="${ list }">
+		
+			<c:out value="${ target.comInnerIdNum }"></c:out>
+			<c:out value="${ target.email }"></c:out>
+			<c:out value="${ target.name }"></c:out>
+			<c:out value="${ target.positionCode }"></c:out>
+			<c:out value="${ target.pwd }"></c:out>
+			<br>
+			
+		</c:forEach>
 		
 	<!-- //작업공간 -->
 	</div>
