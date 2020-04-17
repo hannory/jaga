@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.kh.jaga.finStmt.model.dao.FinStmtDao;
 import com.kh.jaga.finStmt.model.dao.FinStmtDaoImpl;
 import com.kh.jaga.finStmt.model.vo.IncomeStmt;
+import com.kh.jaga.finStmt.model.vo.IncomeStmtAccount;
 
 @Service
 public class FinStmtServiceImpl implements FinStmtService {
@@ -28,6 +29,12 @@ public class FinStmtServiceImpl implements FinStmtService {
 		logger.info(fsd.toString());
 		
 		return fsd.insertIncomeStmt(sqlSession, i);
+	}
+
+	@Override
+	public IncomeStmtAccount selectIncomeStmt(IncomeStmtAccount isa) {
+
+		return fsd.selectIncomeStmt(sqlSession, isa);
 	}
 
 }
