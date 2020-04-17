@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="Employee">
+  
+  <resultMap type="Employee" id="employeeResultSet">
+  <id property="employeeCode" column="EMPLOYEE_CODE"></id> 
+  <result property="comCode" column="COM_CODE"></result>
+  <result property="employeeNum" column="EMPLOYEE_NUM"></result>
+  <result property="employeeName" column="EMPLOYEE_NAME"></result>
+  <result property="securityNum" column="SECURITY_NUMBER"></result>
+  <result property="salary" column="SALARY"></result>
+  <result property="email" column="EMAIL"></result>
+  <result property="bankCode" column="BANK_CODE"></result>
+  <result property="accountNum" column="ACCOUNT_NUMBER"></result>
+  <result property="accountHolder" column="ACCOUNT_HOLDER"></result>
+  <result property="department" column="DEPARTMENT"></result>
+  <result property="positionCode" column="POSITION_CODE"></result>
+  <result property="enrollDate" column="ENROLL_DATE"></result>
+  <result property="leaveDate" column="LEAVE_DATE"></result>
+  <result property="leaveReason" column="LEAVE_REASON"></result>
+  <result property="meals" column="MEALS"></result>
+  <result property="drivingSubsidies" column="DRIVING_SUBSIDIES"></result>
+  <result property="childcareAllowance" column="CHILDCARE_ALLOWANCE"></result>
+  <result property="acquisitionStatus" column="ACQUISITION_STATUS"></result>
+  <result property="big4PositionCode" column="BIG4POSITION_CODE"></result>
+ <result property="goyongSanjae" column="GOYONGSANJAE"></result>
+
+  </resultMap>
+  
+  <insert id="insertEmployee" parameterType="Employee">
+  INSERT INTO EMPLOYEE(EMPLOYEE_CODE,COM_CODE,EMPLOYEE_NUM,EMPLOYEE_NAME,SECURITY_NUMBER,SALARY,EMAIL,BANK_CODE,ACCOUNT_NUMBER,ACCOUNT_HOLDER,DEPARTMENT,POSITION_CODE,ENROLL_DATE,LEAVE_DATE,LEAVE_REASON,MEALS,DRIVING_SUBSIDIES,CHILDCARE_ALLOWANCE,ACQUISITION_STATUS,DEPRIVATION_STATUS,BIG4POSITION_CODE,GOYONGSANJAE)
+  VALUES (EMPLOYEE_SEQ.NEXTVAL,#{comCode},#{employeeNum},#{employeeName},#{securityNum},#{salary},#{email},#{bankCode},#{accountNum},#{accountHolder},#{department},#{positionCode},#{enrollDate},#{leaveDate},#{leaveReason},#{meals},#{drivingSubsidies},#{childcareAllowance},#{acquisitionStatus},#{deprivationStatus},#{big4PositionCode},#{goyongSanjae})
+  
+  </insert>
+  
+  
+  </mapper>
