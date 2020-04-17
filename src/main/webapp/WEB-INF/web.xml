@@ -143,7 +143,7 @@
    </servlet-mapping>
    
    
-      <servlet>
+      <servlet><!-- 신용카드등 수령명세서 -->
       <servlet-name>CcSalesSlipGap</servlet-name>
       <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
       <init-param>
@@ -154,6 +154,19 @@
    <servlet-mapping>
       <servlet-name>CcSalesSlipGap</servlet-name>
       <url-pattern>*.cssg</url-pattern>
+   </servlet-mapping>
+   
+   <servlet><!-- 신용카드등발행명세서 -->
+      <servlet-name>CcIssStmt</servlet-name>
+      <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+      <init-param>
+         <param-name>contextConfigLocation</param-name>
+         <param-value>/WEB-INF/config/CcIssStmt-servlet.xml</param-value>
+      </init-param>
+   </servlet>
+   <servlet-mapping>
+      <servlet-name>CcIssStmt</servlet-name>
+      <url-pattern>*.cis</url-pattern>
    </servlet-mapping>
    
    
@@ -171,7 +184,18 @@
       <url-pattern>*.ve</url-pattern>
    </servlet-mapping> 
    
-   
+   <servlet>
+   <servlet-name>employee</servlet-name>
+      <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+      <init-param>
+         <param-name>contextConfigLocation</param-name>
+         <param-value>/WEB-INF/config/employee-servlet.xml</param-value>
+      </init-param>
+   </servlet>
+   <servlet-mapping>
+      <servlet-name>employee</servlet-name>
+      <url-pattern>*.emp</url-pattern>
+   </servlet-mapping> 
    
    
 	

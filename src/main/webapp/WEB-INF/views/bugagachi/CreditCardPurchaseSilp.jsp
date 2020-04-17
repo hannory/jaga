@@ -107,45 +107,25 @@
 	<main>
 	<div class="container-fluid">
 			<h2 class="mt-4">신용카드매출전표등 발행금액 집계표</h2>
+			
 	<ol class="breadcrumb mb-4">
 			<li><button id="deadlineBtn">마감</button></li>
 			<li>1기예정</li>
             <li>조회기간:
-            	<input type="text" name="search_ye1" class="cc_year">
-            	<select class="cc_month" name="search_mon1">
+            	<input type="text" id="search_ye" class="cc_year" maxlength="4">
+            	<select class="cc_month" id="search_mon1">
             		<option value="">월</option>
-            		<option value="1">1</option>
-            		<option value="1">2</option>
-            		<option value="1">3</option>
-            		<option value="1">4</option>
-            		<option value="1">5</option>
-            		<option value="1">6</option>
-            		<option value="1">7</option>
-            		<option value="1">8</option>
-            		<option value="1">9</option>
-            		<option value="1">10</option>
-            		<option value="1">11</option>
-            		<option value="1">12</option>
+            		<option value="01">1</option>
+            		<option value="07">7</option>
             	</select> 
-            	~ 
-            	<input type="text" name="search_ye2" class="cc_year">
-            	<select class="cc_month" name="search_mon1">
+            	~
+            	<select class="cc_month" id="search_mon2">
             		<option value="">월</option>
-            		<option value="1">1</option>
-            		<option value="1">2</option>
-            		<option value="1">3</option>
-            		<option value="1">4</option>
-            		<option value="1">5</option>
-            		<option value="1">6</option>
-            		<option value="1">7</option>
-            		<option value="1">8</option>
-            		<option value="1">9</option>
-            		<option value="1">10</option>
-            		<option value="1">11</option>
-            		<option value="1">12</option>
+            		<option value="06">6</option>
+            		<option value="12">12</option>
             	</select> 
             </li>
-            <li><input type="button" name="search" value="조회"></li>
+            <li><input type="button" onclick="search_cis()" name="search" value="조회"></li>
             <li><input type="button" name="report" value="신고서미리보기"></li>
 			
 		</ol>
@@ -163,15 +143,16 @@
                 <table align="center" id="totalSum">
                     <tr>
                         <td class="green">상호</td>
-                        <td class="green_value"></td>
+                        <td class="green_value"><c:out value="${ sessionScope.loginCompany.bizName }"/></td>
                         <td class="green">성명</td>
-                        <td class="green_value"></td>
+                        <td class="green_value"><c:out value="${ sessionScope.loginCompany.bossName }"/></td>
                         <td class="green">사업등록번호</td>
-                        <td class="green_value"></td>
+                        <c:set var="comCode" value="${ sessionScope.loginCompany.companyCode }"/>
+                        <td class="green_value"><c:out value="${ sessionScope.loginCompany.bizNum }"/></td>
                     </tr>
                     <tr>
                     	<td class="green">사업장소재지</td>
-                    	<td class="green_value" colspan="5"></td>
+                    	<td class="green_value" colspan="5"><c:out value="${ sessionScope.loginCompany.bizLocation }"/></td>
                     </tr>
                    
                 </table>
@@ -180,6 +161,79 @@
             
         </tr>
         <!-- 1.인적사항 표 끝 -->
+        <script type="text/javascript">
+	 	function search_cis(){
+	 		var search_ye= $("#search_ye").val();
+	 		var search_mon1= $("#search_mon1").val();
+	 		var search_mon2= $("#search_mon2").val();
+	 		var comCode=${comCode};
+	 		console.log(search_ye);
+	 		console.log(search_mon1);
+	 		console.log(search_mon2);
+	 		console.log(comCode);
+	 		
+	 		$.ajax({
+	 			url:"ccIssStmt.cssg",
+	 			type:"post",
+	 			data:{search_ye:search_ye, search_mon1:search_mon1, search_mon2:search_mon2, comCode:comCode },
+	 			success: function(data){
+	 				console.log(data);
+	 			/* 	//1111111111111111111111111111111111111111111111111111111111
+	 				var $replySelectTable = $("#replySelectTable");
+					$replySelectTable.html('');
+					
+					for(var key in data) {
+						var $tr = $("<tr>");
+						var $writerTd = $("<td>").text(data[key].nickName).css("width", "100px");
+						var $contentTd = $("<td>").text(data[key].bContent).css("width", "400px");
+						var $dateTd = $("<td>").text(data[key].bDate).css("width", "200px");
+						
+						$tr.append($writerTd);
+						$tr.append($contentTd);
+						$tr.append($dateTd);
+						
+						$replySelectTable.append($tr);
+					}//1111111111111111111111111111111111111
+					 
+                  */
+	 				var cis=data.cis; 
+	 				$("#tAc").text(cis.cardTax);
+	 				$("#tAcash").text(cis.cashTax);
+	 				$("#tAd").text(cis.digitalTax);
+	 				$("#fAc").text(cis.cardTaxFree);
+	 				$("#fAcash").text(cis.cashTaxFree);
+	 				$("#fAd").text(cis.digitalTaxFree);
+	 				$("#serAc").text(cis.cardSvc);
+	 				$("#serAcash").text(cis.cashSvc);
+	 				$("#serAd").text(cis.digitalSvc);
+					
+	 				//합계부분
+					var cardSum=cis.cardTax+cis.cardTaxFree+cis.cardSvc;/* 카드합계 */
+					$("#cAs").text(cardSum);
+					var cashSum=cis.cashTax+cis.cashTaxFree+cis.cashSvc;/* 현금영수증합계 */
+					$("#cashAs").text(cashSum);
+					var dSum=cis.digitalTax+cis.digitalTaxFree+cis.digitalSvc;/* 전자지급수단 합계 */
+					$("#dAs").text(dSum);
+					var taxSum=cis.cashTax+cis.cardTax+cis.digitalTax;
+					$("#tAs").text(taxSum);
+					var freeSum=cis.cardTaxFree+cis.cashTaxFree+cis.digitalTaxFree;
+					$("#fAs").text(freeSum);
+					var serSum=cis.cardSvc+cis.cashSvc+cis.digitalSvc;
+					$("#serAs").text(serSum);
+					var sumSum=taxSum+freeSum+serSum;
+					$("#sAs").text(sumSum);
+	 				
+					//3.교부내역
+					$("#dTax").text(cis.taxinvIss);
+					$("#ndTax").text(cis.invIss);
+	 			},
+	 			error:function(error){
+	 				console.log(error);
+	 			}
+	 		});
+	 	}
+	 
+	 </script>
         <tr>
             <td colspan="10">
                 <div class="middleMenu">
@@ -201,31 +255,31 @@
                         </tr>
  						<tr>
  							<td class="green" align="center"><div class="table-justify3"><div>합</div><div>계</div></td>
- 							<td class="green_value"></td>
- 							<td class="green_value"></td>
- 							<td class="green_value"></td>
- 							<td class="green_value"></td>
+ 							<td class="green_value" id="sAs"></td>
+ 							<td class="green_value" id="cAs"></td>
+ 							<td class="green_value" id="cashAs"></td>
+ 							<td class="green_value" id="dAs"></td>
  						</tr>
  						<tr>
  							<td class="green" align="center"><div class="table-justify3"><div>과</div><div>세</div><div>매</div><div>출</div><div>분</div></td>
- 							<td class="green_value"></td>
- 							<td></td>
- 							<td></td>
- 							<td></td>
+ 							<td class="green_value" id="tAs"></td>
+ 							<td id="tAc"></td>
+ 							<td id="tAcash"></td>
+ 							<td id="tAd"></td>
  						</tr>
  						<tr>
  							<td class="green" align="center"><div class="table-justify3"><div>면</div><div>세</div><div>매</div><div>출</div><div>분</div></td>
- 							<td class="green_value"></td>
- 							<td></td>
- 							<td></td>
- 							<td></td>
+ 							<td class="green_value" id="fAs"></td>
+ 							<td id="fAc"></td>
+ 							<td id="fAcash"></td>
+ 							<td id="fAd"></td>
  						</tr>
  						<tr>
  							<td class="green" align="center"><div class="table-justify3"><div>봉</div><div>사</div><div>료</div></td>
- 							<td class="green_value"></td>
- 							<td></td>
- 							<td></td>
- 							<td></td>
+ 							<td class="green_value" id="serAs"></td>
+ 							<td id="serAc"></td>
+ 							<td id="serAcash"></td>
+ 							<td id="serAd"></td>
  						</tr>
                         
                     </table>
@@ -245,9 +299,9 @@
         	<table id="tax_pur">
         		<tr>
         			<td class="green">세금계산서발급금액</td>
-        			<td class="green_value" style="width: 30%"></td>
+        			<td class="green_value" style="width: 30%" id="dTax"></td>
         			<td class="green">계산서발급금액</td>
-        			<td class="green_value" style="width: 30%"></td>
+        			<td class="green_value" style="width: 30%" id="ndTax"></td>
         		</tr>
         	
         	</table>
