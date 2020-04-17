@@ -11,6 +11,9 @@
   <result property="filePath" column="FILE_PATH"></result>
   <result property="type" column="TYPE"></result>
   <result property="comCode" column="FK_CODE"></result>
+  <result property="newFileName2" column="NEW_FILENAME"></result>
+  <result property="filePath2" column="FILE_PATH"></result>
+  <result property="type2" column="TYPE"></result>
 
 
   </resultMap>
@@ -20,5 +23,9 @@
   VALUES (ATTACHMENT_SEQ.NEXTVAL,#{newFileName},#{filePath},1,#{comCode})
   </insert>
   
+    <insert id="insertAttachment2" parameterType="Attachment">
+  INSERT INTO ATTACHMENT(FILE_CODE,NEW_FILENAME,FILE_PATH,TYPE,FK_CODE)
+  VALUES (ATTACHMENT_SEQ.NEXTVAL,#{newFileName2},#{filePath2},2,#{comCode})
+  </insert>
   
   </mapper>

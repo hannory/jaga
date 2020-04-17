@@ -25,37 +25,57 @@ private EmployeeService es;
 
 	
 @RequestMapping("insert.emp")
-public String insertEmployee(Model model, Employee e, HttpServletRequest request, @RequestParam MultipartFile idDocument) {
+public String insertEmployee(Model model, Employee e, HttpServletRequest request, @RequestParam MultipartFile idDocument, MultipartFile accountDocument) {
 	
 	String root = request.getSession().getServletContext().getRealPath("resources");
+	String root2 = request.getSession().getServletContext().getRealPath("resources");
+	
 	String filePath=root+"\\uploadFiles";
+	String filePath2=root2+"\\uploadFiles";
 	
 	String originFileName = idDocument.getOriginalFilename();
+	String originFileName2 = accountDocument.getOriginalFilename();
 	String ext = originFileName.substring(originFileName.lastIndexOf("."));
+	String ext2 = originFileName2.substring(originFileName2.lastIndexOf("."));
 	String changeName = CommonsUtils.getRandomString();
+	String changeName2 = CommonsUtils.getRandomString();
 	
 		
- String fileCode = null; 
-		/* String comCode = request.getParameter("loginCompany.comCode"); */
- int type=1;
+	String fileCode = null; 
+	String fileCode2 = null; 
+
+	int type=0;
+	int type2=0;
 		 
 	
 	Attachment at = new Attachment();
-		/*
-		 * at.setComCode(comCode); at.setFileCode(fileCode)
-		 */;
+
 	at.setFilePath(filePath);
 	at.setNewFileName(changeName);
 	at.setType(type);
 	at.setFileCode(fileCode);
 	at.setComCode(e.comCode);
+	
+	
+	Attachment at2 = new Attachment();
+
+	 at2.setFilePath(filePath2);
+	 at2.setNewFileName(changeName2);
+	 at2.setType(type2);
+	 at2.setFileCode(fileCode2);
+	 at2.setComCode(e.comCode);
+
+	
 	try {
 		idDocument.transferTo(new File(filePath+"\\"+changeName+ext));
+		accountDocument.transferTo(new File(filePath2+"\\"+changeName2+ext2));
 		es.insertEmployee(e);
 		es.insertAttachment(at);
+		es.insertAttachment2(at2);
 		return "redirect:index.jsp";
 	} catch (Exception e1) {
 		new File(filePath+"\\"+changeName+ext).delete();
+		new File(filePath+"\\"+changeName2+ext2).delete();
 		model.addAttribute("msg","근로자 등록 실패!");
 		
 		return "common/errorpage";

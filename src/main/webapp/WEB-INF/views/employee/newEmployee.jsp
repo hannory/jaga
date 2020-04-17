@@ -90,12 +90,11 @@ color: #000000;
 
 #row-employee{
 position: absolute;
-width: 90px;
-height: 0px;
+width: 100px;
 left: 304px;
 top: 180px;
 
-border: 3px solid #24574A;
+border: 2px solid #24574A;
 }
 /* 일용근로자 big-one-imployee */
 
@@ -158,7 +157,7 @@ position: absolute;
 width: 82px;
 height: 29px;
 left: 1228px;
-top: 233px;
+top: 203px;
 
 font-family: Roboto;
 font-style: normal;
@@ -181,7 +180,7 @@ position: absolute;
 width: 90px;
 height: 29px;
 left: 1228px;
-top: 233px;
+top: 203px;
 
 background: #296355;
 border-radius: 5px;
@@ -704,7 +703,7 @@ border-radius: 0px 5px 5px 0px;
 position: absolute;
 width: 125px;
 height: 24px;
-left: 896px;
+left: 916px;
 top: 809px;
 
 font-family: Roboto;
@@ -726,7 +725,7 @@ color: #4C4C4C;
 position: absolute;
 width: 27px;
 height: 27px;
-left: 1037px;
+left: 1057px;
 top: 806px;
 
 background: #FFFFFF;
@@ -739,9 +738,9 @@ border-radius: 5px;
 
 #zero-one-1{
 position: absolute;
-width: 53px;
+width: 55px;
 height: 24px;
-left: 1073px;
+left: 1093px;
 top: 809px;
 
 font-family: Roboto;
@@ -761,7 +760,7 @@ color: #4C4C4C;
 position: absolute;
 width: 125px;
 height: 24px;
-left: 896px;
+left: 916px;
 top: 847px;
 
 font-family: Roboto;
@@ -783,7 +782,7 @@ color: #4C4C4C;
 position: absolute;
 width: 27px;
 height: 27px;
-left: 1037px;
+left: 1057px;
 top: 845px;
 
 background: #FFFFFF;
@@ -796,9 +795,9 @@ border-radius: 5px;
 
 #zero-one-2{
 position: absolute;
-width: 53px;
+width: 55px;
 height: 24px;
-left: 1073px;
+left: 1093px;
 top: 848px;
 
 font-family: Roboto;
@@ -1090,7 +1089,7 @@ color: #4C4C4C;
 #id-docu1-surr{
 
 position: absolute;
-width: 356px;
+width: 450px;
 height: 27px;
 left: 659px;
 top: 1242px;
@@ -1198,7 +1197,7 @@ border-radius: 5px;
 
 #account-docu-surr{
 position: absolute;
-width: 356px;
+width: 450px;
 height: 27px;
 left: 659px;
 top: 1294px;
@@ -1377,7 +1376,104 @@ box-sizing: border-box;
 border-radius: 2px;
 }
 
+/* 퇴사란 */
+#leavegongsi-surr{
 
+position: absolute;
+width: 222px;
+height: 27px;
+left: 1035px;
+top: 503px;
+
+background: #FFFFFF;
+border: 1px solid #C4C4C4;
+box-sizing: border-box;
+border-radius: 5px;
+}
+
+/* 퇴사년월일 */
+
+#leavegongsi{
+position: absolute;
+width: 104px;
+height: 24px;
+left: 917px;
+top: 507px;
+
+font-family: Roboto;
+font-style: normal;
+font-weight: bold;
+font-size: 12px;
+line-height: 14px;
+display: flex;
+align-items: center;
+text-align: right;
+
+color: #4C4C4C;
+}
+
+
+/* 직원번호 employeeNum*/
+
+#employeeNum{
+position: absolute;
+width: 60px;
+height: 24px;
+left: 547px;
+top: 285px;
+
+font-family: Roboto;
+font-style: normal;
+font-weight: bold;
+font-size: 12px;
+line-height: 14px;
+display: flex;
+align-items: center;
+text-align: right;
+
+color: #4C4C4C;
+}
+
+
+/*직원번호란 employeeNum-surr  */
+
+#employeeNum-surr{
+position: absolute;
+width: 222px;
+height: 27px;
+left: 661px;
+top: 285px;
+
+background: #FFFFFF;
+border: 1px solid #C4C4C4;
+box-sizing: border-box;
+border-radius: 5px;
+}
+
+/* 퇴사사유버튼란 */
+
+#leaveReason-surr{
+position: absolute;
+width: 70px;
+height: 29px;
+left: 1271px;
+top: 501px;
+
+background: #296355;
+border-radius: 5px;
+}
+
+
+/* 왼쪽리스트영역  */
+
+#listdiv{
+position: absolute;
+width: 165px;
+height: 462px;
+left: 340px;
+top: 320px;
+
+}
 </style>
 </head>
 <body>
@@ -1387,6 +1483,7 @@ border-radius: 2px;
 	<div id="main">
 	<div class="container-fluid">
 
+
 <div id="main">
 <div id="employee-manage">직원관리</div>
 <div id="big-employee">일반근로자</div>
@@ -1395,8 +1492,17 @@ border-radius: 2px;
 <div id="big-income-employee">사업소득자</div>
 <div id="border2"></div>
 <input type="search" id="search-surr">
-<div id="yoo">유길동</div>
-<div id="underline"></div>
+
+<div id="listdiv">
+<table>
+<tr> <td>1001 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td><td>유지방</td>
+</tr>
+<tr> <td>1002</td><td>유지방</td>
+</tr>
+<tr> <td>1003</td><td>유지방</td>
+</tr>
+</table>
+</div>
 <div id="border">
 <div id="vertical"> 
 
@@ -1416,10 +1522,8 @@ border-radius: 2px;
 <input type="text" id="name-surr" name="employeeName"> 
 <b id="security-num">주민등록번호</b>
 <input type="text" id="security-num-surr" name="securityNum">
-<b >직원 번호 </b>
-<input type="text" name="employeeNum">
-<b>직원 이름</b>
-<input type="text" name="employeeName">
+<b id="employeeNum" >직원 번호 </b>
+<input type="text" id="employeeNum-surr" name="employeeNum">
 </td>
 </tr>
 
@@ -1439,14 +1543,12 @@ border-radius: 2px;
 </tr>
 
 <tr>
-<td><b id="enroll-date">입사년월일</b>
-<input type="text" id="enroll-date-surr" name="enrollDate">
-<b id="byeyear">퇴사년월일</b>
-<div id="byeyear-surr"> </div>
-<!-- <button id="byeyear-btn">퇴사일등록</button> -->
-<input type="text" name="leaveDate">
-<div id="">퇴사사유</div>
-<input type="text" name="leaveReason">
+<td><b id="enroll-date" >입사년월일</b>
+<input type="text" id="enroll-date-surr" name="enrollDate" placeholder="2020-00-00 입력">
+<b id="leavegongsi">퇴사년월일</b>
+<input type="text" id="leavegongsi-surr" name="leaveDate"  placeholder="2020-00-00 입력"> 
+<button id="leaveReason-surr" style="color:white; font-size:6px;">퇴사사유</button>
+<!-- <input type="text" name="leaveReason" > -->
 </td>
 </tr>
 
@@ -1575,7 +1677,6 @@ border-radius: 2px;
 <td>
 <b id="id-docu">신분증명서류</b>
 <input type="file" id="id-docu1-surr" name="idDocument"> 
-<button id="uploadbtn1-surr" style="color:white">업로드</button> 
 </td>
 </tr>
 
@@ -1583,12 +1684,12 @@ border-radius: 2px;
 <td>
 <b id="account-docu">급여계좌사본</b>
 <input type="file" id="account-docu-surr" value="2"  name="accountDocument">
-<button id="uploadbtn2-surr" style="color:white">업로드</button> 
 </td>
 </tr>
 </form>
 </div>
 </div>
+
 
 <div style="height: 100vh;"></div>
 		<div class="card mb-4">

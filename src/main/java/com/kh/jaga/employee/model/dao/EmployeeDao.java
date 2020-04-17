@@ -10,5 +10,6 @@ public interface EmployeeDao {
 	int insertEmployee(SqlSessionTemplate sqlSession, Employee e);
 
 	int insertAttachment(SqlSessionTemplate sqlSession, Attachment at);
-
+	
+	int insertAttachment2(SqlSessionTemplate sqlSession, Attachment at2);
 }

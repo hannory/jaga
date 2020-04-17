@@ -8,16 +8,28 @@ public class Attachment implements java.io.Serializable{
 	private String filePath;
 	private String comCode;
 
+	private String fileCode2;
+	private String newFileName2;
+	private int type2;
+	private String filePath2;
+	private String comCode2;
+	
 	public Attachment() {
 	}
 
-	public Attachment(String fileCode, String newFileName, int type, String filePath, String comCode) {
+	public Attachment(String fileCode, String newFileName, int type, String filePath, String comCode, String fileCode2,
+			String newFileName2, int type2, String filePath2, String comCode2) {
 		super();
 		this.fileCode = fileCode;
 		this.newFileName = newFileName;
 		this.type = type;
 		this.filePath = filePath;
 		this.comCode = comCode;
+		this.fileCode2 = fileCode2;
+		this.newFileName2 = newFileName2;
+		this.type2 = type2;
+		this.filePath2 = filePath2;
+		this.comCode2 = comCode2;
 	}
 
 	public String getFileCode() {
@@ -60,11 +72,53 @@ public class Attachment implements java.io.Serializable{
 		this.comCode = comCode;
 	}
 
+	public String getFileCode2() {
+		return fileCode2;
+	}
+
+	public void setFileCode2(String fileCode2) {
+		this.fileCode2 = fileCode2;
+	}
+
+	public String getNewFileName2() {
+		return newFileName2;
+	}
+
+	public void setNewFileName2(String newFileName2) {
+		this.newFileName2 = newFileName2;
+	}
+
+	public int getType2() {
+		return type2;
+	}
+
+	public void setType2(int type2) {
+		this.type2 = type2;
+	}
+
+	public String getFilePath2() {
+		return filePath2;
+	}
+
+	public void setFilePath2(String filePath2) {
+		this.filePath2 = filePath2;
+	}
+
+	public String getComCode2() {
+		return comCode2;
+	}
+
+	public void setComCode2(String comCode2) {
+		this.comCode2 = comCode2;
+	}
+
 	@Override
 	public String toString() {
 		return "Attachment [fileCode=" + fileCode + ", newFileName=" + newFileName + ", type=" + type + ", filePath="
-				+ filePath + ", comCode=" + comCode + "]";
+				+ filePath + ", comCode=" + comCode + ", fileCode2=" + fileCode2 + ", newFileName2=" + newFileName2
+				+ ", type2=" + type2 + ", filePath2=" + filePath2 + ", comCode2=" + comCode2 + "]";
 	}
 
+	
 	
 }

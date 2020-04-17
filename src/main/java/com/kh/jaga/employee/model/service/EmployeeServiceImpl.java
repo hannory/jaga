@@ -34,4 +34,10 @@ public class EmployeeServiceImpl implements EmployeeService {
 		
 	}
 
+	@Override
+	public int insertAttachment2(Attachment at2) {
+		
+		return ed.insertAttachment(sqlSession, at2);
+	}
+
 }
