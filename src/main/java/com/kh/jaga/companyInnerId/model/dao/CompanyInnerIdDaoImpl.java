@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.jaga.companyInnerId.model.dto.CreateCompanyInnerIdDto;
 import com.kh.jaga.companyInnerId.model.exception.ComInIdException;
+import com.kh.jaga.companyInnerId.model.vo.SelectCompanyIdVo;
 @Repository
 public class CompanyInnerIdDaoImpl implements CompanyInnerIdDao {
 
@@ -23,14 +24,15 @@ public class CompanyInnerIdDaoImpl implements CompanyInnerIdDao {
 		return result;
 	}
 
+	//직원 계정 리스트 가져오기
 	@Override
-	public List selectComInIdList(SqlSessionTemplate sqlSession) {
+	public List<SelectCompanyIdVo> selectComInIdList(SqlSessionTemplate sqlSession) {
 
 		System.out.println("dao 호출됨 ㅎ");
-//		List list = sqlSession.selectList("ComInnerId.selectComInIdList"); 
+		List<SelectCompanyIdVo> list = sqlSession.selectList("ComInnerId.selectComInIdList"); 
 		
 		
-		return null;
+		return list;
 	}
 
 	

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.kh.jaga.companyInnerId.model.dao.CompanyInnerIdDao;
 import com.kh.jaga.companyInnerId.model.dto.CreateCompanyInnerIdDto;
 import com.kh.jaga.companyInnerId.model.exception.ComInIdException;
+import com.kh.jaga.companyInnerId.model.vo.SelectCompanyIdVo;
 
 @Service
 public class CompanyInnerIdServiceImpl implements CompanyInnerIdService {
@@ -46,11 +47,11 @@ public class CompanyInnerIdServiceImpl implements CompanyInnerIdService {
 	}
 
 	@Override
-	public List selectComInIdList() {
+	public List<SelectCompanyIdVo> selectComInIdList() {
 		
 		System.out.println("service 진입 ...");
 		
-		List list = dao.selectComInIdList(sqlSession);
+		List<SelectCompanyIdVo> list = dao.selectComInIdList(sqlSession);
 		
 		System.out.println("service > return list : " + list);
 		

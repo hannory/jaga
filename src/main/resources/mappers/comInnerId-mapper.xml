@@ -37,6 +37,9 @@
   </select>
   
   
+  
+  
+  <!-- 트랜잭션 테스트용 -->
   <insert id="insertTest">
   	INSERT INTO SWY_TEMP VALUES(SEQ_TX_TEST.NEXTVAL, SYSDATE);
   </insert>

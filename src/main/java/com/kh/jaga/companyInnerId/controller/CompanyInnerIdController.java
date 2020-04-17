@@ -20,6 +20,7 @@ import com.kh.jaga.common.CommonsUtils;
 import com.kh.jaga.companyInnerId.model.dto.CreateCompanyInnerIdDto;
 import com.kh.jaga.companyInnerId.model.exception.ComInIdException;
 import com.kh.jaga.companyInnerId.model.service.CompanyInnerIdService;
+import com.kh.jaga.companyInnerId.model.vo.SelectCompanyIdVo;
 
 /**
  * @author SWY
@@ -92,17 +93,22 @@ public class CompanyInnerIdController {
 		
 		System.out.println("showViewComInnerIdList.comInId 호출됨..");
 		
-		List list = service.selectComInIdList();
+		List<SelectCompanyIdVo> list = service.selectComInIdList();
 //		request.setAttribute("list", list);
 		
 		if(list != null) {
 			model.addAttribute(list);
 		}else {
-			
+			System.out.println("직원정보 조회 결과 없음");
 		}
 		
+		System.out.println("ctrl > list : " + list);
+		System.out.println("ctrl > list : " + ( (SelectCompanyIdVo) (list.get(0)) ).getId() );
 		
+		SelectCompanyIdVo tempVo = list.get(0);
 		
+		request.setAttribute("tempVo", tempVo);
+		request.setAttribute("list", list);
 		return "selectCompanyId";
 	}
 	
