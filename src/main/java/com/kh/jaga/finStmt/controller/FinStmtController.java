@@ -1,13 +1,19 @@
 package com.kh.jaga.finStmt.controller;
 
+import java.util.Date;
+
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.jaga.finStmt.model.service.FinStmtService;
 import com.kh.jaga.finStmt.model.vo.IncomeStmt;
+import com.kh.jaga.finStmt.model.vo.IncomeStmtAccount;
 
 /**
  * @author hannory
@@ -54,6 +60,15 @@ public class FinStmtController {
 		fss.insertIncomeStmt(i);
 		
 		return "redirect:index.jsp";
+	}
+	
+	@RequestMapping("selectIncomeStmt.fs")
+	public void selectIncomeStmt(IncomeStmtAccount isa, HttpServletResponse response) {
+		System.out.println("year : " + isa.getYear());
+		System.out.println("month : " + isa.getMonth());
+		isa.setAccountCode(40100);
+		
+		isa = fss.selectIncomeStmt(isa);
 	}
 }
 

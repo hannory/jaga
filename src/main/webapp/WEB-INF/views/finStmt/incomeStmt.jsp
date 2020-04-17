@@ -62,22 +62,6 @@
 		<table style="width:100%; max-width:1100px;">
 			<tr>
 				<td><h2 class="mt-4">재무제표</h2></td>
-				<td width="50%" align="right"><span>조회기간&nbsp;&nbsp;&nbsp;&nbsp;</span><input type="number" style="width:70px"> 년&nbsp;&nbsp;&nbsp;&nbsp;
-					<select>
-						<option>1</option>
-						<option>2</option>
-						<option>3</option>
-						<option>4</option>
-						<option>5</option>
-						<option>6</option>
-						<option>7</option>
-						<option>8</option>
-						<option>9</option>
-						<option>10</option>
-						<option>11</option>
-						<option>12</option>
-					</select> 월
-				</td>
 			</tr>
 		</table>
 		<table style="margin-bottom:15px">
@@ -90,6 +74,30 @@
 				<td align="right" style="width:180px;"><div id="foldBtn"><img id="foldImg" src="${ contextPath }/resources/images/fold.PNG"></div></td>
 			</tr>
 		</table>
+		<ol class="breadcrumb mb-4">
+			<table id="searchReTable">
+				<tr>
+					<td style="width:150px;">조회기간 : </td>
+					<td>
+						<input type="number" id="year" name="year" style="width:70px"> 년&nbsp;&nbsp;&nbsp;&nbsp;
+						<select id="month" name="month">
+							<option>1</option>
+							<option>2</option>
+							<option>3</option>
+							<option>4</option>
+							<option>5</option>
+							<option>6</option>
+							<option>7</option>
+							<option>8</option>
+							<option>9</option>
+							<option>10</option>
+							<option>11</option>
+							<option>12</option>
+						</select> 월&nbsp;&nbsp;&nbsp;&nbsp;
+						<button onclick="return dateSearch();">검색</button></td>
+				</tr>
+			</table>
+		</ol>
 		<table style="width:100%; max-width:1100px;">
 			<tr>
 				<td>
@@ -122,9 +130,9 @@
 				</tr>
 				<tr>
 					<td class="table-subSubTitle">상품매출</td>
+					<td id="sales-merchandise-current"></td>
 					<td></td>
-					<td></td>
-					<td></td>
+					<td id="sales-merchandise-past"></td>
 					<td></td>
 				</tr>
 				<tr>
@@ -301,6 +309,31 @@
 			$("#inputNum").val(uncomma($("#inputNum").val()));
 			
 			$("#contentForm").submit();
+		}
+		
+		function dateSearch() {
+			var year = $("#year").val();
+			var month = $("#month").val();
+			
+			console.log(year);
+			console.log(month);
+			
+			$.ajax({
+				url : "selectIncomeStmt.fs",
+				type : "get",
+				data : {
+					year : year,
+					month : month
+				},
+				success : function(data) {
+					$("#sales-merchandise-current").text(data);
+				},
+				error : function(status) {
+					console.log(status);
+				}
+			});
+			
+			return false;
 		}
 	</script>
 	<jsp:include page="../common/menubar2.jsp" />
