@@ -8,12 +8,17 @@
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    
+    
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+  
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
 
 <style>
 	body{
 		background:red;
 	}
-
+ 
 	input {
 	border-top-left-radius: 5px;
 	border-top-right-radius: 5px;
@@ -61,13 +66,10 @@
 		border: 1px solid #888888;
 		color: white;
 	}
-	#searchBtn{
+	button[id^=searchBtn]{
 		background: none;
 		border: none;
 		outline: none;
-	}
-	button[id^=searchBtn]{
-		
 	}
 	#hideArea {
 		display: none;
@@ -76,7 +78,10 @@
 		display: none;
 	}
 	
-	
+	main td {
+		padding-top: 8px;
+		padding-bottom: 8px;
+	}
 	
 	/* The Modal (background) */
         .modal {
@@ -124,6 +129,9 @@
         	background: #296355;
         } 
 	
+	#resultReTable input {
+		text-align: center;
+	}
 </style>
 </head>
 <body>
@@ -131,7 +139,7 @@
 	<main>
 	<div class="container-fluid">
 		<h2 class="mt-4">매입매출전표입력</h2>
-			<form>
+			<form action="insertReceiption.rp" method="post">
 		<div class="card mb-4">
 			<div class="card-body">
 				<table id="insertReTable" border="1">
@@ -169,7 +177,7 @@
 								<option value="80">현금영수증(면세)</option>
 								<option value="90">현금영수증(영세)</option>
 							</select>
-							<select name="evidenceCode" id="evidence2">
+							<select name="evidenceCode" id="evidence2" disabled>
 								<option value="10">세금계산서</option>
 								<option value="20">계산서</option>
 								<option value="30">영세율</option>
@@ -200,7 +208,7 @@
 					<tr>
 						<td>거래처</td>
 						<td colspan="3">
-							<input name="venderCode" type="text">
+							<input type="text" id="venderCode">
 								<button type="button" id="searchBtn2">
 									<img alt="" src="${contextPath}/resources/images/search.PNG" width="20px" height="20px">
 								</button>
@@ -235,11 +243,10 @@
 								</button>
 							
 							<input type="text" name="accountName" id="accountName">
-							<input type="hidden" name="">
 						</td>
 					</tr>
 					<tr>
-						<td>출금계정과목</td>
+						<td>입금계정과목</td>
 						<td colspan="3">
 							<input type="text" id="accountCode2">
 								<button type="button" id="searchBtn4">
@@ -339,6 +346,61 @@
 			dateFormat : 'yy-mm-dd'
 
 		});
+	
+		var accountC = "";//계정과목
+		var accountN;
+		function aaa(value){
+			$(value).parent().parent().children().each(function(index){
+				console.log($(this).text());
+				accountC += ","+$(this).text();
+			})
+			var account = accountC.split(",");
+			accountC = account[1];
+			accountN = account[2];
+			
+			$("#accountCode").val(accountC);
+			$("#accountName").val(accountN);
+			
+			$("div#accountModal").modal("hide");
+			
+		}		
+	
+	
+		var accountCo;//출금/입금계정과목
+		var accountNN;
+		function bbb(value){
+			$(value).parent().parent().children().each(function(index){
+				console.log($(this).text());
+				accountCo += ","+$(this).text();
+			})
+			var account = accountCo.split(",");
+			accountCo = account[1];
+			accountNN = account[2];
+			
+			$("#accountCode2").val(accountCo);
+			$("#accountName2").val(accountNN);
+			
+			$("div#accountModal").modal("hide");
+		}		
+		
+		
+		var venderCo;//출금/입금계정과목
+		var venderNN;
+		function ccc(value){
+			$(value).parent().parent().children().each(function(index){
+				console.log($(this).text());
+				venderCo += ","+$(this).text();
+			})
+			var account = venderCo.split(",");
+			venderCo = account[1];
+			venderNN = account[2];
+			
+			$("#venderCode").val(venderCo);
+			$("#venderName").val(venderNN);
+			
+			$("div#accountModal").modal("hide");
+		}		
+	
 		
 		$(function() {
 			$("#datepicker").datepicker({});
@@ -352,18 +414,20 @@
 				if($(this).val() == 'buy'){
 					/* 매입 */
 					divisionn = 'buy';
-					$("#insertReTable tr").eq(8).children().eq(0).text("입금계정과목");
-					$("#evidence2").css("display", "block");
-					$("#evidence1").css("display", "none");
+					$("#insertReTable tr").eq(9).children().eq(0).text("출금계정과목");
+					$("#evidence2").css("display", "block").attr("disabled", false);
+					$("#evidence1").css("display", "none").attr("disabled", true);
 				}else if($(this).val() == 'sale'){
 					/* 매출 */
 					divisionn = 'sale';
-					$("#insertReTable tr").eq(8).children().eq(0).text("출금계정과목");
-					$("#evidence1").css("display", "block");
-					$("#evidence2").css("display", "none");
+					$("#insertReTable tr").eq(9).children().eq(0).text("입금계정과목");
+					$("#evidence1").css("display", "block").attr("disabled", false);
+					$("#evidence2").css("display", "none").attr("disabled", true);
 				}
 			});
 			
+			
+			/* 공급대가 입력시 부가세 자동 계산 */
 			$("#supplydeaga").blur(function(){
 				var supply = $(this).val();
 				$.ajax({
@@ -382,14 +446,17 @@
 			
 			/* 전표미리보기 이벤트 */
 			$("#preview").click(function(){
+				$("#resultReTable tbody").remove();
+				
 				$("#hideArea").css("display", "block");
 				//108 외상 매출금 / 401 상품 
-				//255 부가세예수금
+				//				255 부가세예수금
 				var accountCode = $("#accountCode").val();
 				var accountCode2 = $("#accountCode2").val();
 				var accName = $("#accountName").val();
 				var accName2 = $("#accountName2").val();
 				var venderName = $("#venderName").val();
+				var venderCode = $("#venderCode").val();
 				var supplydeaga = $("#supplydeaga").val();	//공급대가
 				var supplyValue = $("#supplyValue").val();	//공급가액
 				var valueTax = $("#valueTax").val();	//부가세
@@ -402,30 +469,154 @@
 				if(divisionn == 'buy'){
 					/* 매입 */
 					/* 135부가세대급금 */
+					var $resultTable = $("#resultReTable");
+					
+					
+					var $tr2 = $("<tr>");
+					var accCo = $("<input type='hidden' name='accountCode'>").val(accountC);
+					var venCo = $("<input type='hidden' name='venderCode'>").val(venderCode);
+					var debitCredit = $("<input type='hidden' name='debitCredit'>").val('차변');
+					var $sangpum = $("<td>").html($("<input type='text' name='price'>").val(supplyValue));
+					var $vender = $("<td>").html($("<input type='text'>").val(venderName));
+					var $accN = $("<td>").html($("<input type='text'>").val(accountN));
+					
+					$tr2.append($accN);
+					$tr2.append($vender);
+					$tr2.append($sangpum);
+					$tr2.append($("<td>"));
+					$tr2.append(accCo);
+					$tr2.append(venCo);
+					$tr2.append(debitCredit);
+					$resultTable.append($tr2);
+					
+					var $tr = $("<tr>");
+					
+					var accCo = $("<input type='hidden' name='accountCode'>").val(13500);
+					var venCo = $("<input type='hidden' name='venderCode'>").val(venderCode);
+					var debitCredit = $("<input type='hidden' name='debitCredit'>").val('차변');
+					var $bugaYeah = $("<td>").html($("<input type='text' name='price'>").val(valueTax));
+					var $vender = $("<td>").html($("<input type='text'>").val(venderName));
+					var $accN = $("<td>").html($("<input type='text'>").val('부가세대급금'));
+					
+					$tr.append($accN);
+					$tr.append($vender);
+					$tr.append($bugaYeah);
+					$tr.append($("<td>"));
+					$tr.append(accCo);
+					$tr.append(venCo);
+					$tr.append(debitCredit);
+					$resultTable.append($tr);
+					
+					
+					
+					var $tr3 = $("<tr>");
+					
+					var accCo = $("<input type='hidden' name='accountCode'>").val(accountCo);
+					var venCo = $("<input type='hidden' name='venderCode'>").val(venderCode);
+					var debitCredit = $("<input type='hidden' name='debitCredit'>").val('대변');
+					var $bit = $("<td>").html($("<input type='text' name='price'>").val(supplydeaga));
+					var $vender = $("<td>").html($("<input type='text'>").val(venderName));
+					var $accN = $("<td>").html($("<input type='text'>").val(accountNN));
+					
+					$tr3.append($accN);
+					$tr3.append($vender);
+					$tr3.append($("<td>"));
+					$tr3.append($bit);
+					$tr3.append(accCo);
+					$tr3.append(venCo);
+					$tr3.append(debitCredit);
+					$resultTable.append($tr3);
+					
+					
+					
+					$("#resultReTable tr").each( function (index) {
+						var num = index - 1;
+				        $(this).find("input[name=accountCode]").attr("name", "journalizeList[" + num + "].accountCode");
+				        $(this).find("input[name=debitCredit]").attr("name", "journalizeList[" + num + "].debitCredit");
+				        $(this).find("input[name=price]").attr("name", "journalizeList[" + num + "].price");
+				        $(this).find("input[name=venderCode]").attr("name", "journalizeList[" + num + "].venderCode");
+				    });
+					
+					
 					
 				}else{
 					/* 매출 */
 					/* 255 부가세예수금 */
 					var $resultTable = $("#resultReTable");
+					
+					
+					var $tr2 = $("<tr>");
+					var accCo = $("<input type='hidden' name='accountCode'>").val(accountC);
+					var venCo = $("<input type='hidden' name='venderCode'>").val(venderCode);
+					var debitCredit = $("<input type='hidden' name='debitCredit'>").val('대변');
+					var $sangpum = $("<td>").html($("<input type='text' name='price'>").val(supplyValue));
+					var $vender = $("<td>").html($("<input type='text'>").val(venderName));
+					var $accN = $("<td>").html($("<input type='text'>").val(accountN));
+					
+					$tr2.append($accN);
+					$tr2.append($vender);
+					$tr2.append($("<td>"));
+					$tr2.append($sangpum);
+					$tr2.append(accCo);
+					$tr2.append(venCo);
+					$tr2.append(debitCredit);
+					$resultTable.append($tr2);
+					
 					var $tr = $("<tr>");
 					
-					var accCo = $("<input type='hidden' name='accountCode'>").val(255);
+					var accCo = $("<input type='hidden' name='accountCode'>").val(25500);
+					var venCo = $("<input type='hidden' name='venderCode'>").val(venderCode);
+					var debitCredit = $("<input type='hidden' name='debitCredit'>").val('대변');
 					var $bugaYeah = $("<td>").html($("<input type='text' name='price'>").val(valueTax));
 					var $vender = $("<td>").html($("<input type='text'>").val(venderName));
 					var $accN = $("<td>").html($("<input type='text'>").val('부가세예수금'));
 					
 					$tr.append($accN);
 					$tr.append($vender);
-					$tr.append($bugaYeah);
 					$tr.append($("<td>"));
+					$tr.append($bugaYeah);
+					$tr.append(accCo);
+					$tr.append(venCo);
+					$tr.append(debitCredit);
 					$resultTable.append($tr);
+					
+					
+					
+					var $tr3 = $("<tr>");
+					
+					var accCo = $("<input type='hidden' name='accountCode'>").val(accountCo);
+					var venCo = $("<input type='hidden' name='venderCode'>").val(venderCode);
+					var debitCredit = $("<input type='hidden' name='debitCredit'>").val('차변');
+					var $bit = $("<td>").html($("<input type='text' name='price'>").val(supplydeaga));
+					var $vender = $("<td>").html($("<input type='text'>").val(venderName));
+					var $accN = $("<td>").html($("<input type='text'>").val(accountNN));
+					
+					$tr3.append($accN);
+					$tr3.append($vender);
+					$tr3.append($bit);
+					$tr3.append($("<td>"));
+					$tr3.append(accCo);
+					$tr3.append(venCo);
+					$tr3.append(debitCredit);
+					$resultTable.append($tr3);
+					
+					
+					
+					$("#resultReTable tr").each( function (index) {
+						var num = index - 1;
+				        $(this).find("input[name=accountCode]").attr("name", "journalizeList[" + num + "].accountCode");
+				        $(this).find("input[name=debitCredit]").attr("name", "journalizeList[" + num + "].debitCredit");
+				        $(this).find("input[name=price]").attr("name", "journalizeList[" + num + "].price");
+				        $(this).find("input[name=venderCode]").attr("name", "journalizeList[" + num + "].venderCode");
+				    });
 					
 				}
 				
 			});
 			
-			
+			/* 거래처모달 */
 			$("#searchBtn2").click(function(){
+				/* $("#venderTable td").remove();
 				var $tbody = $("#venderTable tbody");
 				 $.ajax({
 						url:"venderSearch.rp",
@@ -441,7 +632,7 @@
 							for(var i = 0; i < list.length; i++){
 								
 								var $tr = $("<tr>");
-								var $codeTd = $("<td>").text(list[i].venderCode);
+								var $codeTd = $("<td>").html("<a href='#' onclick='ccc(this);'>"+list[i].venderCode+"</a>");
 								var $nameTd = $("<td>").text(list[i].venderName);
 								
 								$tr.append($codeTd);
@@ -450,12 +641,147 @@
 							}
 							
 						}
-					})
+					}) */
+					
+					
+					
+					/* $("#venderTable td").remove(); */
+				/* var $tbody = $("#venderTable tbody"); */
+				
+				$("#venderTable").dataTable({
+					destroy: true,
+					 ajax:{
+							'url':'venderSearch.rp',
+							'type':'get'
+						
+							/* success:function(data){
+								console.log(data);
+								var list = data.accountList;
+								
+								console.log(list.length); 
+								
+								for(var i = 0; i < list.length; i++){
+									
+									var $tr = $("<tr>");
+									var $codeTd = $("<td>").html("<a href='#' onclick='aaa(this);' >"+list[i].accountCode+"</a>");
+									var $nameTd = $("<td>").text(list[i].accountTitle);
+									
+									$tr.append($codeTd);
+									$tr.append($nameTd);
+									$tbody.append($tr);
+								};
+								
+							} */
+						},
+					 
+					 
+					 columns: [
+						 {data : "venderCode",
+							 "render": function(data, type, row){
+					                if(type=='display'){
+					                    data = '<a href="#" onclick="ccc(this);">' + data + '</a>';
+					                }
+					                return data;}},
+						 {data : "venderName"}
+						 
+					 ]
+				});
 				 $("div#accountModal").modal();
 				 
 				 
 			});
 			
+			
+			/* 계정과목모달 */
+			$("#searchBtn3").click(function(){
+				/* $("#venderTable td").remove(); */
+				/* var $tbody = $("#venderTable tbody"); */
+				$("#venderTable").dataTable({
+					destroy: true,
+					 ajax:{
+							'url':'accountSearch.rp',
+							'type':'get'
+						
+							/* success:function(data){
+								console.log(data);
+								var list = data.accountList;
+								
+								console.log(list.length); 
+								
+								for(var i = 0; i < list.length; i++){
+									
+									var $tr = $("<tr>");
+									var $codeTd = $("<td>").html("<a href='#' onclick='aaa(this);' >"+list[i].accountCode+"</a>");
+									var $nameTd = $("<td>").text(list[i].accountTitle);
+									
+									$tr.append($codeTd);
+									$tr.append($nameTd);
+									$tbody.append($tr);
+								};
+								
+							} */
+						},
+					 
+					 
+					 columns: [
+						 {data : "accountCode",
+							 "render": function(data, type, row){
+					                if(type=='display'){
+					                    data = '<a href="#" onclick="aaa(this);">' + data + '</a>';
+					                }
+					                return data;}},
+						 {data : "accountTitle"}
+						 
+					 ]
+				});
+				 $("div#accountModal").modal();
+			});
+			
+			
+			/* 출금계정과목모달 */
+			$("#searchBtn4").click(function(){
+				/* $("#venderTable td").remove(); */
+				/* var $tbody = $("#venderTable tbody"); */
+				$("#venderTable").dataTable({
+					destroy: true,
+					 ajax:{
+							'url':'accountSearch.rp',
+							'type':'get'
+						
+							/* success:function(data){
+								console.log(data);
+								var list = data.accountList;
+								
+								console.log(list.length); 
+								
+								for(var i = 0; i < list.length; i++){
+									
+									var $tr = $("<tr>");
+									var $codeTd = $("<td>").html("<a href='#' onclick='aaa(this);' >"+list[i].accountCode+"</a>");
+									var $nameTd = $("<td>").text(list[i].accountTitle);
+									
+									$tr.append($codeTd);
+									$tr.append($nameTd);
+									$tbody.append($tr);
+								};
+								
+							} */
+						},
+					 
+					 
+					 columns: [
+						 {data : "accountCode",
+							 "render": function(data, type, row){
+					                if(type=='display'){
+					                    data = '<a href="#" onclick="bbb(this);">' + data + '</a>';
+					                }
+					                return data;}},
+						 {data : "accountTitle"}
+						 
+					 ]
+				});
+				 $("div#accountModal").modal();
+			});
 			
 			function print(){
 				console.log("프린트 매입매출전표");				
@@ -463,6 +789,7 @@
 
 		});
 		
+				
 		
 	 </script>
 	<jsp:include page="../common/menubar2.jsp" />

@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
   <mapper namespace="Receiption">
-  	<resultMap type="VenderR" id="venderResultMap">
+  	 <resultMap type="VenderR" id="venderResultMap">
   		<id property="venderCode" column="VENDER_CODE"/>
   		<result property="comCode" column="COM_CODE"/>
   		<result property="bizRegNum" column="BIZ_REG_NUM"/>
@@ -26,13 +26,60 @@
   		<result property="bankCode" column="BANK_CODE"/>
   		<result property="farmersStatus" column="FARMERS_STATUS"/>
 		
+ 	</resultMap> 
+ 	
+ 	<resultMap type="Journalize" id="journalizeResultMap">
+		<id property="journalCode" column="JOURNAL_CODE"/>
+		<result property="slipCode" column="SLIP_CODE"/>
+		<result property="debitCredit" column="DEBIT_CREDIT"/>
+		<result property="price" column="PRICE"/>
+		<result property="accountCode" column="ACCOUNT_CODE"/>
+	</resultMap>
+ 	
+ 	<resultMap type="Receiption" id="receiptionResultMap">
+ 		<id property="slipCode" column="SLIP_CODE"/>
+ 		<result property="slipDivision" column="SLIP_DIVISION"/>
+ 		<result property="division" column="DIVISION"/>
+ 		<result property="slipDate" column="SLIP_DATE"/>
+ 		<result property="evidenceCode" column="EVIDENCE_CODE"/>
+ 		<result property="supplyValue" column="SUPPLY_VALUE"/>
+ 		<result property="valueTax" column="VALUE_TAX"/>
+ 		<result property="deemedStatus" column="DEEMED_STATUS"/>
+ 		<result property="resolutionCode" column="RESOLUTION_CODE"/>
+ 		<result property="brief" column="BRIEF"/>
+ 		<result property="item" column="ITEM"/>
+ 		<result property="comCode" column="COM_CODE"/>
+ 		<result property="dateSlipCode" column="DATE_SLIP_CODE"/>
+ 		<collection property="journalizeList" javaType="java.util.List" resultMap="journalizeResultMap"/>
  	</resultMap>
-  
+ 	 
+ 	 <resultMap type="AccountTitle" id="accountTitleResultMap">
+ 	 	<id property="accountCode" column="ACCOUNT_CODE"/>
+ 		<result property="accountTitle" column="ACCOUNT_TITLE"/>
+ 		<result property="character" column="CHARACTER"/>
+ 		<result property="realation" column="REALATION"/>
+ 		<result property="comCode" column="COM_CODE"/>
+ 		<result property="accountSystem" column="ACCOUNT_SYSTEM"/>
+ 		<result property="venderCode" column="VENDER_CODE"/>
+ 	 </resultMap>
   <select id="selectVenderList" resultMap="venderResultMap" parameterType="VenderR">
   	SELECT *
   	FROM VENDER
   </select>
   
+  <select id="selectAccountTitleList" resultMap="accountTitleResultMap" parameterType="AccountTitle">
+  	SELECT *
+  	FROM ACCOUNT_TITLE
+  </select>
   
+	<insert id="insertReceiption" parameterType="Receiption">
+		INSERT INTO SLIP
+		VALUES (SEQ_SLIP_CODE.NEXTVAL,#{slipDivision},#{division},#{slipDate},#{evidenceCode},#{supplyValue},#{valueTax},'N',#{resolutionCode},#{brief},#{item},42,SEQ_SLIP_42.NEXTVAL)
+	</insert>
+	
+	<insert id="insertJournalize" parameterType="Journalize">
+		INSERT INTO JOURNALIZE
+		VALUES (SEQ_JOURNAL_CODE.NEXTVAL, SEQ_SLIP_CODE.CURRVAL, #{debitCredit}, #{price}, #{accountCode},#{venderCode})
+	</insert>
   
   </mapper>
