@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.jaga.common.CommonsUtils;
 import com.kh.jaga.companyInnerId.model.dto.CreateCompanyInnerIdDto;
+import com.kh.jaga.companyInnerId.model.exception.ComInIdException;
 import com.kh.jaga.companyInnerId.model.service.CompanyInnerIdService;
 
 /**
@@ -63,16 +64,22 @@ public class CompanyInnerIdController {
 			
 			int result = service.insertComInnerId(data);
 			
-			System.out.println("ctrl > result ::: " + result);
+			System.out.println("ctrl > result (예외가 있다면 여긴 출력 X여야함)::: " + result);
 			
 			return "redirect:index.jsp";
 
 		} catch (IllegalStateException e) {
-			e.printStackTrace();
+			System.out.println("컨트롤러 캐치 1111111111");
 		} catch (IOException e) {
-			e.printStackTrace();
+			System.out.println("컨트롤러 캐치 2222222222");
+		} catch (ComInIdException e) {
+			//내가 만든 에러
+			System.out.println("컨트롤러 캐치 3333333333");
+			System.out.println("컨트롤러에서 사내계정 익셉션을 잡음@@@@@@@@@@@@@@@@@@@");
+			return "redirect:index.jsp";
 		}
 		
+		System.out.println("캐치 이후에 여기도 실행이 될까 ?");
 		return "redirect:index.jsp";
 		
 	}//method
@@ -81,15 +88,18 @@ public class CompanyInnerIdController {
 	
 	//페이지 보여주는 메소드(직원 계정 조회)
 	@RequestMapping(value = "showViewComInnerIdList.comInId")
-	public String selectComInIdList(HttpServletRequest request) {
+	public String selectComInIdList(HttpServletRequest request, Model model) {
 		
 		System.out.println("showViewComInnerIdList.comInId 호출됨..");
 		
 		List list = service.selectComInIdList();
-		request.setAttribute("list", list);
+//		request.setAttribute("list", list);
 		
-		
-		System.out.println("ctrl > return list : " + list);
+		if(list != null) {
+			model.addAttribute(list);
+		}else {
+			
+		}
 		
 		
 		
