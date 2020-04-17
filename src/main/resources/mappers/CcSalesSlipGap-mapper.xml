@@ -14,6 +14,8 @@
   <result property="dealCount" column="DEAL_COUNT"/>
   <result property="valOfSupply" column="VAL_OF_SUPPLY"/>
   <result property="tax" column="TAX"/>
+  <result property="deadline" column="DEADLINE"/>
+  <result property="comCode" column="COM_CODE"/>
 
   </resultMap> 
 
@@ -22,6 +24,8 @@
   		FROM CC_RCPT_STMT
   		WHERE YEAR_OF_ATTR= #{yearOfAttr}
   		AND TERM_DIV = #{termDiv}
+  		AND COM_CODE = #{comCode}
+  		AND DEADLINE LIKE 'Y'
   </select>
 
 	

@@ -5,6 +5,10 @@
   
   <configuration>
   
+  <settings>
+    <setting name="jdbcTypeForNull" value="NULL"/>
+  </settings>
+
   <typeAliases>
      <typeAlias type="com.kh.jaga.company.model.vo.Company" alias="Company"/>
   	 <typeAlias type="com.kh.jaga.vender.model.vo.Vender" alias="Vender"/>
@@ -13,6 +17,11 @@
      <typeAlias type="com.kh.jaga.companyInnerId.model.dto.CreateCompanyInnerIdDto" alias="CreateCompanyInnerIdDto"/>
      <typeAlias type="com.kh.jaga.finStmt.model.vo.IncomeStmt" alias="IncomeStmt"/>
      <typeAlias type="com.kh.jaga.bugagachi.model.vo.CcSalesSlipGap" alias="CcSalesSlipGap"/>
+     <typeAlias type="com.kh.jaga.vatCcIssStmt.model.vo.CcIssStmt" alias="CcIssStmt"/>
+     <typeAlias type="com.kh.jaga.employee.model.vo.Employee" alias="Employee"/>
+     <typeAlias type="com.kh.jaga.slip.model.vo.Journalize" alias="Journalize"/> 
+     <typeAlias type="com.kh.jaga.slip.model.vo.AccountTitle" alias="AccountTitle"/>
+     <typeAlias type="com.kh.jaga.employee.model.vo.Attachment" alias="Attachment"/>
   </typeAliases>
   
   
@@ -24,6 +33,8 @@
   	<mapper resource="mappers/comInnerId-mapper.xml"/>
   	<mapper resource="mappers/finStmt-mapper.xml"/>
   	<mapper resource="mappers/CcSalesSlipGap-mapper.xml"/>
+  	<mapper resource="mappers/vatCcIssStmt-mapper.xml"/>
+  	<mapper resource="mappers/employee-mapper.xml"/>
+  	<mapper resource="mappers/attachment-mapper.xml"/>
   </mappers>
-  
   </configuration>
