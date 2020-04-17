@@ -11,7 +11,7 @@ public class Receiption {
 	private String division;		//구분
 	private Date slipDate;			//전표일
 	private String evidenceCode;	//증빙종류
-	private String venderCode;		//거래처코드
+	/* private String venderCode; */		//거래처코드
 	private BigDecimal supplyValue;		//공급가액
 	private BigDecimal valueTax;			//부가세
 	private String deemedStatus;	//의제여부
@@ -25,15 +25,14 @@ public class Receiption {
 	public Receiption() {}
 
 	public Receiption(String slipCode, String slipDivision, String division, Date slipDate, String evidenceCode,
-			String venderCode, BigDecimal supplyValue, BigDecimal valueTax, String deemedStatus, String resolutionCode,
-			String brief, String item, String comCode, String dateSlipCode, List<Journalize> journalizeList) {
+			BigDecimal supplyValue, BigDecimal valueTax, String deemedStatus, String resolutionCode, String brief,
+			String item, String comCode, String dateSlipCode, List<Journalize> journalizeList) {
 		super();
 		this.slipCode = slipCode;
 		this.slipDivision = slipDivision;
 		this.division = division;
 		this.slipDate = slipDate;
 		this.evidenceCode = evidenceCode;
-		this.venderCode = venderCode;
 		this.supplyValue = supplyValue;
 		this.valueTax = valueTax;
 		this.deemedStatus = deemedStatus;
@@ -83,14 +82,6 @@ public class Receiption {
 
 	public void setEvidenceCode(String evidenceCode) {
 		this.evidenceCode = evidenceCode;
-	}
-
-	public String getVenderCode() {
-		return venderCode;
-	}
-
-	public void setVenderCode(String venderCode) {
-		this.venderCode = venderCode;
 	}
 
 	public BigDecimal getSupplyValue() {
@@ -168,11 +159,12 @@ public class Receiption {
 	@Override
 	public String toString() {
 		return "Receiption [slipCode=" + slipCode + ", slipDivision=" + slipDivision + ", division=" + division
-				+ ", slipDate=" + slipDate + ", evidenceCode=" + evidenceCode + ", venderCode=" + venderCode
-				+ ", supplyValue=" + supplyValue + ", valueTax=" + valueTax + ", deemedStatus=" + deemedStatus
-				+ ", resolutionCode=" + resolutionCode + ", brief=" + brief + ", item=" + item + ", comCode=" + comCode
-				+ ", dateSlipCode=" + dateSlipCode + ", journalizeList=" + journalizeList + "]";
+				+ ", slipDate=" + slipDate + ", evidenceCode=" + evidenceCode + ", supplyValue=" + supplyValue
+				+ ", valueTax=" + valueTax + ", deemedStatus=" + deemedStatus + ", resolutionCode=" + resolutionCode
+				+ ", brief=" + brief + ", item=" + item + ", comCode=" + comCode + ", dateSlipCode=" + dateSlipCode
+				+ ", journalizeList=" + journalizeList + "]";
 	}
 
+	
 	
 }

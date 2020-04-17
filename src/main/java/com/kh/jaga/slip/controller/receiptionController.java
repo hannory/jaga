@@ -1,16 +1,22 @@
 package com.kh.jaga.slip.controller;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.jaga.slip.model.exception.receiptionException;
 import com.kh.jaga.slip.model.service.ReceiptionService;
+import com.kh.jaga.slip.model.vo.AccountTitle;
+import com.kh.jaga.slip.model.vo.Receiption;
 import com.kh.jaga.slip.model.vo.Vender;
 
 @Controller
@@ -19,7 +25,7 @@ public class receiptionController {
 	@Autowired
 	private ReceiptionService rs;
 
-	@PostMapping("venderSearch.rp")
+	@GetMapping("venderSearch.rp")
 	public ModelAndView venderSearch(ModelAndView mv) {
 		
 		List<Vender> list =null;
@@ -31,7 +37,20 @@ public class receiptionController {
 		}
 		
 		
-		mv.addObject("venderList", list);
+		mv.addObject("data", list);
+		mv.setViewName("jsonView");
+		return mv;
+	}
+	
+	@GetMapping("accountSearch.rp")
+	public ModelAndView accountSearch(ModelAndView mv) {
+		
+		List<AccountTitle> list =null;
+			list = rs.selectAccountTitleList();
+			
+		
+		
+		mv.addObject("data", list);
 		mv.setViewName("jsonView");
 		return mv;
 	}
@@ -51,5 +70,27 @@ public class receiptionController {
 		
 		mv.setViewName("jsonView");
 		return mv;
+	}
+	
+	@PostMapping("insertReceiption.rp")
+	public String insertReceiption(Receiption receiption, HttpServletRequest request) {
+		receiption.setSlipDivision("매입매출");
+		
+		String division = receiption.getDivision();
+		
+		if(division.equals("buy")) {
+			division = "매입";
+		}else if(division.equals("sale")) {
+			division = "매출";
+		}
+		
+		receiption.setDivision(division);
+		
+		
+		System.out.println(receiption);
+		
+		int result = rs.insertReceiption(receiption);
+		
+		return "slip/receiptionForm";
 	}
 }

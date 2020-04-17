@@ -1,21 +1,26 @@
 package com.kh.jaga.slip.model.vo;
 
+import java.math.BigDecimal;
+
 public class Journalize {
 	private String journalCode;		//분개번호
 	private String slipCode;		//전표코드
 	private String debitCredit;		//차대구분
-	private int price;				//금액
+	private BigDecimal price;				//금액
 	private String accountCode;		//계정코드
+	private String venderCode;
 	
 	public Journalize() {}
 
-	public Journalize(String journalCode, String slipCode, String debitCredit, int price, String accountCode) {
+	public Journalize(String journalCode, String slipCode, String debitCredit, BigDecimal price, String accountCode,
+			String venderCode) {
 		super();
 		this.journalCode = journalCode;
 		this.slipCode = slipCode;
 		this.debitCredit = debitCredit;
 		this.price = price;
 		this.accountCode = accountCode;
+		this.venderCode = venderCode;
 	}
 
 	public String getJournalCode() {
@@ -42,11 +47,11 @@ public class Journalize {
 		this.debitCredit = debitCredit;
 	}
 
-	public int getPrice() {
+	public BigDecimal getPrice() {
 		return price;
 	}
 
-	public void setPrice(int price) {
+	public void setPrice(BigDecimal price) {
 		this.price = price;
 	}
 
@@ -58,11 +63,19 @@ public class Journalize {
 		this.accountCode = accountCode;
 	}
 
+	public String getVenderCode() {
+		return venderCode;
+	}
+
+	public void setVenderCode(String venderCode) {
+		this.venderCode = venderCode;
+	}
+
 	@Override
 	public String toString() {
 		return "Journalize [journalCode=" + journalCode + ", slipCode=" + slipCode + ", debitCredit=" + debitCredit
-				+ ", price=" + price + ", accountCode=" + accountCode + "]";
+				+ ", price=" + price + ", accountCode=" + accountCode + ", venderCode=" + venderCode + "]";
 	}
-	
+
 	
 }
