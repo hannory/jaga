@@ -65,4 +65,14 @@ public class CompanyInnerIdDaoImpl implements CompanyInnerIdDao {
 		return temp;
 	}
 
+	@Override
+	public int selectComIdListCount(SqlSessionTemplate sqlSession) {
+		//페이징
+		int listCount = sqlSession.selectOne("ComInnerId.selectListCount");
+		
+		System.out.println("dao > listCount 갯수 : " + listCount);
+
+		return listCount;
+	}
+
 }

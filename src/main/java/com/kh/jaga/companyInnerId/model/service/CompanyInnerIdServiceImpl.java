@@ -58,4 +58,12 @@ public class CompanyInnerIdServiceImpl implements CompanyInnerIdService {
 		return list;
 	}
 
+	@Override
+	public int selectComIdListCount() {
+		//페이징
+		int listCount = dao.selectComIdListCount(sqlSession);
+		
+		return listCount;
+	}
+
 }

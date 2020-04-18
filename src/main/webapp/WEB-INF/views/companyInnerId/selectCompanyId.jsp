@@ -91,12 +91,30 @@
 				<td>대표</td>
 				<td><button>정보수정</button></td>
 			</tr>
+			<c:forEach var="target" items="${ list }">
+			
+			<tr>
+				<td><c:out value="${ target.comInnerIdNum }"></c:out></td>
+				<td><c:out value="${ target.email }"></c:out></td>
+				<td><c:out value="${ target.name }"></c:out></td>
+				<td><c:out value="${ target.positionCode }"></c:out></td>
+				<td><button>정보수정</button></td>
+			</tr>
+				
+			</c:forEach>
 			
 			
 		</table>
 		</form>
 		
 		<div class="page-area" style="margin-left:350px; margin-top:50px;">
+			
+			<c:forEach begin="${ pi.startPage }" end="${ pi.endPage }" step="1" var="n">
+				<h1><c:out value="${ n }"></c:out></h1>
+			</c:forEach>
+			
+			
+			<!-- 
 			<button><<</button>
 			<button><</button>
 			<button>1</button>
@@ -106,20 +124,13 @@
 			<button>5</button>
 			<button>></button>
 			<button>>></button>
+			-->
 		</div>
 		
-		<h1>zzz</h1>
+		<h1>${ pi.listCount }</h1>
+		<h1>${ pi.limit }</h1>
+		<h1>${ pi.currentPage }</h1>
 		
-		<c:forEach var="target" items="${ list }">
-		
-			<c:out value="${ target.comInnerIdNum }"></c:out>
-			<c:out value="${ target.email }"></c:out>
-			<c:out value="${ target.name }"></c:out>
-			<c:out value="${ target.positionCode }"></c:out>
-			<c:out value="${ target.pwd }"></c:out>
-			<br>
-			
-		</c:forEach>
 		
 	<!-- //작업공간 -->
 	</div>

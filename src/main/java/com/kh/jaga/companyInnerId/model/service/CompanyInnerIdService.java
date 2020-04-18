@@ -10,5 +10,7 @@ public interface CompanyInnerIdService {
 	public abstract int insertComInnerId(CreateCompanyInnerIdDto data) throws ComInIdException;
 
 	public abstract List selectComInIdList();
+
+	public abstract int selectComIdListCount();
 	
 }
