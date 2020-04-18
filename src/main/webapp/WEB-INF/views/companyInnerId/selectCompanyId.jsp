@@ -84,13 +84,7 @@
 				<td style="width:20%">비고</td>
 			</tr>
 			
-			<tr>
-				<td>923</td>
-				<td>abc123@naver.com</td>
-				<td>심원용</td>
-				<td>대표</td>
-				<td><button>정보수정</button></td>
-			</tr>
+			
 			<c:forEach var="target" items="${ list }">
 			
 			<tr>
@@ -110,7 +104,20 @@
 		<div class="page-area" style="margin-left:350px; margin-top:50px;">
 			
 			<c:forEach begin="${ pi.startPage }" end="${ pi.endPage }" step="1" var="n">
-				<h1><c:out value="${ n }"></c:out></h1>
+				
+				<c:if test="${ pi.currentPage != n}">
+					<c:url value="showViewComInnerIdList.comInId" var="pagePath">
+						<c:param name="currentPage" value="${ n }"></c:param>
+					</c:url>
+					<a href="${ pagePath }"><span><c:out value="${ n }"></c:out></span></a>
+				</c:if>
+				
+				<c:if test="${ pi.currentPage eq n }">
+					<b><span><c:out value="${ n }"></c:out></span></b>
+				</c:if>
+				
+				
+				
 			</c:forEach>
 			
 			
@@ -127,9 +134,6 @@
 			-->
 		</div>
 		
-		<h1>${ pi.listCount }</h1>
-		<h1>${ pi.limit }</h1>
-		<h1>${ pi.currentPage }</h1>
 		
 		
 	<!-- //작업공간 -->

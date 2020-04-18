@@ -92,11 +92,25 @@ public class CompanyInnerIdController {
 	//페이지 보여주는 메소드(직원 계정 조회)
 	@RequestMapping(value = "showViewComInnerIdList.comInId")
 	public String selectComInIdList(HttpServletRequest request) {
-		
+
+		//페이징 처리하기
+		int currentPage = 1;
+		if(request.getParameter("currentPage") != null) {
+			currentPage = Integer.parseInt(((String) request.getParameter("currentPage")));
+		}
+		//리스트 카운트 값 확인하고
+		int listCount = service.selectComIdListCount();
+
+		//페이지 정보 객체 생성
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+		System.out.println("pi 정보 ::: " + pi);
+		request.setAttribute("pi", pi);
+
 		System.out.println("showViewComInnerIdList.comInId 호출됨..");
-		
-		List<SelectCompanyIdVo> list = service.selectComInIdList();
-		
+
+		//필요한 페이지 리스트 조회
+		List<SelectCompanyIdVo> list = service.selectComInIdList(pi);
+
 		System.out.println("ctrl > list : " + list);
 		System.out.println("ctrl > list : " + ( (SelectCompanyIdVo) (list.get(0)) ).getId() );
 
@@ -104,17 +118,7 @@ public class CompanyInnerIdController {
 			request.setAttribute("list", list);
 		}
 		
-		//페이징 처리하기
-		int currentPage = 1;
-		if(request.getAttribute("currentPAge") != null) {
-			currentPage = Integer.parseInt(((String) request.getAttribute("currentPage")));	
-		}
 		
-		int listCount = service.selectComIdListCount();
-
-		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
-		System.out.println("pi 정보 ::: " + pi);
-		request.setAttribute("pi", pi);
 		
 		
 		
