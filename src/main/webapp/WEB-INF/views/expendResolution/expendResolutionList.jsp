@@ -8,30 +8,22 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
+
 	.div-menuTap{
 		display: inline-block;
-		background: darkgreen;
+		background: #8DABA3;
 		color:white;
-		width:200px;
-		height:50px;
+		width:160px;
+		height:30px;
 		border-top-left-radius:10px;
 		border-top-right-radius:10px;
 		text-align:center;
-		line-height:50px;
+		line-height:30px;
+		clear:both;
 	}
 	.div-menuTap:hover{
 		cursor:pointer;
 		opacity:80%;
-	}
-	
-	.div-subjectName{
-		background: darkgreen;
-		color:white;
-		width:200px;
-		height:30px;
-	}
-	input{
-		width:200px;
 	}
 	.div-menuTap-no{
 		opacity:50%;
@@ -39,6 +31,7 @@
 	.div-menuTap-no:hover{
 		opacity:80%;
 	}
+	
 </style>
 </head>
 <body>
@@ -49,6 +42,11 @@
 	<main>
 	<div class="container-fluid">
 	<!-- 작업공간 -->
+		
+		
+		
+		
+		
 		
 		<h2 class="mt-4">지출결의서</h2>
 		<div style="margin-left:68%; height:50px;">
@@ -64,26 +62,34 @@
 			<option value="desc">내림차순</option>
 		</select>
 		
+		
+		
+		
+		
+		
+		
+		
+		
 		</div>
-		<div class="div-menuTap div-menuTap-no" onclick="createId()"><span>지출결의서 작성</span></div>
-		<div class="div-menuTap"><span>지출결의서 조회</span></div>
+		<div class="div-menuTap div-menuTap-no" onclick="showExpendResolutionWriteForm()"><span>지출결의서 작성</span></div>
+		<div class="div-menuTap"><span>지출결의서 목록</span></div>
 		<script>
-			function createId(){
-				location.href="showViewCeateCompanyId.vi";
+			function showExpendResolutionWriteForm(){
+				location.href="showExpendResolutionWriteForm.expendResolution";
 			}
 		</script>
 		<form action="" method="post">
 		<table border="1" style="width:80%; text-align:center;">
 		
-			<tr style="background:darkgreen; height:20px;">
-				<td style="width:10%">번호</td>
-				<td style="width:40%">이메일</td>
-				<td style="width:15%">이름</td>
-				<td style="width:15%">직급</td>
-				<td style="width:20%">비고</td>
+			<tr style="background:green; height:20px;">
+				<td style="width:10%">문서번호</td>
+				<td style="width:40%">지출일</td>
+				<td style="width:15%">계정과목</td>
+				<td style="width:15%">지출목적</td>
+				<td style="width:20%">지출금액</td>
 			</tr>
 			
-			
+			    
 			
 			
 		</table>
