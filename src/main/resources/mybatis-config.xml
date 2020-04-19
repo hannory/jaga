@@ -20,11 +20,13 @@
      <typeAlias type="com.kh.jaga.vatCcIssStmt.model.vo.CcIssStmt" alias="CcIssStmt"/>
      <typeAlias type="com.kh.jaga.employee.model.vo.Employee" alias="Employee"/>
      <typeAlias type="com.kh.jaga.slip.model.vo.Journalize" alias="Journalize"/> 
-     <typeAlias type="com.kh.jaga.slip.model.vo.AccountTitle" alias="AccountTitle"/>
+<!--      <typeAlias type="com.kh.jaga.slip.model.vo.AccountTitle" alias="AccountTitle"/> -->
      <typeAlias type="com.kh.jaga.employee.model.vo.Attachment" alias="Attachment"/>
+     <typeAlias type="com.kh.jaga.accountTitle.model.vo.AccountTitle" alias="AccountTitleR"/>
+<!--      <typeAlias type="com.kh.jaga.slip.model.vo.Receiption2" alias="Receiption2"/> -->
   </typeAliases>
   
-  
+
     
   <mappers>
   	<mapper resource="mappers/vender-mapper.xml"/>
@@ -36,5 +38,8 @@
   	<mapper resource="mappers/vatCcIssStmt-mapper.xml"/>
   	<mapper resource="mappers/employee-mapper.xml"/>
   	<mapper resource="mappers/attachment-mapper.xml"/>
+  	<mapper resource="mappers/accountTitle-mapper.xml"/>
+<!--   	<mapper resource="mappers/expendResolution-mapper.xml"/> -->
+<!--   	<mapper resource="mappers/transectionHistory-mapper.xml"/> -->
   </mappers>
   </configuration>

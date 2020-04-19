@@ -412,6 +412,7 @@ background:white;
 </style>
 </head>
 <body>
+	
 	<jsp:include page="../common/menubar.jsp" />
 	<div id="main">
 	<div class="container-fluid">
@@ -485,33 +486,36 @@ background:white;
 		</table>
 		</div>
 		
-		
-		
+<!-- 		style="overflow-y:auto; overflow-x:hidden; -ms-overflow-style: none;" -->
+
+		<form action="accountTitle.at" method="post">
 		<div id="table2" style="overflow-y:scroll;">
+		
 		<table>
 		<tr> <td colspan="2" style="border:1px solid #D8D8DC" id="td2" >코드/계정과목 </td> 
 			<td style="border:1px solid  #D8D8DC" id="td3">성격</td>
 			<td style="border:1px solid  #D8D8DC" id="td4">관계</td>
 		</tr>
+ 		 <c:if test="${ !empty sessionScope.loginCompany }"> 
+ 		 
+		<c:forEach var ="at" items="${list}">
+		<tr> <td style="border:1px solid #D8D8DC" id="td5"><c:out value="${at.accountCode}"/></td> 
+	
+			 <td style="border:1px solid #D8D8DC" id="td5-2"><c:out value="${at.accountTitle}"/></td> 
+	
+			 <td style="border:1px solid #D8D8DC" id="td6" ><c:out value="${at.character}"/></td> 
 		
-		<tr> <td style="border:1px solid #D8D8DC" id="td5">0162 </td> 
-			 <td style="border:1px solid #D8D8DC" id="td5-2">부재료</td> 
-			 <td style="border:1px solid #D8D8DC" id="td6">1.일반재고</td> 
-			 <td style="border:1px solid #D8D8DC" id="td7">0161</td> 
+			 <td style="border:1px solid #D8D8DC" id="td7"><c:out value="${at.realation}"/></td> 
 		</tr>
-		
-		
-		
+		</c:forEach>
+ 		</c:if> 
+
 		</table>
 		</div>
-		
+		</form>
 		</div>
 		
-		
-		
-		
-		
-		
+
 <!-- 		<table id="table3"> -->
 		<div id="input">
 		<tr>
@@ -530,7 +534,7 @@ background:white;
 		
 		</div>
 
-
+	
 
 	</div>
 			

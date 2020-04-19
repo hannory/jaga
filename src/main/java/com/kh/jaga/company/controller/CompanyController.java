@@ -85,11 +85,11 @@ public class CompanyController {
 		}
 	}
 	
-	@RequestMapping("logout.me")
+	@RequestMapping("logout.co")
 	public String logout(SessionStatus status) {
 		status.setComplete();
 		
-		return "redirect:index.jsp";
+		return "redirect:temp.jsp";
 	}
 	
 }
