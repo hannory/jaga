@@ -1,28 +1,30 @@
 package com.kh.jaga.expendResolution.model.dto;
 
+import java.sql.Date;
+
 public class ExpendResolutionDto implements java.io.Serializable{
-	private String resolutionNo;
-	private String comResolutionCode;
-	private String initiativeDate;
-	private String departmentCode;
-	private String managerNo;
-	private String managerPosition;
-	private String expendPurpose;
-	private String expendDate;
-	private String accountTitleCode;
-	private String expendSummary;
-	private String createUser;
-	private String createDate;
-	private String approvalStatus;
-	private String paymentTypeCode;
-	private String evidenceCode;
-	private String comCode;
+	private String resolutionNo;		//결의서 코드
+	private String comResolutionCode;	//회사 코드
+	private Date initiativeDate;		//발의일
+	private String departmentCode;		//담당부서(코드)
+	private String managerNo;			//담당자(번호)
+	private String managerPosition;		//담당자 직급
+	private String expendPurpose;		//지출목적
+	private Date expendDate;			//지출일
+	private String accountTitleCode;	//계정과목(코드)
+	private String expendSummary;		//지출합계
+	private String createUser;			//작성자
+	private Date createDate;			//작성일
+	private String approvalStatus;		//승인여부
+	private String paymentTypeCode;		//결재코드
+	private String evidenceCode;		//관련증빙코드
+	private String comCode;				//회사코드
 	
 	public ExpendResolutionDto() {}
 
-	public ExpendResolutionDto(String resolutionNo, String comResolutionCode, String initiativeDate,
-			String departmentCode, String managerNo, String managerPosition, String expendPurpose, String expendDate,
-			String accountTitleCode, String expendSummary, String createUser, String createDate, String approvalStatus,
+	public ExpendResolutionDto(String resolutionNo, String comResolutionCode, Date initiativeDate,
+			String departmentCode, String managerNo, String managerPosition, String expendPurpose, Date expendDate,
+			String accountTitleCode, String expendSummary, String createUser, Date createDate, String approvalStatus,
 			String paymentTypeCode, String evidenceCode, String comCode) {
 		super();
 		this.resolutionNo = resolutionNo;
@@ -59,11 +61,11 @@ public class ExpendResolutionDto implements java.io.Serializable{
 		this.comResolutionCode = comResolutionCode;
 	}
 
-	public String getInitiativeDate() {
+	public Date getInitiativeDate() {
 		return initiativeDate;
 	}
 
-	public void setInitiativeDate(String initiativeDate) {
+	public void setInitiativeDate(Date initiativeDate) {
 		this.initiativeDate = initiativeDate;
 	}
 
@@ -99,11 +101,11 @@ public class ExpendResolutionDto implements java.io.Serializable{
 		this.expendPurpose = expendPurpose;
 	}
 
-	public String getExpendDate() {
+	public Date getExpendDate() {
 		return expendDate;
 	}
 
-	public void setExpendDate(String expendDate) {
+	public void setExpendDate(Date expendDate) {
 		this.expendDate = expendDate;
 	}
 
@@ -131,11 +133,11 @@ public class ExpendResolutionDto implements java.io.Serializable{
 		this.createUser = createUser;
 	}
 
-	public String getCreateDate() {
+	public Date getCreateDate() {
 		return createDate;
 	}
 
-	public void setCreateDate(String createDate) {
+	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
 	}
 

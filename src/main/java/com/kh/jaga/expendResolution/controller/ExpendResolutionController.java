@@ -1,10 +1,12 @@
 package com.kh.jaga.expendResolution.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.jaga.expendResolution.model.dto.ExpendResolutionDto;
+import com.kh.jaga.expendResolution.model.service.ExpendResolutionService;
 
 /**
  * @author SWY
@@ -13,6 +15,9 @@ import com.kh.jaga.expendResolution.model.dto.ExpendResolutionDto;
  */
 @Controller
 public class ExpendResolutionController {
+	
+	@Autowired
+	ExpendResolutionService service;
 
 	//지출결의서 뷰 보여주는 페이지 //검색할 정보들도 한번에 읽어와서 페이지 이동하기
 	@RequestMapping("showExpendResolutionWriteForm.expendResolution")
@@ -36,6 +41,8 @@ public class ExpendResolutionController {
 		System.out.println("dto ::: ");
 		System.out.println(dto);
 		
+		int result = service.insertExpendResolution(dto);
+
 		mv.setViewName("redirect:index.jsp");
 		return mv;
 	}//method

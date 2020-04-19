@@ -192,7 +192,7 @@
 				<table border="1" style="margin-top:50px; margin-left:140px; text-align:center;">
 					<tr>
 						<td style="width:100px; background:green;"><span>계정과목</span></td>
-						<td><input type="text" style="width:100%; height:100%;"></td>
+						<td><input type="text" name="accountTitleCode" style="width:100%; height:100%;"></td>
 						<td style="width:100px;">
 						<div class="searchBtnSubject" onclick="searchSubject()">
 						<img style="width:30px; height:30px;" src="${contextPath}/resources/images/search.PNG">
@@ -394,7 +394,7 @@
 				<td><input type="text" name="managerNo" style="width:100%; height:100%; text-align:center;"></td>
 				<td onclick="showModalEmployee()"><img style="width:20px; height:20px;" src="${contextPath}/resources/images/search.PNG"></td>
 				<td class="color-green">지출합계</td>
-				<td colspan="2" style="text-align:right"><input id="totalExpend" type="text" value="0" style="width:100%; height:100%; text-align:right;"></td>
+				<td colspan="2" style="text-align:right"><input id="expendSummary" type="text" value="0" style="width:100%; height:100%; text-align:right;"></td>
 			</tr>
 			<tr>
 				<td class="color-green">지출목적</td>
@@ -415,11 +415,11 @@
 					<td class="color-green">비고</td>
 				</tr>
 				<tr>
-					<td><input type="date"></td>
-					<td><input type="text"></td>
-					<td><input type="text"></td>
-					<td><input type="text" class="price"></td>
-					<td><input type="text"></td>
+					<td><input name="detailDate01" type="date"></td>
+					<td><input name="detailBrief01" type="text"></td>
+					<td><input name="detailVenderCode01" type="text"></td>
+					<td><input name="detailPrice01" type="text" class="price"></td>
+					<td><input name="detailDate01" type="text"></td>
 				</tr>
 				<tr>
 					<td>111</td>
@@ -474,9 +474,11 @@
 				<span>위와 같이 지출을 결의하오니 허가하여주시기 바랍니다.</span>
 				
 				<div style="float:right; margin-top:20px;">
+					<!-- 
 					<input type="text" maxlength="4" style="width:50px; text-align:right; border:1px solid white; border-bottom:1px solid black">년
 					<input type="text" maxlength="2" style="width:50px; text-align:right; border:1px solid white; border-bottom:1px solid black">월
 					<input type="text" maxlength="2" style="width:50px; text-align:right; border:1px solid white; border-bottom:1px solid black">일
+					 -->
 					<br>
 					<label>작성자</label><input type="text" style="text-align:right; border:1px solid white; border-bottom:1px solid black;">
 					<label class="label-sign" for="signInput">(인)</label>
