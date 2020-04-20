@@ -10,27 +10,75 @@
 
   <result property="yearOfAttr" column="YEAR_OF_ATTR"/>
   <result property="termDiv" column="TERM_DIV"/>
-  <result property="eventDiv" column="EVENT_DIV"/>
-  <result property="dealCount" column="DEAL_COUNT"/>
-  <result property="valOfSupply" column="VAL_OF_SUPPLY"/>
-  <result property="tax" column="TAX"/>
   <result property="deadline" column="DEADLINE"/>
   <result property="comCode" column="COM_CODE"/>
 
   </resultMap> 
+  
+  <resultMap type="CcSalesSlipDetail" id="CcSalesSlipDetailResultSet">
+  <id property ="ccrcptCode" column="CCRCPT_CODE"/>
 
-  <select id="selectCcSalesSlipGap" resultMap="CcSalesSlipGapResultSet" parameterType="CcSalesSlipGap">
+  <result property="eventDiv" column="EVENT_DIV"/>
+  <result property="dealCount" column="DEAL_COUNT"/>
+  <result property="valOfSupply" column="VAL_OF_SUPPLY"/>
+  <result property="tax" column="TAX"/>
+  <result property="rcptstmtCode" column="RCPTSTMT_CODE"/>
+
+  </resultMap> 
+
+
+<resultMap type="TnxHis" id="TnxHisResultSet">
+  <id property ="slipCode" column="SLIP_CODE"/>
+
+  <result property="silpDate" column="SILP_DATE"/>
+  <result property="division" column="DIVISION"/>
+  <result property="producer" column="PRODUCER"/>
+  <result property="proNum" column="VENDER_NAME"/>
+  <result property="cardmemNum" column="CARDMEM_NUM"/>
+  <result property="numOfTxn" column="NUMOF_TXN"/>
+  <result property="valOfSupply" column="VAL_OF_SUPPLY"/>
+  <result property="tax" column="TAX"/>
+  <result property="rcptstmtCode" column="RCPTSTMT_CODE"/>
+
+  </resultMap> 
+
+
+  <select id="selectCcSalesSlipGap" resultMap="CcSalesSlipDetailResultSet" parameterType="CcSalesSlipGap">
   		SELECT *
   		FROM CC_RCPT_STMT
-  		WHERE YEAR_OF_ATTR= #{yearOfAttr}
+  		WHERE RCPTSTMT_CODE =#{rcptstmtCode}
+  </select>
+
+<select id="selectCcGap" resultMap="CcSalesSlipGapResultSet" parameterType="CcSalesSlipGap">
+SELECT * FROM CC_RCPT_STMT_GAP 
+WHERE YEAR_OF_ATTR= #{yearOfAttr}
+  		AND TERM_DIV =  #{termDiv}
+  		AND COM_CODE = #{comCode}
+  		AND DEADLINE LIKE 'Y'
+
+</select>
+	
+  <select id="selectTnxHis" resultMap="TnxHisResultSet" parameterType="CcSalesSlipGap">
+  	SELECT  C.SLIP_CODE, C.SILP_DATE, C.DIVISION, C.PRODUCER, C.CARDMEM_NUM, C.NUMOF_TXN, C.VAL_OF_SUPPLY, C.TAX, C.RCPTSTMT_CODE, v.vender_NAME
+	FROM TNX_HIS C 
+	JOIN VENDER V ON (C.PRODUCER=V.VENDER_CODE)
+	WHERE RCPTSTMT_CODE =#{rcptstmtCode} 
+  </select>
+  
+  <select id="selectCssgCode" resultType="String" parameterType="CcSalesSlipGap">
+  SELECT RCPTSTMT_CODE FROM CC_RCPT_STMT_GAP
+  WHERE YEAR_OF_ATTR= #{yearOfAttr}
   		AND TERM_DIV = #{termDiv}
   		AND COM_CODE = #{comCode}
   		AND DEADLINE LIKE 'Y'
   </select>
-
-	
-	
   
+  <update id="updateCssgDeadline" parameterType="CcSalesSlipGap">
+  UPDATE CC_RCPT_STMT_GAP
+  	SET DEADLINE = 'N'
+  	WHERE RCPTSTMT_CODE = #{rcptstmtCode}
+  		AND DEADLINE LIKE 'Y'
+  </update>
   
   
   </mapper>

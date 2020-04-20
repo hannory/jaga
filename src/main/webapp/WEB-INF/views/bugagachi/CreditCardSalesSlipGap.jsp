@@ -93,6 +93,11 @@
    			width:50px;
    			height: 30px;
    		}
+   		#termDiv{
+   			width:80px; 
+   			height: 30px;
+   			text-align: center;
+   		}
    		.cc_month{
    			width:50px; 
    			height: 30px;
@@ -103,6 +108,11 @@
    		.billMainTable{
    			width:100%;
    		}
+   		#deadlineCen{
+			display: none;
+			border:1px solid red; 
+			color:red;
+		}
     </style>
 </head>
 <body>
@@ -113,81 +123,13 @@
 	<main>
 	<div class="container-fluid">
 			<h2 class="mt-4">신용카드매출전표등 수령명세서(갑)(을)</h2>
-			 <script type="text/javascript">
-	 	function search_cssg(){
-	 		var search_ye1= $("#search_ye1").val();
-	 		var search_mon1= $("#search_mon1").val();
-	 		var search_mon2= $("#search_mon2").val();
-	 		console.log(search_ye1);
-	 		console.log(search_mon1);
-	 		console.log(search_mon2);
-	 		
-	 		$.ajax({
-	 			url:"ccSalesSilpGap.cssg",
-	 			type:"post",
-	 			data:{search_ye1:search_ye1, search_mon1:search_mon1, search_mon2:search_mon2},
-	 			success: function(data){
-	 				console.log(data);
-	 			/* 	//1111111111111111111111111111111111111111111111111111111111
-	 				var $replySelectTable = $("#replySelectTable");
-					$replySelectTable.html('');
-					
-					for(var key in data) {
-						var $tr = $("<tr>");
-						var $writerTd = $("<td>").text(data[key].nickName).css("width", "100px");
-						var $contentTd = $("<td>").text(data[key].bContent).css("width", "400px");
-						var $dateTd = $("<td>").text(data[key].bDate).css("width", "200px");
-						
-						$tr.append($writerTd);
-						$tr.append($contentTd);
-						$tr.append($dateTd);
-						
-						$replySelectTable.append($tr);
-					}//1111111111111111111111111111111111111
-					 
-                  */
-	 				var cssgList=data.cssgList; 
-	 				for(var key in cssgList){
-	 					console.log(cssgList[key].eventDiv);
-	 					if(cssgList[key].eventDiv =="합계"){
-	 						$("#sum").text("합계");
-	 						$("#sumDeal").text(cssgList[key].dealCount);
-	 						$("#sumVos").text(cssgList[key].valOfSupply);
-	 						$("#sumTax").text(cssgList[key].tax);
-	 					}else if(cssgList[key].eventDiv =="현금영수증"){
-	 						$("#cash").text("현금영수증");
-	 						$("#cashDeal").text(cssgList[key].dealCount);
-	 						$("#cashVos").text(cssgList[key].valOfSupply);
-	 						$("#cashTax").text(cssgList[key].tax);
-	 					}else if(cssgList[key].eventDiv =="화물운전자복지카드"){
-	 						$("#driver").text("화물운전자복지카드");
-	 						$("#driverDeal").text(cssgList[key].dealCount);
-	 						$("#driverVos").text(cssgList[key].valOfSupply);
-	 						$("#driverTax").text(cssgList[key].tax);
-	 					}else if(cssgList[key].eventDiv =="사업용신용카드"){
-	 						$("#bCard").text("사업용신용카드");
-	 						$("#bCardDeal").text(cssgList[key].dealCount);
-	 						$("#bCardVos").text(cssgList[key].valOfSupply);
-	 						$("#bCardTax").text(cssgList[key].tax);
-	 					}else if(cssgList[key].eventDiv =="그밖의신용카드"){
-	 						$("#oCard").text("그밖의신용카드");
-	 						$("#oCardDeal").text(cssgList[key].dealCount);
-	 						$("#oCardVos").text(cssgList[key].valOfSupply);
-	 						$("#oCardTax").text(cssgList[key].tax);
-	 					}
-	 				}
-	 				
-	 			},
-	 			error:function(error){
-	 				console.log(error);
-	 			}
-	 		});
-	 	}
-	 
-	 </script>
+			 
 	<ol class="breadcrumb mb-4">
-			<li><button id="deadlineBtn">마감</button></li>
-			<li>1기확정</li>
+			<li><button id="deadlineBtn" type="submit">마감</button></li>
+		
+			<li><button id="deadlineCen" onclick="cencelDeadline()">마감 취소</button></li>
+		
+			<li><input type="text" readonly  id="termDiv" name="termDiv"></li>
             <li>조회기간:
             	<input type="text" id="search_ye1" maxlength="4" class="cc_year">
             	<select class="cc_month" id="search_mon1">
@@ -211,9 +153,174 @@
             <td colspan="10">
                 <div class="middleMenu">
                     <h4>2.신용카드 등 매입내역 합계</h4>
+            <c:set var="comCode" value="${ sessionScope.loginCompany.companyCode }"/>
                 </div>
             </td>
         </tr>
+        <script type="text/javascript">
+			 function cencelDeadline(){  
+		            $("form").attr("action", "updateccSalesSilpGap.cssg");
+		        }
+	 	function search_cssg(){
+	 		var search_ye1= $("#search_ye1").val();
+	 		var search_mon1= $("#search_mon1").val();
+	 		var search_mon2= $("#search_mon2").val();
+	 		var comCode=${comCode};
+	 		console.log(search_ye1);
+	 		console.log(search_mon1);
+	 		console.log(search_mon2);
+	 		console.log(comCode);
+	 		
+	 		$.ajax({
+	 			url:"ccSalesSilpGap.cssg",
+	 			type:"post",
+	 			data:{search_ye1:search_ye1, search_mon1:search_mon1, search_mon2:search_mon2, comCode:comCode },
+	 			success: function(data){
+	 				console.log(data);
+	 				var cssg=data.cssg; 
+	 				console.log(cssg);
+					var cgDetailList=data.cgDetailList;
+					console.log(cgDetailList);
+					var cssgHisList=data.cssgHisList;
+					console.log(cssgHisList);
+					$("#termDiv").val(cssg.termDiv);
+	 				$("#sum").text("합계");
+	 			 	$("#cash").text("현금영수증");
+	 				$("#driver").text("화물운전자복지카드");
+	 				$("#bCard").text("사업용신용카드");
+	 				$("#oCard").text("그밖의신용카드");
+	 			 // 2.신용카드등 매입내역 합계
+	 			 
+	 			 	//현금영수증
+	 			 	var cashDeal=0;
+	 			 	var cashVos=0;
+	 			 	var cashTax=0;
+	 			 	//화물운전자복지카드
+	 			 	var driverDeal=0;
+	 			 	var driverVos=0;
+	 			 	var driverTax=0;
+	 			 	//사업신용카드
+	 			 	var bCardDeal=0;
+	 			 	var bCardVos=0;
+	 			 	var bCardTax=0;
+	 			 	//그 밖의 신용카드
+	 			 	var oCardDeal=0;
+	 			 	var oCardVos=0;
+	 			 	var oCardTax=0;
+	 				for(var key in cgDetailList){
+	 					console.log(cgDetailList[key].eventDiv);
+	 					
+	 					if(cgDetailList[key].eventDiv =="현금영수증"){
+	 						cashDeal+=cgDetailList[key].dealCount;
+	 						cashVos+=cgDetailList[key].valOfSupply;
+	 						cashTax+=cgDetailList[key].tax;
+	 					}else if(cgDetailList[key].eventDiv =="화물운전자복지카드"){
+	 						driverDeal+=cgDetailList[key].dealCount;
+	 						driverVos+=cgDetailList[key].valOfSupply;
+	 						driverTax+=cgDetailList[key].tax;
+	 					}else if(cgDetailList[key].eventDiv =="사업용신용카드"){
+	 						bCardDeal+=cgDetailList[key].dealCount;
+	 						bCardVos+=cgDetailList[key].valOfSupply;
+	 						bCardTax+=cgDetailList[key].tax;
+	 					}else if(cgDetailList[key].eventDiv =="그 밖의 신용카드"){
+	 						oCardDeal+=cgDetailList[key].dealCount;
+	 						oCardVos+=cgDetailList[key].valOfSupply;
+	 						oCardTax+=cgDetailList[key].tax;
+	 					}
+	 				}
+						//현금영수증 합계
+	 					$("#cashDeal").text(cashDeal);
+	 					$("#cashVos").text(cashVos);
+	 					$("#cashTax").text(cashTax);
+	 					//화물 운전자
+	 					$("#driverDeal").text(driverDeal);
+	 					$("#driverVos").text(driverVos);
+	 					$("#driverTax").text(driverTax);
+	 					//사업용신용카드
+	 					$("#bCardDeal").text(bCardDeal);
+	 					$("#bCardVos").text(bCardVos);
+	 					$("#bCardTax").text(bCardTax);
+	 					//그밖의신용카드
+	 					$("#oCardDeal").text(oCardDeal);
+	 					$("#oCardVos").text(oCardVos);
+	 					$("#oCardTax").text(oCardTax);
+	 						
+	 					//합계	
+	 					var sumDeal=cashDeal+driverDeal+bCardDeal+oCardDeal;
+	 					var sumVos=cashVos+driverVos+bCardVos+oCardVos;
+	 					var sumTax=cashTax+driverTax+bCardTax+oCardTax;
+						$("#sumDeal").text(sumDeal);
+						$("#sumVos").text(sumVos);
+						$("#sumTax").text(sumTax);
+	 				
+	 				//3.거래내역입력
+	 			
+	 				var $Tex_bill_detailList = $("#Tex_bill_detailList");
+					$Tex_bill_detailList.html('<tr class="Tex_bill_th" style="font-weight: 800; height: 25px;"><td rowspan="2" id="Text_billNo">no</td><td rowspan="2">월/일</td><td rowspan="2">구분</td><td rowspan="2" style="width:20%;">공급자</td><td rowspan="2" style="width:20%;">공급자(가맹점)<br>사업자등록번호</td><td rowspan="2">카드호원번호</td><td colspan="3">그 밖의 신용카드 등 거래내역 합계</td></tr><tr class="Tex_bill_th" onclick="PopModalTexList()" style="font-weight: 800; height: 25px;"><td> 거래건수</td><td> 공급가액</td><td> 세액</td></tr>');
+					var index=0;
+					var dealCtn=0;
+					var vos=0;
+					var vat=0;
+					for(var key in cssgHisList) {
+						var $tr = $("<tr  onclick='PopModalTexList()'>");
+						index++;
+						dealCtn+=cssgHisList[key].numOfTxn;
+						vos+=cssgHisList[key].valOfSupply;
+						vat+=cssgHisList[key].tax;
+						var dateSplit=cssgHisList[key].silpDate.split(' ');
+						var date=dateSplit[0];
+						console.log("날짜 자름: "+dateSplit);
+						var $noTd = $(" <td id='Text_billNo'>").text(index);
+						var $dateTd = $("<td>").text(date);
+						var $divisionTd = $("<td>").text(cssgHisList[key].division);
+						var $prodNameTd = $("<td>").text(cssgHisList[key].proNum);
+						var $prodNumTd = $("<td>").text(cssgHisList[key].producer);
+						var $cardmemNumTd = $("<td>").text(cssgHisList[key].cardmemNum);
+						var $numOfTxnTd = $("<td>").text(cssgHisList[key].numOfTxn);
+						var $valOfSupplyTd = $("<td>").text(cssgHisList[key].valOfSupply);
+						var $taxTd = $("<td>").text(cssgHisList[key].tax);
+						
+						$tr.append($noTd);
+						$tr.append($dateTd);
+						$tr.append($divisionTd);
+						$tr.append($prodNameTd);
+						$tr.append($prodNumTd);
+						$tr.append($cardmemNumTd);
+						$tr.append($numOfTxnTd);
+						$tr.append($valOfSupplyTd);
+						$tr.append($taxTd);
+						
+						$Tex_bill_detailList.append($tr);
+					}
+                  	
+					var $endTr=$("<tr class='Tex_bill_th' style='font-weight: 600;'>");
+					var $endTd1=$("<td colspan='6'>").text("합계");
+					var $endTd2=$("<td>").text(dealCtn);
+					var $endTd3=$("<td>").text(vos);
+					var $endTd4=$("<td>").text(vat);
+					$endTr.append($endTd1);
+					$endTr.append($endTd2);
+					$endTr.append($endTd3);
+					$endTr.append($endTd4);
+					$Tex_bill_detailList.append($endTr);
+	 				
+	 				
+	 				
+	 				//마감 버튼 종류
+	 				if(cssg.deadline == 'Y'){
+						console.log("마감된 애임")
+						$("#deadlineCen").show();
+						$("#deadlineBtn").hide();
+					} 
+	 				
+	 			},
+	 			error:function(error){
+	 				console.log(error);
+	 			}
+	 		});
+	 	}
+	 
+	 </script>
         <!-- 매출세금계산서 총합계 표 -->
         <tr>
             <td colspan="10">
@@ -273,72 +380,8 @@
             <td colspan="10">
                 <div>
                     <table id="Tex_bill_detailList">
-                        <tr class="Tex_bill_th" style="font-weight: 800; height: 25px;">
-                            <td rowspan="2" id="Text_billNo">no</td>
-                            <td rowspan="2">월/일</td>
-                            <td rowspan="2">구분</td>
-                            <td rowspan="2" style="width:20%;">공급자</td>
-                            <td rowspan="2" style="width:20%;">공급자(가맹점)<br>사업자등록번호</td>
-                            <td rowspan="2">카드호원번호</td>
-                            <td colspan="3">그 밖의 신용카드 등 거래내역 합계</td>
-                        </tr>
-                        <tr class="Tex_bill_th" onclick="PopModalTexList()" style="font-weight: 800; height: 25px;">
-                           
-                            <td> 거래건수</td>
-                            <td> 공급가액</td>
-                            <td> 세액</td>
-                        </tr>
-                        <tr onclick="PopModalTexList()">
-                            <td id="Text_billNo"> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                        </tr>
-                         <tr onclick="PopModalTexList()">
-                            <td id="Text_billNo"> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                        </tr>
-                        <tr onclick="PopModalTexList()">
-                            <td id="Text_billNo"> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                        </tr>
-                        <tr onclick="PopModalTexList()">
-                            <td id="Text_billNo"> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                        </tr>
-                        <tr class="Tex_bill_th" style="font-weight: 600;">
-                            <td colspan="6"> 합계 </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                  
-                        </tr>
+                        
+                       
                         
                     </table>
                 </div>

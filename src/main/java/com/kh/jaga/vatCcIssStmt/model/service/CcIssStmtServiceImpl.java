@@ -35,7 +35,30 @@ public class CcIssStmtServiceImpl implements CcIssStmtService{
 		// TODO 전표들을 받아와서 계산해야함
 				CcIssStmt cis=null;
 				cis=cd.selectNewCis(sqlSession,re,eD);
-		return null;
+				System.out.println("service 전표 계산후: "+cis);
+		return cis;
+	}
+
+
+	@Override
+	public int insertCcIssStmt(CcIssStmt cis) {
+		System.out.println("마감처리후 SERVICE CIS: "+cis);
+		return cd.insertCis(sqlSession,cis);
+	}
+
+
+	@Override
+	public String selectCurrvalCcIssStmt(CcIssStmt cis) {
+		// TODO 커발가지러가기
+		return cd.selectCurrvalCcIssStmt(sqlSession,cis);
+	}
+
+
+	@Override
+	public int updateCcIssStmt(CcIssStmt cis) {
+		// TODO cis update하러 가기
+		
+		return cd.updateCcIssStmt(sqlSession,cis);
 	}
 
 }

@@ -15,4 +15,10 @@ public interface CcIssStmtDao {
 
 	CcIssStmt selectNewCis(SqlSessionTemplate sqlSession, Receiption re, Date eD);
 
+	int insertCis(SqlSessionTemplate sqlSession, CcIssStmt cis);
+
+	String selectCurrvalCcIssStmt(SqlSessionTemplate sqlSession, CcIssStmt cis);
+
+	int updateCcIssStmt(SqlSessionTemplate sqlSession, CcIssStmt cis);
+
 }
