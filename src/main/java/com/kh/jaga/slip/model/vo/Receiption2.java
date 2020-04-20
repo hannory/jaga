@@ -6,14 +6,13 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-public class Receiption {
+public class Receiption2 {
 	
 	private String slipCode;		//전표코드
 	private String slipDivision;	//전표구분
 	private String division;		//구분
 	
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-	private Date slipDate;			//전표일
+	private String slipDate;			//전표일
 	
 	private String evidenceCode;	//증빙종류
 	/* private String venderCode; */		//거래처코드
@@ -29,9 +28,9 @@ public class Receiption {
 	private String evidence;
 	private List<Journalize> journalizeList;
 	
-	public Receiption() {}
+	public Receiption2() {}
 
-	public Receiption(String slipCode, String slipDivision, String division, Date slipDate, String evidenceCode,
+	public Receiption2(String slipCode, String slipDivision, String division, String slipDate, String evidenceCode,
 			BigDecimal supplyValue, BigDecimal valueTax, BigDecimal supplyDeaga, String deemedStatus,
 			String resolutionCode, String brief, String item, String comCode, String dateSlipCode, String evidence,
 			List<Journalize> journalizeList) {
@@ -78,11 +77,11 @@ public class Receiption {
 		this.division = division;
 	}
 
-	public Date getSlipDate() {
+	public String getSlipDate() {
 		return slipDate;
 	}
 
-	public void setSlipDate(Date slipDate) {
+	public void setSlipDate(String slipDate) {
 		this.slipDate = slipDate;
 	}
 
@@ -184,7 +183,7 @@ public class Receiption {
 
 	@Override
 	public String toString() {
-		return "Receiption [slipCode=" + slipCode + ", slipDivision=" + slipDivision + ", division=" + division
+		return "Receiption2 [slipCode=" + slipCode + ", slipDivision=" + slipDivision + ", division=" + division
 				+ ", slipDate=" + slipDate + ", evidenceCode=" + evidenceCode + ", supplyValue=" + supplyValue
 				+ ", valueTax=" + valueTax + ", supplyDeaga=" + supplyDeaga + ", deemedStatus=" + deemedStatus
 				+ ", resolutionCode=" + resolutionCode + ", brief=" + brief + ", item=" + item + ", comCode=" + comCode
@@ -192,6 +191,7 @@ public class Receiption {
 				+ "]";
 	}
 
+	
 	
 	
 }

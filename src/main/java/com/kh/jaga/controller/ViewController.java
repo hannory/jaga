@@ -147,4 +147,10 @@ public class ViewController {
     public String employee() {
     	return "employee/newEmployee";
     }
+    
+    @GetMapping("businessEmp.vi")
+    public String businessEmp() {
+    	return "employee/businessEmployee";
+    }
+    
 }

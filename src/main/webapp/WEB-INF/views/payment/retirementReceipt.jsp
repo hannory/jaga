@@ -7,6 +7,11 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
+#searchBtn{
+		background: none;
+		border: none;
+		outline: none;
+	}
 #wrapp1 {
 	float: left;
 	width: 20%;

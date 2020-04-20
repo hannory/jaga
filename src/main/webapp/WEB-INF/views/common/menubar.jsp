@@ -103,7 +103,8 @@
 	                                       <a class="nav-link" href="normalReceiption.vi">일반전표입력</a>
 	                                        <a class="nav-link" href="receiption.vi">매입매출전표입력</a>
 	                                        <a class="nav-link" href="taxInvoice.vi">세금계산서발행</a>
-	                                        <a class="nav-link" href="tranHis.vi">매입매출전표조회</a>
+	                                        <a class="nav-link" href="transListAll.th">매입매출전표조회</a>
+	                                        <a class="nav-link" href="businessEmp.vi">사업소득자임시</a>
                                         </nav>
                                     </div>
                                     
@@ -115,8 +116,9 @@
                                         
                                     <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-parent="#sidenavAccordionPages">
                                         <nav class="sb-sidenav-menu-nested nav">
+                                      		<a class="nav-link" href="venderList.vi">거래처리스트</a>
 											<a class="nav-link" href="vender.vi">거래처등록</a>
-	                                        <a class="nav-link" href="account_title.vi">계정과목 및<br> 적요등록</a>
+	                                        <a class="nav-link" href="accountTitle.at">계정과목 및<br> 적요등록</a>
 	                                        <a class="nav-link" href="500.html">부서등록</a>
 	                                        <a class="nav-link" href="500.html">부서등록</a>
                                         </nav>
@@ -140,7 +142,7 @@
                                     
                                     <a class="nav-link collapsed" href="compTrialBal.fs" aria-expanded="false" aria-controls="pagesCollapseError">재무제표</a>
                                         
-                                    <a class="nav-link collapsed" href="showExpendResolution.vi" aria-expanded="false" aria-controls="pagesCollapseError">지출결의서</a>
+                                    <a class="nav-link collapsed" href="showExpendResolutionWriteForm.expendResolution" aria-expanded="false" aria-controls="pagesCollapseError">지출결의서</a>
                                       
                                 </nav>
                             </div>
@@ -177,7 +179,7 @@
                             
                             <div class="collapse" id="collapseB" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="employee.vi">일반근로자<br>자료입력</a>
+                                <a class="nav-link" href="employee.vi">직원관리</a>
                                 <a class="nav-link" href="layout-sidenav-light.html">급여대장</a>
                                 <a class="nav-link" href="businessPayment.vi">사업소득자<br>자료입력</a>
                                 <a class="nav-link" href="layout-sidenav-light.html">일용직<br>급여자료입력</a>

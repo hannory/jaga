@@ -162,31 +162,31 @@
 					<tr>
 						<td>부가세유형</td>
 						<td colspan="3">
-							<select name="evidenceCode" id="evidence1">
+							<select name="evidenceCode" id="evidence1" class="evidence">
 								<option value="10">세금계산서</option>
 								<option value="20">계산서</option>
 								<option value="30">영세율</option>
 								<option value="150">무증빙</option>
 								<option value="40">간이과세</option>
-								<option value="130">수출</option>
-								<option value="60">카드</option>
-								<option value="70">카드(면세)</option>
-								<option value="80">카드(영세)</option>
+								<!-- <option value="130">수출</option> -->
+								<option value="50">카드</option>
+								<option value="60">카드(면세)</option>
+								<option value="70">카드(영세)</option>
 								<option value="140">무증빙(면세)</option>
 								<option value="100">현금영수증</option>
 								<option value="80">현금영수증(면세)</option>
 								<option value="90">현금영수증(영세)</option>
 							</select>
-							<select name="evidenceCode" id="evidence2" disabled>
+							<select name="evidenceCode" id="evidence2" class="evidence"disabled>
 								<option value="10">세금계산서</option>
 								<option value="20">계산서</option>
 								<option value="30">영세율</option>
 								<option value="110">불공제</option>
 								<option value="40">간이과세</option>
-								<option value="120">수입</option>
-								<option value="60">카드</option>
-								<option value="70">카드(면세)</option>
-								<option value="80">카드(영세)</option>
+								<!-- <option value="120">수입</option> -->
+								<option value="50">카드</option>
+								<option value="60">카드(면세)</option>
+								<option value="70">카드(영세)</option>
 								<option value="140">무증빙(면세)</option>
 								<option value="100">현금영수증</option>
 								<option value="80">현금영수증(면세)</option>
@@ -425,28 +425,47 @@
 					$("#evidence2").css("display", "none").attr("disabled", true);
 				}
 			});
+			/* 증빙종류 이벤트 */
+			$(".evidence").click(function(){
+				/* 계산서 카면 카영 간이 현영 현명 무증빙 20, 70 80 40 80 90 140 */
+				if($(this).val() == 20 ||$(this).val() == 70 ||$(this).val() == 80 ||$(this).val() == 40 
+						||$(this).val() == 60 ||$(this).val() == 90 ||$(this).val() == 140){
+					$("#valueTax").attr("readonly", true);
+				}else{
+					$("#valueTax").attr("readonly", false);
+				}
+			})
 			
 			
 			/* 공급대가 입력시 부가세 자동 계산 */
 			$("#supplydeaga").blur(function(){
 				var supply = $(this).val();
-				$.ajax({
-					url:"calculTax.rp",
-					type:"post",
-					data:{supplydeaga : supply},
-					success:function(data){
-						var value = data.value;
-						var tax = data.tax;
-						
-						$("#supplyValue").val(value);
-						$("#valueTax").val(tax);
-					}
-				});
+				var vTax = $("#valueTax").prop("readonly");
+				
+				if(vTax == true){
+					$("#supplyValue").val(supply);
+					$("#valueTax").val(0);
+				}else{
+					
+					$.ajax({
+						url:"calculTax.rp",
+						type:"post",
+						data:{supplydeaga : supply},
+						success:function(data){
+							var value = data.value;
+							var tax = data.tax;
+							
+							$("#supplyValue").val(value);
+							$("#valueTax").val(tax);
+						}
+					});
+				}	
 			});
 			
 			/* 전표미리보기 이벤트 */
 			$("#preview").click(function(){
 				$("#resultReTable tbody").remove();
+				var vTax = $("#valueTax").prop("readonly");
 				
 				$("#hideArea").css("display", "block");
 				//108 외상 매출금 / 401 상품 
@@ -489,6 +508,7 @@
 					$tr2.append(debitCredit);
 					$resultTable.append($tr2);
 					
+					if(vTax == false){
 					var $tr = $("<tr>");
 					
 					var accCo = $("<input type='hidden' name='accountCode'>").val(13500);
@@ -507,7 +527,7 @@
 					$tr.append(debitCredit);
 					$resultTable.append($tr);
 					
-					
+					}
 					
 					var $tr3 = $("<tr>");
 					
@@ -537,7 +557,9 @@
 				        $(this).find("input[name=venderCode]").attr("name", "journalizeList[" + num + "].venderCode");
 				    });
 					
-					
+					if($("evidence2").val() == 20){
+						
+					}
 					
 				}else{
 					/* 매출 */
@@ -562,6 +584,7 @@
 					$tr2.append(debitCredit);
 					$resultTable.append($tr2);
 					
+					if(vTax == false){
 					var $tr = $("<tr>");
 					
 					var accCo = $("<input type='hidden' name='accountCode'>").val(25500);
@@ -580,7 +603,7 @@
 					$tr.append(debitCredit);
 					$resultTable.append($tr);
 					
-					
+					}
 					
 					var $tr3 = $("<tr>");
 					
@@ -616,64 +639,13 @@
 			
 			/* 거래처모달 */
 			$("#searchBtn2").click(function(){
-				/* $("#venderTable td").remove();
-				var $tbody = $("#venderTable tbody");
-				 $.ajax({
-						url:"venderSearch.rp",
-						type:"post",
-						data:{
-						},
-						success:function(data){
-							console.log(data);
-							var list = data.venderList;
-							
-							console.log(list.length);
-							
-							for(var i = 0; i < list.length; i++){
-								
-								var $tr = $("<tr>");
-								var $codeTd = $("<td>").html("<a href='#' onclick='ccc(this);'>"+list[i].venderCode+"</a>");
-								var $nameTd = $("<td>").text(list[i].venderName);
-								
-								$tr.append($codeTd);
-								$tr.append($nameTd);
-								$tbody.append($tr);
-							}
-							
-						}
-					}) */
-					
-					
-					
-					/* $("#venderTable td").remove(); */
-				/* var $tbody = $("#venderTable tbody"); */
 				
 				$("#venderTable").dataTable({
 					destroy: true,
 					 ajax:{
 							'url':'venderSearch.rp',
 							'type':'get'
-						
-							/* success:function(data){
-								console.log(data);
-								var list = data.accountList;
-								
-								console.log(list.length); 
-								
-								for(var i = 0; i < list.length; i++){
-									
-									var $tr = $("<tr>");
-									var $codeTd = $("<td>").html("<a href='#' onclick='aaa(this);' >"+list[i].accountCode+"</a>");
-									var $nameTd = $("<td>").text(list[i].accountTitle);
-									
-									$tr.append($codeTd);
-									$tr.append($nameTd);
-									$tbody.append($tr);
-								};
-								
-							} */
 						},
-					 
 					 
 					 columns: [
 						 {data : "venderCode",
@@ -682,7 +654,12 @@
 					                    data = '<a href="#" onclick="ccc(this);">' + data + '</a>';
 					                }
 					                return data;}},
-						 {data : "venderName"}
+						 {data : "venderName",
+										 "render": function(data, type, row){
+								                if(type=='display'){
+								                    data = '<a href="#" onclick="ccc(this);">' + data + '</a>';
+								                }
+								                return data;}}
 						 
 					 ]
 				});
@@ -701,27 +678,7 @@
 					 ajax:{
 							'url':'accountSearch.rp',
 							'type':'get'
-						
-							/* success:function(data){
-								console.log(data);
-								var list = data.accountList;
-								
-								console.log(list.length); 
-								
-								for(var i = 0; i < list.length; i++){
-									
-									var $tr = $("<tr>");
-									var $codeTd = $("<td>").html("<a href='#' onclick='aaa(this);' >"+list[i].accountCode+"</a>");
-									var $nameTd = $("<td>").text(list[i].accountTitle);
-									
-									$tr.append($codeTd);
-									$tr.append($nameTd);
-									$tbody.append($tr);
-								};
-								
-							} */
 						},
-					 
 					 
 					 columns: [
 						 {data : "accountCode",
@@ -730,7 +687,12 @@
 					                    data = '<a href="#" onclick="aaa(this);">' + data + '</a>';
 					                }
 					                return data;}},
-						 {data : "accountTitle"}
+						 {data : "accountTitle",
+										 "render": function(data, type, row){
+								                if(type=='display'){
+								                    data = '<a href="#" onclick="aaa(this);">' + data + '</a>';
+								                }
+								                return data;}}
 						 
 					 ]
 				});
@@ -748,24 +710,6 @@
 							'url':'accountSearch.rp',
 							'type':'get'
 						
-							/* success:function(data){
-								console.log(data);
-								var list = data.accountList;
-								
-								console.log(list.length); 
-								
-								for(var i = 0; i < list.length; i++){
-									
-									var $tr = $("<tr>");
-									var $codeTd = $("<td>").html("<a href='#' onclick='aaa(this);' >"+list[i].accountCode+"</a>");
-									var $nameTd = $("<td>").text(list[i].accountTitle);
-									
-									$tr.append($codeTd);
-									$tr.append($nameTd);
-									$tbody.append($tr);
-								};
-								
-							} */
 						},
 					 
 					 
@@ -776,7 +720,12 @@
 					                    data = '<a href="#" onclick="bbb(this);">' + data + '</a>';
 					                }
 					                return data;}},
-						 {data : "accountTitle"}
+						 {data : "accountTitle",
+										 "render": function(data, type, row){
+								                if(type=='display'){
+								                    data = '<a href="#" onclick="bbb(this);">' + data + '</a>';
+								                }
+								                return data;}}
 						 
 					 ]
 				});
