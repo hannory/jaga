@@ -1,5 +1,7 @@
 package com.kh.jaga.finStmt.model.dao;
 
+import java.util.HashMap;
+
 import org.mybatis.spring.SqlSessionTemplate;
 
 import com.kh.jaga.finStmt.model.vo.IncomeStmt;
@@ -9,6 +11,6 @@ public interface FinStmtDao {
 
 	int insertIncomeStmt(SqlSessionTemplate sqlSession, IncomeStmt i);
 
-	IncomeStmtAccount selectIncomeStmt(SqlSessionTemplate sqlSession, IncomeStmtAccount isa);
+	HashMap selectIncomeStmt(SqlSessionTemplate sqlSession, IncomeStmtAccount isa);
 
 }

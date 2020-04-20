@@ -1,6 +1,9 @@
 package com.kh.jaga.finStmt.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Date;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -10,10 +13,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
 import com.kh.jaga.finStmt.model.service.FinStmtService;
 import com.kh.jaga.finStmt.model.vo.IncomeStmt;
 import com.kh.jaga.finStmt.model.vo.IncomeStmtAccount;
+
+import net.sf.json.JSONObject;
 
 /**
  * @author hannory
@@ -63,13 +70,28 @@ public class FinStmtController {
 	}
 	
 	@RequestMapping("selectIncomeStmt.fs")
-	public void selectIncomeStmt(IncomeStmtAccount isa, HttpServletResponse response) {
+	public void selectIncomeStmt(IncomeStmtAccount isa, HttpServletResponse response) throws IOException {
 		System.out.println("year : " + isa.getYear());
 		System.out.println("month : " + isa.getMonth());
-		isa.setAccountCode(40100);
 		
-		isa = fss.selectIncomeStmt(isa);
+		HashMap hmap = fss.selectIncomeStmt(isa);
+		
+//		JSONObject jmap = new JSONObject();
+//		jmap.put(14600, jmap.get(14600));
+//		jmap.put(40100, jmap.get(40100));
+//		jmap.put(83000, jmap.get(83000));
+//		
+//		response.setContentType("application/json");
+//		PrintWriter out = response.getWriter();
+//		out.print(jmap.toString());
+//		out.flush();
+//		out.close();
+		
+		response.setContentType("application/json");
+		
+		new Gson().toJson(hmap, response.getWriter());
 	}
+	
 }
 
 
