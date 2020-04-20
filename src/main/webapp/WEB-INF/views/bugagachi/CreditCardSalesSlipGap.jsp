@@ -93,6 +93,10 @@
    			width:50px;
    			height: 30px;
    		}
+   		#termDiv{
+   			width:80px; 
+   			height: 30px;
+   		}
    		.cc_month{
    			width:50px; 
    			height: 30px;
@@ -103,6 +107,11 @@
    		.billMainTable{
    			width:100%;
    		}
+   		#deadlineCen{
+			display: none;
+			border:1px solid red; 
+			color:red;
+		}
     </style>
 </head>
 <body>
@@ -114,18 +123,23 @@
 	<div class="container-fluid">
 			<h2 class="mt-4">신용카드매출전표등 수령명세서(갑)(을)</h2>
 			 <script type="text/javascript">
+			 function cencelDeadline(){  
+		            $("form").attr("action", "updateccSalesSilpGap.cssg");
+		        }
 	 	function search_cssg(){
 	 		var search_ye1= $("#search_ye1").val();
 	 		var search_mon1= $("#search_mon1").val();
 	 		var search_mon2= $("#search_mon2").val();
+	 		var comCode=${comCode};
 	 		console.log(search_ye1);
 	 		console.log(search_mon1);
 	 		console.log(search_mon2);
+	 		console.log(comCode);
 	 		
 	 		$.ajax({
 	 			url:"ccSalesSilpGap.cssg",
 	 			type:"post",
-	 			data:{search_ye1:search_ye1, search_mon1:search_mon1, search_mon2:search_mon2},
+	 			data:{search_ye1:search_ye1, search_mon1:search_mon1, search_mon2:search_mon2, comCode:comCode },
 	 			success: function(data){
 	 				console.log(data);
 	 			/* 	//1111111111111111111111111111111111111111111111111111111111
@@ -176,6 +190,11 @@
 	 						$("#oCardTax").text(cssgList[key].tax);
 	 					}
 	 				}
+	 				if(cssg.deadline == 'Y'){
+						console.log("마감된 애임")
+						$("#deadlineCen").show();
+						$("#deadlineBtn").hide();
+					}
 	 				
 	 			},
 	 			error:function(error){
@@ -186,10 +205,13 @@
 	 
 	 </script>
 	<ol class="breadcrumb mb-4">
-			<li><button id="deadlineBtn">마감</button></li>
-			<li>1기확정</li>
+			<li><button id="deadlineBtn" type="submit">마감</button></li>
+		
+			<li><button id="deadlineCen" onclick="cencelDeadline()">마감 취소</button></li>
+		
+			<li><input type="text" readonly  id="termDiv" name="termDiv"></li>
             <li>조회기간:
-            	<input type="text" id="search_ye1" maxlength="4" class="cc_year">
+            	<input type="text" id="search_ye" maxlength="4" class="cc_year">
             	<select class="cc_month" id="search_mon1">
             		<option value="">월</option>
             		<option value="01">1</option>
@@ -217,6 +239,7 @@
         <!-- 매출세금계산서 총합계 표 -->
         <tr>
             <td colspan="10">
+            <c:set var="comCode" value="${ sessionScope.loginCompany.companyCode }"/>
                 <table align="center" id="totalSum" style="width: 99%;">
                     <tr style="background-color: #E7E6E6;font-weight: 700;">
                         <td>구  분</td>

@@ -78,6 +78,10 @@
    			width:50px; 
    			height: 30px;
    		}
+   		#termDiv{
+   			width:80px; 
+   			height: 30px;
+   		}
    		.Tex_bill_code_p{
    			font-size:23px;
    		}
@@ -97,6 +101,11 @@
 			margin-bottom: 40px;
 			margin-top: 20px;
 		}
+		#deadlineCen{
+			display: none;
+			border:1px solid red; 
+			color:red;
+		}
     </style>
 </head>
 <body>
@@ -107,12 +116,16 @@
 	<main>
 	<div class="container-fluid">
 			<h2 class="mt-4">신용카드매출전표등 발행금액 집계표</h2>
-			
+	<form action="insertCcIssStmt.cis" method="post">	
 	<ol class="breadcrumb mb-4">
-			<li><button id="deadlineBtn">마감</button></li>
-			<li>1기예정</li>
+		
+			<li><button id="deadlineBtn" type="submit">마감</button></li>
+		
+			<li><button id="deadlineCen" onclick="cencelDeadline()">마감 취소</button></li>
+		
+			<li><input type="text" readonly  id="termDiv" name="termDiv"></li>
             <li>조회기간:
-            	<input type="text" id="search_ye" class="cc_year" maxlength="4">
+            	<input type="text" id="search_ye" class="cc_year" name="yearOfAttr" maxlength="4">
             	<select class="cc_month" id="search_mon1">
             		<option value="">월</option>
             		<option value="01">1</option>
@@ -125,7 +138,7 @@
             		<option value="12">12</option>
             	</select> 
             </li>
-            <li><input type="button" onclick="search_cis()" name="search" value="조회"></li>
+            <li><input type="button" onclick="search_cis()" value="조회"></li>
             <li><input type="button" name="report" value="신고서미리보기"></li>
 			
 		</ol>
@@ -148,6 +161,19 @@
                         <td class="green_value"><c:out value="${ sessionScope.loginCompany.bossName }"/></td>
                         <td class="green">사업등록번호</td>
                         <c:set var="comCode" value="${ sessionScope.loginCompany.companyCode }"/>
+   						<input type="hidden" value="${comCode}" name="comCode">
+   						<input type='hidden' id='taxinvIss'name='taxinvIss'>
+   						<input type='hidden' name='invIss'id='invIss'>
+					    <input type='hidden' name='cardTax'id='cardTax'>
+				    	<input type='hidden' name='cardTaxFree'id='cardTaxFree'>
+				    	<input type='hidden' name='cardSvc'id='cardSvc'>
+				    	<input type='hidden' name='cashTax'id='cashTax'>
+				    	<input type='hidden' name='cashTaxFree'id='cashTaxFree'>
+				    	<input type='hidden' name='cashSvc'id='cashSvc'>
+				    	<input type='hidden' name='digitalTax'id='digitalTax'>
+				    	<input type='hidden' name='digitalTaxFree'id='digitalTaxFree'>
+				   		<input type='hidden' name='digitalSvc'id='digitalSvc'>
+
                         <td class="green_value"><c:out value="${ sessionScope.loginCompany.bizNum }"/></td>
                     </tr>
                     <tr>
@@ -162,6 +188,9 @@
         </tr>
         <!-- 1.인적사항 표 끝 -->
         <script type="text/javascript">
+        function cencelDeadline(){  
+            $("form").attr("action", "updateCcIssStmt.cis");
+        }
 	 	function search_cis(){
 	 		var search_ye= $("#search_ye").val();
 	 		var search_mon1= $("#search_mon1").val();
@@ -173,7 +202,7 @@
 	 		console.log(comCode);
 	 		
 	 		$.ajax({
-	 			url:"ccIssStmt.cssg",
+	 			url:"ccIssStmt.cis",
 	 			type:"post",
 	 			data:{search_ye:search_ye, search_mon1:search_mon1, search_mon2:search_mon2, comCode:comCode },
 	 			success: function(data){
@@ -196,6 +225,13 @@
 					}//1111111111111111111111111111111111111
 					 
                   */
+                  /*       
+                 var accCo = $("<input type='hidden' name='accountCode'>").val(accountCo);
+               var venCo = $("<input type='hidden' name='venderCode'>").val(venderCode);
+               var debitCredit = $("<input type='hidden' name='debitCredit'>").val('차변');
+               var $bit = $("<td>").html($("<input type='text' name='price'>").val(supplydeaga));
+               var $vender = $("<td>").html($("<input type='text'>").val(venderName));
+               var $accN = $("<td>").html($("<input type='text'>").val(accountNN));*/
 	 				var cis=data.cis; 
 	 				$("#tAc").text(cis.cardTax);
 	 				$("#tAcash").text(cis.cashTax);
@@ -206,7 +242,24 @@
 	 				$("#serAc").text(cis.cardSvc);
 	 				$("#serAcash").text(cis.cashSvc);
 	 				$("#serAd").text(cis.digitalSvc);
-					
+	 				console.log(cis.termDiv);
+	 				$("#termDiv").val(cis.termDiv);
+	 				$("#dTax").text(cis.taxinvIss)
+	 				$("#ndTax").text(cis.invIss)
+
+	 				//input type 에 값넣어주기
+					$("#taxinvIss").val(cis.taxinvIss);
+					$("#invIss").val(cis.invIss);
+					$("#cardTax").val(cis.cardTax);
+					$("#cardTaxFree").val(cis.cardTaxFree);
+					$("#cardSvc").val(cis.cardSvc);
+					$("#cashTax").val(cis.cashTax);
+					$("#cashTaxFree").val(cis.cashTaxFree);
+					$("#cashSvc").val(cis.cashSvc);
+					$("#digitalTax").val(cis.digitalTax);
+					$("#digitalSvc").val(cis.digitalSvc);
+					$("#digitalTaxFree").val(cis.digitalTaxFree);
+				    
 	 				//합계부분
 					var cardSum=cis.cardTax+cis.cardTaxFree+cis.cardSvc;/* 카드합계 */
 					$("#cAs").text(cardSum);
@@ -226,6 +279,16 @@
 					//3.교부내역
 					$("#dTax").text(cis.taxinvIss);
 					$("#ndTax").text(cis.invIss);
+					
+					//버튼 바꿔주기
+						//$("#deadlineCen").hide();
+					if(cis.deadline == 'Y'){
+						console.log("마감된 애임")
+						//var debitCredit = $("<input type='hidden' name='issCode'>").val('comCode');
+						console.log()
+						$("#deadlineCen").show();
+						$("#deadlineBtn").hide();
+					}
 	 			},
 	 			error:function(error){
 	 				console.log(error);
@@ -341,6 +404,7 @@
 
 		});
 	 </script>
+	 </form>	
 	</main>
 	<jsp:include page="../common/menubar2.jsp" />
 </body>

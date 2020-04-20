@@ -59,11 +59,32 @@
   	FROM SLIP 
   	WHERE SLIP_DIVISION ='매입매출' 
   	AND DIVISION ='매출' 
-  	AND SLIP_DATE BETWEEN TO_DATE('#{re.slipDate}') AND TO_DATE('#{eD}')
+  	AND COM_CODE= #{Receiption.comCode}
+  	AND SLIP_DATE BETWEEN #{Receiption.slipDate} AND #{endDate}
   </select>
-	
-	
   
+   <insert id="insertCcIssStmt" parameterType="CcIssStmt">
+     INSERT INTO CC_ISS_STMT 
+     VALUES( SEQ_CC_ISS_STMT.NEXTVAL,#{taxinvIss},#{invIss},#{cardTax},#{cardTaxFree}
+     ,#{cardSvc},#{cashTax},#{cashTaxFree},#{cashSvc},#{digitalTax},#{digitalTaxFree}
+     ,#{digitalSvc},#{yearOfAttr},#{termDiv},'Y',#{comCode})
+   
+   </insert>
+	
+  <select id="selectCurrvalCis" parameterType="CcIssStmt" resultType="string">
+  	SELECT ISS_CODE
+  		FROM CC_ISS_STMT
+  		WHERE YEAR_OF_ATTR= #{yearOfAttr}
+  		AND TERM_DIV = #{termDiv}
+  		AND COM_CODE = #{comCode}
+  		AND DEADLINE LIKE 'Y'
+  </select>
   
+  <update id="updateCisDeadline" parameterType="CcIssStmt">
+  	UPDATE CC_ISS_STMT
+  	SET DEADLINE = 'N'
+  	WHERE ISS_CODE = #{issCode}
+  		AND DEADLINE LIKE 'Y'
+  </update>
   
   </mapper>

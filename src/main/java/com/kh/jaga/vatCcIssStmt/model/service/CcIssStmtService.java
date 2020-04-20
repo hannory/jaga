@@ -14,4 +14,10 @@ public interface CcIssStmtService {
 
 	CcIssStmt selectNewCis(Receiption re, Date stD);
 
+	int insertCcIssStmt(CcIssStmt cis);
+
+	String selectCurrvalCcIssStmt(CcIssStmt cis);
+
+	int updateCcIssStmt(CcIssStmt cis);
+
 }

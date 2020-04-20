@@ -13,6 +13,12 @@ import com.kh.jaga.bugagachi.model.service.CcSalesSlipGapService;
 import com.kh.jaga.bugagachi.model.vo.CcSalesSlipGap;
 import com.kh.jaga.slip.model.vo.Receiption;
  
+
+/**
+ * @author 조지연
+ * @comment 신용카드매출전표등 수령명세서(갑)(을)
+ * @createDate 2020. 4. 20.
+ */
 @Controller
 public class CcSalesSlipGapController {
 
@@ -20,7 +26,7 @@ public class CcSalesSlipGapController {
 	private CcSalesSlipGapService csser;
 
 	@RequestMapping("ccSalesSilpGap.cssg")
-	public ModelAndView ccSalesSilpGap(@RequestParam String search_ye1 ,
+	public ModelAndView ccSalesSilpGap(@RequestParam String search_ye ,
 			@RequestParam String search_mon1
 			,@RequestParam String search_mon2 , ModelAndView mv){
 		
@@ -31,16 +37,20 @@ public class CcSalesSlipGapController {
 			term="2기확정";
 		}
 		
-		String year=search_ye1.substring(2);
-		String date1= year+"/"+search_mon1;
-		String date2= year+"/"+search_mon2;
+		//달에 따른 끝날짜 설정
+				String endDay="31";
+				if(search_mon2.equals("06")) {
+					endDay="30";
+				}
+				
+				String year=search_ye;
+				String date1= year+search_mon1;// 시작날짜 월까지 문자열로 이음
+				String date2= year+search_mon2;// 시작날짜 월까지 문자열로 이음
+				
+				int yearInt=Integer.parseInt(year);
 		
 		//먼저 신용카드매출전표수령명세서 에 해당날짜가 있는 값이 있는지 확인한다.
 		CcSalesSlipGap cssg= new CcSalesSlipGap(); 
-
-		int yearInt=Integer.parseInt(year);
-		
-		System.out.println("yearInt:"+yearInt);
 		
 		cssg.setYearOfAttr(yearInt);
 		
