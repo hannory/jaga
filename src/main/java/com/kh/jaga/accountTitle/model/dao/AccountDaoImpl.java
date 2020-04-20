@@ -17,4 +17,10 @@ public class AccountDaoImpl implements AccountDao{
 			
 		return list;
 	}
+
+	@Override
+	public int insertAccountTitle(SqlSessionTemplate sqlSession, AccountTitle at) {
+		
+		return sqlSession.insert("AccountTitle.insertAccountTitle",at);
+	}
 }

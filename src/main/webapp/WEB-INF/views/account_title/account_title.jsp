@@ -339,7 +339,7 @@ font-size:15px;
 }
 
 #td3{
-width:135px;
+width:95px;
 background:  #F3F4F6;
 text-align:center;
 font-size:13px;
@@ -347,7 +347,7 @@ font-size:13px;
 }
 
 #td4{
-width:40px;
+width:80px;
 background:  #F3F4F6;
 text-align:center;
 font-size:13px;
@@ -404,11 +404,51 @@ width:1800px;
 background:white;
 } 
 
+/* 계정체계 */
+
+#accountSystem{
+position: absolute;
+width: 65px;
+height: 15px;
+left: 1074px;
+top: 187px;
+
+font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 14px;
+line-height: 16px;
+
+color: #000000;
+}
 
 
+/* 계정체계란 */
 
+#accountSystem-surr{
+position: absolute;
+width: 106px;
+height: 27px;
+left: 1169px;
+top: 183px;
 
+background: #FFFFFF;
+border: 1px solid #C4C4C4;
+box-sizing: border-box;
+border-radius: 5px;
+}
+/* 입력란*/
 
+#enroll{
+position: absolute;
+left: 1295px;
+top: 183px;
+
+background: #FFFFFF;
+border: 1px solid #C4C4C4;
+box-sizing: border-box;
+border-radius: 5px;
+}
 </style>
 </head>
 <body>
@@ -489,12 +529,12 @@ background:white;
 <!-- 		style="overflow-y:auto; overflow-x:hidden; -ms-overflow-style: none;" -->
 
 		<form action="accountTitle.at" method="post">
-		<div id="table2" style="overflow-y:scroll;">
+		<div id="table2" style="overflow-y:auto; overflow-x:hidden; -ms-overflow-style:none;">
 		
 		<table>
 		<tr> <td colspan="2" style="border:1px solid #D8D8DC" id="td2" >코드/계정과목 </td> 
 			<td style="border:1px solid  #D8D8DC" id="td3">성격</td>
-			<td style="border:1px solid  #D8D8DC" id="td4">관계</td>
+			<td style="border:1px solid  #D8D8DC" id="td4">계정체계</td>
 		</tr>
  		 <c:if test="${ !empty sessionScope.loginCompany }"> 
  		 
@@ -505,7 +545,7 @@ background:white;
 	
 			 <td style="border:1px solid #D8D8DC" id="td6" ><c:out value="${at.character}"/></td> 
 		
-			 <td style="border:1px solid #D8D8DC" id="td7"><c:out value="${at.realation}"/></td> 
+			 <td style="border:1px solid #D8D8DC" id="td7"><c:out value="${at.accountSystem}"/></td> 
 		</tr>
 		</c:forEach>
  		</c:if> 
@@ -517,22 +557,28 @@ background:white;
 		
 
 <!-- 		<table id="table3"> -->
+		<form action="insertat.at" method="post">
 		<div id="input">
 		<tr>
 			<td><b id="account-code">계정코드(명)</b>
-			<input type="text" name="" id="account-code-surr">
-			<input type="text" name="" id="account-name-surr"></td>
+			<input type="text" name="accountCode" id="account-code-surr">
+			<input type="text" name="accountTitle" id="account-name-surr"></td>
 		</tr>
 
 
 		<tr>
 			<td><b id="character">성격</b>
-			<input type="text" name="" id="character-surr">
+			<input type="text" name="character" id="character-surr">
+			</td>
+			<td><b id="accountSystem">계정체계</b>
+			<input type="text" name="accountSystem" id="accountSystem-surr">
 			</td>
 		</tr>
 		
+		<button type="submit" id="enroll">등록</button>
 		
 		</div>
+		</form>
 
 	
 

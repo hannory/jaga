@@ -21,4 +21,9 @@
 	
 	</select>
   
+  	<insert id="insertAccountTitle" parameterType="AccountTitleR">
+  	INSERT INTO ACCOUNT_TITLE(ACCOUNT_CODE,ACCOUNT_TITLE,CHARACTER,ACCOUNT_SYSTEM)
+  	VALUES(#{accountCode},#{accountTitle},#{character},#{accountSystem})
+  	
+  	</insert>
   </mapper>

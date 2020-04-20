@@ -8,6 +8,8 @@ public interface AccountService {
 
 	List<AccountTitle> selectAccountTitle();
 
+	int insertAccountTitle(AccountTitle at);
+
 
 
 

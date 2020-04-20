@@ -30,6 +30,13 @@ public class AccountServiceImpl implements AccountService {
 		return list;
 	}
 
+	@Override
+	public int insertAccountTitle(AccountTitle at) {
+		
+		return ad.insertAccountTitle(sqlSession,at);
+		
+	}
+
 		
 	}
 

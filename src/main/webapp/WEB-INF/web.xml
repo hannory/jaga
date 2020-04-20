@@ -238,6 +238,18 @@
       <url-pattern>*.at</url-pattern>
    </servlet-mapping> 
    
+      <servlet>
+      <servlet-name>businessEmp</servlet-name>
+      <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+      <init-param>
+         <param-name>contextConfigLocation</param-name>
+         <param-value>/WEB-INF/config/businessEmp-servlet.xml</param-value>
+      </init-param>
+   </servlet>
+   <servlet-mapping>
+      <servlet-name>businessEmp</servlet-name>
+      <url-pattern>*.be</url-pattern>
+   </servlet-mapping>
    
 
 	<!-- 인코딩 필터 추가 -->

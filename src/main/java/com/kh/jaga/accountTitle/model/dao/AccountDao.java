@@ -11,6 +11,8 @@ public interface AccountDao {
 
 	List<AccountTitle> selectAccountTitle(SqlSessionTemplate sqlSession);
 
+	int insertAccountTitle(SqlSessionTemplate sqlSession, AccountTitle at);
+
 
 
 }
