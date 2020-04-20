@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="ExpendResolution">
+  
+  <insert id="insertExpendResolution" parameterType="com.kh.jaga.expendResolution.model.dto.ExpendResolutionDto">
+  	INSERT ALL
+  	INTO EXPEND_RESOLUTION(
+	  	RESOLUTION_NO,
+		COM_RESOLUTION_CODE,
+		INITIATIVE_DATE,
+		DEPARTMENT_CODE,
+		MANAGER_NO,
+		MANAGER_POSITION,
+		EXPEND_PURPOSE,
+		EXPEND_DATE,
+		ACCOUNT_TITLE_CODE,
+		EXPEND_SUMMARY,
+		CREATE_USER,
+		CREATE_DATE,
+		APPROVAL_STATUS,
+		PAYMENT_TYPE_CODE,
+		EVIDENCE_CODE,
+		COM_CODE
+  	)
+  	VALUES(
+  		SEQ_EXPEND_RESOLUTION.NEXTVAL,
+  		'10',
+  		#{initiativeDate},
+  		'300',
+  		'123',
+		'001',
+		#{expendPurpose},
+		'1994-09-23',
+		'800',
+		99000,
+		'userIdInputplz',
+		SYSDATE,
+		'N',
+		'2',
+		'3',
+		10
+  	)
+  	INTO SWY_TEMP(
+  		ID,
+  		PWD
+  	)
+  	VALUES(
+  		SEQ_SWY_SEQUENCE.NEXTVAL,
+  		'PASS01!'
+  	)
+  	SELECT * FROM DUAL
+  	
+  </insert>
+  
+  
+  <select id="selectTest" resultType="String">
+  	SELECT INITIATIVE_DATE 
+  	FROM EXPEND_RESOLUTION
+  	WHERE RESOLUTION_NO = '5'
+  </select>
+  
+  <select id="selectDeptList" resultType="com.kh.jaga.expendResolution.model.vo.DepartmentVo">
+  	SELECT 
+  		DEPT_CODE as deptCode, 
+  		DEPT_NAME as deptName
+  	FROM DEPARTMENT
+  </select>
+  
+  
+  
+  
+  
+  </mapper>

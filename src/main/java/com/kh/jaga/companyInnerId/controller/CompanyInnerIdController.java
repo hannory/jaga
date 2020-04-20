@@ -17,9 +17,11 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.jaga.common.CommonsUtils;
+import com.kh.jaga.common.Pagination;
 import com.kh.jaga.companyInnerId.model.dto.CreateCompanyInnerIdDto;
 import com.kh.jaga.companyInnerId.model.exception.ComInIdException;
 import com.kh.jaga.companyInnerId.model.service.CompanyInnerIdService;
+import com.kh.jaga.companyInnerId.model.vo.PageInfo;
 import com.kh.jaga.companyInnerId.model.vo.SelectCompanyIdVo;
 
 /**
@@ -89,26 +91,39 @@ public class CompanyInnerIdController {
 	
 	//페이지 보여주는 메소드(직원 계정 조회)
 	@RequestMapping(value = "showViewComInnerIdList.comInId")
-	public String selectComInIdList(HttpServletRequest request, Model model) {
-		
-		System.out.println("showViewComInnerIdList.comInId 호출됨..");
-		
-		List<SelectCompanyIdVo> list = service.selectComInIdList();
-//		request.setAttribute("list", list);
-		
-		if(list != null) {
-			model.addAttribute(list);
-		}else {
-			System.out.println("직원정보 조회 결과 없음");
+	public String selectComInIdList(HttpServletRequest request) {
+
+		//페이징 처리하기
+		int currentPage = 1;
+		if(request.getParameter("currentPage") != null) {
+			currentPage = Integer.parseInt(((String) request.getParameter("currentPage")));
 		}
-		
+		//리스트 카운트 값 확인하고
+		int listCount = service.selectComIdListCount();
+
+		//페이지 정보 객체 생성
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+		System.out.println("pi 정보 ::: " + pi);
+		request.setAttribute("pi", pi);
+
+		System.out.println("showViewComInnerIdList.comInId 호출됨..");
+
+		//필요한 페이지 리스트 조회
+		List<SelectCompanyIdVo> list = service.selectComInIdList(pi);
+
 		System.out.println("ctrl > list : " + list);
 		System.out.println("ctrl > list : " + ( (SelectCompanyIdVo) (list.get(0)) ).getId() );
+
+		if(list != null) {
+			request.setAttribute("list", list);
+		}
 		
-		SelectCompanyIdVo tempVo = list.get(0);
 		
-		request.setAttribute("tempVo", tempVo);
-		request.setAttribute("list", list);
+		
+		
+		
+		
+		
 		return "selectCompanyId";
 	}
 	

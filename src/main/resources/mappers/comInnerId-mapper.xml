@@ -45,6 +45,24 @@
   </insert>
   
   
+  <select id="selectListCount" resultType="int">
+  	SELECT COUNT(COM_INNER_ID_NUM)
+  	FROM COM_INNER_ID
+  </select>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   <!-- @@@@@@@@@@     resultMap     @@@@@@@@@@ -->
   
   <!-- 사내계정 vo -->

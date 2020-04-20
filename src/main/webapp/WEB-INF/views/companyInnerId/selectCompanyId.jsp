@@ -84,42 +84,46 @@
 				<td style="width:20%">비고</td>
 			</tr>
 			
+			
+			<c:forEach var="target" items="${ list }">
+			
 			<tr>
-				<td>923</td>
-				<td>abc123@naver.com</td>
-				<td>심원용</td>
-				<td>대표</td>
+				<td><c:out value="${ target.comInnerIdNum }"></c:out></td>
+				<td><c:out value="${ target.email }"></c:out></td>
+				<td><c:out value="${ target.name }"></c:out></td>
+				<td><c:out value="${ target.positionCode }"></c:out></td>
 				<td><button>정보수정</button></td>
 			</tr>
+				
+			</c:forEach>
 			
 			
 		</table>
 		</form>
 		
 		<div class="page-area" style="margin-left:350px; margin-top:50px;">
-			<button><<</button>
-			<button><</button>
-			<button>1</button>
-			<button>2</button>
-			<button>3</button>
-			<button>4</button>
-			<button>5</button>
-			<button>></button>
-			<button>>></button>
+			
+			<c:forEach begin="${ pi.startPage }" end="${ pi.endPage }" step="1" var="n">
+				
+				<c:if test="${ pi.currentPage != n}">
+					<c:url value="showViewComInnerIdList.comInId" var="pagePath">
+						<c:param name="currentPage" value="${ n }"></c:param>
+					</c:url>
+					<a href="${ pagePath }"><span><c:out value="${ n }"></c:out></span></a>
+				</c:if>
+				
+				<c:if test="${ pi.currentPage eq n }">
+					<b><span><c:out value="${ n }"></c:out></span></b>
+				</c:if>
+				
+				
+				
+			</c:forEach>
+			
+			
 		</div>
 		
-		<h1>zzz</h1>
 		
-		<c:forEach var="target" items="${ list }">
-		
-			<c:out value="${ target.comInnerIdNum }"></c:out>
-			<c:out value="${ target.email }"></c:out>
-			<c:out value="${ target.name }"></c:out>
-			<c:out value="${ target.positionCode }"></c:out>
-			<c:out value="${ target.pwd }"></c:out>
-			<br>
-			
-		</c:forEach>
 		
 	<!-- //작업공간 -->
 	</div>

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.kh.jaga.companyInnerId.model.dao.CompanyInnerIdDao;
 import com.kh.jaga.companyInnerId.model.dto.CreateCompanyInnerIdDto;
 import com.kh.jaga.companyInnerId.model.exception.ComInIdException;
+import com.kh.jaga.companyInnerId.model.vo.PageInfo;
 import com.kh.jaga.companyInnerId.model.vo.SelectCompanyIdVo;
 
 @Service
@@ -46,16 +47,26 @@ public class CompanyInnerIdServiceImpl implements CompanyInnerIdService {
 		return result;
 	}
 
+	//필요한 행 갯수 가져옴
 	@Override
-	public List<SelectCompanyIdVo> selectComInIdList() {
+	public List<SelectCompanyIdVo> selectComInIdList(PageInfo pi) {
 		
 		System.out.println("service 진입 ...");
 		
-		List<SelectCompanyIdVo> list = dao.selectComInIdList(sqlSession);
+		List<SelectCompanyIdVo> list = dao.selectComInIdList(sqlSession, pi);
 		
 		System.out.println("service > return list : " + list);
 		
 		return list;
+	}
+
+	//전체 행 갯수 가져오기
+	@Override
+	public int selectComIdListCount() {
+		//페이징
+		int listCount = dao.selectComIdListCount(sqlSession);
+		
+		return listCount;
 	}
 
 }

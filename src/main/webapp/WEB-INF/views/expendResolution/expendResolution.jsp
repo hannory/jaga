@@ -16,7 +16,6 @@
 	.topTr{
 		background:aqua;
 		height:30px;
-		
 	}
 	.botTr{
 		background:red;
@@ -79,12 +78,11 @@
 	/* 모달(담당부서) */
 	.modal-layer{
 		position:fixed;
-		width:1335px;
-		height:730px;
-		background:gray;
+		width:100%;
+		height:100%;
 		z-index: 1;
 		display:none;
-		background:rgba(150, 150, 150, 0.5);
+		background:rgba(150, 150, 150, 0.9);
 		margin-left:-25px;
 		animation: fadein 2s;
 	}
@@ -93,8 +91,8 @@
 		width:50%;
 		height:70%;
 		background:white;
-		margin:auto;
-		margin-top:10%;
+		margin-left:250px;
+		margin-top:100px;
 		border:1px solid white;
 	}
 	.modal-dept-top{
@@ -102,6 +100,9 @@
 		height:10%;
 		background:pink;
 	}/* 모달(담당부서) 끝 */
+	.dateTestBtn:hover{
+		cursor:pointer;
+	}
 	
 	
 	
@@ -122,11 +123,12 @@
 			<!-- 모달 내 작업영역 -->
 			<div class="modal-section">
 			<button onclick="closeModal()" style="float:right;">X</button>
-		
+				
+				<div style="width: 70%; height: 100%; overflow: scroll;"><!-- 스크롤 만들기 위한 div -->
 				<table border="1" style="margin-top:50px; margin-left:140px; text-align:center;">
 					<tr>
-						<td style="width:100px; background:green;"><span>직원검색</span></td>
-						<td><input type="text" style="width:100%; height:100%;"></td>
+						<td style="width:100px; background:green;"><span>부서검색</span></td>
+						<td><input id="searchDeptBox" type="text" style="width:100%; height:100%;"></td>
 						<td style="width:100px;">
 						<div class="searchBtn" onclick="searchDept()">
 						<img style="width:30px; height:30px;" src="${contextPath}/resources/images/search.PNG">
@@ -134,16 +136,46 @@
 						</td>
 					</tr>
 					<tr style="background:green;">
-						<td>사번</td>
-						<td>이름</td>
-						<td>직책</td>
+						<td>부서코드</td>
+						<td colspan="2">부서 명</td>
 					</tr>
-					<tr>
-						<td>20130872</td>
-						<td>홍길동</td>
-						<td>팀장</td>
-					</tr>
+					
+					
+					<c:if test="${ deptList ne null }">
+						<c:forEach var="list" items="${ deptList }">
+						<tr>
+							<td>${ list.deptCode }</td>
+							<td colspan="2">${ list.deptName }</td>
+						</tr>
+						</c:forEach>	
+					</c:if>
+					
 				</table>
+				</div><!-- //스크롤 만들기 위한 div -->
+				
+				<c:forEach items="${ deptList }" var="temp" varStatus="status">
+					<c:set var="value + status.index" value="temp[status.index]"></c:set>
+				</c:forEach>
+				
+				<script>
+				/* 부서검색을 위한 스크립트 */
+				$('#searchDeptBox').keyup(function(e) {
+					
+					alert("검색 완성하기");
+					
+				});
+				</script>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
 			</div>
 			<!-- //모달 내 작업영역 -->
 		</div><!-- //회색영역 -->
@@ -164,8 +196,9 @@
 	
 	$(function(){
 		$("#inputDept").focus(function(e){
-			e.target.blur();
-			showModalDept();
+			//일단 수동으로 입력 가능하게 ...
+			/* e.target.blur();
+			showModalDept(); */
 			
 		});
 	});
@@ -188,8 +221,8 @@
 		
 				<table border="1" style="margin-top:50px; margin-left:140px; text-align:center;">
 					<tr>
-						<td style="width:100px; background:green;"><span>직원검색</span></td>
-						<td><input type="text" style="width:100%; height:100%;"></td>
+						<td style="width:100px; background:green;"><span>계정과목</span></td>
+						<td><input type="text" name="accountTitleCode" style="width:100%; height:100%;"></td>
 						<td style="width:100px;">
 						<div class="searchBtnSubject" onclick="searchSubject()">
 						<img style="width:30px; height:30px;" src="${contextPath}/resources/images/search.PNG">
@@ -227,8 +260,9 @@
 	
 	$(function(){
 		$("#inputSubject").focus(function(e){
-			e.target.blur();
-			showModalSubject();
+			//일단 수동으로 입력 가능하게 ...
+			/* e.target.blur();
+			showModalSubject(); */
 			
 		});
 	});
@@ -292,8 +326,9 @@
 	
 	$(function(){
 		$("#inputEmployee").focus(function(e){
-			e.target.blur();
-			showModalEmployee();
+			//일단 수동으로 입력 가능하게 ...
+			/* e.target.blur();
+			showModalEmployee(); */
 			
 		});
 	});
@@ -316,7 +351,7 @@
 	
 	
 	
-		<form action="zzzzz" method="post">
+		<form action="insertExpendResolution.expendResolution" method="post">
 		<!-- 우측상단 결재 관련 -->
 		<h2 class="mt-4">지출결의서</h2>
 		
@@ -350,7 +385,7 @@
 		<script>
 		/* 지출결의서 조회 탭으로 이동 */
 			function showExpendResolutionList(){
-				alert("asd");
+				location.href="showExpendResolutionList.expendResolution";
 			}
 		</script>
 
@@ -364,36 +399,36 @@
 		<table class="table01" border="1">
 			<tr>
 				<td style="width:15%" class="color-green">발의일</td>
-				<td style="width:25%"><input readonly id="datepicker01" style="width:100%; text-align:center;"></td>
+				<td style="width:25%"><input name="initiativeDate" readonly id="datepicker01" style="width:100%; text-align:center;"></td>
 				<td style="width:10%"><span>
-				<img id="dateTestBtn01" src="${contextPath}/resources/images/calendar.png" style="width:25px; height:25px;">
+				<img class="dateTestBtn" id="dateTestBtn01" src="${contextPath}/resources/images/calendar.png" style="width:25px; height:25px;">
 				</span></td>
 				<td style="width:15%" class="color-green">지출일</td>
-				<td style="width:25%"><input readonly id="datepicker02" style="width:100%; text-align:center;"></td>
+				<td style="width:25%"><input name="expendDate" readonly id="datepicker02" style="width:100%; text-align:center;"></td>
 				<td style="width:10%"><span>
-				<img id="dateTestBtn02" src="${contextPath}/resources/images/calendar.png" style="width:25px; height:25px;">
+				<img class="dateTestBtn" id="dateTestBtn02" src="${contextPath}/resources/images/calendar.png" style="width:25px; height:25px;">
 				</span>
 				
 				</td>			
 			</tr>
 			<tr>
 				<td class="color-green">담당부서</td>
-				<td><input readonly id="inputDept" type="text" style="width:100%; height:100%; text-align:center;"></td>
+				<td><input id="inputDept" name="departmentCode" type="text" style="width:100%; height:100%; text-align:center;"></td>
 				<td onclick="showModalDept()"><img style="width:20px; height:20px;" src="${contextPath}/resources/images/search.PNG"></td>
 				<td class="color-green">계정과목</td>
-				<td><input readonly id="inputSubject" type="text" style="width:100%; height:100%; text-align:center;"></td>
+				<td><input id="inputSubject" name="accountTitleCode" type="text" style="width:100%; height:100%; text-align:center;"></td>
 				<td onclick="showModalSubject()"><img style="width:20px; height:20px;" src="${contextPath}/resources/images/search.PNG"></td>			
 			</tr>
 			<tr>
 				<td class="color-green">담당자</td>
-				<td><input type="text" style="width:100%; height:100%; text-align:center;"></td>
+				<td><input type="text" name="managerNo" style="width:100%; height:100%; text-align:center;"></td>
 				<td onclick="showModalEmployee()"><img style="width:20px; height:20px;" src="${contextPath}/resources/images/search.PNG"></td>
 				<td class="color-green">지출합계</td>
-				<td colspan="2" style="text-align:right"><input id="totalExpend" type="text" style="width:100%; height:100%; text-align:right;"></td>
+				<td colspan="2" style="text-align:right"><input id="expendSummary" name="expendSummary" type="text" value="0" style="width:100%; height:100%; text-align:right;"></td>
 			</tr>
 			<tr>
 				<td class="color-green">지출목적</td>
-				<td colspan="5"><input type="text" style="width:100%"></td>
+				<td colspan="5"><input type="text" name="expendPurpose" style="width:100%"></td>
 			</tr>
 		</table>
 		<!-- //테이블 1번 -->
@@ -410,11 +445,11 @@
 					<td class="color-green">비고</td>
 				</tr>
 				<tr>
-					<td>111</td>
-					<td>222</td>
-					<td>333</td>
-					<td><input type="text" class="price"></td>
-					<td>555</td>
+					<td><input name="detailDate01" type="date"></td>
+					<td><input name="detailBrief01" type="text"></td>
+					<td><input name="detailVenderCode01" type="text"></td>
+					<td><input name="detailPrice01" type="text" class="price"></td>
+					<td><input name="detailDate01" type="text"></td>
 				</tr>
 				<tr>
 					<td>111</td>
@@ -469,9 +504,11 @@
 				<span>위와 같이 지출을 결의하오니 허가하여주시기 바랍니다.</span>
 				
 				<div style="float:right; margin-top:20px;">
+					<!-- 
 					<input type="text" maxlength="4" style="width:50px; text-align:right; border:1px solid white; border-bottom:1px solid black">년
 					<input type="text" maxlength="2" style="width:50px; text-align:right; border:1px solid white; border-bottom:1px solid black">월
 					<input type="text" maxlength="2" style="width:50px; text-align:right; border:1px solid white; border-bottom:1px solid black">일
+					 -->
 					<br>
 					<label>작성자</label><input type="text" style="text-align:right; border:1px solid white; border-bottom:1px solid black;">
 					<label class="label-sign" for="signInput">(인)</label>
@@ -609,15 +646,24 @@
 	 /* 상세내역 금액 총 합을 지출합계 항목으로 넣어준다 */
 	 $(function(){
 		 $(".price").blur(function(e){
-			 
+			 console.log(e.target.value);
+			 //숫자만 입력하도록 함
 			 var value = e.target.value;
-			 
 			 var regExp = /^[0-9]+$/;
-			 
 			 if(!regExp.test(value)){
-				 //문자 ㅇㅇ
+				 //문자있으므로 초기화시켜줌
 				 e.target.value = "";
 			 }
+
+			//totalExpend 값을 총합으로 바꿔줌
+			$("#expendSummary").val(
+					Number($(".price").eq(0).val()) + 
+					Number($(".price").eq(1).val()) +
+					Number($(".price").eq(2).val())	
+					);
+			 
+			 
+			 
 			 
 		 });
 		 	 
@@ -648,7 +694,7 @@
 		<!-- footer -->
 		<div class="card mb-4">
 			<div class="card-body">
-			도움말입니다. 읽어주세요*^^*
+			도움말입니다. 읽어주세요*^^*	<h1>${ test }</h1>
 			</div>
 		</div>
 		<!-- ///footer -->
