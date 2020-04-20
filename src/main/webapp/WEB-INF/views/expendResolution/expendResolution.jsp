@@ -123,11 +123,12 @@
 			<!-- 모달 내 작업영역 -->
 			<div class="modal-section">
 			<button onclick="closeModal()" style="float:right;">X</button>
-		
+				
+				<div style="width: 70%; height: 100%; overflow: scroll;"><!-- 스크롤 만들기 위한 div -->
 				<table border="1" style="margin-top:50px; margin-left:140px; text-align:center;">
 					<tr>
 						<td style="width:100px; background:green;"><span>부서검색</span></td>
-						<td><input type="text" style="width:100%; height:100%;"></td>
+						<td><input id="searchDeptBox" type="text" style="width:100%; height:100%;"></td>
 						<td style="width:100px;">
 						<div class="searchBtn" onclick="searchDept()">
 						<img style="width:30px; height:30px;" src="${contextPath}/resources/images/search.PNG">
@@ -135,16 +136,46 @@
 						</td>
 					</tr>
 					<tr style="background:green;">
-						<td>사번</td>
-						<td>이름</td>
-						<td>직책</td>
+						<td>부서코드</td>
+						<td colspan="2">부서 명</td>
 					</tr>
-					<tr>
-						<td>20130872</td>
-						<td>홍길동</td>
-						<td>팀장</td>
-					</tr>
+					
+					
+					<c:if test="${ deptList ne null }">
+						<c:forEach var="list" items="${ deptList }">
+						<tr>
+							<td>${ list.deptCode }</td>
+							<td colspan="2">${ list.deptName }</td>
+						</tr>
+						</c:forEach>	
+					</c:if>
+					
 				</table>
+				</div><!-- //스크롤 만들기 위한 div -->
+				
+				<c:forEach items="${ deptList }" var="temp" varStatus="status">
+					<c:set var="value + status.index" value="temp[status.index]"></c:set>
+				</c:forEach>
+				
+				<script>
+				/* 부서검색을 위한 스크립트 */
+				$('#searchDeptBox').keyup(function(e) {
+					
+					alert("검색 완성하기");
+					
+				});
+				</script>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
 			</div>
 			<!-- //모달 내 작업영역 -->
 		</div><!-- //회색영역 -->
