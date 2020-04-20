@@ -16,7 +16,6 @@
 	.topTr{
 		background:aqua;
 		height:30px;
-		
 	}
 	.botTr{
 		background:red;
@@ -394,7 +393,7 @@
 				<td><input type="text" name="managerNo" style="width:100%; height:100%; text-align:center;"></td>
 				<td onclick="showModalEmployee()"><img style="width:20px; height:20px;" src="${contextPath}/resources/images/search.PNG"></td>
 				<td class="color-green">지출합계</td>
-				<td colspan="2" style="text-align:right"><input id="expendSummary" type="text" value="0" style="width:100%; height:100%; text-align:right;"></td>
+				<td colspan="2" style="text-align:right"><input id="expendSummary" name="expendSummary" type="text" value="0" style="width:100%; height:100%; text-align:right;"></td>
 			</tr>
 			<tr>
 				<td class="color-green">지출목적</td>
@@ -616,6 +615,7 @@
 	 /* 상세내역 금액 총 합을 지출합계 항목으로 넣어준다 */
 	 $(function(){
 		 $(".price").blur(function(e){
+			 console.log(e.target.value);
 			 //숫자만 입력하도록 함
 			 var value = e.target.value;
 			 var regExp = /^[0-9]+$/;
@@ -625,7 +625,7 @@
 			 }
 
 			//totalExpend 값을 총합으로 바꿔줌
-			$("#totalExpend").val(
+			$("#expendSummary").val(
 					Number($(".price").eq(0).val()) + 
 					Number($(".price").eq(1).val()) +
 					Number($(".price").eq(2).val())	

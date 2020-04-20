@@ -62,6 +62,13 @@
   	WHERE RESOLUTION_NO = '5'
   </select>
   
+  <select id="selectDeptList" resultType="com.kh.jaga.expendResolution.model.vo.DepartmentVo">
+  	SELECT 
+  		DEPT_CODE as deptCode, 
+  		DEPT_NAME as deptName
+  	FROM DEPARTMENT
+  </select>
+  
   
   
   

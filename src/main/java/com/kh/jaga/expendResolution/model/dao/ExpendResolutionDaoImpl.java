@@ -1,11 +1,14 @@
 package com.kh.jaga.expendResolution.model.dao;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.jaga.expendResolution.model.dto.ExpendResolutionDto;
+import com.kh.jaga.expendResolution.model.vo.DepartmentVo;
 
 @Repository
 public class ExpendResolutionDaoImpl implements ExpendResolutionDao{
@@ -19,6 +22,13 @@ public class ExpendResolutionDaoImpl implements ExpendResolutionDao{
 		System.out.println("!!!!!!!!!! sql date ? " + date);
 		
 		return sqlSession.insert("ExpendResolution.insertExpendResolution", dto);
+	}
+
+	@Override
+	public List<DepartmentVo> selectDeptList(SqlSessionTemplate sqlSession) {
+		List<DepartmentVo> deptList = sqlSession.selectList("ExpendResolution.selectDeptList");
+		
+		return deptList;
 	}
 
 }
