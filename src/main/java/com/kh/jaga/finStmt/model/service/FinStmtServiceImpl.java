@@ -1,5 +1,7 @@
 package com.kh.jaga.finStmt.model.service;
 
+import java.util.HashMap;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,7 +34,7 @@ public class FinStmtServiceImpl implements FinStmtService {
 	}
 
 	@Override
-	public IncomeStmtAccount selectIncomeStmt(IncomeStmtAccount isa) {
+	public HashMap selectIncomeStmt(IncomeStmtAccount isa) {
 
 		return fsd.selectIncomeStmt(sqlSession, isa);
 	}

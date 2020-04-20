@@ -1,27 +1,40 @@
 package com.kh.jaga.finStmt.model.vo;
 
 public class IncomeStmt implements java.io.Serializable {
-	private int endingInvOfMdse;
+	private int curEndingInvOfMdse;			//기말상품재고액
+	private int curSuppliesExpenses;		//소모품비
 	
 	public IncomeStmt() {}
 
-	public IncomeStmt(int endingInvOfMdse) {
+	public IncomeStmt(int curEndingInvOfMdse, int curSuppliesExpenses) {
 		super();
-		this.endingInvOfMdse = endingInvOfMdse;
+		this.curEndingInvOfMdse = curEndingInvOfMdse;
+		this.curSuppliesExpenses = curSuppliesExpenses;
 	}
 
-	public int getEndingInvOfMdse() {
-		return endingInvOfMdse;
+	public int getCurEndingInvOfMdse() {
+		return curEndingInvOfMdse;
 	}
 
-	public void setEndingInvOfMdse(int endingInvOfMdse) {
-		this.endingInvOfMdse = endingInvOfMdse;
+	public void setCurEndingInvOfMdse(int curEndingInvOfMdse) {
+		this.curEndingInvOfMdse = curEndingInvOfMdse;
+	}
+
+	public int getCurSuppliesExpenses() {
+		return curSuppliesExpenses;
+	}
+
+	public void setCurSuppliesExpenses(int curSuppliesExpenses) {
+		this.curSuppliesExpenses = curSuppliesExpenses;
 	}
 
 	@Override
 	public String toString() {
-		return "IncomeStmt [endingInvOfMdse=" + endingInvOfMdse + "]";
+		return "IncomeStmt [curEndingInvOfMdse=" + curEndingInvOfMdse + ", curSuppliesExpenses=" + curSuppliesExpenses
+				+ "]";
 	}
+
+	
 	
 	
 }
