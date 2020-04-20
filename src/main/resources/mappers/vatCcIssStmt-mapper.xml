@@ -71,7 +71,7 @@
    
    </insert>
 	
-  <select id="selectCurrvalCis" parameterType="CcIssStmt" resultType="string">
+  <select id="selectCurrvalCis"  resultType="string" parameterType="CcIssStmt">
   	SELECT ISS_CODE
   		FROM CC_ISS_STMT
   		WHERE YEAR_OF_ATTR= #{yearOfAttr}

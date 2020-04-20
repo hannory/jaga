@@ -3,30 +3,32 @@ package com.kh.jaga.bugagachi.model.vo;
 import java.sql.Date;
 
 public class TnxHis {//거래내역
-	private String slipCode;
-	private Date silpDate;
-	private String division;
-	private String producer;
-	private String cardmemNum;
-	private int numOfTxn;
-	private int valOfSupply;
-	private int tax;
-	private String rcptstmtCode;
+	private String slipCode; //전표번호
+	private String silpDate; //거래날짜
+	private String division; //구분(1:현금,2:복지,3:사업,4:신용)
+	private String producer; //공급자
+	private String proNum;	 //공급자 사업번호
+	private String cardmemNum;//카드회원번호
+	private int numOfTxn;	//거래건수
+	private int valOfSupply; //공급가액
+	private int tax; 			//세액
+	private String rcptstmtCode;//수령명세서 코드
 	
 	public TnxHis() {}
 
-	public TnxHis(String slipCode, Date silpDate, String division, String producer, String cardmemNum, int numOfTxn,
-			int valOfSupply, int tax, String rcptstmtCode) {
+	public TnxHis(String slipCode, String silpDate, String division, String producer, String proNum, String cardmemNum,
+			int numOfTxn, int valOfSupply, int tax, String rcptstmtCode) {
 		super();
-		this.slipCode = slipCode;           //전표번호
-		this.silpDate = silpDate; 			//거래날짜
-		this.division = division;			//구분(1:현금,2:복지,3:사업,4:신용)
-		this.producer = producer;			//공급자
-		this.cardmemNum = cardmemNum;		//카드회원번호
-		this.numOfTxn = numOfTxn;			//거래건수
-		this.valOfSupply = valOfSupply;		//공급가액
-		this.tax = tax;						//세액
-		this.rcptstmtCode = rcptstmtCode;	//수령명세서 코드
+		this.slipCode = slipCode;
+		this.silpDate = silpDate;
+		this.division = division;
+		this.producer = producer;
+		this.proNum = proNum;
+		this.cardmemNum = cardmemNum;
+		this.numOfTxn = numOfTxn;
+		this.valOfSupply = valOfSupply;
+		this.tax = tax;
+		this.rcptstmtCode = rcptstmtCode;
 	}
 
 	public String getSlipCode() {
@@ -37,11 +39,11 @@ public class TnxHis {//거래내역
 		this.slipCode = slipCode;
 	}
 
-	public Date getSilpDate() {
+	public String getSilpDate() {
 		return silpDate;
 	}
 
-	public void setSilpDate(Date silpDate) {
+	public void setSilpDate(String silpDate) {
 		this.silpDate = silpDate;
 	}
 
@@ -59,6 +61,14 @@ public class TnxHis {//거래내역
 
 	public void setProducer(String producer) {
 		this.producer = producer;
+	}
+
+	public String getProNum() {
+		return proNum;
+	}
+
+	public void setProNum(String proNum) {
+		this.proNum = proNum;
 	}
 
 	public String getCardmemNum() {
@@ -104,9 +114,11 @@ public class TnxHis {//거래내역
 	@Override
 	public String toString() {
 		return "TnxHis [slipCode=" + slipCode + ", silpDate=" + silpDate + ", division=" + division + ", producer="
-				+ producer + ", cardmemNum=" + cardmemNum + ", numOfTxn=" + numOfTxn + ", valOfSupply=" + valOfSupply
-				+ ", tax=" + tax + ", rcptstmtCode=" + rcptstmtCode + "]";
+				+ producer + ", proNum=" + proNum + ", cardmemNum=" + cardmemNum + ", numOfTxn=" + numOfTxn
+				+ ", valOfSupply=" + valOfSupply + ", tax=" + tax + ", rcptstmtCode=" + rcptstmtCode + "]";
 	}
+
+	
 	
 	
 	

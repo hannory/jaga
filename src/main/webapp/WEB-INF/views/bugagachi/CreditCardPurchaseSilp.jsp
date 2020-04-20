@@ -207,24 +207,6 @@
 	 			data:{search_ye:search_ye, search_mon1:search_mon1, search_mon2:search_mon2, comCode:comCode },
 	 			success: function(data){
 	 				console.log(data);
-	 			/* 	//1111111111111111111111111111111111111111111111111111111111
-	 				var $replySelectTable = $("#replySelectTable");
-					$replySelectTable.html('');
-					
-					for(var key in data) {
-						var $tr = $("<tr>");
-						var $writerTd = $("<td>").text(data[key].nickName).css("width", "100px");
-						var $contentTd = $("<td>").text(data[key].bContent).css("width", "400px");
-						var $dateTd = $("<td>").text(data[key].bDate).css("width", "200px");
-						
-						$tr.append($writerTd);
-						$tr.append($contentTd);
-						$tr.append($dateTd);
-						
-						$replySelectTable.append($tr);
-					}//1111111111111111111111111111111111111
-					 
-                  */
                   /*       
                  var accCo = $("<input type='hidden' name='accountCode'>").val(accountCo);
                var venCo = $("<input type='hidden' name='venderCode'>").val(venderCode);
