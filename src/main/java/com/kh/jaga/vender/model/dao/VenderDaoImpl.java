@@ -1,5 +1,7 @@
 package com.kh.jaga.vender.model.dao;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -12,5 +14,27 @@ public class VenderDaoImpl implements VenderDao{
 
 		return sqlSession.insert("Vender.insertVender",v);
 	}
+
+	@Override
+	public List<Vender> selectVender(SqlSessionTemplate sqlSession) {
+		List<Vender> list = sqlSession.selectList("Vender.selectVenderList");
+		System.out.println(list+"dao리스트다.");
+		return list;
+	}
+
+	@Override
+	public List<Vender> selectOne(String venderCode, SqlSessionTemplate sqlSession) {
+		List<Vender> list = sqlSession.selectList("Vender.selectOne",venderCode);
+		
+		return list;
+	}
+
+	@Override
+	public int modifyOne(SqlSessionTemplate sqlSession, Vender v) {
+		
+		return sqlSession.update("Vender.modifyOne",v);
+	}
+
+
   
 }

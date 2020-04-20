@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="AccountTitle">
+  
+  <resultMap type="AccountTitleR" id="AccountResultMap">
+  <id property="accountCode" column="ACCOUNT_CODE"/>
+  <result property="accountTitle" column="ACCOUNT_TITLE"/>
+  <result property="character" column="CHARACTER"/>
+  <result property="realation" column="REALATION"/>
+  <result property="comCode" column="COM_CODE"/>
+  <result property="accountSystem" column="ACCOUNT_SYSTEM"/>
+  </resultMap>
+  
+	<select id="selectAccountTitleList" resultMap="AccountResultMap">
+
+	SELECT ACCOUNT_CODE,ACCOUNT_TITLE,CHARACTER,REALATION,COM_CODE,ACCOUNT_SYSTEM
+	FROM ACCOUNT_TITLE
+	
+	</select>
+  
+  	<insert id="insertAccountTitle" parameterType="AccountTitleR">
+  	INSERT INTO ACCOUNT_TITLE(ACCOUNT_CODE,ACCOUNT_TITLE,CHARACTER,ACCOUNT_SYSTEM)
+  	VALUES(#{accountCode},#{accountTitle},#{character},#{accountSystem})
+  	
+  	</insert>
+  </mapper>

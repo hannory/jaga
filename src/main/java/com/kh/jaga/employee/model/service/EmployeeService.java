@@ -9,4 +9,6 @@ public interface EmployeeService {
 
 	int insertAttachment(Attachment at);
 
+	int insertAttachment2(Attachment at2);
+
 }

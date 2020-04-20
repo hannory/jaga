@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+        <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -912,6 +913,18 @@ border: 1px solid #C4C4C4;
 box-sizing: border-box;
 border-radius: 5px;
 }
+/*업체담당자연락처 코드란 com-manager1-tel-surr*/
+
+#com-manager1-tel-surr{
+position: absolute;
+width: 190px;
+height: 27px;
+left: 460px;
+top: 544px;
+border: 1px solid #C4C4C4;
+box-sizing: border-box;
+border-radius: 5px;
+}
 
 </style>
 <body>
@@ -926,35 +939,38 @@ border-radius: 5px;
 			<div id="main">
 		<div id="table-total"> 
 		 
+		 <form action="modifyVender.vi" method="post">
 <!-- <table> -->
+ 		<c:forEach var="v" items="${list}">
 		<tr>
-			<td><b id="vender-info">거래처 등록정보</b></td>
-			<td><b id="vender-name">거래처명</b><input type="text" name="" id="vender-name-surr"></td>
+			<td><b id="vender-info">거래처 등록정보</b></td>  <td><input type="hidden" value="${v.venderCode}" name="venderCode"></td> 
+			<td><b id="vender-name">거래처명</b>
+			<input type="text" name="venderName" id="vender-name-surr" value="${v.venderName} "></td>
 		</tr>
 		
 		<tr>
 			<td><b id="biz-num">1.사업자등록번호</b>
-			<input type="text" name="" id="biz-reg-num-surr"></td>
+			<input type="text" name="bizRegNum" id="biz-reg-num-surr" value="${v.bizRegNum}"></td>
 		</tr>
 
 
 		<tr>
 			<td><b id="boss-name">2.대표자성명</b>
-			<input type="text" name="" id="boss-name-surr"></td>
+			<input type="text" name="bossName" id="boss-name-surr" value="${v.bossName}"></td>
 		</tr>
 		
 		<tr>
 			<td>
-				<b id="sell">3.업종</b> <b id="sell-way">업태</b> <input type="text" name="" id="sell-way-surr" >
-				<b id="sell-target">종목</b> <input type="text" name="" id="sell-target-surr">
-				<b id="farmers-status">농어민</b><input type="checkbox" id="farmers-status-surr">
+				<b id="sell">3.업종</b> <b id="sell-way">업태</b> <input type="text" name="sellWay" id="sell-way-surr" value="${v.sellWay}">
+				<b id="sell-target">종목</b> <input type="text" name="sellTarget" id="sell-target-surr" value="${v.sellTarget}">
+					<b id="farmers-status">농어민</b><input type="checkbox" value="1" id="farmers-status-surr" name="farmersStatus">
 			</td>
 		</tr>
 		
 		<tr>
 			<td><b id="address">4.주소</b>
 			<input type="text" name="" id="vender-address1-surr"><input type="text" id="vender-address2-surr"></td>
-			<td><input type="text" name="" id="vender-address3-surr"></td>
+			<td><input type="text" name="venderAddress" id="vender-address3-surr" value="${v.venderAddress}"></td>
 		</tr>
 		
 		<tr>
@@ -962,52 +978,62 @@ border-radius: 5px;
 		</tr>
 
 		<tr>
-			<td><b id="phone">5.연 락 처</b> 
-			<b id="vender-tel">전화번호</b> <input type="tel" name="" id="vender-tell-surr">
-			<b id="vender-fax">팩스번호</b> <input type="tel" name="" id="vender-fax-surr">
+			<td><b id="phone" >5.연 락 처</b> 
+			<b id="vender-tel">전화번호</b> <input type="tel" name="venderTel" id="vender-tell-surr" value="${v.venderTel}">
+			<b id="vender-fax">팩스번호</b> <input type="tel" name="venderFax" id="vender-fax-surr" value="${v.venderFax}">
 			</td>
 			<td></td>
 		</tr>
 		
 		<tr>
 			<td><b id="department-incharge">6.담당(부서)사원</b>
-			`<input type="text" id="department-incharge1-surr">
+			`<input type="text" id="department-incharge1-surr" name="departmentIncharge" value="${v.departmentIncharge}">
 			`<input type="text" id="department-incharge2-surr">
 			</td>
 		</tr>
 		
  		<tr>
 			<td><b id="account-income-num">7.입금 계좌 번호</b>
-				<b id=bank>은행</b><input type="text" id="bank-code-surr"><input type="text" id="bank-code-name-surr">
+				<b id=bank>은행</b><input type="text" id="bank-code-surr" value="${v.bankCode}" name="bankCode">
+			 <c:if test="${v.bankCode==1}"><input type="text" id="bank-code-name-surr" value="한국은행"></c:if> 
+			 <c:if test="${v.bankCode==2}"><input type="text" id="bank-code-name-surr" value="산업은행"></c:if> 
+			 <c:if test="${v.bankCode==3}"><input type="text" id="bank-code-name-surr" value="기업은행"></c:if> 
+			 <c:if test="${v.bankCode==4}"><input type="text" id="bank-code-name-surr" value="국민은행"></c:if> 
+			 <c:if test="${v.bankCode==5}"><input type="text" id="bank-code-name-surr" value="신한은행"></c:if> 
+			 <c:if test="${v.bankCode==6}"><input type="text" id="bank-code-name-surr" value="농협은행"></c:if> 
+			 <c:if test="${v.bankCode==7}"><input type="text" id="bank-code-name-surr" value="SC은행"></c:if> 
+			 <c:if test="${v.bankCode==8}"><input type="text" id="bank-code-name-surr" value="한국씨티은행"></c:if> 
+			 <c:if test="${v.bankCode==9}"><input type="text" id="bank-code-name-surr" value="우리은행"></c:if> 
+				
+				
 			</td>
-			<td><b id="account-holder"> 예금주 </b><input type="text" name="" id="account-holder-surr">
-				<b id="account-num">계좌번호</b><input type="text" name="" id="account-num-surr">
+			<td><b id="account-holder"> 예금주 </b><input type="text" name="accountHolder" id="account-holder-surr" value="${v.accountHolder}">
+				<b id="account-num">계좌번호</b><input type="text" name="accountNum" id="account-num-surr" value="${v.accountNum}">
 			</td>
 		</tr>
 		
 		<tr>
-			<td><b id="com-manage-tel"> 8.업체담당자연락처 </b><button id="btn-okay" style="font-size:8px">조회/등록</button>
-				<input type="text" name="" id="com-manager1-tel-surr">
-				<input type="text" name="" id="com-manager2-tel-surr">
-			</td>
+		<td><b id="com-manage-tel"> 8.업체담당자연락처 </b>
+				<input type="text" name="comManagerTel" id="com-manager1-tel-surr" placeholder="숫자만 입력"  value="${v.comManagerTel}" >
 			<td></td>
 		</tr>
 		<tr>
 			<td><b id="remarks">비    고</b>
-			<input type="text" name="" id="remarks-surr"></td>
+			<input type="text" name="remarks" id="remarks-surr" value="${v.remarks}"></td>
 			<td></td>
 		</tr>
 		<tr>
 			<td><b id="status">사 용 여 부</b>
-			<input type="text" name="" id="zero-one-surr">
+			<input type="text" name="status" id="zero-one-surr" value="${v.status}">
 			<b id="zero-one">0:부 1:여</b></td>
 			<td></td>
 		</tr>
+		</c:forEach>
 		
 		<tr>
-			<td><button id="okay" style="color:white">확인</button></td>
+			<td><button id="okay" style="color:white" type="submit">수정완료</button></td>
 		</tr>
-
+		</form>
 		<div style="height: 100vh;"></div>
 		<div class="card mb-4">
 			<div class="card-body">When scrolling, the navigation stays at

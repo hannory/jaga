@@ -1,5 +1,7 @@
 package com.kh.jaga.vender.model.service;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,5 +23,26 @@ public class VenderServiceImpl implements VenderService {
 		
 		return vd.insertVender(sqlSession,v);
 	}
+
+	@Override
+	public List<Vender> selectVender() {
+		List<Vender> list = vd.selectVender(sqlSession);
+		
+		return list;
+	}
+
+	@Override
+	public List<Vender> selectOne(String venderCode) {
+		List<Vender> list = vd.selectOne(venderCode,sqlSession);
+		return list;
+	}
+
+	@Override
+	public int modifyOne(Vender v) {
+
+		return vd.modifyOne(sqlSession,v);
+	}
+
+
 
 }

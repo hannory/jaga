@@ -20,4 +20,9 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		return sqlSession.insert("Attachment.insertAttachment",at);
 	}
 
+	@Override
+	public int insertAttachment2(SqlSessionTemplate sqlSession, Attachment at2) {
+		return sqlSession.insert("Attachment.insertAttachment2",at2);
+	}
+
 }

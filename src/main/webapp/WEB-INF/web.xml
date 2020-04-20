@@ -114,6 +114,20 @@
 		<url-pattern>*.rp</url-pattern>
 	</servlet-mapping>
 	
+	   <servlet>
+      <servlet-name>transectionHistory</servlet-name>
+      <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+      <init-param>
+         <param-name>contextConfigLocation</param-name>
+         <param-value>/WEB-INF/config/transectionHistory-servlet.xml</param-value>
+      </init-param>
+   </servlet>
+   <servlet-mapping>
+      <servlet-name>transectionHistory</servlet-name>
+      <url-pattern>*.th</url-pattern>
+   </servlet-mapping>
+	
+	
 	<!-- 1Dragon -->
 	<servlet>
       <servlet-name>companyInnerId</servlet-name>
@@ -127,6 +141,20 @@
       <servlet-name>companyInnerId</servlet-name>
       <url-pattern>*.comInId</url-pattern>
    </servlet-mapping>
+
+ <servlet><!-- 지출결의서 -->
+      <servlet-name>expendResolution</servlet-name>
+      <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+      <init-param>
+         <param-name>contextConfigLocation</param-name>
+         <param-value>/WEB-INF/config/expendResolution-servlet.xml</param-value>
+      </init-param>
+   </servlet>
+   <servlet-mapping>
+      <servlet-name>expendResolution</servlet-name>
+      <url-pattern>*.expendResolution</url-pattern>
+   </servlet-mapping>
+
    
    <!-- 브랜치 -->
    <servlet>
@@ -197,8 +225,33 @@
       <url-pattern>*.emp</url-pattern>
    </servlet-mapping> 
    
+      <servlet>
+   <servlet-name>accountTitle</servlet-name>
+      <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+      <init-param>
+         <param-name>contextConfigLocation</param-name>
+         <param-value>/WEB-INF/config/accountTitle-servlet.xml</param-value>
+      </init-param>
+   </servlet>
+   <servlet-mapping>
+      <servlet-name>accountTitle</servlet-name>
+      <url-pattern>*.at</url-pattern>
+   </servlet-mapping> 
    
-	
+      <servlet>
+      <servlet-name>businessEmp</servlet-name>
+      <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+      <init-param>
+         <param-name>contextConfigLocation</param-name>
+         <param-value>/WEB-INF/config/businessEmp-servlet.xml</param-value>
+      </init-param>
+   </servlet>
+   <servlet-mapping>
+      <servlet-name>businessEmp</servlet-name>
+      <url-pattern>*.be</url-pattern>
+   </servlet-mapping>
+   
+
 	<!-- 인코딩 필터 추가 -->
 	<filter>
 		<filter-name>encodingFilter</filter-name>
