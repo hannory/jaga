@@ -9,11 +9,13 @@ public class Journalize {
 	private BigDecimal price;				//금액
 	private String accountCode;		//계정코드
 	private String venderCode;
+	private String venderName;
+	private String accountTitle;
 	
 	public Journalize() {}
 
 	public Journalize(String journalCode, String slipCode, String debitCredit, BigDecimal price, String accountCode,
-			String venderCode) {
+			String venderCode, String venderName, String accountTitle) {
 		super();
 		this.journalCode = journalCode;
 		this.slipCode = slipCode;
@@ -21,6 +23,8 @@ public class Journalize {
 		this.price = price;
 		this.accountCode = accountCode;
 		this.venderCode = venderCode;
+		this.venderName = venderName;
+		this.accountTitle = accountTitle;
 	}
 
 	public String getJournalCode() {
@@ -71,10 +75,27 @@ public class Journalize {
 		this.venderCode = venderCode;
 	}
 
+	public String getVenderName() {
+		return venderName;
+	}
+
+	public void setVenderName(String venderName) {
+		this.venderName = venderName;
+	}
+
+	public String getAccountTitle() {
+		return accountTitle;
+	}
+
+	public void setAccountTitle(String accountTitle) {
+		this.accountTitle = accountTitle;
+	}
+
 	@Override
 	public String toString() {
 		return "Journalize [journalCode=" + journalCode + ", slipCode=" + slipCode + ", debitCredit=" + debitCredit
-				+ ", price=" + price + ", accountCode=" + accountCode + ", venderCode=" + venderCode + "]";
+				+ ", price=" + price + ", accountCode=" + accountCode + ", venderCode=" + venderCode + ", venderName="
+				+ venderName + ", accountTitle=" + accountTitle + "]";
 	}
 
 	

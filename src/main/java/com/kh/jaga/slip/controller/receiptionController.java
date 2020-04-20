@@ -19,6 +19,11 @@ import com.kh.jaga.slip.model.vo.AccountTitle;
 import com.kh.jaga.slip.model.vo.Receiption;
 import com.kh.jaga.slip.model.vo.Vender;
 
+/**
+ * @author HY S
+ * @comment
+ * @createDate 2020. 4. 18.
+ */
 @Controller
 public class receiptionController {
 	
