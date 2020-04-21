@@ -247,10 +247,64 @@
 						<tr>
 							<th>부서</th>
 							<td>
-							
+								<select id="department" name="department">
+									<option value="1">총무팀</option>
+									<option value="2">경리부(회계)</option>
+									<option value="3">경영지원팀</option>
+									<option value="4">경영개선팀</option>
+									<option value="5">인사과</option>
+									<option value="6">인사팀</option>
+									<option value="7">재경부</option>
+									<option value="8">고객만족팀</option>
+									<option value="9">구매부서</option>
+									<option value="10">관리부서</option>
+									<option value="11">기술지원팀</option>
+									<option value="12">기획팀</option>
+									<option value="13">전략기획팀</option>
+									<option value="14">연구기획팀</option>
+									<option value="15">연구개발팀</option>
+									<option value="16">비서실</option>
+									<option value="17">생산관리팀</option>
+									<option value="18">시설관리팀</option>
+									<option value="19">R&D</option>
+									<option value="20">영업팀</option>
+									<option value="21">영업기획팀</option>
+									<option value="22">영업지원팀</option>
+									<option value="23">품질관리팀</option>
+									<option value="24">해외사업부</option>
+									<option value="25">해외사업팀</option>
+									<option value="26">홍보실</option>
+									<option value="27">e-Biz팀</option>
+								</select>
 							</td>
 							<th>예금주</th>
 							<td><input type="text" name="accountHolder"></td>
+						</tr>
+						
+						<tr>
+							<th>직급</th>
+							<td>
+								<select id="jobPosition" name="positionCode">
+									<option value="0">대표</option>
+									<option value="1">회장</option>
+									<option value="2">부회장</option>
+									<option value="3">사장</option>
+									<option value="4">부사장</option>
+									<option value="5">전무</option>
+									<option value="6">상무</option>
+									<option value="7">이사</option>
+									<option value="8">부장</option>
+									<option value="9">차장</option>
+									<option value="10">과장</option>
+									<option value="11">대리</option>
+									<option value="12">주임</option>
+									<option value="13">사원</option>
+									<option value="14">인턴</option>
+									<option value="15">알바</option>
+								</select>
+							</td>
+							<td> </td>
+							<td> </td>
 						</tr>
 					</table>
 					<div id="fileArea">
@@ -258,13 +312,13 @@
 							<tr>
 								<th>신분증명서류</th>
 								<td>
-									<input type="file">
+									<input type="file" name="idDocument">
 								</td>
 							</tr>
 							<tr>
 								<th>급여계좌사본</th>
 								<td>
-									<input type="file">
+									<input type="file" name="accountDocument">
 								</td>
 							</tr>
 						</table>

@@ -4,11 +4,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.jaga.employee.model.service.BusinessEmpService;
 import com.kh.jaga.employee.model.vo.Bank;
+import com.kh.jaga.employee.model.vo.BusinessEmp;
 import com.kh.jaga.employee.model.vo.TypeOfBizCode;
 
 @Controller
@@ -38,8 +40,15 @@ public class BusinessEmpController {
 	}
 	
 	@RequestMapping("businessEmpList.be")
-	public String bEmpListAll() {
+	public String bEmpListAll(BusinessEmp be, Model model) {
+		System.out.println(be);
 		
-		return "";
+		return "views/businessEmpoyee";
+	}
+	@RequestMapping("addBusinessEmp.be")
+	public String addBusinessEmp(BusinessEmp be, Model model) {
+		System.out.println(be);
+		
+		return "views/businessEmployee";
 	}
 }
