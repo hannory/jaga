@@ -42,13 +42,18 @@ public class CompanyController {
 			System.out.println(loginCompany+"로그인컴퍼니다");
 			model.addAttribute("loginCompany",loginCompany);
 
-			return "redirect:index.jsp";
+			return "redirect:gomain.co";
 
 		} catch (LoginException e) {
 			model.addAttribute("msg",e.getMessage());
 			
 			return "common/errorPage";
 		}
+	}
+	
+	@GetMapping("gomain.co")
+	public String gomain() {
+		return "main/main";
 	}
 
 	@GetMapping("companyJoinView.co")
@@ -89,7 +94,7 @@ public class CompanyController {
 	public String logout(SessionStatus status) {
 		status.setComplete();
 		
-		return "redirect:temp.jsp";
+		return "redirect:index.jsp";
 	}
 	
 }

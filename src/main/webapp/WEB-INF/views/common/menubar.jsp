@@ -48,6 +48,17 @@
 		outline: none;
 		float: right;
 	}
+	
+	#huanying{
+	font-size:9px;
+	text-align:center;
+	}
+	
+		#printWinBtn22 {
+		background: none;
+		border: none;
+		outline: none;
+	}
 </style>
 </head>
 <body class="sb-nav-fixed">
@@ -60,6 +71,10 @@
             <button id="helpPersonBtn" style="color:#296355; font-weight: bold;"><img src="${ contextPath }/resources/images/cs.PNG" width="30px"> 고객센터</button>
             <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
                 <div class="input-group">
+                	 	<c:if test="${!empty sessionScope.loginCompany }">
+
+			<button id="printWinBtn22" style="color:#296355; font-weight: bold;"  disabled="disabled"><c:out value="${sessionScope.loginCompany.bizName}의  ${sessionScope.loginCompany.companyId }님 "></c:out></button>
+ 				</c:if> 
                     <input class="form-control" type="text" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" />
                     <div class="input-group-append">
                         <button class="btn btn-primary" type="button"><i class="fas fa-search"></i></button>
@@ -73,7 +88,7 @@
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                         <a class="dropdown-item" href="#">Settings</a><a class="dropdown-item" href="#">Activity Log</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="login.html">Logout</a>
+                        <a class="dropdown-item" href="${contextPath}/logout.co">Logout</a>
                     </div>
                 </li>
             </ul>
