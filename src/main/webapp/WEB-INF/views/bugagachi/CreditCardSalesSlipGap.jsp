@@ -103,7 +103,7 @@
    			height: 30px;
    		}
    		.Tex_bill_code_p{
-   			font-size:23px;
+   			font-size:14px;
    		}
    		.billMainTable{
    			width:100%;
@@ -123,6 +123,7 @@
 	<main>
 	<div class="container-fluid">
 			<h2 class="mt-4">신용카드매출전표등 수령명세서(갑)(을)</h2>
+			<form action="insertCcsalesSlip.cssg" method="post">
 			 
 	<ol class="breadcrumb mb-4">
 			<li><button id="deadlineBtn" type="submit">마감</button></li>
@@ -154,13 +155,14 @@
                 <div class="middleMenu">
                     <h4>2.신용카드 등 매입내역 합계</h4>
             <c:set var="comCode" value="${ sessionScope.loginCompany.companyCode }"/>
+            <input type="hidden" name="rcptstmtCode" id="rcptstmtCode">
                 </div>
             </td>
         </tr>
         <script type="text/javascript">
-			 function cencelDeadline(){  
-		            $("form").attr("action", "updateccSalesSilpGap.cssg");
-		        }
+		function cencelDeadline(){  
+		   $("form").attr("action", "updateccSalesSilpGap.cssg");
+		}
 	 	function search_cssg(){
 	 		var search_ye1= $("#search_ye1").val();
 	 		var search_mon1= $("#search_mon1").val();
@@ -189,6 +191,7 @@
 	 				$("#driver").text("화물운전자복지카드");
 	 				$("#bCard").text("사업용신용카드");
 	 				$("#oCard").text("그밖의신용카드");
+	 				$("#rcptstmtCode").val(cssg.rcptstmtCode);
 	 			 // 2.신용카드등 매입내역 합계
 	 			 
 	 			 	//현금영수증
@@ -313,11 +316,13 @@
 						$("#deadlineBtn").hide();
 					} 
 	 				
+	 				
+	 				
 	 			},
 	 			error:function(error){
 	 				console.log(error);
 	 			}
-	 		});
+	 		});/* ajax끝!!! */
 	 	}
 	 
 	 </script>
@@ -421,7 +426,7 @@
 
 		});
 	 </script>
-	
+	</form>
 	</main>
 	<jsp:include page="../common/menubar2.jsp" />
 </body>

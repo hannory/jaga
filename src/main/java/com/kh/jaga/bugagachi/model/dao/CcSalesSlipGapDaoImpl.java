@@ -1,5 +1,7 @@
 package com.kh.jaga.bugagachi.model.dao;
 
+import java.sql.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -8,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.jaga.bugagachi.model.vo.CcSalesSlipDetail;
 import com.kh.jaga.bugagachi.model.vo.CcSalesSlipGap;
 import com.kh.jaga.bugagachi.model.vo.TnxHis;
+import com.kh.jaga.slip.model.vo.Receiption;
 
 @Repository
 public class CcSalesSlipGapDaoImpl implements CcSalesSlipGapDao{
@@ -47,6 +50,7 @@ public class CcSalesSlipGapDaoImpl implements CcSalesSlipGapDao{
 	@Override
 	public String selectCssgPk(SqlSessionTemplate sqlSession, CcSalesSlipGap cssg) {
 		// TODO pk cssg db 가기
+		System.out.println("Dao: cssg: "+ cssg);
 		String cssgCode=sqlSession.selectOne("CcSalesSlipGap.selectCssgCode",cssg);
 		
 		System.out.println("Dao: cssgCode: "+ cssgCode);
@@ -61,6 +65,22 @@ public class CcSalesSlipGapDaoImpl implements CcSalesSlipGapDao{
 		int result= sqlSession.update("CcSalesSlipGap.updateCssgDeadline", cssg);
 		System.out.println("Dao: updateCcSalesSlipGap :result :"+result);
 		return result;
+	}
+
+	@Override
+	public List<TnxHis> selectNewRecei(SqlSessionTemplate sqlSession, Receiption re,Date eD) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> map=new HashMap<String, Object>();
+		map.put("Receiption",re);
+		map.put("endDate",eD);
+		//List<Receiption> recei=sqlSession.selectList("CcSalesSlipGap.selectNewRecei", map);
+		
+		//System.out.println("Dao:selectNewRecei: recei"+recei);
+		
+		
+		
+		
+		return null;
 	}
 
 }

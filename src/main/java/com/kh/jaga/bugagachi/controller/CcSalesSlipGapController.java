@@ -1,6 +1,8 @@
 package com.kh.jaga.bugagachi.controller;
 
 
+import java.sql.Date;
+import java.text.ParseException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -61,9 +63,11 @@ public class CcSalesSlipGapController {
 		cssg.setTermDiv(term);
 		cssg.setComCode(comCode);
 
-		cssg= csser.selectCcGap(cssg);
+		System.out.println("Dao: ccSalesSilpGap:cssg설정값 :"+cssg);
+		CcSalesSlipGap cssg2= new CcSalesSlipGap(); 
+		cssg2= csser.selectCcGap(cssg);
 		
-		if(cssg.getRcptstmtCode() !=null) {
+		if(cssg2 !=null) {
 		//cssg가 pk가 있으면 밑의 합계들을 가지고 오고 아니면 계산해야함
 		//신용카드매출전표가지고와서 가지고 온값으로 거래내역 조회해야함
 			System.out.println("controller: CcGap이 있을때: "+cssg);
@@ -78,22 +82,56 @@ public class CcSalesSlipGapController {
 			
 			mv.setViewName("jsonView");
 		}else {
-			System.out.println("controller: CcGap이 없을때:!!!!! "+cssg);
+			System.out.println("controller: CcGap이 없을때:!!!!! "+cssg2);
+			//전표에서 없으면 값 불러오기
+			//전표구분을 : 매입매출, 구분:매입, 증빙종류: 50,60,70,80,90,100(db: slip전표,evidence), 전표일: 년1개 째기
+			Receiption re=new Receiption();
+			//전표구분:매입매출, 구분
+			re.setSlipDivision("매입매출");
+			re.setDivision("매입");
+			re.setComCode(comCode);
+			
+			String startD=date1+"01";//전표일 조건중 시작날짜
+			String endD=date2+endDay;
+			try {
+				 
+				java.util.Date ed = new java.text.SimpleDateFormat("yyyyMMdd").parse(endD);
+				java.util.Date sd = new java.text.SimpleDateFormat("yyyyMMdd").parse(startD);
+				System.out.println("ed:"+ed);
+				System.out.println("sd:"+sd);
+				//java.util.Date 를 java.sql.Date로 변환함
+				Date stD= new Date(sd.getTime());
+				Date eD= new Date(ed.getTime());
+				re.setSlipDate(stD);
+				System.out.println("eD"+eD);
+				
+				//전표리스트
+				List<TnxHis> cssgHisList=csser.selectNewRecei(re,eD);
+				
+				//중간합계효
+				//List<CcSalesSlipDetail> cgDetailList=
+				
+				//cssg
+				
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
 		}
-//		if(cssg2!=null) {
-//			mv.addObject("cssgList",cssg2); 
-//			mv.setViewName("jsonView");
-//		}else {
-//			//전표에서 없으면 값 불러오기
-//			//전표구분을 : 매입매출, 구분:매입, 증빙종류: 50,60,70,80,90,100(db: slip전표,evidence), 전표일: 년1개 째기
-//			//List<Receiption> re=csser.selectReceiCssg(cssg);
-//			
-//			
-//		}
 		
 		return mv;
 	}
+	
+
+	//인설트
+//	@RequestMapping("insertCcsalesSlip.cssg")
+//	public String insertCcsalesSlip() {
+//		
+//	}
+	
+	
+	
 	
 	
 	
@@ -102,14 +140,14 @@ public class CcSalesSlipGapController {
 	public String updateCcSalesSlipGap(Model model,CcSalesSlipGap cssg,HttpServletRequest request  ) {
 		System.out.println("controller: updateCcSalesSlipGap 진입");
 		
-		//pk찾아오기
-		String cssgCode=csser.selectCssgPk(cssg);
-		
-		System.out.println("controller: updateCcSalesSlipGap pk: "+cssgCode);
-		
-		if(cssgCode==null) {
-			return "common/error";
-		}
+		//pk찾아오기(필요없어 집)
+//		String cssgCode=csser.selectCssgPk(cssg);
+//		
+//		System.out.println("controller: updateCcSalesSlipGap pk: "+cssgCode);
+//		
+//		if(cssgCode==null) {
+//			return "common/error";
+//		}
 		
 		//PK이를 기준으로 deadline y->n으로 바꾸기
 		int result= csser.updateCcSalesSlipGap(cssg);
@@ -119,5 +157,7 @@ public class CcSalesSlipGapController {
 		return "bugagachi/CreditCardSalesSlipGap";
 		
 	} 
+	
+	
 	
 }
