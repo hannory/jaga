@@ -16,6 +16,53 @@
 		<result property="sellTargetName" column="SELL_TARGET_NAME"/>
   	</resultMap>
   	
+  	<resultMap type="BusinessEmp" id="BusinessEmpResultMap">
+  		<id property="employeeCode" column="EMPLOYEE_CODE"/>
+  		<result property="comCode" column="COM_CODE"/>
+  		<result property="employeeNum" column="EMPLOYEE_NUM"/>
+  		<result property="employeeName" column="EMPLOYEE_NAME"/>
+  		<result property="securityNumber" column="SECURITY_NUMBER"/>
+  		<result property="salary" column="SALARY"/>
+  		<result property="email" column="EMAIL"/>
+  		<result property="backCode" column="BANK_CODE"/>
+  		<result property="accountNumber" column="ACCOUNT_NUMBER"/>
+  		<result property="accountHolder" column="ACCOUNT_HOLDER"/>
+  		<result property="department" column="DEPARTMENT"/>
+  		<result property="positionCode" column="POSITION_CODE"/>
+  		<result property="enrollDate" column="ENROLL_DATE"/>
+  		<result property="leaveDate" column="LEAVE_DATE"/>
+  		<result property="leaveReason" column="LEAVE_REASON"/>
+  		<result property="idDocument" column="ID_DOCUMENT"/>
+  		<result property="accountDocument" column="ACCOUNT_DOCUMENT"/>
+  		<result property="incomeClass" column="INCOME_CLASS"/>
+  	</resultMap>
+  	
+  	
+  	<resultMap type="BusinessEmp2" id="BusinessEmpResultMap2">
+  		<id property="employeeCode" column="EMPLOYEE_CODE"/>
+  		<result property="comCode" column="COM_CODE"/>
+  		<result property="employeeNum" column="EMPLOYEE_NUM"/>
+  		<result property="employeeName" column="EMPLOYEE_NAME"/>
+  		<result property="securityNumber" column="SECURITY_NUMBER"/>
+  		<result property="salary" column="SALARY"/>
+  		<result property="email" column="EMAIL"/>
+  		<result property="backCode" column="BANK_CODE"/>
+  		<result property="accountNumber" column="ACCOUNT_NUMBER"/>
+  		<result property="accountHolder" column="ACCOUNT_HOLDER"/>
+  		<result property="department" column="DEPARTMENT"/>
+  		<result property="positionCode" column="POSITION_CODE"/>
+  		<result property="enrollDate" column="ENROLL_DATE"/>
+  		<result property="leaveDate" column="LEAVE_DATE"/>
+  		<result property="leaveReason" column="LEAVE_REASON"/>
+  		<result property="idDocument" column="ID_DOCUMENT"/>
+  		<result property="accountDocument" column="ACCOUNT_DOCUMENT"/>
+  		<result property="incomeClass" column="INCOME_CLASS"/>
+  		<result property="positionName" column="POSITION_NAME"/>
+  		<result property="deptName" column="DEPT_NAME"/>
+  		<result property="typeOfBixCode" column="TYPE_OF_BIZ_CODE"/>
+  		<result property="sellTargetName" column="SELL_TARGET_NAME"/>
+  	</resultMap>
+  	
   	<select id="selectBank" resultMap="bankResultMap">
   		SELECT *
   		FROM BANK
@@ -30,4 +77,63 @@
 		ORDER BY TYPE_OF_BIZ_CODE
     ]]>
   	</select>
+  	
+  	<insert id="insertBEmp">
+  		INSERT INTO BUSINESS_EMP
+  		VALUES(SEQ_EMP_CODE.NEXTVAL, #{comCode}, #{employeeNum} ,#{employeeName} ,#{securityNumber} ,#{salary} ,#{email} ,#{backCode} ,#{accountNumber} ,#{accountHolder} ,#{department} ,#{positionCode} ,#{enrollDate} ,#{leaveDate} ,#{leaveReason} ,#{idDocument}, #{accountDocument}, #{incomeClass})
+  	</insert>
+  	
+  	<select id="selectBEmp" resultMap="BusinessEmpResultMap" parameterType="java.lang.String">
+  		SELECT *
+  		FROM BUSINESS_EMP
+  		WHERE COM_CODE = #{ comCode }
+  	</select>
+  	
+  	<select id="selectDetailBEmp" resultMap="BusinessEmpResultMap2" parameterType="java.lang.String">
+  		SELECT B.EMPLOYEE_CODE
+		       , B.COM_CODE
+		       , B.EMPLOYEE_NUM
+		       , B.EMPLOYEE_NAME
+		       , B.SECURITY_NUMBER
+		       , B.SALARY
+		       , B.EMAIL
+		       , B.BANK_CODE
+		       , B.ACCOUNT_NUMBER
+		       , B.ACCOUNT_HOLDER
+		       , B.DEPARTMENT
+		       , B.POSITION_CODE
+		       , TO_CHAR(B.ENROLL_DATE,'YYYY-MM-DD')
+		       , B.LEAVE_DATE
+		       , B.LEAVE_REASON
+		       , B.ID_DOCUMENT
+		       , B.ACCOUNT_DOCUMENT
+		       , B.INCOME_CLASS
+		       , J.POSITION_NAME
+		       , D.DEPT_NAME
+		       , T.TYPE_OF_BIZ_CODE
+		       , T.SELL_TARGET_NAME
+		FROM BUSINESS_EMP B
+		JOIN JOB_POSITION J ON(B.POSITION_CODE = J.POSITION_CODE)
+		JOIN DEPARTMENT D ON(D.DEPT_CODE = B.DEPARTMENT)
+		JOIN TYPE_OF_BIZ_CODE T ON(T.TOBC_PK_CODE = B.INCOME_CLASS)
+  		WHERE EMPLOYEE_CODE = #{empCode}
+  	</select>
+  	
+  	<update id="updateBEmp">
+  		UPDATE BUSINESS_EMP 
+  		SET 
+	  		EMPLOYEE_NAME = #{employeeName},
+	  		SECURITY_NUMBER = #{securityNumber},
+	  		SALARY = #{salary},
+	  		EMAIL = #{email},
+	  		BANK_CODE = #{backCode},
+	  		ACCOUNT_NUMBER = #{accountNumber},
+	  		ACCOUNT_HOLDER = #{accountHolder},
+	  		DEPARTMENT = #{department},
+	  		LEAVE_DATE = #{leaveDate},
+	  		LEAVE_REASON = #{leaveReason},
+	  		INCOME_CLASS = #{incomeClass},
+	  		ENROLL_DATE = #{enrollDate}
+  		WHERE EMPLOYEE_CODE = #{employeeCode}
+  	</update>
   </mapper>

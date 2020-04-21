@@ -5,6 +5,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    
 <title>Insert title here</title>
 <style>
 	#searchBtn{
@@ -172,21 +176,29 @@
 					</button>
 				<br>
 					<table id="empList" style="text-align: center;">
-						<tr>
-							<td><input type="checkbox" id="checkk"></td>
-							<td>10001</td>
-							<td>최새우</td>
-						</tr>				
+						<c:forEach var="e" items="${ empList }" >
+							<tr>
+								<td><input type="checkbox" id="checkk"></td>
+								<td>
+								<a href="#" onclick="detail('${e.employeeCode}')"><c:out value="${ e.employeeNum }"/></a>
+								</td>
+								<td>
+								<a href="#" onclick="detail('${e.employeeCode}')"><c:out value="${ e.employeeName }"/></a>
+								</td>
+							</tr>				
+						</c:forEach>
 					</table>
 				
 				</div>
 				
 				<div id="wrapp2">
-				<form action="addBusinessEmp.be" method="post">
+				<form action="addBusinessEmp.be" method="post" enctype="multipart/form-data">
+				<input type="hidden" name="comCode" value="${ sessionScope.loginCompany.companyCode }">
+				<input type="hidden" name="employeeNum" value="${ employeeNum }">
 					<table id="saveArea">
 					
 						<tr>
-							<th><h4>사업소득자_신규추가</h4></th>
+							<th><h4>사업소득자_<span id="empNamee">신규추가</span></h4></th>
 							<td><button id="saveBtn">저장하기</button></td>
 						</tr>
 					</table>
@@ -200,22 +212,30 @@
 					</colgroup>
 						<tr>
 							<th>이름</th>
-							<td><input type="text" name="employeeNum"></td>
+							<td><input type="text" name="employeeName" id="employeeName"></td>
 							<th>주민등록번호</th>
-							<td><input type="text" name="securityNumber"></td>
+							<td><input type="text" name="securityNumber" id="securityNumber"></td>
 						</tr>
 						<tr>
 							<th>소득구분</th>
 							<td>
-								<input type="text" id="typeOfBizCode" name="typeOfBizCode incomeClass">
+								<input type="text" id="typeOfBizCode" name="typeOfBizCode">
 								<button type="button" id="searchBtn3">
 									<img alt="" src="${contextPath}/resources/images/search.PNG" width="20px" height="20px">
 								</button>
 								<input type="text" name="sellTargetName" id="sellTargetName">
-								<input type="hidden" name="tobcPkCode" id="tobcPkCode">
+								<input type="hidden" name="tobcPkCode" id="incomeClass">
 							</td>
 							<th>이메일</th>
-							<td><input type="email" name="email"></td>
+							<td><input type="email" name="email" id="email"></td>
+						</tr>
+						<tr>
+							<th>입사일</th>
+							<td>
+								<input type="text" id="datepicker" name="enrollDate">
+							</td>
+							<th></th>
+							<td></td>
 						</tr>
 					</table>
 					
@@ -229,82 +249,82 @@
 						<tr>
 							<th>급여이체은행</th>
 							<td>
-								<select>
-									<option value="1">한국은행</option>
-									<option value="2">산업은행</option>
-									<option value="3">기업은행</option>
-									<option value="4">국민은행</option>
-									<option value="5">신한은행</option>
-									<option value="6">농협은행</option>
-									<option value="7">SC은행</option>
-									<option value="8">한국씨티은행</option>
-									<option value="9">우리은행</option>
+								<select name="backCode" id="backCode">
+									<option value="001">한국은행</option>
+									<option value="002">산업은행</option>
+									<option value="003">기업은행</option>
+									<option value="004">국민은행</option>
+									<option value="005">신한은행</option>
+									<option value="006">농협은행</option>
+									<option value="00H7">SC은행</option>
+									<option value="008">한국씨티은행</option>
+									<option value="009">우리은행</option>
 								</select>
 							</td>
 							<th>계좌번호</th>
-							<td><input type="text" name="accountNumber"></td>
+							<td><input type="text" name="accountNumber" id="accountNumber"></td>
 						</tr>
 						<tr>
 							<th>부서</th>
 							<td>
 								<select id="department" name="department">
-									<option value="1">총무팀</option>
-									<option value="2">경리부(회계)</option>
-									<option value="3">경영지원팀</option>
-									<option value="4">경영개선팀</option>
-									<option value="5">인사과</option>
-									<option value="6">인사팀</option>
-									<option value="7">재경부</option>
-									<option value="8">고객만족팀</option>
-									<option value="9">구매부서</option>
-									<option value="10">관리부서</option>
-									<option value="11">기술지원팀</option>
-									<option value="12">기획팀</option>
-									<option value="13">전략기획팀</option>
-									<option value="14">연구기획팀</option>
-									<option value="15">연구개발팀</option>
-									<option value="16">비서실</option>
-									<option value="17">생산관리팀</option>
-									<option value="18">시설관리팀</option>
-									<option value="19">R&D</option>
-									<option value="20">영업팀</option>
-									<option value="21">영업기획팀</option>
-									<option value="22">영업지원팀</option>
-									<option value="23">품질관리팀</option>
-									<option value="24">해외사업부</option>
-									<option value="25">해외사업팀</option>
-									<option value="26">홍보실</option>
-									<option value="27">e-Biz팀</option>
+									<option value="001">총무팀</option>
+									<option value="002">경리부(회계)</option>
+									<option value="003">경영지원팀</option>
+									<option value="004">경영개선팀</option>
+									<option value="005">인사과</option>
+									<option value="006">인사팀</option>
+									<option value="007">재경부</option>
+									<option value="008">고객만족팀</option>
+									<option value="009">구매부서</option>
+									<option value="010">관리부서</option>
+									<option value="011">기술지원팀</option>
+									<option value="012">기획팀</option>
+									<option value="013">전략기획팀</option>
+									<option value="014">연구기획팀</option>
+									<option value="015">연구개발팀</option>
+									<option value="016">비서실</option>
+									<option value="017">생산관리팀</option>
+									<option value="018">시설관리팀</option>
+									<option value="019">R&D</option>
+									<option value="020">영업팀</option>
+									<option value="021">영업기획팀</option>
+									<option value="022">영업지원팀</option>
+									<option value="023">품질관리팀</option>
+									<option value="024">해외사업부</option>
+									<option value="025">해외사업팀</option>
+									<option value="026">홍보실</option>
+									<option value="027">e-Biz팀</option>
 								</select>
 							</td>
 							<th>예금주</th>
-							<td><input type="text" name="accountHolder"></td>
+							<td><input type="text" name="accountHolder" id="accountHolder"></td>
 						</tr>
 						
 						<tr>
 							<th>직급</th>
 							<td>
-								<select id="jobPosition" name="positionCode">
-									<option value="0">대표</option>
-									<option value="1">회장</option>
-									<option value="2">부회장</option>
-									<option value="3">사장</option>
-									<option value="4">부사장</option>
-									<option value="5">전무</option>
-									<option value="6">상무</option>
-									<option value="7">이사</option>
-									<option value="8">부장</option>
-									<option value="9">차장</option>
-									<option value="10">과장</option>
-									<option value="11">대리</option>
-									<option value="12">주임</option>
-									<option value="13">사원</option>
-									<option value="14">인턴</option>
-									<option value="15">알바</option>
+								<select id="positionCode" name="positionCode">
+									<option value="000">대표</option>
+									<option value="001">회장</option>
+									<option value="002">부회장</option>
+									<option value="003">사장</option>
+									<option value="004">부사장</option>
+									<option value="005">전무</option>
+									<option value="006">상무</option>
+									<option value="007">이사</option>
+									<option value="008">부장</option>
+									<option value="009">차장</option>
+									<option value="010">과장</option>
+									<option value="011">대리</option>
+									<option value="012">주임</option>
+									<option value="013">사원</option>
+									<option value="014">인턴</option>
+									<option value="015">알바</option>
 								</select>
 							</td>
-							<td> </td>
-							<td> </td>
+							<th>급여</th>
+							<td><input type="number" name="salary" placeholder="소득세포함 월급" id="salary"></td>
 						</tr>
 					</table>
 					<div id="fileArea">
@@ -321,6 +341,7 @@
 									<input type="file" name="accountDocument">
 								</td>
 							</tr>
+							
 						</table>
 					</div>
 					</form>
@@ -367,6 +388,74 @@
 	</main>
 	
 	<script>
+		/* 날짜 input jquery ui */
+		$.datepicker.setDefaults({
+			showOn : "both",
+			buttonImageOnly : true,
+			buttonImage : "${contextPath}/resources/images/calendar.png",
+			dateFormat : 'yy-mm-dd'
+	
+		});
+		
+		$(function(){
+			$("#datepicker").datepicker({});
+			/* 달력버튼 */
+			$("img.ui-datepicker-trigger")
+					.attr("style","margin-left:2px; vertical-align:middle; cursor: Pointer; width:20px; height:20px");
+			
+			
+			if($("#empNamee").text() != '신규추가'){
+				$("form").attr("action", "addBusinessEmp.be");
+			}
+		});
+		
+		function detail(data){
+			$.ajax({
+				url:"detailBEmp.be",
+				data:{empCode:data},
+				success:function(data){
+					$("#fileArea").css("display", "block");
+					var emp = data.BEmp;
+					
+					
+					var employeeName = emp.employeeName;
+					var securityNumber = emp.securityNumber;
+					var incomeClass = emp.incomeClass;
+					var email = emp.email;
+					var enrollDate = emp.enrollDate;
+					var backCode = emp.backCode;
+					var accountNumber = emp.accountNumber;
+					var department = emp.department;
+					var positionCode = emp.positionCode;
+					var accountHolder = emp.accountHolder;
+					var salary = emp.salary;
+					var typeOfBixCode = emp.typeOfBixCode;
+					var sellTargetName = emp.sellTargetName;
+					
+					
+					
+					$("#empNamee").text(employeeName);
+					
+					$("#employeeName").val(employeeName);
+					$("#securityNumber").val(securityNumber);
+					$("#incomeClass").val(incomeClass);
+					$("#email").val(email);
+					$("#datepicker").val(enrollDate);
+					$("#backCode").val(backCode);
+					$("#accountNumber").val(accountNumber);
+					$("#department").val(department);
+					$("#positionCode").val(positionCode);
+					$("#accountHolder").val(accountHolder);
+					$("#salary").val(salary);
+					$("#typeOfBizCode").val(typeOfBixCode);
+					$("#sellTargetName").val(sellTargetName);
+					
+					$("form").attr("action", "addBusinessEmp2.be");
+					
+				}
+			});
+		}
+	
 		$("#searchBtn3").click(function(){
 			$("#reTable td").remove();
 			var $tbody = $("#reTable tbody");
@@ -381,7 +470,6 @@
 						var $tr = $("<tr>");
 						var $codeTd = $("<td>").html("<a href='#' onclick='aaa(this,"+list[i].tobcPkCode+","+list[i].typeOfBizCode+");'>"+list[i].typeOfBizCode+"</a>");
 						var $nameTd = $("<td>").html("<a href='#' onclick='aaa(this,"+list[i].tobcPkCode+","+list[i].typeOfBizCode+");'>"+list[i].sellTargetName+"</a>");
-						
 						
 						$tr.append($codeTd);
 						$tr.append($nameTd);
