@@ -93,7 +93,7 @@ public class CompanyController {
 	@RequestMapping("logout.co")
 	public String logout(SessionStatus status) {
 		status.setComplete();
-		
+		 
 		return "redirect:index.jsp";
 	}
 	

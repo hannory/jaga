@@ -71,7 +71,7 @@
 .join_id_pwd2 {
 	position: absolute;
 	width: 100px;
-	height: 50px; 
+	height: 50px;  
 	left: 630px;
 	top: 705px;
 }
