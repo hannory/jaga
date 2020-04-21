@@ -12,7 +12,6 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.jaga.finStmt.model.vo.IncomeStmt;
 import com.kh.jaga.finStmt.model.vo.IncomeStmtAccount;
-import com.kh.jaga.finStmt.model.vo.StmtDate;
 
 @Repository
 public class FinStmtDaoImpl implements FinStmtDao {

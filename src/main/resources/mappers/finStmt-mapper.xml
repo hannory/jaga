@@ -10,7 +10,7 @@
 	</resultMap>
 
 	<insert id="insertIncomeStmt" parameterType="IncomeStmt">
-		INSERT INTO INCOME_STMT VALUES(SEQ_INCOME_STMT.NEXTVAL, 1, 1, 2019, NULL, #{curEndingInvOfMdse}, 3)
+		INSERT INTO INCOME_STMT(INCOME_STMT_CODE, YEAR, TERM, SALES) VALUES(SEQ_INCOME_STMT_CODE.NEXTVAL, #{year}, #{term}, #{sales})
 	</insert>
 
 	<select id="selectCurIncomeStmt" parameterType="IncomeStmtAccount" resultMap="IncomeStmtResultSet">
