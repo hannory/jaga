@@ -28,6 +28,11 @@
 	text-align:left;
 	padding-left:40px;
 }
+.table-subTitle-num {
+	background:#d3ede6;
+	text-align:right;
+	padding-left:40px;
+}
 .table-subSubTitle {
 	text-align:left;
 	padding-left:61px;
@@ -133,13 +138,13 @@
 				<tr>
 					<td class="table-title">Ⅰ. 매출액</td>
 					<td class="table-title"></td>
-					<td class="table-title-num" id="cSum10"></td>
+					<td class="table-title-num" id="cSum10" name="sales"></td>
 					<td class="table-title"></td>
 					<td class="table-title-num" id="pSum10"></td>
 				</tr>
 				<tr class="table-detail">
 					<td class="table-subSubTitle">상품매출</td>
-					<td class="table-content" id="c40100"></td>
+					<td class="table-content" id="c40100" name="salesOfMerchandise"></td>
 					<td></td>
 					<td class="table-content" id="p40100"></td>
 					<td></td>
@@ -154,22 +159,22 @@
 				<tr>
 					<td class="table-title">Ⅱ. 매출원가</td>
 					<td class="table-title"></td>
-					<td class="table-title" id="cSum20"></td>
+					<td class="table-title-num" id="cSum20" name="costOfSales"></td>
 					<td class="table-title"></td>
-					<td class="table-title" id="pSum20"></td>
+					<td class="table-title-num" id="pSum20"></td>
 				</tr>
 				<tr class="table-detail">
 					<td class="table-subTitle">상품매출원가</td>
 					<td class="table-subTitle"></td>
-					<td class="table-subTitle" id="cSum21"></td>
+					<td class="table-subTitle-num" id="cSum21"></td>
 					<td class="table-subTitle"></td>
-					<td class="table-subTitle" id="pSum21"></td>
+					<td class="table-subTitle-num" id="pSum21"></td>
 				</tr>
 				<tr class="table-detail">
 					<td class="table-subSubTitle">기초상품재고액</td>
+					<td class="table-content" id="cVal211"></td>
 					<td></td>
-					<td></td>
-					<td></td>
+					<td class="table-content" id="pVal211"></td>
 					<td></td>
 				</tr>
 				<tr class="table-detail">
@@ -181,37 +186,37 @@
 				</tr>
 				<tr class="table-detail">
 					<td class="table-subSubTitle">기말상품재고액</td>
-					<td><input type="text" id="inputNum" name="endingInvOfMdse" onkeyup="inputNumberFormat(this);" style="width:195px;"></td>
+					<td><input type="text" id="inputNum" name="endingInvOfMerchandise" onkeyup="inputNumberFormat(this);" style="width:195px;"></td>
 					<td></td>
-					<td></td>
+					<td class="table-content" id="pVal213"></td>
 					<td></td>
 				</tr>
 				<tr class="table-detail">
 					<td class="table-subTitle">제품매출원가</td>
 					<td class="table-subTitle"></td>
-					<td class="table-subTitle" id="cSum22"></td>
+					<td class="table-subTitle-num" id="cSum22"></td>
 					<td class="table-subTitle"></td>
-					<td class="table-subTitle" id="pSum22"></td>
+					<td class="table-subTitle-num" id="pSum22"></td>
 				</tr>
 				<tr class="table-detail">
 					<td class="table-subSubTitle">기초제품재고액</td>
-					<td class="table-content" id="cur-beginning-inventory-of-finished-goods"></td>
+					<td class="table-content" id="cVal221"></td>
 					<td></td>
-					<td></td>
+					<td class="table-content" id="pVal221"></td>
 					<td></td>
 				</tr>
 				<tr class="table-detail">
 					<td class="table-subSubTitle">당기제품제조원가</td>
-					<td class="table-content" id="cur-cost-of-finished-goods"></td>
+					<td class="table-content" id="cVal222"></td>
 					<td></td>
-					<td></td>
+					<td class="table-content" id="pVal222"></td>
 					<td></td>
 				</tr>
 				<tr class="table-detail">
 					<td class="table-subSubTitle">기말제품재고액</td>
-					<td class="table-content" id="cur-ending-inventory-of-finished-goods"></td>
+					<td class="table-content" id="cVal223"></td>
 					<td></td>
-					<td></td>
+					<td class="table-content" id="pVal223"></td>
 					<td></td>
 				</tr>
 				<tr>
@@ -320,9 +325,28 @@
 			case 11 : $("#dec").prop("selected", true); break;
 			}
 			
-			/* 키 입력창 이벤트 */
+			/* 키 입력창에 값을 입력시 발생하는 이벤트 */
 			$("#inputNum").keyup(function() {
+				console.log("keyup 위한 테스트 uncomma : " + uncomma($("#cSum21").text()));
 				
+				
+				var cSum21 = uncomma($("#cVal211").text()) + uncomma($("#c14600").text()) + uncomma($("#inputNum").val());
+				$("#cSum21").text(comma(cSum21));
+				
+				var cSum20 = cSum21 + uncomma($("#cSum22").text());
+				$("#cSum20").text(comma(cSum20));
+				
+				var cSum30 = uncomma($("#cSum10").text()) - cSum20;
+				$("#cSum30").text(comma(cSum30));
+				
+				var cSum50 = cSum30 - uncomma($("#cSum40").text())
+				$("#cSum50").text(comma(cSum50));
+				
+				var cSum80 = cSum50 + uncomma($("#cSum60").text()) - uncomma($("#cSum70").text());
+				$("#cSum80").text(comma(cSum80));
+				
+				var cSum100 = cSum80 - uncomma($("#cSum90").text());
+				$("#cSum100").text(comma(cSum100));
 			})
 		});
 		
@@ -335,7 +359,7 @@
 		/* 콤마 등 숫자 이외의 입력값 제거 */
 		function uncomma(str) {
 			str = String(str);
-			return str.replace(/[^\d]+/g, "");
+			return Number(str.replace(/[^\d]+/g, ""));
 		}
 		
 		/* 값 입력시 콤마 찍기 */
@@ -347,10 +371,7 @@
 		function insertIncomeStmt() {
 			console.log("마감 버튼 입력");
 			
-			num = uncomma($("#inputNum").val());
-			console.log("num : " + num);
-			
-			$("#inputNum").val(uncomma($("#inputNum").val()));
+			$("#inputNum").val(Number(uncomma($("#inputNum").val())));
 			
 			$("#contentForm").submit();
 		}
@@ -383,7 +404,22 @@
 					var cSum10 = c40100 + 0;
 					$("#cSum10").text(comma(cSum10));
 					
-					var cSum30 = cSum10 - 0;
+					var cVal211 = 0;
+					
+					var cSum21 = cVal211 + c14600;
+					$("#cSum21").text(comma(cSum21));
+					
+					var cVal221 = 0;
+					var cVal222 = 0;
+					var cVal223 = 0;
+
+					var cSum22 = cVal221 + cVal222 + cVal223;
+					$("#cSum22").text(comma(cSum22));
+					
+					var cSum20 = cSum21 + cSum22;
+					$("#cSum20").text(comma(cSum20));
+					
+					var cSum30 = cSum10 - cSum20;
 					$("#cSum30").text(comma(cSum30));
 					
 					var cSum40 = c83000 + 0;
@@ -421,7 +457,23 @@
 					var pSum10 = p40100 + 0;
 					$("#pSum10").text(comma(pSum10));
 					
-					var pSum30 = pSum10 - 0;
+					var pVal211 = 0;
+					var pVal213 = 0;
+					
+					var pSum21 = pVal211 + p14600 + pVal213;
+					$("#pSum21").text(comma(pSum21));
+					
+					var pVal221 = 0;
+					var pVal222 = 0;
+					var pVal223 = 0;
+
+					var pSum22 = pVal221 + pVal222 + pVal223;
+					$("#pSum22").text(comma(pSum22));
+					
+					var pSum20 = pSum21 + pSum22;
+					$("#pSum20").text(comma(pSum20));
+					
+					var pSum30 = pSum10 - pSum20;
 					$("#pSum30").text(comma(pSum30));
 					
 					var pSum40 = p83000 + 0;

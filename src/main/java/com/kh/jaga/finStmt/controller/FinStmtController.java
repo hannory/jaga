@@ -66,7 +66,7 @@ public class FinStmtController {
 		
 		fss.insertIncomeStmt(i);
 		
-		return "redirect:index.jsp";
+		return "incomeStmt";
 	}
 	
 	@RequestMapping("selectIncomeStmt.fs")
