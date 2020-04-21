@@ -15,7 +15,7 @@
 		<h2 class="mt-4">대시보드</h2>
 		<ol class="breadcrumb mb-4">
 			<li class="breadcrumb-item"><a href="index.html">끨끨끨</a></li>
-			<li class="breadcrumb-item active">희희희희희희희희희</li>
+			<li class="breadcrumb-item active">희희희희희희희희희</li> 
 		</ol>
 		<div class="card mb-4">
 			<div class="card-body">

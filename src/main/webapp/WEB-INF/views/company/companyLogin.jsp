@@ -15,8 +15,9 @@
 	left: 430px;
 	top: 263px;
 	background: #FFFFFF;
-	border: 1px solid #000000;
+	border: 1px solid gray;
 	box-sizing: border-box;
+	border-radius: 5px;
 }
 
 .userPwd {
@@ -26,8 +27,9 @@
 	left: 430px;
 	top: 328px;
 	background: #FFFFFF;
-	border: 1px solid #000000;
+	border: 1px solid gray;
 	box-sizing: border-box;
+	border-radius: 5px;
 }
 
 .business_registry_number {
@@ -53,24 +55,23 @@
 	border-radius: 15px;
 }
 
+.join_id_pwd{
+	left: 300px;
+	top: 950px;
+	
+}
+
 .jagalogo {
 	width: 350px;
 	height: 300px;
 	left: auto;
 }
 
-.join_id_pwd {
-	position: absolute;
-	width: 100px;
-	height: 50px;
-	left: 530px;
-	top: 705px;
-}
 
 .join_id_pwd2 {
 	position: absolute;
 	width: 100px;
-	height: 50px;
+	height: 50px;  
 	left: 630px;
 	top: 705px;
 }
@@ -95,9 +96,9 @@
 	<c:set var ="contextPath" value="${pageContext.servletContext.contextPath }" scope="application"/>
 	
 	<br>
-	
+	<div style="height:250px;"></div>
 	<div align="center">
-		<img src="${contextPath }/resources/images/logo_vertical.PNG" class="jagalogo">
+		<img src="${contextPath }/resources/images/logo_vertical.PNG" style="max-width: 100%; height: auto;" class="jagalogo">
 	</div>
 	
 	<div class="loginArea" align="center">
@@ -122,24 +123,15 @@
 						<button class="loginBtn" style="color:white; font-size:25px"> 로그인 </button>
 					</td>
 					<td class="blank"></td>
-					<td></td>
+					<td class="blank"></td>
 				</tr>
 				
-				<tr>
-					<td class="join_id_pwd"><a href="companyJoinView.co"> 회원가입 </a></td> 
-<!-- 					<td class="join_id_pwd2"><a href="/WEB-INF/views/member/memberJoin.jsp"> 아이디찾기  </a></td> 
-					<td class="join_id_pwd3"><a href="/WEB-INF/views/member/memberJoin.jsp"> 비밀번호찾기 </a></td> -->
-					
-<!-- 					<td><a href="/WEB-INF/views/vender/newVender.jsp">임시거래처등록세션확인</a></td> -->
-				</tr>
 			</table>
+					<div class="join_id_pwd"><a href="companyJoinView.co"> 회원가입 </a></div> 
 		</form>
  		</c:if> 
-
-	 	<c:if test="${!empty sessionScope.loginCompany }">
-			<h3 align="right"><c:out value="${sessionScope.loginCompany.companyId }님 환영합니다."></c:out></h3> 
-			<button onclick="logout()">로그아웃</button> 
- 		</c:if> 
+ 
+			<button onclick="logout()">로그아웃</button>  
 	</div>
 	
 	<script>
