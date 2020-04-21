@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.jaga.bugagachi.model.service.CcSalesSlipGapService;
+import com.kh.jaga.bugagachi.model.vo.CcSalesSlipDetail;
 import com.kh.jaga.bugagachi.model.vo.CcSalesSlipGap;
 
 @Controller
@@ -43,7 +44,7 @@ public class BugagachiController {
 		System.out.println("되면 오류없는거 날짜확인:" +date1+"Rmx"+date2);
 		cssg.setTermDiv(term);
 		//신용카드매출전표가지고와서 가지고 온값으로 거래내역 조회해야함
-		List<CcSalesSlipGap> cssg2=csser.selectCssg(cssg);
+		List<CcSalesSlipDetail> cssg2=csser.selectCssg(cssg);
 		mv.addObject("cssgList",cssg2); 
 		mv.setViewName("jsonView");
 		
