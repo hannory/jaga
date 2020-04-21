@@ -99,6 +99,16 @@
 		width:100%;
 		height:10%;
 		background:pink;
+	}
+	.deptDefaultRow:hover{
+		background:gray;
+		opacity:30%;
+		color:white;
+	}
+	.deptTempRow:hover{
+		background:gray;
+		opacity:30%;
+		color:white;
 	}/* 모달(담당부서) 끝 */
 	.dateTestBtn:hover{
 		cursor:pointer;
@@ -117,6 +127,28 @@
 	<div class="container-fluid">
 	<!-- 작업공간 -->
 	
+	
+	
+	
+	<script>
+	/* 테스트용 */
+	/* $(function(){
+		console.log("===test===");
+		var swy = "swyValue";
+		var goal = new Array(JSON.parse('${ jsonList }'));
+		targetList = goal[0];
+		for(var i = 0; i < targetList.length; i++){
+			console.log(targetList[i]);
+			$("#targetTag").append(targetList[i].deptName +"<br>");
+		}
+	}); */
+	</script>
+	
+				
+				
+				
+				
+				
 	<!-- 모달창 영역(담당부서 검색) -->
 		<div class="modal-layer" id="modalLayer"><!-- 회색영역 -->
 			
@@ -135,15 +167,14 @@
 						</div>
 						</td>
 					</tr>
-					<tr style="background:green;">
+					<tr id="trDeptHead" style="background:green;">
 						<td>부서코드</td>
 						<td colspan="2">부서 명</td>
 					</tr>
 					
-					
 					<c:if test="${ deptList ne null }">
 						<c:forEach var="list" items="${ deptList }">
-						<tr>
+						<tr class="deptDefaultRow" onclick="selectDept(this);">
 							<td>${ list.deptCode }</td>
 							<td colspan="2">${ list.deptName }</td>
 						</tr>
@@ -153,19 +184,59 @@
 				</table>
 				</div><!-- //스크롤 만들기 위한 div -->
 				
-				<c:forEach items="${ deptList }" var="temp" varStatus="status">
-					<c:set var="value + status.index" value="temp[status.index]"></c:set>
-				</c:forEach>
+				
+				
+				
+				<script>
+				/* 부서 행 클릭 시 동작 */
+				function selectDept(target){
+					var selectedDeptCode = target.children[0].innerHTML;
+					var selectedDeptName = target.children[1].innerHTML;
+					$("#inputDeptName").val(selectedDeptName);
+					$("#inputDept").val(selectedDeptCode);
+					closeModal(); 
+				}
+				</script>
+
+
+
 				
 				<script>
 				/* 부서검색을 위한 스크립트 */
 				$('#searchDeptBox').keyup(function(e) {
+					/* 검색창에서 keyup 될 때 마다 실행 */
+					var searchValue = e.target.value;
+					var $deptDefaultRow = $(".deptDefaultRow");
 					
-					alert("검색 완성하기");
+					if(searchValue != 0){
+						console.log("searchValue 길이 : 0 아님")
+						$(".deptDefaultRow").detach();
+					}else{
+						console.log("searchValue 길이 : 0 맞음")
+						$("#trDeptHead").append($deptDefaultRow);
+					}
+					console.log(searchValue);
 					
+					console.log("===test===");
+					var listDeptTemp = new Array(JSON.parse('${ jsonList }'));
+					listDept = listDeptTemp[0];
+					for(var i = 0; i < listDept.length; i++){
+						if(listDept[i].deptName.includes(searchValue) || listDept[i].deptCode.includes(searchValue)){
+							var tempDeptName = listDept[i].deptName;
+							var tempDeptCode = listDept[i].deptCode;
+							$(".deptTempRow").detach();
+							$("#trDeptHead").after(
+								"<tr class='deptTempRow' onclick='selectDept(this)'><td>" + tempDeptCode + "</td><td colspan='2'>" + tempDeptName + "</td></tr>"
+							);
+							
+							
+						}
+					}
 				});
-				</script>
 				
+				
+				
+				</script>
 				
 				
 				
@@ -191,7 +262,7 @@
 		$("#modalLayer").fadeOut(200);
 	}
 	function searchDept(){
-		alert("zzasd");
+		alert("부서검색 검색 버튼 누름");
 	}
 	
 	$(function(){
@@ -413,7 +484,10 @@
 			</tr>
 			<tr>
 				<td class="color-green">담당부서</td>
-				<td><input id="inputDept" name="departmentCode" type="text" style="width:100%; height:100%; text-align:center;"></td>
+				<td>
+					<input id="inputDeptName" name="departmentCode" type="text" style="width:100%; height:100%; text-align:center;">
+					<input id="inputDept" name="departmentCode" type="hidden">
+				</td>
 				<td onclick="showModalDept()"><img style="width:20px; height:20px;" src="${contextPath}/resources/images/search.PNG"></td>
 				<td class="color-green">계정과목</td>
 				<td><input id="inputSubject" name="accountTitleCode" type="text" style="width:100%; height:100%; text-align:center;"></td>
