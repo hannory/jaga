@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.jaga.expendResolution.model.dto.ExpendResolutionDto;
@@ -15,7 +14,7 @@ import com.kh.jaga.expendResolution.model.service.ExpendResolutionService;
 import com.kh.jaga.expendResolution.model.vo.DepartmentVo;
 
 import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
+
 
 /**
  * @author SWY
@@ -32,13 +31,6 @@ public class ExpendResolutionController {
 	@RequestMapping("showExpendResolutionWriteForm.expendResolution")
 	public ModelAndView ShowExpendResolutionForm(ModelAndView mv, HttpServletResponse response) {
 		
-				//제이슨으로도 전달해보자 ,,
-				JSONObject jsonObj = new JSONObject();
-				jsonObj.put("k01", "v01");
-				
-				mv.addObject(jsonObj);
-				
-		
 		
 		
 		
@@ -48,12 +40,17 @@ public class ExpendResolutionController {
 		mv.addObject("deptList",deptList);
 		mv.setViewName("expendResolution");
 		
+		//제이슨 테스트
+		JSONArray jsonList = JSONArray.fromObject(deptList);
+		mv.addObject("jsonList", jsonList); 
+		
 		
 		
 		return mv;
 	}//method
 	
 	//지출결의서 디비에 저장
+	
 	@RequestMapping("insertExpendResolution.expendResolution")
 	public ModelAndView insertExpendResolution(ModelAndView mv, ExpendResolutionDto dto) {
 		
