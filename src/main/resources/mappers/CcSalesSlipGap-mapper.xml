@@ -41,7 +41,24 @@
   <result property="rcptstmtCode" column="RCPTSTMT_CODE"/>
 
   </resultMap> 
+<resultMap type="Receiption" id="ReceiptionResultSet">
+  <id property ="issCode" column="ISS_CODE"/>
 
+  <result property="slipCode" column="SLIP_CODE"/>
+  <result property="slipDivision" column="SLIP_DIVISION"/>
+  <result property="division" column="DIVISION"/>
+  <result property="slipDate" column="SLIP_DATE"/>
+  <result property="evidenceCode" column="EVIDENCE_CODE"/>
+  <result property="supplyValue" column="SUPPLY_VALUE"/>
+  <result property="valueTax" column="VALUE_TAX"/>
+  <result property="deemedStatus" column="DEEMED_STATUS"/>
+  <result property="resolutionCode" column="RESOLUTION_CODE"/>
+  <result property="brief" column="BRIEF"/>
+  <result property="item" column="ITEM"/>
+  <result property="comCode" column="COM_CODE"/>
+  <result property="dateSlipCode" column="DATE_SLIP_CODE"/>
+
+  </resultMap> 
 
   <select id="selectCcSalesSlipGap" resultMap="CcSalesSlipDetailResultSet" parameterType="CcSalesSlipGap">
   		SELECT *
@@ -80,5 +97,16 @@ WHERE YEAR_OF_ATTR= #{yearOfAttr}
   		AND DEADLINE LIKE 'Y'
   </update>
   
+  <select id="selectNewRecei" resultMap="ReceiptionResultSet" parameterType="hashMap">
+ SELECT S.SLIP_CODE ,S.SLIP_DATE ,S.EVIDENCE_CODE ,S.SUPPLY_VALUE ,S.VALUE_TAX
+,S.BRIEF ,S.DATE_SLIP_CODE ,J.VENDER_CODE,V.VENDER_NAME,J.DEBIT_CREDIT,J.JOURNAL_CODE
+  	FROM SLIP 
+  	WHERE SLIP_DIVISION ='매입매출' 
+  	AND DIVISION ='매입' 
+  	AND COM_CODE= #{Receiption.comCode}
+  	AND S.EVIDENCE_CODE BETWEEN 50 AND 100
+  	AND SLIP_DATE BETWEEN #{Receiption.slipDate} AND #{endDate}
+  	AND J.DEBIT_CREDIT='대변'
   
+  </select>
   </mapper>

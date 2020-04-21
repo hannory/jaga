@@ -1,5 +1,6 @@
 package com.kh.jaga.bugagachi.model.service;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -24,6 +25,8 @@ public interface CcSalesSlipGapService {
 	String selectCssgPk(CcSalesSlipGap cssg);
 
 	int updateCcSalesSlipGap(CcSalesSlipGap cssg);
+
+	List<TnxHis> selectNewRecei(Receiption re, Date eD);
 
 	 
 }

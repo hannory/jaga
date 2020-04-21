@@ -1,5 +1,6 @@
 package com.kh.jaga.bugagachi.model.service;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -77,5 +78,15 @@ public class CcSalesSlipGapServiceImpl implements CcSalesSlipGapService{
 		// TODO Auto-generated method stub
 		return cd.updateCcSalesSlipGap(sqlSession,cssg);
 	}
+
+	@Override
+	public List<TnxHis> selectNewRecei(Receiption re,Date eD) {
+		// TODO 전표계산하러가기RE
+		
+		System.out.println("Service: selectNewRecei: re"+re);
+		return cd.selectNewRecei(sqlSession,re,eD);
+	}
+
+	
 
 }
