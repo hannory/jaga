@@ -31,4 +31,12 @@
 	<beans:bean id="viewResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver">
 		<beans:property name="order" value="1"/>
 	</beans:bean>
+	
+	
+	
+	
+
+
+	
+	
 </beans:beans>

@@ -28,6 +28,8 @@
   <typeAlias type="com.kh.jaga.bugagachi.model.vo.TnxHis" alias="TnxHis"/> 
    <typeAlias type="com.kh.jaga.employee.model.vo.Bank" alias="Bank"/>
      <typeAlias type="com.kh.jaga.employee.model.vo.TypeOfBizCode" alias="TypeOfBizCode"/> 
+     <typeAlias type="com.kh.jaga.employee.model.vo.BusinessEmp" alias="BusinessEmp"/> 
+     <typeAlias type="com.kh.jaga.employee.model.vo.BusinessEmp2" alias="BusinessEmp2"/> 
       <typeAlias type="com.kh.jaga.finStmt.model.vo.IncomeStmtAccount" alias="IncomeStmtAccount"/> 
   
   </typeAliases>

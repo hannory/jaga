@@ -6,7 +6,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-public class BusinessEmp {
+public class BusinessEmp2 {
 	
 	private String employeeCode; 	//직원구분번호
 	private String comCode;			//회사 코드
@@ -20,25 +20,24 @@ public class BusinessEmp {
 	private String accountHolder;	//예금주
 	private String department;		//부서
 	private String positionCode;	//직급 코드
-	
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss", timezone = "Asia/Seoul")
-	@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
-	private Date enrollDate;		//입사일
-	
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss", timezone = "Asia/Seoul")
-	@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
-	private Date leaveDate;			//퇴사일
+	private String enrollDate;		//입사일
+	private String leaveDate;			//퇴사일
 	private String leaveReason;		//	퇴사사유
 	private String idDocument;		//신분증명서류
 	private String accountDocument;	//통장사본
 	private String incomeClass;		//소득구분
+	private String positionName;		//소득구분
+	private String deptName;		//소득구분
+	private String typeOfBixCode;		//소득구분
+	private String sellTargetName;		//소득구분
 	
-	public BusinessEmp() {}
+	public BusinessEmp2() {}
 
-	public BusinessEmp(String employeeCode, String comCode, String employeeNum, String employeeName,
+	public BusinessEmp2(String employeeCode, String comCode, String employeeNum, String employeeName,
 			String securityNumber, int salary, String email, String backCode, String accountNumber,
-			String accountHolder, String department, String positionCode, Date enrollDate, Date leaveDate,
-			String leaveReason, String idDocument, String accountDocument, String incomeClass) {
+			String accountHolder, String department, String positionCode, String enrollDate, String leaveDate,
+			String leaveReason, String idDocument, String accountDocument, String incomeClass, String positionName,
+			String deptName, String typeOfBixCode, String sellTargetName) {
 		super();
 		this.employeeCode = employeeCode;
 		this.comCode = comCode;
@@ -58,6 +57,10 @@ public class BusinessEmp {
 		this.idDocument = idDocument;
 		this.accountDocument = accountDocument;
 		this.incomeClass = incomeClass;
+		this.positionName = positionName;
+		this.deptName = deptName;
+		this.typeOfBixCode = typeOfBixCode;
+		this.sellTargetName = sellTargetName;
 	}
 
 	public String getEmployeeCode() {
@@ -156,19 +159,19 @@ public class BusinessEmp {
 		this.positionCode = positionCode;
 	}
 
-	public Date getEnrollDate() {
+	public String getEnrollDate() {
 		return enrollDate;
 	}
 
-	public void setEnrollDate(Date enrollDate) {
+	public void setEnrollDate(String enrollDate) {
 		this.enrollDate = enrollDate;
 	}
 
-	public Date getLeaveDate() {
+	public String getLeaveDate() {
 		return leaveDate;
 	}
 
-	public void setLeaveDate(Date leaveDate) {
+	public void setLeaveDate(String leaveDate) {
 		this.leaveDate = leaveDate;
 	}
 
@@ -204,16 +207,49 @@ public class BusinessEmp {
 		this.incomeClass = incomeClass;
 	}
 
+	public String getPositionName() {
+		return positionName;
+	}
+
+	public void setPositionName(String positionName) {
+		this.positionName = positionName;
+	}
+
+	public String getDeptName() {
+		return deptName;
+	}
+
+	public void setDeptName(String deptName) {
+		this.deptName = deptName;
+	}
+
+	public String getTypeOfBixCode() {
+		return typeOfBixCode;
+	}
+
+	public void setTypeOfBixCode(String typeOfBixCode) {
+		this.typeOfBixCode = typeOfBixCode;
+	}
+
+	public String getSellTargetName() {
+		return sellTargetName;
+	}
+
+	public void setSellTargetName(String sellTargetName) {
+		this.sellTargetName = sellTargetName;
+	}
+
 	@Override
 	public String toString() {
-		return "BusinessEmp [employeeCode=" + employeeCode + ", comCode=" + comCode + ", employeeNum=" + employeeNum
+		return "BusinessEmp2 [employeeCode=" + employeeCode + ", comCode=" + comCode + ", employeeNum=" + employeeNum
 				+ ", employeeName=" + employeeName + ", securityNumber=" + securityNumber + ", salary=" + salary
 				+ ", email=" + email + ", backCode=" + backCode + ", accountNumber=" + accountNumber
 				+ ", accountHolder=" + accountHolder + ", department=" + department + ", positionCode=" + positionCode
 				+ ", enrollDate=" + enrollDate + ", leaveDate=" + leaveDate + ", leaveReason=" + leaveReason
 				+ ", idDocument=" + idDocument + ", accountDocument=" + accountDocument + ", incomeClass=" + incomeClass
-				+ "]";
+				+ ", positionName=" + positionName + ", deptName=" + deptName + ", typeOfBixCode=" + typeOfBixCode
+				+ ", sellTargetName=" + sellTargetName + "]";
 	}
-	
+
 	
 }
