@@ -700,25 +700,25 @@
 						<td class="color-green">비고</td>
 					</tr>
 					<tr>
-						<td><input name="detailDate02" type="date"></td>
-						<td><input name="detailBrief02" type="text"></td>
-						<td><input name="detailVenderCode02" type="text"></td>
-						<td><input name="detailPrice02" type="text" class="price"></td>
-						<td><input name="detailDate02" type="text"></td>
+						<td><input name="detailDate01" type="date"></td>
+						<td><input name="detailBrief01" type="text"></td>
+						<td><input name="detailVenderCode01" type="text"></td>
+						<td><input name="detailPrice01" type="text" class="price"></td>
+						<td><input name="detailMemo01" type="text"></td>
 					</tr>
 					<tr>
 						<td><input name="detailDate02" type="date"></td>
 						<td><input name="detailBrief02" type="text"></td>
 						<td><input name="detailVenderCode02" type="text"></td>
 						<td><input name="detailPrice02" type="text" class="price"></td>
-						<td><input name="detailDate02" type="text"></td>
+						<td><input name="detailMemo02" type="text"></td>
 					</tr>
 					<tr>
 						<td><input name="detailDate03" type="date"></td>
 						<td><input name="detailBrief03" type="text"></td>
 						<td><input name="detailVenderCode03" type="text"></td>
 						<td><input name="detailPrice03" type="text" class="price"></td>
-						<td><input name="detailDate03" type="text"></td>
+						<td><input name="detailMemo03" type="text"></td>
 					</tr>
 
 				</table>
