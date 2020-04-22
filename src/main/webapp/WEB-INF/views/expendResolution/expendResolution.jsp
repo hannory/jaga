@@ -333,7 +333,7 @@
 					style="margin-top: 50px; margin-left: 140px; text-align: center;">
 					<tr>
 						<td style="width: 100px; background: green;"><span>계정과목</span></td>
-						<td><input id="searchAccountTitleBox" type="text" name="accountTitleCode"
+						<td><input id="searchAccountTitleBox" type="text"
 							style="width: 100%; height: 100%;"></td>
 						<td style="width: 100px;">
 							<div class="searchBtnSubject" onclick="searchSubject()">
@@ -399,14 +399,17 @@
 														|| listAccountTitle[i].accountCode.includes(searchValue)) {
 													var tempAccountTitleName = listAccountTitle[i].accountTitle;
 													var tempAccountTitleCode = listAccountTitle[i].accountCode;
+													var tempAccountTitleCharacter = listAccountTitle[i].character;
 													/* $(".accountTitleTempRow").detach(); */
 													
 													$("#trAccountTitleHead")
 															.after(
 																	"<tr class='accountTitleTempRow' onclick='selectAccountTitle(this)'><td>"
 																			+ tempAccountTitleCode
-																			+ "</td><td colspan='2'>"
+																			+ "</td><td>"
 																			+ tempAccountTitleName
+																			+ "</td><td>"
+																			+ tempAccountTitleCharacter
 																			+ "</td></tr>");
 													
 														
@@ -422,8 +425,10 @@
 														.after(
 																"<tr class='accountTitleTempRow' onclick='selectDept(this)'><td>"
 																		+ listAccountTitle[i].accountCode
-																		+ "</td><td colspan='2'>"
+																		+ "</td><td>"
 																		+ listAccountTitle[i].accountTitle
+																		+ "</td><td>"
+																		+ listAccountTitle[i].character
 																		+ "</td></tr>");
 											}
 										}
@@ -695,25 +700,25 @@
 						<td class="color-green">비고</td>
 					</tr>
 					<tr>
-						<td><input name="detailDate01" type="date"></td>
-						<td><input name="detailBrief01" type="text"></td>
-						<td><input name="detailVenderCode01" type="text"></td>
-						<td><input name="detailPrice01" type="text" class="price"></td>
-						<td><input name="detailDate01" type="text"></td>
+						<td><input name="detailDate02" type="date"></td>
+						<td><input name="detailBrief02" type="text"></td>
+						<td><input name="detailVenderCode02" type="text"></td>
+						<td><input name="detailPrice02" type="text" class="price"></td>
+						<td><input name="detailDate02" type="text"></td>
 					</tr>
 					<tr>
-						<td>111</td>
-						<td>222</td>
-						<td>333</td>
-						<td><input type="text" class="price"></td>
-						<td>555</td>
+						<td><input name="detailDate02" type="date"></td>
+						<td><input name="detailBrief02" type="text"></td>
+						<td><input name="detailVenderCode02" type="text"></td>
+						<td><input name="detailPrice02" type="text" class="price"></td>
+						<td><input name="detailDate02" type="text"></td>
 					</tr>
 					<tr>
-						<td>111</td>
-						<td>222</td>
-						<td>333</td>
-						<td><input type="text" class="price"></td>
-						<td>555</td>
+						<td><input name="detailDate03" type="date"></td>
+						<td><input name="detailBrief03" type="text"></td>
+						<td><input name="detailVenderCode03" type="text"></td>
+						<td><input name="detailPrice03" type="text" class="price"></td>
+						<td><input name="detailDate03" type="text"></td>
 					</tr>
 
 				</table>
@@ -737,15 +742,18 @@
 					</tr>
 					<tr>
 						<td class="color-green">관련증빙</td>
-						<td colspan="2'"><input type="radio" name="receptionType"
-							value="taxReception" id="radiotaxReception"><label
+						<td><input type="radio" name="receptionType" class="evidenceTemp"
+							value="10" id="radiotaxReception"><label
 							for="radiotaxReception">세금계산서</label></td>
-						<td><input type="radio" name="receptionType"
-							value="cashReception" id="radiocashReception"><label
+						<td><input type="radio" name="receptionType" class="evidenceTemp"
+							value="50" id="radiocashReception"><label
 							for="radiocashReception">현금영수증</label></td>
-						<td><input type="radio" name="receptionType"
-							value="cardReception" id="radiocardReception"><label
+						<td><input type="radio" name="receptionType" class="evidenceTemp"
+							value="100" id="radiocardReception"><label
 							for="radiocardReception">카드영수증</label></td>
+						<td><input type="radio" name="receptionType" class="evidenceTemp"
+							value="50" id="radioetcReception"><label
+							for="radioetcReception">ㅇㅇㅇㅇㅇ</label></td>
 						<td><span id="receptionLabel">증빙파일을 선택하세요</span></td>
 					</tr>
 				</table>
@@ -802,11 +810,11 @@
 					}
 
 					/* 체크박스 클릭 시 파일 선택창 클릭 */
-					window.onload = function() {
-						$("input[name=receptionType]").click(function() {
+					$(function() {
+						$(".evidenceTemp").click(function(e) {
 							$("#receptionFile").click();
 						});
-					}
+					});
 
 					/* 영수증 파일 선택 완료 시 파일 명  표시 */
 					$(function() {

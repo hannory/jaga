@@ -64,10 +64,17 @@
   
   <select id="selectDeptList" resultType="com.kh.jaga.expendResolution.model.vo.DepartmentVo">
   	SELECT 
-  		DEPT_CODE as deptCode, 
-  		DEPT_NAME as deptName
+  		DEPT_CODE,
+  		DEPT_NAME
   	FROM DEPARTMENT
   </select>
+  
+  <!-- 
+  SELECT 
+  		DEPT_CODE as deptCode, 
+  		DEPT_NAME as deptName
+  FROM DEPARTMENT
+   -->
   
   <select id="selectAccountTitleList" resultMap="AccountTitleVoResultSet">
   	SELECT  

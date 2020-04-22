@@ -43,6 +43,12 @@ public class ExpendResolutionController {
 		JSONArray jsonList = JSONArray.fromObject(deptList);
 		mv.addObject("jsonList", jsonList);		//json타입 리스트 추가
 		
+		System.out.println("\n@@@@@@@@@@@@@@@@@@@@\n");
+		System.out.println(deptList);
+		System.out.println("\n@@@@@@@@@@@@@@@@@@@@\n");
+		System.out.println(jsonList);
+		System.out.println("\n@@@@@@@@@@@@@@@@@@@@\n");
+		
 		//2.계정과목
 		List<AccountTitleVo> accountTitleList = service.selectAccountTitleList();
 		mv.addObject("accountTitleList", accountTitleList);				//리스트 추가
