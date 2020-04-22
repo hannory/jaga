@@ -119,7 +119,7 @@
 	                                        <a class="nav-link" href="receiption.vi">매입매출전표입력</a>
 	                                        <a class="nav-link" href="taxInvoice.vi">세금계산서발행</a>
 	                                        <a class="nav-link" href="transListAll.th">매입매출전표조회</a>
-	                                        <a class="nav-link" href="businessEmp.vi">사업소득자임시</a>
+	                                        <a class="nav-link" href="businessEmpList.be">사업소득자임시</a>
                                         </nav>
                                     </div>
                                     

@@ -197,12 +197,12 @@
 					<tr>
 						<td> </td>
 						<td colspan="3">
-							<input type="text">
+							<input type="text" id="venderCode2">
 								<button type="button" id="searchBtn1" >
 									<img alt="" src="${contextPath}/resources/images/search.PNG" width="20px" height="20px">
 								</button>
 							
-							<input type="text">
+							<input type="text" id="venderName2">
 						</td>
 					</tr>
 					<tr>
@@ -402,6 +402,24 @@
 		}		
 	
 		
+		var venderCo;//출금/입금계정과목
+		var venderNN;
+		function ddd(value){
+			$(value).parent().parent().children().each(function(index){
+				console.log($(this).text());
+				venderCo += ","+$(this).text();
+			})
+			var account = venderCo.split(",");
+			venderCo = account[1];
+			venderNN = account[2];
+			
+			$("#venderCode2").val(venderCo);
+			$("#venderName2").val(venderNN);
+			
+			$("div#accountModal").modal("hide");
+		}		
+	
+		
 		$(function() {
 			$("#datepicker").datepicker({});
 			/* 달력버튼 */
@@ -489,77 +507,148 @@
 					/* 매입 */
 					/* 135부가세대급금 */
 					var $resultTable = $("#resultReTable");
+					console.log($("#evidence2").val());
 					
-					
-					var $tr2 = $("<tr>");
-					var accCo = $("<input type='hidden' name='accountCode'>").val(accountC);
-					var venCo = $("<input type='hidden' name='venderCode'>").val(venderCode);
-					var debitCredit = $("<input type='hidden' name='debitCredit'>").val('차변');
-					var $sangpum = $("<td>").html($("<input type='text' name='price'>").val(supplyValue));
-					var $vender = $("<td>").html($("<input type='text'>").val(venderName));
-					var $accN = $("<td>").html($("<input type='text'>").val(accountN));
-					
-					$tr2.append($accN);
-					$tr2.append($vender);
-					$tr2.append($sangpum);
-					$tr2.append($("<td>"));
-					$tr2.append(accCo);
-					$tr2.append(venCo);
-					$tr2.append(debitCredit);
-					$resultTable.append($tr2);
-					
-					if(vTax == false){
-					var $tr = $("<tr>");
-					
-					var accCo = $("<input type='hidden' name='accountCode'>").val(13500);
-					var venCo = $("<input type='hidden' name='venderCode'>").val(venderCode);
-					var debitCredit = $("<input type='hidden' name='debitCredit'>").val('차변');
-					var $bugaYeah = $("<td>").html($("<input type='text' name='price'>").val(valueTax));
-					var $vender = $("<td>").html($("<input type='text'>").val(venderName));
-					var $accN = $("<td>").html($("<input type='text'>").val('부가세대급금'));
-					
-					$tr.append($accN);
-					$tr.append($vender);
-					$tr.append($bugaYeah);
-					$tr.append($("<td>"));
-					$tr.append(accCo);
-					$tr.append(venCo);
-					$tr.append(debitCredit);
-					$resultTable.append($tr);
-					
-					}
-					
-					var $tr3 = $("<tr>");
-					
-					var accCo = $("<input type='hidden' name='accountCode'>").val(accountCo);
-					var venCo = $("<input type='hidden' name='venderCode'>").val(venderCode);
-					var debitCredit = $("<input type='hidden' name='debitCredit'>").val('대변');
-					var $bit = $("<td>").html($("<input type='text' name='price'>").val(supplydeaga));
-					var $vender = $("<td>").html($("<input type='text'>").val(venderName));
-					var $accN = $("<td>").html($("<input type='text'>").val(accountNN));
-					
-					$tr3.append($accN);
-					$tr3.append($vender);
-					$tr3.append($("<td>"));
-					$tr3.append($bit);
-					$tr3.append(accCo);
-					$tr3.append(venCo);
-					$tr3.append(debitCredit);
-					$resultTable.append($tr3);
-					
-					
-					
-					$("#resultReTable tr").each( function (index) {
-						var num = index - 1;
-				        $(this).find("input[name=accountCode]").attr("name", "journalizeList[" + num + "].accountCode");
-				        $(this).find("input[name=debitCredit]").attr("name", "journalizeList[" + num + "].debitCredit");
-				        $(this).find("input[name=price]").attr("name", "journalizeList[" + num + "].price");
-				        $(this).find("input[name=venderCode]").attr("name", "journalizeList[" + num + "].venderCode");
-				    });
-					
-					if($("evidence2").val() == 20){
+					if($("#evidence2").val() != 50){
+						var $tr2 = $("<tr>");
+						var accCo = $("<input type='hidden' name='accountCode'>").val(accountC);
+						var venCo = $("<input type='hidden' name='venderCode'>").val(venderCode);
+						var debitCredit = $("<input type='hidden' name='debitCredit'>").val('차변');
+						var $sangpum = $("<td>").html($("<input type='text' name='price'>").val(supplyValue));
+						var $vender = $("<td>").html($("<input type='text'>").val(venderName));
+						var $accN = $("<td>").html($("<input type='text'>").val(accountN));
 						
+						$tr2.append($accN);
+						$tr2.append($vender);
+						$tr2.append($sangpum);
+						$tr2.append($("<td>"));
+						$tr2.append(accCo);
+						$tr2.append(venCo);
+						$tr2.append(debitCredit);
+						$resultTable.append($tr2);
+						
+						if(vTax == false){
+						var $tr = $("<tr>");
+						
+						var accCo = $("<input type='hidden' name='accountCode'>").val(13500);
+						var venCo = $("<input type='hidden' name='venderCode'>").val(venderCode);
+						var debitCredit = $("<input type='hidden' name='debitCredit'>").val('차변');
+						var $bugaYeah = $("<td>").html($("<input type='text' name='price'>").val(valueTax));
+						var $vender = $("<td>").html($("<input type='text'>").val(venderName));
+						var $accN = $("<td>").html($("<input type='text'>").val('부가세대급금'));
+						
+						$tr.append($accN);
+						$tr.append($vender);
+						$tr.append($bugaYeah);
+						$tr.append($("<td>"));
+						$tr.append(accCo);
+						$tr.append(venCo);
+						$tr.append(debitCredit);
+						$resultTable.append($tr);
+						
+						}
+						
+						var $tr3 = $("<tr>");
+						
+						var accCo = $("<input type='hidden' name='accountCode'>").val(accountCo);
+						var venCo = $("<input type='hidden' name='venderCode'>").val(venderCode);
+						var debitCredit = $("<input type='hidden' name='debitCredit'>").val('대변');
+						var $bit = $("<td>").html($("<input type='text' name='price'>").val(supplydeaga));
+						var $vender = $("<td>").html($("<input type='text'>").val(venderName));
+						var $accN = $("<td>").html($("<input type='text'>").val(accountNN));
+						
+						$tr3.append($accN);
+						$tr3.append($vender);
+						$tr3.append($("<td>"));
+						$tr3.append($bit);
+						$tr3.append(accCo);
+						$tr3.append(venCo);
+						$tr3.append(debitCredit);
+						$resultTable.append($tr3);
+						
+						
+						
+						$("#resultReTable tr").each( function (index) {
+							var num = index - 1;
+					        $(this).find("input[name=accountCode]").attr("name", "journalizeList[" + num + "].accountCode");
+					        $(this).find("input[name=debitCredit]").attr("name", "journalizeList[" + num + "].debitCredit");
+					        $(this).find("input[name=price]").attr("name", "journalizeList[" + num + "].price");
+					        $(this).find("input[name=venderCode]").attr("name", "journalizeList[" + num + "].venderCode");
+				   		 });
+					} else if($("#evidence2").val() == 50){
+						/* 카드매입 */
+						/* 상품 / 미지급금 */
+						/* 부가세대급금 */
+						var cardName = $("#venderName2").val();
+						var cardCode = $("#venderCode2").val();
+						
+						var $tr2 = $("<tr>");
+						var accCo = $("<input type='hidden' name='accountCode'>").val(accountC);
+						var venCo = $("<input type='hidden' name='venderCode'>").val(venderCode);
+						var debitCredit = $("<input type='hidden' name='debitCredit'>").val('차변');
+						var $sangpum = $("<td>").html($("<input type='text' name='price'>").val(supplyValue));
+						var $vender = $("<td>").html($("<input type='text'>").val(venderName));
+						var $accN = $("<td>").html($("<input type='text'>").val(accountN));
+						
+						$tr2.append($accN);
+						$tr2.append($vender);
+						$tr2.append($sangpum);
+						$tr2.append($("<td>"));
+						$tr2.append(accCo);
+						$tr2.append(venCo);
+						$tr2.append(debitCredit);
+						$resultTable.append($tr2);
+						
+						if(vTax == false){
+						var $tr = $("<tr>");
+						
+						var accCo = $("<input type='hidden' name='accountCode'>").val(13500);
+						var venCo = $("<input type='hidden' name='venderCode'>").val(venderCode);
+						var debitCredit = $("<input type='hidden' name='debitCredit'>").val('차변');
+						var $bugaYeah = $("<td>").html($("<input type='text' name='price'>").val(valueTax));
+						var $vender = $("<td>").html($("<input type='text'>").val(venderName));
+						var $accN = $("<td>").html($("<input type='text'>").val('부가세대급금'));
+						
+						$tr.append($accN);
+						$tr.append($vender);
+						$tr.append($bugaYeah);
+						$tr.append($("<td>"));
+						$tr.append(accCo);
+						$tr.append(venCo);
+						$tr.append(debitCredit);
+						$resultTable.append($tr);
+						
+						}
+						
+						var $tr3 = $("<tr>");
+						
+						var accCo = $("<input type='hidden' name='accountCode'>").val(accountCo);
+						var venCo = $("<input type='hidden' name='venderCode'>").val(cardCode);
+						var debitCredit = $("<input type='hidden' name='debitCredit'>").val('대변');
+						var $bit = $("<td>").html($("<input type='text' name='price'>").val(supplydeaga));
+						var $vender = $("<td>").html($("<input type='text'>").val(cardName));
+						var $accN = $("<td>").html($("<input type='text'>").val(accountNN));
+						
+						$tr3.append($accN);
+						$tr3.append($vender);
+						$tr3.append($("<td>"));
+						$tr3.append($bit);
+						$tr3.append(accCo);
+						$tr3.append(venCo);
+						$tr3.append(debitCredit);
+						$resultTable.append($tr3);
+						
+						
+						
+						$("#resultReTable tr").each( function (index) {
+							var num = index - 1;
+					        $(this).find("input[name=accountCode]").attr("name", "journalizeList[" + num + "].accountCode");
+					        $(this).find("input[name=debitCredit]").attr("name", "journalizeList[" + num + "].debitCredit");
+					        $(this).find("input[name=price]").attr("name", "journalizeList[" + num + "].price");
+					        $(this).find("input[name=venderCode]").attr("name", "journalizeList[" + num + "].venderCode");
+				   		 });
 					}
+					
 					
 				}else{
 					/* 매출 */
@@ -658,6 +747,35 @@
 										 "render": function(data, type, row){
 								                if(type=='display'){
 								                    data = '<a href="#" onclick="ccc(this);">' + data + '</a>';
+								                }
+								                return data;}}
+						 
+					 ]
+				});
+				 $("div#accountModal").modal();
+				 
+				 
+			});
+			$("#searchBtn1").click(function(){
+				
+				$("#venderTable").dataTable({
+					destroy: true,
+					 ajax:{
+							'url':'venderSearch.rp',
+							'type':'get'
+						},
+					 
+					 columns: [
+						 {data : "venderCode",
+							 "render": function(data, type, row){
+					                if(type=='display'){
+					                    data = '<a href="#" onclick="ddd(this);">' + data + '</a>';
+					                }
+					                return data;}},
+						 {data : "venderName",
+										 "render": function(data, type, row){
+								                if(type=='display'){
+								                    data = '<a href="#" onclick="ddd(this);">' + data + '</a>';
 								                }
 								                return data;}}
 						 

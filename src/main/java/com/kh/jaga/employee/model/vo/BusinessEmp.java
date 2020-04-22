@@ -20,13 +20,7 @@ public class BusinessEmp {
 	private String accountHolder;	//예금주
 	private String department;		//부서
 	private String positionCode;	//직급 코드
-	
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss", timezone = "Asia/Seoul")
-	@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
 	private Date enrollDate;		//입사일
-	
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss", timezone = "Asia/Seoul")
-	@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
 	private Date leaveDate;			//퇴사일
 	private String leaveReason;		//	퇴사사유
 	private String idDocument;		//신분증명서류

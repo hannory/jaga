@@ -190,9 +190,10 @@
 					</table>
 				
 				</div>
-				
+				 <!-- enctype="multipart/form-data" -->
 				<div id="wrapp2">
-				<form action="addBusinessEmp.be" method="post" enctype="multipart/form-data">
+				<form action="addBusinessEmp.be" method="post">
+				<input type="hidden" name="employeeCode" id="empCode">
 				<input type="hidden" name="comCode" value="${ sessionScope.loginCompany.companyCode }">
 				<input type="hidden" name="employeeNum" value="${ employeeNum }">
 					<table id="saveArea">
@@ -332,13 +333,13 @@
 							<tr>
 								<th>신분증명서류</th>
 								<td>
-									<input type="file" name="idDocument">
+									<input type="file" name="idPhoto">
 								</td>
 							</tr>
 							<tr>
 								<th>급여계좌사본</th>
 								<td>
-									<input type="file" name="accountDocument">
+									<input type="file" name="accountPhoto">
 								</td>
 							</tr>
 							
@@ -417,7 +418,7 @@
 					$("#fileArea").css("display", "block");
 					var emp = data.BEmp;
 					
-					
+					var employeeCode = emp.employeeCode;
 					var employeeName = emp.employeeName;
 					var securityNumber = emp.securityNumber;
 					var incomeClass = emp.incomeClass;
@@ -432,15 +433,15 @@
 					var typeOfBixCode = emp.typeOfBixCode;
 					var sellTargetName = emp.sellTargetName;
 					
-					
+					var date1 = new Date(enrollDate); 
 					
 					$("#empNamee").text(employeeName);
-					
+					$("#empCode").val(employeeCode);
 					$("#employeeName").val(employeeName);
 					$("#securityNumber").val(securityNumber);
 					$("#incomeClass").val(incomeClass);
 					$("#email").val(email);
-					$("#datepicker").val(enrollDate);
+					$("#datepicker").datepicker('setDate',date1);
 					$("#backCode").val(backCode);
 					$("#accountNumber").val(accountNumber);
 					$("#department").val(department);
@@ -450,7 +451,9 @@
 					$("#typeOfBizCode").val(typeOfBixCode);
 					$("#sellTargetName").val(sellTargetName);
 					
-					$("form").attr("action", "addBusinessEmp2.be");
+					console.log($("#datepicker"));
+					
+					$("form").attr("action", "addBusinessEmp2.be").attr("encType","multipart/form-data");
 					
 				}
 			});

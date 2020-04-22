@@ -1,7 +1,9 @@
 package com.kh.jaga.employee.model.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import com.kh.jaga.employee.model.vo.Attachment;
 import com.kh.jaga.employee.model.vo.Bank;
 import com.kh.jaga.employee.model.vo.BusinessEmp;
 import com.kh.jaga.employee.model.vo.BusinessEmp2;
@@ -19,6 +21,6 @@ public interface BusinessEmpService {
 
 	BusinessEmp2 selectOneBEmp(String empCode);
 
-	int updateBEmp(BusinessEmp be);
+	int updateBEmp(BusinessEmp be, ArrayList<Attachment> attList);
 
 }

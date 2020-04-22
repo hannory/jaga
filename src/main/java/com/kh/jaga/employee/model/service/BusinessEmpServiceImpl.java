@@ -1,5 +1,6 @@
 package com.kh.jaga.employee.model.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.jaga.employee.model.dao.BusinessEmpDao;
+import com.kh.jaga.employee.model.vo.Attachment;
 import com.kh.jaga.employee.model.vo.Bank;
 import com.kh.jaga.employee.model.vo.BusinessEmp;
 import com.kh.jaga.employee.model.vo.BusinessEmp2;
@@ -56,8 +58,13 @@ public class BusinessEmpServiceImpl implements BusinessEmpService{
 
 
 	@Override
-	public int updateBEmp(BusinessEmp be) {
-		return bed.updateBEmp(sqlSession, be);
+	public int updateBEmp(BusinessEmp be, ArrayList<Attachment> attList) {
+		int result = bed.updateBEmp(sqlSession, be);
+		
+		int result2 = bed.insertAttachBEmp(sqlSession, attList);
+		
+		
+		return result2;
 	}
 
 }
