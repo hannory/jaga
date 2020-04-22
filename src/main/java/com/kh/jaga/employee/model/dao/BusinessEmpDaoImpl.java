@@ -1,10 +1,12 @@
 package com.kh.jaga.employee.model.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.jaga.employee.model.vo.Attachment;
 import com.kh.jaga.employee.model.vo.Bank;
 import com.kh.jaga.employee.model.vo.BusinessEmp;
 import com.kh.jaga.employee.model.vo.BusinessEmp2;
@@ -51,6 +53,16 @@ public class BusinessEmpDaoImpl implements BusinessEmpDao {
 	@Override
 	public int updateBEmp(SqlSessionTemplate sqlSession, BusinessEmp be) {
 		int result = sqlSession.update("BusinessEmp.updateBEmp", be);
+		
+		return result;
+	}
+
+	@Override
+	public int insertAttachBEmp(SqlSessionTemplate sqlSession, ArrayList<Attachment> attList) {
+		int result = 0;
+		for(int i = 0; i < attList.size(); i++) {
+			result = sqlSession.insert("BusinessEmp.insertAttBEmp", attList.get(i));
+		}
 		
 		return result;
 	}

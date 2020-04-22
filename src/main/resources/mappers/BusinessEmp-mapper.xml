@@ -80,7 +80,7 @@
   	
   	<insert id="insertBEmp">
   		INSERT INTO BUSINESS_EMP
-  		VALUES(SEQ_EMP_CODE.NEXTVAL, #{comCode}, #{employeeNum} ,#{employeeName} ,#{securityNumber} ,#{salary} ,#{email} ,#{backCode} ,#{accountNumber} ,#{accountHolder} ,#{department} ,#{positionCode} ,#{enrollDate} ,#{leaveDate} ,#{leaveReason} ,#{idDocument}, #{accountDocument}, #{incomeClass})
+  		VALUES(SEQ_EMP_CODE.NEXTVAL, #{comCode}, #{employeeNum} ,#{employeeName} ,#{securityNumber} ,#{salary} ,#{email} ,#{backCode} ,#{accountNumber} ,#{accountHolder} ,#{department} ,#{positionCode} ,#{enrollDate} ,#{leaveDate} ,#{leaveReason} , #{incomeClass})
   	</insert>
   	
   	<select id="selectBEmp" resultMap="BusinessEmpResultMap" parameterType="java.lang.String">
@@ -102,11 +102,9 @@
 		       , B.ACCOUNT_HOLDER
 		       , B.DEPARTMENT
 		       , B.POSITION_CODE
-		       , TO_CHAR(B.ENROLL_DATE,'YYYY-MM-DD')
+		       , B.ENROLL_DATE
 		       , B.LEAVE_DATE
 		       , B.LEAVE_REASON
-		       , B.ID_DOCUMENT
-		       , B.ACCOUNT_DOCUMENT
 		       , B.INCOME_CLASS
 		       , J.POSITION_NAME
 		       , D.DEPT_NAME
@@ -116,24 +114,30 @@
 		JOIN JOB_POSITION J ON(B.POSITION_CODE = J.POSITION_CODE)
 		JOIN DEPARTMENT D ON(D.DEPT_CODE = B.DEPARTMENT)
 		JOIN TYPE_OF_BIZ_CODE T ON(T.TOBC_PK_CODE = B.INCOME_CLASS)
+		LEFT JOIN ATTACHMENT A ON(A.FK_CODE = B.EMPLOYEE_CODE)
   		WHERE EMPLOYEE_CODE = #{empCode}
   	</select>
   	
   	<update id="updateBEmp">
   		UPDATE BUSINESS_EMP 
   		SET 
-	  		EMPLOYEE_NAME = #{employeeName},
-	  		SECURITY_NUMBER = #{securityNumber},
-	  		SALARY = #{salary},
-	  		EMAIL = #{email},
-	  		BANK_CODE = #{backCode},
-	  		ACCOUNT_NUMBER = #{accountNumber},
-	  		ACCOUNT_HOLDER = #{accountHolder},
-	  		DEPARTMENT = #{department},
-	  		LEAVE_DATE = #{leaveDate},
-	  		LEAVE_REASON = #{leaveReason},
-	  		INCOME_CLASS = #{incomeClass},
-	  		ENROLL_DATE = #{enrollDate}
+	  		 EMPLOYEE_NAME = #{employeeName}
+	  		,SECURITY_NUMBER = #{securityNumber}
+	  		,SALARY = #{salary}
+	  		,EMAIL = #{email}
+	  		,BANK_CODE = #{backCode}
+	  		,ACCOUNT_NUMBER = #{accountNumber}
+	  		,ACCOUNT_HOLDER = #{accountHolder}
+	  		,DEPARTMENT = #{department}
+	  		,LEAVE_DATE = #{leaveDate}
+	  		,LEAVE_REASON = #{leaveReason}
+	  		,INCOME_CLASS = #{incomeClass}
+	  		,ENROLL_DATE = #{enrollDate}
   		WHERE EMPLOYEE_CODE = #{employeeCode}
   	</update>
+  	
+  	<insert id="insertAttBEmp">
+  		INSERT INTO ATTACHMENT
+  		VALUES(ATTACHMENT_SEQ.NEXTVAL, #{newFileName}, #{filePath}, #{type}, #{comCode})
+  	</insert>
   </mapper>

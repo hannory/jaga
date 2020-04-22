@@ -1,9 +1,11 @@
 package com.kh.jaga.employee.model.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 
+import com.kh.jaga.employee.model.vo.Attachment;
 import com.kh.jaga.employee.model.vo.Bank;
 import com.kh.jaga.employee.model.vo.BusinessEmp;
 import com.kh.jaga.employee.model.vo.BusinessEmp2;
@@ -22,5 +24,7 @@ public interface BusinessEmpDao {
 	BusinessEmp2 selectOneBEmp(SqlSessionTemplate sqlSession, String empCode);
 
 	int updateBEmp(SqlSessionTemplate sqlSession, BusinessEmp be);
+
+	int insertAttachBEmp(SqlSessionTemplate sqlSession, ArrayList<Attachment> attList);
 
 }
