@@ -9,8 +9,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.jaga.companyInnerId.model.vo.ComInIdVo;
 import com.kh.jaga.expendResolution.model.dto.ExpendResolutionDto;
 import com.kh.jaga.expendResolution.model.service.ExpendResolutionService;
+import com.kh.jaga.expendResolution.model.vo.AccountTitleVo;
 import com.kh.jaga.expendResolution.model.vo.DepartmentVo;
 
 import net.sf.json.JSONArray;
@@ -34,23 +36,38 @@ public class ExpendResolutionController {
 		
 		
 		
-		//검색할 정보들 가져오기	//부서정보
+		//검색할 정보들 가져오기	
+		//1.부서정보
 		List<DepartmentVo> deptList = service.selectDeptList();
-		
-		mv.addObject("deptList",deptList);
-		mv.setViewName("expendResolution");
-		
-		//제이슨 테스트
+		mv.addObject("deptList",deptList);		//리스트 추가
 		JSONArray jsonList = JSONArray.fromObject(deptList);
-		mv.addObject("jsonList", jsonList); 
+		mv.addObject("jsonList", jsonList);		//json타입 리스트 추가
+		
+		//2.계정과목
+		List<AccountTitleVo> accountTitleList = service.selectAccountTitleList();
+		mv.addObject("accountTitleList", accountTitleList);				//리스트 추가
+		JSONArray jsonAccountTitleList = JSONArray.fromObject(accountTitleList);
+		mv.addObject("jsonAccountTitleList", jsonAccountTitleList);		//json타입 리스트 추가
+		
+		//3.담당자
+		List<ComInIdVo> comInIdList = service.selectComInIdList();
+		mv.addObject("comInIdList", comInIdList);				//리스트 추가
+		JSONArray jsonComInIdList = JSONArray.fromObject(comInIdList);
+		mv.addObject("jsonComInIdList", jsonComInIdList);		//json타입 리스트 추가
 		
 		
 		
+	 
+		
+		
+		
+		mv.setViewName("expendResolution");
 		return mv;
 	}//method
 	
-	//지출결의서 디비에 저장
 	
+	
+	//지출결의서 디비에 저장
 	@RequestMapping("insertExpendResolution.expendResolution")
 	public ModelAndView insertExpendResolution(ModelAndView mv, ExpendResolutionDto dto) {
 		

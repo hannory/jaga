@@ -69,7 +69,62 @@
   	FROM DEPARTMENT
   </select>
   
+  <select id="selectAccountTitleList" resultMap="AccountTitleVoResultSet">
+  	SELECT  
+  		ACCOUNT_CODE,
+  		ACCOUNT_TITLE,
+  		CHARACTER,
+  		REALATION,
+  		COM_CODE,
+  		ACCOUNT_SYSTEM
+  	FROM ACCOUNT_TITLE
+  </select>
   
+  <select id="selectComInIdList" resultMap="ComInIdVoResultSet">
+  	SELECT
+  		COM_INNER_ID_NUM,
+  		COM_CODE,
+  		J.POSITION_CODE,
+  		ID,
+  		PWD,
+  		EMAIL,
+  		NAME,
+  		FILE_NAME,
+  		J.POSITION_NAME
+  	FROM COM_INNER_ID C
+  	JOIN JOB_POSITION J ON (C.POSITION_CODE = J.POSITION_CODE)
+  </select>
+  
+  
+  
+  
+  
+  
+  <!-- @@@@@@@@@@@@@@@ resultMap @@@@@@@@@@@@@@@ -->
+  
+  <!-- 지출결의서 : 페이지 호출시 : 계정과목 : 검색용 데이터 -->
+  <resultMap type="com.kh.jaga.expendResolution.model.vo.AccountTitleVo" id="AccountTitleVoResultSet">
+  	<id property="" column=""/>
+  	<result property="accountCode" column="ACCOUNT_CODE"/>
+  	<result property="accountTitle" column="ACCOUNT_TITLE"/>
+  	<result property="character" column="CHARACTER"/>
+  	<result property="realation" column="REALATION"/>
+  	<result property="comCode" column="COM_CODE"/>
+  	<result property="accountSystem" column="ACCOUNT_SYSTEM"/>
+  </resultMap>
+  
+  <!-- 지출결의서 : 페이지 호출시 : 담당자 : 검색용 데이터 -->
+  <resultMap type="com.kh.jaga.companyInnerId.model.vo.ComInIdVo" id="ComInIdVoResultSet">
+	  <id property="comInnerIdNum" column="COM_INNER_ID_NUM"/>
+	  <result property="comCode" column="COM_CODE"/>
+	  <result property="positionCode" column="POSITION_CODE"/>
+	  <result property="id" column="ID"/>
+	  <result property="pwd" column="PWD"/>
+	  <result property="email" column="EMAIL"/>
+	  <result property="name" column="NAME"/>
+	  <result property="fileName" column="FILE_NAME"/>
+	  <result property="positionName" column="POSITION_NAME"/>
+  </resultMap>
   
   
   
