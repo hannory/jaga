@@ -153,4 +153,9 @@ public class ViewController {
     	return "employee/businessEmployee";
     }
     
+    @GetMapping("main.vi")
+    public String showMain() {
+    	return "main/main";
+    }
+    
 }
