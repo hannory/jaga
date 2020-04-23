@@ -20,10 +20,16 @@ public interface CcSalesSlipGapDao {
 
 	List<TnxHis> selectTnxHis(SqlSessionTemplate sqlSession, CcSalesSlipGap cssg);
 
-	String selectCssgPk(SqlSessionTemplate sqlSession, CcSalesSlipGap cssg);
+	String selectCssgPk(SqlSessionTemplate sqlSession, CcSalesSlipGap cssg) throws Exception;
 
 	int updateCcSalesSlipGap(SqlSessionTemplate sqlSession, CcSalesSlipGap cssg);
 
 	List<TnxHis> selectNewRecei(SqlSessionTemplate sqlSession, Receiption re,Date eD);
+
+	int insertCssg(SqlSessionTemplate sqlSession, CcSalesSlipGap cssg);
+
+	String selectCssgPk2(SqlSessionTemplate sqlSession, CcSalesSlipGap cssg) throws Exception;
+
+	int insertCssgDetail(SqlSessionTemplate sqlSession, List<CcSalesSlipDetail> cgDetailList, String pk);
 
 }

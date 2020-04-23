@@ -22,11 +22,17 @@ public interface CcSalesSlipGapService {
 
 	List<TnxHis> selectTnxHis(CcSalesSlipGap cssg);
 
-	String selectCssgPk(CcSalesSlipGap cssg);
+	String selectCssgPk(CcSalesSlipGap cssg) throws Exception;
 
 	int updateCcSalesSlipGap(CcSalesSlipGap cssg);
 
 	List<TnxHis> selectNewRecei(Receiption re, Date eD);
+
+	int insertCssg(CcSalesSlipGap cssg);
+
+	String selectCssgPk2(CcSalesSlipGap cssg) throws Exception ;
+
+	int insertCssgDetail(List<CcSalesSlipDetail> cgDetailList, String pk);
 
 	 
 }

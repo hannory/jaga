@@ -1,20 +1,25 @@
 package com.kh.jaga.bugagachi.controller;
 
 
+import java.math.BigDecimal;
 import java.sql.Date;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.jaga.bugagachi.model.service.CcSalesSlipGapService;
+import com.kh.jaga.bugagachi.model.vo.CcSalesSlip;
 import com.kh.jaga.bugagachi.model.vo.CcSalesSlipDetail;
 import com.kh.jaga.bugagachi.model.vo.CcSalesSlipGap;
 import com.kh.jaga.bugagachi.model.vo.TnxHis;
@@ -32,6 +37,7 @@ public class CcSalesSlipGapController {
 	@Autowired
 	private CcSalesSlipGapService csser;
 
+	@Transactional
 	@RequestMapping("ccSalesSilpGap.cssg")
 	public ModelAndView ccSalesSilpGap(@RequestParam String search_ye1 ,
 			@RequestParam String search_mon1
@@ -97,21 +103,94 @@ public class CcSalesSlipGapController {
 				 
 				java.util.Date ed = new java.text.SimpleDateFormat("yyyyMMdd").parse(endD);
 				java.util.Date sd = new java.text.SimpleDateFormat("yyyyMMdd").parse(startD);
-				System.out.println("ed:"+ed);
-				System.out.println("sd:"+sd);
 				//java.util.Date 를 java.sql.Date로 변환함
 				Date stD= new Date(sd.getTime());
 				Date eD= new Date(ed.getTime());
 				re.setSlipDate(stD);
-				System.out.println("eD"+eD);
 				
+				//CcSalesSlip css=new CcSalesSlip();
 				//전표리스트
 				List<TnxHis> cssgHisList=csser.selectNewRecei(re,eD);
 				
-				//중간합계효
-				//List<CcSalesSlipDetail> cgDetailList=
+				//css.setCssTnxHis(cssgHisList);
 				
-				//cssg
+				System.out.println("Controller: cssgHisList: "+cssgHisList);
+				//중간합계효!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!11
+				List<CcSalesSlipDetail> cgDetailList=new ArrayList<CcSalesSlipDetail>();
+				int cardCount=0; 
+				BigDecimal cardValOfSupply=new BigDecimal("0");
+				BigDecimal cardTax=new BigDecimal("0");
+				int cashCount=0; 
+				BigDecimal cashValOfSupply=new BigDecimal("0");
+				BigDecimal cashTax=new BigDecimal("0");
+				CcSalesSlipDetail cd= new CcSalesSlipDetail();
+				CcSalesSlipDetail cd2= new CcSalesSlipDetail();
+				for(TnxHis th:cssgHisList) {
+					if(th.getDivision().equals("신용")) {
+						
+						cardCount++;
+						cardValOfSupply=cardValOfSupply.add(th.getValOfSupply());
+						cardTax=cardTax.add(th.getTax());
+						
+					}else if(th.getDivision().equals("현금")){
+						cashCount++;
+						cashValOfSupply=cashValOfSupply.add(th.getValOfSupply());
+						cashTax=cashTax.add(th.getTax());
+					}
+					
+				}
+				
+				if(cashCount>0) {
+					cd.setEventDiv("현금영수증");
+					
+				}
+				cd.setDealCount(cashCount);
+				cd.setValOfSupply(cashValOfSupply);
+				cd.setTax(cashTax);
+				cgDetailList.add(cd);
+				
+				if(cardCount>0) {
+					cd2.setEventDiv("그 밖의 신용카드");
+				}
+				cd2.setDealCount(cardCount);
+				cd2.setValOfSupply(cardValOfSupply);
+				cd2.setTax(cardTax);
+				cgDetailList.add(cd2);
+				//css.setCssDetail(cgDetailList);
+				//중간합계효!!!!!!!!!!!!!!!!!!!!!!!!!!!끝끝끝끝
+				//CcSalesSlipGap cssg= new CcSalesSlipGap(); 
+				cssg.setComCode(comCode);
+				cssg.setYearOfAttr(yearInt);
+				cssg.setTermDiv(term);
+				cssg.setDeadline("N");
+				
+				System.out.println("Controller: 값게삲 다하고 dto로 css: "+cssg);
+				System.out.println("Controller: 값게삲 다하고 dto로 cd: "+cgDetailList);
+				
+				//인설트를 뷰페이지까지 안가고 여기서 테이블에 넣어주고 마감유무를 Y/N으로 구분 시킬꺼임!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+				int insertResult=csser.insertCssg(cssg);
+				if(insertResult>0) {
+					try {
+						String pk=csser.selectCssgPk2(cssg);
+						//DetailList 인설트 시켜주기
+						
+						int insertCssd=csser.insertCssgDetail(cgDetailList,pk);
+						
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				
+				
+				
+				
+				
+				
+				mv.addObject("cssg", cssg);
+				mv.addObject("cgDetailList", cgDetailList);
+				mv.addObject("cssgHisList", cssgHisList);
+				mv.setViewName("jsonView");
 				
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block
@@ -125,10 +204,16 @@ public class CcSalesSlipGapController {
 	
 
 	//인설트
-//	@RequestMapping("insertCcsalesSlip.cssg")
-//	public String insertCcsalesSlip() {
-//		
-//	}
+	@RequestMapping("insertCcsalesSlip.cssg")
+	public String insertCcsalesSlip(Model model, CcSalesSlip css,HttpServletRequest request) {
+		
+		
+		System.out.println("Controller: insert: cssg "+css);
+		
+		
+		
+		return "bugagachi/CreditCardSalesSilpGap";
+	}
 	
 	
 	

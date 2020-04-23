@@ -7,8 +7,8 @@
   
   <settings>
     <setting name="jdbcTypeForNull" value="NULL"/>
+	<setting name="mapUnderscoreToCamelCase" value="true"/>
   </settings>
-
   <typeAliases>
      <typeAlias type="com.kh.jaga.company.model.vo.Company" alias="Company"/>
   	 <typeAlias type="com.kh.jaga.vender.model.vo.Vender" alias="Vender"/>
@@ -31,6 +31,7 @@
      <typeAlias type="com.kh.jaga.employee.model.vo.BusinessEmp" alias="BusinessEmp"/> 
      <typeAlias type="com.kh.jaga.employee.model.vo.BusinessEmp2" alias="BusinessEmp2"/> 
       <typeAlias type="com.kh.jaga.finStmt.model.vo.IncomeStmtAccount" alias="IncomeStmtAccount"/> 
+      <typeAlias type="com.kh.jaga.bugagachi.model.vo.CcSalesSlip" alias="CcSalesSlip"/>
   
   </typeAliases>
   

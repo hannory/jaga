@@ -83,7 +83,7 @@
         	margin-top:3px;
         }
         .sumTableSales{
-        	width: 20%;
+        	width: 100%;
         	padding-left:5%;
         }
    		#List_detail td{
@@ -97,6 +97,9 @@
    		}
    		.Tex_bill_code_p{
    			font-size:23px;
+   		}
+   		.tdSalesPur{
+	   		width: 5%;
    		}
     </style>
 </head>
@@ -154,8 +157,8 @@
     <table align="center" class="mainTable">
         
         <tr>
-            <td><div class="sumTableSales" onclick="showsumTable_sales()" id="showsumTable_sales"><h4>매출</h4></div></td>            
-            <td><div class="sumTableSales" onclick="showsumTable_purchase()"><h4>매입</h4></div></td>
+            <td class="tdSalesPur"><div class="sumTableSales" onclick="showsumTable_sales()" id="showsumTable_sales"><h4>매출</h4></div></td>            
+            <td class="tdSalesPur"><div class="sumTableSales" onclick="showsumTable_purchase()"><h4>매입</h4></div></td>
             <td></td>
             <td></td>
             <td></td>
@@ -608,8 +611,8 @@
 		 <table align="center" class="mainTable">
         
         <tr>
-            <td><div class="sumTableSales" onclick="showsumTable_sales()" ><h4>매출</h4></div></td>            
-            <td><div class="sumTableSales" onclick="showsumTable_purchase()" id="showsumTable_purchase"><h4>매입</h4></div></td>
+            <td class="tdSalesPur"><div class="sumTableSales" onclick="showsumTable_sales()" ><h4>매출</h4></div></td>            
+            <td class="tdSalesPur"><div class="sumTableSales" onclick="showsumTable_purchase()" id="showsumTable_purchase"><h4>매입</h4></div></td>
             <td></td>
             <td></td>
             <td></td>
