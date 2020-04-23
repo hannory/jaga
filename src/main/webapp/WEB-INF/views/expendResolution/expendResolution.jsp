@@ -583,6 +583,28 @@
 
 
 		<form action="insertExpendResolution.expendResolution" method="post">
+		
+		
+		<!-- 데이터 모아놓음 value들 밸루들 밸류들 -->
+		
+		<input type="hidden" id="managerPosition" name="managerPosition" value="직급명">
+		
+		<!-- 로그인한게 컴퍼니인지, 유저인지에 따라 createUser 값을 다르게 설정하기 -->
+		<c:if test="${ empty sessionScope.loginCompany }">
+			<%-- <input type="hidden" id="createUser" name="createUser" value="${ sessionScope.loginUser.id }"> --%>
+			<input type="hidden" id="createUser" name="createUser" value="defaultUserId">
+		</c:if>
+		<c:if test="${ !empty sessionScope.loginCompany }">
+			<input type="hidden" id="createUser" name="createUser" value="${ sessionScope.loginCompany.companyId }">
+			<%-- <input type="hidden" id="createUser" name="createUser" value="${ defaultComId }"> --%>
+		</c:if>
+		
+		<input type="hidden" id="comCode" name="comCode" value="${ loginCompany.companyCode }">
+		
+		<!-- //데이터 모아놓음 value들 밸루들 밸류들 끝-->
+		
+		
+		
 			<!-- 우측상단 결재 관련 -->
 			<h2 class="mt-4">지출결의서</h2>
 
@@ -792,10 +814,10 @@
 					<tr>
 						<td class="color-green" style="width: 10%">결제구분</td>
 						<td style="width: 10%;"><input type="radio"
-							name="paymentType" value="cash" id="radioCash"><label
+							name="paymentTypeCode" value="cash" id="radioCash"><label
 							for="radioCash">현금</label></td>
 						<td style="width: 10%;"><input type="radio"
-							name="paymentType" value="card" id="radioCard"><label
+							name="paymentTypeCode" value="card" id="radioCard"><label
 							for="radioCard">카드</label></td>
 						<td style="width: 10%; border-top: 1px solid white;"></td>
 						<td style="width: 10%;" class="color-green">합계</td>
@@ -803,17 +825,17 @@
 					</tr>
 					<tr>
 						<td class="color-green">관련증빙</td>
-						<td><input type="radio" name="receptionType" class="evidenceTemp"
+						<td><input type="radio" name="evidenceCode" class="evidenceTemp"
 							value="10" id="radiotaxReception"><label
 							for="radiotaxReception">세금계산서</label></td>
-						<td><input type="radio" name="receptionType" class="evidenceTemp"
+						<td><input type="radio" name="evidenceCode" class="evidenceTemp"
 							value="50" id="radiocashReception"><label
 							for="radiocashReception">현금영수증</label></td>
-						<td><input type="radio" name="receptionType" class="evidenceTemp"
+						<td><input type="radio" name="evidenceCode" class="evidenceTemp"
 							value="100" id="radiocardReception"><label
 							for="radiocardReception">카드영수증</label></td>
-						<td><input type="radio" name="receptionType" class="evidenceTemp"
-							value="50" id="radioetcReception"><label
+						<td><input type="radio" name="evidenceCode" class="evidenceTemp"
+							value="999" id="radioetcReception"><label
 							for="radioetcReception">ㅇㅇㅇㅇㅇ</label></td>
 						<td><span id="receptionLabel">증빙파일을 선택하세요</span></td>
 					</tr>
