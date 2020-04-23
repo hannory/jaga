@@ -132,7 +132,7 @@
 		
 			<li><input type="text" readonly  id="termDiv" name="termDiv"></li>
             <li>조회기간:
-            	<input type="text" id="search_ye1" maxlength="4" class="cc_year">
+            	<input type="text" id="search_ye1" maxlength="4" name="yearOfAttr" class="cc_year">
             	<select class="cc_month" id="search_mon1">
             		<option value="">월</option>
             		<option value="01">1</option>
@@ -156,9 +156,28 @@
                     <h4>2.신용카드 등 매입내역 합계</h4>
             <c:set var="comCode" value="${ sessionScope.loginCompany.companyCode }"/>
             <input type="hidden" name="rcptstmtCode" id="rcptstmtCode">
+            <input type="hidden" name="comCode" value="${comCode }">
+            
+            <!-- Detail항목 -->
+            <input type="text" name="eventDiv" id="eventDiv"><!-- Detail항목명 -->
+            <input type="text" name="dealCount" id="dealCount"><!-- Detail거래건수 -->
+            <input type="text" name="valOfSupply" id="valOfSupply"><!-- Detail공급가액 -->
+            <input type="text" name="tax" id="tax"><!--Detail세금 -->
+            
+            <!-- TnxHis 항목 -->
+           <!--  <input type="hidden" name="slipCode" id="slipCode">
+            <input type="hidden" name="silpDate" id="silpDate">
+            <input type="hidden" name="division" id="division">
+            <input type="hidden" name="producer" id="producer">
+            <input type="hidden" name="proNum" id="proNum">
+            <input type="hidden" name="cardmemNum" id="cardmemNum">
+            <input type="hidden" name="numOfTxn" id="numOfTxn">
+            <input type="hidden" name="valOfSupply" id="valOfSupply"> -->
+            
                 </div>
             </td>
         </tr>
+        <!-- $(this).find(인풋) -->
         <script type="text/javascript">
 		function cencelDeadline(){  
 		   $("form").attr("action", "updateccSalesSilpGap.cssg");
@@ -210,9 +229,9 @@
 	 			 	var oCardDeal=0;
 	 			 	var oCardVos=0;
 	 			 	var oCardTax=0;
+	 			 	var index=0;
 	 				for(var key in cgDetailList){
 	 					console.log(cgDetailList[key].eventDiv);
-	 					
 	 					if(cgDetailList[key].eventDiv =="현금영수증"){
 	 						cashDeal+=cgDetailList[key].dealCount;
 	 						cashVos+=cgDetailList[key].valOfSupply;
@@ -230,11 +249,50 @@
 	 						oCardVos+=cgDetailList[key].valOfSupply;
 	 						oCardTax+=cgDetailList[key].tax;
 	 					}
+	 					index++;
+	 					
 	 				}
+	 				
+	 					
+	 				for(var key in cgDetailList){
+	 					if(cgDetailList[key].eventDiv =="현금영수증"){
+	 						$("input[name=eventDiv]").attr("name","cssDetail["+key+"].eventDiv").val("현금영수222증");
+		 					$("input[name=dealCount]").attr("name","cssDetail["+key+"].dealCount").val(cgDetailList[key].dealCount);
+		 					var temp = $("input");
+		 					console.log(temp);
+		 					console.log("현영: "+cgDetailList[key].dealCount)
+		 					$("input[name=valOfSupply]").attr("name","cssDetail["+key+"].valOfSupply").val(cgDetailList[key].valOfSupply);
+		 					console.log("현영: "+cgDetailList[key].valOfSupply)
+		 					$("input[name=tax]").attr("name","cssDetail["+key+"].tax").val(cgDetailList[key].tax); 
+	 						
+	 					}
+	 					if(cgDetailList[key].eventDiv =="그 밖의 신용카드"){
+	 					
+	 						$("input[name=eventDiv]").attr("name","cssDetail["+key+"].eventDiv").val("그 밖의 신용카드");
+	 						$("input[name=dealCount]").attr("name","cssDetail["+key+"].dealCount").val(cgDetailList[key].dealCount);
+	 						console.log("그 밖"+cgDetailList[key].dealCount)
+	 						$("input[name=valOfSupply]").attr("name","cssDetail["+key+"].valOfSupply").val(cgDetailList[key].valOfSupply);
+	 						console.log("그 밖"+cgDetailList[key].valOfSupply)
+	 						$("input[name=tax]").attr("name","cssDetail["+key+"].tax").val(cgDetailList[key].tax);
+		 					
+	 					}
+	 					
+	 				}
+	 				
+	 				
+	 				
+	 				
 						//현금영수증 합계
 	 					$("#cashDeal").text(cashDeal);
 	 					$("#cashVos").text(cashVos);
+	 					$("#valOfSupply").val(cashVos)
 	 					$("#cashTax").text(cashTax);
+	 						console.log("1");
+	 					
+	 					
+	 					console.log(cashDeal);
+	 					
+	 					
 	 					//화물 운전자
 	 					$("#driverDeal").text(driverDeal);
 	 					$("#driverVos").text(driverVos);
@@ -247,6 +305,25 @@
 	 					$("#oCardDeal").text(oCardDeal);
 	 					$("#oCardVos").text(oCardVos);
 	 					$("#oCardTax").text(oCardTax);
+	 			
+	 					
+	 					
+	 					
+	 					
+		 				
+		 					console.log("index: "+index);
+	 					
+	 					
+	 					
+	 					
+	 					
+	 					
+	 					
+	 					
+	 					
+	 					
+	 					
+	 					
 	 						
 	 					//합계	
 	 					var sumDeal=cashDeal+driverDeal+bCardDeal+oCardDeal;
@@ -256,10 +333,12 @@
 						$("#sumVos").text(sumVos);
 						$("#sumTax").text(sumTax);
 	 				
+		
+						
 	 				//3.거래내역입력
 	 			
 	 				var $Tex_bill_detailList = $("#Tex_bill_detailList");
-					$Tex_bill_detailList.html('<tr class="Tex_bill_th" style="font-weight: 800; height: 25px;"><td rowspan="2" id="Text_billNo">no</td><td rowspan="2">월/일</td><td rowspan="2">구분</td><td rowspan="2" style="width:20%;">공급자</td><td rowspan="2" style="width:20%;">공급자(가맹점)<br>사업자등록번호</td><td rowspan="2">카드호원번호</td><td colspan="3">그 밖의 신용카드 등 거래내역 합계</td></tr><tr class="Tex_bill_th" onclick="PopModalTexList()" style="font-weight: 800; height: 25px;"><td> 거래건수</td><td> 공급가액</td><td> 세액</td></tr>');
+					$Tex_bill_detailList.html('<tr class="Tex_bill_th" style="font-weight: 800; height: 25px;"><td rowspan="2" id="Text_billNo">no</td><td rowspan="2">월/일</td><td rowspan="2">구분</td><td rowspan="2" style="width:20%;">공급자</td><td rowspan="2" style="width:20%;">공급자(가맹점)<br>사업자등록번호</td><td rowspan="2">카드회원번호</td><td colspan="3">그 밖의 신용카드 등 거래내역 합계</td></tr><tr class="Tex_bill_th" onclick="PopModalTexList()" style="font-weight: 800; height: 25px;"><td> 거래건수</td><td> 공급가액</td><td> 세액</td></tr>');
 					var index=0;
 					var dealCtn=0;
 					var vos=0;
@@ -272,7 +351,6 @@
 						vat+=cssgHisList[key].tax;
 						var dateSplit=cssgHisList[key].silpDate.split(' ');
 						var date=dateSplit[0];
-						console.log("날짜 자름: "+dateSplit);
 						var $noTd = $(" <td id='Text_billNo'>").text(index);
 						var $dateTd = $("<td>").text(date);
 						var $divisionTd = $("<td>").text(cssgHisList[key].division);
@@ -282,6 +360,17 @@
 						var $numOfTxnTd = $("<td>").text(cssgHisList[key].numOfTxn);
 						var $valOfSupplyTd = $("<td>").text(cssgHisList[key].valOfSupply);
 						var $taxTd = $("<td>").text(cssgHisList[key].tax);
+						
+						
+						$("#slipCode").val(cssgHisList[key].slipCode);
+						$("#silpDate").val(cssgHisList[key].silpDate);
+						$("#division").val(cssgHisList[key].division);
+						$("#producer").val(cssgHisList[key].producer);
+						$("#proNum").val(cssgHisList[key].proNum);
+						$("#cardmemNum").val(cssgHisList[key].cardmemNum);
+						$("#numOfTxn").val(cssgHisList[key].numOfTxn);
+						$("#valOfSupply").val(cssgHisList[key].valOfSupply);
+						$("#tax").val(cssgHisList[key].tax);
 						
 						$tr.append($noTd);
 						$tr.append($dateTd);
@@ -343,7 +432,7 @@
                         <td id="sumTax"> </td>
                     </tr>
                      <tr><!-- 현금영수증  -->
-                        <td id="cash"> </td>
+                        <td id="cash"> </td> 
                         <td id="cashDeal"> </td>
                         <td id="cashVos"> </td>
                         <td id="cashTax"> </td>

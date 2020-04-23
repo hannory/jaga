@@ -66,7 +66,7 @@ public class CcSalesSlipGapServiceImpl implements CcSalesSlipGapService{
 	}
 
 	@Override
-	public String selectCssgPk(CcSalesSlipGap cssg) {
+	public String selectCssgPk(CcSalesSlipGap cssg) throws Exception {
 		// TODO 커발pk가지고 오기
 		System.out.println("Service: selectCssgPk: cssg "+cssg);
 		
@@ -85,6 +85,30 @@ public class CcSalesSlipGapServiceImpl implements CcSalesSlipGapService{
 		
 		System.out.println("Service: selectNewRecei: re"+re);
 		return cd.selectNewRecei(sqlSession,re,eD);
+	}
+
+	@Override
+	public int insertCssg(CcSalesSlipGap cssg) {
+		// TODO Auto-generated method stub
+		
+		//cssg부터 인설트하고 pk받아오기
+		System.out.println("Service: cssg부터 인설트하고 pk받아오기");
+		int insertCssg=cd.insertCssg(sqlSession,cssg);
+		System.out.println("Service: cssg부터 인설트결과: "+insertCssg);
+		
+		return insertCssg;
+	}
+
+	@Override
+	public String selectCssgPk2(CcSalesSlipGap cssg) throws Exception {
+		// TODO 커발받기
+		return cd.selectCssgPk2(sqlSession,cssg);
+	}
+
+	@Override
+	public int insertCssgDetail(List<CcSalesSlipDetail> cgDetailList,String pk) {
+		// TODO cgDetail insert하기
+		return cd.insertCssgDetail(sqlSession,cgDetailList,pk);
 	}
 
 	

@@ -1,5 +1,6 @@
 package com.kh.jaga.bugagachi.model.vo;
 
+import java.math.BigDecimal;
 import java.sql.Date;
 
 public class TnxHis {//거래내역
@@ -10,14 +11,14 @@ public class TnxHis {//거래내역
 	private String proNum;	 //공급자 사업번호
 	private String cardmemNum;//카드회원번호
 	private int numOfTxn;	//거래건수
-	private int valOfSupply; //공급가액
-	private int tax; 			//세액
+	private BigDecimal valOfSupply; //공급가액
+	private BigDecimal tax; 			//세액
 	private String rcptstmtCode;//수령명세서 코드
 	
 	public TnxHis() {}
 
 	public TnxHis(String slipCode, String silpDate, String division, String producer, String proNum, String cardmemNum,
-			int numOfTxn, int valOfSupply, int tax, String rcptstmtCode) {
+			int numOfTxn, BigDecimal valOfSupply, BigDecimal tax, String rcptstmtCode) {
 		super();
 		this.slipCode = slipCode;
 		this.silpDate = silpDate;
@@ -87,19 +88,19 @@ public class TnxHis {//거래내역
 		this.numOfTxn = numOfTxn;
 	}
 
-	public int getValOfSupply() {
+	public BigDecimal getValOfSupply() {
 		return valOfSupply;
 	}
 
-	public void setValOfSupply(int valOfSupply) {
+	public void setValOfSupply(BigDecimal valOfSupply) {
 		this.valOfSupply = valOfSupply;
 	}
 
-	public int getTax() {
+	public BigDecimal getTax() {
 		return tax;
 	}
 
-	public void setTax(int tax) {
+	public void setTax(BigDecimal tax) {
 		this.tax = tax;
 	}
 
@@ -118,7 +119,6 @@ public class TnxHis {//거래내역
 				+ ", valOfSupply=" + valOfSupply + ", tax=" + tax + ", rcptstmtCode=" + rcptstmtCode + "]";
 	}
 
-	
 	
 	
 	
