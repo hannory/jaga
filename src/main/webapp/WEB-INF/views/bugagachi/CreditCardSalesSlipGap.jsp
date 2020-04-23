@@ -159,10 +159,10 @@
             <input type="hidden" name="comCode" value="${comCode }">
             
             <!-- Detail항목 -->
-            <input type="text" name="eventDiv" id="eventDiv"><!-- Detail항목명 -->
-            <input type="text" name="dealCount" id="dealCount"><!-- Detail거래건수 -->
-            <input type="text" name="valOfSupply" id="valOfSupply"><!-- Detail공급가액 -->
-            <input type="text" name="tax" id="tax"><!--Detail세금 -->
+            <!-- <input type="text" name="eventDiv" id="eventDiv">Detail항목명
+            <input type="text" name="dealCount" id="dealCount">Detail거래건수
+            <input type="text" name="valOfSupply" id="valOfSupply">Detail공급가액
+            <input type="text" name="tax" id="tax">Detail세금 -->
             
             <!-- TnxHis 항목 -->
            <!--  <input type="hidden" name="slipCode" id="slipCode">

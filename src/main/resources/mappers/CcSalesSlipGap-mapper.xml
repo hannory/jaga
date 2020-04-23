@@ -77,10 +77,10 @@ WHERE YEAR_OF_ATTR= #{yearOfAttr}
 
 </select>
 	
-  <select id="selectTnxHis" resultMap="TnxHisResultSetB" parameterType="CcSalesSlipGap">
-  	SELECT  C.SLIP_CODE, C.SILP_DATE, C.DIVISION, C.PRODUCER, C.CARDMEM_NUM, C.NUMOF_TXN, C.VAL_OF_SUPPLY, C.TAX, C.RCPTSTMT_CODE, v.vender_NAME
+  <select id="selectTnxHis" resultMap="TnxHisResultSet" parameterType="CcSalesSlipGap">
+  	SELECT  C.SLIP_CODE, C.SILP_DATE, C.DIVISION, C.PRODUCER, C.CARDMEM_NUM, C.NUMOF_TXN, C.VAL_OF_SUPPLY, C.TAX, C.RCPTSTMT_CODE, V.VENDER_NAME
 	FROM TNX_HIS C 
-	JOIN VENDER V ON (C.PRODUCER=V.VENDER_CODE)
+	JOIN VENDER V ON (C.PRODUCER=V.BIZ_REG_NUM)
 	WHERE RCPTSTMT_CODE =#{rcptstmtCode} 
   </select>
   
@@ -147,4 +147,17 @@ FROM (SELECT S.SLIP_CODE , V.VENDER_NAME,V.BIZ_REG_NUM
   <select id="selectCssgCurval" resultType="string">
   	SELECT SEQ_CC_RCPT_STMT_GAP.CURRVAL FROM Dual
   </select>
+  <insert id="insertCssgDetail" parameterType="CcSalesSlipDetail">
+  INSERT INTO CC_RCPT_STMT VALUES(SEQ_CC_RCPT_STMT.NEXTVAL,#{eventDiv},#{dealCount},#{valOfSupply},#{tax},#{rcptstmtCode})
+  
+  </insert>
+  <insert id="insertCssHis" parameterType="TnxHis">
+  INSERT INTO TNX_HIS VALUES(SEQ_TNX_HIS.NEXTVAL,#{silpDate},#{division},#{producer},#{cardmemNum},#{numOfTxn},#{valOfSupply},#{tax},#{rcptstmtCode})
+  </insert>
+  <update id="updateCssgDead" parameterType="CcSalesSlipGap">
+  UPDATE CC_RCPT_STMT_GAP
+  	SET DEADLINE = 'Y'
+  	WHERE RCPTSTMT_CODE = #{rcptstmtCode}
+  		AND DEADLINE LIKE 'N'
+  </update>
   </mapper>
