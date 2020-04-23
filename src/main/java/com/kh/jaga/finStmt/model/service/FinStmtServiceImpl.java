@@ -1,5 +1,6 @@
 package com.kh.jaga.finStmt.model.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -22,13 +23,6 @@ public class FinStmtServiceImpl implements FinStmtService {
 	
 	@Override
 	public int insertIncomeStmt(IncomeStmt i) {
-		//log 출력
-		final Logger logger = LoggerFactory.getLogger(FinStmtDaoImpl.class);
-		
-		System.out.println("IncomeStmt at Service : " + i);
-		
-		System.out.println("Log4j 동작 테스트");
-		logger.info(fsd.toString());
 		
 		return fsd.insertIncomeStmt(sqlSession, i);
 	}
@@ -37,6 +31,14 @@ public class FinStmtServiceImpl implements FinStmtService {
 	public HashMap selectIncomeStmt(IncomeStmtAccount isa) {
 
 		return fsd.selectIncomeStmt(sqlSession, isa);
+	}
+
+	@Override
+	public ArrayList<IncomeStmtAccount> selectSlip(IncomeStmtAccount isa) {
+
+		ArrayList list = fsd.selectSlip(sqlSession, isa);
+		
+		return list;
 	}
 
 }

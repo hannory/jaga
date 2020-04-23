@@ -135,10 +135,10 @@
 				<tr>
 					<td class="table-head" width="28%" rowspan="2">과&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;목</td>
 					<td class="table-head" colspan="2">
-						제 <label class="nomal-label" id="cur-term"></label>(당)기 2020.01 ~ 2020.<label class="normal-label" id="cur-month">03</label>
-						<input type="hidden" id="login-openDay" value="${ sessionScope.loginCompany }">
+						제 <label class="normal-label" id="cur-term"></label>(당)기 2020.01 ~ 2020.<label class="normal-label" id="cur-month">03</label>
+						<input type="hidden" id="login-openDay" value="${ sessionScope.loginCompany.gaeup }">
 					</td>
-					<td class="table-head" colspan="2">제 <label class="nomal-label" id="past-term"></label>(전)기 2019.01 ~ 2019.12</td>
+					<td class="table-head" colspan="2">제 <label class="normal-label" id="past-term"></label>(전)기 2019.01 ~ 2019.12</td>
 				</tr>
 				<tr>
 					<td class="table-head" width="18%">잔액</td>
@@ -337,12 +337,14 @@
 			}
 			
 			/* 로그인 회사로 기수 설정 */
-			var key = "세션 키";
-			var value = "세션 벨류";
-			sessionStorage.setItem(key, value);
-			console.log("세션 정보 : " + sessionStorage.getItem(key));
-			console.log("세션 정보 : " + sessionStorage.getItem("loginCompany"));
+			var openDay = $("#login-openDay").val();
+			var openYear = String(openDay).substring(0,4);
 			
+			var curTerm = Number(curDate.getFullYear()) - Number(openYear) + 1;
+			var pastTerm = curTerm - 1;
+			
+			$("#cur-term").text(curTerm);
+			$("#past-term").text(pastTerm);
 			
 			/* 키 입력창에 값을 입력시 발생하는 이벤트 */
 			$("#inputNum").keyup(function() {
@@ -568,21 +570,33 @@
 		});
 		
 		/* 전표 모달 띄우기 */
-		$(document).on("click", '.table-detail', function() {
+		$(document).on("click", '.table-content', function() {
 			$("#slip").modal();
 			
 			var year = $("#year").val();
-			var month = $("#month").val();
+			var accountCode = $(this).attr('id').substring(1,6);
+
+			console.log("accountCode : " + accountCode);
 			
 			$.ajax({
 				url : "selectSlip.fs",
 				type : "get",
 				data : {
 					year : year,
-					comCode : comCode,
 					accountCode : accountCode
 				},
 				success : function(data) {
+					console.log(data);
+					
+					$tableBody = $("#List_detail");
+					//테이블을 갱신하기 위해 비워줌
+					$tableBody.html('');
+					
+					$.each(data, function(index, value)) {
+						
+						
+						
+					}
 					
 				},
 				error : function(status) {
@@ -632,46 +646,50 @@
 					</script>
 					<div>
 			        	<table id="List_detail" style=" width:100%; margin-left:auto; margin-right: auto;">
-			        		<tr>
-			        			<td class="modal-head">일자</td>
-			        			<td class="modal-head">번호</td>
-			        			<td class="modal-head">적요</td>
-			        			<td class="modal-head">코드</td>
-			        			<td class="modal-head">거래처</td>
-			        			<td class="modal-head">차변</td>
-			        			<td class="modal-head">대변</td>
-			        			<td class="modal-head">잔액</td>
-			        		</tr>
-			        		<tr class="modal_detail" style="height: 25px;">
-			        			<td style="text-align:center;">03-31</td>
-			        			<td style="text-align:center;">00005</td>
-			        			<td></td>
-			        			<td style="text-align:center;">01003</td>
-			        			<td style="text-align:center;">마음전자</td>
-			        			<td style="text-align:right;">550,000</td>
-			        			<td style="text-align:right;"></td>
-			        			<td style="text-align:right;">550,000</td>
-			        		</tr>
-			        		<tr>
-			        			<td class="modal-head"></td>
-			        			<td class="modal-head"></td>
-			        			<td class="modal-head" style="text-align:left;">[월&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;계]</td>
-			        			<td class="modal-head"></td>
-			        			<td class="modal-head"></td>
-			        			<td class="modal-head"></td>
-			        			<td class="modal-head"></td>
-			        			<td class="modal-head"></td>
-			        		</tr>
-			        		<tr>
-			        			<td class="modal-head"></td>
-			        			<td class="modal-head"></td>
-			        			<td class="modal-head" style="text-align:left;">[누&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;계]</td>
-			        			<td class="modal-head"></td>
-			        			<td class="modal-head"></td>
-			        			<td class="modal-head"></td>
-			        			<td class="modal-head"></td>
-			        			<td class="modal-head"></td>
-			        		</tr>
+			        		<thead>
+				        		<tr>
+				        			<th class="modal-head" style="width:5%;">일자</th>
+				        			<th class="modal-head" style="width:5%;">번호</th>
+				        			<th class="modal-head" style="width:20%;">적요</th>
+				        			<th class="modal-head" style="width:5%;">코드</th>
+				        			<th class="modal-head" style="width:17%;">거래처명</th>
+				        			<th class="modal-head" style="width:16%;">차변</th>
+				        			<th class="modal-head" style="width:16%;">대변</th>
+				        			<th class="modal-head" style="width:16%;">잔액</th>
+				        		</tr>
+				        	</thead>
+				        	<tbody></tbody>
+				        		<tr class="modal_detail" style="height: 25px;">
+				        			<td style="text-align:center;">03-31</td>
+				        			<td style="text-align:center;">00005</td>
+				        			<td></td>
+				        			<td style="text-align:center;">01003</td>
+				        			<td style="text-align:center;">마음전자</td>
+				        			<td style="text-align:right;">55,550,550,550,000</td>
+				        			<td style="text-align:right;"></td>
+				        			<td style="text-align:right;">550,000</td>
+				        		</tr>
+				        		<tr>
+				        			<td class="modal-head"></td>
+				        			<td class="modal-head"></td>
+				        			<td class="modal-head" style="text-align:left;">[월&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;계]</td>
+				        			<td class="modal-head"></td>
+				        			<td class="modal-head"></td>
+				        			<td class="modal-head"></td>
+				        			<td class="modal-head"></td>
+				        			<td class="modal-head"></td>
+				        		</tr>
+				        		<tr>
+				        			<td class="modal-head"></td>
+				        			<td class="modal-head"></td>
+				        			<td class="modal-head" style="text-align:left;">[누&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;계]</td>
+				        			<td class="modal-head"></td>
+				        			<td class="modal-head"></td>
+				        			<td class="modal-head"></td>
+				        			<td class="modal-head"></td>
+				        			<td class="modal-head"></td>
+				        		</tr>
+			        		</tbody>
 			        	</table>
 			        </div>
 			        <div class="modal-footer">

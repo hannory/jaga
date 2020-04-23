@@ -2,6 +2,7 @@ package com.kh.jaga.finStmt.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonIOException;
 import com.kh.jaga.company.model.vo.Company;
 import com.kh.jaga.finStmt.model.service.FinStmtService;
 import com.kh.jaga.finStmt.model.vo.IncomeStmt;
@@ -64,8 +66,6 @@ public class FinStmtController {
 		
 		System.out.println("incomeStmt : " + i);
 		
-		//System.out.println("comCode : " + ((Company) request.getSession().getAttribute("loginCompany")).getCompanyCode());
-
 		i.setComCode(((Company) request.getSession().getAttribute("loginCompany")).getCompanyCode());
 		
 		fss.insertIncomeStmt(i);
@@ -82,6 +82,7 @@ public class FinStmtController {
 		
 		HashMap hmap = fss.selectIncomeStmt(isa);
 		
+		//JSON 사용
 //		JSONObject jmap = new JSONObject();
 //		jmap.put(14600, jmap.get(14600));
 //		jmap.put(40100, jmap.get(40100));
@@ -93,11 +94,32 @@ public class FinStmtController {
 //		out.flush();
 //		out.close();
 		
+		//GSON 사용
 		response.setContentType("application/json");
 		
 		new Gson().toJson(hmap, response.getWriter());
 	}
 	
+	@RequestMapping("selectSlip.fs")
+	public void selectSlip(IncomeStmtAccount isa, HttpServletRequest request, HttpServletResponse response) {
+//		System.out.println("year : " + isa.getYear());
+//		System.out.println("comCode : " + isa.getComCode());
+//		System.out.println("accountCode : " + isa.getAccountCode());
+		
+		isa.setComCode(((Company) request.getSession().getAttribute("loginCompany")).getCompanyCode());
+		
+		ArrayList<IncomeStmtAccount> list = fss.selectSlip(isa);
+		
+		response.setContentType("application/json");
+		
+		try {
+			new Gson().toJson(list, response.getWriter());
+		} catch (JsonIOException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }
 
 

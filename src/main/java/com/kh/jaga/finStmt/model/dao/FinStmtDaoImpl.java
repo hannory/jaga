@@ -75,6 +75,16 @@ public class FinStmtDaoImpl implements FinStmtDao {
 		
 		return hmap;
 	}
+
+	@Override
+	public ArrayList selectSlip(SqlSessionTemplate sqlSession, IncomeStmtAccount isa) {
+		
+		ArrayList list = (ArrayList) sqlSession.selectList("FinStmt.selectSlip", isa);
+		
+		//System.out.println("slip list : " + list);
+		
+		return list;
+	}
 }
 
 
