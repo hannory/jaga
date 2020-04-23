@@ -10,7 +10,8 @@
 	</resultMap>
 
 	<insert id="insertIncomeStmt" parameterType="IncomeStmt">
-		INSERT INTO INCOME_STMT(INCOME_STMT_CODE, YEAR, TERM, SALES) VALUES(SEQ_INCOME_STMT_CODE.NEXTVAL, #{year}, #{term}, #{sales})
+		INSERT INTO INCOME_STMT(INCOME_STMT_CODE, COM_CODE, YEAR, TERM, SALES, ENDING_INV_OF_MERCHANDISE) 
+		VALUES(SEQ_INCOME_STMT_CODE.NEXTVAL, #{comCode}, #{year}, #{term}, #{sales}, #{endingInvOfMerchandise})
 	</insert>
 
 	<select id="selectCurIncomeStmt" parameterType="IncomeStmtAccount" resultMap="IncomeStmtResultSet">
@@ -19,6 +20,7 @@
 		LEFT JOIN JOURNALIZE J ON(S.SLIP_CODE = J.SLIP_CODE)
 		WHERE TO_CHAR(S.SLIP_DATE, 'YYYY') = #{year}
 		AND TO_NUMBER(TO_CHAR(S.SLIP_DATE, 'MM')) <![CDATA[<=]]> #{month}
+		AND COM_CODE = #{comCode}
 	</select>
 
 	<select id="selectPastIncomeStmt" parameterType="IncomeStmtAccount" resultMap="IncomeStmtResultSet">
@@ -27,6 +29,7 @@
 		LEFT JOIN JOURNALIZE J ON(S.SLIP_CODE = J.SLIP_CODE)
 		WHERE TO_CHAR(S.SLIP_DATE, 'YYYY') = #{year} - 1
 		AND TO_NUMBER(TO_CHAR(S.SLIP_DATE, 'MM')) <![CDATA[<=]]> #{month}
+		AND COM_CODE = #{comCode}
 	</select>
 
 </mapper>

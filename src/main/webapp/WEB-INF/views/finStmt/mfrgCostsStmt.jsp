@@ -50,7 +50,7 @@
 	-webkit-appearance:none;
 }
 </style>
-<title></title>
+<title>자가 경리</title>
 </head>
 <body>
 	<jsp:include page="../common/menubar.jsp" />

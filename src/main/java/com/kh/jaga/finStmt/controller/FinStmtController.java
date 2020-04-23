@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.util.Date;
 import java.util.HashMap;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
+import com.kh.jaga.company.model.vo.Company;
 import com.kh.jaga.finStmt.model.service.FinStmtService;
 import com.kh.jaga.finStmt.model.vo.IncomeStmt;
 import com.kh.jaga.finStmt.model.vo.IncomeStmtAccount;
@@ -58,11 +60,13 @@ public class FinStmtController {
 	}	
 	
 	@RequestMapping("insertIncomeStmt.fs")
-	public String insertIncomeStmt(IncomeStmt i, Model model) {
+	public String insertIncomeStmt(IncomeStmt i, Model model, HttpServletRequest request) {
 		
 		System.out.println("incomeStmt : " + i);
 		
-		//System.out.println("result : " + fss.insertIncomeStmt(i));
+		//System.out.println("comCode : " + ((Company) request.getSession().getAttribute("loginCompany")).getCompanyCode());
+
+		i.setComCode(((Company) request.getSession().getAttribute("loginCompany")).getCompanyCode());
 		
 		fss.insertIncomeStmt(i);
 		
@@ -70,9 +74,11 @@ public class FinStmtController {
 	}
 	
 	@RequestMapping("selectIncomeStmt.fs")
-	public void selectIncomeStmt(IncomeStmtAccount isa, HttpServletResponse response) throws IOException {
+	public void selectIncomeStmt(IncomeStmtAccount isa, HttpServletRequest request,HttpServletResponse response) throws IOException {
 		System.out.println("year : " + isa.getYear());
 		System.out.println("month : " + isa.getMonth());
+		
+		isa.setComCode(((Company) request.getSession().getAttribute("loginCompany")).getCompanyCode());
 		
 		HashMap hmap = fss.selectIncomeStmt(isa);
 		

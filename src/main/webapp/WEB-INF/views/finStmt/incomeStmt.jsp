@@ -5,65 +5,73 @@
 <head>
 <meta charset="UTF-8">
 <style>
-.subtitle {
-	font-size:21px;
-	margin-right:60px;
-}
-.table-head {
-	border:1px solid #a6a6a6;
-	background:#e7e6e6;
-}
-.table-title {
-	background:#7edfc6;
-	text-align:left;
-	padding-left:20px;
-}
-.table-title-num {
-	background:#7edfc6;
-	text-align:right;
-	padding-left:20px;
-}
-.table-subTitle {
-	background:#d3ede6;
-	text-align:left;
-	padding-left:40px;
-}
-.table-subTitle-num {
-	background:#d3ede6;
-	text-align:right;
-	padding-left:40px;
-}
-.table-subSubTitle {
-	text-align:left;
-	padding-left:61px;
-}
-.table-content {
-	text-align:right;
-}
-#foldBtn {
-	background:#24574A;
-	border-radius:3px;
-	padding:1px;
-	padding-bottom:7px;
-	color:white;
-}
-#foldImg {
-	height:30px;
-	padding:1px;
-	padding-right:3px;
-}
-#inputNum {
-	text-align:right;
-}
-#inputNum:focus {
-	background:#b3cfe4;
-}
-#inputNum::-webkit-inner-spin-button,
-#inputNum::-webkit-outer-spin-button {
-	-webkit-appearance:none;
-}
+	.subtitle {
+		font-size:21px;
+		margin-right:60px;
+	}
+	.normal-label {
+		margin:0px;
+	}
+	.table-head {
+		border:1px solid #a6a6a6;
+		background:#e7e6e6;
+	}
+	.table-title {
+		background:#7edfc6;
+		text-align:left;
+		padding-left:20px;
+	}
+	.table-title-num {
+		background:#7edfc6;
+		text-align:right;
+		padding-left:20px;
+	}
+	.table-subTitle {
+		background:#d3ede6;
+		text-align:left;
+		padding-left:40px;
+	}
+	.table-subTitle-num {
+		background:#d3ede6;
+		text-align:right;
+		padding-left:40px;
+	}
+	.table-subSubTitle {
+		text-align:left;
+		padding-left:61px;
+	}
+	.table-content {
+		text-align:right;
+	}
+	#foldBtn {
+		background:#24574A;
+		border-radius:3px;
+		padding:1px;
+		padding-bottom:7px;
+		color:white;
+	}
+	#foldImg {
+		height:30px;
+		padding:1px;
+		padding-right:3px;
+	}
+	#inputNum {
+		text-align:right;
+	}
+	#inputNum:focus {
+		background:#b3cfe4;
+	}
+	#inputNum::-webkit-inner-spin-button,
+	#inputNum::-webkit-outer-spin-button {
+		-webkit-appearance:none;
+	}
+	.modal-head {
+		border: 1px solid #a6a6a6;
+		background: #e7e6e6;
+		text-align: center;
+	}
 </style>
-<title></title>
+<title>자가 경리</title>
 </head>
 <body>
 	<jsp:include page="../common/menubar.jsp" />
@@ -87,6 +95,7 @@
 				<td align="right" style="width:180px;"><span id="foldBtn" data-clicks="false" align="left"><img id="foldImg" src="${ contextPath }/resources/images/fold.PNG"></span></td>
 			</tr>
 		</table>
+		<form id="contentForm" action="insertIncomeStmt.fs" method="post">		
 		<ol class="breadcrumb mb-4">
 			<table id="searchReTable">
 				<tr>
@@ -122,12 +131,14 @@
 				</td>
 			</tr>
 		</table>
-		<form id="contentForm" action="insertIncomeStmt.fs" method="post">		
 			<table id="contentTable" width="1100px" style="text-align:center;">
 				<tr>
 					<td class="table-head" width="28%" rowspan="2">과&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;목</td>
-					<td class="table-head" colspan="2">제 14(당)기 2020.01 ~ 2020.03</td>
-					<td class="table-head" colspan="2">제 13(전)기 2019.01 ~ 2019.12</td>
+					<td class="table-head" colspan="2">
+						제 <label class="nomal-label" id="cur-term"></label>(당)기 2020.01 ~ 2020.<label class="normal-label" id="cur-month">03</label>
+						<input type="hidden" id="login-openDay" value="${ sessionScope.loginCompany }">
+					</td>
+					<td class="table-head" colspan="2">제 <label class="nomal-label" id="past-term"></label>(전)기 2019.01 ~ 2019.12</td>
 				</tr>
 				<tr>
 					<td class="table-head" width="18%">잔액</td>
@@ -138,13 +149,13 @@
 				<tr>
 					<td class="table-title">Ⅰ. 매출액</td>
 					<td class="table-title"></td>
-					<td class="table-title-num" id="cSum10" name="sales"></td>
+					<td class="table-title-num"><span id="cSum10"></span><input type="hidden" id="cSum10-input" name="sales"></td>
 					<td class="table-title"></td>
 					<td class="table-title-num" id="pSum10"></td>
 				</tr>
 				<tr class="table-detail">
 					<td class="table-subSubTitle">상품매출</td>
-					<td class="table-content" id="c40100" name="salesOfMerchandise"></td>
+					<td class="table-content" id="c40100" name="salesOfMerchandise"><input type="hidden"></td>
 					<td></td>
 					<td class="table-content" id="p40100"></td>
 					<td></td>
@@ -325,6 +336,14 @@
 			case 11 : $("#dec").prop("selected", true); break;
 			}
 			
+			/* 로그인 회사로 기수 설정 */
+			var key = "세션 키";
+			var value = "세션 벨류";
+			sessionStorage.setItem(key, value);
+			console.log("세션 정보 : " + sessionStorage.getItem(key));
+			console.log("세션 정보 : " + sessionStorage.getItem("loginCompany"));
+			
+			
 			/* 키 입력창에 값을 입력시 발생하는 이벤트 */
 			$("#inputNum").keyup(function() {
 				console.log("keyup 위한 테스트 uncomma : " + uncomma($("#cSum21").text()));
@@ -348,6 +367,7 @@
 				var cSum100 = cSum80 - uncomma($("#cSum90").text());
 				$("#cSum100").text(comma(cSum100));
 			})
+			
 		});
 		
 		/* 콤마 찍기 */
@@ -369,13 +389,24 @@
 		
 		/* 마감버튼 입력시 */
 		function insertIncomeStmt() {
-			console.log("마감 버튼 입력");
+			console.log("마감 버튼 입력 : " + $("#cSum10").text());
 			
-			$("#inputNum").val(Number(uncomma($("#inputNum").val())));
+			if($("#cSum10").text() == "") {
+				window.alert("조회기간 검색을 진행해주세요");
+			} else if(Number(uncomma($("#inputNum").val())) == 0) {
+				window.alert("기말상품재고액을 입력하세요");				
+			} else {
+				$("#inputNum").val(Number(uncomma($("#inputNum").val())));
+				$("#cSum10-input").val(Number(uncomma($("#cSum10").text())));
+				
+				window.alert("마감이 완료되었습니다");
+
+				$("#contentForm").submit();
+			}			
 			
-			$("#contentForm").submit();
 		}
 		
+		/* 날짜 옆의 검색 버튼 클릭시 */
 		function dateSearch() {
 			var year = $("#year").val();
 			var month = $("#month").val();
@@ -391,6 +422,8 @@
 					month : month
 				},
 				success : function(data) {
+					$("#cur-month").text(month);
+					
 					//-------------당기-------------					
 					var c14600 = data["c14600"];
 					var c40100 = data["c40100"];
@@ -500,9 +533,9 @@
 					
 					//행 보여주기/숨기기
 					if(c83000 == 0 && p83000 == 0) {
-						$("#row83000").hide();
+						$("#row83000").fadeOut(200);
 					} else {
-						$("#row83000").show();
+						$("#row83000").fadeIn(200);
 					}
 				},
 				error : function(status) {
@@ -513,6 +546,7 @@
 			return false;
 		}
 		
+		/* 접기 버튼 클릭 시 */
 		$(document).on("click", '#foldBtn', function() {
 			var clicks = $(this).data('clicks');
 			
@@ -520,15 +554,134 @@
 			
 			if(clicks) {
 				$("#foldImg").attr({'src':'${ contextPath }/resources/images/fold.PNG'});
-				$(".table-detail").show();
+				$(".table-detail").fadeIn(200);
+				//$(".table-detail").css({'transform':'scaleY(1)', 'transition-duration':'.3s'});
+				//$(".table-detail").parent().css({'overflow':'auto', 'transition':'height ease-in 0.5s'});
 			} else {
 				$("#foldImg").attr({'src':'${ contextPath }/resources/images/unfold.PNG'});
-				$(".table-detail").hide();
+				$(".table-detail").fadeOut(200);
+				//$(".table-detail").css({'transform':'scaleY(0)', 'transition-duration':'.3s'});
+				//$(".table-detail").parent().css({'overflow':'hidden', 'transition':'height ease-in 0.5s'});
 			}
 			
 			$(this).data('clicks', !clicks);
 		});
+		
+		/* 전표 모달 띄우기 */
+		$(document).on("click", '.table-detail', function() {
+			$("#slip").modal();
+			
+			var year = $("#year").val();
+			var month = $("#month").val();
+			
+			$.ajax({
+				url : "selectSlip.fs",
+				type : "get",
+				data : {
+					year : year,
+					comCode : comCode,
+					accountCode : accountCode
+				},
+				success : function(data) {
+					
+				},
+				error : function(status) {
+					console.log(status);
+				}
+			});
+		});
 	</script>
+	
+	<!-- Bootstrap 원장조회 모달 -->
+	<div class="modal fade" id="slip" role="dialog">
+    	<div class="modal-dialog modal-lg">
+	      <div class="modal-content">
+		        <div class="modal-header" style="background-color:#1B5748;">
+		        	<h4 class="modal-title" style="color:white;">원장조회</h4>
+		        	<button type="button" class="close" data-dismiss="modal">&times;</button>
+		        </div>
+		        <div class="modal-body">
+			    	<table width="100%" style="margin-bottom:5px">
+			        	<tr>
+			        		<td>계정과목&nbsp;&nbsp;&nbsp;&nbsp;<div id="modal-account-title"></div>
+			        		</td>
+			        		<td align="right"><span>조회기간&nbsp;&nbsp;&nbsp;&nbsp;</span><input type="text" id="datepicker3"> ~ <input type="text" id="datepicker4"></td>
+			        	</tr>
+			        </table>
+					<script>
+							/* 날짜 input jquery ui */
+							$.datepicker
+									.setDefaults({
+										showOn : "both",
+										buttonImageOnly : true,
+										buttonImage : "${contextPath}/resources/images/calendar.png",
+										dateFormat : 'yy-mm-dd'
+	
+									});
+							$(function() {
+								$("#datepicker3").datepicker({});
+								$("#datepicker4").datepicker({});
+								/* 달력버튼 */
+								$("img.ui-datepicker-trigger")
+										.attr(
+												"style",
+												"margin-left:2px; vertical-align:middle; cursor: Pointer; width:20px; height:20px");
+							});
+							
+							
+					</script>
+					<div>
+			        	<table id="List_detail" style=" width:100%; margin-left:auto; margin-right: auto;">
+			        		<tr>
+			        			<td class="modal-head">일자</td>
+			        			<td class="modal-head">번호</td>
+			        			<td class="modal-head">적요</td>
+			        			<td class="modal-head">코드</td>
+			        			<td class="modal-head">거래처</td>
+			        			<td class="modal-head">차변</td>
+			        			<td class="modal-head">대변</td>
+			        			<td class="modal-head">잔액</td>
+			        		</tr>
+			        		<tr class="modal_detail" style="height: 25px;">
+			        			<td style="text-align:center;">03-31</td>
+			        			<td style="text-align:center;">00005</td>
+			        			<td></td>
+			        			<td style="text-align:center;">01003</td>
+			        			<td style="text-align:center;">마음전자</td>
+			        			<td style="text-align:right;">550,000</td>
+			        			<td style="text-align:right;"></td>
+			        			<td style="text-align:right;">550,000</td>
+			        		</tr>
+			        		<tr>
+			        			<td class="modal-head"></td>
+			        			<td class="modal-head"></td>
+			        			<td class="modal-head" style="text-align:left;">[월&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;계]</td>
+			        			<td class="modal-head"></td>
+			        			<td class="modal-head"></td>
+			        			<td class="modal-head"></td>
+			        			<td class="modal-head"></td>
+			        			<td class="modal-head"></td>
+			        		</tr>
+			        		<tr>
+			        			<td class="modal-head"></td>
+			        			<td class="modal-head"></td>
+			        			<td class="modal-head" style="text-align:left;">[누&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;계]</td>
+			        			<td class="modal-head"></td>
+			        			<td class="modal-head"></td>
+			        			<td class="modal-head"></td>
+			        			<td class="modal-head"></td>
+			        			<td class="modal-head"></td>
+			        		</tr>
+			        	</table>
+			        </div>
+			        <div class="modal-footer">
+			          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			        </div>
+				</div>        
+	        </div>
+		</div>
+	</div>
+	<!-- Bootstrap 원장조회 모달 끝 -->
 	<jsp:include page="../common/menubar2.jsp" />
 </body>
 </html>
