@@ -27,4 +27,8 @@ public interface BusinessEmpDao {
 
 	int insertAttachBEmp(SqlSessionTemplate sqlSession, ArrayList<Attachment> attList);
 
+	int deletePhoto(SqlSessionTemplate sqlSession, String fileCode);
+
+	Attachment selectFilePath(SqlSessionTemplate sqlSession, String fileCode);
+
 }

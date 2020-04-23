@@ -12,6 +12,11 @@
 		border: none;
 		outline: none;
 	}
+	#searchBtn3{
+		background: none;
+		border: none;
+		outline: none;
+	}
 	
 	#wrapp1 {
 		float: left;
@@ -112,24 +117,30 @@
 				</form>
 				<br>
 					<table id="empList" style="text-align: center;">
-						<tr>
-							<td><input type="checkbox" id="checkk"></td>
-							<td>10001</td>
-							<td>최새우</td>
-						</tr>				
+						<c:forEach var="e" items="${ empList }" >
+							<tr>
+								<td><input type="checkbox" id="checkk"></td>
+								<td>
+								<a href="#" onclick="detail('${e.employeeCode}')"><c:out value="${ e.employeeNum }"/></a>
+								</td>
+								<td>
+								<a href="#" onclick="detail('${e.employeeCode}')"><c:out value="${ e.employeeName }"/></a>
+								</td>
+							</tr>				
+						</c:forEach>
 					</table>
 				
 				</div>
 				
 				<div id="wrapp2">
-				
+					<form action="insertBPay.bp" method="post">
 					<table id="content">
 						<thead>
 							<tr>
 								<td>
 									<table id="contentH">
 										<tr>
-											<th><h4>사업소득자-</h4><div id="businessName"></div></th>
+											<th><h4>사업소득자-<sapn id="empNamee"></span></h4></th>
 											<td align="right" style="padding-right:5px;"><button id="saveBtn">저장</button></td>
 										</tr>
 									</table>
@@ -148,47 +159,54 @@
 									</colgroup>
 										<tr>
 											<th>이름</th>
-											<td><input type="text"></td>
+											<td><input type="text" name="employeeName" id="employeeName"></td>
 											<th>주민등록번호</th>
-											<td><input type="text"></td>
+											<td><input type="text" name="securityNumber" id="securityNumber"></td>
 										</tr>
 										<tr>
 											<th>소득구분</th>
 											<td>
-												<input type="text" style="width:20%">
-												<button id="searchBtn">
+												<input type="text" id="typeOfBizCode" name="typeOfBizCode" style="width:20%;">
+												<button type="button" id="searchBtn3">
 													<img alt="" src="${contextPath}/resources/images/search.PNG" width="20px" height="20px">
 												</button>
-												<input type="text">
+												<input type="text" name="sellTargetName" id="sellTargetName">
+												<input type="hidden" name="incomeClass" id="incomeClass">
 											</td>
 											<th>이메일</th>
-											<td><input type="email"></td>
+											<td><input type="email" name="email" id="email"></td>
 										</tr>
 										<tr>
 											<th>급여이체 은행</th>
 											<td>
-												<select id="">
-													<option value="">국민은행</option>
-													<option value="">국민은행</option>
-													<option value="">국민은행</option>
-													<option value="">국민은행</option>
-													<option value="">국민은행</option>
+												<select name="backCode" id="backCode">
+													<option value="001">한국은행</option>
+													<option value="002">산업은행</option>
+													<option value="003">기업은행</option>
+													<option value="004">국민은행</option>
+													<option value="005">신한은행</option>
+													<option value="006">농협은행</option>
+													<option value="00H7">SC은행</option>
+													<option value="008">한국씨티은행</option>
+													<option value="009">우리은행</option>
 												</select>
 											</td>
 											<th>계좌번호</th>
-											<td><input type="text"></td>
+											<td><input type="text" name="accountNumber" id="accountNumber"></td>
 										</tr>
 										<tr>
 											<th>예금주</th>
-											<td><input type="text"></td>
-											<td></td>
-											<td></td>
+											<td><input type="text" name="accountHolder" id="accountHolder"></td>
+											<th>급여</th>
+											<td><input type="number" name="salary" placeholder="소득세포함 월급" id="salary"></td>
 										</tr>
 									</table>
 								</td>
 							</tr>
 							<tr>
 								<td style="padding-top:20px;">
+									<input type="hidden" name="employeeCode" id="empCode">
+									<input type="hidden" name="employeeNum" value="${ employeeNum }" id="employeeNum">
 									<table id="contentF" border="1">
 									<colgroup>
 										<col width="6%">
@@ -202,6 +220,7 @@
 										<col width="10%">
 										<col>
 									</colgroup>
+									<thead>
 										<tr>
 											<th colspan="2">귀속년월</th>
 											<th colspan="3">지급일자</th>
@@ -218,102 +237,24 @@
 											<th>월</th>
 											<th>일</th>
 										</tr>
-										<tr>
-											<td><input type="text" style="width:100%"></td>
-											<td><input type="text" style="width:100%"></td>
-											<td><input type="text" style="width:100%"></td>
-											<td><input type="text" style="width:100%"></td>
-											<td><input type="text" style="width:100%"></td>
-											<td><input type="text" style="width:100%"></td>
-											<td><input type="text" style="width:100%"></td>
-											<td><input type="text" style="width:100%"></td>
-											<td><input type="text" style="width:100%"></td>
-											<td><input type="text" style="width:100%"></td>
-										</tr>
-										<tr>
-											<td><input type="text" style="width:100%"></td>
-											<td><input type="text" style="width:100%"></td>
-											<td><input type="text" style="width:100%"></td>
-											<td><input type="text" style="width:100%"></td>
-											<td><input type="text" style="width:100%"></td>
-											<td><input type="text" style="width:100%"></td>
-											<td><input type="text" style="width:100%"></td>
-											<td><input type="text" style="width:100%"></td>
-											<td><input type="text" style="width:100%"></td>
-											<td><input type="text" style="width:100%"></td>
-										</tr>
-										<tr>
-											<td><input type="text" style="width:100%"></td>
-											<td><input type="text" style="width:100%"></td>
-											<td><input type="text" style="width:100%"></td>
-											<td><input type="text" style="width:100%"></td>
-											<td><input type="text" style="width:100%"></td>
-											<td><input type="text" style="width:100%"></td>
-											<td><input type="text" style="width:100%"></td>
-											<td><input type="text" style="width:100%"></td>
-											<td><input type="text" style="width:100%"></td>
-											<td><input type="text" style="width:100%"></td>
-										</tr>
-										<tr>
-											<td><input type="text" style="width:100%"></td>
-											<td><input type="text" style="width:100%"></td>
-											<td><input type="text" style="width:100%"></td>
-											<td><input type="text" style="width:100%"></td>
-											<td><input type="text" style="width:100%"></td>
-											<td><input type="text" style="width:100%"></td>
-											<td><input type="text" style="width:100%"></td>
-											<td><input type="text" style="width:100%"></td>
-											<td><input type="text" style="width:100%"></td>
-											<td><input type="text" style="width:100%"></td>
-										</tr>
-										<tr>
-											<td><input type="text" style="width:100%"></td>
-											<td><input type="text" style="width:100%"></td>
-											<td><input type="text" style="width:100%"></td>
-											<td><input type="text" style="width:100%"></td>
-											<td><input type="text" style="width:100%"></td>
-											<td><input type="text" style="width:100%"></td>
-											<td><input type="text" style="width:100%"></td>
-											<td><input type="text" style="width:100%"></td>
-											<td><input type="text" style="width:100%"></td>
-											<td><input type="text" style="width:100%"></td>
-										</tr>
-										<tr>
-											<td><input type="text" style="width:100%"></td>
-											<td><input type="text" style="width:100%"></td>
-											<td><input type="text" style="width:100%"></td>
-											<td><input type="text" style="width:100%"></td>
-											<td><input type="text" style="width:100%"></td>
-											<td><input type="text" style="width:100%"></td>
-											<td><input type="text" style="width:100%"></td>
-											<td><input type="text" style="width:100%"></td>
-											<td><input type="text" style="width:100%"></td>
-											<td><input type="text" style="width:100%"></td>
-										</tr>
-										<tr>
-											<td><input type="text" style="width:100%"></td>
-											<td><input type="text" style="width:100%"></td>
-											<td><input type="text" style="width:100%"></td>
-											<td><input type="text" style="width:100%"></td>
-											<td><input type="text" style="width:100%"></td>
-											<td><input type="text" style="width:100%"></td>
-											<td><input type="text" style="width:100%"></td>
-											<td><input type="text" style="width:100%"></td>
-											<td><input type="text" style="width:100%"></td>
-											<td><input type="text" style="width:100%"></td>
-										</tr>
-										<tr>
-											<td><input type="text" style="width:100%"></td>
-											<td><input type="text" style="width:100%"></td>
-											<td><input type="text" style="width:100%"></td>
-											<td><input type="text" style="width:100%"></td>
-											<td><input type="text" style="width:100%"></td>
-											<td><input type="text" style="width:100%"></td>
-											<td><input type="text" style="width:100%"></td>
-											<td><input type="text" style="width:100%"></td>
-											<td><input type="text" style="width:100%"></td>
-											<td><input type="text" style="width:100%"></td>
-										</tr>
+									<thead>
+									<tbody>
+										<c:forEach var="num" begin="1" end="12">
+											<tr>
+												<td><input type="text" style="width:100%" name="attYear" value="2020"></td>
+												<td><input type="text" style="width:100%" name="attMonth" value="${ num }"></td>
+												<td><input type="text" style="width:100%" name="payYear"></td>
+												<td><input type="text" style="width:100%" name="payMonth"></td>
+												<td><input type="text" style="width:100%" name="payDay"></td>
+												<td><input type="text" style="width:100%" name="salary" id="salary"></td>
+												<td><input type="text" style="width:100%" name=""></td>
+												<td><input type="text" style="width:100%" name="incomeTax"></td>
+												<td><input type="text" style="width:100%" name="localIncomeTax"></td>
+												<td><input type="text" style="width:100%" name="differencePymt"></td>
+											</tr>
+										</c:forEach>
+									</tbody>
+									<tfoot>
 										<tr style="background:#D4D5D9">
 											<th colspan="5" style="background:#D4D5D9; color:black;">합계</th>
 											<td></td>
@@ -322,11 +263,13 @@
 											<td></td>
 											<td></td>
 										</tr>
+									</tfoot>
 									</table>
 								</td>
 							</tr>
 						</tbody>
 					</table>
+					</form>
 				</div>
 			</div>
 		</div>
@@ -337,6 +280,87 @@
 		</div>
 	</div>
 	</main>
+	
+	
+	<script>
+		$(function(){
+			$("#contentF tr").each( function (index) {
+				var num = index - 2;
+				
+		        $(this).find("input[name=attYear]").attr("name", "bpList[" + num + "].attYear");
+		        $(this).find("input[name=attMonth]").attr("name", "bpList[" + num + "].attMonth");
+		        $(this).find("input[name=payYear]").attr("name", "bpList[" + num + "].payYear");
+		        $(this).find("input[name=payMonth]").attr("name", "bpList[" + num + "].payMonth");
+		        $(this).find("input[name=payDay]").attr("name", "bpList[" + num + "].payDay");
+		        $(this).find("input[name=salary]").attr("name", "bpList[" + num + "].salary");
+		        $(this).find("input[name=incomeTax]").attr("name", "bpList[" + num + "].incomeTax");
+		        $(this).find("input[name=localIncomeTax]").attr("name", "bpList[" + num + "].localIncomeTax");
+		        $(this).find("input[name=differencePymt]").attr("name", "bpList[" + num + "].differencePymt");
+		    });
+			
+			$("#salary").blur(function(){
+				var salary = $(this).val();
+				$.ajax({
+					url:"calculTax.bp",
+					data:{salary:salary},
+					success:function(data){
+						console.log(data);
+					}
+				});
+			});
+			
+		});
+	
+		function detail(data){
+			$.ajax({
+				url:"detailBEmp.be",
+				data:{empCode:data},
+				success:function(data){
+					//$("#fileArea").css("display", "block");
+					var emp = data.BEmp;
+					console.log(emp);
+					
+					$("#contentF tbody td:nth-of-type(2) ~ td").children().val().remove();
+					
+					var employeeCode = emp.employeeCode;
+					var employeeName = emp.employeeName;
+					var securityNumber = emp.securityNumber;
+					var incomeClass = emp.incomeClass;
+					var email = emp.email;
+					var enrollDate = emp.enrollDate;
+					var backCode = emp.backCode;
+					var accountNumber = emp.accountNumber;
+					var department = emp.department;
+					var positionCode = emp.positionCode;
+					var accountHolder = emp.accountHolder;
+					var salary = emp.salary;
+					var typeOfBixCode = emp.typeOfBixCode;
+					var sellTargetName = emp.sellTargetName;
+					var incomeClass = emp.incomeClass;
+					
+					var date1 = new Date(enrollDate); 
+					
+						$("#employeeNum").val(emp.employeeNum);
+						$("#empNamee").text(employeeName);
+						$("#empCode").val(employeeCode);
+						$("#employeeName").val(employeeName);
+						$("#securityNumber").val(securityNumber);
+						$("#incomeClass").val(incomeClass);
+						$("#email").val(email);
+						$("#datepicker").datepicker('setDate',date1);
+						$("#backCode").val(backCode);
+						$("#accountNumber").val(accountNumber);
+						$("#department").val(department);
+						$("#positionCode").val(positionCode);
+						$("#accountHolder").val(accountHolder);
+						$("#salary").val(salary);
+						$("#typeOfBizCode").val(typeOfBixCode);
+						$("#sellTargetName").val(sellTargetName);
+						$("#incomeClass").val(incomeClass);
+				}
+			});
+		}
+	</script>
 	<jsp:include page="../common/menubar2.jsp" />
 </body>
 </html>
