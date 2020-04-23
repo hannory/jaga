@@ -5,7 +5,7 @@
 <html>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <head>
 <meta charset="UTF-8">
 <title>회원 가입 폼 view </title>
@@ -303,8 +303,11 @@
 </style>
 </head>
 <body>
-	<jsp:include page="../common/menubar.jsp" />
 	<div id="main">
+	
+			<div id="layer" style="display:none;position:fixed;overflow:hidden;z-index:1;-webkit-overflow-scrolling:touch;">
+				<img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnCloseLayer" style="cursor:pointer;position:absolute;right:-3px;top:-3px;z-index:1" onclick="closeDaumPostcode()" alt="닫기 버튼">
+			</div>
 	<div class="container-fluid">
 		<h2 class="mt-4">회원가입</h2>
 		<ol class="breadcrumb mb-4">
@@ -508,6 +511,7 @@
                <td class="thirdLine"></td>
            </tr>
             
+            
             <tr class="hidesub">
 				<td></td>
 				<td></td>
@@ -562,6 +566,7 @@
 		$("#userIdCheck").text(msg);
 		
 	});
+	
 	//중복 확인하러 고우고우
 	$("#idCheck").click(function(){
 		var userId = $("#userId").val();
@@ -586,31 +591,57 @@
 				
 			});
 	});
+	
+	
+	
+	//비밀번호 제한 
+ 	
+	
+				$("#userPwd").keyup(function(){
+					var msg = '';
+					var pw = $("#userPwd").val(); 
+					var num = pw.search(/[0-9]/g); 
+					var eng = pw.search(/[a-z]/ig); 
+					var spe = pw.search(/[`~!@@#$%^&*|₩₩₩;:₩/?]/gi); 
+					
+					if(pw.length < 6 || pw.length > 16){ 
+						msg = "6자리 ~ 16자리 이내로 입력해주세요."; 
+						$("#userPwdCheck").css("color", "red");
+					}else if(pw.search(/\s/) != -1){
+						msg = "비밀번호는 공백 없이 입력해주세요."; 
+						$("#userPwdCheck").css("color", "red");
+					}else if(num < 0 || eng < 0 || spe < 0 ){ 
+						msg = "영문,숫자, 특수문자를 혼합하여 입력해주세요."; 
+						$("#userPwdCheck").css("color", "red");
+					}else { 
+						msg = "유효한 비밀번호 입니다."; 
+						$("#userPwdCheck").css("color", "green");
+					}
+					$("#userPwdCheck").text(msg);
+		
+					
+				});
+				
+	 //비밀번호 일치하는지 
+	 
+	$("#userPwd2").keyup(function(){
+		var pw=$("#userPwd").val();
+		var pw2=$("#userPwd2").val();
+		var msg='';
+		
+		if(pw==pw2){
+			msg="비밀번호가 일치합니다.";
+			$("#pwdResult").css("color","green");
+		}else{
+			msg="비밀번호가 일치하지 않습니다."
+			$("#pwdResult").css("color","red");
+			
+		}
+		$("#pwdResult").text(msg);
+	});
 
 	
-/* /* 	$("#userPwd").keyup(function(){
-		var msg='';
-		var pw = $("#userPwd").val();
-		var num = pw.search(/[0-9]/g);
-		var eng = pw.search(/[a-z]/ig);
-		var spe = pw.search(/[`~!@#$%<>^&*/;]/gi);
-		
-		if(pw.length<6||pw.length>16){
-			msg="6자리 16자리 이내로 입력해주세요.";
-			$("#userPwdCheck").css("color","red");
-		}else if(pw.search(/\s/))!=-1{
-			msg="비밀번호는 공백없이 입력해주세요.";
-			$("userPwdCheck").css("color","red");
-		}else if(num<0||eng<0||spe<0){
-			msg="영문, 숫자, 특수문자를 혼합하여 입력해주세요.";
-			$("userPwdCheck").css("color","red");
-		}else{
-			msg="유효한 비밀번호 입니다. "
-			$("userPwdCheck").css("color","green");
-		}
-		$("userPwdCheck").text(msg);
-	}); */
-	 */
+		//달력 
 		
 	$.datepicker.setDefaults({
 		showOn:"both",
@@ -640,8 +671,112 @@
 		})
 	}; */
 
-	
 	</script>
+	
+		
+ 	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	
+	<script>
+	
+	/*주소*/
+	var element_layer = document.getElementById('layer');
+	
+	function closeDaumPostCode(){
+		element_layer.style.display='none';
+		
+	}
+
+	function sample2_execDaumPostcode(){
+		new daum.Postcode(
+				{
+				oncomplete : function(data){
+				
+				var addr ='';
+				var extraAddr='';
+				
+				if(data.userSelectedType==='R'){
+					addr=data.roadAddress;
+					
+				}else{
+					addr=data.jibunAddress;
+				}
+				
+				if(data.userSelectedType ==='R'){
+					if(data.bname!==''
+						&& /[동|로|가]$/g.test(data.bname)){
+						extraAddr += data.bname;
+					}		
+					
+					if(data.buildingName !==''
+						&& data.apartment ==='Y'){
+						extraAddr +=(extraAddr!==''?', '
+								+ data.buildingName:data.buildingName);
+					}
+						
+					if(extraAddr !==''){
+						extraAddr ='('+extraAddr+')';
+					}
+				}
+					document.getElementById('postcode').value=data.zonecode;
+					document.getElementById('address1').value=addr;
+					document.getElementById('bizLocation').focus();
+					element_layer.style.display='none';
+					},
+					width:'100%',
+					height:'100%',
+					maxSuggestItems :5
+			}).embed(element_layer);
+		
+		element_layer.style.display='block';
+		
+		initLayerPosition();
+		
+		}
+		
+		function initLayerPosition(){
+		 var width=400;
+		 var height=500;
+		 var borderWidth=2;
+		 
+		element_layer.style.width=width+'px';
+		element_layer.style.height=height + 'px';
+		element_layer.style.border=borderWidth + 'px solid';
+		element_layer.style.left =(((window.innerWidth || document.documentElement.clientWidth) - width) / 2 - borderWidth)
+					+ 'px';
+		element_layer.style.top = (((window.innerHeight || document.documentElement.clientHeight) - height) / 2 - borderWidth)
+					+ 'px';
+		}
+		
+/* 		var themeObj = {
+				
+				bgColor:"pink"; */
+				   //bgColor: "", //바탕 배경색
+				   //searchBgColor: "", //검색창 배경색
+				   //contentBgColor: "", //본문 배경색(검색결과,결과없음,첫화면,검색서제스트)
+				   //pageBgColor: "", //페이지 배경색
+				   //textColor: "", //기본 글자색
+				   //queryTextColor: "", //검색창 글자색
+				   //postcodeTextColor: "", //우편번호 글자색
+				   //emphTextColor: "", //강조 글자색
+				   //outlineColor: "" //테두리
+/* 				}; */
+
+				//위에서 생성한 themeObj객체를 우편번호 서비스 생성자에 넣습니다.
+				//생성자의 자세한 설정은 예제 및 속성탭을 확인해 주세요.
+				/*
+				new daum.Postcode({
+				   theme: themeObj
+				}).open();
+
+				new daum.Postcode({
+				   theme: themeObj
+				}).embed(target);
+				*/
+		
+		
+
+	</script>
+		 
 	</div>
 		<div style="height: 100vh;"></div>
 		<div class="card mb-4">
