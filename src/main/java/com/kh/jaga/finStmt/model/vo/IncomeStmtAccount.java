@@ -1,7 +1,7 @@
 package com.kh.jaga.finStmt.model.vo;
 
 public class IncomeStmtAccount implements java.io.Serializable {
-	private int comCode;
+	private String comCode;
 	private String dateSlipCode;	//회사별, 일별 전표코드
 	private String debitCredit;		//차대구분
 	private int price;				//금액
@@ -12,7 +12,7 @@ public class IncomeStmtAccount implements java.io.Serializable {
 	
 	public IncomeStmtAccount() {}
 	
-	public IncomeStmtAccount(int comCode, String dateSlipCode, String debitCredit, int price, int accountCode,
+	public IncomeStmtAccount(String comCode, String dateSlipCode, String debitCredit, int price, int accountCode,
 			String accountTitle, int year, int month) {
 		super();
 		this.comCode = comCode;
@@ -25,11 +25,11 @@ public class IncomeStmtAccount implements java.io.Serializable {
 		this.month = month;
 	}
 
-	public int getComCode() {
+	public String getComCode() {
 		return comCode;
 	}
 
-	public void setComCode(int comCode) {
+	public void setComCode(String comCode) {
 		this.comCode = comCode;
 	}
 

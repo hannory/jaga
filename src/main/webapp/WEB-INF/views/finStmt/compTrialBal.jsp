@@ -5,64 +5,87 @@
 <head>
 <meta charset="UTF-8">
 <style>
-.subtitle {
-	font-size:21px;
-	margin-right:60px;
-}
-.table-justify1 {
-	width: 183px;
-	display: flex;
-	justify-content: space-between;
-}
-.hidden-right {
-	color: #7edfc6;
-	margin-bottom: 0px;
-}
-.table-justify2 {
-	width: 180px;
-	display: flex;
-	justify-content: space-between;
-}
-.table-justify3 {
-	width: 150px;
-	display: flex;
-	justify-content: space-between;
-}
-/* table-justify1과 같은 레벨인데 번호가 2자리인 경우 */
-.table-justify4 {
-	width: 200px;
-	display: flex;
-	justify-content: space-between;
-}
-.table-head {
-	border:1px solid #a6a6a6;
-	background:#e7e6e6;
-}
-.table-title {
-	background:#7edfc6;
-}
-.table-subTitle {
-	background:#d3ede6;
-}
-#foldBtn {
-	width:77px;
-	background:#24574A;
-	border-radius:5px;
-	color:white;
-}
-#foldImg {
-	width:70px;
-	height:26px;
-	padding:1px;
-	padding-right:3px;
-}
-.modal-head {
-	border: 1px solid #a6a6a6;
-	background: #e7e6e6;
-	text-align: center;
-}
+	.subtitle {
+		font-size:21px;
+		margin-right:60px;
+	}
+	.table-justify1 {
+		width: 183px;
+		display: flex;
+		justify-content: space-between;
+	}
+	.hidden-right {
+		color: #7edfc6;
+		margin-bottom: 0px;
+	}
+	.table-justify2 {
+		width: 180px;
+		display: flex;
+		justify-content: space-between;
+	}
+	.table-justify3 {
+		width: 150px;
+		display: flex;
+		justify-content: space-between;
+	}
+	/* table-justify1과 같은 레벨인데 번호가 2자리인 경우 */
+	.table-justify4 {
+		width: 200px;
+		display: flex;
+		justify-content: space-between;
+	}
+	.table-head {
+		border:1px solid #a6a6a6;
+		background:#e7e6e6;
+	}
+	.table-title {
+		background:#7edfc6;
+	}
+	.table-subTitle {
+		background:#d3ede6;
+	}
+	#foldBtn {
+		width:77px;
+		background:#24574A;
+		border-radius:5px;
+		color:white;
+	}
+	#foldImg {
+		width:70px;
+		height:26px;
+		padding:1px;
+		padding-right:3px;
+	}
+	.modal-head {
+		border: 1px solid #a6a6a6;
+		background: #e7e6e6;
+		text-align: center;
+	}
+	/* MyModal */
+	.modal-layer {
+		position:fixed;
+ 		width:100vw; 
+ 		height:100vh; 
+		top: 10px;
+ 		z-index:1050;
+		display:none;
+		/* background:rgba(0, 0, 0, 0.45); */
+		role:dialog;
+		aria-modal:ture;
+		overflow: auto;
+		/* margin-left:-25px; */
+	}
+	.modal-section {
+		z-index: -1;
+		width:50%;
+		height:70%;
+		background:white;
+		margin-left:250px;
+		margin-top:100px;
+		border:1px solid white;
+	}
 </style>
-<title></title>
+<title>자가 경리</title>
 </head>
 <body>
 	<jsp:include page="../common/menubar.jsp" />
@@ -78,16 +101,6 @@
 			</tr>
 		</table>
 		
-		
-		<!-- <ol class="breadcrumb mb-4">
-			<li class="breadcrumb-item"><a href="index.html">끨끨끨</a></li>
-			<li class="breadcrumb-item active">희희희희희희희희희</li>
-		</ol> -->
-		<!-- <div class="card mb-4">
-			<div class="card-body">
-				<p class="mb-0">본문내용 영역임니다.</p>
-			</div>
-		</div> -->
 		<table style="margin-bottom:15px">
 			<tr>
 				<td><span class="subtitle" style="border-bottom:1px solid #24574A">합계잔액시산표</span></td>
@@ -110,7 +123,7 @@
 				<td class="table-head" width="18%">합계</td>
 				<td class="table-head" width="18%">잔액</td>
 			</tr>
-			<tr ondblclick="popSlipModal()">
+			<tr ondblclick="popSlipModal();">
 				<td class="table-title"></td>
 				<td class="table-title"></td>
 				<td class="table-title" align="center"><div class="table-justify1"><div>1. 유</div><div>동</div><div>자</div><div>산 <label class="hidden-right">.1</label></div></div></td>
@@ -405,201 +418,104 @@
 		</div>
 	</div>
 	
-	<!-- 원장조회 모달 -->
+	<!-- Bootstrap 원장조회 모달 -->
 	<script>
 		function popSlipModal() {
 			$("#slip").modal();
 		};
-		
-		function popAccountList() {
-			$("#accountList").modal();
-		}
 	</script>
 	
   	<div class="modal fade" id="slip" role="dialog">
     	<div class="modal-dialog modal-lg">
 	      <div class="modal-content">
-	        <div class="modal-header" style="background-color:#1B5748;">
-	        	<h4 class="modal-title" style="color:white;">원장조회</h4>
-	        	<button type="button" class="close" data-dismiss="modal">&times;</button>
-	        </div>
-	        <div class="modal-body">
-		    	<table width="100%" style="margin-bottom:5px">
-		        	<tr>
-		        		<td>계정과목&nbsp;&nbsp;&nbsp;&nbsp;<input style="width:100px;" type="text">&nbsp;&nbsp;
-		        			<img src="${contextPath}/resources/images/bubble.PNG" style="width:30px; height:26px;" onclick="popAccountList();">
-		        		</td>
-		        		<td align="right"><span>조회기간&nbsp;&nbsp;&nbsp;&nbsp;</span><input type="text" id="datepicker3"> ~ <input type="text" id="datepicker4"></td>
-		        	</tr>
-		        </table>
-				<script>
-						/* 날짜 input jquery ui */
-						$.datepicker
-								.setDefaults({
-									showOn : "both",
-									buttonImageOnly : true,
-									buttonImage : "${contextPath}/resources/images/calendar.png",
-									dateFormat : 'yy-mm-dd'
-
-								});
-						$(function() {
-							$("#datepicker3").datepicker({});
-							$("#datepicker4").datepicker({});
-							/* 달력버튼 */
-							$("img.ui-datepicker-trigger")
-									.attr(
-											"style",
-											"margin-left:2px; vertical-align:middle; cursor: Pointer; width:20px; height:20px");
-						});
-						
-						
-				</script>
-				<div>
-		        	<table id="List_detail" style=" width:100%; margin-left:auto; margin-right: auto;">
-		        		<tr>
-		        			<td class="modal-head">일자</td>
-		        			<td class="modal-head">번호</td>
-		        			<td class="modal-head">적요</td>
-		        			<td class="modal-head">코드</td>
-		        			<td class="modal-head">거래처</td>
-		        			<td class="modal-head">차변</td>
-		        			<td class="modal-head">대변</td>
-		        			<td class="modal-head">잔액</td>
-		        		</tr>
-		        		<tr class="modal_detail" style="height: 25px;">
-		        			<td style="text-align:center;">03-31</td>
-		        			<td style="text-align:center;">00005</td>
-		        			<td></td>
-		        			<td style="text-align:center;">01003</td>
-		        			<td style="text-align:center;">마음전자</td>
-		        			<td style="text-align:right;">550,000</td>
-		        			<td style="text-align:right;"></td>
-		        			<td style="text-align:right;">550,000</td>
-		        		</tr>
-		        		<tr>
-		        			<td class="modal-head"></td>
-		        			<td class="modal-head"></td>
-		        			<td class="modal-head" style="text-align:left;">[월&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;계]</td>
-		        			<td class="modal-head"></td>
-		        			<td class="modal-head"></td>
-		        			<td class="modal-head"></td>
-		        			<td class="modal-head"></td>
-		        			<td class="modal-head"></td>
-		        		</tr>
-		        		<tr>
-		        			<td class="modal-head"></td>
-		        			<td class="modal-head"></td>
-		        			<td class="modal-head" style="text-align:left;">[누&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;계]</td>
-		        			<td class="modal-head"></td>
-		        			<td class="modal-head"></td>
-		        			<td class="modal-head"></td>
-		        			<td class="modal-head"></td>
-		        			<td class="modal-head"></td>
-		        		</tr>
-		        	</table>
+		        <div class="modal-header" style="background-color:#1B5748;">
+		        	<h4 class="modal-title" style="color:white;">원장조회</h4>
+		        	<button type="button" class="close" data-dismiss="modal">&times;</button>
 		        </div>
-		        <div class="modal-footer">
-		          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		        <div class="modal-body">
+			    	<table width="100%" style="margin-bottom:5px">
+			        	<tr>
+			        		<td>계정과목&nbsp;&nbsp;&nbsp;&nbsp;<input style="width:100px;" type="text">&nbsp;&nbsp;
+			        			<img src="${contextPath}/resources/images/bubble.PNG" style="width:30px; height:26px;">
+			        		</td>
+			        		<td align="right"><span>조회기간&nbsp;&nbsp;&nbsp;&nbsp;</span><input type="text" id="datepicker3"> ~ <input type="text" id="datepicker4"></td>
+			        	</tr>
+			        </table>
+					<script>
+							/* 날짜 input jquery ui */
+							$.datepicker
+									.setDefaults({
+										showOn : "both",
+										buttonImageOnly : true,
+										buttonImage : "${contextPath}/resources/images/calendar.png",
+										dateFormat : 'yy-mm-dd'
+	
+									});
+							$(function() {
+								$("#datepicker3").datepicker({});
+								$("#datepicker4").datepicker({});
+								/* 달력버튼 */
+								$("img.ui-datepicker-trigger")
+										.attr(
+												"style",
+												"margin-left:2px; vertical-align:middle; cursor: Pointer; width:20px; height:20px");
+							});
+							
+							
+					</script>
+					<div>
+			        	<table id="List_detail" style=" width:100%; margin-left:auto; margin-right: auto;">
+			        		<tr>
+			        			<td class="modal-head">일자</td>
+			        			<td class="modal-head">번호</td>
+			        			<td class="modal-head">적요</td>
+			        			<td class="modal-head">코드</td>
+			        			<td class="modal-head">거래처</td>
+			        			<td class="modal-head">차변</td>
+			        			<td class="modal-head">대변</td>
+			        			<td class="modal-head">잔액</td>
+			        		</tr>
+			        		<tr class="modal_detail" style="height: 25px;">
+			        			<td style="text-align:center;">03-31</td>
+			        			<td style="text-align:center;">00005</td>
+			        			<td></td>
+			        			<td style="text-align:center;">01003</td>
+			        			<td style="text-align:center;">마음전자</td>
+			        			<td style="text-align:right;">550,000</td>
+			        			<td style="text-align:right;"></td>
+			        			<td style="text-align:right;">550,000</td>
+			        		</tr>
+			        		<tr>
+			        			<td class="modal-head"></td>
+			        			<td class="modal-head"></td>
+			        			<td class="modal-head" style="text-align:left;">[월&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;계]</td>
+			        			<td class="modal-head"></td>
+			        			<td class="modal-head"></td>
+			        			<td class="modal-head"></td>
+			        			<td class="modal-head"></td>
+			        			<td class="modal-head"></td>
+			        		</tr>
+			        		<tr>
+			        			<td class="modal-head"></td>
+			        			<td class="modal-head"></td>
+			        			<td class="modal-head" style="text-align:left;">[누&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;계]</td>
+			        			<td class="modal-head"></td>
+			        			<td class="modal-head"></td>
+			        			<td class="modal-head"></td>
+			        			<td class="modal-head"></td>
+			        			<td class="modal-head"></td>
+			        		</tr>
+			        	</table>
+			        </div>
+			        <div class="modal-footer">
+			          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			        </div>
 		        </div>
-	        </div>
+			</div>        
 		</div>
 	</div>
-	<!-- 원장조회 모달 끝 -->
+	<!-- Bootstrap 원장조회 모달 끝 -->
 	
-	<!-- 계정조회 모달 -->
-	<div class="modal fade" id="accountList" role="dialog" style="top: 300px;">
-    	<div class="modal-dialog modal-lg">
-	      <div class="modal-content">
-	        <div class="modal-header" style="background-color:#1B5748;">
-	        	<h4 class="modal-title" style="color:white;">원장조회</h4>
-	        	<button type="button" class="close" data-dismiss="modal">&times;</button>
-	        </div>
-	        <div class="modal-body">
-		    	<table width="100%" style="margin-bottom:5px">
-		        	<tr>
-		        		<td>계정과목&nbsp;&nbsp;&nbsp;&nbsp;<input style="width:100px;" type="text">&nbsp;&nbsp;
-		        			<img src="${contextPath}/resources/images/bubble.png" style="width:30px; height:26px;" onclick="popAccountList();">
-		        		</td>
-		        		<td align="right"><span>조회기간&nbsp;&nbsp;&nbsp;&nbsp;</span><input type="text" id="datepicker3"> ~ <input type="text" id="datepicker4"></td>
-		        	</tr>
-		        </table>
-				<script>
-						/* 날짜 input jquery ui */
-						$.datepicker
-								.setDefaults({
-									showOn : "both",
-									buttonImageOnly : true,
-									buttonImage : "${contextPath}/resources/images/calendar.png",
-									dateFormat : 'yy-mm-dd'
-
-								});
-						$(function() {
-							$("#datepicker3").datepicker({});
-							$("#datepicker4").datepicker({});
-							/* 달력버튼 */
-							$("img.ui-datepicker-trigger")
-									.attr(
-											"style",
-											"margin-left:2px; vertical-align:middle; cursor: Pointer; width:20px; height:20px");
-						});
-				</script>
-				<div>
-		        	<table id="List_detail" style=" width:100%; margin-left:auto; margin-right: auto;">
-		        		<tr>
-		        			<td class="modal-head">일자</td>
-		        			<td class="modal-head">번호</td>
-		        			<td class="modal-head">적요</td>
-		        			<td class="modal-head">코드</td>
-		        			<td class="modal-head">거래처</td>
-		        			<td class="modal-head">차변</td>
-		        			<td class="modal-head">대변</td>
-		        			<td class="modal-head">잔액</td>
-		        		</tr>
-		        		<tr class="modal_detail" style="height: 25px;">
-		        			<td style="text-align:center;">03-31</td>
-		        			<td style="text-align:center;">00005</td>
-		        			<td></td>
-		        			<td style="text-align:center;">01003</td>
-		        			<td style="text-align:center;">마음전자</td>
-		        			<td style="text-align:right;">550,000</td>
-		        			<td style="text-align:right;"></td>
-		        			<td style="text-align:right;">550,000</td>
-		        		</tr>
-		        		<tr>
-		        			<td class="modal-head"></td>
-		        			<td class="modal-head"></td>
-		        			<td class="modal-head" style="text-align:left;">[월&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;계]</td>
-		        			<td class="modal-head"></td>
-		        			<td class="modal-head"></td>
-		        			<td class="modal-head"></td>
-		        			<td class="modal-head"></td>
-		        			<td class="modal-head"></td>
-		        		</tr>
-		        		<tr>
-		        			<td class="modal-head"></td>
-		        			<td class="modal-head"></td>
-		        			<td class="modal-head" style="text-align:left;">[누&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;계]</td>
-		        			<td class="modal-head"></td>
-		        			<td class="modal-head"></td>
-		        			<td class="modal-head"></td>
-		        			<td class="modal-head"></td>
-		        			<td class="modal-head"></td>
-		        		</tr>
-		        	</table>
-		        </div>
-		        <div class="modal-footer">
-		          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-		        </div>
-	        </div>
-		</div>
-	</div>
-	<!-- 계정조회 모달 끝 -->
-	
-	<!-- jModal -->
-	<div id='modal'>
-		
-	</div>	
-  
 	</main>
 	<script>
 	/* 날짜 input jquery ui */
@@ -631,6 +547,101 @@
 		$('#modal')
 	}
 	</script>
+	
+	<!-- MyModal 원장조회 -->
+	<script>
+		/* 모달 보여주기 */
+		function popMySlipModal() {
+			console.log("모달창 실행");
+			$("#slip-modal").fadeIn(200);	
+		}
+		/* 모달 닫기 */
+		function closeMySlipModal() {
+			$("#slip-modal").fadeOut(200);
+		}
+	</script>
+	
+	<div class="modal-layer" id="slip-modal">
+		<div class="modal-section">
+			<button onclick="closeMySlipModal()" style="float:right;">&times;</button>
+			<table style="margin-bottom:5px; width:100%;">
+		        	<tr>
+		        		<td>계정과목&nbsp;&nbsp;&nbsp;&nbsp;<input style="width:100px;" type="text">&nbsp;&nbsp;
+		        			<img src="${contextPath}/resources/images/bubble.PNG" style="width:30px; height:26px;">
+		        		</td>
+		        		<td align="right"><span>조회기간&nbsp;&nbsp;&nbsp;&nbsp;</span><input type="text" id="datepicker3"> ~ <input type="text" id="datepicker4"></td>
+		        	</tr>
+		        </table>
+				<script>
+						/* 날짜 input jquery ui */
+						$.datepicker
+								.setDefaults({
+									showOn : "both",
+									buttonImageOnly : true,
+									buttonImage : "${contextPath}/resources/images/calendar.png",
+									dateFormat : 'yy-mm-dd'
+
+								});
+						$(function() {
+							$("#datepicker3").datepicker({});
+							$("#datepicker4").datepicker({});
+							/* 달력버튼 */
+							$("img.ui-datepicker-trigger")
+									.attr(
+											"style",
+											"margin-left:2px; vertical-align:middle; cursor: Pointer; width:20px; height:20px");
+						});
+						
+						
+				</script>
+				<div>
+		        	<table id="List_detail" style=" width:100%; margin-left:auto; margin-right: auto;">
+		        		<tr>
+		        			<td class="modal-head">일자</td>
+		        			<td class="modal-head">번호</td>
+		        			<td class="modal-head">적요</td>
+		        			<td class="modal-head">코드</td>
+		        			<td class="modal-head">거래처</td>
+		        			<td class="modal-head">차변</td>
+		        			<td class="modal-head">대변</td>
+		        			<td class="modal-head">잔액</td>
+		        		</tr>
+		        		<tr class="modal_detail" style="height: 25px;">
+		        			<td style="text-align:center;">03-31</td>
+		        			<td style="text-align:center;">00005</td>
+		        			<td></td>
+		        			<td style="text-align:center;">01003</td>
+		        			<td style="text-align:center;">마음전자</td>
+		        			<td style="text-align:right;">550,000</td>
+		        			<td style="text-align:right;"></td>
+		        			<td style="text-align:right;">550,000</td>
+		        		</tr>
+		        		<tr>
+		        			<td class="modal-head"></td>
+		        			<td class="modal-head"></td>
+		        			<td class="modal-head" style="text-align:left;">[월&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;계]</td>
+		        			<td class="modal-head"></td>
+		        			<td class="modal-head"></td>
+		        			<td class="modal-head"></td>
+		        			<td class="modal-head"></td>
+		        			<td class="modal-head"></td>
+		        		</tr>
+		        		<tr>
+		        			<td class="modal-head"></td>
+		        			<td class="modal-head"></td>
+		        			<td class="modal-head" style="text-align:left;">[누&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;계]</td>
+		        			<td class="modal-head"></td>
+		        			<td class="modal-head"></td>
+		        			<td class="modal-head"></td>
+		        			<td class="modal-head"></td>
+		        			<td class="modal-head"></td>
+		        		</tr>
+		        	</table>
+		        </div>
+		</div>
+	</div>
+	<!-- MyModal 원장조회 끝 -->
+	
 	<jsp:include page="../common/menubar2.jsp" />
 </body>
 </html>

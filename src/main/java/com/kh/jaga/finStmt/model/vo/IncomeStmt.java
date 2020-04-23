@@ -1,7 +1,7 @@
 package com.kh.jaga.finStmt.model.vo;
 
 public class IncomeStmt implements java.io.Serializable {
-	private int comCode;					//회사코드
+	private String comCode;					//회사코드
 	private int year;						//연도
 	private int term;						//기수
 	private int sales;						//매출액
@@ -25,7 +25,7 @@ public class IncomeStmt implements java.io.Serializable {
 		
 	public IncomeStmt() {}
 
-	public IncomeStmt(int comCode, int year, int term, int sales, int salesOfMerchandise, int salesOfFinishedGoods,
+	public IncomeStmt(String comCode, int year, int term, int sales, int salesOfMerchandise, int salesOfFinishedGoods,
 			int costOfSales, int costOfMerchandisesSold, int beginningInvOfMerchandise, int costOfMerchandisePurchased,
 			int endingInvOfMerchandise, int costOfFinishedGoods, int grossProfit, int sellingAndAdminExpense,
 			int consumablesExpenses, int operatingIncome, int nonOperatingRevenue, int nonOperatingExpense,
@@ -54,11 +54,11 @@ public class IncomeStmt implements java.io.Serializable {
 		this.netIncome = netIncome;
 	}
 
-	public int getComCode() {
+	public String getComCode() {
 		return comCode;
 	}
 
-	public void setComCode(int comCode) {
+	public void setComCode(String comCode) {
 		this.comCode = comCode;
 	}
 
