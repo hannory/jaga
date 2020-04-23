@@ -24,7 +24,7 @@ public class VenderController {
 	
 	@RequestMapping("insert.ve")
 	public String insertVender(Model model, Vender v, HttpServletRequest request) {
-		
+		 
 		System.out.println(v);
 		vs.insertVender(v);
 		

@@ -18,7 +18,7 @@ public class CompanyDaoImpl implements CompanyDao {
 			
 			throw new LoginException("로그인 정보가 존재하지 않습니다.");
 		}
-		
+		 
 		return loginCompany;
 	}
 	

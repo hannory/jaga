@@ -39,7 +39,7 @@ public class CompanyServiceImpl implements CompanyService {
 		}
 		return loginCompany;
 	}
-
+ 
 	@Override
 	public int insertCompany(Company c) {
 

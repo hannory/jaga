@@ -29,7 +29,7 @@
   <result property="farmersStatus" column="FARMERS_STATUS"/>
   </resultMap>
 
-
+ 
 	
 	<insert id="insertVender" parameterType="Vender">
 		INSERT INTO VENDER(VENDER_CODE,COM_CODE,BIZ_REG_NUM,VENDER_NAME,BOSS_NAME,SELL_WAY,SELL_TARGET,VENDER_ADDRESS,VENDER_TEL,

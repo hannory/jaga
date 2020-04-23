@@ -51,7 +51,7 @@
 	<select id="doubleIdCheck" parameterType="java.lang.String" resultMap="companyResultSet">
 		SELECT COM_ID 
 		FROM COMPANY
-		WHERE COM_ID=#{companyId}
+		WHERE COM_ID=#{companyId}  
 	</select>
   
   

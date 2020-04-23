@@ -18,7 +18,7 @@
         margin-left:70px;
     }
 
-
+ 
     /* 거래처리스트 이벤트 정보 박스  */
     .vender-list-main-table-margin {
 

@@ -48,7 +48,7 @@ public class Company implements java.io.Serializable {
 		this.modifyDate = modifyDate;
 		this.payStatus = payStatus;
 		this.enrollStatus = enrollStatus;
-		this.gaeup = gaeup;
+		this.gaeup = gaeup; 
 	}
 	public String getCompanyCode() {
 		return companyCode;

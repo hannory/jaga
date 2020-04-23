@@ -132,7 +132,7 @@ public class CompanyController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return "redirect:index.jsp";
+		return "redirect:index.jsp"; 
 	}
 	
 	/*

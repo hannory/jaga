@@ -14,7 +14,7 @@ public interface CompanyDao {
 	Company loginCheck(SqlSessionTemplate sqlSession, Company c) throws LoginException;
 
 	int insertCompany(SqlSessionTemplate sqlSession, Company c);
-
+ 
 	Company doubleCheckId(SqlSessionTemplate sqlSession, String userId);
 
 }

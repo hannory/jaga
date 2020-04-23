@@ -30,7 +30,7 @@
 				  history.go(-1);
 			    });
 			<%-- alert("<%=msg%>"); --%>
-			
+			  
 			//history.go(-1);
 		};
 	</script>

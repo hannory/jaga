@@ -10,5 +10,5 @@ public interface CompanyService {
 	int insertCompany(Company c);
 
 	int doubleCheckId(String userId);
-
+ 
 }

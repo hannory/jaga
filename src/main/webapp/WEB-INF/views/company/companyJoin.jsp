@@ -588,7 +588,7 @@
 	});
 
 	
-/* 	$("#userPwd").keyup(function(){
+/* /* 	$("#userPwd").keyup(function(){
 		var msg='';
 		var pw = $("#userPwd").val();
 		var num = pw.search(/[0-9]/g);
@@ -610,7 +610,7 @@
 		}
 		$("userPwdCheck").text(msg);
 	}); */
-	
+	 */
 		
 	$.datepicker.setDefaults({
 		showOn:"both",

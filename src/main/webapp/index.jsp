@@ -12,6 +12,6 @@
       value="${ pageContext.servletContext.contextPath }"
       scope="application" /> 
    <jsp:forward page="WEB-INF/views/company/companyLogin.jsp"/>   
-
+  
 </body>
 </html>
