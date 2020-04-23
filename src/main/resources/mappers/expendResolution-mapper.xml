@@ -43,12 +43,28 @@
 		'3',
 		10
   	)
+  	INTO APPROVALER_INFO(
+		APPR_INFO_CODE,
+		APPR_EMP_CODE,
+		APPR_EMP_POSITION,
+		EXPEND_RESOLUTION,
+		EMPLOYEE_CODE,
+		APPR_STATUS
+  	)
+  	VALUES(
+  		SEQ_APPROVALER_INFO.NEXTVAL,
+  		#{apprEmpCode},
+  		#{apprEmpPosition},
+  		SEQ_EXPEND_RESOLUTION.CURRVAL,
+  		'1',
+  		'N'
+  	)
   	INTO SWY_TEMP(
   		ID,
   		PWD
   	)
   	VALUES(
-  		SEQ_SWY_SEQUENCE.NEXTVAL,
+  		'923',
   		'PASS01!'
   	)
   	SELECT * FROM DUAL
@@ -64,11 +80,96 @@
   
   <select id="selectDeptList" resultType="com.kh.jaga.expendResolution.model.vo.DepartmentVo">
   	SELECT 
-  		DEPT_CODE as deptCode, 
-  		DEPT_NAME as deptName
+  		DEPT_CODE,
+  		DEPT_NAME
   	FROM DEPARTMENT
   </select>
   
+  <!-- 
+  SELECT 
+  		DEPT_CODE as deptCode, 
+  		DEPT_NAME as deptName
+  FROM DEPARTMENT
+   -->
+  
+  <select id="selectAccountTitleList" resultMap="AccountTitleVoResultSet">
+  	SELECT  
+  		ACCOUNT_CODE,
+  		ACCOUNT_TITLE,
+  		CHARACTER,
+  		REALATION,
+  		COM_CODE,
+  		ACCOUNT_SYSTEM
+  	FROM ACCOUNT_TITLE
+  </select>
+  
+  <select id="selectComInIdList" resultMap="ComInIdVoResultSet">
+  	SELECT
+  		COM_INNER_ID_NUM,
+  		COM_CODE,
+  		J.POSITION_CODE,
+  		ID,
+  		PWD,
+  		EMAIL,
+  		NAME,
+  		FILE_NAME,
+  		J.POSITION_NAME
+  	FROM COM_INNER_ID C
+  	JOIN JOB_POSITION J ON (C.POSITION_CODE = J.POSITION_CODE)
+  </select>
+  
+  
+  <select id="selectExpendResolutionList" resultType="com.kh.jaga.expendResolution.model.dto.ExpendResolutionDto">
+  	SELECT
+		RESOLUTION_NO,
+		COM_RESOLUTION_CODE,
+		INITIATIVE_DATE,
+		DEPARTMENT_CODE,
+		MANAGER_NO,
+		MANAGER_POSITION,
+		EXPEND_PURPOSE,
+		EXPEND_DATE,
+		ACCOUNT_TITLE_CODE,
+		EXPEND_SUMMARY,
+		CREATE_USER,
+		CREATE_DATE,
+		APPROVAL_STATUS,
+		PAYMENT_TYPE_CODE,
+		EVIDENCE_CODE,
+		COM_CODE
+	FROM EXPEND_RESOLUTION
+  </select>
+  
+  
+  
+  
+  
+  
+  <!-- @@@@@@@@@@@@@@@ resultMap @@@@@@@@@@@@@@@ -->
+  
+  <!-- 지출결의서 : 페이지 호출시 : 계정과목 : 검색용 데이터 -->
+  <resultMap type="com.kh.jaga.expendResolution.model.vo.AccountTitleVo" id="AccountTitleVoResultSet">
+  	<id property="" column=""/>
+  	<result property="accountCode" column="ACCOUNT_CODE"/>
+  	<result property="accountTitle" column="ACCOUNT_TITLE"/>
+  	<result property="character" column="CHARACTER"/>
+  	<result property="realation" column="REALATION"/>
+  	<result property="comCode" column="COM_CODE"/>
+  	<result property="accountSystem" column="ACCOUNT_SYSTEM"/>
+  </resultMap>
+  
+  <!-- 지출결의서 : 페이지 호출시 : 담당자 : 검색용 데이터 -->
+  <resultMap type="com.kh.jaga.companyInnerId.model.vo.ComInIdVo" id="ComInIdVoResultSet">
+	  <id property="comInnerIdNum" column="COM_INNER_ID_NUM"/>
+	  <result property="comCode" column="COM_CODE"/>
+	  <result property="positionCode" column="POSITION_CODE"/>
+	  <result property="id" column="ID"/>
+	  <result property="pwd" column="PWD"/>
+	  <result property="email" column="EMAIL"/>
+	  <result property="name" column="NAME"/>
+	  <result property="fileName" column="FILE_NAME"/>
+	  <result property="positionName" column="POSITION_NAME"/>
+  </resultMap>
   
   
   

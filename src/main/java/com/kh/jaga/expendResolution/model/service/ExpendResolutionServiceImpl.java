@@ -8,8 +8,10 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.jaga.companyInnerId.model.vo.ComInIdVo;
 import com.kh.jaga.expendResolution.model.dao.ExpendResolutionDao;
 import com.kh.jaga.expendResolution.model.dto.ExpendResolutionDto;
+import com.kh.jaga.expendResolution.model.vo.AccountTitleVo;
 import com.kh.jaga.expendResolution.model.vo.DepartmentVo;
 
 @Service
@@ -38,6 +40,30 @@ public class ExpendResolutionServiceImpl implements ExpendResolutionService{
 		List<DepartmentVo> deptList = dao.selectDeptList(sqlSession);
 		
 		return deptList;
+	}
+
+	@Override
+	public List<AccountTitleVo> selectAccountTitleList() {
+		
+		List<AccountTitleVo> accountTitleList = dao.selectAccountTitleList(sqlSession);
+
+		return accountTitleList;
+	}
+
+	@Override
+	public List<ComInIdVo> selectComInIdList() {
+		
+		List<ComInIdVo> ComInIdList = dao.selectComInIdListList(sqlSession);
+
+		return ComInIdList;
+	}
+
+	@Override
+	public List<ExpendResolutionDto> selectExpendResolutionList() {
+		
+		List<ExpendResolutionDto> dtoList = dao.selectExpendResolutionList(sqlSession);
+		
+		return dtoList;
 	}
 	
 	
