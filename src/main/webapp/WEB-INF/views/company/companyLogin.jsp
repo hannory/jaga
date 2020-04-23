@@ -127,11 +127,13 @@
 				</tr>
 				
 			</table>
-					<div class="join_id_pwd"><a href="companyJoinView.co"> 회원가입 </a></div> 
+					<div class="join_id_pwd"><a href="companyJoinView.co"> 회원가입 </a></div> <br>
+					<a href="">아이디/비밀번호찾기</a><br>
 		</form>
  		</c:if> 
- 			
-			<button onclick="logout()">로그아웃</button>  
+ 			<br>
+<!-- 			<button onclick="logout()">로그아웃</button>   -->
+			<br>
 	</div>
 	
 	<script>
