@@ -23,4 +23,8 @@ public interface BusinessEmpService {
 
 	int updateBEmp(BusinessEmp be, ArrayList<Attachment> attList);
 
+	int deletePhoto(String fileCode);
+
+	Attachment selectFilePath(String fileCode);
+
 }

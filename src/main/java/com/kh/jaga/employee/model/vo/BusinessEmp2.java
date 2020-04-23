@@ -1,10 +1,6 @@
 package com.kh.jaga.employee.model.vo;
 
-import java.sql.Date;
-
-import org.springframework.format.annotation.DateTimeFormat;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
+import java.util.List;
 
 public class BusinessEmp2 {
 	
@@ -30,6 +26,7 @@ public class BusinessEmp2 {
 	private String deptName;		//소득구분
 	private String typeOfBixCode;		//소득구분
 	private String sellTargetName;		//소득구분
+	private List<Attachment> attList;
 	
 	public BusinessEmp2() {}
 
@@ -37,7 +34,7 @@ public class BusinessEmp2 {
 			String securityNumber, int salary, String email, String backCode, String accountNumber,
 			String accountHolder, String department, String positionCode, String enrollDate, String leaveDate,
 			String leaveReason, String idDocument, String accountDocument, String incomeClass, String positionName,
-			String deptName, String typeOfBixCode, String sellTargetName) {
+			String deptName, String typeOfBixCode, String sellTargetName, List<Attachment> attList) {
 		super();
 		this.employeeCode = employeeCode;
 		this.comCode = comCode;
@@ -61,6 +58,7 @@ public class BusinessEmp2 {
 		this.deptName = deptName;
 		this.typeOfBixCode = typeOfBixCode;
 		this.sellTargetName = sellTargetName;
+		this.attList = attList;
 	}
 
 	public String getEmployeeCode() {
@@ -239,6 +237,14 @@ public class BusinessEmp2 {
 		this.sellTargetName = sellTargetName;
 	}
 
+	public List<Attachment> getAttList() {
+		return attList;
+	}
+
+	public void setAttList(List<Attachment> attList) {
+		this.attList = attList;
+	}
+
 	@Override
 	public String toString() {
 		return "BusinessEmp2 [employeeCode=" + employeeCode + ", comCode=" + comCode + ", employeeNum=" + employeeNum
@@ -248,8 +254,9 @@ public class BusinessEmp2 {
 				+ ", enrollDate=" + enrollDate + ", leaveDate=" + leaveDate + ", leaveReason=" + leaveReason
 				+ ", idDocument=" + idDocument + ", accountDocument=" + accountDocument + ", incomeClass=" + incomeClass
 				+ ", positionName=" + positionName + ", deptName=" + deptName + ", typeOfBixCode=" + typeOfBixCode
-				+ ", sellTargetName=" + sellTargetName + "]";
+				+ ", sellTargetName=" + sellTargetName + ", attList=" + attList + "]";
 	}
 
+	
 	
 }

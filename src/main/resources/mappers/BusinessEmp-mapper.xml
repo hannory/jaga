@@ -37,6 +37,14 @@
   		<result property="incomeClass" column="INCOME_CLASS"/>
   	</resultMap>
   	
+  	<resultMap type="Attachment" id="attResultMap">
+  		<id property="fileCode" column="FILE_CODE"/>
+  		<result property="newFileName" column="NEW_FILENAME"/>
+  		<result property="filePath" column="FILE_PATH"/>
+  		<result property="type" column="TYPE"/>
+  		<result property="comCode" column="FK_CODE"/>
+  	</resultMap>
+  	
   	
   	<resultMap type="BusinessEmp2" id="BusinessEmpResultMap2">
   		<id property="employeeCode" column="EMPLOYEE_CODE"/>
@@ -61,6 +69,7 @@
   		<result property="deptName" column="DEPT_NAME"/>
   		<result property="typeOfBixCode" column="TYPE_OF_BIZ_CODE"/>
   		<result property="sellTargetName" column="SELL_TARGET_NAME"/>
+  		<collection property="attList" javaType="java.util.List" resultMap="attResultMap"/>
   	</resultMap>
   	
   	<select id="selectBank" resultMap="bankResultMap">
@@ -110,11 +119,20 @@
 		       , D.DEPT_NAME
 		       , T.TYPE_OF_BIZ_CODE
 		       , T.SELL_TARGET_NAME
+               , A.FILE_CODE
+               , A.NEW_FILENAME
+               , A.FILE_PATH
+               , A.TYPE
+               , A.FK_CODE
 		FROM BUSINESS_EMP B
 		JOIN JOB_POSITION J ON(B.POSITION_CODE = J.POSITION_CODE)
 		JOIN DEPARTMENT D ON(D.DEPT_CODE = B.DEPARTMENT)
 		JOIN TYPE_OF_BIZ_CODE T ON(T.TOBC_PK_CODE = B.INCOME_CLASS)
-		LEFT JOIN ATTACHMENT A ON(A.FK_CODE = B.EMPLOYEE_CODE)
+		LEFT JOIN (SELECT *
+                    FROM ATTACHMENT
+                    WHERE FK_CODE = 4
+                        AND TYPE = 3
+                        OR TYPE = 4) A ON(A.FK_CODE = B.EMPLOYEE_CODE)
   		WHERE EMPLOYEE_CODE = #{empCode}
   	</select>
   	
@@ -140,4 +158,19 @@
   		INSERT INTO ATTACHMENT
   		VALUES(ATTACHMENT_SEQ.NEXTVAL, #{newFileName}, #{filePath}, #{type}, #{comCode})
   	</insert>
+  	
+  	<delete id="deletePhoto" parameterType="java.lang.String">
+  		DELETE FROM ATTACHMENT
+  		WHERE FILE_CODE = #{fileCode}
+  	</delete>
+  	
+  	<select id="selectFilePath" resultType="Attachment" parameterType="java.lang.String">
+  		SELECT FILE_CODE
+		 	 , NEW_FILENAME "NEW_FILE_NAME"
+			 , FILE_PATH
+			 , TYPE
+			 , FK_CODE "COM_CODE"
+  		FROM ATTACHMENT
+  		WHERE FILE_CODE = #{fileCode}
+  	</select>
   </mapper>

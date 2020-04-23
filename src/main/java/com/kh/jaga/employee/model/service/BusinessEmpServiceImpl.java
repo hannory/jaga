@@ -67,4 +67,16 @@ public class BusinessEmpServiceImpl implements BusinessEmpService{
 		return result2;
 	}
 
+
+	@Override
+	public int deletePhoto(String fileCode) {
+		return bed.deletePhoto(sqlSession,fileCode);
+	}
+
+
+	@Override
+	public Attachment selectFilePath(String fileCode) {
+		return bed.selectFilePath(sqlSession, fileCode);
+	}
+
 }

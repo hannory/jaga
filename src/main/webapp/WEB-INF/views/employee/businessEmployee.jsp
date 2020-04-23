@@ -195,7 +195,7 @@
 				<form action="addBusinessEmp.be" method="post">
 				<input type="hidden" name="employeeCode" id="empCode">
 				<input type="hidden" name="comCode" value="${ sessionScope.loginCompany.companyCode }">
-				<input type="hidden" name="employeeNum" value="${ employeeNum }">
+				<input type="hidden" name="employeeNum" value="${ employeeNum }" id="employeeNum">
 					<table id="saveArea">
 					
 						<tr>
@@ -220,12 +220,12 @@
 						<tr>
 							<th>소득구분</th>
 							<td>
-								<input type="text" id="typeOfBizCode" name="typeOfBizCode">
+								<input type="text" id="typeOfBizCode" name="typeOfBizCode" style="width:20%;">
 								<button type="button" id="searchBtn3">
 									<img alt="" src="${contextPath}/resources/images/search.PNG" width="20px" height="20px">
 								</button>
 								<input type="text" name="sellTargetName" id="sellTargetName">
-								<input type="hidden" name="tobcPkCode" id="incomeClass">
+								<input type="hidden" name="incomeClass" id="incomeClass">
 							</td>
 							<th>이메일</th>
 							<td><input type="email" name="email" id="email"></td>
@@ -333,13 +333,17 @@
 							<tr>
 								<th>신분증명서류</th>
 								<td>
-									<input type="file" name="idPhoto">
+									<input type="file" name="idPhoto" id="idPhoto">
+									<button type="button" id="idPhotoDown">다운</button>
+									<button type="button" id="idPhotoDel">삭제</button>
 								</td>
 							</tr>
 							<tr>
 								<th>급여계좌사본</th>
 								<td>
-									<input type="file" name="accountPhoto">
+									<input type="file" name="accountPhoto" id="accountPhoto">
+									<button type="button" id="accPhotoDown">다운</button>
+									<button type="button" id="accPhotoDel">삭제</button>
 								</td>
 							</tr>
 							
@@ -418,6 +422,7 @@
 					$("#fileArea").css("display", "block");
 					var emp = data.BEmp;
 					
+					
 					var employeeCode = emp.employeeCode;
 					var employeeName = emp.employeeName;
 					var securityNumber = emp.securityNumber;
@@ -432,9 +437,26 @@
 					var salary = emp.salary;
 					var typeOfBixCode = emp.typeOfBixCode;
 					var sellTargetName = emp.sellTargetName;
+					var incomeClass = emp.incomeClass;
 					
 					var date1 = new Date(enrollDate); 
+					for(var i = 0; i < emp.attList.length; i++){
+						if(emp.attList[i].type == 3){
+							console.log("신분증명서류");
+							$("#idPhoto").attr("type", "text").val(emp.attList[i].newFileName).attr("readonly", "true").attr("name","yeah");
+							$("#idPhotoDel").attr("onclick","deletePhoto("+emp.attList[i].fileCode+");");
+							$("#idPhotoDown").attr("onclick","downPhoto("+emp.attList[i].fileCode+");");
+						}else if(emp.attList[i].type == 4) {
+							console.log("뭐시기");
+							var zzz = emp.attList[i].filePath;
+							$("#accountPhoto").attr("type", "text").val(emp.attList[i].newFileName).attr("readonly", "true").attr("name","yeah");
+							$("#accPhotoDel").attr("onclick",'deletePhoto('+emp.attList[i].fileCode+');');
+							$("#accPhotoDown").attr("onclick",'downPhoto('+emp.attList[i].fileCode+');');
+							
+						}
+					}
 					
+					$("#employeeNum").val(emp.employeeNum);
 					$("#empNamee").text(employeeName);
 					$("#empCode").val(employeeCode);
 					$("#employeeName").val(employeeName);
@@ -450,8 +472,9 @@
 					$("#salary").val(salary);
 					$("#typeOfBizCode").val(typeOfBixCode);
 					$("#sellTargetName").val(sellTargetName);
+					$("#incomeClass").val(incomeClass);
 					
-					console.log($("#datepicker"));
+					console.log($("#employeeNum").val());
 					
 					$("form").attr("action", "addBusinessEmp2.be").attr("encType","multipart/form-data");
 					
@@ -487,6 +510,28 @@
 		});
 		
 		
+		function deletePhoto(code){
+			console.log(code);
+			
+			location.href="deletePhoto.be?fileCode="+code;
+			
+			/* $.ajax({
+				url:"deletePhoto.be",
+				data:{fileCode:code},
+				success:function(data){
+					location.href="businessEmpList.be";
+				}
+			}); */
+		}
+		
+		
+		function downPhoto(code){
+			console.log(code);
+			
+			location.href="downloadPhoto.be?fileCode="+code;
+			
+		}
+		
 		
 		var accountC = "";//계정과목
 		var accountN;
@@ -501,7 +546,7 @@
 			
 			$("#typeOfBizCode").val(code);
 			$("#sellTargetName").val(accountN);
-			$("#tobcPkCode").val(pk);
+			$("#incomeClass").val(pk);
 			
 			 $("div#accountModal").modal("hide");
 		}

@@ -67,4 +67,18 @@ public class BusinessEmpDaoImpl implements BusinessEmpDao {
 		return result;
 	}
 
+	@Override
+	public int deletePhoto(SqlSessionTemplate sqlSession, String fileCode) {
+		int result = sqlSession.delete("BusinessEmp.deletePhoto", fileCode);
+		
+		return 0;
+	}
+
+	@Override
+	public Attachment selectFilePath(SqlSessionTemplate sqlSession, String fileCode) {
+		Attachment filePath = sqlSession.selectOne("BusinessEmp.selectFilePath",fileCode);
+		
+		return filePath;
+	}
+
 }
