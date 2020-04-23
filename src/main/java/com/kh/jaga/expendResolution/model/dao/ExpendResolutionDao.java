@@ -1,5 +1,6 @@
 package com.kh.jaga.expendResolution.model.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -18,5 +19,7 @@ public interface ExpendResolutionDao {
 	List<AccountTitleVo> selectAccountTitleList(SqlSessionTemplate sqlSession);
 
 	List<ComInIdVo> selectComInIdListList(SqlSessionTemplate sqlSession);
+
+	List<ExpendResolutionDto> selectExpendResolutionList(SqlSessionTemplate sqlSession);
 
 }

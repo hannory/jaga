@@ -10,18 +10,18 @@
 <title>Insert title here</title>
 <style>
 .confirmTable {
-	background: gray;
+	/* background: gray; */
 	float: right;
 	text-align: center;
 }
 
 .topTr {
-	background: aqua;
+	/* background: aqua; */
 	height: 30px;
 }
 
 .botTr {
-	background: red;
+	/* background: red; */
 	height: 100px;
 }
 
@@ -30,6 +30,9 @@
 }
 
 .botTd {
+	width: 100px;
+}
+.topTdInput{
 	width: 100px;
 }
 
@@ -525,7 +528,7 @@
 					var selectedComInIdName = target.children[1].innerHTML;
 					var selectedComInIdPositionName = target.children[2].innerHTML;
 					$("#inputComInIdNum").val(selectedComInIdNum);
-					$("#inputComInIdName").val(selectedComInIdName); /* 와드 */
+					$("#inputComInIdName").val(selectedComInIdName);
 					closeModalEmployee();
 				}
 				/* 모달 > 담당자 행 클릭 시 동작 끝 */
@@ -576,7 +579,7 @@
 
 
 
-
+		<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 본 화면 내용 (모달X) @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
 
 
 		<form action="insertExpendResolution.expendResolution" method="post">
@@ -587,18 +590,76 @@
 			<table class="confirmTable" border="1">
 				<tr class="topTr" id="confirmTopRow">
 					<td class="" style="width: 30px;" onclick="addBtn()">+</td>
-					<td class="topTd">품의자</td>
-					<td class="topTd">품의자</td>
+					<td class="topTd">작성자</td>
+					<td class="topTd">
+						<input type="hidden" id="apprInfoCode" name="apprInfoCode">
+						<!-- <input type="text" id="apprEmpCode" name="apprEmpCode" class='topTdInput'> -->
+						<select id="apprEmpCode" name="apprEmpCode">
+							<option value="${ comInIdList[0].comInnerIdNum }"><c:out value="${ comInIdList[0].name }"/></option>
+							<option value="${ comInIdList[1].comInnerIdNum }"><c:out value="${ comInIdList[1].name }"/></option>
+							<option value="zzz"><c:out value="asdasd"/></option>
+							
+							<c:if test="${ comInIdList ne null }">
+								<c:forEach items="${ comInIdList }" var="obj">
+									<option value="${ obj.comInnerIdNum }"><c:out value="${ obj.name }"/></option>	
+								</c:forEach>
+							</c:if>
+							
+						</select>
+					</td>
 				</tr>
 
 				<tr class="botTr" id="confirmBotRow">
 					<td class="">결재</td>
 					<td class="botTd">본인싸인</td>
-					<td class="botTd">싸인</td>
+					<td class="botTd" id="apprSignImg01">싸인</td>
 				</tr>
 
 			</table>
 			<!-- //우측상단 결재 관련 -->
+			
+			<script>
+			/* 우측상단 결재박스 늘리기 */
+			var apprCount = 1;	//전역변수 설정	//
+			function addBtn() {
+				console.log(apprCount);
+				apprCount++;
+				console.log(apprCount);
+				
+				var topTdStr = "<td class='topTd'>"
+							 + "<input style='width:100px;' type='hidden' id='apprInfoCodeㅋㅋㅋ" + apprCount + "' name='apprInfoCodeㅋㅋㅋ" + apprCount + "'>"
+							 + "<input type='text' id='apprEmpCodeㅋㅋㅋ" + apprCount + "' class='topTdInput' name='apprEmpCodeㅋㅋㅋ" + apprCount + "'></td>";
+				var botTdStr = "<td class='botTd' id='apprSignImg01'>싸인</td>";
+				
+				$(".topTd:last-child").after(topTdStr);
+				$(".botTd:last-child").after(botTdStr);
+				
+				console.log($(".topTdInput:nth-last-child(1)"));
+				/* console.log($(".topTdInput:last-child").attr("name")); */
+				
+				
+				/* var nodeTop = document.createElement("td");
+				var textnodeTop = document.createTextNode("품의자");
+				nodeTop.appendChild(textnodeTop);
+				document.getElementById("confirmTopRow").appendChild(nodeTop);
+
+				var nodeBot = document.createElement("td");
+				var textnodeBot = document.createTextNode("싸인");
+				nodeBot.appendChild(textnodeBot);
+				document.getElementById("confirmBotRow").appendChild(nodeBot); */
+
+			}
+		</script>
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -738,7 +799,7 @@
 							for="radioCard">카드</label></td>
 						<td style="width: 10%; border-top: 1px solid white;"></td>
 						<td style="width: 10%;" class="color-green">합계</td>
-						<td style="width: 20%;">140,000</td>
+						<td style="width: 20%;"><span id="totalSumDisplay"></span></td>
 					</tr>
 					<tr>
 						<td class="color-green">관련증빙</td>
@@ -757,6 +818,7 @@
 						<td><span id="receptionLabel">증빙파일을 선택하세요</span></td>
 					</tr>
 				</table>
+				
 				<!-- //테이블 3번 -->
 
 
@@ -840,22 +902,7 @@
 
 		</form>
 
-		<script>
-			/* 우측상단 결재박스 늘리기 */
-			function addBtn() {
-
-				var nodeTop = document.createElement("td");
-				var textnodeTop = document.createTextNode("품의자");
-				nodeTop.appendChild(textnodeTop);
-				document.getElementById("confirmTopRow").appendChild(nodeTop);
-
-				var nodeBot = document.createElement("td");
-				var textnodeBot = document.createTextNode("싸인");
-				nodeBot.appendChild(textnodeBot);
-				document.getElementById("confirmBotRow").appendChild(nodeBot);
-
-			}
-		</script>
+		
 
 
 
@@ -941,12 +988,19 @@
 								e.target.value = "";
 							}
 
-							//totalExpend 값을 총합으로 바꿔줌
+							//expendSummary(지출합계) 값을 자동으로 바꿔줌
 							$("#expendSummary").val(
 									Number($(".price").eq(0).val())
 											+ Number($(".price").eq(1).val())
-											+ Number($(".price").eq(2).val()));
-
+											+ Number($(".price").eq(2).val())
+							);
+							//totalSumDisplay(합계) 값을 자동으로 바꿔줌
+							$("#totalSumDisplay").text(
+									Number($(".price").eq(0).val())
+									+ Number($(".price").eq(1).val())
+									+ Number($(".price").eq(2).val())	
+							);
+							
 						});
 
 			});

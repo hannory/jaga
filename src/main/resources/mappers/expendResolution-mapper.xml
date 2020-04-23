@@ -43,12 +43,28 @@
 		'3',
 		10
   	)
+  	INTO APPROVALER_INFO(
+		APPR_INFO_CODE,
+		APPR_EMP_CODE,
+		APPR_EMP_POSITION,
+		EXPEND_RESOLUTION,
+		EMPLOYEE_CODE,
+		APPR_STATUS
+  	)
+  	VALUES(
+  		SEQ_APPROVALER_INFO.NEXTVAL,
+  		#{apprEmpCode},
+  		#{apprEmpPosition},
+  		SEQ_EXPEND_RESOLUTION.CURRVAL,
+  		'1',
+  		'N'
+  	)
   	INTO SWY_TEMP(
   		ID,
   		PWD
   	)
   	VALUES(
-  		SEQ_SWY_SEQUENCE.NEXTVAL,
+  		'923',
   		'PASS01!'
   	)
   	SELECT * FROM DUAL
@@ -103,6 +119,28 @@
   </select>
   
   
+  <select id="selectExpendResolutionList" resultType="com.kh.jaga.expendResolution.model.dto.ExpendResolutionDto">
+  	SELECT
+		RESOLUTION_NO,
+		COM_RESOLUTION_CODE,
+		INITIATIVE_DATE,
+		DEPARTMENT_CODE,
+		MANAGER_NO,
+		MANAGER_POSITION,
+		EXPEND_PURPOSE,
+		EXPEND_DATE,
+		ACCOUNT_TITLE_CODE,
+		EXPEND_SUMMARY,
+		CREATE_USER,
+		CREATE_DATE,
+		APPROVAL_STATUS,
+		PAYMENT_TYPE_CODE,
+		EVIDENCE_CODE,
+		COM_CODE
+	FROM EXPEND_RESOLUTION
+  </select>
+  
+  
   
   
   
@@ -132,6 +170,7 @@
 	  <result property="fileName" column="FILE_NAME"/>
 	  <result property="positionName" column="POSITION_NAME"/>
   </resultMap>
+  
   
   
   

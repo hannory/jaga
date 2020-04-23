@@ -1,5 +1,6 @@
 package com.kh.jaga.expendResolution.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -72,16 +73,23 @@ public class ExpendResolutionController {
 		System.out.println("dto ::: ");
 		System.out.println(dto);
 		
-//임시주석		int result = service.insertExpendResolution(dto);
+		int result = service.insertExpendResolution(dto);
+		System.out.println("지출결의서 인서트 결과 ::::: " + result);
 
 		mv.setViewName("redirect:index.jsp");
 		return mv;
 	}//method
 	
 	
-	//탭메뉴 이동 - 지출결의서 목록
+	//탭메뉴 이동 - 지출결의서 목록 조회                     
 	@RequestMapping("showExpendResolutionList.expendResolution")
 	public ModelAndView showExpendResolutionList(ModelAndView mv) {
+		
+		//리스트 조회해오기
+		List<ExpendResolutionDto> dtoList = service.selectExpendResolutionList(); 
+		
+		System.out.println("조회결과 :::::::");
+		System.out.println(dtoList);
 		
 		mv.setViewName("expendResolutionList");
 		return mv;

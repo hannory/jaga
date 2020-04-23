@@ -57,6 +57,14 @@ public class ExpendResolutionServiceImpl implements ExpendResolutionService{
 
 		return ComInIdList;
 	}
+
+	@Override
+	public List<ExpendResolutionDto> selectExpendResolutionList() {
+		
+		List<ExpendResolutionDto> dtoList = dao.selectExpendResolutionList(sqlSession);
+		
+		return dtoList;
+	}
 	
 	
 }

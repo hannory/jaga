@@ -1,5 +1,6 @@
 package com.kh.jaga.expendResolution.model.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.kh.jaga.companyInnerId.model.vo.ComInIdVo;
@@ -16,5 +17,7 @@ public interface ExpendResolutionService {
 	List<AccountTitleVo> selectAccountTitleList();
 
 	List<ComInIdVo> selectComInIdList();
+
+	List<ExpendResolutionDto> selectExpendResolutionList();
 
 }

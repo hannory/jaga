@@ -21,7 +21,7 @@ public class ExpendResolutionDto implements java.io.Serializable{
 //	private String comCode;				//회사코드
 	
 	//APPROVALER_INFO 테이블		 		//[결재자정보]
-	private String apprInfoCode;		//결재자정보번호
+	private String apprInfoCode = "시퀀스넣기";		//결재자정보번호
 	private String apprEmpCode;			//결재자직원코드
 	private String apprEmpPosition;		//결재자직급
 	private String expendResolution;	//결의서코드
@@ -29,7 +29,7 @@ public class ExpendResolutionDto implements java.io.Serializable{
 	private String apprStatus;			//승인여부
 	
 	//EXPEND_RESOLUTION 테이블 			//[지출결의서]
-	private String resolutionNo;		//결의서 코드
+	private String resolutionNo = "시퀀스넣기";		//결의서 코드
 	private String comResolutionCode;	//회사 코드
 	private String initiativeDate;		//발의일
 	private String departmentCode;		//담당부서(코드)
@@ -47,7 +47,7 @@ public class ExpendResolutionDto implements java.io.Serializable{
 	private String comCode;				//회사코드
 	
 	//EXPEND_RESOLUTION_DETAIL 테이블		//지출결의서 상세
-	private String expendDetailNo;		//상세내역번호
+	private String expendDetailNo = "시퀀스넣기";		//상세내역번호
 	private String expendDetailDate;	//지출일자		//디비에서 받아올 데이터	//DB칼럼명이랑 일치하지않으므로 맵핑 주의해서 할 것
 	private String brief;				//적요
 	private String venderCode;			//거래처코드
@@ -488,23 +488,23 @@ public class ExpendResolutionDto implements java.io.Serializable{
 
 	@Override
 	public String toString() {
-		return "ExpendResolutionDto [apprInfoCode=" + apprInfoCode + ", apprEmpCode=" + apprEmpCode
-				+ ", apprEmpPosition=" + apprEmpPosition + ", expendResolution=" + expendResolution + ", employeeCode="
-				+ employeeCode + ", apprStatus=" + apprStatus + ", resolutionNo=" + resolutionNo
-				+ ", comResolutionCode=" + comResolutionCode + ", initiativeDate=" + initiativeDate
-				+ ", departmentCode=" + departmentCode + ", managerNo=" + managerNo + ", managerPosition="
-				+ managerPosition + ", expendPurpose=" + expendPurpose + ", expendDate=" + expendDate
-				+ ", accountTitleCode=" + accountTitleCode + ", expendSummary=" + expendSummary + ", createUser="
-				+ createUser + ", createDate=" + createDate + ", approvalStatus=" + approvalStatus
-				+ ", paymentTypeCode=" + paymentTypeCode + ", evidenceCode=" + evidenceCode + ", comCode=" + comCode
-				+ ", expendDetailNo=" + expendDetailNo + ", expendDetailDate=" + expendDetailDate + ", brief=" + brief
-				+ ", venderCode=" + venderCode + ", price=" + price + ", memo=" + memo + ", expendResolutionNo="
-				+ expendResolutionNo + ", detailDate01=" + detailDate01 + ", detailBrief01=" + detailBrief01
-				+ ", detailVenderCode01=" + detailVenderCode01 + ", detailPrice01=" + detailPrice01 + ", detailMemo01="
-				+ detailMemo01 + ", detailDate02=" + detailDate02 + ", detailBrief02=" + detailBrief02
-				+ ", detailVenderCode02=" + detailVenderCode02 + ", detailPrice02=" + detailPrice02 + ", detailMemo02="
-				+ detailMemo02 + ", detailDate03=" + detailDate03 + ", detailBrief03=" + detailBrief03
-				+ ", detailVenderCode03=" + detailVenderCode03 + ", detailPrice03=" + detailPrice03 + ", detailMemo03="
+		return "ExpendResolutionDto:::\n [apprInfoCode=" + apprInfoCode + ", \napprEmpCode=" + apprEmpCode
+				+ ", \napprEmpPosition=" + apprEmpPosition + ", \nexpendResolution=" + expendResolution + ", \nemployeeCode="
+				+ employeeCode + ", \napprStatus=" + apprStatus + ", \nresolutionNo=" + resolutionNo
+				+ ", \ncomResolutionCode=" + comResolutionCode + ", \ninitiativeDate=" + initiativeDate
+				+ ", \ndepartmentCode=" + departmentCode + ", \nmanagerNo=" + managerNo + ", \nmanagerPosition="
+				+ managerPosition + ", \nexpendPurpose=" + expendPurpose + ", \nexpendDate=" + expendDate
+				+ ", \naccountTitleCode=" + accountTitleCode + ", \nexpendSummary=" + expendSummary + ", \ncreateUser="
+				+ createUser + ", \ncreateDate=" + createDate + ", \napprovalStatus=" + approvalStatus
+				+ ", \npaymentTypeCode=" + paymentTypeCode + ", \nevidenceCode=" + evidenceCode + ", \ncomCode=" + comCode
+				+ ", \nexpendDetailNo=" + expendDetailNo + ", \nexpendDetailDate=" + expendDetailDate + ", \nbrief=" + brief
+				+ ", \nvenderCode=" + venderCode + ", \nprice=" + price + ", \nmemo=" + memo + ", \nexpendResolutionNo="
+				+ expendResolutionNo + ", \ndetailDate01=" + detailDate01 + ", \ndetailBrief01=" + detailBrief01
+				+ ", \ndetailVenderCode01=" + detailVenderCode01 + ", \ndetailPrice01=" + detailPrice01 + ", \ndetailMemo01="
+				+ detailMemo01 + ", \ndetailDate02=" + detailDate02 + ", \ndetailBrief02=" + detailBrief02
+				+ ", \ndetailVenderCode02=" + detailVenderCode02 + ", \ndetailPrice02=" + detailPrice02 + ", \ndetailMemo02="
+				+ detailMemo02 + ", \ndetailDate03=" + detailDate03 + ", \ndetailBrief03=" + detailBrief03
+				+ ", \ndetailVenderCode03=" + detailVenderCode03 + ", \ndetailPrice03=" + detailPrice03 + ", \ndetailMemo03="
 				+ detailMemo03 + "]";
 	}
 	
