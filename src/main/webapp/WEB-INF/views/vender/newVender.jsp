@@ -20,7 +20,7 @@ top: 547px;
  */
 
 /* 거래처 등록정보 vender-info*/
-
+ 
 #vender-info{
 position: absolute;
 width: 173px;

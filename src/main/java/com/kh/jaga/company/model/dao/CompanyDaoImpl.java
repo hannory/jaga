@@ -18,7 +18,7 @@ public class CompanyDaoImpl implements CompanyDao {
 			
 			throw new LoginException("로그인 정보가 존재하지 않습니다.");
 		}
-		
+		 
 		return loginCompany;
 	}
 	
@@ -35,6 +35,11 @@ public class CompanyDaoImpl implements CompanyDao {
 	@Override
 	public int insertCompany(SqlSessionTemplate sqlSession, Company c) {
 		return sqlSession.insert("Company.insertCompany",c);
+	}
+
+	@Override
+	public Company doubleCheckId(SqlSessionTemplate sqlSession, String userId) {
+		return sqlSession.selectOne("Company.doubleIdCheck", userId);
 	}
 
 }

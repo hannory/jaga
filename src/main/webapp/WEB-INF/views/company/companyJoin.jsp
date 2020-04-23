@@ -3,6 +3,9 @@
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <head>
 <meta charset="UTF-8">
 <title>회원 가입 폼 view </title>
@@ -289,6 +292,14 @@
 		cursor: pointer;
 	}
 
+#datepicker{
+		width:150px;
+		height:25px;
+		background: #FFFFFF;
+		border: 1px solid #C4C4C4;
+		box-sizing: border-box;
+		border-radius: 5px;
+}
 </style>
 </head>
 <body>
@@ -383,7 +394,7 @@
         </tr>
         
         <tr>
-        	<td class="firstLine">전화번호</td>
+        	<td class="firstLine"><b>전화번호</b></td>
         	<td class="secondLine">
         	<input type="tel" maxlength="30" name="phone" id="phone">
         	</td>
@@ -394,16 +405,16 @@
 		
             <td class="firstLine"><b>사업자 등록증</b></td>
                		
-            <td class="secondLine">
+<!--             <td class="secondLine">
              <div id="licenseImgArea">
              <img id="fake-fileUp" name="upload" width="150" height="200">
              </div>
-            </td>
+            </td> -->
                		
             <td class="thirdLine">
+             
               <input type="file" id="input-fileUp" name="photo" onchange="loadImg(this, 2);">
-              <button type="button" id="uploadBtn">등록증 인증</button>
-            </td>
+            </td> 
         </tr>
         
         <tr class="hidesub">
@@ -416,6 +427,15 @@
                <td class="firstLine"><b>사업자 등록번호</b></td>
                <td class="secondLine">
                <input type="text" id="inputBizNum" maxlength="13" name="bizNum" placeholder="사업자 등록증을 인증해주세요">
+               </td>
+               <td class="thirdLine"><label id="nnResult"></label></td>
+         </tr>
+         
+                  <tr class="licenseTriger">
+               <td class="firstLine"><b>개업년월일</b></td>
+               <td class="secondLine">
+               <input type="text" id="datepicker" maxlength="13" name="gaeup" placeholder="">
+<!--                <button onclick="dateSearch();">검색</button> -->
                </td>
                <td class="thirdLine"><label id="nnResult"></label></td>
          </tr>
@@ -495,7 +515,7 @@
 			</tr>
 		
 		    <tr class="licenseTriger">
-               <td class="firstLine">업종코드</td>
+               <td class="firstLine" ><b>업종코드</b></td>
                <td class="secondLine"><input type="text" id="address2" name="bizType" placeholder="업종코드"></td>
                <td class="thirdLine"></td>
            </tr>	
@@ -522,6 +542,106 @@
 		
 	</div>
 	
+	<script>
+	/*아이디 비밀번호 비밀번호 확인 이메일 전화번호 사업자 등록증 사업자등록번호 개업년월일 회사명(상호) 대표자명 주민등록번호 회사주소 업종코드 
+/* 	"6~12자 영문 소문자, 숫자 입력" */
+
+	$("#userId").keyup(function(){
+		var msg ='';
+		var regId=/^[a-z][a-z,0-9]{5,11}$/
+		var val = this.value;
+		
+		if(!regId.test($("#userId").val())){
+			msg='6-12자 영문 소문자, 숫자를 입력해주세요';
+			$("userIdCheck").css("color","red");
+		}else{
+			msg="중복확인을 해주세요."
+			$("#userIdCheck").css("color","green");
+		};
+		
+		$("#userIdCheck").text(msg);
+		
+	});
+	//중복 확인하러 고우고우
+	$("#idCheck").click(function(){
+		var userId = $("#userId").val();
+	
+		//드디어 에이작스
+		$.ajax({
+			url: "doubleCheck.co",
+			type:"post",
+			data:{userId:userId},
+			
+			success:function(data){
+			swal({
+				title:data,
+				text:"",
+				icon:"warning"
+			})
+			var msg = data;
+			},
+			error: function(error){
+				alert(error);
+			}
+				
+			});
+	});
+
+	
+/* /* 	$("#userPwd").keyup(function(){
+		var msg='';
+		var pw = $("#userPwd").val();
+		var num = pw.search(/[0-9]/g);
+		var eng = pw.search(/[a-z]/ig);
+		var spe = pw.search(/[`~!@#$%<>^&*/;]/gi);
+		
+		if(pw.length<6||pw.length>16){
+			msg="6자리 16자리 이내로 입력해주세요.";
+			$("#userPwdCheck").css("color","red");
+		}else if(pw.search(/\s/))!=-1{
+			msg="비밀번호는 공백없이 입력해주세요.";
+			$("userPwdCheck").css("color","red");
+		}else if(num<0||eng<0||spe<0){
+			msg="영문, 숫자, 특수문자를 혼합하여 입력해주세요.";
+			$("userPwdCheck").css("color","red");
+		}else{
+			msg="유효한 비밀번호 입니다. "
+			$("userPwdCheck").css("color","green");
+		}
+		$("userPwdCheck").text(msg);
+	}); */
+	 */
+		
+	$.datepicker.setDefaults({
+		showOn:"both",
+		buttonImageOnly:true,
+		buttonImage :"${contextPath}/resources/images/calendar.png",
+		dateFormat: 'yy-mm-dd'
+	});
+	
+	$(function(){
+		$("#datepicker").datepicker({});
+		$("img.ui-datepicker-trigger")
+		.attr("style","margin-left:10px; vertical-align:middle; cursor:Pointer; width:22px; height:20px");
+	});
+	
+/* 	function dataSearch(){
+		var date1 = $("#datepicker").val();
+
+		$.ajax({
+			url:"gaeupSearch.co",
+			type:"get",
+			data:{
+				date1:date1,
+			},
+			success:function(data){
+				
+			}
+		})
+	}; */
+
+	
+	</script>
 	</div>
 		<div style="height: 100vh;"></div>
 		<div class="card mb-4">

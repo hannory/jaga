@@ -18,6 +18,7 @@
   <result property="personalNum" column="PERSONAL_NUM"/>
   <result property="bizType" column="TYPE_OF_BIZ"/>
   <result property="bizLocation" column="BIZ_LOCATION"/>
+  <result property="gaeup" column="GAEUPDAY"/>
   </resultMap>
 
   <select id="selectLoginCompany" resultMap="companyResultSet" parameterType="Company">
@@ -43,10 +44,15 @@
 	</select>
 	
 	<insert id="insertCompany" parameterType="Company">
-		INSERT INTO COMPANY(COM_CODE,PWD,COM_ID,EMAIL,PHONE,BIZ_NAME,BIZ_NUM,BOSS_NAME,PERSONAL_NUM,TYPE_OF_BIZ,BIZ_LOCATION)
-		VALUES (COMPANY_SEQ.NEXTVAL,#{companyPwd},#{companyId},#{email},#{phone},#{bizName},#{bizNum},#{bossName},#{personalNum},#{bizType},#{bizLocation})
+		INSERT INTO COMPANY(COM_CODE,PWD,COM_ID,EMAIL,PHONE,BIZ_NAME,BIZ_NUM,BOSS_NAME,PERSONAL_NUM,TYPE_OF_BIZ,BIZ_LOCATION,GAEUPDAY)
+		VALUES (COMPANY_SEQ.NEXTVAL,#{companyPwd},#{companyId},#{email},#{phone},#{bizName},#{bizNum},#{bossName},#{personalNum},#{bizType},#{bizLocation},#{gaeup})
 	</insert>
 	
+	<select id="doubleIdCheck" parameterType="java.lang.String" resultMap="companyResultSet">
+		SELECT COM_ID 
+		FROM COMPANY
+		WHERE COM_ID=#{companyId}  
+	</select>
   
   
   

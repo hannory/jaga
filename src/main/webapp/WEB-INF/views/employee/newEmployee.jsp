@@ -1635,7 +1635,7 @@ top: 320px;
 <option value="4">농협</option>
 <option value="5">우리은행</option>
 <option value="6">sc제일은행</option>
-<option value="7">신한은행</option>
+<option value="7">신한은행</option> 
 <option value="8">씨티은행</option>
 <option value="9 ">대구은행</option>
 </select>

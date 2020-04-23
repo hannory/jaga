@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>로그인!</title>
-
+ 
 <style>
 .userId {
 	position: auto;
@@ -98,7 +98,7 @@
 	<br>
 	<div style="height:250px;"></div>
 	<div align="center">
-		<img src="${contextPath }/resources/images/logo_vertical.PNG" style="max-width: 100%; height: auto;" class="jagalogo">
+		<img src="${contextPath }/resources/images/logo_vertical.PNG" style="max-width: 100%; height: auto;" class="jagalogo" onclick="gomain()">
 	</div>
 	
 	<div class="loginArea" align="center">
@@ -130,7 +130,7 @@
 					<div class="join_id_pwd"><a href="companyJoinView.co"> 회원가입 </a></div> 
 		</form>
  		</c:if> 
- 
+ 			
 			<button onclick="logout()">로그아웃</button>  
 	</div>
 	
@@ -138,6 +138,9 @@
 		function logout(){
 			location.href="${contextPath}/logout.co"
 		}
+	 	function gomain(){
+	 		location.href="${contextPath}/gomain.co"
+	 	}
 	</script>
 	
 </body>
