@@ -33,7 +33,7 @@ public class CompanyServiceImpl implements CompanyService {
 		String encPassword = cd.selectEncPassword(sqlSession,c);
 		
 		if(!passwordEncoder.matches(c.getCompanyPwd(),encPassword)) {
-			throw new LoginException("로그인실패!");
+			throw new LoginException(" 로그인 실패! ");
 		}else {
 			loginCompany = cd.selectCompany(sqlSession,c);
 		}
@@ -45,4 +45,18 @@ public class CompanyServiceImpl implements CompanyService {
 
 		return cd.insertCompany(sqlSession,c);
 	}
-}
+
+	@Override
+	public int doubleCheckId(String userId) {
+		int checkIdresult =0;
+		Company checkId= cd.doubleCheckId(sqlSession,userId);
+		
+		if(checkId==null) {
+			checkIdresult=1;
+			
+		}else {
+			checkIdresult=99;
+		}
+		 return checkIdresult;
+	}
+} 

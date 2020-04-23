@@ -46,11 +46,13 @@
   	SELECT VENDER_CODE, COM_CODE,BIZ_REG_NUM,VENDER_NAME,BOSS_NAME,SELL_WAY,SELL_TARGET,VENDER_ADDRESS,VENDER_TEL,
 		DEPARTMENT_INCHARGE,COM_MANAGER_TEL,REMARKS,STATUS,VENDER_FAX,ACCOUNT_HOLDER,ACCOUNT_NUM,BANK_CODE,FARMERS_STATUS
 		FROM VENDER
+		WHERE VENDER_CODE=#{venderCode}
   	</select>
   	
-  	  <!-- 	<update id="modifyOne" parameterType="Vender">
-	UPDATE VENDER SET VENDER_CODE=#{venderCode},BIZ_REG_NUM=#{bizRegNum},VENDER_NAME=#{venderName},BOSS_NAME=#{bossName},SELL_WAY=#{sellWay},SELL_TARGET=#{sellTarget},VENDER_ADDRESS=#{venderAddress},VENDER_TEL=#{venderTel},
+  	 	<update id="modifyOne" parameterType="Vender">
+	UPDATE VENDER SET BIZ_REG_NUM=#{bizRegNum},VENDER_NAME=#{venderName},BOSS_NAME=#{bossName},SELL_WAY=#{sellWay},SELL_TARGET=#{sellTarget},VENDER_ADDRESS=#{venderAddress},VENDER_TEL=#{venderTel},
 		DEPARTMENT_INCHARGE=#{departmentIncharge},COM_MANAGER_TEL=#{comManagerTel},REMARKS=#{remarks},STATUS=#{status},VENDER_FAX=#{venderFax},ACCOUNT_HOLDER=#{accountHolder},ACCOUNT_NUM=#{accountNum},BANK_CODE=#{bankCode},FARMERS_STATUS=#{farmersStatus}
-  	</update> -->
+ 	 WHERE VENDER_CODE=#{venderCode}
+  	</update> 
  
   </mapper>

@@ -42,8 +42,9 @@ public class VenderController {
 
 	
 	  @RequestMapping("venderSelectOne.vi")
-	  public String selectOne(@RequestParam (value="venderCode")String venderCode, HttpServletRequest request, HttpServletResponse response) {
-	 System.out.println("vendercode"+venderCode);
+	  public String selectOne(@RequestParam String venderCode, HttpServletRequest request, HttpServletResponse response) {
+	
+		  System.out.println("vendercode"+venderCode);
 	 
 		/* int vcode = Integer.parseInt(venderCode); */
 	  
@@ -56,9 +57,11 @@ public class VenderController {
 	  @RequestMapping("modifyVender.vi")
 	  public String modifyOne(Vender v, HttpServletRequest request, HttpServletResponse response) {
 		  
-		 int result = vs.modifyOne(v);
+		vs.modifyOne(v);
 		  
-		  return "redirect: venderSelectOne.vi";
+		/* return "redirect: venderSelectOne.vi"; */
+	 return "redirect: venderList.vi";
+	 
 	  }
 }
 

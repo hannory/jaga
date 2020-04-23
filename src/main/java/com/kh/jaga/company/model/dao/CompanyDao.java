@@ -15,4 +15,6 @@ public interface CompanyDao {
 
 	int insertCompany(SqlSessionTemplate sqlSession, Company c);
 
+	Company doubleCheckId(SqlSessionTemplate sqlSession, String userId);
+
 }

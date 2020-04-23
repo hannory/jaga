@@ -1,8 +1,12 @@
 package com.kh.jaga.company.controller;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Date;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -15,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.jaga.common.CommonsUtils;
 import com.kh.jaga.company.model.exception.LoginException;
@@ -84,7 +89,7 @@ public class CompanyController {
 
 		}catch (Exception e) {
 			new File(filePath+"\\"+changeName+ext).delete();
-			model.addAttribute("msg","회원가입실패!");
+			model.addAttribute("msg"," 회원가입 실패 ! ");
 			e.printStackTrace();
 			return "common/errorPage";
 		}
@@ -97,4 +102,44 @@ public class CompanyController {
 		return "redirect:index.jsp";
 	}
 	
+	@RequestMapping("doubleCheck.co")
+	public String doubleCheckId(HttpServletRequest request, HttpServletResponse response) {
+		
+		String userId= request.getParameter("userId");
+		
+		System.out.println("유저아이디는??"+userId);
+		
+		int checkIdresult= cs.doubleCheckId(userId);
+		
+		String msg="";
+		
+		if(checkIdresult ==1) {
+			msg=" 사용가능한 아이디입니다. ";
+			
+		}else {
+			msg=" 중복된 아이디입니다."
+					+ " 다시 입력해주세요";
+		}
+		
+		System.out.println(checkIdresult);
+		
+		PrintWriter out;
+		try {
+			out = response.getWriter();
+			out.print(msg);
+			out.flush();
+			out.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return "redirect:index.jsp";
+	}
+	
+	/*
+	 * @RequestMapping("gaeupSearch.co") public ModelAndView
+	 * gaeupSearch(@RequestParam Date date1, ModelAndView mv) {
+	 * System.out.println("date1은요"+date1);
+	 * 
+	 * mv.setViewName("jsonView"); return mv; }
+	 */
 }

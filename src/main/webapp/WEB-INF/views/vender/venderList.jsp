@@ -62,8 +62,16 @@
     /* 거래처명 글씨 크기 */
     #vender-Name {
       font-size:20px;
+      text-align:center;
     }
     
+    #vender-tel{
+    text-align:center;
+    }
+
+	#boss-name{
+	text-align:center;
+	}    
     #space{
     width:50px;
     float:left;
@@ -79,7 +87,10 @@
     .boldText {
     	font-weight: bold;
     }
-
+	
+	#account-status{
+	text-align:center;
+	}
 
 </style>
 <body>
@@ -101,7 +112,7 @@
  -->        </div>
         
         <div class="vender-list-main-table-margin" style="margin-top: 10px;"> 
-           <form action="select.ve" method="post">
+<!--            <form action="select.ve" method="post"> -->
             <table border="0" class="table table-hover vender-list-main-table-2nd" id="listArea2">
               <thead>
                 <tr class="my-page-table-top">
@@ -109,6 +120,7 @@
                   <th>대표자명</th>
                   <th>연락처</th>
                   <th>이체정보</th>
+                  <th></th>
                 </tr>
               </thead>
               
@@ -122,13 +134,13 @@
                	 <td id="account-status"> <c:if test="${!empty v.accountNum}">등록</c:if>
                	 							<c:if test="${empty v.accountNum }">미등록</c:if>
                   </td> 
-                <td><input type="hidden" value="${v.venderCode}" name="venderCode"></td> 
+                <td><input type="hidden"  style="display:none;" name="venderCode" value="${v.venderCode}" ><div style="display:none;">${v.venderCode}</div></td> 
               	 </tr>
               	 </c:forEach>
 				</c:if>
                 </tbody>
               </table>
-              </form>
+<!--               </form> -->
         </div>
         
         <div id="space"></div>
@@ -138,6 +150,14 @@
 			<div class="card-body">When scrolling, the navigation stays at
 				the top of the page. This is the end of the static navigation demo.</div>
 		</div>
+		</div>
+		</div>
+		</div>
+		</div>
+		</div>
+		</div>
+		</div>
+		
 	</main>
 	<jsp:include page="../common/menubar2.jsp" />
     
@@ -148,18 +168,15 @@
 		}).mouseout(function(){
 			$(this).parent().css("background","white");
 		}).click(function(){
-			var venderCode = $(this).parent().children().eq(5).text();
+			/* var venderCode = $(this).parent().children().eq(5).text(); */
+			var venderCode =$(this).parent().children().eq(4).text();
 			console.log(venderCode);
 			location.href="${contextPath}/venderSelectOne.vi?venderCode="+venderCode;
 		});
 	});
     </script>
 		 
-		
-		
-	
-		
-		
+
 
 </body>
 </html>

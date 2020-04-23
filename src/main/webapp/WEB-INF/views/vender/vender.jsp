@@ -940,10 +940,12 @@ border-radius: 5px;
 		<div id="table-total"> 
 		 
 		 <form action="modifyVender.vi" method="post">
-<!-- <table> -->
+<!-- <table> -->				
+	<c:if test="${!empty sessionScope.loginCompany}">
  		<c:forEach var="v" items="${list}">
 		<tr>
-			<td><b id="vender-info">거래처 등록정보</b></td>  <td><input type="hidden" value="${v.venderCode}" name="venderCode"></td> 
+			<td><b id="vender-info">거래처 등록정보</b></td>  
+			<td><input type="hidden"   style="display:none;" value="${v.venderCode}" name="venderCode"></td> 
 			<td><b id="vender-name">거래처명</b>
 			<input type="text" name="venderName" id="vender-name-surr" value="${v.venderName} "></td>
 		</tr>
@@ -1029,7 +1031,7 @@ border-radius: 5px;
 			<td></td>
 		</tr>
 		</c:forEach>
-		
+		</c:if>
 		<tr>
 			<td><button id="okay" style="color:white" type="submit">수정완료</button></td>
 		</tr>

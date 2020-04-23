@@ -24,10 +24,11 @@ public class Company implements java.io.Serializable {
 	private Date modifyDate;
 	private String payStatus;
 	private String enrollStatus;
-	public Company(String companyCode, String companyPwd, String companyPwd2, String companyId, String email, String phone,
-			String bizName, String bizNum, String bossName, String personalNum, Date openDay, String bizLocation,
-			String bossAddress, String bizType, Date enrollDate, Date modifyDate, String payStatus,
-			String enrollStatus) {
+	private Date gaeup;
+	public Company(String companyCode, String companyPwd, String companyPwd2, String companyId, String email,
+			String phone, String bizName, String bizNum, String bossName, String personalNum, Date openDay,
+			String bizLocation, String bossAddress, String bizType, Date enrollDate, Date modifyDate, String payStatus,
+			String enrollStatus, Date gaeup) {
 		super();
 		this.companyCode = companyCode;
 		this.companyPwd = companyPwd;
@@ -47,6 +48,7 @@ public class Company implements java.io.Serializable {
 		this.modifyDate = modifyDate;
 		this.payStatus = payStatus;
 		this.enrollStatus = enrollStatus;
+		this.gaeup = gaeup;
 	}
 	public String getCompanyCode() {
 		return companyCode;
@@ -156,6 +158,12 @@ public class Company implements java.io.Serializable {
 	public void setEnrollStatus(String enrollStatus) {
 		this.enrollStatus = enrollStatus;
 	}
+	public Date getGaeup() {
+		return gaeup;
+	}
+	public void setGaeup(Date gaeup) {
+		this.gaeup = gaeup;
+	}
 	@Override
 	public String toString() {
 		return "Company [companyCode=" + companyCode + ", companyPwd=" + companyPwd + ", companyPwd2=" + companyPwd2
@@ -163,10 +171,8 @@ public class Company implements java.io.Serializable {
 				+ ", bizNum=" + bizNum + ", bossName=" + bossName + ", personalNum=" + personalNum + ", openDay="
 				+ openDay + ", bizLocation=" + bizLocation + ", bossAddress=" + bossAddress + ", bizType=" + bizType
 				+ ", enrollDate=" + enrollDate + ", modifyDate=" + modifyDate + ", payStatus=" + payStatus
-				+ ", enrollStatus=" + enrollStatus + "]";
+				+ ", enrollStatus=" + enrollStatus + ", gaeup=" + gaeup + "]";
 	}
-	
-	
 
 	
 }

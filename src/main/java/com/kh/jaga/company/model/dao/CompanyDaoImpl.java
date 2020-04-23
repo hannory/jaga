@@ -37,4 +37,9 @@ public class CompanyDaoImpl implements CompanyDao {
 		return sqlSession.insert("Company.insertCompany",c);
 	}
 
+	@Override
+	public Company doubleCheckId(SqlSessionTemplate sqlSession, String userId) {
+		return sqlSession.selectOne("Company.doubleIdCheck", userId);
+	}
+
 }
