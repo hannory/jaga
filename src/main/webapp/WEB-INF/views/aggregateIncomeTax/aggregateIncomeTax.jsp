@@ -34,6 +34,14 @@
 	/* 테이블 하위 td들 넓이 설정 */
 		width:200px;
 	}
+	.table-center{
+		border-collapse:separate;
+	}
+	.table-top input{
+		border:none;
+		width:100%;
+		height:100%;
+	}
 </style>
 </head>
 <body>
@@ -116,7 +124,7 @@
 		<!-- 상단 테이블 감싸는 div 끝 -->
 		
 		<!-- 본문 테이블 감싸는 div -->
-		<div style="margin-top:30px; margin-bottom:30px;">
+		<div class="div-tableCenter" style="margin-top:30px; margin-bottom:30px;">
 		<table class="table-center">
 			<tr>
 				<td>소득 구분 코드</td>
