@@ -617,16 +617,11 @@
 						<input type="hidden" id="apprInfoCode" name="apprInfoCode">
 						<!-- <input type="text" id="apprEmpCode" name="apprEmpCode" class='topTdInput'> -->
 						<select id="apprEmpCode" name="apprEmpCode">
-							<option value="${ comInIdList[0].comInnerIdNum }"><c:out value="${ comInIdList[0].name }"/></option>
-							<option value="${ comInIdList[1].comInnerIdNum }"><c:out value="${ comInIdList[1].name }"/></option>
-							<option value="zzz"><c:out value="asdasd"/></option>
-							
 							<c:if test="${ comInIdList ne null }">
 								<c:forEach items="${ comInIdList }" var="obj">
 									<option value="${ obj.comInnerIdNum }"><c:out value="${ obj.name }"/></option>	
 								</c:forEach>
 							</c:if>
-							
 						</select>
 					</td>
 				</tr>
@@ -729,7 +724,7 @@
 					</tr>
 					<tr>
 						<td class="color-green">담당부서</td>
-						<td><input id="inputDeptName" name="departmentCode"
+						<td><input id="inputDeptName" name="departmentCodeDisplay"
 							type="text"
 							style="width: 100%; height: 100%; text-align: center;"> <input
 							id="inputDept" name="departmentCode" type="hidden"></td>
@@ -785,8 +780,8 @@
 					<tr>
 						<td><input name="detailDate01" type="date"></td>
 						<td><input name="detailBrief01" type="text"></td>
-						<td><input name="detailVenderCode01" type="text"></td>
-						<td><input name="detailPrice01" type="text" class="price"></td>
+						<td><input name="venderCode" type="text"></td>
+						<td><input name="price" type="text" class="price"></td>
 						<td><input name="detailMemo01" type="text"></td>
 					</tr>
 					<tr>
@@ -853,7 +848,7 @@
 			<div class="div-bot">
 				<div>
 					<!-- 두개 묶어주기 위한 div -->
-					<br> <span>위와 같이 지출을 결의하오니 허가하여주시기 바랍니다.</span>
+					<br><span>위와 같이 지출을 결의하오니 허가하여주시기 바랍니다.</span>
 
 					<div style="float: right; margin-top: 20px;">
 						<!-- 

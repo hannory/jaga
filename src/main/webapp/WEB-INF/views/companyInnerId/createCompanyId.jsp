@@ -143,9 +143,22 @@
 				</td>
 				<td>
 					<select name="position" style="width:200px;">
-						<option value="001">사장</option>
-						<option value=002>부장</option>
-						<option value="003">과장</option>					
+						<option value="000">대표</option>
+						<option value="001">회장</option>
+						<option value="002">부회장</option>
+						<option value="003">사장</option>
+						<option value="004">부사장</option>
+						<option value="005">전무</option>
+						<option value="006">상무</option>
+						<option value="007">이사</option>
+						<option value="008">부장</option>
+						<option value="009">차장</option>
+						<option value="010">과장</option>
+						<option value="011">대리</option>
+						<option value="012">주임</option>
+						<option value="013">사원</option>
+						<option value="014">인턴</option>
+						<option value="015">알바</option>
 					</select>
 				</td>
 			</tr>
@@ -162,9 +175,76 @@
 					<img id="imgArea" style="width:100%; height:100%;">
 					</div>
 				</td>
+				
+				<td>
+					<div class="div-subjectName">
+						<label>부서</label>
+					</div>
+				</td>
+				
+				<td>
+					<select style="width:200px;">
+						<option value="001">총무팀</option>
+						<option value="002">경리부(회계)</option>
+						<option value="003">경영지원팀</option>
+						<option value="004">경영개선팀</option>
+						<option value="005">인사과</option>
+						<option value="006">인사팀</option>
+						<option value="007">재경부</option>
+						<option value="008">고객만족팀</option>
+						<option value="009">구매부서</option>
+						<option value="010">관리부서</option>
+						<option value="011">기술지원팀</option>
+						<option value="012">기획팀</option>
+						<option value="013">전략기획팀</option>
+						<option value="014">연구기획팀</option>
+						<option value="015">연구개발팀</option>
+						<option value="016">비서실</option>
+						<option value="017">생산관리팀</option>
+						<option value="018">시설관리팀</option>
+						<option value="019">R&D</option>
+						<option value="020">영업팀</option>
+						<option value="021">영업기획팀</option>
+						<option value="022">영업지원팀</option>
+						<option value="023">품질관리팀</option>
+						<option value="024">해외사업부</option>
+						<option value="025">해외사업팀</option>
+						<option value="026">홍보팀</option>
+						<option value="027">e-Biz팀</option>
+					</select>
+				</td>
+				
 			</tr>
 			
 		</table>
+		
+		<!-- 
+				003
+				004
+				005
+				006
+				007
+				008
+				009
+				010
+				011
+				012
+				013
+				014
+				015
+				016
+				017
+				018
+				019
+				020
+				021
+				022
+				023
+				024
+				025
+				026
+				027
+		 -->
 			
 			<input type="file" id="fileBtn" name="signFile" onchange="loadImg(this)" style="display:none;">
 		
