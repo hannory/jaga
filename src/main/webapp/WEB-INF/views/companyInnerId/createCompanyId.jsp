@@ -77,9 +77,8 @@
 		
 		<h2 class="mt-4">사내계정생성</h2>
 		
-		<div style="height:50px;">
-		</div>
 		
+		<div style="height:50px;"></div>
 		
 		
 		<div class="div-menuTap"><span>직원 계정 생성</span></div>
