@@ -336,12 +336,12 @@
 					style="margin-top: 50px; margin-left: 140px; text-align: center;">
 					<tr>
 						<td style="width: 100px; background: green;"><span>계정과목</span></td>
-						<td><input id="searchAccountTitleBox" type="text"
-							style="width: 100%; height: 100%;"></td>
+						<td style="width: 200px;">
+							<input id="searchAccountTitleBox" type="text" style="width: 100%; height: 100%;">
+						</td>
 						<td style="width: 100px;">
 							<div class="searchBtnSubject" onclick="searchSubject()">
-								<img style="width: 30px; height: 30px;"
-									src="${contextPath}/resources/images/search.PNG">
+								<img style="width: 30px; height: 30px;" src="${contextPath}/resources/images/search.PNG">
 							</div>
 						</td>
 					</tr>

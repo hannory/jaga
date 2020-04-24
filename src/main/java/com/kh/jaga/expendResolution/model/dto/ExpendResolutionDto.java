@@ -46,7 +46,7 @@ public class ExpendResolutionDto implements java.io.Serializable{
 	private String evidenceCode;		//관련증빙코드
 	private String comCode;				//회사코드
 	
-	//EXPEND_RESOLUTION_DETAIL 테이블		//지출결의서 상세
+	//EXPEND_RESOLUTION_DETAIL 테이블		//[지출결의서 상세]
 	private String expendDetailNo = "시퀀스넣기";		//상세내역번호
 	private String expendDetailDate;	//지출일자		//디비에서 받아올 데이터	//DB칼럼명이랑 일치하지않으므로 맵핑 주의해서 할 것
 	private String brief;				//적요

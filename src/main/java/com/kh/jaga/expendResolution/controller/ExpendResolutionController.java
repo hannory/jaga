@@ -91,6 +91,8 @@ public class ExpendResolutionController {
 		System.out.println("조회결과 :::::::");
 		System.out.println(dtoList);
 		
+		mv.addObject("dtoList", dtoList);
+		
 		mv.setViewName("expendResolutionList");
 		return mv;
 	}
