@@ -1,5 +1,7 @@
 package com.kh.jaga.employee.model.dao;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 
 import com.kh.jaga.employee.model.vo.Attachment;
@@ -12,4 +14,6 @@ public interface EmployeeDao {
 	int insertAttachment(SqlSessionTemplate sqlSession, Attachment at);
 	
 	int insertAttachment2(SqlSessionTemplate sqlSession, Attachment at2);
+
+	List<Employee> selectEmpList(SqlSessionTemplate sqlSession);
 }

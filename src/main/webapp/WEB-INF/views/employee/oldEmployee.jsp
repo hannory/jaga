@@ -1,3 +1,5 @@
+
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -51,7 +53,7 @@ transform: rotate(90.05deg);
 /*직원관리 employee-manage*/
 #employee-manage{
 position: absolute;
-width: 193px;
+width: 213px;
 height: 42px;
 left: 303px;
 top: 74px;
@@ -59,7 +61,7 @@ top: 74px;
 font-family: Roboto;
 font-style: normal;
 font-weight: normal;
-font-size: 30px;
+font-size: 33px;
 line-height: 35px;
 
 color: #000000;
@@ -68,7 +70,7 @@ color: #000000;
 /* 일반근로자 big-employee*/
 #big-employee{
 position: absolute;
-width: 110px;
+width: 120px;
 height: 42px;
 left: 304px;
 top: 148px;
@@ -76,7 +78,7 @@ top: 148px;
 font-family: Roboto;
 font-style: normal;
 font-weight: normal;
-font-size: 20px;
+font-size: 23px;
 line-height: 23px;
 
 color: #000000;
@@ -88,18 +90,17 @@ color: #000000;
 
 #row-employee{
 position: absolute;
-width: 90px;
-height: 0px;
+width: 120px;
 left: 304px;
 top: 180px;
 
-border: 3px solid #24574A;
+border: 2px solid #24574A;
 }
 /* 일용근로자 big-one-imployee */
 
 #big-one-imployee{
 position: absolute;
-width: 100px;
+width: 120px;
 height: 42px;
 left: 451px;
 top: 148px;
@@ -107,7 +108,7 @@ top: 148px;
 font-family: Roboto;
 font-style: normal;
 font-weight: normal;
-font-size: 20px;
+font-size: 23px;
 line-height: 23px;
 
 color: #5A5A5A;
@@ -117,7 +118,7 @@ color: #5A5A5A;
 
 #big-income-employee{
 position: absolute;
-width: 101px;
+width: 120px;
 height: 42px;
 left: 599px;
 top: 148px;
@@ -125,7 +126,7 @@ top: 148px;
 font-family: Roboto;
 font-style: normal;
 font-weight: normal;
-font-size: 20px;
+font-size: 23px;
 line-height: 23px;
 
 color: #5A5A5A;
@@ -135,15 +136,15 @@ color: #5A5A5A;
 
 #employee{
 position: absolute;
-width: 236px;
+width: 330px;
 height: 30px;
-left: 499px;
-top: 128px;
+left: 453px;
+top: 100px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: normal;
-font-size: 20px;
+font-size: 23px;
 line-height: 23px;
 
 color: #000000;
@@ -155,13 +156,13 @@ color: #000000;
 position: absolute;
 width: 82px;
 height: 29px;
-left: 1228px;
-top: 233px;
+left: 1180px;
+top: 183px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -172,14 +173,14 @@ color: #FFFFFF;
 }
 
 
-/* 저장하기버튼 save-surr */
+/*저장하기버튼 save-surr */
 
 #save-surr{
 position: absolute;
 width: 90px;
 height: 29px;
-left: 1228px;
-top: 233px;
+left: 1180px;
+top: 183px;
 
 background: #296355;
 border-radius: 5px;
@@ -198,7 +199,7 @@ top: 301px;
 font-family: Roboto;
 font-style: normal;
 font-weight: normal;
-font-size: 16px;
+font-size: 19px;
 line-height: 19px;
 
 color: #000000;
@@ -210,13 +211,13 @@ color: #000000;
 position: absolute;
 width: 104px;
 height: 24px;
-left: 547px;
+left: 463px;
 top: 340px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -226,13 +227,13 @@ color: #4C4C4C;
 }
 
 
-/*name-surr */
+/* name-surr */
 
 #name-surr{
 position: absolute;
 width: 222px;
 height: 27px;
-left: 661px;
+left: 581px;
 top: 337px;
 
 background: #FFFFFF;
@@ -249,13 +250,13 @@ border-radius: 5px;
 position: absolute;
 width: 104px;
 height: 24px;
-left: 920px;
+left: 890px;
 top: 340px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -270,7 +271,7 @@ color: #4C4C4C;
 position: absolute;
 width: 222px;
 height: 27px;
-left: 1034px;
+left: 1004px;
 top: 337px;
 
 background: #FFFFFF;
@@ -287,13 +288,13 @@ border-radius: 5px;
 position: absolute;
 width: 104px;
 height: 24px;
-left: 547px;
+left: 463px;
 top: 391px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -308,7 +309,7 @@ color: #4C4C4C;
 position: absolute;
 width: 222px;
 height: 27px;
-left: 661px;
+left: 581px;
 top: 388px;
 
 background: #FFFFFF;
@@ -324,13 +325,13 @@ border-radius: 5px;
 position: absolute;
 width: 104px;
 height: 24px;
-left: 920px;
+left: 890px;
 top: 391px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -340,13 +341,13 @@ color: #4C4C4C;
 }
 
 
-/*  email-surr */
+/*email-surr */
 
 #email-surr{
 position: absolute;
 width: 222px;
 height: 27px;
-left: 1034px;
+left: 1004px;
 top: 388px;
 
 background: #FFFFFF;
@@ -360,7 +361,7 @@ border-radius: 5px;
 position: absolute;
 width: 225px;
 height: 55px;
-left: 662px;
+left: 581px;
 top: 420px;
 
 font-family: Roboto;
@@ -380,13 +381,13 @@ color: #888888;
 position: absolute;
 width: 104px;
 height: 24px;
-left: 543px;
+left: 463px;
 top: 503px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -395,14 +396,14 @@ text-align: right;
 color: #4C4C4C;
 }
 
-/* 입사연월일 란 enroll-date-surr*/
+/*입사연월일 란 enroll-date-surr*/
 
-#enroll-date-surr{
+.enroll-date-surr{
 position: absolute;
-width: 222px;
+width: 220px;
 height: 27px;
-left: 661px;
-top: 504px;
+left: 581px;
+top: 503px;
 
 background: #FFFFFF;
 border: 1px solid #C4C4C4;
@@ -416,13 +417,13 @@ border-radius: 5px;
 position: absolute;
 width: 104px;
 height: 24px;
-left: 543px;
-top: 548px;
+left: 463px;
+top: 545px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -432,13 +433,13 @@ color: #4C4C4C;
 
 }
 
-/* Rectangle 254 식대란 rice-surr */
+/*식대란 rice-surr */
 
 #rice-surr{
 position: absolute;
 width: 222px;
 height: 27px;
-left: 661px;
+left: 581px;
 top: 546px;
 
 background: #FFFFFF;
@@ -447,13 +448,13 @@ box-sizing: border-box;
 border-radius: 5px;
 }
 
-/* 식대셀렉트박스란 rice-select-surr*/
+/*식대셀렉트박스란 rice-select-surr*/
 
 #rice-select-surr{
 position: absolute;
 width: 27px;
 height: 27px;
-left: 856px;
+left: 776px;
 top: 546px;
 
 background: #E4E4E4;
@@ -469,13 +470,13 @@ border-radius: 0px 5px 5px 0px;
 position: absolute;
 width: 104px;
 height: 24px;
-left: 919px;
-top: 551px;
+left: 890px;
+top: 545px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -491,7 +492,7 @@ color: #4C4C4C;
 position: absolute;
 width: 222px;
 height: 27px;
-left: 1034px;
+left: 1004px;
 top: 546px;
 
 background: #FFFFFF;
@@ -500,14 +501,14 @@ box-sizing: border-box;
 border-radius: 5px;
 }
 
-/* 자가운전셀렉트박스란 drive-select-surr  */
+/*  자가운전셀렉트박스란 drive-select-surr  */
 
 #drive-select-surr{
 
 position: absolute;
 width: 27px;
 height: 27px;
-left: 1229px;
+left: 1200px;
 top: 546px;
 
 background: #E4E4E4;
@@ -525,13 +526,13 @@ border-radius: 0px 5px 5px 0px;
 position: absolute;
 width: 104px;
 height: 24px;
-left: 543px;
+left: 463px;
 top: 588px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -547,7 +548,7 @@ color: #4C4C4C;
 position: absolute;
 width: 222px;
 height: 27px;
-left: 661px;
+left: 581px;
 top: 588px;
 
 background: #FFFFFF;
@@ -556,13 +557,13 @@ box-sizing: border-box;
 border-radius: 5px;
 }
 
-/*육아수당셀렉트박스란 baby-select-surr*/
+/* 육아수당셀렉트박스란 baby-select-surr*/
 
 #baby-select-surr{
 position: absolute;
 width: 27px;
 height: 27px;
-left: 856px;
+left: 774px;
 top: 588px;
 
 background: #E4E4E4;
@@ -575,15 +576,15 @@ border-radius: 0px 5px 5px 0px;
 
 #big4-insurance{
 position: absolute;
-width: 95px;
+width: 120px;
 height: 30px;
-left: 551px;
+left: 463px;
 top: 673px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: normal;
-font-size: 16px;
+font-size: 19px;
 line-height: 19px;
 
 color: #000000;
@@ -596,13 +597,13 @@ color: #000000;
 position: absolute;
 width: 104px;
 height: 24px;
-left: 547px;
-top: 721px;
+left: 463px;
+top: 719px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -611,13 +612,13 @@ text-align: right;
 color: #4C4C4C;
 }
 
-/* 직급란 position-surr */
+/*직급란 position-surr */
 
 #position-surr{
 position: absolute;
 width: 222px;
 height: 27px;
-left: 661px;
+left: 581px;
 top: 718px;
 
 background: #FFFFFF;
@@ -626,13 +627,13 @@ box-sizing: border-box;
 border-radius: 5px;
 
 }
-/* 직급셀렉트박스란 position-select-surr*/
+/*   직급셀렉트박스란 position-select-surr*/
 
 #position-select-surr{
 position: absolute;
 width: 27px;
 height: 27px;
-left: 856px;
+left: 774px;
 top: 718px;
 
 background: #E4E4E4;
@@ -648,13 +649,13 @@ border-radius: 0px 5px 5px 0px;
 position: absolute;
 width: 110px;
 height: 24px;
-left: 917px;
-top: 721px;
+left: 890px;
+top: 719px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -669,7 +670,7 @@ color: #4C4C4C;
 position: absolute;
 width: 222px;
 height: 27px;
-left: 1031px;
+left: 1004px;
 top: 718px;
 
 background: #FFFFFF;
@@ -678,13 +679,13 @@ box-sizing: border-box;
 border-radius: 5px;
 }
 
-/* 고용산재보험셀렉트박스 goyong-sanjae-select-surr */
+/*  고용산재보험셀렉트박스 goyong-sanjae-select-surr */
 
 #goyong-sanjae-select-surr{
 position: absolute;
 width: 27px;
 height: 27px;
-left: 1226px;
+left: 1200px;
 top: 718px;
 
 background: #E4E4E4;
@@ -702,13 +703,13 @@ border-radius: 0px 5px 5px 0px;
 position: absolute;
 width: 125px;
 height: 24px;
-left: 896px;
-top: 809px;
+left: 890px;
+top: 805px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -718,13 +719,13 @@ color: #4C4C4C;
 }
 
 
-/* 취득여부란 a-status-surr */
+/*취득여부란 a-status-surr */
 
 #a-status-surr{
 position: absolute;
 width: 27px;
 height: 27px;
-left: 1037px;
+left: 1004px;
 top: 806px;
 
 background: #FFFFFF;
@@ -737,15 +738,15 @@ border-radius: 5px;
 
 #zero-one-1{
 position: absolute;
-width: 53px;
+width: 75px;
 height: 24px;
-left: 1073px;
-top: 809px;
+left: 1053px;
+top: 805px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -759,13 +760,13 @@ color: #4C4C4C;
 position: absolute;
 width: 125px;
 height: 24px;
-left: 896px;
+left: 890px;
 top: 847px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -775,13 +776,13 @@ color: #4C4C4C;
 }
 
 
-/*  상실여부란 de-status-surr */
+/*상실여부란 de-status-surr */
 
 #de-status-surr{
 position: absolute;
 width: 27px;
 height: 27px;
-left: 1037px;
+left: 1004px;
 top: 845px;
 
 background: #FFFFFF;
@@ -794,15 +795,15 @@ border-radius: 5px;
 
 #zero-one-2{
 position: absolute;
-width: 53px;
+width: 75px;
 height: 24px;
-left: 1073px;
+left: 1053px;
 top: 848px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -818,13 +819,13 @@ color: #4C4C4C;
 position: absolute;
 width: 90px;
 height: 30px;
-left: 550px;
+left: 463px;
 top: 903px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: normal;
-font-size: 16px;
+font-size: 19px;
 line-height: 19px;
 
 color: #000000;
@@ -837,13 +838,13 @@ color: #000000;
 position: absolute;
 width: 104px;
 height: 24px;
-left: 547px;
+left: 463px;
 top: 946px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -860,7 +861,7 @@ color: #4C4C4C;
 position: absolute;
 width: 222px;
 height: 27px;
-left: 661px;
+left: 581px;
 top: 947px;
 
 background: #FFFFFF;
@@ -875,7 +876,7 @@ border-radius: 5px;
 position: absolute;
 width: 27px;
 height: 27px;
-left: 856px;
+left: 774px;
 top: 947px;
 
 background: #E4E4E4;
@@ -891,13 +892,13 @@ border-radius: 0px 5px 5px 0px;
 position: absolute;
 width: 104px;
 height: 24px;
-left: 917px;
+left: 890px;
 top: 946px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -906,13 +907,13 @@ text-align: right;
 color: #4C4C4C;
 }
 
-/* 계좌번호 란 account-num-surr */
+/*계좌번호 란 account-num-surr */
 
 #account-num-surr{
 position: absolute;
 width: 222px;
 height: 27px;
-left: 1034px;
+left: 1004px;
 top: 948px;
 
 background: #FFFFFF;
@@ -928,13 +929,13 @@ border-radius: 5px;
 position: absolute;
 width: 104px;
 height: 24px;
-left: 547px;
+left: 463px;
 top: 996px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -944,13 +945,13 @@ color: #4C4C4C;
 }
 
 
-/*예금주 란 account-holder-surr*/
+/*  예금주 란 account-holder-surr*/
 
 #account-holder-surr{
 position: absolute;
 width: 222px;
 height: 27px;
-left: 661px;
+left: 581px;
 top: 998px;
 
 background: #FFFFFF;
@@ -969,13 +970,13 @@ border-radius: 5px;
 position: absolute;
 width: 104px;
 height: 24px;
-left: 917px;
+left: 890px;
 top: 996px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -986,13 +987,13 @@ color: #4C4C4C;
 
 }
 
-/* 부서란 department-surr  */
+/*부서란 department-surr  */
 
 #department-surr{
 position: absolute;
 width: 222px;
 height: 27px;
-left: 1034px;
+left: 1004px;
 top: 998px;
 
 background: #FFFFFF;
@@ -1009,13 +1010,13 @@ border-radius: 5px;
 position: absolute;
 width: 104px;
 height: 24px;
-left: 547px;
-top: 1046px;
+left: 463px;
+top: 1050px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -1030,7 +1031,7 @@ color: #4C4C4C;
 position: absolute;
 width: 222px;
 height: 27px;
-left: 661px;
+left: 581px;
 top: 1049px;
 
 background: #FFFFFF;
@@ -1043,15 +1044,15 @@ border-radius: 5px;
 
 #document-info{
 position: absolute;
-width: 110px;
+width: 130px;
 height: 19px;
-left: 550px;
+left: 463px;
 top: 1188px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: normal;
-font-size: 16px;
+font-size: 19px;
 line-height: 19px;
 /* identical to box height */
 
@@ -1068,13 +1069,13 @@ color: #000000;
 position: absolute;
 width: 103px;
 height: 24px;
-left: 546px;
+left: 463px;
 top: 1245px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -1088,9 +1089,9 @@ color: #4C4C4C;
 #id-docu1-surr{
 
 position: absolute;
-width: 356px;
+width: 450px;
 height: 27px;
-left: 659px;
+left: 581px;
 top: 1242px;
 
 background: #FFFFFF;
@@ -1099,13 +1100,13 @@ box-sizing: border-box;
 border-radius: 5px;
 
 }
-/* 파일선택란1 chose-file1-surr*/
+/*  파일선택란1 chose-file1-surr*/
 
 #chose-file1-surr{
 position: absolute;
 width: 65px;
 height: 27px;
-left: 950px;
+left: 890px;
 top: 1242px;
 
 background: #E4E4E4;
@@ -1121,13 +1122,13 @@ border-radius: 0px 5px 5px 0px;
 position: absolute;
 width: 57px;
 height: 27px;
-left: 955px;
+left: 895px;
 top: 1242px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -1141,13 +1142,13 @@ color: #000000;
 position: absolute;
 width: 103px;
 height: 24px;
-left: 546px;
+left: 463px;
 top: 1297px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -1167,7 +1168,7 @@ top: 1242px;
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -1177,7 +1178,7 @@ color: #FFFFFF;
 
 }
 
-/* 업로드버튼1란 uploadbtn1-surr */
+/*업로드버튼1란 uploadbtn1-surr */
 
 #uploadbtn1-surr{
 position: absolute;
@@ -1192,13 +1193,13 @@ border-radius: 5px;
 }
 
 
-/*급여계좌사본란 account-docu-surr */
+/* 급여계좌사본란 account-docu-surr */
 
 #account-docu-surr{
 position: absolute;
-width: 356px;
+width: 450px;
 height: 27px;
-left: 659px;
+left: 581px;
 top: 1294px;
 
 background: #FFFFFF;
@@ -1213,7 +1214,7 @@ border-radius: 5px;
 position: absolute;
 width: 65px;
 height: 27px;
-left: 950px;
+left: 890px;
 top: 1294px;
 
 background: #E4E4E4;
@@ -1234,7 +1235,7 @@ top: 1293px;
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -1269,7 +1270,7 @@ top: 314px;
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -1288,7 +1289,7 @@ top: 330px;
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -1325,14 +1326,173 @@ width:1350px;
 height:1700px;
 }
 
+
+/* 퇴사년월일 (byeyear) */
+#byeyear{
+position: absolute;
+width: 104px;
+height: 24px;
+left: 890px;
+top: 493px;
+
+font-family: Roboto;
+font-style: normal;
+font-weight: bold;
+font-size: 16px;
+line-height: 14px;
+display: flex;
+align-items: center;
+text-align: right;
+
+color: #4C4C4C;
+}
+
+/*퇴사년월일란 (byeyear-surr)*/
+#byeyear-surr{
+
+position: absolute;
+width: 131px;
+height: 27px;
+left: 1004px;
+top: 502px;
+
+background: #D4D5D9;
+border: 1px solid #C4C4C4;
+box-sizing: border-box;
+border-radius: 2px;
+}
+
+/*퇴사년월일버튼 byeyear-btn*/
+#byeyear-btn{
+position: absolute;
+width: 85px;
+height: 27px;
+left: 1145px;
+top: 503px;
+
+background: #EEEEEE;
+border: 1px solid #C4C4C4;
+box-sizing: border-box;
+border-radius: 2px;
+}
+
+/* 퇴사란 */
+.leavegongsi-surr{
+
+position: absolute;
+width: 180px;
+height: 27px;
+left: 1004px;
+top: 503px;
+
+background: #EEEEEE;
+border: 1px solid #C4C4C4;
+box-sizing: border-box;
+border-radius: 5px;
+}
+
+/* 퇴사년월일 */
+
+#leavegongsi{
+position: absolute;
+width: 104px;
+height: 24px;
+left: 890px;
+top: 503px;
+
+font-family: Roboto;
+font-style: normal;
+font-weight: bold;
+font-size: 16px;
+line-height: 14px;
+display: flex;
+align-items: center;
+text-align: right;
+
+color: #4C4C4C;
+}
+
+
+/* 직원번호 employeeNum*/
+
+#employeeNum{
+position: absolute;
+width: 80px;
+height: 24px;
+left: 463px;
+top: 285px;
+
+font-family: Roboto;
+font-style: normal;
+font-weight: bold;
+font-size: 16px;
+line-height: 14px;
+display: flex;
+align-items: center;
+text-align: right;
+
+color: #4C4C4C;
+}
+
+
+/*직원번호란 employeeNum-surr  */
+
+#employeeNum-surr{
+position: absolute;
+width: 222px;
+height: 27px;
+left: 581px;
+top: 285px;
+
+background: #FFFFFF;
+border: 1px solid #C4C4C4;
+box-sizing: border-box;
+border-radius: 5px;
+}
+
+/* 퇴사사유버튼란 */
+
+#leaveReason-surr{
+position: absolute;
+width: 70px;
+height: 29px;
+left: 1200px;
+top: 501px;
+
+background: #296355;
+border-radius: 5px;
+}
+
+
+/* 왼쪽리스트영역  */
+
+#listdiv{
+position: absolute;
+width: 165px;
+height: 462px;
+left: 340px;
+top: 320px;
+
+}
+
+#datepicker{
+width:190px;
+height:25px;
+background: #FFFFFF;
+border: 1px solid #C4C4C4;
+box-sizing: border-box;
+border-radius: 5px;
+}
+
 </style>
 </head>
 <body>
 
+
 	<jsp:include page="../common/menubar.jsp" />
 	<div id="main">
 	<div class="container-fluid">
-<!-- 		<h2 class="mt-4">일반근로자 신규등록</h2> -->
+
 
 <div id="main">
 <div id="employee-manage">직원관리</div>
@@ -1342,34 +1502,45 @@ height:1700px;
 <div id="big-income-employee">사업소득자</div>
 <div id="border2"></div>
 <input type="search" id="search-surr">
-<div id="yoo">유길동</div>
-<div id="underline"></div>
+
+<div id="listdiv">
+<table>
+<tr> <td>1001 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td><td>유지방</td>
+</tr>
+<tr> <td>1002</td><td>유지방</td>
+</tr>
+<tr> <td>1003</td><td>유지방</td>
+</tr>
+</table>
+</div>
 <div id="border">
 <div id="vertical"> 
 
 </div>
 <tr>
-<td> <b id="employee"> 일반근로자-신규추가 </b></td> 
+<td> <b id="employee"> <h2>일반근로자-신규추가</h2> </b></td> 
 </tr>
-<form action="insert.emp" method="post" >
+ <form action="insert.emp" method="POST" encType="multipart/form-data" >
 <tr>
-<td> <button id="save-surr" style="color:white" type="submit">저장하기 </button>
-<td><input type="hidden" value="${sessionScope.loginCompany.companyCode}" name="comCode"></td> 
+<td> <button id="save-surr" style="color:white">저장하기 </button>
 </tr> 
 
 <tr>
 <td>
+<td><input type="hidden" value="${sessionScope.loginCompany.companyCode}"  name="comCode"></td> 
 <b id="name"> 이름</b>
-<input type="text" id="name-surr" name="employeeName" > 
+<input type="text" id="name-surr" name="employeeName"> 
 <b id="security-num">주민등록번호</b>
 <input type="text" id="security-num-surr" name="securityNum">
+<b id="employeeNum" >직원 번호 </b>
+<input type="text" id="employeeNum-surr" name="employeeNum">
 </td>
 </tr>
 
 <tr>
 <td>
 <b id="salary">월급여</b>
-<input type="text" id="salary-surr" name="salary">
+<input type="text" id="salary-surr" name="salary" onkeyup="inputNumberFormat(this)">
 <b id="email">이메일</b>
 <input type="text" id="email-surr" name="email">
 </td>
@@ -1382,8 +1553,13 @@ height:1700px;
 </tr>
 
 <tr>
-<td><b id="enroll-date">입사년월일</b>
-<input type="text" id="enroll-date-surr" name="enrollDate">
+<td><b id="enroll-date" >입사년월일</b>
+<input type="text" class="enroll-date-surr" id="datepicker" name="enrollDate"></td>
+<td><b id="leavegongsi">퇴사년월일</b></td>
+<td><input type="text" class="leavegongsi-surr" id="datepicker2" name="leaveDate"></td>
+<td><button id="leaveReason-surr" style="color:white; font-size:6px;">퇴사사유</button></td>
+ <td class="thirdLine"><label id="nnResult"></label></td>
+<!-- <input type="text" name="leaveReason" > -->
 </td>
 </tr>
 
@@ -1399,7 +1575,7 @@ height:1700px;
 
 <tr>
 <td><b id="drive">자가운전</b>
-<select id="drive-surr" name="drivingSubsidies">
+<select id="drive-surr" name="drivingsubsidies">
 <option value="2" selected disabled hidden>적용안함</option> 
 <option value="1">적용</option>
 <option value="2">적용안함</option>
@@ -1424,8 +1600,7 @@ height:1700px;
 <tr>
 <td><b id="position">직급</b>
 <select id="position-surr" name="positionCode">
-<option value="1" selected disabled hidden>사원</option>
-<option value="1">사원</option>
+<option value="1" selected>사원</option>
 <option value="2">등기이사</option>  
 <option value="3">대표</option>
 </select>
@@ -1434,8 +1609,7 @@ height:1700px;
 <tr>
 <td><b id="goyong-sanjae">고용/산재보험</b>
 <select id="goyong-sanjae-surr" name="goyongSanjae">
-<option value="1" selected disabled hidden>적용</option>
-<option value="1">적용</option>  
+<option value="1" selected>적용</option>  
 <option value="2">비적용</option>
 </select>
 </tr>
@@ -1451,7 +1625,7 @@ height:1700px;
 <tr>
 <td>
 <b id="deprivation-status">상실신고 여부</b>
-<input type="text" id="de-status-surr"  name="deprivationStatus">
+<input type="text" id="de-status-surr" name="deprivationStatus">
 <b id="zero-one-2">Y:부 N:여</b>
 </td>
 </tr>
@@ -1472,7 +1646,7 @@ height:1700px;
 <option value="4">농협</option>
 <option value="5">우리은행</option>
 <option value="6">sc제일은행</option>
-<option value="7">신한은행</option>
+<option value="7">신한은행</option> 
 <option value="8">씨티은행</option>
 <option value="9 ">대구은행</option>
 </select>
@@ -1513,21 +1687,75 @@ height:1700px;
 <tr>
 <td>
 <b id="id-docu">신분증명서류</b>
-<input type="file" id="id-docu1-surr" name="idDocument">
-<button id="uploadbtn1-surr" style="color:white">업로드</button> 
+<input type="file" id="id-docu1-surr" name="idDocument"> 
 </td>
 </tr>
 
 <tr>
 <td>
 <b id="account-docu">급여계좌사본</b>
-<input type="file" id="account-docu-surr" name="accountDocument">
-<button id="uploadbtn2-surr" style="color:white">업로드</button> 
+<input type="file" id="account-docu-surr" value="2"  name="accountDocument">
 </td>
 </tr>
 </form>
+<script>
+	$.datepicker.setDefaults({
+		showOn:"both",
+		buttonImageOnly:true,
+		buttonImage :"${contextPath}/resources/images/calendar.png",
+		dateFormat: 'yy-mm-dd'
+	});
+	
+	$(function(){
+		$("#datepicker").datepicker({});
+		$("img.ui-datepicker-trigger")
+		.attr("style","margin-left:5px; vertical-align:middle; cursor:Pointer; width:1px; height:1px");
+	});
+	
+	$.datepicker.setDefaults({
+		showOn:"both",
+		buttonImageOnly:true,
+		buttonImage :"${contextPath}/resources/images/calendar.png",
+		dateFormat: 'yy-mm-dd'
+	});
+	
+	$(function(){
+		$("#datepicker2").datepicker({});
+		$("img.ui-datepicker-trigger")
+		.attr("style","margin-left:5px; vertical-align:middle; cursor:Pointer; width:1px; height:1px");
+	});
+	
+
+	$("#salary-surr").keyup(function(){
+		var salary=$("#salary-surr").val();
+		var msg='';
+		var sal= Number(salary);
+	
+	if(sal<1795310){
+		msg="월급여가 최저 시급에 위반됩니다. 식대/자가운전/육아수당/연구수당을 포함한 금액을 입력해주세요";
+		$("#tip").css("color","red");
+	}else{
+		msg="식대/자가운전/육아수당/연구수당을 포함한 금액을 입력해주세요";
+		$("#tip").css("color","gray");
+	}
+	$("#tip").text(msg);
+	});
+	
+	function comma(str){
+		str=String(str);
+		return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, "$1,");
+
+	}
+	
+	function inputNumberFormat(str){
+		str.value=comma(uncomma(str.value));
+	}
+	
+</script>
 </div>
 </div>
+
+
 <div style="height: 100vh;"></div>
 		<div class="card mb-4">
 			<div class="card-body">When scrolling, the navigation stays at
@@ -1536,8 +1764,5 @@ height:1700px;
 	</main>
 	<jsp:include page="../common/menubar2.jsp" />
 
-
 </body>
-</html>                   
-
-
+</html>        

@@ -1,10 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<!-- jquery UI calendar-->
+<script
+   src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+   integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+   crossorigin="anonymous"></script>
+   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+      <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+  
 </head>
 
 <style>
@@ -20,7 +35,7 @@ top: 547px;
  */
 
 /* 거래처 등록정보 vender-info*/
- 
+/*  
 #vender-info{
 position: absolute;
 width: 173px;
@@ -31,30 +46,29 @@ top: 81px;
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 18px;
+font-size: 21px;
 line-height: 21px;
 
 color: #000000;
 
-}
+} */
 
 /* 1. 사업자등록번호 biz-Num*/
 
 #biz-num{
 position: absolute;
-width: 104px;
+width: 400px;
 height: 24px;
 left: 320px;
-top: 124px;
+top: 184px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
-text-align: right;
 
 color: #4C4C4C;
 
@@ -63,26 +77,26 @@ color: #4C4C4C;
 /*사업자등록번호 네모칸 biz-reg-num-surr*/
 
 #biz-reg-num-surr{
+
 position: absolute;
-width: 222px;
-height: 24px;
-left: 454px;
-top: 124px;
+width: 360px;
+height: 27px;
+left: 731px;
+top: 184px;
 
 background: #FFFFFF;
 border: 1px solid #C4C4C4;
 box-sizing: border-box;
 border-radius: 5px;
 }
-
 /* 거래처주소 2번째칸 vender-address2-surr */
 
 #vender-address2-surr{
 position: absolute;
-width: 392px;
+width: 352px;
 height: 27px;
-left: 594px;
-top: 235px;
+left: 630px;
+top: 360px;
 
 background: #FFFFFF;
 border: 1px solid #C4C4C4;
@@ -96,8 +110,8 @@ border-radius: 5px;
 position: absolute;
 width: 191px;
 height: 27px;
-left: 594px;
-top: 385px;
+left: 455px;
+top: 457px;
 
 background: #D9E3E3;
 border: 1px solid #C4C4C4;
@@ -113,7 +127,7 @@ position: absolute;
 width: 555px;
 height: 27px;
 left: 454px;
-top: 625px;
+top: 677px;
 
 background: #FFFFFF;
 border: 1px solid #C4C4C4;
@@ -128,7 +142,7 @@ position: absolute;
 width: 228px;
 height: 27px;
 left: 644px;
-top: 465px;
+top: 530px;
 
 background: #D9E3E3;
 border: 1px solid #C4C4C4;
@@ -143,7 +157,7 @@ position: absolute;
 width: 649px;
 height: 27px;
 left: 337px;
-top: 298px;
+top: 328px;
 
 background: #FFFFFF;
 border: 1px solid #C4C4C4;
@@ -158,12 +172,12 @@ position: absolute;
 width: 668px;
 height: 24px;
 left: 320px;
-top: 300px;
+top: 330px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -179,12 +193,12 @@ position: absolute;
 width: 104px;
 height: 24px;
 left: 319px;
-top: 160px;
+top: 250px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -201,12 +215,12 @@ position: absolute;
 width: 104px;
 height: 24px;
 left: 321px;
-top: 197px;
+top: 307px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -223,12 +237,12 @@ position: absolute;
 width: 104px;
 height: 24px;
 left: 321px;
-top: 237px;
+top: 357px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -246,12 +260,12 @@ position: absolute;
 width: 104px;
 height: 24px;
 left: 321px;
-top: 347px;
+top: 407px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -265,15 +279,15 @@ color: #4C4C4C;
 
 #department-incharge{
 position: absolute;
-width: 104px;
+width: 124px;
 height: 24px;
-left: 321px;
-top: 387px;
+left: 320px;
+top: 457px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -290,12 +304,12 @@ position: absolute;
 width: 104px;
 height: 24px;
 left: 321px;
-top: 467px;
+top: 530px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -309,15 +323,15 @@ color: #4C4C4C;
 
 #com-manage-tel{
 position: absolute;
-width: 120px;
+width: 150px;
 height: 24px;
 left: 320px;
-top: 547px;
+top: 617px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -333,13 +347,13 @@ color: #4C4C4C;
 position: absolute;
 width: 104px;
 height: 24px;
-left: 331px;
-top: 627px;
+left: 321px;
+top: 677px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -355,13 +369,13 @@ color: #4C4C4C;
 position: absolute;
 width: 104px;
 height: 24px;
-left: 331px;
-top: 667px;
+left: 321px;
+top: 727px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -378,12 +392,12 @@ position: absolute;
 width: 104px;
 height: 24px;
 left: 455px;
-top: 197px;
+top: 307px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -400,12 +414,12 @@ position: absolute;
 width: 104px;
 height: 24px;
 left: 455px;
-top: 347px;
+top: 407px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -422,12 +436,12 @@ position: absolute;
 width: 104px;
 height: 24px;
 left: 455px;
-top: 467px;
+top: 527px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -444,12 +458,12 @@ position: absolute;
 width: 104px;
 height: 24px;
 left: 455px;
-top: 507px;
+top: 567px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -466,12 +480,12 @@ position: absolute;
 width: 104px;
 height: 24px;
 left:  720px;
-top: 507px;
+top: 567px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -487,13 +501,13 @@ color: #4C4C4C;
 position: absolute;
 width: 104px;
 height: 24px;
-left: 720px;
-top: 347px;
+left: 750px;
+top: 407px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -510,12 +524,12 @@ position: absolute;
 width: 104px;
 height: 24px;
 left: 720px;
-top: 197px;
+top: 307px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -532,7 +546,7 @@ position: absolute;
 width: 222px;
 height: 27px;
 left: 452px;
-top: 160px;
+top: 250px;
 
 background: #FFFFFF;
 border: 1px solid #C4C4C4;
@@ -546,8 +560,8 @@ border-radius: 5px;
 position: absolute;
 width: 180px;
 height: 27px;
-left: 495px;
-top: 194px;
+left: 525px;
+top: 307px;
 
 background: #FFFFFF;
 border: 1px solid #C4C4C4;
@@ -561,8 +575,8 @@ border-radius: 5px;
 position: absolute;
 width: 180px;
 height: 27px;
-left: 515px;
-top: 344px;
+left: 535px;
+top: 407px;
 
 background: #FFFFFF;
 border: 1px solid #C4C4C4;
@@ -576,8 +590,8 @@ border-radius: 5px;
 position: absolute;
 width: 201px;
 height: 27px;
-left: 785px;
-top: 344px;
+left: 835px;
+top: 404px;
 
 background: #FFFFFF;
 border: 1px solid #C4C4C4;
@@ -587,18 +601,18 @@ border-radius: 5px;
 
 /* 주소상세란 vender-address3-surr*/
 
-#vender-address3-surr{
+/* #vender-address3-surr{
 position: absolute;
 width: 531px;
 height: 27px;
 left: 455px;
-top: 264px;
+top: 387px;
 
 background: #FFFFFF;
 border: 1px solid #C4C4C4;
 box-sizing: border-box;
 border-radius: 5px;
-}
+} */
 
 /* 주소첫번째란 vender-address1-surr */
 
@@ -607,7 +621,7 @@ position: absolute;
 width: 82px;
 height: 27px;
 left: 455px;
-top: 234px;
+top: 357px;
 
 background: #FFFFFF;
 border: 1px solid #C4C4C4;
@@ -615,6 +629,18 @@ box-sizing: border-box;
 border-radius: 5px;
 }
  
+ #addressbtn{
+position: absolute;
+width: 50px;
+height: 28px;
+left: 560px;
+top: 357px;
+background:#24574A;
+color:white;
+border-radius:5px;
+font-size:6px;
+
+ }
 
 /*담당부서사원코드란 department-incharge1-surr */
 
@@ -622,8 +648,8 @@ border-radius: 5px;
 position: absolute;
 width: 82px;
 height: 27px;
-left: 455px;
-top: 384px;
+left: 405px;
+top: 457px;
 
 background: #FFFFFF;
 border: 1px solid #C4C4C4;
@@ -639,7 +665,7 @@ position: absolute;
 width: 82px;
 height: 27px;
 left: 505px;
-top: 464px;
+top: 530px;
 
 background: #FFFFFF;
 border: 1px solid #C4C4C4;
@@ -653,8 +679,8 @@ border-radius: 5px;
 position: absolute;
 width: 190px;
 height: 27px;
-left: 460px;
-top: 544px;
+left: 500px;
+top: 610px;
 border: 1px solid #C4C4C4;
 box-sizing: border-box;
 border-radius: 5px;
@@ -667,7 +693,7 @@ position: absolute;
 width: 180px;
 height: 27px;
 left: 505px;
-top: 504px;
+top: 564px;
 
 background: #FFFFFF;
 border: 1px solid #C4C4C4;
@@ -683,7 +709,7 @@ position: absolute;
 width: 201px;
 height: 27px;
 left: 785px;
-top: 504px;
+top: 564px;
 
 background: #FFFFFF;
 border: 1px solid #C4C4C4;
@@ -698,7 +724,7 @@ position: absolute;
 width: 201px;
 height: 27px;
 left: 660px;
-top: 544px;
+top: 604px;
 
 background: #D9E3E3;
 border: 1px solid #C4C4C4;
@@ -713,7 +739,7 @@ position: absolute;
 width: 221px;
 height: 27px;
 left: 765px;
-top: 194px;
+top: 307px;
 
 background: #FFFFFF;
 border: 1px solid #C4C4C4;
@@ -729,12 +755,12 @@ position: absolute;
 width: 208px;
 height: 24px;
 left: 801px;
-top: 387px;
+top: 247px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -748,15 +774,15 @@ color: #4C4C4C;
 
 #zero-one{
 position: absolute;
-width: 53px;
+width: 73px;
 height: 24px;
-left: 491px;
-top: 667px;
+left: 501px;
+top: 727px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -771,7 +797,7 @@ position: absolute;
 width: 82px;
 height: 27px;
 left: 644px;
-top: 755px;
+top: 815px;
 
 background: #296355;
 border-radius: 5px;
@@ -783,7 +809,7 @@ position: absolute;
 width: 75px;
 height: 22.33px;
 left: 455px;
-top: 547px;
+top: 607px;
 
 background: #D9E3E3;
 }
@@ -794,12 +820,12 @@ position: absolute;
 width: 69px;
 height: 15.69px;
 left: 446px;
-top: 550.62px;
+top: 610.62px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: normal;
-font-size: 13px;
+font-size: 16px;
 line-height: 15px;
 }
 
@@ -808,15 +834,15 @@ line-height: 15px;
 
 #account-income-num{
 position: absolute;
-width: 104px;
+width: 124px;
 height: 24px;
 left: 321px;
-top: 467px;
+top: 517px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -832,7 +858,7 @@ position: absolute;
 width: 27px;
 height: 27px;
 left: 455px;
-top: 664px;
+top: 724px;
 
 background: #FFFFFF;
 border: 1px solid #C4C4C4;
@@ -842,16 +868,17 @@ border-radius: 5px;
 
 /*거래처 명 : vender-name*/
 #vender-name{
+
 position: absolute;
-width: 58px;
+width: 80px;
 height: 24px;
-left: 455px;
-top: 79px;
+left: 326px;
+top: 120px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -865,10 +892,10 @@ color: #4C4C4C;
 #vender-name-surr{
 
 position: absolute;
-width: 167px;
+width: 254px;
 height: 27px;
-left: 516px;
-top: 79px;
+left: 473px;
+top: 120px;
 
 background: #FFFFFF;
 border: 1px solid #C4C4C4;
@@ -882,12 +909,12 @@ position: absolute;
 width: 95px;
 height: 24px;
 left: 1025px;
-top: 197px;
+top: 307px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -902,7 +929,7 @@ position: absolute;
 width: 25px;
 height: 25px;
 left: 1082px;
-top: 192px;
+top: 307px;
 
 background: #FFFFFF;
 border: 1px solid #C4C4C4;
@@ -910,11 +937,71 @@ box-sizing: border-box;
 border-radius: 5px;
 }
 
+/* 구분 vendertype */
+
+#vendertype{
+position: absolute;
+width: 50px;
+height: 24px;
+left: 813px;
+top: 120px;
+
+font-family: Roboto;
+font-style: normal;
+font-weight: bold;
+font-size: 16px;
+line-height: 14px;
+display: flex;
+align-items: center;
+text-align: right;
+
+color: #4C4C4C;
+
+
+}
+
+/* 구분 셀렉트박스란 vendertype-surr*/
+
+#vendertype-surr{
+position: absolute;
+width: 170px;
+height: 27px;
+left: 890px;
+top: 120px;
+
+background: #FFFFFF;
+border: 1px solid #C4C4C4;
+box-sizing: border-box;
+border-radius: 5px;
+
+}
+
+/* Rectangle 257 */
+
+
+/* position: absolute;
+width: 27px;
+height: 27px;
+left: 959px;
+top: 82px;
+
+background: #E4E4E4;
+border: 1px solid #C4C4C4;
+box-sizing: border-box;
+border-radius: 0px 5px 5px 0px; */
+ 
+
+
+
 </style>
 <body>
 	
 	<jsp:include page="../common/menubar.jsp" />
+	
 	<div id="main">
+				<div id="layer" style="display:none;position:fixed;overflow:hidden;z-index:1;-webkit-overflow-scrolling:touch;">
+				<img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnCloseLayer" style="cursor:pointer;position:absolute;right:-3px;top:-3px;z-index:1" onclick="closeDaumPostcode()" alt="닫기 버튼">
+			</div>
 	<div class="container-fluid">
 		<h2 class="mt-4">거래처 신규등록</h2>
 <!-- 		<ol class="breadcrumb mb-4">
@@ -927,12 +1014,19 @@ border-radius: 5px;
 <!-- <table> -->
 	<form id="joinForm" method="post" action="insert.ve">
 		<tr>
-			<td><b id="vender-info">거래처 신규등록</b></td>
+<!-- 		<td><b id="vender-info">거래처 신규등록</b></td> -->
 			<td><b id="vender-name">거래처명</b><input type="text" name="venderName" id="vender-name-surr" name="venderName"></td>
+			<td><b id ="vendertype">구분</b><select id="vendertype-surr" name="venderType">
+			<option value="1"selected disabled hidden>일반거래처</option>
+			<option value="1">일반거래처</option>
+			<option value="2">은행</option>
+			<option value="3">카드</option>
+			</select>
+			</td>
 		</tr>
 		
 		<tr>
-			<td><b id="biz-num">1.사업자등록번호</b>
+			<td><b id="biz-num"> 1.사업자등록번호 / 주민번호 / 계좌번호 / 카드번호  </b>
 			<input type="text" name="bizRegNum" id="biz-reg-num-surr">
 			<!-- <button>사업자등록상태조회</button></td> -->
 		</tr>
@@ -951,15 +1045,31 @@ border-radius: 5px;
 			</td>
 		</tr>
 		
-		<tr>
-			<td><b id="address">4.주소</b>
-			<input type="text" name="" id="vender-address1-surr"><input type="text" id="vender-address2-surr"></td>
-			<td><input type="text" name="venderAddress" id="vender-address3-surr"></td>
-		</tr>
+		
+<!-- 		  <td class="firstLine"><b>회사/점포주소</b></td>
+               <td class="secondLine">
+               <input type="text" id="postcode" name="postcode" placeholder="우편번호">
+               <input type="text" id="address1" name="bizLocation" placeholder="주소">
+               </td>
+               
+               <td class="thirdLine">
+               <input type="button" onclick="sample2_execDaumPostcode()" id="location-btn" value="주소 검색">
+               </td>
+          </tr> -->
+		
+		
 		
 		<tr>
-			<td><b id="null-okay">####상세 입력 안함####</b>
+			<td><b id="address">4.주소</b>
+			<input type="text" name="postcode" placeholder="우편번호" id="vender-address1-surr">
+			<td><input type="button" onclick="sample2_execDaumPostcode()" id="addressbtn" value="검색"></td>
+			<td><input type="text" id="vender-address2-surr" name="venderAddress" placeholder="주소"></td>
+		  <td class="secondLine"><input type="hidden" id="address2" name="address1" placeholder="상세주소"></td>
 		</tr>
+		
+<!-- 		<tr>
+			<td><b id="null-okay">####상세 입력 안함####</b>
+		</tr> -->
 
 		<tr>
 			<td><b id="phone">5.연 락 처</b> 
@@ -971,7 +1081,7 @@ border-radius: 5px;
 		
 		<tr>
 			<td><b id="department-incharge">6.담당(부서)사원</b>
-			`<input type="text" id="department-incharge1-surr">
+<!-- 			`<input type="text" id="department-incharge1-surr"> -->
 			`<input type="text" name="departmentIncharge" id="department-incharge2-surr">
 			</td>
 		</tr>
@@ -1018,5 +1128,104 @@ border-radius: 5px;
 	</main>
 	<jsp:include page="../common/menubar2.jsp" />
 <!-- </table> -->
+
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
+<script>
+
+/*주소*/
+// 우편번호 찾기 화면을 넣을 element
+var element_layer = document.getElementById('layer');
+
+function closeDaumPostcode() {
+	// iframe을 넣은 element를 안보이게 한다.
+	element_layer.style.display = 'none';
+}
+
+function sample2_execDaumPostcode() {
+	new daum.Postcode(
+			{
+				oncomplete : function(data) {
+					// 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+					// 각 주소의 노출 규칙에 따라 주소를 조합한다.
+					
+					// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+					var addr = ''; // 주소 변수
+					var extraAddr = ''; // 참고항목 변수
+
+					//사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+					if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+						addr = data.roadAddress;
+					} else { // 사용자가 지번 주소를 선택했을 경우(J)
+						addr = data.jibunAddress;
+					}
+
+					// 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+					if (data.userSelectedType === 'R') {
+						// 법정동명이 있을 경우 추가한다. (법정리는 제외)
+						// 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+						if (data.bname !== ''
+								&& /[동|로|가]$/g.test(data.bname)) {
+							extraAddr += data.bname;
+						}
+						// 건물명이 있고, 공동주택일 경우 추가한다.
+						if (data.buildingName !== ''
+								&& data.apartment === 'Y') {
+							extraAddr += (extraAddr !== '' ? ', '
+									+ data.buildingName : data.buildingName);
+						}
+						// 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+						if (extraAddr !== '') {
+							extraAddr = ' (' + extraAddr + ')';
+						}
+
+					} /* else {
+						document.getElementById("sample2_extraAddress").value = '';
+					} 여기 주석처리했어!*/
+
+					// 우편번호와 주소 정보를 해당 필드에 넣는다.
+					document.getElementById('vender-address1-surr').value = data.zonecode;
+					document.getElementById("vender-address2-surr").value = addr;
+					// 커서를 상세주소 필드로 이동한다.
+					document.getElementById("address2")
+							.focus();
+
+					// iframe을 넣은 element를 안보이게 한다.
+					// (autoClose:false 기능을 이용한다면, 아래 코드를 제거해야 화면에서 사라지지 않는다.)
+					element_layer.style.display = 'none';
+				},
+				width : '100%',
+				height : '100%',
+				maxSuggestItems : 5
+			}).embed(element_layer);
+
+	// iframe을 넣은 element를 보이게 한다.
+	element_layer.style.display = 'block';
+
+	// iframe을 넣은 element의 위치를 화면의 가운데로 이동시킨다.
+	initLayerPosition();
+}
+
+// 브라우저의 크기 변경에 따라 레이어를 가운데로 이동시키고자 할때는
+// resize이벤트나, orientationchange이벤트를 이용하여 값이 변경될때마다 아래 함수를 실행 시켜 주거나,
+// 직접 element_layer의 top,left값을 수정해 주면 
+function initLayerPosition() {
+	var width = 400; //우편번호서비스가 들어갈 element의 width
+	var height = 500; //우편번호서비스가 들어갈 element의 height
+	var borderWidth = 1; //샘플에서 사용하는 border의 두께
+
+	// 위에서 선언한 값들을 실제 element에 넣는다.
+	element_layer.style.width = width + 'px';
+	element_layer.style.height = height + 'px';
+	element_layer.style.border = borderWidth + 'px solid';
+	// 실행되는 순간의 화면 너비와 높이 값을 가져와서 중앙에 뜰 수 있도록 위치를 계산한다.
+	element_layer.style.left = (((window.innerWidth || document.documentElement.clientWidth) - width) / 2 - borderWidth)
+			+ 'px';
+	element_layer.style.top = (((window.innerHeight || document.documentElement.clientHeight) - height) / 2 - borderWidth)
+			+ 'px';
+}
+
+
+</script>
 </body>
 </html>

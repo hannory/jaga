@@ -45,7 +45,7 @@
 	
 	<insert id="insertCompany" parameterType="Company">
 		INSERT INTO COMPANY(COM_CODE,PWD,COM_ID,EMAIL,PHONE,BIZ_NAME,BIZ_NUM,BOSS_NAME,PERSONAL_NUM,TYPE_OF_BIZ,BIZ_LOCATION,GAEUPDAY)
-		VALUES (COMPANY_SEQ.NEXTVAL,#{companyPwd},#{companyId},#{email},#{phone},#{bizName},#{bizNum},#{bossName},#{personalNum},#{bizType},#{bizLocation},#{gaeup})
+		VALUES (LPAD(COMPANY_SEQ.NEXTVAL, 5, 0), #{companyPwd},#{companyId},#{email},#{phone},#{bizName},#{bizNum},#{bossName},#{personalNum},#{bizType},#{bizLocation},#{gaeup})
 	</insert>
 	
 	<select id="doubleIdCheck" parameterType="java.lang.String" resultMap="companyResultSet">

@@ -36,5 +36,8 @@
   
   </insert>
   
-  
+   <select id="selectEmpList" resultMap="employeeResultSet">
+   SELECT EMPLOYEE_CODE, EMPLOYEE_NUM, EMPLOYEE_NAME
+   FROM EMPLOYEE
+  </select> 
   </mapper>

@@ -1,6 +1,7 @@
 package com.kh.jaga.employee.controller;
 
 import java.io.File;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -82,5 +83,11 @@ public String insertEmployee(Model model, Employee e, HttpServletRequest request
 	} 
 	
 }
-	
+@RequestMapping("selectEmpList.emp")
+public String selectEmpList(HttpServletRequest request) {
+	List<Employee> list = es.selectEmpList();
+	request.setAttribute("list", list);
+	System.out.println("리스트다 리스트 잘 출력되니?"+list);
+	return "employee/newEmployee";
+}
 }
