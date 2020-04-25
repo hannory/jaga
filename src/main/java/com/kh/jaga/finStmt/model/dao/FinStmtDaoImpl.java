@@ -67,8 +67,6 @@ public class FinStmtDaoImpl implements FinStmtDao {
 		hmap.put("c40100", cSum40100);
 		hmap.put("c83000", cSum83000);
 		
-		System.out.println("pSum83000 at Dao : " + pSum83000);
-		
 		hmap.put("p14600", pSum14600);
 		hmap.put("p40100", pSum40100);
 		hmap.put("p83000", pSum83000);

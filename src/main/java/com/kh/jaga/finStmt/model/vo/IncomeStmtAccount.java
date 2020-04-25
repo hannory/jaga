@@ -7,6 +7,7 @@ public class IncomeStmtAccount implements java.io.Serializable {
 	private int accountCode;		//계정코드
 	private String accountTitle;	//계정명
 	private int year;				//조회 연도
+	private String curPast;			//당기, 전기여부
 	private int month;				//조회 월
 	private Date slipDate;			//전표일
 	private String dateSlipCode;	//회사별, 일별 전표코드
@@ -18,19 +19,23 @@ public class IncomeStmtAccount implements java.io.Serializable {
 	
 	public IncomeStmtAccount() {}
 
-	public IncomeStmtAccount(String comCode, String dateSlipCode, String debitCredit, int price, int accountCode,
-			String accountTitle, String brief, int year, int month, Date slipDate) {
+	public IncomeStmtAccount(String comCode, int accountCode, String accountTitle, int year, String curPast, int month,
+			Date slipDate, String dateSlipCode, String brief, String venderCode, String venderName, String debitCredit,
+			int price) {
 		super();
 		this.comCode = comCode;
-		this.dateSlipCode = dateSlipCode;
-		this.debitCredit = debitCredit;
-		this.price = price;
 		this.accountCode = accountCode;
 		this.accountTitle = accountTitle;
-		this.brief = brief;
 		this.year = year;
+		this.curPast = curPast;
 		this.month = month;
 		this.slipDate = slipDate;
+		this.dateSlipCode = dateSlipCode;
+		this.brief = brief;
+		this.venderCode = venderCode;
+		this.venderName = venderName;
+		this.debitCredit = debitCredit;
+		this.price = price;
 	}
 
 	public String getComCode() {
@@ -112,12 +117,38 @@ public class IncomeStmtAccount implements java.io.Serializable {
 	public void setBrief(String brief) {
 		this.brief = brief;
 	}
+	
+	public String getCurPast() {
+		return curPast;
+	}
+
+	public void setCurPast(String curPast) {
+		this.curPast = curPast;
+	}
+
+	public String getVenderCode() {
+		return venderCode;
+	}
+
+	public void setVenderCode(String venderCode) {
+		this.venderCode = venderCode;
+	}
+
+	public String getVenderName() {
+		return venderName;
+	}
+
+	public void setVenderName(String venderName) {
+		this.venderName = venderName;
+	}
 
 	@Override
 	public String toString() {
-		return "IncomeStmtAccount [comCode=" + comCode + ", dateSlipCode=" + dateSlipCode + ", debitCredit="
-				+ debitCredit + ", price=" + price + ", accountCode=" + accountCode + ", accountTitle=" + accountTitle
-				+ ", brief=" + brief + ", year=" + year + ", month=" + month + ", slipDate=" + slipDate + "]";
+		return "IncomeStmtAccount [comCode=" + comCode + ", accountCode=" + accountCode + ", accountTitle="
+				+ accountTitle + ", year=" + year + ", curPast=" + curPast + ", month=" + month + ", slipDate="
+				+ slipDate + ", dateSlipCode=" + dateSlipCode + ", brief=" + brief + ", venderCode=" + venderCode
+				+ ", venderName=" + venderName + ", debitCredit=" + debitCredit + ", price=" + price + "]";
 	}
+
 
 }

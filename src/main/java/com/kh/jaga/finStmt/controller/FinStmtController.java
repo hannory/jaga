@@ -38,27 +38,37 @@ public class FinStmtController {
 	
 	@GetMapping("compTrialBal.fs")
     public String showCompTrialBal() {
-       return "compTrialBal";
+       return "finStmt/compTrialBal";
     }
 	
 	@GetMapping("stmtOfFinPos.fs")
     public String showStmtOfFinPos() {
-       return "stmtOfFinPos";
+       return "finStmt/stmtOfFinPos";
     }
 	
 	@GetMapping("incomeStmt.fs")
-	public String showIncomeStmt() {
-		return "incomeStmt";
+	public String showIncomeStmt(HttpServletRequest request) {
+//		Company loginCompany = (Company) request.getSession().getAttribute("loginCompany"); 
+//		
+//		if(loginCompany == null) {
+//			request.getSession().setAttribute("msg", "로그인을 해주세요");
+//			
+//			return "common/alertPage";
+//		} else {
+//			return "finStmt/incomeStmt";
+//		}
+		
+		return "finStmt/incomeStmt";
 	}
 	
 	@GetMapping("mfrgCostsStmt.fs")
 	public String showMfrgCostsStmt() {
-		return "mfrgCostsStmt";
+		return "finStmt/mfrgCostsStmt";
 	}
 	
 	@GetMapping("stmtOfCashFlow.fs")
 	public String showStmtOfCashFlow() {
-		return "stmtOfCashFlow";
+		return "finStmt/stmtOfCashFlow";
 	}	
 	
 	@RequestMapping("insertIncomeStmt.fs")
@@ -70,7 +80,7 @@ public class FinStmtController {
 		
 		fss.insertIncomeStmt(i);
 		
-		return "incomeStmt";
+		return "finStmt/incomeStmt";
 	}
 	
 	@RequestMapping("selectIncomeStmt.fs")
@@ -102,13 +112,21 @@ public class FinStmtController {
 	
 	@RequestMapping("selectSlip.fs")
 	public void selectSlip(IncomeStmtAccount isa, HttpServletRequest request, HttpServletResponse response) {
-//		System.out.println("year : " + isa.getYear());
-//		System.out.println("comCode : " + isa.getComCode());
-//		System.out.println("accountCode : " + isa.getAccountCode());
-		
 		isa.setComCode(((Company) request.getSession().getAttribute("loginCompany")).getCompanyCode());
 		
-		ArrayList<IncomeStmtAccount> list = fss.selectSlip(isa);
+		System.out.println("curPast : " + isa.getCurPast());
+		
+		ArrayList<IncomeStmtAccount> list;
+		
+		if(isa.getCurPast().equals("c")) {
+			//당기일 경우
+			list = fss.selectSlip(isa);
+		} else {
+			//전기일 경우
+			int curYear = isa.getYear();
+			isa.setYear(curYear - 1);
+			list = fss.selectSlip(isa);
+		}
 		
 		response.setContentType("application/json");
 		

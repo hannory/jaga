@@ -158,4 +158,9 @@ public class ViewController {
     	return "main/main";
     }
     
+    @GetMapping("alertPage.vi")
+    public String showAlert() {
+    	return "common/alertPage";
+    }
+    
 }

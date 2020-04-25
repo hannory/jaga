@@ -45,7 +45,7 @@
 	}
 	#foldBtn {
 		background:#24574A;
-		border-radius:3px;
+		border-radius:4px;
 		padding:1px;
 		padding-bottom:7px;
 		color:white;
@@ -69,6 +69,10 @@
 		border: 1px solid #a6a6a6;
 		background: #e7e6e6;
 		text-align: center;
+	}
+	#pastData {
+		background: #f165b2;
+		padding: 1px;
 	}
 </style>
 <title>자가 경리</title>
@@ -132,167 +136,171 @@
 			</tr>
 		</table>
 			<table id="contentTable" width="1100px" style="text-align:center;">
-				<tr>
-					<td class="table-head" width="28%" rowspan="2">과&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;목</td>
-					<td class="table-head" colspan="2">
-						제 <label class="normal-label" id="cur-term"></label>(당)기 2020.01 ~ 2020.<label class="normal-label" id="cur-month">03</label>
-						<input type="hidden" id="login-openDay" value="${ sessionScope.loginCompany.gaeup }">
-					</td>
-					<td class="table-head" colspan="2">제 <label class="normal-label" id="past-term"></label>(전)기 2019.01 ~ 2019.12</td>
-				</tr>
-				<tr>
-					<td class="table-head" width="18%">잔액</td>
-					<td class="table-head" width="18%">합계</td>
-					<td class="table-head" width="18%">잔액</td>
-					<td class="table-head" width="18%">합계</td>
-				</tr>
-				<tr>
-					<td class="table-title">Ⅰ. 매출액</td>
-					<td class="table-title"></td>
-					<td class="table-title-num"><span id="cSum10"></span><input type="hidden" id="cSum10-input" name="sales"></td>
-					<td class="table-title"></td>
-					<td class="table-title-num" id="pSum10"></td>
-				</tr>
-				<tr class="table-detail">
-					<td class="table-subSubTitle">상품매출</td>
-					<td class="table-content" id="c40100" name="salesOfMerchandise"><input type="hidden"></td>
-					<td></td>
-					<td class="table-content" id="p40100"></td>
-					<td></td>
-				</tr>
-				<tr class="table-detail">
-					<td class="table-subSubTitle">제품매출</td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td class="table-title">Ⅱ. 매출원가</td>
-					<td class="table-title"></td>
-					<td class="table-title-num" id="cSum20" name="costOfSales"></td>
-					<td class="table-title"></td>
-					<td class="table-title-num" id="pSum20"></td>
-				</tr>
-				<tr class="table-detail">
-					<td class="table-subTitle">상품매출원가</td>
-					<td class="table-subTitle"></td>
-					<td class="table-subTitle-num" id="cSum21"></td>
-					<td class="table-subTitle"></td>
-					<td class="table-subTitle-num" id="pSum21"></td>
-				</tr>
-				<tr class="table-detail">
-					<td class="table-subSubTitle">기초상품재고액</td>
-					<td class="table-content" id="cVal211"></td>
-					<td></td>
-					<td class="table-content" id="pVal211"></td>
-					<td></td>
-				</tr>
-				<tr class="table-detail">
-					<td class="table-subSubTitle">당기상품매입액</td>
-					<td class="table-content" id="c14600"></td>
-					<td></td>
-					<td class="table-content" id="p14600"></td>
-					<td></td>
-				</tr>
-				<tr class="table-detail">
-					<td class="table-subSubTitle">기말상품재고액</td>
-					<td><input type="text" id="inputNum" name="endingInvOfMerchandise" onkeyup="inputNumberFormat(this);" style="width:195px;"></td>
-					<td></td>
-					<td class="table-content" id="pVal213"></td>
-					<td></td>
-				</tr>
-				<tr class="table-detail">
-					<td class="table-subTitle">제품매출원가</td>
-					<td class="table-subTitle"></td>
-					<td class="table-subTitle-num" id="cSum22"></td>
-					<td class="table-subTitle"></td>
-					<td class="table-subTitle-num" id="pSum22"></td>
-				</tr>
-				<tr class="table-detail">
-					<td class="table-subSubTitle">기초제품재고액</td>
-					<td class="table-content" id="cVal221"></td>
-					<td></td>
-					<td class="table-content" id="pVal221"></td>
-					<td></td>
-				</tr>
-				<tr class="table-detail">
-					<td class="table-subSubTitle">당기제품제조원가</td>
-					<td class="table-content" id="cVal222"></td>
-					<td></td>
-					<td class="table-content" id="pVal222"></td>
-					<td></td>
-				</tr>
-				<tr class="table-detail">
-					<td class="table-subSubTitle">기말제품재고액</td>
-					<td class="table-content" id="cVal223"></td>
-					<td></td>
-					<td class="table-content" id="pVal223"></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td class="table-title">Ⅲ. 매출총이익</td>
-					<td class="table-title"></td>
-					<td class="table-title-num" id="cSum30"></td>
-					<td class="table-title"></td>
-					<td class="table-title-num" id="pSum30"></td>
-				</tr>
-				<tr>
-					<td class="table-title">Ⅳ. 판매비와관리비</td>
-					<td class="table-title"></td>
-					<td class="table-title-num" id="cSum40"></td>
-					<td class="table-title"></td>
-					<td class="table-title-num" id="pSum40"></td>
-				</tr>
-				<tr class="table-detail" id="row83000">
-					<td class="table-subSubTitle">소모품비</td>
-					<td class="table-content" id="c83000"></td>
-					<td></td>
-					<td class="table-content" id="p83000"></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td class="table-title">Ⅴ. 영업이익</td>
-					<td class="table-title"></td>
-					<td class="table-title-num" id="cSum50"></td>
-					<td class="table-title"></td>
-					<td class="table-title-num" id="pSum50"></td>
-				</tr>
-				<tr>
-					<td class="table-title">Ⅵ. 영업외수익</td>
-					<td class="table-title"></td>
-					<td class="table-title-num" id="cSum60"></td>
-					<td class="table-title"></td>
-					<td class="table-title-num" id="pSum60"></td>
-				</tr>
-				<tr>
-					<td class="table-title">Ⅶ. 영업외비용</td>
-					<td class="table-title"></td>
-					<td class="table-title-num" id="cSum70"></td>
-					<td class="table-title"></td>
-					<td class="table-title-num" id="pSum70"></td>
-				</tr>
-				<tr>
-					<td class="table-title">Ⅷ. 소득세차감전이익</td>
-					<td class="table-title"></td>
-					<td class="table-title-num" id="cSum80"></td>
-					<td class="table-title"></td>
-					<td class="table-title-num" id="pSum80"></td>
-				</tr>
-				<tr>
-					<td class="table-title">Ⅸ. 소득세등</td>
-					<td class="table-title"></td>
-					<td class="table-title-num" id="cSum90"></td>
-					<td class="table-title"></td>
-					<td class="table-title-num" id="pSum90"></td>
-				</tr>
-				<tr>
-					<td class="table-title">Ⅹ. 당기순이익</td>
-					<td class="table-title"></td>
-					<td class="table-title-num" id="cSum100"></td>
-					<td class="table-title"></td>
-					<td class="table-title-num" id="pSum100"></td>
-				</tr>
+				<thead>
+					<tr>
+						<td class="table-head" width="28%" rowspan="2">과&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;목</td>
+						<td class="table-head" colspan="2">
+							제 <label class="normal-label" id="cur-term"></label>(당)기 2020.01 ~ 2020.<label class="normal-label" id="cur-month">03</label>
+							<input type="hidden" id="login-openDay" value="${ sessionScope.loginCompany.gaeup }">
+						</td>
+						<td class="table-head" colspan="2">제 <label class="normal-label" id="past-term"></label>(전)기 2019.01 ~ 2019.12</td>
+					</tr>
+					<tr>
+						<td class="table-head" width="18%">잔액</td>
+						<td class="table-head" width="18%">합계</td>
+						<td class="table-head" width="18%">잔액</td>
+						<td class="table-head" width="18%">합계</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class="table-title">Ⅰ. 매출액</td>
+						<td class="table-title"></td>
+						<td class="table-title-num"><span id="cSum10"></span><input type="hidden" id="cSum10-input" name="sales"></td>
+						<td class="table-title"></td>
+						<td class="table-title-num" id="pSum10"></td>
+					</tr>
+					<tr class="table-detail">
+						<td class="table-subSubTitle">상품매출</td>
+						<td class="table-content" id="c40100" name="salesOfMerchandise"><input type="hidden"></td>
+						<td></td>
+						<td class="table-content" id="p40100"></td>
+						<td></td>
+					</tr>
+					<tr class="table-detail">
+						<td class="table-subSubTitle">제품매출</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td class="table-title">Ⅱ. 매출원가</td>
+						<td class="table-title"></td>
+						<td class="table-title-num" id="cSum20" name="costOfSales"></td>
+						<td class="table-title"></td>
+						<td class="table-title-num" id="pSum20"></td>
+					</tr>
+					<tr class="table-detail">
+						<td class="table-subTitle">상품매출원가</td>
+						<td class="table-subTitle"></td>
+						<td class="table-subTitle-num" id="cSum21"></td>
+						<td class="table-subTitle"></td>
+						<td class="table-subTitle-num" id="pSum21"></td>
+					</tr>
+					<tr class="table-detail">
+						<td class="table-subSubTitle">기초상품재고액</td>
+						<td class="table-content" id="cVal211"></td>
+						<td></td>
+						<td class="table-content" id="pVal211"></td>
+						<td></td>
+					</tr>
+					<tr class="table-detail">
+						<td class="table-subSubTitle">당기상품매입액</td>
+						<td class="table-content" id="c14600"></td>
+						<td></td>
+						<td class="table-content" id="p14600"></td>
+						<td></td>
+					</tr>
+					<tr class="table-detail">
+						<td class="table-subSubTitle">기말상품재고액</td>
+						<td><input type="text" id="inputNum" name="endingInvOfMerchandise" onkeyup="inputNumberFormat(this);" style="width:195px;"></td>
+						<td></td>
+						<td class="table-content" id="pVal213"></td>
+						<td></td>
+					</tr>
+					<tr class="table-detail">
+						<td class="table-subTitle">제품매출원가</td>
+						<td class="table-subTitle"></td>
+						<td class="table-subTitle-num" id="cSum22"></td>
+						<td class="table-subTitle"></td>
+						<td class="table-subTitle-num" id="pSum22"></td>
+					</tr>
+					<tr class="table-detail">
+						<td class="table-subSubTitle">기초제품재고액</td>
+						<td class="table-content" id="cVal221"></td>
+						<td></td>
+						<td class="table-content" id="pVal221"></td>
+						<td></td>
+					</tr>
+					<tr class="table-detail">
+						<td class="table-subSubTitle">당기제품제조원가</td>
+						<td class="table-content" id="cVal222"></td>
+						<td></td>
+						<td class="table-content" id="pVal222"></td>
+						<td></td>
+					</tr>
+					<tr class="table-detail">
+						<td class="table-subSubTitle">기말제품재고액</td>
+						<td class="table-content" id="cVal223"></td>
+						<td></td>
+						<td class="table-content" id="pVal223"></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td class="table-title">Ⅲ. 매출총이익</td>
+						<td class="table-title"></td>
+						<td class="table-title-num" id="cSum30"></td>
+						<td class="table-title"></td>
+						<td class="table-title-num" id="pSum30"></td>
+					</tr>
+					<tr>
+						<td class="table-title">Ⅳ. 판매비와관리비</td>
+						<td class="table-title"></td>
+						<td class="table-title-num" id="cSum40"></td>
+						<td class="table-title"></td>
+						<td class="table-title-num" id="pSum40"></td>
+					</tr>
+					<tr class="table-detail" id="row83000">
+						<td class="table-subSubTitle">소모품비</td>
+						<td class="table-content" id="c83000"></td>
+						<td></td>
+						<td class="table-content" id="p83000"></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td class="table-title">Ⅴ. 영업이익</td>
+						<td class="table-title"></td>
+						<td class="table-title-num" id="cSum50"></td>
+						<td class="table-title"></td>
+						<td class="table-title-num" id="pSum50"></td>
+					</tr>
+					<tr>
+						<td class="table-title">Ⅵ. 영업외수익</td>
+						<td class="table-title"></td>
+						<td class="table-title-num" id="cSum60"></td>
+						<td class="table-title"></td>
+						<td class="table-title-num" id="pSum60"></td>
+					</tr>
+					<tr>
+						<td class="table-title">Ⅶ. 영업외비용</td>
+						<td class="table-title"></td>
+						<td class="table-title-num" id="cSum70"></td>
+						<td class="table-title"></td>
+						<td class="table-title-num" id="pSum70"></td>
+					</tr>
+					<tr>
+						<td class="table-title">Ⅷ. 소득세차감전이익</td>
+						<td class="table-title"></td>
+						<td class="table-title-num" id="cSum80"></td>
+						<td class="table-title"></td>
+						<td class="table-title-num" id="pSum80"></td>
+					</tr>
+					<tr>
+						<td class="table-title">Ⅸ. 소득세등</td>
+						<td class="table-title"></td>
+						<td class="table-title-num" id="cSum90"></td>
+						<td class="table-title"></td>
+						<td class="table-title-num" id="pSum90"></td>
+					</tr>
+					<tr>
+						<td class="table-title">Ⅹ. 당기순이익</td>
+						<td class="table-title"></td>
+						<td class="table-title-num" id="cSum100"></td>
+						<td class="table-title"></td>
+						<td class="table-title-num" id="pSum100"></td>
+					</tr>
+				</tbody>
 			</table>
 		</form>
 		<div style="height: 10vh;"></div>
@@ -394,16 +402,37 @@
 			console.log("마감 버튼 입력 : " + $("#cSum10").text());
 			
 			if($("#cSum10").text() == "") {
-				window.alert("조회기간 검색을 진행해주세요");
-			} else if(Number(uncomma($("#inputNum").val())) == 0) {
-				window.alert("기말상품재고액을 입력하세요");				
+				
+				Swal.fire({
+					icon: "warning",
+					text: "먼저 조회기간 검색을 해주세요!"
+				})
+				
+			} else if($("#inputNum").val() == "") {
+				
+				console.log("기말상품재고액 : " + Number(uncomma($("#inputNum").val())));
+				console.log("기말상품재고액2 : " + $("#inputNum").val());
+				console.log("기말상품재고액2 : " + Number($("#inputNum").val()));
+				
+				Swal.fire({
+					icon: "warning",
+					text: "기말상품재고액을 입력해주세요!"
+				})
+				
 			} else {
 				$("#inputNum").val(Number(uncomma($("#inputNum").val())));
 				$("#cSum10-input").val(Number(uncomma($("#cSum10").text())));
 				
-				window.alert("마감이 완료되었습니다");
+				Swal.fire({
+					icon: "success",
+					title: "마감 성공",
+					text: "마감이 완료되었습니다!"
+				}).then((result) => {
+					if(result.value) {
+						$("#contentForm").submit();
+					}
+				}) 
 
-				$("#contentForm").submit();
 			}			
 			
 		}
@@ -570,39 +599,205 @@
 		});
 		
 		/* 전표 모달 띄우기 */
-		$(document).on("click", '.table-content', function() {
-			$("#slip").modal();
+		$(document).on("dblclick", '.table-content', function() {
 			
-			var year = $("#year").val();
-			var accountCode = $(this).attr('id').substring(1,6);
+			if($(this).text() == "") {
 
-			console.log("accountCode : " + accountCode);
-			
-			$.ajax({
-				url : "selectSlip.fs",
-				type : "get",
-				data : {
-					year : year,
-					accountCode : accountCode
-				},
-				success : function(data) {
-					console.log(data);
-					
-					$tableBody = $("#List_detail");
-					//테이블을 갱신하기 위해 비워줌
-					$tableBody.html('');
-					
-					$.each(data, function(index, value)) {
-						
-						
-						
-					}
-					
-				},
-				error : function(status) {
-					console.log(status);
+				Swal.fire({
+					icon: "warning",
+					text: "먼저 조회기간 검색을 해주세요!"
+				})
+				
+			} else {
+				$("#slip").modal();
+				
+				var year = $("#year").val();
+				var month = $("#month").val();
+				var accountCode = $(this).attr('id').substring(1,6);
+				var curPast = $(this).attr('id').substring(0,1);
+				
+				if(curPast == "p") {
+					$("#pastData").text("전기 데이터 조회중");
+				} else {
+					$("#pastData").text("");
 				}
-			});
+				
+				$.ajax({
+					url : "selectSlip.fs",
+					type : "get",
+					data : {
+						year : year,
+						curPast : curPast,
+						month : month,
+						accountCode : accountCode
+					},
+					success : function(data) {
+						console.log(data);
+						
+						$tableBody = $("#List_detail tbody");
+						//테이블을 갱신하기 위해 비워줌
+						$tableBody.html('');
+						
+						//잔액과 누계 계산을 위한 변수
+						var balance = 0;
+						//월계 게산을 위한 변수
+						var monthBalance = 0;
+						
+						//월별로 월계, 누계 계산을 위한 변수
+						monthCheck = 0;
+						
+						$.each(data, function(index, value) {
+							
+							console.log("index : " + index);
+		
+							console.log("slipDate : " + value.slipDate);
+							
+							// "00월 00일, 0000년" 형식의 반환 String에서 일자 뽑기
+							var dateArray = String((((value.slipDate).split(",", 1)))).split(" ", 2);
+							var date = dateArray[1];
+							
+							// 일을 2자리수로 만들기
+							if(date.length == 1) {
+								var date = 0 + date;
+							}
+							
+							var month = (value.slipDate).split('월', 1);
+							
+							// 해당 계정과목 값의 첫 월 계산
+							if(index == 0) {
+								monthCheck = Number(month);
+							}
+							
+							//월계, 누계 계산
+							if(month != monthCheck) {
+								
+								var $mtr = $("<tr>").attr("class", "modal-head");
+								var $mtd1 = $("<td>").attr("class", "modal-head");
+								var $mtd2 = $("<td>").attr("class", "modal-head");
+								var $mtd3 = $("<td>").attr("class", "modal-head").text("[월\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0계]").css("text-align", "left");
+								var $mtd4 = $("<td>").attr("class", "modal-head");
+								var $mtd5 = $("<td>").attr("class", "modal-head");
+								
+								if(value.debitCredit == '차변') {
+									var $mtd6 = $("<td>").attr("class", "modal-head").text(comma(monthBalance)).css("text-align", "right");
+									var $mtd7 = $("<td>").attr("class", "modal-head");
+								} else {
+									var $mtd6 = $("<td>").attr("class", "modal-head");
+									var $mtd7 = $("<td>").attr("class", "modal-head").text(comma(monthBalance)).css("text-align", "right");
+								}
+								
+								var $mtd8 = $("<td>").attr("class", "modal-head");
+								
+								$mtr.append($mtd1);
+								$mtr.append($mtd2);
+								$mtr.append($mtd3);
+								$mtr.append($mtd4);
+								$mtr.append($mtd5);
+								$mtr.append($mtd6);
+								$mtr.append($mtd7);
+								$mtr.append($mtd8);
+								$tableBody.append($mtr);
+								
+								var $atr = $("<tr>").attr("class", "modal-head");
+								var $atd1 = $("<td>").attr("class", "modal-head");
+								var $atd2 = $("<td>").attr("class", "modal-head");
+								var $atd3 = $("<td>").attr("class", "modal-head").text("[누\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0계]").css("text-align", "left");
+								var $atd4 = $("<td>").attr("class", "modal-head");
+								var $atd5 = $("<td>").attr("class", "modal-head");
+								
+								if(value.debitCredit == '차변') {
+									var $atd6 = $("<td>").attr("class", "modal-head").text(comma(balance)).css("text-align", "right");
+									var $atd7 = $("<td>").attr("class", "modal-head");
+								} else {
+									var $atd6 = $("<td>").attr("class", "modal-head");
+									var $atd7 = $("<td>").attr("class", "modal-head").text(comma(balance)).css("text-align", "right");
+								}
+								
+								var $atd8 = $("<td>").attr("class", "modal-head");
+								
+								$atr.append($atd1);
+								$atr.append($atd2);
+								$atr.append($atd3);
+								$atr.append($atd4);
+								$atr.append($atd5);
+								$atr.append($atd6);
+								$atr.append($atd7);
+								$atr.append($atd8);
+								$tableBody.append($atr);
+								
+								//월계 초기화
+								monthBalance = 0;
+							}
+							
+							if(month != monthCheck) {
+								var gap = month - monthCheck;
+								monthCheck += gap;
+							}
+							
+							//월을 2자리수로 만들기
+							console.log("month : " + month);
+							console.log("month typeof : " + typeof(month));
+							console.log("month.length : " + month.length);
+							console.log("String month.length : " + String(month).length);
+							if(String(month).length == 1) {
+								var month = 0 + month;
+							}
+							
+							//전표별 값 입력
+							var $tr = $("<tr>");
+							var $dateTd = $("<td>").text(month + "-" + date).css("text-align", "center");
+							var $dateSlipCodeTd = $("<td>").text(value.dateSlipCode).css("text-align", "center");
+							var $briefTd = $("<td>").text(value.brief);
+							var $venderCodeTd = $("<td>").text(value.venderCode).css("text-align", "center");
+							var $venderNameTd = $("<td>").text(value.venderName);
+							
+							//차변 대변 구분
+							if(value.debitCredit == '차변') {
+								var $debitTd = $("<td>").text(comma(value.price)).css("text-align", "right");
+								var $creditTd = $("<td>");
+							} else {
+								var $debitTd = $("<td>");
+								var $creditTd = $("<td>").text(comma(value.price)).css("text-align", "right");
+							}
+							
+							//잔액, 누계 계산
+							balance += value.price;
+							var $balanceTd = $("<td>").text(comma(balance)).css("text-align", "right");							
+							
+							//월계 계산
+							monthBalance += value.price;
+							
+							$tr.append($dateTd);
+							$tr.append($dateSlipCodeTd);
+							$tr.append($briefTd);
+							$tr.append($venderCodeTd);
+							$tr.append($venderNameTd);
+							$tr.append($debitTd);
+							$tr.append($creditTd);
+							$tr.append($balanceTd);
+							$tableBody.append($tr);
+							
+						}); 
+						
+						//마지막행 월계, 누계에 값 입력
+						if(data[0].debitCredit == '차변') {
+							$("#last-debit-month").text(comma(monthBalance)).css("text-align", "right");
+							$("#last-debit-acc").text(comma(balance)).css("text-align", "right");
+							$("#last-credit-month").text("");
+							$("#last-credit-acc").text("");
+						} else {							
+							$("#last-debit-month").text("");
+							$("#last-debit-acc").text("");
+							$("#last-credit-month").text(comma(monthBalance)).css("text-align", "right");
+							$("#last-credit-acc").text(comma(balance)).css("text-align", "right");
+						}
+					},
+					error : function(status) {
+						console.log(status);
+					}
+				});
+			}
+			
 		});
 	</script>
 	
@@ -619,7 +814,7 @@
 			        	<tr>
 			        		<td>계정과목&nbsp;&nbsp;&nbsp;&nbsp;<div id="modal-account-title"></div>
 			        		</td>
-			        		<td align="right"><span>조회기간&nbsp;&nbsp;&nbsp;&nbsp;</span><input type="text" id="datepicker3"> ~ <input type="text" id="datepicker4"></td>
+			        		<td align="right"><span id="pastData"></span>&nbsp;&nbsp;<span>조회기간&nbsp;&nbsp;&nbsp;&nbsp;</span><input type="text" id="datepicker3"> ~ <input type="text" id="datepicker4"></td>
 			        	</tr>
 			        </table>
 					<script>
@@ -648,35 +843,27 @@
 			        	<table id="List_detail" style=" width:100%; margin-left:auto; margin-right: auto;">
 			        		<thead>
 				        		<tr>
-				        			<th class="modal-head" style="width:5%;">일자</th>
-				        			<th class="modal-head" style="width:5%;">번호</th>
-				        			<th class="modal-head" style="width:20%;">적요</th>
-				        			<th class="modal-head" style="width:5%;">코드</th>
-				        			<th class="modal-head" style="width:17%;">거래처명</th>
-				        			<th class="modal-head" style="width:16%;">차변</th>
-				        			<th class="modal-head" style="width:16%;">대변</th>
-				        			<th class="modal-head" style="width:16%;">잔액</th>
+				        			<td class="modal-head" style="width:5%;">일자</td>
+				        			<td class="modal-head" style="width:6%;">번호</td>
+				        			<td class="modal-head" style="width:20%;">적요</td>
+				        			<td class="modal-head" style="width:6%;">코드</td>
+				        			<td class="modal-head" style="width:18%;">거래처명</td>
+				        			<td class="modal-head" style="width:15%;">차변</td>
+				        			<td class="modal-head" style="width:15%;">대변</td>
+				        			<td class="modal-head" style="width:15%;">잔액</td>
 				        		</tr>
 				        	</thead>
-				        	<tbody></tbody>
-				        		<tr class="modal_detail" style="height: 25px;">
-				        			<td style="text-align:center;">03-31</td>
-				        			<td style="text-align:center;">00005</td>
-				        			<td></td>
-				        			<td style="text-align:center;">01003</td>
-				        			<td style="text-align:center;">마음전자</td>
-				        			<td style="text-align:right;">55,550,550,550,000</td>
-				        			<td style="text-align:right;"></td>
-				        			<td style="text-align:right;">550,000</td>
-				        		</tr>
+				        	<tbody>
+				        	</tbody>
+				        	<tfoot>
 				        		<tr>
 				        			<td class="modal-head"></td>
 				        			<td class="modal-head"></td>
 				        			<td class="modal-head" style="text-align:left;">[월&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;계]</td>
 				        			<td class="modal-head"></td>
 				        			<td class="modal-head"></td>
-				        			<td class="modal-head"></td>
-				        			<td class="modal-head"></td>
+				        			<td class="modal-head" id="last-debit-month"></td>
+				        			<td class="modal-head" id="last-credit-month"></td>
 				        			<td class="modal-head"></td>
 				        		</tr>
 				        		<tr>
@@ -685,11 +872,11 @@
 				        			<td class="modal-head" style="text-align:left;">[누&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;계]</td>
 				        			<td class="modal-head"></td>
 				        			<td class="modal-head"></td>
-				        			<td class="modal-head"></td>
-				        			<td class="modal-head"></td>
+				        			<td class="modal-head" id="last-debit-acc"></td>
+				        			<td class="modal-head" id="last-credit-acc"></td>
 				        			<td class="modal-head"></td>
 				        		</tr>
-			        		</tbody>
+			        		</tfoot>
 			        	</table>
 			        </div>
 			        <div class="modal-footer">
