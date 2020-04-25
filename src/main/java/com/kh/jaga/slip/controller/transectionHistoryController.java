@@ -5,6 +5,8 @@ import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,7 +26,8 @@ public class transectionHistoryController {
 	
 	
 	@RequestMapping("transListAll.th")
-	public String transHistoryListAll(Model model) {
+	public String transHistoryListAll(Model model, HttpServletRequest request) {
+		
 		List<Receiption> list = ths.selectTListAll();
 		
 		BigDecimal saleValue = new BigDecimal("0");
@@ -94,7 +97,6 @@ public class transectionHistoryController {
 			}
 		}
 		
-		System.out.println("list 출렦ㄲㄱ : " + list);
 		minusValue = saleValue.subtract(buyValue);
 		
 		mv.addObject("list", list);

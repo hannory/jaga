@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -96,17 +97,19 @@
 						<th>출력여부</th>
 						<th>인쇄</th>
 					</tr>
+					<c:forEach var="t" items="${ list }">
 					<tr>
 						<td><input type="checkbox" class="checkk"></td>
-						<td>2020/03/01</td>
-						<td>101</td>
-						<td>오렌지레드컴퍼니(주)</td>
-						<td>50,000</td>
-						<td>5,000</td>
-						<td>55,000</td>
-						<td>부</td>
-						<td><button id="printBtn"><img alt="" src="${ contextPath }/resources/images/print.PNG" width="30px" height="30px"></button></td>
+						<td><c:out value="${ t.division }"/></td>
+						<td><c:out value="${ t.journalizeList[0].venderCode }"/></td>
+						<td><c:out value="${ t.journalizeList[0].venderName }"/></td>
+						<td><fmt:formatNumber value="${t.supplyValue}" type="currency" currencySymbol=""/></td>
+						<td><fmt:formatNumber value="${t.valueTax}" type="currency" currencySymbol=""/></td>
+						<td><fmt:formatNumber value="${t.supplyDeaga}" type="currency" currencySymbol=""/></td>
+						<td><c:out value="${ t.issueStatus }"/></td>
+						<td><button id="printBtn" onclick="printBtn('${t.slipCode}');"><img alt="" src="${ contextPath }/resources/images/print.PNG" width="30px" height="30px"></button></td>
 					</tr>
+					</c:forEach>
 				</table>
 			</div>
 		</div>
@@ -115,7 +118,6 @@
 			<div class="card-body">When scrolling, the navigation stays at
 				the top of the page. This is the end of the static navigation demo.</div>
 		</div>
-		
 		
 	</div>
 	</main>
@@ -130,6 +132,30 @@
 			dateFormat : 'yy-mm-dd'
 
 		});
+	
+		/* 콤마찍기+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+		//콤마찍기
+		function comma(str) {
+		    str = String(str);
+		    return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+		}
+		
+		//콤마풀기
+		function uncomma(str) {
+		    str = String(str);
+		    return str.replace(/[^\d]+/g, '');
+		}
+		
+		function inputNumberFormat(obj) {
+		    obj.value = comma(uncomma(obj.value));
+		}
+		/* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+	
+		function printBtn(code){
+			location.href="${ contextPath }/taxInvoicePrint.ti?slipCode="+code;
+		};
+		
+		
 		$(function() {
 			$("#datepicker").datepicker({});
 			$("#datepicker1").datepicker({});
@@ -142,9 +168,7 @@
 				
 			});
 			
-			$("#printBtn").click(function(){
-				location.href="${ contextPath }/taxInvoicePrint.vi";
-			});
+			
 
 		});
 	 </script>

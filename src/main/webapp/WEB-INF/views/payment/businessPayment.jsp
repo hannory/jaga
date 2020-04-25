@@ -86,7 +86,7 @@
 		color: white;
 	}
 	#contentF tr:last-child{
-		background: #D4D5D9;
+		/* background: #D4D5D9; */
 	}
 	
 	#saveBtn {
@@ -97,7 +97,11 @@
 		border-top-right-radius: 5px;
 		border-bottom-left-radius: 5px;
 		border-bottom-right-radius: 5px;
-		
+	}
+	
+	#contentF tbody input{
+		text-align: right;
+		padding-right: 6px;
 	}
 </style>
 </head>
@@ -140,7 +144,7 @@
 								<td>
 									<table id="contentH">
 										<tr>
-											<th><h4>사업소득자-<sapn id="empNamee"></span></h4></th>
+											<th><h4>사업소득자<sapn id="empNamee"></span></h4></th>
 											<td align="right" style="padding-right:5px;"><button id="saveBtn">저장</button></td>
 										</tr>
 									</table>
@@ -198,7 +202,7 @@
 											<th>예금주</th>
 											<td><input type="text" name="accountHolder" id="accountHolder"></td>
 											<th>급여</th>
-											<td><input type="number" name="salary" placeholder="소득세포함 월급" id="salary"></td>
+											<td><input type="text" name="salary" placeholder="소득세포함 월급" id="salary" style="text-align:right; padding-right:6px;"></td>
 										</tr>
 									</table>
 								</td>
@@ -240,17 +244,23 @@
 									<thead>
 									<tbody>
 										<c:forEach var="num" begin="1" end="12">
+										<c:if test="${ num < 10 }">
+											<c:set var="mon" value="0${ num }"></c:set>
+										</c:if>
+										<c:if test="${ num >= 10 }">
+											<c:set var="mon" value="${ num }"/>
+										</c:if>
 											<tr>
-												<td><input type="text" style="width:100%" name="attYear" value="2020"></td>
-												<td><input type="text" style="width:100%" name="attMonth" value="${ num }"></td>
-												<td><input type="text" style="width:100%" name="payYear"></td>
-												<td><input type="text" style="width:100%" name="payMonth"></td>
-												<td><input type="text" style="width:100%" name="payDay"></td>
-												<td><input type="text" style="width:100%" name="salary" id="salary"></td>
-												<td><input type="text" style="width:100%" name=""></td>
-												<td><input type="text" style="width:100%" name="incomeTax"></td>
-												<td><input type="text" style="width:100%" name="localIncomeTax"></td>
-												<td><input type="text" style="width:100%" name="differencePymt"></td>
+												<td><input type="text" style="width:100%" name="attYear" id="attYear" value="2020" readonly></td>
+												<td><input type="text" style="width:100%" name="attMonth" id="attMonth" value="${ mon }" readonly></td>
+												<td><input type="text" style="width:100%" name="payYear" id="payYear" readonly></td>
+												<td><input type="text" style="width:100%" name="payMonth" id="payMonth" ></td>
+												<td><input type="text" style="width:100%" name="payDay" id="payDay"></td>
+												<td><input type="text" style="width:100%" name="salary" id="salary" onkeyup="inputNumberFormat(this);"></td>
+												<td><input type="text" style="width:100%" name="taxVal" id="tax" readonly></td>
+												<td><input type="text" style="width:100%" name="incomeTax" id="incomeTax" onloadeddata="numberFormat(this);"></td>
+												<td><input type="text" style="width:100%" name="localIncomeTax" id="localIncomeTax"></td>
+												<td><input type="text" style="width:100%" name="differencePymt" id="differencePymt"></td>
 											</tr>
 										</c:forEach>
 									</tbody>
@@ -287,40 +297,109 @@
 			$("#contentF tr").each( function (index) {
 				var num = index - 2;
 				
-		        $(this).find("input[name=attYear]").attr("name", "bpList[" + num + "].attYear");
-		        $(this).find("input[name=attMonth]").attr("name", "bpList[" + num + "].attMonth");
-		        $(this).find("input[name=payYear]").attr("name", "bpList[" + num + "].payYear");
-		        $(this).find("input[name=payMonth]").attr("name", "bpList[" + num + "].payMonth");
-		        $(this).find("input[name=payDay]").attr("name", "bpList[" + num + "].payDay");
-		        $(this).find("input[name=salary]").attr("name", "bpList[" + num + "].salary");
-		        $(this).find("input[name=incomeTax]").attr("name", "bpList[" + num + "].incomeTax");
-		        $(this).find("input[name=localIncomeTax]").attr("name", "bpList[" + num + "].localIncomeTax");
-		        $(this).find("input[name=differencePymt]").attr("name", "bpList[" + num + "].differencePymt");
+		        $(this).find("input[id=attYear]").attr("id", "bpList[" + num + "].attYear");
+		        $(this).find("input[id=attMonth]").attr("id", "bpList[" + num + "].attMonth");
+		        $(this).find("input[id=payYear]").attr("id", "bpList[" + num + "].payYear");
+		        $(this).find("input[id=payMonth]").attr("id", "bpList[" + num + "].payMonth");
+		        $(this).find("input[id=payDay]").attr("id", "bpList[" + num + "].payDay");
+		        $(this).find("input[id=salary]").attr("id", "bpList[" + num + "].salary");
+		        $(this).find("input[id=incomeTax]").attr("id", "bpList[" + num + "].incomeTax");
+		        $(this).find("input[id=localIncomeTax]").attr("id", "bpList[" + num + "].localIncomeTax");
+		        $(this).find("input[id=differencePymt]").attr("id", "bpList[" + num + "].differencePymt");
 		    });
 			
-			$("#salary").blur(function(){
-				var salary = $(this).val();
+			/* 폼전송시 콤마 빼기++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++= */
+			$("form").submit(function(){
+				$("input").each(function(){
+					$(this).val(uncomma($(this).val()));
+				});
+			});
+			
+			
+			/* 소득세 계산++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++= */
+			var idx = 0;
+			
+			$("input[name*=salary]").blur(function(){
+				var salary = uncomma($(this).val());
+				var salaryTag = $(this);
+				var inputs = $(this).parent().siblings().children();
 				$.ajax({
 					url:"calculTax.bp",
 					data:{salary:salary},
 					success:function(data){
-						console.log(data);
+						var incomeT = data.incomeTax;
+						var localTax = data.localTax;
+						var diffrence = data.di;
+						
+						
+						inputs.filter("[name=incomeTax]").val(comma(incomeT));
+						inputs.filter("[name=localIncomeTax]").val(comma(localTax));
+						inputs.filter("[name=taxVal]").val(3);
+						inputs.filter("[name=differencePymt]").val(comma(diffrence));
+						
+						inputs.filter("[name=attYear]").attr("name", "bpList[" + idx + "].attYear");
+						inputs.filter("[name=attMonth]").attr("name", "bpList[" + idx + "].attMonth");
+						inputs.filter("[name=payYear]").attr("name", "bpList[" + idx + "].payYear");
+						inputs.filter("[name=payMonth]").attr("name", "bpList[" + idx + "].payMonth");
+						inputs.filter("[name=payDay]").attr("name", "bpList[" + idx + "].payDay");
+						salaryTag.attr("name", "bpList[" + idx + "].salary");
+						inputs.filter("[name=incomeTax]").attr("name", "bpList[" + idx + "].incomeTax");
+						inputs.filter("[name=localIncomeTax]").attr("name", "bpList[" + idx + "].localIncomeTax");
+						inputs.filter("[name=differencePymt]").attr("name", "bpList[" + idx + "].differencePymt");
+						
+						idx++;
+						
 					}
 				});
 			});
+			/* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+			
+			
+			/* 지급일자 년월 자동입력+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+			
+			$("input[name*=payYear]").focus(function(){
+				var inputs = $(this).parent().siblings().children();
+				
+				$(this).val(inputs.filter("[name=attYear]").val());
+				inputs.filter("[name=payMonth]").val(inputs.filter("[name=attMonth]").val());
+				
+				inputs.filter("[name=payDay]").focus();
+			});
+			
+			
+			/* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 			
 		});
+		/* 콤마찍기+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+		//콤마찍기
+		function comma(str) {
+		    str = String(str);
+		    return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+		}
+		
+		//콤마풀기
+		function uncomma(str) {
+		    str = String(str);
+		    return str.replace(/[^\d]+/g, '');
+		}
+		
+		function inputNumberFormat(obj) {
+		    obj.value = comma(uncomma(obj.value));
+		}
+		/* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 	
+		/* 직원 상세정보 불러오기++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 		function detail(data){
 			$.ajax({
-				url:"detailBEmp.be",
+				url:"detailBEmp.bp",
 				data:{empCode:data},
 				success:function(data){
-					//$("#fileArea").css("display", "block");
+					//$("#fileArea").css("display", "block"); 
 					var emp = data.BEmp;
-					console.log(emp);
+					//console.log(emp);
+					var payList = data.payList;
 					
-					$("#contentF tbody td:nth-of-type(2) ~ td").children().val().remove();
+					$("#contentF tbody td:nth-of-type(2) ~ td").children().val("");
 					
 					var employeeCode = emp.employeeCode;
 					var employeeName = emp.employeeName;
@@ -333,33 +412,57 @@
 					var department = emp.department;
 					var positionCode = emp.positionCode;
 					var accountHolder = emp.accountHolder;
-					var salary = emp.salary;
+					var salary = comma(emp.salary);
 					var typeOfBixCode = emp.typeOfBixCode;
 					var sellTargetName = emp.sellTargetName;
 					var incomeClass = emp.incomeClass;
 					
 					var date1 = new Date(enrollDate); 
 					
-						$("#employeeNum").val(emp.employeeNum);
-						$("#empNamee").text(employeeName);
-						$("#empCode").val(employeeCode);
-						$("#employeeName").val(employeeName);
-						$("#securityNumber").val(securityNumber);
-						$("#incomeClass").val(incomeClass);
-						$("#email").val(email);
-						$("#datepicker").datepicker('setDate',date1);
-						$("#backCode").val(backCode);
-						$("#accountNumber").val(accountNumber);
-						$("#department").val(department);
-						$("#positionCode").val(positionCode);
-						$("#accountHolder").val(accountHolder);
-						$("#salary").val(salary);
-						$("#typeOfBizCode").val(typeOfBixCode);
-						$("#sellTargetName").val(sellTargetName);
-						$("#incomeClass").val(incomeClass);
+					$("#employeeNum").val(emp.employeeNum);
+					$("#empNamee").text("-"+ employeeName);
+					$("#empCode").val(employeeCode);
+					$("#employeeName").val(employeeName);
+					$("#securityNumber").val(securityNumber);
+					$("#incomeClass").val(incomeClass);
+					$("#email").val(email);
+					$("#datepicker").datepicker('setDate',date1);
+					$("#backCode").val(backCode);
+					$("#accountNumber").val(accountNumber);
+					$("#department").val(department);
+					$("#positionCode").val(positionCode);
+					$("#accountHolder").val(accountHolder);
+					$("#salary").val(salary);
+					$("#typeOfBizCode").val(typeOfBixCode);
+					$("#sellTargetName").val(sellTargetName);
+					$("#incomeClass").val(incomeClass);
+						
+					/* 귀속년월에 맞게 행 찾아서 넣어줌! */
+					for(var i = 0; i < payList.length; i++){
+						var payment = payList[i];
+						payment.attMonth;
+						$("input[name*=attMonth]").each(function(index){
+							if($(this).val() == payment.attMonth){
+								var inputs = $(this).parent().siblings().children();
+								inputs.filter("[name=payYear]").val(payment.payYear);
+								inputs.filter("[name=payMonth]").val(payment.payMonth);
+								inputs.filter("[name=payDay]").val(payment.payDay);
+								inputs.filter("[name=salary]").val(comma(payment.salary));
+								inputs.filter("[name=taxVal]").val(3);
+								inputs.filter("[name=incomeTax]").val(comma(payment.incomeTax));
+								inputs.filter("[name=localIncomeTax]").val(comma(payment.localIncomeTax));
+								inputs.filter("[name=differencePymt]").val(comma(payment.differencePymt));
+							}
+							
+						});
+							
+					}
 				}
 			});
 		}
+		/* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
+		
 	</script>
 	<jsp:include page="../common/menubar2.jsp" />
 </body>

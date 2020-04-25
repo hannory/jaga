@@ -1,14 +1,11 @@
 package com.kh.jaga.employee.controller;
 
-import java.io.BufferedInputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -29,11 +26,21 @@ import com.kh.jaga.employee.model.vo.BusinessEmp;
 import com.kh.jaga.employee.model.vo.BusinessEmp2;
 import com.kh.jaga.employee.model.vo.TypeOfBizCode;
 
+/**
+ * @author EunJin
+ * @comment 사업소득자 등록 관련 컨트롤러
+ * @createDate 2020. 4. 24.
+ */
 @Controller
 public class BusinessEmpController {
 	@Autowired
 	private BusinessEmpService bes;
 	
+	/**
+	 * @comment 은행..내가 만들었나?
+	 * @param mv
+	 * @return
+	 */
 	@RequestMapping("bankSearch.be")
 	public ModelAndView bankSearch(ModelAndView mv) {
 		List<Bank> bk = bes.selectBankList();
@@ -43,6 +50,12 @@ public class BusinessEmpController {
 		return mv;
 	}
 	
+	/**
+	 * @comment 사업소득자 소득구분 리스트 불러오기 모달
+	 * @comment TYPE_OF_BIZ_CODE/SELECT
+	 * @param mv
+	 * @return
+	 */
 	@RequestMapping("tobcSearch.be")
 	public ModelAndView tobcSearch(ModelAndView mv) {
 		List<TypeOfBizCode> bk = bes.selectTOBList();
@@ -55,6 +68,14 @@ public class BusinessEmpController {
 		return mv;
 	}
 	
+	/**
+	 * @comment 메뉴 눌렀을때 등록된 사업소득자 리스트 불러와서 해당 리스트를 가지고 view에 방문함
+	 * @comment BUSINESS_EMP/select
+	 * @param be	이건 왜 했지
+	 * @param model
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping("businessEmpList.be")
 	public String bEmpListAll(BusinessEmp be, Model model, HttpServletRequest request) {
 		Company com = (Company)request.getSession().getAttribute("loginCompany");
@@ -75,6 +96,13 @@ public class BusinessEmpController {
 		return "employee/businessEmployee";
 	}
 	
+	/**
+	 * @comment 신규 사업소득자 등록하는 메소드
+	 * @comment BUSINESS_EMP/insert
+	 * @param be
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping("addBusinessEmp.be")
 	public String addBusinessEmp(BusinessEmp be, Model model) {
 		int result = bes.insertBEmp(be);
@@ -82,6 +110,16 @@ public class BusinessEmpController {
 		return "redirect:businessEmpList.be";
 	}
 	
+	/**
+	 * @comment 사업소득자 수정관련 메소드 / +첨부파일
+	 * @comment BUSINESS_EMP/update / ATTACHMENT/INSERT
+	 * @param be	수정사항이 담긴 DTO
+	 * @param model
+	 * @param request
+	 * @param idPhoto	신분증사본
+	 * @param accountPhoto	계좌서류
+	 * @return
+	 */
 	@RequestMapping("addBusinessEmp2.be")
 	public String addBusinessEmp2(BusinessEmp be, Model model, HttpServletRequest request,
 			@RequestParam MultipartFile idPhoto, @RequestParam MultipartFile accountPhoto) {
@@ -149,6 +187,14 @@ public class BusinessEmpController {
 		return "redirect:businessEmpList.be";
 	}
 	
+	/**
+	 * @comment 사업소득자 상세정보 호출용 메소드
+	 * @comment BUSINESS_EMP/SELECT
+	 * @param mv
+	 * @param empCode
+	 * @param response
+	 * @return
+	 */
 	@RequestMapping("detailBEmp.be")
 	public ModelAndView detailBEmp(ModelAndView mv, @RequestParam String empCode, HttpServletResponse response) {
 		BusinessEmp2 be = bes.selectOneBEmp(empCode);
@@ -160,6 +206,11 @@ public class BusinessEmpController {
 		return mv;
 	}
 	
+	/**
+	 * @comment 첨부파일 삭제용 메소드 DB에서도 삭제하고 파일도 삭제함
+	 * @param fileCode 삭제할 파일의 PK코드
+	 * @return
+	 */
 	@RequestMapping("deletePhoto.be")
 	public String deletePhoto(@RequestParam String fileCode) {
 		
@@ -173,36 +224,20 @@ public class BusinessEmpController {
 		return "redirect:businessEmpList.be";
 	}
 	
+	/**
+	 * @comment 
+	 * @param mv
+	 * @param fileCode
+	 * @param response
+	 * @return
+	 * @throws ServletException
+	 * @throws IOException
+	 */
 	@RequestMapping("downloadPhoto.be")
 	public ModelAndView downloadPhoto(ModelAndView mv, @RequestParam String fileCode, HttpServletResponse response) throws ServletException, IOException {
-		//System.out.println("여길못오나");
 		Attachment at = bes.selectFilePath(fileCode);
 		File downFile = new File(at.getFilePath() + "\\" + at.getNewFileName());
 		
-//		
-//		 BufferedInputStream buf = null;
-//		 
-//		 ServletOutputStream downOut;
-//		 
-//		 
-//		 
-//		 downOut = response.getOutputStream();
-//		 
-//		 response.setContentType("text/plain; charset=UTF-8");
-//		 response.setHeader("Content-Disposition", "attachment; filename=\""+ new String(at.getNewFileName().getBytes("UTF-8"), "ISO-8859-1") + "\"");
-//		 response.setContentLength((int)downFile.length());
-//		 
-//		 FileInputStream fin = new FileInputStream(downFile); buf = new
-//		 BufferedInputStream(fin);
-//		 
-//		 int readBytes = 0; while((readBytes=buf.read()) != -1) {
-//		 downOut.write(readBytes);
-//		 
-//		 }
-//		 
-//		 downOut.close();
-//		 
-//		 buf.close();
 		 
 		mv.addObject("attachment", at);
 		mv.addObject("downloadFile", downFile);

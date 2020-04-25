@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="BusinessPayment">
+  	<insert id="insertBPay">
+  		INSERT INTO BUSINESS_INCOME_HISTORY
+  		VALUES (#{employeeCode},#{attributeDate},#{payDate},#{salary},#{incomeTax},#{localIncomeTax},#{differencePymt},DEFAULT)
+  	</insert>
+  	
+  	<select id="selectBPay" resultType="BusinessPayment" parameterType="java.lang.String">
+  		SELECT EMPLOYEE_CODE, ATTRIBUTE_DATE, TO_CHAR(PAY_DATE,'YYYY-MM-DD') "PAY_DATE", SALARY, INCOME_TAX, LOCAL_INCOME_TAX, DIFFERENCE_PYMT, PAY_STUB_COUNT
+  		FROM BUSINESS_INCOME_HISTORY
+  		WHERE EMPLOYEE_CODE = #{empCode}
+  	</select>
+  
+  </mapper>

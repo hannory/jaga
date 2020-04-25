@@ -4,16 +4,19 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.kh.jaga.company.model.vo.Company;
 import com.kh.jaga.slip.model.exception.receiptionException;
 import com.kh.jaga.slip.model.vo.AccountTitle;
 import com.kh.jaga.slip.model.vo.Receiption;
 import com.kh.jaga.slip.model.vo.Vender;
+import com.kh.jaga.taxInvoice.model.vo.TaxInvoice;
 
 @Service
 public interface ReceiptionService {
-	List<Vender> selectVenderList() throws receiptionException 	;
+	List<Vender> selectVenderList(String comCode) throws receiptionException 	;
 
 	int insertReceiption(Receiption receiption);
 
-	List<AccountTitle> selectAccountTitleList();
+	List<AccountTitle> selectAccountTitleList(String comCode);
+
 }

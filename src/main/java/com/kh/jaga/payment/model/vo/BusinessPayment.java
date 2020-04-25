@@ -11,8 +11,8 @@ public class BusinessPayment {
 	private BigDecimal localIncomeTax;	//지방소득세
 	private BigDecimal differencePymt;	//차인지급액
 	private int payStubCount;
-	private int attYear;
-	private int attMonth;
+	private String attYear;
+	private String attMonth;
 	private String payYear;
 	private String payMonth;
 	private String payDay;
@@ -22,8 +22,8 @@ public class BusinessPayment {
 
 
 	public BusinessPayment(String employeeCode, int attributeDate, String payDate, BigDecimal salary,
-			BigDecimal incomeTax, BigDecimal localIncomeTax, BigDecimal differencePymt, int payStubCount, int attYear,
-			int attMonth, String payYear, String payMonth, String payDay) {
+			BigDecimal incomeTax, BigDecimal localIncomeTax, BigDecimal differencePymt, int payStubCount, String attYear,
+			String attMonth, String payYear, String payMonth, String payDay) {
 		super();
 		this.employeeCode = employeeCode;
 		this.attributeDate = attributeDate;
@@ -121,22 +121,22 @@ public class BusinessPayment {
 	}
 
 
-	public int getAttYear() {
+	public String getAttYear() {
 		return attYear;
 	}
 
 
-	public void setAttYear(int attYear) {
+	public void setAttYear(String attYear) {
 		this.attYear = attYear;
 	}
 
 
-	public int getAttMonth() {
+	public String getAttMonth() {
 		return attMonth;
 	}
 
 
-	public void setAttMonth(int attMonth) {
+	public void setAttMonth(String attMonth) {
 		this.attMonth = attMonth;
 	}
 

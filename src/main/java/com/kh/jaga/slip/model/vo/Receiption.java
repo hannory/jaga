@@ -11,10 +11,7 @@ public class Receiption {
 	private String slipCode;		//전표코드
 	private String slipDivision;	//전표구분
 	private String division;		//구분
-	
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	private Date slipDate;			//전표일
-	
 	private String evidenceCode;	//증빙종류
 	/* private String venderCode; */		//거래처코드
 	private BigDecimal supplyValue;		//공급가액
@@ -27,6 +24,7 @@ public class Receiption {
 	private String comCode;			//회사코드
 	private String dateSlipCode;	//회사별, 일자별 전표번호
 	private String evidence;
+	private String issueStatus;
 	private List<Journalize> journalizeList;
 	
 	public Receiption() {}
@@ -34,7 +32,7 @@ public class Receiption {
 	public Receiption(String slipCode, String slipDivision, String division, Date slipDate, String evidenceCode,
 			BigDecimal supplyValue, BigDecimal valueTax, BigDecimal supplyDeaga, String deemedStatus,
 			String resolutionCode, String brief, String item, String comCode, String dateSlipCode, String evidence,
-			List<Journalize> journalizeList) {
+			String issueStatus, List<Journalize> journalizeList) {
 		super();
 		this.slipCode = slipCode;
 		this.slipDivision = slipDivision;
@@ -51,6 +49,7 @@ public class Receiption {
 		this.comCode = comCode;
 		this.dateSlipCode = dateSlipCode;
 		this.evidence = evidence;
+		this.issueStatus = issueStatus;
 		this.journalizeList = journalizeList;
 	}
 
@@ -174,6 +173,14 @@ public class Receiption {
 		this.evidence = evidence;
 	}
 
+	public String getIssueStatus() {
+		return issueStatus;
+	}
+
+	public void setIssueStatus(String issueStatus) {
+		this.issueStatus = issueStatus;
+	}
+
 	public List<Journalize> getJournalizeList() {
 		return journalizeList;
 	}
@@ -188,10 +195,9 @@ public class Receiption {
 				+ ", slipDate=" + slipDate + ", evidenceCode=" + evidenceCode + ", supplyValue=" + supplyValue
 				+ ", valueTax=" + valueTax + ", supplyDeaga=" + supplyDeaga + ", deemedStatus=" + deemedStatus
 				+ ", resolutionCode=" + resolutionCode + ", brief=" + brief + ", item=" + item + ", comCode=" + comCode
-				+ ", dateSlipCode=" + dateSlipCode + ", evidence=" + evidence + ", journalizeList=" + journalizeList
-				+ "]";
+				+ ", dateSlipCode=" + dateSlipCode + ", evidence=" + evidence + ", issueStatus=" + issueStatus
+				+ ", journalizeList=" + journalizeList + "]";
 	}
 
-	
 	
 }

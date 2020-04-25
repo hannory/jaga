@@ -62,19 +62,21 @@
  		<result property="accountSystem" column="ACCOUNT_SYSTEM"/>
  		<result property="venderCode" column="VENDER_CODE"/>
  	 </resultMap>
-  <select id="selectVenderList" resultMap="venderResultMap" parameterType="VenderR">
+  <select id="selectVenderList" resultMap="venderResultMap" parameterType="java.lang.String">
   	SELECT *
   	FROM VENDER
+  	WHERE COM_CODE = #{comCode}
   </select>
   
-  <select id="selectAccountTitleList" resultMap="accountTitleResultMap" parameterType="AccountTitle">
+  <select id="selectAccountTitleList" resultMap="accountTitleResultMap" parameterType="java.lang.String">
   	SELECT *
   	FROM ACCOUNT_TITLE
+  	
   </select>
   
 	<insert id="insertReceiption" parameterType="Receiption">
 		INSERT INTO SLIP
-		VALUES (SEQ_SLIP_CODE.NEXTVAL,#{slipDivision},#{division},#{slipDate},#{evidenceCode},#{supplyValue},#{valueTax},'N',#{resolutionCode},#{brief},#{item},42,SEQ_SLIP_42.NEXTVAL)
+		VALUES (SEQ_SLIP_CODE.NEXTVAL,#{slipDivision},#{division},#{slipDate},#{evidenceCode},#{supplyValue},#{valueTax},'N',#{resolutionCode},#{brief},#{item},#{comCode},SEQ_SLIP_42.NEXTVAL)
 	</insert>
 	
 	<insert id="insertJournalize" parameterType="Journalize">
@@ -82,4 +84,12 @@
 		VALUES (SEQ_JOURNAL_CODE.NEXTVAL, SEQ_SLIP_CODE.CURRVAL, #{debitCredit}, #{price}, #{accountCode},#{venderCode})
 	</insert>
   
+  	<select id="selectSlipCode" resultType="string">
+  		SELECT SEQ_SLIP_CODE.CURRVAL FROM DUAL;
+  	</select>
+  	
+  	<insert id="insertTaxInvoice" parameterType="TaxInvoice">
+  		INSERT INTO TAX_INVOICE
+  		VALUES (SEQ_TAX_INVOICE.NEXTVAL, NULL, SEQ_SLIP_CODE.CURRVAL, #{division}, #{venderCode}, 'N')
+  	</insert>
   </mapper>

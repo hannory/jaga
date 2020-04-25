@@ -219,20 +219,20 @@
 					<tr>
 						<td>공급대가</td>
 						<td colspan="3">
-							<input type="number" name="supplydeaga" id="supplydeaga" placeholder="부가세포함금액">
+							<input type="text" name="supplydeaga" id="supplydeaga" placeholder="부가세포함금액" onkeyup="inputNumberFormat(this);">
 						</td>
 					</tr>
 					<tr>
 						<td>공급가액</td>
-						<td colspan="3"><input type="number" name="supplyValue" id="supplyValue"></td>
+						<td colspan="3"><input type="text" name="supplyValue" id="supplyValue"></td>
 					</tr>
 					<tr>
 						<td>부가세</td>
-						<td colspan="3"><input type="number" name="valueTax" id="valueTax"></td>
+						<td colspan="3"><input type="text" name="valueTax" id="valueTax"></td>
 					</tr>
 					<tr>
 						<td>적요</td>
-						<td colspan="3"><input type="text" name="brief"></td>
+						<td colspan="3"><input type="text" name="brief" id="brief"></td>
 					</tr>
 					<tr>
 						<td>계정과목</td>
@@ -418,6 +418,24 @@
 			
 			$("div#accountModal").modal("hide");
 		}		
+		
+		/* 콤마찍기+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+		//콤마찍기
+		function comma(str) {
+		    str = String(str);
+		    return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+		}
+		
+		//콤마풀기
+		function uncomma(str) {
+		    str = String(str);
+		    return str.replace(/[^\d]+/g, '');
+		}
+		
+		function inputNumberFormat(obj) {
+		    obj.value = comma(uncomma(obj.value));
+		}
+		/* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 	
 		
 		$(function() {
@@ -425,6 +443,15 @@
 			/* 달력버튼 */
 			$("img.ui-datepicker-trigger")
 					.attr("style","margin-left:2px; vertical-align:middle; cursor: Pointer; width:20px; height:20px");
+			
+			/* 폼전송시 콤마 빼기++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++= */
+			$("form").submit(function(){
+				$("input").not("#datepicker").not("[name*=debitCredit]").not("#brief").not("[name=division]").each(function(){
+					$(this).val(uncomma($(this).val()));
+				});
+			});
+			
+			/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 			
 			/* 라디오버튼 이벤트 */
 			var divisionn = 'sale';
@@ -452,16 +479,17 @@
 				}else{
 					$("#valueTax").attr("readonly", false);
 				}
-			})
+				
+			});
 			
 			
 			/* 공급대가 입력시 부가세 자동 계산 */
 			$("#supplydeaga").blur(function(){
-				var supply = $(this).val();
+				var supply = uncomma($(this).val());
 				var vTax = $("#valueTax").prop("readonly");
 				
 				if(vTax == true){
-					$("#supplyValue").val(supply);
+					$("#supplyValue").val(comma(supply));
 					$("#valueTax").val(0);
 				}else{
 					
@@ -470,8 +498,8 @@
 						type:"post",
 						data:{supplydeaga : supply},
 						success:function(data){
-							var value = data.value;
-							var tax = data.tax;
+							var value = comma(data.value);
+							var tax = comma(data.tax);
 							
 							$("#supplyValue").val(value);
 							$("#valueTax").val(tax);
