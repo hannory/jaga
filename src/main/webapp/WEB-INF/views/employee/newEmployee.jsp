@@ -1,7 +1,7 @@
 
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+  <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -53,7 +53,7 @@ transform: rotate(90.05deg);
 /*직원관리 employee-manage*/
 #employee-manage{
 position: absolute;
-width: 193px;
+width: 213px;
 height: 42px;
 left: 303px;
 top: 74px;
@@ -61,7 +61,7 @@ top: 74px;
 font-family: Roboto;
 font-style: normal;
 font-weight: normal;
-font-size: 30px;
+font-size: 33px;
 line-height: 35px;
 
 color: #000000;
@@ -70,7 +70,7 @@ color: #000000;
 /* 일반근로자 big-employee*/
 #big-employee{
 position: absolute;
-width: 110px;
+width: 120px;
 height: 42px;
 left: 304px;
 top: 148px;
@@ -78,7 +78,7 @@ top: 148px;
 font-family: Roboto;
 font-style: normal;
 font-weight: normal;
-font-size: 20px;
+font-size: 23px;
 line-height: 23px;
 
 color: #000000;
@@ -90,7 +90,7 @@ color: #000000;
 
 #row-employee{
 position: absolute;
-width: 100px;
+width: 120px;
 left: 304px;
 top: 180px;
 
@@ -100,7 +100,7 @@ border: 2px solid #24574A;
 
 #big-one-imployee{
 position: absolute;
-width: 100px;
+width: 120px;
 height: 42px;
 left: 451px;
 top: 148px;
@@ -108,7 +108,7 @@ top: 148px;
 font-family: Roboto;
 font-style: normal;
 font-weight: normal;
-font-size: 20px;
+font-size: 23px;
 line-height: 23px;
 
 color: #5A5A5A;
@@ -118,7 +118,7 @@ color: #5A5A5A;
 
 #big-income-employee{
 position: absolute;
-width: 101px;
+width: 120px;
 height: 42px;
 left: 599px;
 top: 148px;
@@ -126,7 +126,7 @@ top: 148px;
 font-family: Roboto;
 font-style: normal;
 font-weight: normal;
-font-size: 20px;
+font-size: 23px;
 line-height: 23px;
 
 color: #5A5A5A;
@@ -136,15 +136,15 @@ color: #5A5A5A;
 
 #employee{
 position: absolute;
-width: 236px;
+width: 330px;
 height: 30px;
-left: 499px;
-top: 128px;
+left: 453px;
+top: 100px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: normal;
-font-size: 20px;
+font-size: 23px;
 line-height: 23px;
 
 color: #000000;
@@ -156,13 +156,13 @@ color: #000000;
 position: absolute;
 width: 82px;
 height: 29px;
-left: 1228px;
-top: 203px;
+left: 1180px;
+top: 183px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -179,8 +179,8 @@ color: #FFFFFF;
 position: absolute;
 width: 90px;
 height: 29px;
-left: 1228px;
-top: 203px;
+left: 1180px;
+top: 183px;
 
 background: #296355;
 border-radius: 5px;
@@ -199,7 +199,7 @@ top: 301px;
 font-family: Roboto;
 font-style: normal;
 font-weight: normal;
-font-size: 16px;
+font-size: 19px;
 line-height: 19px;
 
 color: #000000;
@@ -211,13 +211,13 @@ color: #000000;
 position: absolute;
 width: 104px;
 height: 24px;
-left: 547px;
+left: 463px;
 top: 340px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -233,7 +233,7 @@ color: #4C4C4C;
 position: absolute;
 width: 222px;
 height: 27px;
-left: 661px;
+left: 581px;
 top: 337px;
 
 background: #FFFFFF;
@@ -250,13 +250,13 @@ border-radius: 5px;
 position: absolute;
 width: 104px;
 height: 24px;
-left: 920px;
+left: 890px;
 top: 340px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -271,7 +271,7 @@ color: #4C4C4C;
 position: absolute;
 width: 222px;
 height: 27px;
-left: 1034px;
+left: 1004px;
 top: 337px;
 
 background: #FFFFFF;
@@ -288,13 +288,13 @@ border-radius: 5px;
 position: absolute;
 width: 104px;
 height: 24px;
-left: 547px;
+left: 463px;
 top: 391px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -309,7 +309,7 @@ color: #4C4C4C;
 position: absolute;
 width: 222px;
 height: 27px;
-left: 661px;
+left: 581px;
 top: 388px;
 
 background: #FFFFFF;
@@ -325,13 +325,13 @@ border-radius: 5px;
 position: absolute;
 width: 104px;
 height: 24px;
-left: 920px;
+left: 890px;
 top: 391px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -347,7 +347,7 @@ color: #4C4C4C;
 position: absolute;
 width: 222px;
 height: 27px;
-left: 1034px;
+left: 1004px;
 top: 388px;
 
 background: #FFFFFF;
@@ -361,7 +361,7 @@ border-radius: 5px;
 position: absolute;
 width: 225px;
 height: 55px;
-left: 662px;
+left: 581px;
 top: 420px;
 
 font-family: Roboto;
@@ -381,13 +381,13 @@ color: #888888;
 position: absolute;
 width: 104px;
 height: 24px;
-left: 543px;
+left: 463px;
 top: 503px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -398,12 +398,12 @@ color: #4C4C4C;
 
 /*입사연월일 란 enroll-date-surr*/
 
-#enroll-date-surr{
+.enroll-date-surr{
 position: absolute;
-width: 222px;
+width: 220px;
 height: 27px;
-left: 661px;
-top: 504px;
+left: 581px;
+top: 503px;
 
 background: #FFFFFF;
 border: 1px solid #C4C4C4;
@@ -417,13 +417,13 @@ border-radius: 5px;
 position: absolute;
 width: 104px;
 height: 24px;
-left: 543px;
-top: 548px;
+left: 463px;
+top: 545px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -439,7 +439,7 @@ color: #4C4C4C;
 position: absolute;
 width: 222px;
 height: 27px;
-left: 661px;
+left: 581px;
 top: 546px;
 
 background: #FFFFFF;
@@ -454,7 +454,7 @@ border-radius: 5px;
 position: absolute;
 width: 27px;
 height: 27px;
-left: 856px;
+left: 776px;
 top: 546px;
 
 background: #E4E4E4;
@@ -470,13 +470,13 @@ border-radius: 0px 5px 5px 0px;
 position: absolute;
 width: 104px;
 height: 24px;
-left: 919px;
-top: 551px;
+left: 890px;
+top: 545px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -492,7 +492,7 @@ color: #4C4C4C;
 position: absolute;
 width: 222px;
 height: 27px;
-left: 1034px;
+left: 1004px;
 top: 546px;
 
 background: #FFFFFF;
@@ -508,7 +508,7 @@ border-radius: 5px;
 position: absolute;
 width: 27px;
 height: 27px;
-left: 1229px;
+left: 1200px;
 top: 546px;
 
 background: #E4E4E4;
@@ -526,13 +526,13 @@ border-radius: 0px 5px 5px 0px;
 position: absolute;
 width: 104px;
 height: 24px;
-left: 543px;
+left: 463px;
 top: 588px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -548,7 +548,7 @@ color: #4C4C4C;
 position: absolute;
 width: 222px;
 height: 27px;
-left: 661px;
+left: 581px;
 top: 588px;
 
 background: #FFFFFF;
@@ -563,7 +563,7 @@ border-radius: 5px;
 position: absolute;
 width: 27px;
 height: 27px;
-left: 856px;
+left: 774px;
 top: 588px;
 
 background: #E4E4E4;
@@ -576,15 +576,15 @@ border-radius: 0px 5px 5px 0px;
 
 #big4-insurance{
 position: absolute;
-width: 95px;
+width: 120px;
 height: 30px;
-left: 551px;
+left: 463px;
 top: 673px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: normal;
-font-size: 16px;
+font-size: 19px;
 line-height: 19px;
 
 color: #000000;
@@ -597,13 +597,13 @@ color: #000000;
 position: absolute;
 width: 104px;
 height: 24px;
-left: 547px;
-top: 721px;
+left: 463px;
+top: 719px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -618,7 +618,7 @@ color: #4C4C4C;
 position: absolute;
 width: 222px;
 height: 27px;
-left: 661px;
+left: 581px;
 top: 718px;
 
 background: #FFFFFF;
@@ -633,7 +633,7 @@ border-radius: 5px;
 position: absolute;
 width: 27px;
 height: 27px;
-left: 856px;
+left: 774px;
 top: 718px;
 
 background: #E4E4E4;
@@ -649,13 +649,13 @@ border-radius: 0px 5px 5px 0px;
 position: absolute;
 width: 110px;
 height: 24px;
-left: 917px;
-top: 721px;
+left: 890px;
+top: 719px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -670,7 +670,7 @@ color: #4C4C4C;
 position: absolute;
 width: 222px;
 height: 27px;
-left: 1031px;
+left: 1004px;
 top: 718px;
 
 background: #FFFFFF;
@@ -685,7 +685,7 @@ border-radius: 5px;
 position: absolute;
 width: 27px;
 height: 27px;
-left: 1226px;
+left: 1200px;
 top: 718px;
 
 background: #E4E4E4;
@@ -703,13 +703,13 @@ border-radius: 0px 5px 5px 0px;
 position: absolute;
 width: 125px;
 height: 24px;
-left: 916px;
-top: 809px;
+left: 890px;
+top: 805px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -725,7 +725,7 @@ color: #4C4C4C;
 position: absolute;
 width: 27px;
 height: 27px;
-left: 1057px;
+left: 1004px;
 top: 806px;
 
 background: #FFFFFF;
@@ -738,15 +738,15 @@ border-radius: 5px;
 
 #zero-one-1{
 position: absolute;
-width: 55px;
+width: 75px;
 height: 24px;
-left: 1093px;
-top: 809px;
+left: 1053px;
+top: 805px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -760,13 +760,13 @@ color: #4C4C4C;
 position: absolute;
 width: 125px;
 height: 24px;
-left: 916px;
+left: 890px;
 top: 847px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -782,7 +782,7 @@ color: #4C4C4C;
 position: absolute;
 width: 27px;
 height: 27px;
-left: 1057px;
+left: 1004px;
 top: 845px;
 
 background: #FFFFFF;
@@ -795,15 +795,15 @@ border-radius: 5px;
 
 #zero-one-2{
 position: absolute;
-width: 55px;
+width: 75px;
 height: 24px;
-left: 1093px;
+left: 1053px;
 top: 848px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -819,13 +819,13 @@ color: #4C4C4C;
 position: absolute;
 width: 90px;
 height: 30px;
-left: 550px;
+left: 463px;
 top: 903px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: normal;
-font-size: 16px;
+font-size: 19px;
 line-height: 19px;
 
 color: #000000;
@@ -838,13 +838,13 @@ color: #000000;
 position: absolute;
 width: 104px;
 height: 24px;
-left: 547px;
+left: 463px;
 top: 946px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -861,7 +861,7 @@ color: #4C4C4C;
 position: absolute;
 width: 222px;
 height: 27px;
-left: 661px;
+left: 581px;
 top: 947px;
 
 background: #FFFFFF;
@@ -876,7 +876,7 @@ border-radius: 5px;
 position: absolute;
 width: 27px;
 height: 27px;
-left: 856px;
+left: 774px;
 top: 947px;
 
 background: #E4E4E4;
@@ -892,13 +892,13 @@ border-radius: 0px 5px 5px 0px;
 position: absolute;
 width: 104px;
 height: 24px;
-left: 917px;
+left: 890px;
 top: 946px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -913,7 +913,7 @@ color: #4C4C4C;
 position: absolute;
 width: 222px;
 height: 27px;
-left: 1034px;
+left: 1004px;
 top: 948px;
 
 background: #FFFFFF;
@@ -929,13 +929,13 @@ border-radius: 5px;
 position: absolute;
 width: 104px;
 height: 24px;
-left: 547px;
+left: 463px;
 top: 996px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -951,7 +951,7 @@ color: #4C4C4C;
 position: absolute;
 width: 222px;
 height: 27px;
-left: 661px;
+left: 581px;
 top: 998px;
 
 background: #FFFFFF;
@@ -970,13 +970,13 @@ border-radius: 5px;
 position: absolute;
 width: 104px;
 height: 24px;
-left: 917px;
+left: 890px;
 top: 996px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -993,7 +993,7 @@ color: #4C4C4C;
 position: absolute;
 width: 222px;
 height: 27px;
-left: 1034px;
+left: 1004px;
 top: 998px;
 
 background: #FFFFFF;
@@ -1010,13 +1010,13 @@ border-radius: 5px;
 position: absolute;
 width: 104px;
 height: 24px;
-left: 547px;
-top: 1046px;
+left: 463px;
+top: 1050px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -1031,7 +1031,7 @@ color: #4C4C4C;
 position: absolute;
 width: 222px;
 height: 27px;
-left: 661px;
+left: 581px;
 top: 1049px;
 
 background: #FFFFFF;
@@ -1044,15 +1044,15 @@ border-radius: 5px;
 
 #document-info{
 position: absolute;
-width: 110px;
+width: 130px;
 height: 19px;
-left: 550px;
+left: 463px;
 top: 1188px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: normal;
-font-size: 16px;
+font-size: 19px;
 line-height: 19px;
 /* identical to box height */
 
@@ -1069,13 +1069,13 @@ color: #000000;
 position: absolute;
 width: 103px;
 height: 24px;
-left: 546px;
+left: 463px;
 top: 1245px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -1091,7 +1091,7 @@ color: #4C4C4C;
 position: absolute;
 width: 450px;
 height: 27px;
-left: 659px;
+left: 581px;
 top: 1242px;
 
 background: #FFFFFF;
@@ -1106,7 +1106,7 @@ border-radius: 5px;
 position: absolute;
 width: 65px;
 height: 27px;
-left: 950px;
+left: 890px;
 top: 1242px;
 
 background: #E4E4E4;
@@ -1122,13 +1122,13 @@ border-radius: 0px 5px 5px 0px;
 position: absolute;
 width: 57px;
 height: 27px;
-left: 955px;
+left: 895px;
 top: 1242px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -1142,13 +1142,13 @@ color: #000000;
 position: absolute;
 width: 103px;
 height: 24px;
-left: 546px;
+left: 463px;
 top: 1297px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -1168,7 +1168,7 @@ top: 1242px;
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -1199,7 +1199,7 @@ border-radius: 5px;
 position: absolute;
 width: 450px;
 height: 27px;
-left: 659px;
+left: 581px;
 top: 1294px;
 
 background: #FFFFFF;
@@ -1214,7 +1214,7 @@ border-radius: 5px;
 position: absolute;
 width: 65px;
 height: 27px;
-left: 950px;
+left: 890px;
 top: 1294px;
 
 background: #E4E4E4;
@@ -1235,7 +1235,7 @@ top: 1293px;
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -1270,7 +1270,7 @@ top: 314px;
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -1289,7 +1289,7 @@ top: 330px;
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -1332,13 +1332,13 @@ height:1700px;
 position: absolute;
 width: 104px;
 height: 24px;
-left: 919px;
-top: 503px;
+left: 890px;
+top: 493px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -1353,7 +1353,7 @@ color: #4C4C4C;
 position: absolute;
 width: 131px;
 height: 27px;
-left: 1034px;
+left: 1004px;
 top: 502px;
 
 background: #D4D5D9;
@@ -1367,8 +1367,8 @@ border-radius: 2px;
 position: absolute;
 width: 85px;
 height: 27px;
-left: 1165px;
-top: 502px;
+left: 1145px;
+top: 503px;
 
 background: #EEEEEE;
 border: 1px solid #C4C4C4;
@@ -1377,15 +1377,15 @@ border-radius: 2px;
 }
 
 /* 퇴사란 */
-#leavegongsi-surr{
+.leavegongsi-surr{
 
 position: absolute;
-width: 222px;
+width: 180px;
 height: 27px;
-left: 1035px;
+left: 1004px;
 top: 503px;
 
-background: #FFFFFF;
+background: #C4C4C4;
 border: 1px solid #C4C4C4;
 box-sizing: border-box;
 border-radius: 5px;
@@ -1397,13 +1397,13 @@ border-radius: 5px;
 position: absolute;
 width: 104px;
 height: 24px;
-left: 917px;
-top: 507px;
+left: 890px;
+top: 503px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -1417,15 +1417,15 @@ color: #4C4C4C;
 
 #employeeNum{
 position: absolute;
-width: 60px;
+width: 80px;
 height: 24px;
-left: 547px;
+left: 463px;
 top: 285px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -1441,7 +1441,7 @@ color: #4C4C4C;
 position: absolute;
 width: 222px;
 height: 27px;
-left: 661px;
+left: 581px;
 top: 285px;
 
 background: #FFFFFF;
@@ -1456,7 +1456,7 @@ border-radius: 5px;
 position: absolute;
 width: 70px;
 height: 29px;
-left: 1271px;
+left: 1200px;
 top: 501px;
 
 background: #296355;
@@ -1468,12 +1468,23 @@ border-radius: 5px;
 
 #listdiv{
 position: absolute;
-width: 165px;
-height: 462px;
+width: 200px;
+height: 800px;
 left: 340px;
-top: 320px;
+top: 300px;
+background-color:yellow;
 
 }
+
+#datepicker{
+width:190px;
+height:25px;
+background: #FFFFFF;
+border: 1px solid #C4C4C4;
+box-sizing: border-box;
+border-radius: 5px;
+}
+
 </style>
 </head>
 <body>
@@ -1491,24 +1502,43 @@ top: 320px;
 <div id="big-one-imployee">일용근로자</div>
 <div id="big-income-employee">사업소득자</div>
 <div id="border2"></div>
-<input type="search" id="search-surr">
+<!-- <input type="search" id="search-surr"> -->
 
-<div id="listdiv">
-<table>
-<tr> <td>1001 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td><td>유지방</td>
-</tr>
-<tr> <td>1002</td><td>유지방</td>
-</tr>
-<tr> <td>1003</td><td>유지방</td>
-</tr>
-</table>
+<form action="selectEmpList.emp" method="POST">
+ <div id="listdiv"> 
+ <table>
+		<td><input type="hidden" value="${sessionScope.loginCompany.companyCode}"  name="comCode"></td> 
+		<tr> 
+			<td style="border:1px solid  #D8D8DC" >   직원번호    </td>
+			<td style="border:1px solid  #D8D8DC" >   직원이름    </td>
+		</tr>
+ 
+ 		  <c:if test="${ !empty sessionScope.loginCompany }">  
+
+ 		<c:forEach var="emp" items="${list}">
+	
+
+		 <tr> <td style="border:1px solid #D8D8DC"><c:out value="${emp.employeeNum}"/></td> 
+			 <td style="border:1px solid #D8D8DC"><c:out value="${emp.employeeName}"/></td> 
+			 <td><input type="hidden" value="${emp.employeeCode}" name="employeeCode"></td> 
+		</tr> 
+		
+		</c:forEach> 
+	
+ 		</c:if> 
+		
+		 
+</table> 
 </div>
 <div id="border">
+</form>
 <div id="vertical"> 
 
+</body>
+       
 </div>
 <tr>
-<td> <b id="employee"> 일반근로자-신규추가 </b></td> 
+<td> <b id="employee"> <h2>일반근로자-신규추가</h2> </b></td> 
 </tr>
  <form action="insert.emp" method="POST" encType="multipart/form-data" >
 <tr>
@@ -1530,7 +1560,7 @@ top: 320px;
 <tr>
 <td>
 <b id="salary">월급여</b>
-<input type="text" id="salary-surr" name="salary">
+<input type="text" id="salary-surr" name="salary" onkeyup="inputNumberFormat(this);" >
 <b id="email">이메일</b>
 <input type="text" id="email-surr" name="email">
 </td>
@@ -1544,10 +1574,11 @@ top: 320px;
 
 <tr>
 <td><b id="enroll-date" >입사년월일</b>
-<input type="text" id="enroll-date-surr" name="enrollDate" placeholder="2020-00-00 입력">
-<b id="leavegongsi">퇴사년월일</b>
-<input type="text" id="leavegongsi-surr" name="leaveDate"  placeholder="2020-00-00 입력"> 
-<button id="leaveReason-surr" style="color:white; font-size:6px;">퇴사사유</button>
+<input type="text" class="enroll-date-surr" id="datepicker" name="enrollDate"></td>
+<td><b id="leavegongsi">퇴사년월일</b></td>
+<td><input type="text" class="leavegongsi-surr" id="datepicker2" name="leaveDate"></td>
+<td><button id="leaveReason-surr" style="color:white; font-size:6px;">퇴사사유</button></td>
+ <td class="thirdLine"><label id="nnResult"></label></td>
 <!-- <input type="text" name="leaveReason" > -->
 </td>
 </tr>
@@ -1687,6 +1718,67 @@ top: 320px;
 </td>
 </tr>
 </form>
+<script>
+	$.datepicker.setDefaults({
+		showOn:"both",
+		buttonImageOnly:true,
+		buttonImage :"${contextPath}/resources/images/calendar.png",
+		dateFormat: 'yy-mm-dd'
+	});
+	
+	$(function(){
+		$("#datepicker").datepicker({});
+		$("img.ui-datepicker-trigger")
+		.attr("style","margin-left:5px; vertical-align:middle; cursor:Pointer; width:1px; height:1px");
+	});
+	
+	$.datepicker.setDefaults({
+		showOn:"both",
+		buttonImageOnly:true,
+		buttonImage :"${contextPath}/resources/images/calendar.png",
+		dateFormat: 'yy-mm-dd'
+	});
+	
+	$(function(){
+		$("#datepicker2").datepicker({});
+		$("img.ui-datepicker-trigger")
+		.attr("style","margin-left:5px; vertical-align:middle; cursor:Pointer; width:1px; height:1px");
+	});
+	
+
+	$("#salary-surr").keyup(function(){
+		var salary=$("#salary-surr").val();
+		var msg='';
+		var sal= Number(salary);
+	
+	if(sal<1795310){
+		msg="월급여가 최저 시급에 위반됩니다. 식대/자가운전/육아수당/연구수당을 포함한 금액을 입력해주세요";
+		$("#tip").css("color","red");
+	}else{
+		msg="식대/자가운전/육아수당/연구수당을 포함한 금액을 입력해주세요";
+		$("#tip").css("color","gray");
+	}
+	$("#tip").text(msg);
+	});
+	
+	function comma(str) {
+		str = String(str);
+		return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, "$1,");
+	}
+	
+	/* 콤마 등 숫자 이외의 입력값 제거 */
+	function uncomma(str) {
+		str = String(str);
+		return Number(str.replace(/[^\d]+/g, ""));
+	}
+	
+	/* 값 입력시 콤마 찍기 */
+	function inputNumberFormat(str) {
+		str.value = comma(uncomma(str.value));
+	}
+	
+
+</script>
 </div>
 </div>
 
@@ -1698,7 +1790,4 @@ top: 320px;
 		</div>
 	</main>
 	<jsp:include page="../common/menubar2.jsp" />
-
-
-</body>
-</html>        
+</html>

@@ -27,14 +27,15 @@
   <result property="comManagerEmail" column="COM_MANAGER_EMAIL"/>
   <result property="bankCode" column="BANK_CODE"/>
   <result property="farmersStatus" column="FARMERS_STATUS"/>
+  <result property="venderType" column="VENDER_TYPE"/>
   </resultMap>
 
  
 	
 	<insert id="insertVender" parameterType="Vender">
 		INSERT INTO VENDER(VENDER_CODE,COM_CODE,BIZ_REG_NUM,VENDER_NAME,BOSS_NAME,SELL_WAY,SELL_TARGET,VENDER_ADDRESS,VENDER_TEL,
-		DEPARTMENT_INCHARGE,COM_MANAGER_TEL,REMARKS,STATUS,VENDER_FAX,ACCOUNT_HOLDER,ACCOUNT_NUM,BANK_CODE,FARMERS_STATUS)
-		VALUES (VENDER_SEQ.NEXTVAL,#{comCode},#{bizRegNum},#{venderName},#{bossName},#{sellWay},#{sellTarget},#{venderAddress},#{venderTel},#{departmentIncharge},#{comManagerTel},#{remarks},#{status},#{venderFax},#{accountHolder},#{accountNum},#{bankCode},#{farmersStatus})
+		DEPARTMENT_INCHARGE,COM_MANAGER_TEL,REMARKS,STATUS,VENDER_FAX,ACCOUNT_HOLDER,ACCOUNT_NUM,BANK_CODE,FARMERS_STATUS,VENDER_TYPE)
+		VALUES (LPAD(VENDER_SEQ.NEXTVAL, 5, 0),#{comCode},#{bizRegNum},#{venderName},#{bossName},#{sellWay},#{sellTarget},#{venderAddress},#{venderTel},#{departmentIncharge},#{comManagerTel},#{remarks},#{status},#{venderFax},#{accountHolder},#{accountNum},#{bankCode},#{farmersStatus},#{venderType})
 	</insert>
 	
 	<select id="selectVenderList" resultMap="venderResultSet">
@@ -44,14 +45,14 @@
 
   	<select id="selectOne" resultMap="venderResultSet">
   	SELECT VENDER_CODE, COM_CODE,BIZ_REG_NUM,VENDER_NAME,BOSS_NAME,SELL_WAY,SELL_TARGET,VENDER_ADDRESS,VENDER_TEL,
-		DEPARTMENT_INCHARGE,COM_MANAGER_TEL,REMARKS,STATUS,VENDER_FAX,ACCOUNT_HOLDER,ACCOUNT_NUM,BANK_CODE,FARMERS_STATUS
+		DEPARTMENT_INCHARGE,COM_MANAGER_TEL,REMARKS,STATUS,VENDER_FAX,ACCOUNT_HOLDER,ACCOUNT_NUM,BANK_CODE,FARMERS_STATUS,VENDER_TYPE
 		FROM VENDER
 		WHERE VENDER_CODE=#{venderCode}
   	</select>
   	
   	 	<update id="modifyOne" parameterType="Vender">
 	UPDATE VENDER SET BIZ_REG_NUM=#{bizRegNum},VENDER_NAME=#{venderName},BOSS_NAME=#{bossName},SELL_WAY=#{sellWay},SELL_TARGET=#{sellTarget},VENDER_ADDRESS=#{venderAddress},VENDER_TEL=#{venderTel},
-		DEPARTMENT_INCHARGE=#{departmentIncharge},COM_MANAGER_TEL=#{comManagerTel},REMARKS=#{remarks},STATUS=#{status},VENDER_FAX=#{venderFax},ACCOUNT_HOLDER=#{accountHolder},ACCOUNT_NUM=#{accountNum},BANK_CODE=#{bankCode},FARMERS_STATUS=#{farmersStatus}
+		DEPARTMENT_INCHARGE=#{departmentIncharge},COM_MANAGER_TEL=#{comManagerTel},REMARKS=#{remarks},STATUS=#{status},VENDER_FAX=#{venderFax},ACCOUNT_HOLDER=#{accountHolder},ACCOUNT_NUM=#{accountNum},BANK_CODE=#{bankCode},FARMERS_STATUS=#{farmersStatus},VENDER_TYPE=#{venderType}
  	 WHERE VENDER_CODE=#{venderCode}
   	</update> 
  

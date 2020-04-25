@@ -1,5 +1,7 @@
 package com.kh.jaga.employee.model.service;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
@@ -38,6 +40,17 @@ public class EmployeeServiceImpl implements EmployeeService {
 	public int insertAttachment2(Attachment at2) {
 		
 		return ed.insertAttachment(sqlSession, at2);
+	}
+
+	@Override
+	public List<Employee> selectEmpList() {
+		List<Employee> list = ed.selectEmpList(sqlSession);
+		
+		if(list==null) {
+			System.out.println("임플로이리스트가널이다널이야");
+		}
+		
+		return list;
 	}
 
 }

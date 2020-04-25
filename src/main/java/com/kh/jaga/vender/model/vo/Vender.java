@@ -22,13 +22,15 @@ public class Vender implements java.io.Serializable {
 	private String comManagerEmail; 
 	private String farmersStatus;
 	private String bankCode;
+	private String venderType;
 	
 	public Vender() {}
 
 	public Vender(String venderCode, String comCode, String bizRegNum, String venderName, String bossName,
 			String sellWay, String sellTarget, String venderAddress, String venderTel, String departmentIncharge,
 			String comManagerTel, String remarks, String status, String venderFax, String accountHolder,
-			String accountNum, String personalNum, String comManagerEmail, String farmersStatus, String bankCode) {
+			String accountNum, String personalNum, String comManagerEmail, String farmersStatus, String bankCode,
+			String venderType) {
 		super();
 		this.venderCode = venderCode;
 		this.comCode = comCode;
@@ -50,6 +52,7 @@ public class Vender implements java.io.Serializable {
 		this.comManagerEmail = comManagerEmail;
 		this.farmersStatus = farmersStatus;
 		this.bankCode = bankCode;
+		this.venderType = venderType;
 	}
 
 	public String getVenderCode() {
@@ -212,6 +215,14 @@ public class Vender implements java.io.Serializable {
 		this.bankCode = bankCode;
 	}
 
+	public String getVenderType() {
+		return venderType;
+	}
+
+	public void setVenderType(String venderType) {
+		this.venderType = venderType;
+	}
+
 	@Override
 	public String toString() {
 		return "Vender [venderCode=" + venderCode + ", comCode=" + comCode + ", bizRegNum=" + bizRegNum
@@ -220,8 +231,10 @@ public class Vender implements java.io.Serializable {
 				+ departmentIncharge + ", comManagerTel=" + comManagerTel + ", remarks=" + remarks + ", status="
 				+ status + ", venderFax=" + venderFax + ", accountHolder=" + accountHolder + ", accountNum="
 				+ accountNum + ", personalNum=" + personalNum + ", comManagerEmail=" + comManagerEmail
-				+ ", farmersStatus=" + farmersStatus + ", bankCode=" + bankCode + "]";
+				+ ", farmersStatus=" + farmersStatus + ", bankCode=" + bankCode + ", venderType=" + venderType + "]";
 	}
+
+	
 	
 	
 }
