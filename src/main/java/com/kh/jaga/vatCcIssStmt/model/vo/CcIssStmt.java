@@ -1,8 +1,9 @@
 package com.kh.jaga.vatCcIssStmt.model.vo;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class CcIssStmt {
+public class CcIssStmt implements Serializable{
 
 	private String issCode;				//발행금액집계표 코드
 	private BigDecimal taxinvIss;		//세금계산서발급금액

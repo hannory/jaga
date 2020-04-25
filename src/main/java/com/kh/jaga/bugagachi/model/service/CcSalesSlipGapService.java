@@ -34,5 +34,9 @@ public interface CcSalesSlipGapService {
 
 	int insertCssgDetail(List<CcSalesSlipDetail> cgDetailList, String pk);
 
+	int insertCssgHis(List<TnxHis> cssgHisList, String pk);
+
+	int updateCcSalesSlipGapDead(CcSalesSlipGap cssg);
+
 	 
 }

@@ -32,4 +32,8 @@ public interface CcSalesSlipGapDao {
 
 	int insertCssgDetail(SqlSessionTemplate sqlSession, List<CcSalesSlipDetail> cgDetailList, String pk);
 
+	int insertCssgHis(SqlSessionTemplate sqlSession, List<TnxHis> cssgHisList, String pk);
+
+	int updateCcSalesSlipGapDead(SqlSessionTemplate sqlSession, CcSalesSlipGap cssg);
+
 }

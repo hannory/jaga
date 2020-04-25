@@ -133,13 +133,40 @@ public class CcSalesSlipGapDaoImpl implements CcSalesSlipGapDao{
 			throw new Exception();
 		}
 		System.out.println("Dao: selectCssgPk2: currval:"+pk);
-		return null;
+		return pk;
 	}
 
 	@Override
 	public int insertCssgDetail(SqlSessionTemplate sqlSession, List<CcSalesSlipDetail> cgDetailList, String pk) {
+		// TODO cssgDetail insert
+		int result=0;
+		for(CcSalesSlipDetail cssgD: cgDetailList) {
+			System.out.println("Dao: insertCssgDetail:pk: "+pk);
+			cssgD.setRcptstmtCode(pk);
+			System.out.println("Dao: insertCssgDetail: cssgD: "+cssgD);
+			result=sqlSession.insert("CcSalesSlipGap.insertCssgDetail",cssgD);
+		}
+		return result;
+	}
+
+	@Override
+	public int insertCssgHis(SqlSessionTemplate sqlSession, List<TnxHis> cssgHisList, String pk) {
+		// TODO insert cssgHis
+		int result=0;
+		for(TnxHis cssH: cssgHisList) {
+			cssH.setRcptstmtCode(pk);
+			System.out.println("Dao: insertCssHis: cssH: "+cssH );
+			result=sqlSession.insert("CcSalesSlipGap.insertCssHis",cssH);
+		}
+		return result;
+	}
+
+	@Override
+	public int updateCcSalesSlipGapDead(SqlSessionTemplate sqlSession, CcSalesSlipGap cssg) {
 		// TODO Auto-generated method stub
-		return 0;
+		int result= sqlSession.update("CcSalesSlipGap.updateCssgDead", cssg);
+		System.out.println("Dao: updateCcSalesSlipGapDead :result :"+result);
+		return result;
 	}
 
 }

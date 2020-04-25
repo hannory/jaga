@@ -1,9 +1,10 @@
 package com.kh.jaga.bugagachi.model.vo;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Date;
 
-public class TnxHis {//거래내역
+public class TnxHis implements Serializable {//거래내역
 	private String slipCode; //전표번호
 	private String silpDate; //거래날짜
 	private String division; //구분(1:현금,2:복지,3:사업,4:신용)

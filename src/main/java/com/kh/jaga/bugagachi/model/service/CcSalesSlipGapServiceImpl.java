@@ -1,6 +1,7 @@
 package com.kh.jaga.bugagachi.model.service;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -25,7 +26,7 @@ public class CcSalesSlipGapServiceImpl implements CcSalesSlipGapService{
 	@Override 
 	public List<CcSalesSlipDetail> selectCssg(CcSalesSlipGap cssg) {
 		
-		List<CcSalesSlipDetail> cssg2=null;
+		List<CcSalesSlipDetail> cssg2=new ArrayList<CcSalesSlipDetail>();
 		System.out.println("service: selectCssg: cssg "+cssg);
 		cssg2=cd.selectCssg(sqlSession,cssg);
 		System.out.println("service: selectCssg: cssg2 "+cssg2);
@@ -33,15 +34,7 @@ public class CcSalesSlipGapServiceImpl implements CcSalesSlipGapService{
 	}
 
 	//신용카드 등 수령명세서 테이블에 값없었으면 전표테이블에서 전표들 불러오기
-	@Override
-	public List<Receiption> selectReceiCssg(CcSalesSlipGap cssg) {
-		
-		//List<Receiption> re=cd.selectReceiCssg(sqlSession,)
-		
-		
-		
-		return null;
-	}
+
 
 	@Override
 	public CcSalesSlipGap selectCcGap(CcSalesSlipGap cssg) {
@@ -58,10 +51,10 @@ public class CcSalesSlipGapServiceImpl implements CcSalesSlipGapService{
 	public List<TnxHis> selectTnxHis(CcSalesSlipGap cssg) {
 		// TODO tnxhis에서 상세 거래내역 찾아보기
 		
-		List<TnxHis> th=null;
-		System.out.println("DAO: selectTnxHis: csssg "+cssg);
+		List<TnxHis> th=new ArrayList<TnxHis>();
+		System.out.println("Service: selectTnxHis: csssg "+cssg);
 		th=cd.selectTnxHis(sqlSession,cssg);
-		System.out.println("DAO: selectTnxHis: th "+th);
+		System.out.println("Service: selectTnxHis: th "+th);
 		return th;
 	}
 
@@ -109,6 +102,24 @@ public class CcSalesSlipGapServiceImpl implements CcSalesSlipGapService{
 	public int insertCssgDetail(List<CcSalesSlipDetail> cgDetailList,String pk) {
 		// TODO cgDetail insert하기
 		return cd.insertCssgDetail(sqlSession,cgDetailList,pk);
+	}
+
+	@Override
+	public int insertCssgHis(List<TnxHis> cssgHisList, String pk) {
+		// TODO cgHis insert하기
+		return cd.insertCssgHis(sqlSession,cssgHisList,pk);
+	}
+
+	@Override
+	public int updateCcSalesSlipGapDead(CcSalesSlipGap cssg) {
+		// TODO Auto-generated method stub
+		return cd.updateCcSalesSlipGapDead(sqlSession,cssg);
+	}
+
+	@Override
+	public List<Receiption> selectReceiCssg(CcSalesSlipGap cssg) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	

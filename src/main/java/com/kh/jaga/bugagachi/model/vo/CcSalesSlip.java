@@ -1,9 +1,10 @@
 package com.kh.jaga.bugagachi.model.vo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CcSalesSlip {
+public class CcSalesSlip implements Serializable{
 	private String rcptstmtCode; //수령명세서 코드
 	private int yearOfAttr;		 //귀속연도
 	private String termDiv;		 //기수구분

@@ -76,13 +76,13 @@ public class CcSalesSlipGapController {
 		if(cssg2 !=null) {
 		//cssg가 pk가 있으면 밑의 합계들을 가지고 오고 아니면 계산해야함
 		//신용카드매출전표가지고와서 가지고 온값으로 거래내역 조회해야함
-			System.out.println("controller: CcGap이 있을때: "+cssg);
+			System.out.println("controller: CcGap이 있을때: "+cssg2);
 			
-			List<CcSalesSlipDetail> cgDetailList=csser.selectCssg(cssg);
+			List<CcSalesSlipDetail> cgDetailList=csser.selectCssg(cssg2);
 			
-			List<TnxHis> cssgHisList=csser.selectTnxHis(cssg);
+			List<TnxHis> cssgHisList=csser.selectTnxHis(cssg2);
 			
-			mv.addObject("cssg", cssg);
+			mv.addObject("cssg", cssg2);
 			mv.addObject("cgDetailList", cgDetailList);
 			mv.addObject("cssgHisList", cssgHisList);
 			
@@ -173,8 +173,12 @@ public class CcSalesSlipGapController {
 					try {
 						String pk=csser.selectCssgPk2(cssg);
 						//DetailList 인설트 시켜주기
-						
+						System.out.println("Controller: pk: "+pk);
 						int insertCssd=csser.insertCssgDetail(cgDetailList,pk);
+						System.out.println("Controller: isnertCssd: "+insertCssd);
+						
+						int insertCssHis=csser.insertCssgHis(cssgHisList,pk);
+						System.out.println("Controller: insertCssHis: "+insertCssHis);
 						
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
@@ -205,14 +209,22 @@ public class CcSalesSlipGapController {
 
 	//인설트
 	@RequestMapping("insertCcsalesSlip.cssg")
-	public String insertCcsalesSlip(Model model, CcSalesSlip css,HttpServletRequest request) {
+	public String insertCcsalesSlip(Model model, CcSalesSlipGap cssg,HttpServletRequest request) {
+		String pk=null;
+		try {
+			pk=csser.selectCssgPk2(cssg);
+			System.out.println("Controller: insertCcsalesSlip: pk: "+pk);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		cssg.setRcptstmtCode(pk);
+		System.out.println("Controller: insert: cssg "+cssg);
+		int result=csser.updateCcSalesSlipGapDead(cssg);
+		System.out.println("Controller: insertCcsalesSlip: result: "+result);
 		
 		
-		System.out.println("Controller: insert: cssg "+css);
-		
-		
-		
-		return "bugagachi/CreditCardSalesSilpGap";
+		return "bugagachi/CreditCardSalesSlipGap";
 	}
 	
 	
