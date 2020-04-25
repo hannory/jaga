@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+		
+		
+	<!-- 어노테이션 쓰겠다 -->
+	<annotation-driven />
+
+
+	<!-- 여기있는 소스를 이용한다. -->
+	<resources mapping="/resources/**" location="/resources/" />
+	
+	<!-- 응답은 아래 bean을 이용해서 처리한다. -->
+	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="prefix" value="/WEB-INF/views/aggregateIncomeTax/" />
+		<beans:property name="suffix" value=".jsp" />
+	</beans:bean>
+	
+	<!-- 스캔할 경로 -->
+	<context:component-scan base-package="com.kh.jaga.aggregateIncomeTax" />
+	
+	<!-- 프록시를 사용하겠다. -->
+	<aop:aspectj-autoproxy proxy-target-class="true"/>
+	
+	<!-- 파일 업로드를 위한 bean -->
+	<beans:bean id="multipartResolver"
+				class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+				<beans:property name="maxUploadSize" value="10000000"/> 
+	</beans:bean>
+	
+
+</beans:beans>

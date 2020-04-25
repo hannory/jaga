@@ -8,8 +8,8 @@
 <title>자가 경리</title>
 
 <style>
-	/* 상단 메뉴 4개 설정 */
 	.div-top4menuWrapper{
+	/* 상단 메뉴 4개 설정 */
 		width:70%;
 	}
 	.div-top4menu{
@@ -22,10 +22,26 @@
 	/* 각 메뉴 글자들을 가운데 두기 위함 */
 		text-align:center;
 	}
+	.div-top4menu:hover{
+	/* 상단 4개 메뉴 */
+		cursor: pointer;
+	}
+	
+	
+	
+	.table-top input{
+		/* 상단테이블 인풋태그 수정 */
+		border:none;
+		width:100%;
+		height:100%;
+	}
 	.table-top td{
 	/* 상단 신고유형 구분 테이블 하위 td 조정 */
 		padding: 5px;
 	}
+	
+	
+	
 	.table-center td:first-child{
 	/* 본문 테이블 1열에 색깔 넣기 */
 		background:aqua;
@@ -35,13 +51,11 @@
 		width:200px;
 	}
 	.table-center{
-		border-collapse:separate;
+	/* 본문테이블 td 간격 두기 */
+		border-spacing: 5px;
+		border-collapse: separate;
 	}
-	.table-top input{
-		border:none;
-		width:100%;
-		height:100%;
-	}
+	
 </style>
 </head>
 <body>
@@ -50,30 +64,10 @@
 	<div class="container-fluid">
 	<!-- 작업영역 -->
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 		<h2 class="mt-4">종합소득세</h2>
+		
+		
+		
 		
 		<!-- 귀속년도 -->
 		<div style="float:right;">
@@ -87,16 +81,48 @@
 		
 		<div class="div-top4menuWrapper">
 			<div class="div-top4menu" style="border-bottom: 3px solid green"><h5>소득금액명세서</h5></div>
-			<div class="div-top4menu"><h5>소득공제명세서</h5></div>
-			<div class="div-top4menu"><h5>가산세명세서</h5></div>
-			<div class="div-top4menu"><h5>종합소득세액계산서</h5></div>
-		</div><!-- //class="div-top4menu" -->
+			<div class="div-top4menu" onclick="goIncomeDeductStmt.aggregate"><h5>소득공제명세서</h5></div>
+			<div class="div-top4menu" onclick="goIncomeDeductStmt.aggregate"><h5>가산세명세서</h5></div>
+			<div class="div-top4menu" onclick="goIncomeDeductStmt.aggregate"><h5>종합소득세액계산서</h5></div>
+		</div>
+		<!-- //class="div-top4menu" -->
+		
+		
+		<script type="text/javascript">
+		/* 상단 메뉴 탭 이동 함수들 */
+		
+		function goAggregateIncomeTax(){
+			/* 소득금액명세서 */
+			location.href="showAggregateIncomeTax.aggregate";
+		}
+		function goIncomeDeductStmt(){
+			/* 소득공제명세서 */
+			location.href="showIncomeDeductStmt.aggregate";
+		}
+		function goAddedTaxStmt(){
+			/* 가산세명세서 */
+			location.href="showAddedTaxStmt.aggregate";
+		}
+		function goIncomeDeductStmt(){
+			/* 종합소득세액계산서 */
+			location.href="showAggregateCalculated.aggregate";
+		}
+		</script>
+		
 		
 		<br>
 		
-		<form action="zzzzz" method="get">
 		
-		</form>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		<!-- 상단 테이블 감싸는 div -->
 		<div style="width:70%; background:white;">
