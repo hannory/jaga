@@ -82,13 +82,47 @@
 		<table border="1" style="width:80%; text-align:center;">
 		
 			<tr style="background:green; height:20px;">
-				<td style="width:10%">문서번호</td>
-				<td style="width:40%">지출일</td>
-				<td style="width:15%">계정과목</td>
-				<td style="width:15%">지출목적</td>
-				<td style="width:20%">지출금액</td>
+				<td style="width:8%">문서번호</td>
+				<td style="width:38%">지출일</td>
+				<td style="width:13%">계정과목</td>
+				<td style="width:13%">지출목적</td>
+				<td style="width:18%">지출금액</td>
+				<td style="width:10%">승인여부</td>
 			</tr>
 			
+			<c:if test="${ !empty dtoList }">
+				<c:forEach var="target" items="${ dtoList }"> 
+					<tr>
+						<td>${ target.resolutionNo }</td>
+						<td>${ target.expendDate }</td>
+						<td>${ target.accountTitleCode }</td>
+						<td>${ target.expendPurpose }</td>
+						<td>${ target.expendSummary }</td>
+						<td>${ target.approvalStatus }</td>
+					</tr>
+				</c:forEach>
+			</c:if>
+			
+			
+			<!-- 
+				//EXPEND_RESOLUTION 테이블 			//[지출결의서]
+				private String resolutionNo = "시퀀스넣기";		//결의서 코드
+				private String comResolutionCode;	//회사 코드
+				private String initiativeDate;		//발의일
+				private String departmentCode;		//담당부서(코드)
+				private String managerNo;			//담당자(번호)
+				private String managerPosition;		//담당자 직급
+				private String expendPurpose;		//지출목적
+				private String expendDate;			//지출일
+				private String accountTitleCode;	//계정과목(코드)
+				private String expendSummary;		//지출합계
+				private String createUser;			//작성자
+				private String createDate;			//작성일
+				private String approvalStatus;		//승인여부
+				private String paymentTypeCode;		//결재코드
+				private String evidenceCode;		//관련증빙코드
+				private String comCode;				//회사코드
+			 -->
 			    
 			
 			

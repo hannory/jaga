@@ -27,21 +27,21 @@
   	)
   	VALUES(
   		SEQ_EXPEND_RESOLUTION.NEXTVAL,
-  		'10',
+  		#{comCode},		
   		#{initiativeDate},
-  		'300',
-  		'123',
-		'001',
+  		#{departmentCode},
+  		#{managerNo},
+		#{managerPosition},
 		#{expendPurpose},
-		'1994-09-23',
-		'800',
-		99000,
-		'userIdInputplz',
+		#{expendDate},
+		#{accountTitleCode},
+		#{expendSummary},
+		#{createUser},
 		SYSDATE,
 		'N',
-		'2',
-		'3',
-		10
+		#{paymentTypeCode},
+		#{evidenceCode},
+		#{comCode}
   	)
   	INTO APPROVALER_INFO(
 		APPR_INFO_CODE,
@@ -56,27 +56,39 @@
   		#{apprEmpCode},
   		#{apprEmpPosition},
   		SEQ_EXPEND_RESOLUTION.CURRVAL,
-  		'1',
+  		'0',
   		'N'
   	)
-  	INTO SWY_TEMP(
-  		ID,
-  		PWD
+  	INTO EXPEND_RESOLUTION_DETAIL(
+	  	EXPEND_DETAIL_NO,
+		EXPEND_DATE,
+		BRIEF,
+		VENDER_CODE,
+		PRICE,
+		MEMO,
+		EXPEND_RESOLUTION_NO
   	)
   	VALUES(
-  		'923',
-  		'PASS01!'
+  		SEQ_EXPEND_RESOLUTION_DETAIL.NEXTVAL,
+  		#{expendDate},
+  		#{brief},
+  		#{venderCode},
+  		#{price},
+  		#{memo},
+  		SEQ_EXPEND_RESOLUTION.CURRVAL
   	)
   	SELECT * FROM DUAL
   	
   </insert>
   
   
+  <!-- 
   <select id="selectTest" resultType="String">
   	SELECT INITIATIVE_DATE 
   	FROM EXPEND_RESOLUTION
   	WHERE RESOLUTION_NO = '5'
-  </select>
+  </select> 
+  -->
   
   <select id="selectDeptList" resultType="com.kh.jaga.expendResolution.model.vo.DepartmentVo">
   	SELECT 
@@ -118,7 +130,7 @@
   	JOIN JOB_POSITION J ON (C.POSITION_CODE = J.POSITION_CODE)
   </select>
   
-  
+  <!-- 지출결의서 리스트 조회 -->
   <select id="selectExpendResolutionList" resultType="com.kh.jaga.expendResolution.model.dto.ExpendResolutionDto">
   	SELECT
 		RESOLUTION_NO,
