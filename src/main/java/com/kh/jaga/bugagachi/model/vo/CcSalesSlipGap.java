@@ -1,8 +1,9 @@
 package com.kh.jaga.bugagachi.model.vo;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class CcSalesSlipGap {//신용카드 등 수령명세서
+public class CcSalesSlipGap implements Serializable{//신용카드 등 수령명세서
 
 	private String rcptstmtCode; //수령명세서 코드
 	private int yearOfAttr;		 //귀속연도

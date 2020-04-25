@@ -1,8 +1,9 @@
 package com.kh.jaga.bugagachi.model.vo;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class CcSalesSlipDetail {
+public class CcSalesSlipDetail implements Serializable{
 
 	private String ccrcptCode;
 	private String eventDiv;

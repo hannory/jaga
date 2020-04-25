@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="SumOfTaxInv">
+<resultMap type="SumTaxInvDetail" id="SumTaxInvDetailResultSet">
+ <id property ="detaillistCode" column="DETAILLIST_CODE"/>
+
+  <result property="slipDate" column="SLIP_DATE"/>
+  <result property="venderCode" column="VENDER_CODE"/>
+  <result property="bizRegNum" column="BIZ_REG_NUM"/>
+  <result property="venderName" column="VENDER_NAME"/>
+  <result property="dealCount" column="DEAL_COUNT"/>
+  <result property="valOfSupply" column="VAL_OF_SUPPLY"/>
+  <result property="tax" column="TAX"/>
+  <result property="bossName" column="BOSS_NAME"/>
+  <result property="sellWay" column="SELL_WAY"/>
+  <result property="sellTarget" column="SELL_TARGET"/>
+  <result property="taxinvCode" column="TAXINV_CODE"/>
+
+</resultMap>
+  
+  <select id="selectSoti" resultType="SumOfTaxInvDto">
+  SELECT TAXINV_CODE
+      ,TABLETAX_DIV
+      ,YEAR_OF_ATTR
+      ,REPORT_TERM
+      ,REPORT_TYPE
+      ,DEADLINE
+      ,COM_CODE
+FROM SUM_OF_TAX_INV
+WHERE COM_CODE= #{comCode}
+    AND TABLETAX_DIV ='세금계산서'
+    AND YEAR_OF_ATTR= #{yearOfAttr}
+    AND REPORT_TERM= #{reportTerm}
+    AND REPORT_TYPE= #{reportType}
+    AND DEADLINE='Y'
+  	
+  </select>
+  <select id="selectSotiDivSales" resultType="SumOfTaxInvDiv">
+  SELECT DIV_COT_CODE
+    , ACCT_CODE_CT
+    , DEAL_COUNT
+    , VAL_OF_SUPPLY
+    , TAX
+    , DIVISION_CODE
+    , TAXINV_CODE
+    , PUR_SALES
+FROM SUM_OF_TAX_INV_DIV_CNT
+WHERE PUR_SALES='매출'
+    AND TAXINV_CODE= #{taxinvCode}
+  
+  </select>
+  <select id="selectSotiDivPur" resultType="SumOfTaxInvDiv">
+  SELECT DIV_COT_CODE
+    , ACCT_CODE_CT
+    , DEAL_COUNT
+    , VAL_OF_SUPPLY
+    , TAX
+    , DIVISION_CODE
+    , TAXINV_CODE
+    , PUR_SALES
+FROM SUM_OF_TAX_INV_DIV_CNT
+WHERE PUR_SALES='매입'
+    AND TAXINV_CODE= #{taxinvCode}
+  
+  </select>
+  <select id="selectDetailSales" resultMap="SumTaxInvDetailResultSet" parameterType="SumOfTaxInvDto">
+  SELECT D.DETAILLIST_CODE 	AS DETAILLIST_CODE
+    , S.SLIP_DATE AS SLIP_DATE 
+    ,D.VENDER_CODE AS VENDER_CODE 
+    ,V.BIZ_REG_NUM AS BIZ_REG_NUM 
+    ,V.VENDER_NAME AS VENDER_NAME 
+    ,D.DEAL_COUNT AS DEAL_COUNT 
+    ,D.VAL_OF_SUPPLY AS VAL_OF_SUPPLY 
+    ,D.TAX AS TAX 
+    ,V.BOSS_NAME AS BOSS_NAME 
+    ,V.SELL_WAY AS SELL_WAY 
+    ,V.SELL_TARGET AS SELL_TARGET 
+    ,D.TAXINV_CODE AS TAXINV_CODE
+FROM SUM_OF_TAX_INV_DETAIL D 
+JOIN VENDER V ON(D.VENDER_CODE=V.VENDER_CODE)
+JOIN SLIP S ON(D.DETAILlIST_CODE=S.SLIP_CODE)
+WHERE S.SLIP_DIVISION='매입매출'
+AND S.DIVISION='매출'
+AND D.TAXINV_CODE= #{taxinvCode}
+AND S.COM_CODE= #{comCode}
+  </select>
+  <select id="selectDetailPur" resultType="SumTaxInvDetail">
+  SELECT D.DETAILLIST_CODE
+    , S.SLIP_DATE 
+    ,D.VENDER_CODE 
+    ,V.BIZ_REG_NUM 
+    ,V.VENDER_NAME 
+    ,D.DEAL_COUNT 
+    ,D.VAL_OF_SUPPLY 
+    ,D.TAX 
+    ,V.BOSS_NAME 
+    ,V.SELL_WAY 
+    ,V.SELL_TARGET 
+    ,D.TAXINV_CODE
+FROM SUM_OF_TAX_INV_DETAIL D 
+JOIN VENDER V ON(D.VENDER_CODE=V.VENDER_CODE)
+JOIN SLIP S ON(D.DETAILlIST_CODE=S.SLIP_CODE)
+WHERE S.SLIP_DIVISION='매입매출'
+AND S.DIVISION='매입'
+AND D.TAXINV_CODE= #{taxinvCode}
+AND S.COM_CODE= #{comCode}
+  </select>
+  
+  </mapper>
