@@ -6,11 +6,13 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.jaga.company.model.vo.Company;
 import com.kh.jaga.slip.model.dao.ReceiptionDao;
 import com.kh.jaga.slip.model.exception.receiptionException;
 import com.kh.jaga.slip.model.vo.AccountTitle;
 import com.kh.jaga.slip.model.vo.Receiption;
 import com.kh.jaga.slip.model.vo.Vender;
+import com.kh.jaga.taxInvoice.model.vo.TaxInvoice;
 
 @Service
 public class ReceiptionServiceImpl implements ReceiptionService{
@@ -21,10 +23,10 @@ public class ReceiptionServiceImpl implements ReceiptionService{
 	private ReceiptionDao receiptionDao;
 	
 	@Override
-	public List<Vender> selectVenderList() throws receiptionException {
+	public List<Vender> selectVenderList(String comCode) throws receiptionException {
 		List<Vender> list = null;
 		
-		list = receiptionDao.selectVenderList(sqlSession);
+		list = receiptionDao.selectVenderList(sqlSession, comCode);
 		
 		if(list == null) {
 			throw new receiptionException("거래처 불러오기 실패!");
@@ -42,6 +44,18 @@ public class ReceiptionServiceImpl implements ReceiptionService{
 		if(result > 0) {
 			try {
 				result2 = receiptionDao.insertJournalize(sqlSession, receiption.getJournalizeList());
+				
+				if(receiption.getEvidenceCode().equals("10")) {
+					//String slipCode = receiptionDao.selectSlipCode(sqlSession);
+					TaxInvoice ti = new TaxInvoice();
+					//ti.setSlipCode(slipCode);
+					ti.setDivision(receiption.getDivision());
+					ti.setVenderCode(receiption.getJournalizeList().get(0).getVenderCode());
+					
+					System.out.println("----------" + ti);
+					
+					int result3 = receiptionDao.insertTaxInvoice(sqlSession, ti);
+				}
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -56,13 +70,14 @@ public class ReceiptionServiceImpl implements ReceiptionService{
 	}
 
 	@Override
-	public List<AccountTitle> selectAccountTitleList() {
+	public List<AccountTitle> selectAccountTitleList(String comCode) {
 		List<AccountTitle> list = null;
 		
-		list = receiptionDao.selectAccountTitleList(sqlSession);
+		list = receiptionDao.selectAccountTitleList(sqlSession, comCode);
 		
 		
 		return list;
 	}
+
 
 }

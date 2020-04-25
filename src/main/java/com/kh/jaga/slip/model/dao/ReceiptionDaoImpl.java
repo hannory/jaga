@@ -5,18 +5,20 @@ import java.util.List;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.jaga.company.model.vo.Company;
 import com.kh.jaga.slip.model.exception.receiptionException;
 import com.kh.jaga.slip.model.vo.AccountTitle;
 import com.kh.jaga.slip.model.vo.Journalize;
 import com.kh.jaga.slip.model.vo.Receiption;
 import com.kh.jaga.slip.model.vo.Vender;
+import com.kh.jaga.taxInvoice.model.vo.TaxInvoice;
 
 @Repository
 public class ReceiptionDaoImpl implements ReceiptionDao {
 
 	@Override
-	public List<Vender> selectVenderList(SqlSessionTemplate sqlSession) throws receiptionException {
-		List<Vender> list = sqlSession.selectList("Receiption.selectVenderList");
+	public List<Vender> selectVenderList(SqlSessionTemplate sqlSession, String comCode) throws receiptionException {
+		List<Vender> list = sqlSession.selectList("Receiption.selectVenderList", comCode);
 		
 		if(list == null) {
 			throw new receiptionException("거래처리스트출력실패!!");
@@ -48,11 +50,21 @@ public class ReceiptionDaoImpl implements ReceiptionDao {
 	}
 
 	@Override
-	public List<AccountTitle> selectAccountTitleList(SqlSessionTemplate sqlSession) {
-		List<AccountTitle> list = sqlSession.selectList("Receiption.selectAccountTitleList");
+	public List<AccountTitle> selectAccountTitleList(SqlSessionTemplate sqlSession, String comCode) {
+		List<AccountTitle> list = sqlSession.selectList("Receiption.selectAccountTitleList", comCode);
 		
 		
 		return list;
+	}
+
+	@Override
+	public String selectSlipCode(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("Receiption.selectSlipCode");
+	}
+
+	@Override
+	public int insertTaxInvoice(SqlSessionTemplate sqlSession, TaxInvoice ti) {
+		return sqlSession.insert("Receiption.insertTaxInvoice", ti);
 	}
 	
 }

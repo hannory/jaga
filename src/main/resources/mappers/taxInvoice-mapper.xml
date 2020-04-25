@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="TaxInvoice">
+
+	<resultMap type="Journalize" id="journalizeResultMap">
+		<id property="journalCode" column="JOURNAL_CODE"/>
+		<result property="slipCode" column="SLIP_CODE"/>
+		<result property="debitCredit" column="DEBIT_CREDIT"/>
+		<result property="price" column="PRICE"/>
+		<result property="accountCode" column="ACCOUNT_CODE"/>
+		<result property="venderCode" column="VENDER_CODE"/>
+		<result property="venderName" column="VENDER_NAME"/>
+		<result property="accountTitle" column="ACCOUNT_TITLE"/>
+	</resultMap>
+ 	
+ 	<resultMap type="Receiption" id="receiptionResultMap">
+ 		<id property="slipCode" column="SLIP_CODE"/>
+ 		<result property="slipDivision" column="SLIP_DIVISION"/>
+ 		<result property="division" column="DIVISION"/>
+ 		<result property="slipDate" column="SLIP_DATE"/>
+ 		<result property="evidenceCode" column="EVIDENCE_CODE"/>
+ 		<result property="supplyValue" column="SUPPLY_VALUE"/>
+ 		<result property="valueTax" column="VALUE_TAX"/>
+ 		<result property="deemedStatus" column="DEEMED_STATUS"/>
+ 		<result property="resolutionCode" column="RESOLUTION_CODE"/>
+ 		<result property="brief" column="BRIEF"/>
+ 		<result property="item" column="ITEM"/>
+ 		<result property="comCode" column="COM_CODE"/>
+ 		<result property="dateSlipCode" column="DATE_SLIP_CODE"/>
+ 		<result property="evidence" column="EVIDENCE"/>
+ 		<result property="issueStatus" column="ISSUE_STATUS"/>
+ 		<collection property="journalizeList" javaType="java.util.List" resultMap="journalizeResultMap"/>
+ 	</resultMap>
+
+	<select id="selectTList" resultMap="receiptionResultMap" parameterType="java.lang.String">
+		SELECT S.SLIP_CODE
+		      ,S.DIVISION
+		      ,S.SLIP_DATE
+		      ,S.EVIDENCE_CODE
+		      ,S.SUPPLY_VALUE
+		      ,S.VALUE_TAX
+		      ,T.VENDER_CODE
+		      ,V.VENDER_NAME
+		      ,T.ISSUE_STATUS
+		FROM SLIP S
+		JOIN TAX_INVOICE T ON(S.SLIP_CODE = T.SLIP_CODE)
+		JOIN VENDER V ON(V.VENDER_CODE = T.VENDER_CODE)
+		WHERE S.DIVISION = '매출'
+		    AND S.SLIP_DIVISION = '매입매출'
+		    AND EVIDENCE_CODE = 10
+		    AND S.COM_CODE = '42'
+		    AND SUBSTR(TO_CHAR(S.SLIP_DATE, 'YYYYMMDD'), 1, 4) = 2020
+		ORDER BY S.SLIP_DATE DESC
+	</select>
+	
+	<select id="" parameterType="java.lang.String">
+		SELECT S.SLIP_CODE, S.SLIP_DATE, S.SUPPLY_VALUE, S.VALUE_TAX
+		     , V.BIZ_REG_NUM, V.VENDER_NAME, V.BOSS_NAME, V.SELL_WAY, V.SELL_TARGET, V.VENDER_ADDRESS
+		     , C.BIZ_NAME, C.BOSS_NAME, C.BIZ_LOCATION, C.BIZ_NUM
+		     , T.SELL_WAY_NAME, T.SELL_TARGET_NAME 
+		FROM SLIP S
+		JOIN (SELECT JOURNAL_CODE, SLIP_CODE, VENDER_CODE
+		      FROM JOURNALIZE
+		      WHERE (SLIP_CODE, PRICE) IN (SELECT SLIP_CODE, MIN(PRICE)
+		                                    FROM (SELECT SLIP_CODE, PRICE, JOURNAL_CODE
+		                                    FROM JOURNALIZE
+		                                    WHERE (SLIP_CODE, PRICE) NOT IN (SELECT SLIP_CODE, MIN(PRICE)
+		                                                                     FROM JOURNALIZE
+		                                                                     GROUP BY SLIP_CODE))
+		                                    GROUP BY SLIP_CODE)) J ON(S.SLIP_CODE = J.SLIP_CODE)
+		JOIN VENDER V ON(V.VENDER_CODE = J.VENDER_CODE)
+		JOIN COMPANY C ON(S.COM_CODE = C.COM_CODE)
+		JOIN TYPE_OF_BIZ_CODE T ON(C.TYPE_OF_BIZ = T.TOBC_PK_CODE)
+		WHERE S.SLIP_CODE = #{slipCode}
+	</select>
+</mapper>

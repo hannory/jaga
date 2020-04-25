@@ -71,7 +71,7 @@ public class BusinessEmpDaoImpl implements BusinessEmpDao {
 	public int deletePhoto(SqlSessionTemplate sqlSession, String fileCode) {
 		int result = sqlSession.delete("BusinessEmp.deletePhoto", fileCode);
 		
-		return 0;
+		return result;
 	}
 
 	@Override
