@@ -47,6 +47,14 @@
 		border: none;
 		outline: none;
 	}
+	
+	input{
+		border-top-left-radius: 5px;
+		border-top-right-radius: 5px;
+		border-bottom-left-radius: 5px;
+		border-bottom-right-radius: 5px;
+		border: 1px solid lightgray;
+	}
 </style>
 </head>
 <body>
@@ -100,7 +108,7 @@
 					<c:forEach var="t" items="${ list }">
 					<tr>
 						<td><input type="checkbox" class="checkk"></td>
-						<td><c:out value="${ t.division }"/></td>
+						<td><c:out value="${ t.slipDate }"/></td>
 						<td><c:out value="${ t.journalizeList[0].venderCode }"/></td>
 						<td><c:out value="${ t.journalizeList[0].venderName }"/></td>
 						<td><fmt:formatNumber value="${t.supplyValue}" type="currency" currencySymbol=""/></td>
@@ -152,7 +160,9 @@
 		/* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 	
 		function printBtn(code){
-			location.href="${ contextPath }/taxInvoicePrint.ti?slipCode="+code;
+			//location.href="${ contextPath }/taxInvoicePrint.ti?slipCode="+code;
+			window.open("${ contextPath }/taxInvoicePrint.ti?slipCode="+code, "_blank", "width=600, height=850");
+			
 		};
 		
 		

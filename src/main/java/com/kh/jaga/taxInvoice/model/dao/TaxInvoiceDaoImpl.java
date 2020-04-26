@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.jaga.company.model.vo.Company;
 import com.kh.jaga.slip.model.vo.Receiption;
+import com.kh.jaga.taxInvoice.model.vo.TaxInvoicePrintDTO;
 
 @Repository
 public class TaxInvoiceDaoImpl implements TaxInvoiceDao{
@@ -15,5 +16,16 @@ public class TaxInvoiceDaoImpl implements TaxInvoiceDao{
 	public List<Receiption> selectTListAll(SqlSessionTemplate sqlSession, Company com) {
 		return sqlSession.selectList("TaxInvoice.selectTList", com);
 	}
+
+	@Override
+	public TaxInvoicePrintDTO selectTaxInvoice(SqlSessionTemplate sqlSession, String slipCode) {
+		return sqlSession.selectOne("TaxInvoice.selectTaxInvoice", slipCode);
+	}
+
+	@Override
+	public int updatePrintStatus(SqlSessionTemplate sqlSession, String slipCode) {
+		return sqlSession.update("TaxInvoice.updatePrintStatus", slipCode);
+	}
+
 
 }
