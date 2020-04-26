@@ -312,16 +312,7 @@
 	 					
 		 				
 		 					console.log("index: "+index);
-	 					
-	 					
-	 					
-	 					
-	 					
-	 					
-	 					
-	 					
-	 					
-	 					
+
 	 					
 	 					
 	 						

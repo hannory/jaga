@@ -164,7 +164,7 @@ public class SumTaxInvDetail implements Serializable{
 	@Override
 	public String toString() {
 		return "SumTaxInvDetail [detaillistCode=" + detaillistCode + ", silpDate=" + slipDate + ", venderCode="
-				+ venderCode + ", bizRerNum=" + bizRegNum + ", venderName=" + venderName + ", deal_count=" + dealCount
+				+ venderCode + ", bizRegNum=" + bizRegNum + ", venderName=" + venderName + ", dealCount=" + dealCount
 				+ ", valOfSupply=" + valOfSupply + ", tax=" + tax + ", bossName=" + bossName + ", sellWay=" + sellWay
 				+ ", sellTarget=" + sellTarget + ", taxinvCode=" + taxinvCode + "]";
 	}
