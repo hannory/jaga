@@ -8,7 +8,7 @@
 <style>
 
 
-/* Rectangle 237 사각형 테두리 border */
+/* 사각형 테두리 border */
 
 #border{
 position: absolute;

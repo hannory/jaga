@@ -1507,13 +1507,13 @@ border-radius: 5px;
 <form action="selectEmpList.emp" method="POST">
  <div id="listdiv"> 
  <table>
-		<td><input type="hidden" value="${sessionScope.loginCompany.companyCode}"  name="comCode"></td> 
+<%-- 		<td><input type="hidden" value="${sessionScope.loginCompany.companyCode}"  name="comCode"></td>  --%>
 		<tr> 
 			<td style="border:1px solid  #D8D8DC" >   직원번호    </td>
 			<td style="border:1px solid  #D8D8DC" >   직원이름    </td>
 		</tr>
  
- 		  <c:if test="${ !empty sessionScope.loginCompany }">  
+ 		  <c:if test="${ !empty sessionScope.loginCompany }">   
 
  		<c:forEach var="emp" items="${list}">
 	
@@ -1526,7 +1526,6 @@ border-radius: 5px;
 		</c:forEach> 
 	
  		</c:if> 
-		
 		 
 </table> 
 </div>
@@ -1534,8 +1533,7 @@ border-radius: 5px;
 </form>
 <div id="vertical"> 
 
-</body>
-       
+
 </div>
 <tr>
 <td> <b id="employee"> <h2>일반근로자-신규추가</h2> </b></td> 
@@ -1790,4 +1788,6 @@ border-radius: 5px;
 		</div>
 	</main>
 	<jsp:include page="../common/menubar2.jsp" />
+	</div>
+	</body>
 </html>
