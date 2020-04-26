@@ -56,9 +56,9 @@
 		ORDER BY S.SLIP_DATE DESC
 	</select>
 	
-	<select id="" parameterType="java.lang.String">
-		SELECT S.SLIP_CODE, S.SLIP_DATE, S.SUPPLY_VALUE, S.VALUE_TAX
-		     , V.BIZ_REG_NUM, V.VENDER_NAME, V.BOSS_NAME, V.SELL_WAY, V.SELL_TARGET, V.VENDER_ADDRESS
+	<select id="selectTaxInvoice" resultType="TaxInvoiceDTO" parameterType="java.lang.String">
+		SELECT S.SLIP_CODE, TO_CHAR(S.SLIP_DATE, 'YYYY-MM-DD') SLIP_DATE, S.SUPPLY_VALUE, S.VALUE_TAX
+		     , V.BIZ_REG_NUM, V.VENDER_NAME, V.BOSS_NAME "VENDER_BOSS_NAME", V.SELL_WAY, V.SELL_TARGET, V.VENDER_ADDRESS
 		     , C.BIZ_NAME, C.BOSS_NAME, C.BIZ_LOCATION, C.BIZ_NUM
 		     , T.SELL_WAY_NAME, T.SELL_TARGET_NAME 
 		FROM SLIP S
@@ -76,4 +76,8 @@
 		JOIN TYPE_OF_BIZ_CODE T ON(C.TYPE_OF_BIZ = T.TOBC_PK_CODE)
 		WHERE S.SLIP_CODE = #{slipCode}
 	</select>
+	
+	<update id="updatePrintStatus" parameterType="java.lang.String">
+		UPDATE TAX_INVOICE SET ISSUE_STATUS = 'Y' WHERE SLIP_CODE = #{slipCode}
+	</update>
 </mapper>

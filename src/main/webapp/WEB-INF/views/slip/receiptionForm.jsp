@@ -15,10 +15,6 @@
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
 
 <style>
-	body{
-		background:red;
-	}
- 
 	input {
 	border-top-left-radius: 5px;
 	border-top-right-radius: 5px;
@@ -318,8 +314,8 @@
           	<table id="venderTable">
           		<thead>
 	          		<tr>
-	          			<th>거래처코드</th>
-	          			<th>거래처명</th>
+	          			<th>코드</th>
+	          			<th>이름</th>
 	          		</tr>
           		</thead>
           		<tbody>
@@ -780,6 +776,8 @@
 						 
 					 ]
 				});
+				
+				$(".modal-title").text("거래처검색");
 				 $("div#accountModal").modal();
 				 
 				 

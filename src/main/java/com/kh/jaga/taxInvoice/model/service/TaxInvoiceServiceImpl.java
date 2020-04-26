@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.kh.jaga.company.model.vo.Company;
 import com.kh.jaga.slip.model.vo.Receiption;
 import com.kh.jaga.taxInvoice.model.dao.TaxInvoiceDao;
+import com.kh.jaga.taxInvoice.model.vo.TaxInvoicePrintDTO;
 
 @Service
 public class TaxInvoiceServiceImpl implements TaxInvoiceService{
@@ -21,6 +22,16 @@ public class TaxInvoiceServiceImpl implements TaxInvoiceService{
 	@Override
 	public List<Receiption> selectTListAll(Company com) {
 		return tid.selectTListAll(sqlSession, com);
+	}
+
+	@Override
+	public TaxInvoicePrintDTO selectTaxInvoice(String slipCode) {
+		return tid.selectTaxInvoice(sqlSession, slipCode);
+	}
+
+	@Override
+	public int updatePrintStatus(String slipCode) {
+		return tid.updatePrintStatus(sqlSession, slipCode);
 	}
 
 }

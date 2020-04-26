@@ -37,6 +37,7 @@
    		<typeAlias type="com.kh.jaga.vatSumTaxInv.model.vo.SumOfTaxInvDiv" alias="SumOfTaxInvDiv"/>
    		<typeAlias type="com.kh.jaga.vatSumTaxInv.model.vo.SumOfTaxInvDto" alias="SumOfTaxInvDto"/>
    		<typeAlias type="com.kh.jaga.taxInvoice.model.vo.TaxInvoice" alias="TaxInvoice"/>
+   		<typeAlias type="com.kh.jaga.taxInvoice.model.vo.TaxInvoicePrintDTO" alias="TaxInvoiceDTO"/>
 	</typeAliases>
 
 	<mappers>
