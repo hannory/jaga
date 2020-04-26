@@ -81,6 +81,198 @@
 		
 		<br>
 		
+		<table class="table-center" border="1">
+		
+			<tr>
+				<td colspan="4">구분 및 계산기준</td>
+				<td>기준금액</td>
+				<td>가산세율</td>
+				<td>가산세액</td>
+			</tr>
+			
+			<tr>
+				<td rowspan="4">무신고</td>
+				<td rowspan="2" colspan="2">부정무신고</td>
+				<td>무신고납부세액</td>
+				<td><input type="text" id=""></td>
+				<td>40/100</td>
+				<td><input type="text" id="" name=""></td>
+			</tr>
+			
+			<tr>
+				<td>수입금액</td>
+				<td><input type="text"></td>
+				<td>14/10,000</td>
+				<td><input type="text"></td>
+			</tr>
+			
+			<tr>
+				<td colspan="2" rowspan="2">일반무신고</td>
+				<td>무신고납부세액</td>
+				<td><input type="text" id=""></td>
+				<td>20/100</td>
+				<td><input type="text" id="" name=""></td>
+			</tr>
+			
+			<tr>
+				<td>수입금액</td>
+				<td><input type="text"></td>
+				<td>7/10,000</td>
+				<td><input type="text"></td>
+			</tr>
+			
+			<tr>
+				<td rowspan="3">과소신고</td>
+				<td rowspan="2" colspan="2">부정과서신고</td>
+				<td>과소신고납부세액</td>
+				<td><input type="text"></td>
+				<td>40/100</td>
+				<td><input type="text"></td>
+			</tr>
+			
+			<tr>
+				<td>수입금액</td>
+				<td><input type="text"></td>
+				<td>14/10,000</td>
+				<td><input type="text"></td>
+			</tr>
+			
+			<tr>
+				<td colspan="2">일반과소신고</td>
+				<td>과소신고납부세액</td>
+				<td><input type="text"></td>
+				<td>10/100</td>
+				<td><input type="text"></td>
+			</tr>
+			
+			<tr>
+				<td rowspan="2" colspan="2">납부(환급)불성실</td>
+				<td colspan="2" >미납일수</td>
+				<td><input type="text"></td>
+				<td rowspan="2">2.5/10,000</td>
+				<td><input type="text"></td>
+			</tr>
+			
+			<tr>
+				<td colspan="2">미납부(환급)세액</td>
+				<td><input type="text"></td>
+				<td><input type="text"></td>
+			</tr>
+			
+			
+			
+			<tr>
+				<td rowspan="13">보고불성실</td>
+				<td rowspan="2">지급명세서</td>
+				<td>미제출(불명)</td>
+				<td>지급(불명)금액</td>
+				<td><input type="text"></td>
+				<td>1/100</td>
+				<td><input type="text"></td>
+			</tr>
+			
+			<tr>
+				<td>지연 제출</td>
+				<td>지연 제출 금액</td>
+				<td><input type="text"></td>
+				<td>0.5/100</td>
+				<td><input type="text"></td>
+			</tr>
+			
+			<tr>
+				<td rowspan="6">계산서</td>
+				<td>미발급(위장)</td>
+				<td>공급가액</td>
+				<td><input type="text"></td>
+				<td>2/100</td>
+				<td><input type="text"></td>
+			</tr>
+			
+			<tr>
+				<td>지연발급</td>
+				<td>공급가액</td>
+				<td><input type="text"></td>
+				<td>2/100</td>
+				<td><input type="text"></td>
+			</tr>
+			
+			<tr>
+				<td>불명</td>
+				<td>불명금액</td>
+				<td><input type="text"></td>
+				<td>1/100</td>
+				<td><input type="text"></td>
+			</tr>
+			
+			<tr>
+				<td>전자계산서 외 발급</td>
+				<td>공급가액</td>
+				<td><input type="text"></td>
+				<td>1/100</td>
+				<td><input type="text"></td>
+			</tr>
+			
+			<tr>
+				<td>전자계산서 미전송</td>
+				<td>공급가액</td>
+				<td><input type="text"></td>
+				<td> - </td>
+				<td><input type="text"></td>
+			</tr>
+			
+			<tr>
+				<td>전자계산서 지연전송</td>
+				<td>지연 전송 금액</td>
+				<td><input type="text"></td>
+				<td> - </td>
+				<td><input type="text"></td>
+			</tr>
+			
+			<tr>
+				<td rowspan="2">계산서합계표</td>
+				<td>미제출(불명)</td>
+				<td>공급(불명)가액</td>
+				<td><input type="text"></td>
+				<td>0.5/100</td>
+				<td><input type="text"></td>
+			</tr>
+			
+			<tr>
+				<td>지연 제출</td>
+				<td>지연 제출 금액</td>
+				<td><input type="text"></td>
+				<td>0.3/100</td>
+				<td><input type="text"></td>
+			</tr>
+			
+			<tr>
+				<td rowspan="2">매입처별세금<br>계산서합계표</td>
+				<td>미제출(불명)</td>
+				<td>공급(불명)가액</td>
+				<td><input type="text"></td>
+				<td>1/100</td>
+				<td><input type="text"></td>
+			</tr>
+			
+			<tr>
+				<td>지연 제출</td>
+				<td>지연 제출 금액</td>
+				<td><input type="text"></td>
+				<td>0.3/100</td>
+				<td><input type="text"></td>
+			</tr>
+			
+			<tr>
+				<td colspan="3">소계</td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			
+		
+		
+		</table>
+		
 		
 		
 		
