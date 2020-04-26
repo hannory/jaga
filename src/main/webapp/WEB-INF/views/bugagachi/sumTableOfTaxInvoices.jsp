@@ -40,7 +40,7 @@
             background-color: #1B5748;
             color: white;
         }   
-        #Tex_bill_detailList{
+        .Tex_bill_detailList{
             margin-top: 25px;
             margin-bottom: 25px;
             margin-left: auto;
@@ -48,7 +48,7 @@
             width: 98%;
             text-align: center;
         }
-        #Tex_bill_detailList td{
+        .Tex_bill_detailList td{
             border: 1px solid #C9CACE; 
         }
         #Tex_bill_th{
@@ -211,6 +211,11 @@
 	 			success: function (data){
 	 				var sDto=data.sDto;
 	 				var sDtoDivSales=data.sDto.sumOfTaxInvDivSales;
+	 				var sDtoDetailSales=data.sDto.sumTaxInvDetailSales;
+	 				
+	 				console.log(sDtoDivPur);
+	 				console.log(sDtoDetailSales);
+	 				console.log(sDtoDetailPur);
 	 				
 	 				/* 구분영역 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!111 */
 	 				//소계랑 합계변수 선언//
@@ -278,16 +283,135 @@
 		 		     $("#sAtax").text(tSAtax);
 		 		    /* 구분영역 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!111 */
 		 		    
-		 		    
-		 		    
-		 		    
+		 		    /* 상세리스트 영역 */
+		 		    var $Tex_bill_detailList=$("#Tex_bill_detailList2");
+		 		    var $Tex_bill_detailList3=$("#Tex_bill_detailList3");
+		 		    var dealCount=0;
+		 		    var volCount=0;
+		 		    var taxCount=0;
+		 		    var index=0;
+		 		    for(var key in sDtoDetailSales ){
+		 		    	index++;
+		 		    	var $tr= $("<tr onclick='PopModalTexList()'>");
+		 		    	var $noTd = $(" <td id='Text_billNo'>").text(index);
+						var $bizRegNumTd = $("<td>").text(sDtoDetailSales[key].bizRegNum);
+						console.log("사업자번호: "+sDtoDetailSales[key].bizRegNum)
+						var $venderTd = $("<td>").text(sDtoDetailSales[key].venderCode);
+						var $venderNameTd = $("<td>").text(sDtoDetailSales[key].venderName);
+						var $dealCountTd = $("<td>").text(sDtoDetailSales[key].dealCount);
+						console.log("거래건수: "+sDtoDetailSales[key].dealCount)
+						var $valOfSupplyTd = $("<td>").text(sDtoDetailSales[key].valOfSupply);
+						var $taxTd = $("<td>").text(sDtoDetailSales[key].tax);
+						var $bossNameTd = $("<td>").text(sDtoDetailSales[key].bossName);
+						var $sellWayTd = $("<td>").text(sDtoDetailSales[key].sellWay);
+						var $sellTargetTd = $("<td>").text(sDtoDetailSales[key].sellTarget);
+						var $lastTd = $("<td>").text();//주류코드부분
+						
+						dealCount=dealCount+sDtoDetailSales[key].dealCount;
+						volCount=volCount+sDtoDetailSales[key].valOfSupply;
+						taxCount=taxCount+sDtoDetailSales[key].tax;
+						
+						
+						$tr.append($noTd);
+						$tr.append($bizRegNumTd);
+						$tr.append($venderTd);
+						$tr.append($venderNameTd);
+						$tr.append($dealCountTd);
+						$tr.append($valOfSupplyTd);
+						$tr.append($taxTd);
+						$tr.append($bossNameTd);
+						$tr.append($sellWayTd);
+						$tr.append($sellTargetTd);
+						$tr.append($lastTd);
+						
+						$Tex_bill_detailList.append($tr);
+						$Tex_bill_detailList3.append($tr);
+		 		    }
+		 		   $("#dealCount1").text(dealCount);
+		 		   $("#volCount1").text(volCount);
+		 		   $("#taxCount1").text(taxCount);
+		 		   /* 합계 */
+		 		   $Tex_bill_detailList.append("<tr id='Tex_bill_th' style=;font-weight: 600;'><td id='Text_billNo' rowspan='2' style='height: 50px;'> </td><td colspan='3'> 합   계 </td><td id='dealCount1'> </td><td id='volCount1'> </td><td id='taxCount1'> </td><td> </td><td> </td><td> </td><td> </td></tr>");
+		 		   $Tex_bill_detailList3.append("<tr id='Tex_bill_th' style=;font-weight: 600;'><td id='Text_billNo' rowspan='2' style='height: 50px;'> </td><td colspan='3'> 합   계 </td><td id='dealCount1'> </td><td id='volCount1'> </td><td id='taxCount1'> </td><td> </td><td> </td><td> </td><td> </td></tr>");
+		 		   
+		 		   /* 마감합계 */
+		 		  $Tex_bill_detailList.append("<tr id='Tex_bill_th' style='font-weight: 600;'><td colspan='3'> 마감합계 </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td></tr>");
+		 		  $Tex_bill_detailList3.append("<tr id='Tex_bill_th' style='font-weight: 600;'><td colspan='3'> 마감합계 </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td></tr>");
 		 		    
 		 		    
 	 				console.log(data.sDto.sumOfTaxInvDivSales);
 	 				console.log(data.sDto.sumOfTaxInvDivSales[0]);
 	 				console.log(data.sDto.sumOfTaxInvDivSales[0].divCotCode);
 	 				
-	 				
+	 			/* 매입역역!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
+	 			
+	 			var sDtoDivPur=data.sDto.sumOfTaxInvDivPur;
+	 			var sDtoDetailPur=data.sDto.sumTaxInvDetailPur;
+	 			
+	 			/* 매입 구분표 */
+	 			var ptSAvc=0; //전체 매출(입) 처수
+ 				var ptSAdc=0;//전체매수
+ 				var ptSAvol=0;//전체공급차액
+ 				var ptSAtax=0;//전체 세액
+ 				var pssAvc=0;//11일 이전 매출(입) 처수 소계
+ 				var pssAdc=0;//11일 이전 매수소계
+ 				var pssAvol=0;//11일 이전 공급가액 소계
+ 				var pssAtax=0;//11일 이전 세액 소계
+ 				var pOssAvc=0;//12일 이후 매출(입) 처수 소계
+ 				var pOssAdc=0;//12일 이후 매수소계
+ 				var pOssAvol=0;//12일 이후 공급가액 소계
+ 				var pOssAtax=0;//12일 이후 세액 소계
+ 				for(var key in sDtoDivPur){
+                    /* 11일 이전 세금계산서 사업자번호*/
+ 					if(sDtoDivPur[key].divisionCode=="11"){
+ 						$("#pbAvc").text(sDtoDivPur[key].acctCodeCt);
+ 						$("#pbAdc").text(sDtoDivPur[key].dealCount);
+ 						$("#pbAvol").text(sDtoDivPur[key].valOfSupply);
+ 						$("#pbAtax").text(sDtoDivPur[key].tax);
+ 					}else if(sDtoDivPur[key].divisionCode=="12"){/* 11일 이전 세금계산서 주민번호*/
+ 						$("#ppAvc").text(sDtoDivPur[key].acctCodeCt);
+ 						$("#ppAdc").text(sDtoDivPur[key].dealCount);
+ 						$("#ppAvol").text(sDtoDivPur[key].valOfSupply);
+ 						$("#ppAtax").text(sDtoDivPur[key].tax);
+ 					}else if(sDtoDivPur[key].divisionCode=="13"){/* 11일 이전 세금계산서 소계*/
+ 						$("#pssAvc").text(sDtoDivPur[key].acctCodeCt);
+ 						$("#pssAdc").text(sDtoDivPur[key].dealCount);
+ 						$("#pssAvol").text(sDtoDivPur[key].valOfSupply);
+ 						$("#pssAtax").text(sDtoDivPur[key].tax);
+ 						pssAvc=sDtoDivPur[key].acctCodeCt;
+ 						pssAdc=sDtoDivPur[key].dealCount;
+ 						pssAvol=sDtoDivPur[key].valOfSupply;
+ 						pssAtax=sDtoDivPur[key].tax;
+ 					}else if(sDtoDivPur[key].divisionCode=="21"){/* 12일 이후 세금계산서 사업자번호*/
+ 						$("#pObAvc").text(sDtoDivPur[key].acctCodeCt);
+ 						$("#pObAdc").text(sDtoDivPur[key].dealCount);
+ 						$("#pObAvol").text(sDtoDivPur[key].valOfSupply);
+ 						$("#pObAtax").text(sDtoDivPur[key].tax);
+ 					}else if(sDtoDivPur[key].divisionCode=="22"){/* 12일 이후 세금계산서 주민번호*/
+ 						$("#pOpAvc").text(sDtoDivPur[key].acctCodeCt);
+ 						$("#pOpAdc").text(sDtoDivPur[key].dealCount);
+ 						$("#pOpAvol").text(sDtoDivPur[key].valOfSupply);
+ 						$("#pOpAtax").text(sDtoDivPur[key].tax);
+ 					}else if(sDtoDivPur[key].divisionCode=="23"){/* 12일 이후 세금계산서 소계*/
+ 						$("#pOssAvc").text(sDtoDivPur[key].acctCodeCt);
+ 						$("#pOssAdc").text(sDtoDivPur[key].dealCount);
+ 						$("#pOssAvol").text(sDtoDivPur[key].valOfSupply);
+ 						$("#pOssAtax").text(sDtoDivPur[key].tax);
+ 						pOssAvc=sDtoDivPur[key].acctCodeCt;
+ 						pOssAdc=sDtoDivPur[key].dealCount;
+ 						pOssAvol=sDtoDivPur[key].valOfSupply;
+ 						pOssAtax=sDtoDivPur[key].tax;
+ 					}
+ 				}
+ 				 ptSAvc=ssAvc+OssAvc;
+	 			 ptSAdc=ssAdc+OssAdc;
+	 			 ptSAvol=ssAvol+OssAvol;
+	 		     ptSAtax=ssAtax+OssAtax;
+	 		     $("#psAvc").text(ptSAvc);
+	 		     $("#psAdc").text(ptSAdc);
+	 		     $("#psAvol").text(ptSAvol);
+	 		     $("#psAtax").text(ptSAtax);
+	 			
 	 			},
 	 			error:function(error){
 	 				console.log(error);
@@ -469,7 +593,7 @@
         <tr>
             <td colspan="10">
                 <div id="cho_div1">
-                    <table id="Tex_bill_detailList">
+                    <table class="Tex_bill_detailList" id="Tex_bill_detailList">
                         <tr id="Tex_bill_th" style="font-weight: 800;">
                             <td id="Text_billNo">no</td>
                             <td>사업자등록번호1</td>
@@ -521,7 +645,7 @@
                     </table>
                 </div>
                  <div id="cho_div2">
-                    <table id="Tex_bill_detailList">
+                    <table class="Tex_bill_detailList" id="Tex_bill_detailList2">
                         <tr id="Tex_bill_th" style="font-weight: 800;">
                             <td id="Text_billNo">no</td>
                             <td>사업자등록번호2</td>
@@ -573,7 +697,7 @@
                     </table>
                 </div>
                  <div id="cho_div3">
-                    <table id="Tex_bill_detailList">
+                    <table class="Tex_bill_detailList" id="Tex_bill_detailList3">
                         <tr id="Tex_bill_th" style="font-weight: 800;">
                             <td id="Text_billNo">no</td>
                             <td>사업자등록번호3</td>
@@ -586,40 +710,6 @@
                             <td>업   태</td>
                             <td>종   목</td>
                             <td>주류코드</td>
-                        </tr>
-                        <tr onclick="PopModalTexList()">
-                            <td id="Text_billNo"> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                        </tr>
-                        <tr id="Tex_bill_th" style="font-weight: 600;">
-                            <td id="Text_billNo" rowspan="2" style="height: 50px;"> </td>
-                            <td colspan="3"> 합   계 </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                        </tr>
-                        <tr id="Tex_bill_th" style="font-weight: 600;">
-                            <td colspan="3"> 마감합계 </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
                         </tr>
                         
                     </table>
