@@ -47,7 +47,20 @@
 		<url-pattern>*.vi</url-pattern>
 	</servlet-mapping>
 	
-		<servlet>
+	 <servlet><!-- 로그인 -->
+		<servlet-name>login</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/config/company-servlet.xml</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>login</servlet-name>
+		<url-pattern>*.lo</url-pattern>
+	</servlet-mapping>
+	
+	  <servlet>
 		<servlet-name>company</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>
@@ -302,7 +315,7 @@
    </servlet-mapping>
    
 
-	<!-- 인코딩 필터 추가 -->
+	<!-- 인코딩 필터 -->
 	<filter>
 		<filter-name>encodingFilter</filter-name>
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -320,4 +333,57 @@
 		<filter-name>encodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
+	
+	<!-- Spring Security Filter -->
+	<!-- <filter>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping> -->
+	
+	<!-- 로그인 체크 필터 -->
+	<filter>
+		<filter-name>loginCheckFilter</filter-name>
+		<filter-class>com.kh.jaga.common.LoginCheckFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>loginCheckFilter</filter-name>
+		<url-pattern>*.vi</url-pattern>
+		<!-- 종현 -->
+		<url-pattern>*.fs</url-pattern>
+		<url-pattern>*.ab</url-pattern>
+		<!-- 유지 -->		
+		<url-pattern>*.co</url-pattern>
+		<url-pattern>*.ve</url-pattern>
+		<url-pattern>*.emp</url-pattern>
+		<url-pattern>*.at</url-pattern>
+		<url-pattern>*.be</url-pattern>
+		<!-- 원용 -->
+		<url-pattern>*.comInId</url-pattern>
+		<url-pattern>*.expendResolution</url-pattern>
+		<url-pattern>*.aggregate</url-pattern>
+		<!-- 조지 -->
+		<url-pattern>*.bu</url-pattern>
+		<url-pattern>*.soti</url-pattern>
+		<url-pattern>*.cssg</url-pattern>
+		<url-pattern>*.cis</url-pattern>
+		<!-- 새우 -->
+		<url-pattern>*.nr</url-pattern>
+		<url-pattern>*.rp</url-pattern>
+		<url-pattern>*.th</url-pattern>
+		<url-pattern>*.bp</url-pattern>
+		<url-pattern>*.ti</url-pattern>
+	</filter-mapping>
+	
 </web-app>
+
+
+
+
+
+
+
+

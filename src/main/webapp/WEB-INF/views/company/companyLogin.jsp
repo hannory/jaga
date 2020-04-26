@@ -104,7 +104,7 @@
 	<div class="loginArea" align="center">
 	 	<c:if test="${empty sessionScope.loginCompany }">
 		
-		<form action ="login.co" method="post">
+		<form action ="login.lo" method="post">
 			<table id="loginTable" style="text-align:center">
 				<tr>
 					<td><input type="text" name="companyId" class="userId" placeholder="아이디"></td>

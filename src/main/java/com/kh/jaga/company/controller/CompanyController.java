@@ -36,7 +36,7 @@ public class CompanyController {
 	private BCryptPasswordEncoder passwordEncoder;
 
 	//로그인
-	@PostMapping("login.co")
+	@PostMapping("login.lo")
 	public String loginCheck(Company c,Model model) {
 
 		Company loginCompany = null;
