@@ -269,6 +269,208 @@
 				<td></td>
 			</tr>
 			
+			<tr>
+				<td rowspan="2">증빙불비</td>
+				<td colspan="2">미수취</td>
+				<td>미 수취 금액</td>
+				<td><input type="text"></td>
+				<td>2/100</td>
+				<td><input type="text"></td>
+			</tr>
+			
+			<tr>
+				<td colspan="2">허위수취</td>
+				<td>허위 수취 금액</td>
+				<td><input type="text"></td>
+				<td>2/100</td>
+				<td><input type="text"></td>
+			</tr>
+			
+			<tr>
+				<td rowspan="2">영수증 수취<br>명세서미제출</td>
+				<td colspan="2">미제출</td>
+				<td>미제출금액</td>
+				<td><input type="text"></td>
+				<td>1/100</td>
+				<td><input type="text"></td>
+			</tr>
+			
+			<tr>
+				<td colspan="2">불명</td>
+				<td>불명금액</td>
+				<td><input type="text"></td>
+				<td>1/100</td>
+				<td><input type="text"></td>
+			</tr>
+			
+			<tr>
+				<td rowspan="2">사업장현황<br>신고불성실</td>
+				<td colspan="2">무신고</td>
+				<td>수입금액</td>
+				<td><input type="text"></td>
+				<td>0.5/100</td>
+				<td><input type="text"></td>
+			</tr>
+			
+			<tr>
+				<td colspan="2">과소신고</td>
+				<td>수입금액</td>
+				<td><input type="text"></td>
+				<td>0.5/100</td>
+				<td><input type="text"></td>
+			</tr>
+			
+			<tr>
+				<td rowspan="2">공동사업장<br>등록불성실</td>
+				<td colspan="2">미등록/허위등록</td>
+				<td>총 수입금액</td>
+				<td><input type="text"></td>
+				<td>0.5/100</td>
+				<td><input type="text"></td>
+			</tr>
+			
+			<tr>
+				<td colspan="2">손익분배비율 허위신고 등</td>
+				<td>총 수입금액</td>
+				<td><input type="text"></td>
+				<td>0.1/100</td>
+				<td><input type="text"></td>
+			</tr>
+			
+			<tr>
+				<td colspan="3">무기장</td>
+				<td>산출세액</td>
+				<td><input type="text"></td>
+				<td>20/100</td>
+				<td><input type="text"></td>
+			</tr>
+			
+			<tr>
+				<td rowspan="2">사업용계좌<br>미신고 등</td>
+				<td colspan="2">미개설/미신고</td>
+				<td>수입금액 등</td>
+				<td><input type="text"></td>
+				<td>0.2/100</td>
+				<td><input type="text"></td>
+			</tr>
+			
+			<tr>
+				<td colspan="2">미사용</td>
+				<td>미사용 금액</td>
+				<td><input type="text"></td>
+				<td>0.2/100</td>
+				<td><input type="text"></td>
+			</tr>
+			
+			<tr>
+				<td rowspan="3">신용카드거부</td>
+				<td colspan="3">거래거부/불성실금액</td>
+				<td><input type="text"></td>
+				<td>5/100</td>
+				<td><input type="text"></td>
+			</tr>
+			
+			<tr>
+				<td colspan="3">거래거부/불성실건수</td>
+				<td><input type="text"></td>
+				<td>5,000원</td>
+				<td><input type="text"></td>
+			</tr>
+			
+			<tr>
+				<td colspan="2">위장가공</td>
+				<td>발급수취금액</td>
+				<td><input type="text"></td>
+				<td>2/100</td>
+				<td><input type="text"></td>
+			</tr>
+			
+			<tr>
+				<td rowspan="5">현금영수증<br>미발급</td>
+				<td colspan="2">미가맹</td>
+				<td>수입금액</td>
+				<td><input type="text"></td>
+				<td>1/100</td>
+				<td><input type="text"></td>
+			</tr>
+			
+			<tr>
+				<td colspan="3">미발급/불성실금액</td>
+				<td><input type="text"></td>
+				<td>5/100</td>
+				<td><input type="text"></td>
+			</tr>
+			
+			<tr>
+				<td colspan="3">미발급/불성실건수</td>
+				<td><input type="text"></td>
+				<td>5,000원</td>
+				<td><input type="text"></td>
+			</tr>
+			
+			<tr>
+				<td colspan="2">위장가공</td>
+				<td>발급수취금액</td>
+				<td><input type="text"></td>
+				<td>2/100</td>
+				<td><input type="text"></td>
+			</tr>
+			
+			<tr>
+				<td colspan="3">미발급금액(2019귀속부터적용)</td>
+				<td><input type="text"></td>
+				<td>20/100</td>
+				<td><input type="text"></td>
+			</tr>
+			
+			<tr>
+				<td rowspan="2">기부금영수증<br>불성실</td>
+				<td colspan="2">영수증 불성실발급</td>
+				<td>불성실기재금액</td>
+				<td><input type="text"></td>
+				<td>2/100</td>
+				<td><input type="text"></td>
+			</tr>
+			
+			<tr>
+				<td colspan="2">발급명세서 미작성/미보관</td>
+				<td>미작성 등 금액</td>
+				<td><input type="text"></td>
+				<td>0.2/100</td>
+				<td><input type="text"></td>
+			</tr>
+			
+			<tr>
+				<td colspan="4">동업기업 배분 가산세</td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			
+			<tr>
+				<td colspan="3">성실신고확인서 미제출 가산세</td>
+				<td>산출세액</td>
+				<td><input type="text"></td>
+				<td>5/100</td>
+				<td><input type="text"></td>
+			</tr>
+			
+			<tr>
+				<td colspan="3">유보소득계산명세서 제출 불성실 가산세</td>
+				<td>배당가능 유보소득금액</td>
+				<td><input type="text"></td>
+				<td>0.5/100</td>
+				<td><input type="text"></td>
+			</tr>
+			
+			<tr>
+				<td colspan="4">합계</td>
+				<td><input type="text"></td>
+				<td></td>
+				<td><input type="text"></td>
+			</tr>
+			
+		
 		
 		
 		</table>
