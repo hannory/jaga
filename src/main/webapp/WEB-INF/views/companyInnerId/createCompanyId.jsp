@@ -10,7 +10,7 @@
 <style>
 	.div-menuTap{
 		display: inline-block;
-		background: #8DABA3;
+		background: #24574A;
 		color:white;
 		width:200px;
 		height:30px;
@@ -26,7 +26,7 @@
 	
 	.div-subjectName{
 		background: #24574A;
-		color:black;
+		color:white;
 		width:200px;
 		height:30px;
 	}

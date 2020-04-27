@@ -13,11 +13,11 @@
 		background: #24574A;
 		color:white;
 		width:200px;
-		height:50px;
+		height:30px;
 		border-top-left-radius:10px;
 		border-top-right-radius:10px;
 		text-align:center;
-		line-height:50px;
+		line-height:30px;
 	}
 	.div-menuTap:hover{
 		cursor:pointer;
@@ -101,7 +101,7 @@
 		</table>
 		</form>
 		
-		<div class="page-area" style="margin-left:350px; margin-top:50px;">
+		<div class="page-area" style="margin-left:350px; margin-top:30px;">
 			
 			<c:forEach begin="${ pi.startPage }" end="${ pi.endPage }" step="1" var="n">
 				

@@ -8,9 +8,15 @@
 <title>자가 경리</title>
 
 <style>
+	input{
+		border: none;
+		text-align:center;
+	}
+
+
 	.div-top4menuWrapper{
 	/* 상단 메뉴 4개 설정 */
-		width:70%;
+		width:80%;
 	}
 	.div-top4menu{
 	/* 상단 4개 메뉴에 대한 설정(탭ㄴㄴ완전상단ㅇㅇ) */
@@ -44,7 +50,10 @@
 	
 	.table-center td:first-child{
 	/* 본문 테이블 1열에 색깔 넣기 */
-		background:aqua;
+		background:#24574A;
+		color:white;
+		border-radius: 5px;
+		text-align:center;
 	}
 	.table-center td{
 	/* 테이블 하위 td들 넓이 설정 */
@@ -54,6 +63,10 @@
 	/* 본문테이블 td 간격 두기 */
 		border-spacing: 5px;
 		border-collapse: separate;
+		text-align:center;
+	}
+	.table-center td:nth-last-child(1){
+		border-bottom:1px solid black;
 	}
 	
 </style>
@@ -72,7 +85,7 @@
 		<!-- 귀속년도 -->
 		<div style="float:right;">
 			<label>귀속년도 : </label>
-			<input type="text" style="">
+			<input type="text" style="border-bottom:1px solid black;">
 			<label>년</label>
 		</div>
 		<!-- //귀속년도 -->
@@ -125,24 +138,24 @@
 		
 		<!-- 상단 테이블 감싸는 div -->
 		<div style="width:70%; background:white;">
-			<table border="1" class="table-top" style="">
+			<table border="1" class="table-top" style="text-align:center;">
 				<tr>
-					<td><span>신고유형</span></td>
-					<td><input type="text" id="" name=""></td>
-					<td>1. 자기조정</td>
+					<td style="width:6%;"><span>신고<br>유형</span></td>
+					<td style="width:5%;"><input type="text" id="" name=""></td>
+					<td style="width:18%;">1. 자기조정</td>
 					<td>2. 간편장부</td>
 					<td>3. 추계 - 기준</td>
 					<td>4. 추계 - 단순</td>
-					<td>5. 성실신고확인</td>
+					<td style="width:15%;">5. 성실신고확인</td>
 				</tr>
 				<tr>
-					<td><span>기장의무</span></td>
+					<td><span>기장<br>의무</span></td>
 					<td><input type="text" id="" name=""></td>
 					<td>1. 복식부기의무자</td>
 					<td>2. 간편장부대상자</td>
 					<td>3. 비사업자</td>
-					<td></td>
-					<td><button onclick="">소득금액명세추가</button></td>
+					<td style="border-bottom:1px solid white;"></td>
+					<td style="border-left:1px solid white; border-right:1px solid white; border-bottom:1px solid white;"><button onclick="">소득금액명세추가</button></td>
 				</tr>
 			</table>
 		</div>
@@ -153,75 +166,75 @@
 		<table class="table-center">
 			<tr>
 				<td>소득 구분 코드</td>
-				<td>1</td>
+				<td><input type="text" id="" name=""></td>
 			</tr>
 			<tr>
 				<td>신고 유형 코드</td>
-				<td>1</td>
+				<td><input type="text" id="" name=""></td>
 			</tr>
 			<tr>
 				<td>상호 또는 법인명</td>
-				<td>1</td>
+				<td><input type="text" id="" name=""></td>
 			</tr>
 			<tr>
 				<td>사업자 등록번호</td>
-				<td>1</td>
+				<td><input type="text" id="" name=""></td>
 			</tr>
 			<tr>
 				<td>주민등록번호</td>
-				<td>1</td>
+				<td><input type="text" id="" name=""></td>
 			</tr>
 			<tr>
 				<td>기장의무</td>
-				<td>1</td>
+				<td><input type="text" id="" name=""></td>
 			</tr>
 			<tr>
 				<td>주업종코드</td>
-				<td>1</td>
+				<td><input type="text" id="" name=""></td>
 			</tr>
 			<tr>
 				<td>총수입금액</td>
-				<td>1</td>
+				<td><input type="text" id="" name=""></td>
 			</tr>
 			<tr>
 				<td>필요경비</td>
-				<td>1</td>
+				<td><input type="text" id="" name=""></td>
 			</tr>
 			<tr>
 				<td>소득금액</td>
-				<td>1</td>
+				<td><input type="text" id="" name=""></td>
 			</tr>
 			<tr>
 				<td>원천징수액 - 소득세</td>
-				<td>1</td>
+				<td><input type="text" id="" name=""></td>
 			</tr>
 			<tr>
 				<td>이월결손금 공제 여부</td>
-				<td>1</td>
+				<td><input type="text" id="" name=""></td>
 			</tr>
 			<tr>
 				<td>공동사업장 여부</td>
-				<td>1</td>
+				<td><input type="text" id="" name=""></td>
 			</tr>
 			<tr>
 				<td>최저한세적용대상 소득</td>
-				<td>1</td>
+				<td><input type="text" id="" name=""></td>
 			</tr>
 			<tr>
 				<td>과세기간 시작일</td>
-				<td>1</td>
+				<td><input type="text" id="" name=""></td>
 			</tr>
 			<tr>
 				<td>과세기간 종료일</td>
-				<td>1</td>
+				<td><input type="text" id="" name=""></td>
 			</tr>
 			<tr>
 				<td>소재지</td>
-				<td>1</td>
+				<td><input type="text" id="" name=""></td>
 			</tr>
 			<tr>
 				<td>국내여부</td>
-				<td>1</td>
+				<td><input type="text" id="" name=""></td>
 			</tr>
 		</table>
 		</div>

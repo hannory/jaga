@@ -14,7 +14,7 @@
 
 	.div-top4menuWrapper{
 	/* 상단 메뉴 4개 설정 */
-		width:70%;
+		width:80%;
 	}
 	.div-top4menu{
 	/* 상단 4개 메뉴에 대한 설정(탭ㄴㄴ완전상단ㅇㅇ) */
@@ -126,7 +126,7 @@
 		<!-- 귀속년도 -->
 		<div style="float:right;">
 			<label>귀속년도 : </label>
-			<input type="text" style="">
+			<input type="text" style="border-bottom:1px solid black;">
 			<label>년</label>
 		</div>
 		<!-- //귀속년도 -->

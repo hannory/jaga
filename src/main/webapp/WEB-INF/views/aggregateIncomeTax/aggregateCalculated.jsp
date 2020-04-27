@@ -15,7 +15,7 @@
 
 	.div-top4menuWrapper{
 	/* 상단 메뉴 4개 설정 */
-		width:70%;
+		width:80%;
 	}
 	.div-top4menu{
 	/* 상단 4개 메뉴에 대한 설정(탭ㄴㄴ완전상단ㅇㅇ) */
@@ -69,7 +69,7 @@
 		<!-- 귀속년도 -->
 		<div style="float:right;">
 			<label>귀속년도 : </label>
-			<input type="text" style="">
+			<input type="text" style="border-bottom:1px solid black;">
 			<label>년</label>
 		</div>
 		<!-- //귀속년도 -->
@@ -164,7 +164,7 @@
 		
 		<!-- 인적공제 테이블 -->
 		<table id="table01" border="1" style="margin-bottom:30px;">
-			<tr>
+			<tr style="text-align:center;">
 				<td colspan="2">구분</td>
 				<td>종합소득세</td>
 				<td>지방소득세</td>
@@ -316,7 +316,7 @@
 		<!-- 소득세법상 소득공제 테이블 -->
 		<table border="1" id="table02" style="display:none;">
 		
-			<tr>
+			<tr style="text-align:center;">
 				<td colspan="2">구분</td>
 				<td>소득세</td>
 				<td>농어촌특별세</td>
@@ -347,7 +347,7 @@
 			</tr>
 			
 			<tr>
-				<td rowspan="6">원천징수세액 및 납세조합 징수세액</td>
+				<td rowspan="6" style="text-align:center">원천징수세액 <br>및<br> 납세조합 징수세액</td>
 				<td>5. 이자소득</td>
 				<td><input type="text" name="" id=""></td>
 				<td><input type="text" name="" id=""></td>
