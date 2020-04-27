@@ -25,7 +25,7 @@
 	}
 	
 	.div-subjectName{
-		/* background: darkgreen; */
+		background: #24574A;
 		color:black;
 		width:200px;
 		height:30px;
@@ -50,12 +50,12 @@
 	.div-subjectName{
 		text-align:center;
 		border-radius:10px;
-		border:2px solid green;
+		border:2px solid #24574A;
 	}
 	.formBtn{
 		width:100px;
 		border-radius:10px;
-		border:1px solid green;
+		border:1px solid #24574A;
 	}
 	.div-menuTap-no{
 		opacity:50%;

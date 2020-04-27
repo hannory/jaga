@@ -80,7 +80,7 @@
 		<div style="height:50px;"></div><!-- 간격 띄우기 위한 용도 -->
 		
 		<div class="div-top4menuWrapper">
-			<div class="div-top4menu" style="border-bottom: 3px solid green"><h5>소득금액명세서</h5></div>
+			<div class="div-top4menu" style="border-bottom: 3px solid #24574A"><h5>소득금액명세서</h5></div>
 			<div class="div-top4menu" onclick="goIncomeDeductStmt();"><h5>소득공제명세서</h5></div>
 			<div class="div-top4menu" onclick="goAddedTaxStmt();"><h5>가산세명세서</h5></div>
 			<div class="div-top4menu" onclick="goAggregateCalculated();"><h5>종합소득세액계산서</h5></div>

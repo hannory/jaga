@@ -10,7 +10,7 @@
 <style>
 	.div-menuTap{
 		display: inline-block;
-		background: darkgreen;
+		background: #24574A;
 		color:white;
 		width:200px;
 		height:50px;
@@ -25,7 +25,7 @@
 	}
 	
 	.div-subjectName{
-		background: darkgreen;
+		background: #24574A;
 		color:white;
 		width:200px;
 		height:30px;
@@ -76,7 +76,7 @@
 		<form action="" method="post">
 		<table border="1" style="width:80%; text-align:center;">
 		
-			<tr style="background:darkgreen; height:20px;">
+			<tr style="background:#24574A; height:20px;">
 				<td style="width:10%">번호</td>
 				<td style="width:40%">이메일</td>
 				<td style="width:15%">이름</td>

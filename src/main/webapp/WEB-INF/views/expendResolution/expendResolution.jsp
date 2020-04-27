@@ -86,7 +86,7 @@
 }
 
 .color-green {
-	background: green;
+	background: #24574A;
 }
 
 .label-sign:hover {
@@ -184,7 +184,7 @@
 					<table border="1"
 						style="margin-top: 50px; margin-left: 140px; text-align: center;">
 						<tr>
-							<td style="width: 100px; background: green;"><span>부서검색</span></td>
+							<td style="width: 100px; background: #24574A;"><span>부서검색</span></td>
 							<td><input id="searchDeptBox" type="text"
 								style="width: 100%; height: 100%;"></td>
 							<td style="width: 100px;">
@@ -194,7 +194,7 @@
 								</div>
 							</td>
 						</tr>
-						<tr id="trDeptHead" style="background: green;">
+						<tr id="trDeptHead" style="background: #24574A;">
 							<td>부서코드</td>
 							<td colspan="2">부서 명</td>
 						</tr>
@@ -335,7 +335,7 @@
 				<table border="1"
 					style="margin-top: 50px; margin-left: 140px; text-align: center;">
 					<tr>
-						<td style="width: 100px; background: green;"><span>계정과목</span></td>
+						<td style="width: 100px; background: #24574A;"><span>계정과목</span></td>
 						<td style="width: 200px;">
 							<input id="searchAccountTitleBox" type="text" style="width: 100%; height: 100%;">
 						</td>
@@ -345,7 +345,7 @@
 							</div>
 						</td>
 					</tr>
-					<tr id="trAccountTitleHead" style="background: green;">
+					<tr id="trAccountTitleHead" style="background: #24574A;">
 						<td>코드</td>
 						<td>계정과목명</td>
 						<td>비고</td>
@@ -488,7 +488,7 @@
 				<table border="1"
 					style="margin-top: 50px; margin-left: 140px; text-align: center;">
 					<tr>
-						<td style="width: 100px; background: green;"><span>직원검색</span></td>
+						<td style="width: 100px; background: #24574A;"><span>직원검색</span></td>
 						<td><input type="text" style="width: 100%; height: 100%;"></td>
 						<td style="width: 100px;">
 							<div class="searchBtnEmployee" onclick="searchEmployee()">
@@ -497,7 +497,7 @@
 							</div>
 						</td>
 					</tr>
-					<tr style="background: green;">
+					<tr style="background: #24574A;">
 						<td>직원코드</td>
 						<td>직원명</td>
 						<td>직급</td>
