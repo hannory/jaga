@@ -6,6 +6,13 @@
 <meta charset="UTF-8">
 <title>자가 경리</title>
 <style>
+
+	input{
+		border:none;
+	}
+
+
+
 	.div-top4menuWrapper{
 	/* 상단 메뉴 4개 설정 */
 		width:70%;
@@ -24,6 +31,28 @@
 	/* 상단 4개 메뉴 */
 		cursor: pointer;
 	}		
+	
+	
+	
+	.tapMenu{
+	/* 초록색 탭메뉴  */
+		display:inline-block;
+		/* background:#8DABA3; */
+		background:green;
+		height: 35px;
+		line-height: 35px;
+		border: 1px solid #C9CACE;
+		color:white;
+		border-top-left-radius:10px;
+        border-top-right-radius:10px;
+        padding-left:5px;
+		padding-right:5px;
+	}
+	.tapMenu:hover{
+		cursor: pointer;
+	}
+	
+	
 </style>
 </head>
 <body>
@@ -48,10 +77,10 @@
 		<div style="height:50px;"></div><!-- 간격 띄우기 위한 용도 -->
 		
 		<div class="div-top4menuWrapper">
-			<div class="div-top4menu" style="border-bottom: 3px solid green"><h5>소득금액명세서</h5></div>
+			<div class="div-top4menu" onclick="goAggregateIncomeTax();"><h5>소득금액명세서</h5></div>
 			<div class="div-top4menu" onclick="goIncomeDeductStmt();"><h5>소득공제명세서</h5></div>
 			<div class="div-top4menu" onclick="goAddedTaxStmt();"><h5>가산세명세서</h5></div>
-			<div class="div-top4menu" onclick="goAggregateCalculated();"><h5>종합소득세액계산서</h5></div>
+			<div class="div-top4menu" style="border-bottom: 3px solid green"><h5>종합소득세액계산서</h5></div>
 		</div>
 		<!-- //class="div-top4menu" -->
 		
@@ -90,6 +119,285 @@
 		
 		
 		
+		<!-- 초록색 탭메뉴 만들기 -->
+		<div id="tabMenu01" class="tapMenu" onclick="tap01click()">인적공제</div>
+		<div id="tabMenu02" class="tapMenu" onclick="tap02click()" style="opacity:50%;">소득세법상 소득공제</div>
+		<!-- //초록색 탭메뉴 만들기 끝-->
+		
+		<script type="text/javascript">
+			
+		function tap01click(){
+			/* 소득세법상 소득공제 보여주기 */
+			$("#table02").css("display","none");
+			$("#table01").css("display","block");
+			
+			$("#tabMenu02").css("opacity","50%");
+			$("#tabMenu01").css("opacity","100%");
+			
+		}
+		
+		function tap02click(){
+			/* 인적공제 보여주기 */
+			$("#table01").css("display","none");
+			$("#table02").css("display","block");	
+			
+			$("#tabMenu01").css("opacity","50%");
+			$("#tabMenu02").css("opacity","100");
+			
+		}
+			
+		</script>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<!-- 인적공제 테이블 -->
+		<table id="table01" border="1" style="margin-bottom:30px;">
+			<tr>
+				<td colspan="2">구분</td>
+				<td>종합소득세</td>
+				<td>지방소득세</td>
+				<td>농어촌 특별세</td>
+			</tr>
+			
+			<tr>
+				<td colspan="2">19. 종합소득금액</td>
+				<td><input type="text" name="" id=""></td>
+				<td><input type="text" name="" id=""></td>
+				<td><input type="text" name="" id=""></td>
+			</tr>
+			
+			<tr>
+				<td colspan="2">20. 소득공제계</td>
+				<td><input type="text" name="" id=""></td>
+				<td><input type="text" name="" id=""></td>
+				<td><input type="text" name="" id=""></td>
+			</tr>
+			
+			<tr>
+				<td colspan="2">21. 과세표준(19-20)</td>
+				<td><input type="text" name="" id=""></td>
+				<td><input type="text" name="" id=""></td>
+				<td><input type="text" name="" id=""></td>
+			</tr>
+			
+			<tr>
+				<td colspan="2">22. 세율</td>
+				<td><input type="text" name="" id=""></td>
+				<td><input type="text" name="" id=""></td>
+				<td><input type="text" name="" id=""></td>
+			</tr>
+			
+			<tr>
+				<td colspan="2">23. 산출세액</td>
+				<td><input type="text" name="" id=""></td>
+				<td><input type="text" name="" id=""></td>
+				<td><input type="text" name="" id=""></td>
+			</tr>
+			
+			<tr>
+				<td colspan="2">24. 세액감면</td>
+				<td><input type="text" name="" id=""></td>
+				<td><input type="text" name="" id=""></td>
+				<td><input type="text" name="" id=""></td>
+			</tr>
+			
+			<tr>
+				<td colspan="2">25. 세액공제</td>
+				<td><input type="text" name="" id=""></td>
+				<td><input type="text" name="" id=""></td>
+				<td><input type="text" name="" id=""></td>
+			</tr>
+			
+			<tr>
+				<td colspan="2">26. 결정세액(23-24-25)</td>
+				<td><input type="text" name="" id=""></td>
+				<td><input type="text" name="" id=""></td>
+				<td><input type="text" name="" id=""></td>
+			</tr>
+			
+			<tr>
+				<td colspan="2">27. 가산세</td>
+				<td><input type="text" name="" id=""></td>
+				<td><input type="text" name="" id=""></td>
+				<td><input type="text" name="" id=""></td>
+			</tr>
+			
+			<tr>
+				<td colspan="2">28. 추가납부세액</td>
+				<td><input type="text" name="" id=""></td>
+				<td><input type="text" name="" id=""></td>
+				<td><input type="text" name="" id=""></td>
+			</tr>
+			
+			<tr>
+				<td colspan="2">29. 합계(26+27+28)</td>
+				<td><input type="text" name="" id=""></td>
+				<td><input type="text" name="" id=""></td>
+				<td><input type="text" name="" id=""></td>
+			</tr>
+			
+			<tr>
+				<td colspan="2">30. 기납부세액</td>
+				<td><input type="text" name="" id=""></td>
+				<td><input type="text" name="" id=""></td>
+				<td><input type="text" name="" id=""></td>
+			</tr>
+			
+			<tr>
+				<td colspan="2">31. 납부(환급)할 총 세액</td>
+				<td><input type="text" name="" id=""></td>
+				<td><input type="text" name="" id=""></td>
+				<td><input type="text" name="" id=""></td>
+			</tr>
+			
+			<tr>
+				<td rowspan="2">32. 납부특례세액</td>
+				<td>차감</td>
+				<td><input type="text" name="" id=""></td>
+				<td><input type="text" name="" id=""></td>
+				<td><input type="text" name="" id=""></td>
+			</tr>
+			
+			<tr>
+				<td>가산</td>
+				<td><input type="text" name="" id=""></td>
+				<td><input type="text" name="" id=""></td>
+				<td><input type="text" name="" id=""></td>
+			</tr>
+			
+			<tr>
+				<td colspan="2">34. 분할납세액(2개월 내)</td>
+				<td><input type="text" name="" id=""></td>
+				<td><input type="text" name="" id=""></td>
+				<td><input type="text" name="" id=""></td>
+			</tr>
+			
+			<tr>
+				<td colspan="2">35. 기한 이내 납부할 세액</td>
+				<td><input type="text" name="" id=""></td>
+				<td><input type="text" name="" id=""></td>
+				<td><input type="text" name="" id=""></td>
+			</tr>
+		</table>
+		<!-- //인적공제 테이블 끝-->
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<!-- 소득세법상 소득공제 테이블 -->
+		<table border="1" id="table02" style="display:none;">
+		
+			<tr>
+				<td colspan="2">구분</td>
+				<td>소득세</td>
+				<td>농어촌특별세</td>
+			</tr>
+			
+			<tr>
+				<td colspan="2">1. 중간 예납 세액</td>
+				<td><input type="text" name="" id=""></td>
+				<td><input type="text" name="" id=""></td>
+			</tr>
+			
+			<tr>
+				<td colspan="2">2. 토지등매매차익예정신고납부</td>
+				<td><input type="text" name="" id=""></td>
+				<td><input type="text" name="" id=""></td>
+			</tr>
+			
+			<tr>
+				<td colspan="2">3. 토지등매매차익예정고지세액</td>
+				<td><input type="text" name="" id=""></td>
+				<td><input type="text" name="" id=""></td>
+			</tr>
+			
+			<tr>
+				<td colspan="2">4. 수시부과세액</td>
+				<td><input type="text" name="" id=""></td>
+				<td><input type="text" name="" id=""></td>
+			</tr>
+			
+			<tr>
+				<td rowspan="6">원천징수세액 및 납세조합 징수세액</td>
+				<td>5. 이자소득</td>
+				<td><input type="text" name="" id=""></td>
+				<td><input type="text" name="" id=""></td>
+			</tr>
+			
+			<tr>
+				<td>6. 배당소득</td>
+				<td><input type="text" name="" id=""></td>
+				<td><input type="text" name="" id=""></td>
+			</tr>
+			
+			<tr>
+				<td>7. 사업소득</td>
+				<td><input type="text" name="" id=""></td>
+				<td><input type="text" name="" id=""></td>
+			</tr>
+			
+			<tr>
+				<td>8. 근로소득</td>
+				<td><input type="text" name="" id=""></td>
+				<td><input type="text" name="" id=""></td>
+			</tr>
+			
+			<tr>
+				<td>9. 연금소득</td>
+				<td><input type="text" name="" id=""></td>
+				<td><input type="text" name="" id=""></td>
+			</tr>
+			
+			<tr>
+				<td>10. 기타소득</td>
+				<td><input type="text" name="" id=""></td>
+				<td><input type="text" name="" id=""></td>
+			</tr>
+			
+			<tr>
+				<td colspan="2">11. 기납부세액합계</td>
+				<td><input type="text" name="" id=""></td>
+				<td><input type="text" name="" id=""></td>
+			</tr>
+			
+		</table>
+		<!-- //소득세법상 소득공제 테이블 끝-->
+		
+		
+		
+		
+		
+		
+		
 		
 		
 		
@@ -115,8 +423,11 @@
 		<!-- footer -->
 		<div class="card mb-4">
 			<div class="card-body">
-				도움말입니다. 읽어주세요*^^*
-				<h1>${ test }ㅋㅋㅋ</h1>
+				<p>
+					종소세 >  1천만 : 종소세분납시에는 분납비율만큼, 종소세 미분납시는 0<br>
+					종소세 <= 1천만 : 농특세 납부할 총 세액 > 1천만 : (농특세 납부할 총 세액 X 50%)<br>
+	                            : 농특세 납부할 총 세액 > 5백만 : (농특세 납부할 총 세액 - 5백만)
+				</p>
 			</div>
 		</div>
 		<!-- ///footer -->
