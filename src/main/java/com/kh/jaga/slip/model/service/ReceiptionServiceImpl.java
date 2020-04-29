@@ -44,17 +44,18 @@ public class ReceiptionServiceImpl implements ReceiptionService{
 		if(result > 0) {
 			try {
 				result2 = receiptionDao.insertJournalize(sqlSession, receiption.getJournalizeList());
-				
-				if(receiption.getEvidenceCode().equals("10")) {
-					//String slipCode = receiptionDao.selectSlipCode(sqlSession);
-					TaxInvoice ti = new TaxInvoice();
-					//ti.setSlipCode(slipCode);
-					ti.setDivision(receiption.getDivision());
-					ti.setVenderCode(receiption.getJournalizeList().get(0).getVenderCode());
-					
-					System.out.println("----------" + ti);
-					
-					int result3 = receiptionDao.insertTaxInvoice(sqlSession, ti);
+				if(receiption.getEvidenceCode() != null) {
+					if(receiption.getEvidenceCode().equals("10")) {
+						//String slipCode = receiptionDao.selectSlipCode(sqlSession);
+						TaxInvoice ti = new TaxInvoice();
+						//ti.setSlipCode(slipCode);
+						ti.setDivision(receiption.getDivision());
+						ti.setVenderCode(receiption.getJournalizeList().get(0).getVenderCode());
+						
+						System.out.println("----------" + ti);
+						
+						int result3 = receiptionDao.insertTaxInvoice(sqlSession, ti);
+					}
 				}
 			} catch (Exception e) {
 				// TODO Auto-generated catch block

@@ -76,7 +76,7 @@
   
 	<insert id="insertReceiption" parameterType="Receiption">
 		INSERT INTO SLIP
-		VALUES (SEQ_SLIP_CODE.NEXTVAL,#{slipDivision},#{division},#{slipDate},#{evidenceCode},#{supplyValue},#{valueTax},'N',#{resolutionCode},#{brief},#{item},#{comCode},SEQ_SLIP_42.NEXTVAL)
+		VALUES (SEQ_SLIP_CODE.NEXTVAL,#{slipDivision},#{division},#{slipDate},#{evidenceCode},#{supplyValue},#{valueTax},#{deemedStatus},#{resolutionCode},#{brief},#{item},#{comCode},SEQ_SLIP_42.NEXTVAL)
 	</insert>
 	
 	<insert id="insertJournalize" parameterType="Journalize">

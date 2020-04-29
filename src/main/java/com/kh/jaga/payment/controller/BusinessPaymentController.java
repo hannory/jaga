@@ -2,7 +2,9 @@ package com.kh.jaga.payment.controller;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.sql.Date;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -23,6 +24,9 @@ import com.kh.jaga.employee.model.vo.BusinessEmp2;
 import com.kh.jaga.payment.model.service.BusinessPaymentService;
 import com.kh.jaga.payment.model.vo.BusinessPayList;
 import com.kh.jaga.payment.model.vo.BusinessPayment;
+import com.kh.jaga.slip.model.service.ReceiptionService;
+import com.kh.jaga.slip.model.vo.Journalize;
+import com.kh.jaga.slip.model.vo.Receiption;
 
 
 /**
@@ -38,6 +42,8 @@ public class BusinessPaymentController {
 	@Autowired
 	private BusinessPaymentService bps;
 	
+	@Autowired
+	private ReceiptionService rs;
 	
 	/**
 	 * @comment 메뉴에서 사업소득자료 클릭시 사업소득자 리스트를 불러오는 컨트롤러 메소드
@@ -80,9 +86,51 @@ public class BusinessPaymentController {
 			bp.setEmployeeCode(employeeCode);
 			bp.setAttributeDate(Integer.parseInt(bp.getAttYear()+bp.getAttMonth()));
 			bp.setPayDate(bp.getPayYear()+"-"+bp.getPayMonth()+"-"+bp.getPayDay());
+			
+			Date date = new Date(Integer.parseInt(bp.getPayYear()), Integer.parseInt(bp.getPayMonth()),Integer.parseInt(bp.getPayDay()));
+			
+			Receiption rp = new Receiption();
+			rp.setSlipDivision("일반");
+			rp.setDivision("매입");
+			rp.setSlipDate(date);
+			rp.setSupplyValue(bp.getSalary());
+			BigDecimal zero = new BigDecimal("0");
+			rp.setValueTax(zero);
+			rp.setDeemedStatus("N");
+			
+			Journalize j = new Journalize();
+			j.setDebitCredit("차변");
+			j.setPrice(bp.getSalary());
+			j.setAccountCode("83100");
+			
+			Journalize o = new Journalize();
+			o.setDebitCredit("대변");
+			o.setPrice(bp.getDifferencePymt());
+			o.setAccountCode("10300");
+			
+			Journalize u = new Journalize();
+			u.setDebitCredit("대변");
+			u.setPrice(bp.getIncomeTax());
+			u.setAccountCode("25400");
+			
+			Journalize r = new Journalize();
+			r.setDebitCredit("대변");
+			r.setPrice(bp.getLocalIncomeTax());
+			r.setAccountCode("25400");
+			
+			List<Journalize> lj = new ArrayList<Journalize>();
+			
+			lj.add(j);
+			lj.add(o);
+			lj.add(u);
+			lj.add(r);
+			
+			rp.setJournalizeList(lj);
+			
+			int result2 = rs.insertReceiption(rp);
 		}
+
 		
-		System.out.println(list);
 		
 		int result = bps.insertBPay(list);
 		

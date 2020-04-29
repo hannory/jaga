@@ -30,6 +30,7 @@
 	    <typeAlias type="com.kh.jaga.employee.model.vo.TypeOfBizCode" alias="TypeOfBizCode"/> 
 	    <typeAlias type="com.kh.jaga.employee.model.vo.BusinessEmp" alias="BusinessEmp"/> 
 	    <typeAlias type="com.kh.jaga.employee.model.vo.BusinessEmp2" alias="BusinessEmp2"/> 
+	    <typeAlias type="com.kh.jaga.payment.model.vo.BusinessPayment" alias="BusinessPayment"/> 
 	    <typeAlias type="com.kh.jaga.finStmt.model.vo.IncomeStmtAccount" alias="IncomeStmtAccount"/> 
 	    <typeAlias type="com.kh.jaga.bugagachi.model.vo.CcSalesSlip" alias="CcSalesSlip"/>
 	    <typeAlias type="com.kh.jaga.vatSumTaxInv.model.vo.SumOfTaxInv" alias="SumOfTaxInv"/>
@@ -56,6 +57,7 @@
  		<mapper resource="mappers/BusinessEmp-mapper.xml"/> 
  		<mapper resource="mappers/vatSumOfTaxInv-mapper.xml"/>
  		<mapper resource="mappers/taxInvoice-mapper.xml"/>
+ 		<mapper resource="mappers/businessPayment-mapper.xml"/>
   	</mappers>
 
 </configuration>

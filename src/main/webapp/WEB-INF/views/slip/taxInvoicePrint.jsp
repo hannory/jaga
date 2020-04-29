@@ -290,7 +290,7 @@
 			<th>백</th>
 			<th>십</th>
 			<th>일</th>
-			<th colspan="4" rowspan="2">희</th>
+			<th colspan="4" rowspan="2"></th>
 		</tr>
 		<tr>
 			<td colspan="2"><c:out value="${ info.year }"/></td>

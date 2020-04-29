@@ -31,6 +31,8 @@ public class BusinessPaymentDaoImpl implements BusinessPaymentDao{
 	public List<BusinessPayment> selectBPay(SqlSessionTemplate sqlSession, String empCode) {
 		List<BusinessPayment> list = sqlSession.selectList("BusinessPayment.selectBPay", empCode);
 		
+		System.out.println("dao -----------" + list);
+		
 		return list;
 	}
 
