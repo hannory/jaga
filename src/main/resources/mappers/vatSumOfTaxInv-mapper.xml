@@ -35,7 +35,7 @@ WHERE COM_CODE= #{comCode}
     AND YEAR_OF_ATTR= #{yearOfAttr}
     AND REPORT_TERM= #{reportTerm}
     AND REPORT_TYPE= #{reportType}
-    AND DEADLINE='Y'
+    AND DEADLINE LIKE 'Y'
   	
   </select>
   <select id="selectSotiDivSales" resultType="SumOfTaxInvDiv">
@@ -84,7 +84,6 @@ JOIN VENDER V ON(D.VENDER_CODE=V.VENDER_CODE)
 JOIN SLIP S ON(D.DETAILlIST_CODE=S.SLIP_CODE)
 WHERE S.SLIP_DIVISION='매입매출'
 AND S.DIVISION='매출'
-AND D.TAXINV_CODE= #{taxinvCode}
 AND S.COM_CODE= #{comCode}
   </select>
   <select id="selectDetailPur" resultType="SumTaxInvDetail">
@@ -105,8 +104,51 @@ JOIN VENDER V ON(D.VENDER_CODE=V.VENDER_CODE)
 JOIN SLIP S ON(D.DETAILlIST_CODE=S.SLIP_CODE)
 WHERE S.SLIP_DIVISION='매입매출'
 AND S.DIVISION='매입'
-AND D.TAXINV_CODE= #{taxinvCode}
 AND S.COM_CODE= #{comCode}
   </select>
   
+  <select id="selectReceiption" resultType="SumTaxInvDetail" parameterType="java.util.HashMap">
+SELECT VENDER.BIZ_REG_NUM,VENDER.VENDER_CODE,VENDER.VENDER_NAME,S.DEAL_COUNT, S.VAL_OF_SUPPLY, S.TAX, BOSS_NAME,SELL_WAY,SELL_TARGET
+FROM(SELECT J.VENDER_CODE AS VENDER_CODE, COUNT(*) AS DEAL_COUNT, SUM(S.SUPPLY_VALUE) AS VAL_OF_SUPPLY, SUM(S.VALUE_TAX) AS TAX
+FROM SLIP S
+JOIN JOURNALIZE J ON(S.SLIP_CODE=J.SLIP_CODE)
+JOIN VENDER V ON(J.VENDER_CODE=V.VENDER_CODE)
+WHERE S.SLIP_DIVISION ='매입매출' 
+    AND S.DIVISION =#{Receiption.division} 
+    AND S.COM_CODE= #{Receiption.comCode}
+    AND S.EVIDENCE_CODE='10'
+    AND SLIP_DATE BETWEEN #{Receiption.slipDate} AND #{endDate}
+    AND J.DEBIT_CREDIT='대변'
+GROUP BY J.VENDER_CODE) S
+JOIN VENDER ON(VENDER.VENDER_CODE=S.VENDER_CODE)
+  </select>
+  
+  <insert id="insertSumOfTaxInv" parameterType="SumOfTaxInv">
+  INSERT INTO SUM_OF_TAX_INV VALUES(SEQ_SUM_OF_TAX_INV.NEXTVAL, #{tabletaxDiv}, #{yearOfAttr},#{reportTerm}, #{reportType},'N',#{comCode})
+  </insert>
+  
+  <select id="selectSotiCurrval" resultType="string">
+  SELECT SEQ_SUM_OF_TAX_INV.CURRVAL FROM DUAL
+  </select>
+  <insert id="insertDetailList" parameterType="SumTaxInvDetail">
+  
+  INSERT INTO SUM_OF_TAX_INV_DETAIL VALUES
+  (SEQ_SUM_OF_TAX_INV_DETAIL.NEXTVAL,#{slipDate},#{venderCode},#{dealCount},#{valOfSupply},#{tax},#{taxinvCode})
+  
+  </insert>
+  
+  <insert id="insertDivList" parameterType="SumOfTaxInvDiv">
+  
+  INSERT INTO SUM_OF_TAX_INV_DIV_CNT VALUES
+  (SEQ_SUM_OF_TAX_INV_DIV_CNT.NEXTVAL,#{acctCodeCt},#{dealCount},#{valOfSupply},#{tax},#{divisionCode},#{taxinvCode},#{purSales})
+  
+  </insert>
+  <update id="updatesDtoDeadline" parameterType="SumOfTaxInvDto">
+  UPDATE SUM_OF_TAX_INV SET DEADLINE='Y' WHERE TAXINV_CODE=#{taxinvCode}
+  </update>
+  
+  <update id="updatesDtoDeadlineCen" parameterType="SumOfTaxInvDto">
+  UPDATE SUM_OF_TAX_INV SET DEADLINE='N' WHERE TAXINV_CODE=#{taxinvCode} 
+  AND DEADLINE LIKE 'Y'
+  </update>
   </mapper>

@@ -4,7 +4,7 @@
 <html>
 <head> 
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>자가 경리</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <link href="${ contextPath }/resources/css/styles.css" rel="stylesheet" />
         <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />

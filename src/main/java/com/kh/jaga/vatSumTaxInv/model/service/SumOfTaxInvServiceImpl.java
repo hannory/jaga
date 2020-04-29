@@ -1,12 +1,15 @@
 package com.kh.jaga.vatSumTaxInv.model.service;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.jaga.slip.model.vo.Receiption;
 import com.kh.jaga.vatSumTaxInv.model.dao.SumOfTaxInvDao;
+import com.kh.jaga.vatSumTaxInv.model.vo.SumOfTaxInv;
 import com.kh.jaga.vatSumTaxInv.model.vo.SumOfTaxInvDiv;
 import com.kh.jaga.vatSumTaxInv.model.vo.SumOfTaxInvDto;
 import com.kh.jaga.vatSumTaxInv.model.vo.SumTaxInvDetail;
@@ -53,5 +56,53 @@ public class SumOfTaxInvServiceImpl implements SumOfTaxInvService{
 		System.out.println("Service: selectSotiDetailPur: sDto2: "+sDto2);
 		return sd.selectSotiDetailPur(sqlSession, sDto2);
 	}
+
+	@Override
+	public List<SumTaxInvDetail> selectReceiption(Receiption receiptionPur, Date eD) {
+		//  TODO receiption 가져오기
+		
+		System.out.println("Service: selectReceition: receiption: "+receiptionPur);
+		return sd.selectReceition(sqlSession, receiptionPur, eD);
+	}
+
+	@Override
+	public int insertSoti(SumOfTaxInv soti) {
+		// TODO soit insert
+		System.out.println("Service: insertSoti: soti: "+soti);
+		return sd.insertSoti(sqlSession,soti);
+	}
+
+	@Override
+	public String selectTaxinvCode()  throws Exception{
+		// TODO Auto-generated method stub
+		return sd.selectSotiCurrval(sqlSession);
+	}
+
+	@Override
+	public int insertDetailList(List<SumTaxInvDetail> rePur) {
+		// TODO Auto-generated method stub
+		return sd.insertDetailList(sqlSession,rePur);
+	}
+
+	@Override
+	public int insertDivList(List<SumOfTaxInvDiv> sDivPur) {
+		// TODO Auto-generated method stub
+		return sd.insertDivList(sqlSession,sDivPur);
+	}
+
+	@Override
+	public int insertSdto(SumOfTaxInvDto sDto) {
+		// TODO Auto-generated method stub
+		
+		return sd.insertsDtoDeadline(sqlSession,sDto);
+	}
+
+	@Override
+	public int updateSdto(SumOfTaxInvDto sDto) {
+		// TODO Auto-generated method stub
+		return sd.updatesDtoDeadLineCen(sqlSession,sDto);
+	}
+
+	
 
 }

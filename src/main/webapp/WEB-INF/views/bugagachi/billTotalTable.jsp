@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>자가 경리</title>
 <!--  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -113,15 +113,27 @@
 	<main>
 	<div class="container-fluid">
 	<h2 class="mt-4">계산서 합계표</h2>
+	<form action="deadLine.soi" method="post">
 	<ol class="breadcrumb mb-4">
-			<li><button id="deadlineBtn">마감</button></li>
-			<li>1기예정</li>
+			<li><button id="deadlineBtn" type="submit">마감</button></li>
+			<li><button id="deadlineCen" onclick="cencelDeadline()">마감 취소</button></li>
+			<li><input type="text" readonly  id="termDiv" name="termDiv"></li>
             <li>조회기간:
-            	<input type="text" name="search_st" class="datepicker"> ~ <input type="text" name="serach_ed" class="datepicker">
+            	<input type="text" id="search_ye" class="cc_year" name="yearOfAttr" maxlength="4">
+            	<select class="cc_month" id="search_mon1">
+            		<option value="">월</option>
+            		<option value="01">1</option>
+            		<option value="07">7</option>
+            	</select> 
+            	~
+            	<select class="cc_month" id="search_mon2">
+            		<option value="">월</option>
+            		<option value="06">6</option>
+            		<option value="12">12</option>
+            	</select> 
             </li>
-            <li><input type="button" name="search" value="조회"></li>
-            <li><input type="button" name="report" value="신고서미리보기"></li>
-			
+			<li><input type="button" onclick="search_cis()" value="조회"></li>
+			<li><input type="button" name="report" value="신고서미리보기" onclick="print()"></li>	
 		</ol>
 		
      <script>

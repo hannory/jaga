@@ -1,10 +1,14 @@
 package com.kh.jaga.vatSumTaxInv.model.dao;
 
+import java.sql.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.jaga.slip.model.vo.Receiption;
+import com.kh.jaga.vatSumTaxInv.model.vo.SumOfTaxInv;
 import com.kh.jaga.vatSumTaxInv.model.vo.SumOfTaxInvDiv;
 import com.kh.jaga.vatSumTaxInv.model.vo.SumOfTaxInvDto;
 import com.kh.jaga.vatSumTaxInv.model.vo.SumTaxInvDetail;
@@ -67,5 +71,83 @@ public class SumOfTaxInvDaoImpl implements SumOfTaxInvDao {
 		System.out.println("Dao: selectSotiDetailPur: sDetailSales: "+sDetailPur);
 		return sDetailPur;
 	}
+
+	@Override
+	public List<SumTaxInvDetail> selectReceition(SqlSessionTemplate sqlSession, Receiption receiptionPur, Date eD) {
+		// TODO 전표계산하게 값 가져오기
+		
+		System.out.println("Dao: selectReceition: receiption: "+ receiptionPur);
+		HashMap<String, Object> map=new HashMap<String, Object>();
+		map.put("Receiption",receiptionPur);
+		map.put("endDate",eD);
+		List<SumTaxInvDetail> re=sqlSession.selectList("SumOfTaxInv.selectReceiption", map);
+		return re;
+	}
+
+	@Override
+	public int insertSoti(SqlSessionTemplate sqlSession, SumOfTaxInv soti) {
+		// TODO Auto-generated method stub
+		
+		System.out.println("Dao: insertSoti: soti: "+soti);
+		int result=sqlSession.insert("SumOfTaxInv.insertSumOfTaxInv",soti);
+		System.out.println("Dao: isnertSoti: result: "+result);
+		return result;
+	}
+
+	@Override
+	public String selectSotiCurrval(SqlSessionTemplate sqlSession) throws Exception{
+		// TODO Auto-generated method stub
+		String currval=sqlSession.selectOne("SumOfTaxInv.selectSotiCurrval");
+		if(currval==null) {
+			throw new Exception();
+		}
+		return currval;
+	}
+
+	@Override
+	public int insertDetailList(SqlSessionTemplate sqlSession, List<SumTaxInvDetail> rePur) {
+		// TODO Auto-generated method stub
+		System.out.println("Dao: insertDetailList: rePur: "+rePur);
+		int result=0;
+		for(SumTaxInvDetail stid: rePur) {
+			stid.setSlipDate("2020-01-01");// slipDate에 임의의 데이트
+			result=sqlSession.insert("SumOfTaxInv.insertDetailList",stid);
+		}
+		System.out.println("Dao: insertDetailList리스트 형식으로 insert: result: "+result);
+		return result;
+	}
+
+	@Override
+	public int insertDivList(SqlSessionTemplate sqlSession, List<SumOfTaxInvDiv> sDivPur) {
+		// TODO Auto-generated method stub
+		System.out.println("Dao: insertDivList: rePur: "+sDivPur);
+		int result=0;
+		for(SumOfTaxInvDiv stid:sDivPur) {
+			
+			result=sqlSession.insert("SumOfTaxInv.insertDivList",stid);
+		}
+		System.out.println("Dao: insertDivList리스트 형식으로 나오는지: result: "+result);
+		return result;
+	}
+
+	@Override
+	public int insertsDtoDeadline(SqlSessionTemplate sqlSession, SumOfTaxInvDto sDto) {
+		// TODO Auto-generated method stub
+		System.out.println("Dao: insertsDtoDeadLine: sDto: "+sDto);
+		
+		int result=sqlSession.update("SumOfTaxInv.updatesDtoDeadline",sDto);
+		
+		return result;
+	}
+
+	@Override
+	public int updatesDtoDeadLineCen(SqlSessionTemplate sqlSession, SumOfTaxInvDto sDto) {
+		// TODO Auto-generated method stub
+		int result=sqlSession.update("SumOfTaxInv.updatesDtoDeadlineCen",sDto);
+		return result;
+	}
+
+
+	
 
 }
