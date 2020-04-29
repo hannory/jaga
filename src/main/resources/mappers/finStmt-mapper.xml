@@ -14,36 +14,38 @@
 		VALUES(SEQ_INCOME_STMT_CODE.NEXTVAL, #{comCode}, #{year}, #{term}, #{sales}, #{endingInvOfMerchandise})
 	</insert>
 
-	<select id="selectCurIncomeStmt" parameterType="IncomeStmtAccount" resultType="IncomeStmtAccount">
+	<!-- (거래처 미입력 등) 분개가 제대로 안되어 NULL 값이 나오는 경우가 있어 RIGHT JOIN -->
+	<select id="selectCurFinStmt" parameterType="IncomeStmtAccount" resultType="IncomeStmtAccount">
 		SELECT J.PRICE, J.ACCOUNT_CODE
 		FROM SLIP S
-		LEFT JOIN JOURNALIZE J ON(S.SLIP_CODE = J.SLIP_CODE)
+		RIGHT JOIN JOURNALIZE J ON(S.SLIP_CODE = J.SLIP_CODE)
 		WHERE TO_CHAR(S.SLIP_DATE, 'YYYY') = #{year}
 		AND TO_NUMBER(TO_CHAR(S.SLIP_DATE, 'MM')) <![CDATA[<=]]> #{month}
 		AND COM_CODE = #{comCode}
 	</select>
-
-	<select id="selectPastIncomeStmt" parameterType="IncomeStmtAccount" resultType="IncomeStmtAccount">
+	
+	<select id="selectPastFinStmt" parameterType="IncomeStmtAccount" resultType="IncomeStmtAccount">
 		SELECT J.PRICE, J.ACCOUNT_CODE
 		FROM SLIP S
-		LEFT JOIN JOURNALIZE J ON(S.SLIP_CODE = J.SLIP_CODE)
+		RIGHT JOIN JOURNALIZE J ON(S.SLIP_CODE = J.SLIP_CODE)
 		WHERE TO_CHAR(S.SLIP_DATE, 'YYYY') = #{year} - 1
 		AND TO_NUMBER(TO_CHAR(S.SLIP_DATE, 'MM')) <![CDATA[<=]]> #{month}
 		AND COM_CODE = #{comCode}
 	</select>
 
 	<select id="selectSlip" parameterType="IncomeStmtAccount" resultType="IncomeStmtAccount">
-		SELECT S.SLIP_DATE, S.DATE_SLIP_CODE, S.BRIEF, J.VENDER_CODE, V.VENDER_NAME, J.DEBIT_CREDIT, J.PRICE 
+		SELECT S.SLIP_DATE, S.DATE_SLIP_CODE, S.BRIEF, J.VENDER_CODE, V.VENDER_NAME, J.DEBIT_CREDIT, J.PRICE, A.ACCOUNT_TITLE 
 		FROM SLIP S
-		LEFT JOIN JOURNALIZE J ON(S.SLIP_CODE = J.SLIP_CODE)
+		RIGHT JOIN JOURNALIZE J ON(S.SLIP_CODE = J.SLIP_CODE)
 		LEFT JOIN VENDER V ON(J.VENDER_CODE = V.VENDER_CODE)
+		LEFT JOIN ACCOUNT_TITLE A ON(J.ACCOUNT_CODE = A.ACCOUNT_CODE)
 		WHERE TO_CHAR(S.SLIP_DATE, 'YYYY') = #{year}
 		AND TO_NUMBER(TO_CHAR(S.SLIP_DATE, 'MM')) <![CDATA[<=]]> #{month}
 		AND S.COM_CODE = #{comCode}
 		AND J.ACCOUNT_CODE = #{accountCode}
 		ORDER BY S.SLIP_DATE
 	</select>
-
+	
 </mapper>
 
 

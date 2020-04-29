@@ -13,4 +13,6 @@ public interface FinStmtService {
 	HashMap selectIncomeStmt(IncomeStmtAccount isa);
 
 	ArrayList<IncomeStmtAccount> selectSlip(IncomeStmtAccount isa);
+
+	HashMap selectMfrgCostStmt(IncomeStmtAccount isa);
 }

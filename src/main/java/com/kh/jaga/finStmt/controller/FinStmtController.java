@@ -84,7 +84,7 @@ public class FinStmtController {
 	}
 	
 	@RequestMapping("selectIncomeStmt.fs")
-	public void selectIncomeStmt(IncomeStmtAccount isa, HttpServletRequest request,HttpServletResponse response) throws IOException {
+	public void selectIncomeStmt(IncomeStmtAccount isa, HttpServletRequest request,HttpServletResponse response) {
 		System.out.println("year : " + isa.getYear());
 		System.out.println("month : " + isa.getMonth());
 		
@@ -105,9 +105,16 @@ public class FinStmtController {
 //		out.close();
 		
 		//GSON 사용
-		response.setContentType("application/json");
-		
-		new Gson().toJson(hmap, response.getWriter());
+		try {
+			response.setContentType("application/json");
+			new Gson().toJson(hmap, response.getWriter());
+		} catch (JsonIOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	@RequestMapping("selectSlip.fs")
@@ -138,6 +145,25 @@ public class FinStmtController {
 			e.printStackTrace();
 		}
 	}
+	
+	@RequestMapping("selectMfrgCostStmt.fs")
+	public void selectMfrgCostStmt(IncomeStmtAccount isa, HttpServletRequest request, HttpServletResponse response) {
+		isa.setComCode(((Company) request.getSession().getAttribute("loginCompany")).getCompanyCode());
+		
+		HashMap hmap = fss.selectMfrgCostStmt(isa);
+		
+		try {
+			response.setContentType("application/json");
+			new Gson().toJson(hmap, response.getWriter());
+		} catch (JsonIOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 }
 
 
