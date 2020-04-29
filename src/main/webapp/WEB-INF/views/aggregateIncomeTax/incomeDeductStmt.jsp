@@ -14,7 +14,7 @@
 
 	.div-top4menuWrapper{
 	/* 상단 메뉴 4개 설정 */
-		width:70%;
+		width:80%;
 	}
 	.div-top4menu{
 	/* 상단 4개 메뉴에 대한 설정(탭ㄴㄴ완전상단ㅇㅇ) */
@@ -37,7 +37,7 @@
 	/* 초록색 탭메뉴  */
 		display:inline-block;
 		/* background:#8DABA3; */
-		background:green;
+		background:#24574A;
 		height: 35px;
 		line-height: 35px;
 		border: 1px solid #C9CACE;
@@ -126,7 +126,7 @@
 		<!-- 귀속년도 -->
 		<div style="float:right;">
 			<label>귀속년도 : </label>
-			<input type="text" style="">
+			<input type="text" style="border-bottom:1px solid black;">
 			<label>년</label>
 		</div>
 		<!-- //귀속년도 -->
@@ -137,7 +137,7 @@
 		
 		<div class="div-top4menuWrapper">
 			<div class="div-top4menu" onclick="goAggregateIncomeTax();"><h5>소득금액명세서</h5></div>
-			<div class="div-top4menu" style="border-bottom: 3px solid green"><h5>소득공제명세서</h5></div>
+			<div class="div-top4menu" style="border-bottom: 3px solid #24574A"><h5>소득공제명세서</h5></div>
 			<div class="div-top4menu" onclick="goAddedTaxStmt();"><h5>가산세명세서</h5></div>
 			<div class="div-top4menu" onclick="goAggregateCalculated();"><h5>종합소득세액계산서</h5></div>
 		</div>

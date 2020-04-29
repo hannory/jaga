@@ -91,6 +91,12 @@ public class ExpendResolutionController {
 		System.out.println("조회결과 :::::::");
 		System.out.println(dtoList);
 		
+		
+//		for(int i = 0; i < dtoList.size(); i++) {
+//			//날짜 0000-00-00 로 자르기
+//			dtoList.get(i).setExpendDate(dtoList.get(i).getExpendDate().substring(0,dtoList.get(i).getExpendDate().indexOf(" ")));
+//		}
+		
 		mv.addObject("dtoList", dtoList);
 		
 		mv.setViewName("expendResolutionList");

@@ -6,18 +6,18 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>자가 경리</title>
 <style>
 	.div-menuTap{
 		display: inline-block;
-		background: darkgreen;
+		background: #24574A;
 		color:white;
 		width:200px;
-		height:50px;
+		height:30px;
 		border-top-left-radius:10px;
 		border-top-right-radius:10px;
 		text-align:center;
-		line-height:50px;
+		line-height:30px;
 	}
 	.div-menuTap:hover{
 		cursor:pointer;
@@ -25,7 +25,7 @@
 	}
 	
 	.div-subjectName{
-		background: darkgreen;
+		background: #24574A;
 		color:white;
 		width:200px;
 		height:30px;
@@ -76,7 +76,7 @@
 		<form action="" method="post">
 		<table border="1" style="width:80%; text-align:center;">
 		
-			<tr style="background:darkgreen; height:20px;">
+			<tr style="background:#24574A; height:20px;">
 				<td style="width:10%">번호</td>
 				<td style="width:40%">이메일</td>
 				<td style="width:15%">이름</td>
@@ -101,7 +101,7 @@
 		</table>
 		</form>
 		
-		<div class="page-area" style="margin-left:350px; margin-top:50px;">
+		<div class="page-area" style="margin-left:350px; margin-top:30px;">
 			
 			<c:forEach begin="${ pi.startPage }" end="${ pi.endPage }" step="1" var="n">
 				
