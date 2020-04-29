@@ -35,6 +35,12 @@ public class VenderDaoImpl implements VenderDao{
 		return sqlSession.update("Vender.modifyOne",v);
 	}
 
+	@Override
+	public List<Vender> selectBankList(SqlSessionTemplate sqlSession, String comCode) {
+		List<Vender> list = sqlSession.selectList("Vender.selectBankList",comCode);
+		return list;
+	}
+
 
   
 }

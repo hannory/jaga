@@ -5,6 +5,13 @@
   
   <mapper namespace="Vender">
   
+      <resultMap type="Bank" id="bankResultMap">
+  	<id property="bankCode" column="BANK_CODE"/>
+  	<result property="bankName" column="BANK_NAME"/>
+  	</resultMap>
+  	
+  
+  
   <resultMap type="Vender" id="venderResultSet">
   <id property ="venderCode" column="VENDER_CODE"/>
   
@@ -26,6 +33,7 @@
   <result property="personalNum" column="PERSONAL_NUM"/>
   <result property="comManagerEmail" column="COM_MANAGER_EMAIL"/>
   <result property="bankCode" column="BANK_CODE"/>
+  <result property="bankName" column="BANK_NAME"/>
   <result property="farmersStatus" column="FARMERS_STATUS"/>
   <result property="venderType" column="VENDER_TYPE"/>
   </resultMap>
@@ -55,5 +63,11 @@
 		DEPARTMENT_INCHARGE=#{departmentIncharge},COM_MANAGER_TEL=#{comManagerTel},REMARKS=#{remarks},STATUS=#{status},VENDER_FAX=#{venderFax},ACCOUNT_HOLDER=#{accountHolder},ACCOUNT_NUM=#{accountNum},BANK_CODE=#{bankCode},FARMERS_STATUS=#{farmersStatus},VENDER_TYPE=#{venderType}
  	 WHERE VENDER_CODE=#{venderCode}
   	</update> 
+  	
+  	
+  	<select id="selectBankList" resultMap="bankResultMap">
+  	SELECT *
+  	FROM BANK
+  	</select>
  
   </mapper>

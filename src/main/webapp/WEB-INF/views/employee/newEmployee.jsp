@@ -464,6 +464,38 @@ border-radius: 0px 5px 5px 0px;
 }
 
 
+
+.leaveReason{
+position: absolute;
+width: 104px;
+height: 24px;
+left: 890px;
+top: 545px;
+
+font-family: Roboto;
+font-style: normal;
+font-weight: bold;
+font-size: 16px;
+line-height: 14px;
+display: flex;
+align-items: center;
+text-align: right;
+
+color: #4C4C4C;
+}
+
+.leaveReason-surr{
+position: absolute;
+width: 222px;
+height: 27px;
+left: 1004px;
+top: 546px;
+
+background: #FFFFFF;
+border: 1px solid #C4C4C4;
+box-sizing: border-box;
+border-radius: 5px;
+}
 /* 자가운전 drive */
 
 #drive{
@@ -471,7 +503,7 @@ position: absolute;
 width: 104px;
 height: 24px;
 left: 890px;
-top: 545px;
+top: 588px;
 
 font-family: Roboto;
 font-style: normal;
@@ -493,7 +525,7 @@ position: absolute;
 width: 222px;
 height: 27px;
 left: 1004px;
-top: 546px;
+top: 588px;
 
 background: #FFFFFF;
 border: 1px solid #C4C4C4;
@@ -1385,7 +1417,7 @@ height: 27px;
 left: 1004px;
 top: 503px;
 
-background: #C4C4C4;
+/* background: #C4C4C4; */
 border: 1px solid #C4C4C4;
 box-sizing: border-box;
 border-radius: 5px;
@@ -1468,22 +1500,47 @@ border-radius: 5px;
 
 #listdiv{
 position: absolute;
-width: 200px;
+width: 450px;
 height: 800px;
 left: 340px;
-top: 300px;
-background-color:yellow;
+top: 370px;
+border:solid 0px white; 
+
+/* <table border=1  style='border-left:0;border-right:0;border-bottom:0;border-top:0'> */
 
 }
 
+#searchdiv{
+position:absolute;
+width:600px;
+height:100px;
+left:340px;
+top:300px;
+}
+
+#search{
+left: 370px;
+top:300px;
+border-radius:5px;
+
+}
+
+#searchBtn{
+
+left:440px;
+top:270px;
+
+
+}
 #datepicker{
 width:190px;
 height:25px;
 background: #FFFFFF;
 border: 1px solid #C4C4C4;
 box-sizing: border-box;
-border-radius: 5px;
+
 }
+
 
 </style>
 </head>
@@ -1505,22 +1562,27 @@ border-radius: 5px;
 <!-- <input type="search" id="search-surr"> -->
 
 <form action="selectEmpList.emp" method="POST">
+<div id="searchdiv">
+
+<input type="text" id="search"> <button type="button" id="searchBtn"><img alt="" src="${contextPath}/resources/images/search.PNG" width="20px" height="20px">
+								</button>
+</div>
  <div id="listdiv"> 
- <table>
+ <table border=1  style='border-left:0;border-right:0;border-bottom:0;border-top:0'>
 <%-- 		<td><input type="hidden" value="${sessionScope.loginCompany.companyCode}"  name="comCode"></td>  --%>
 		<tr> 
-			<td style="border:1px solid  #D8D8DC" >   직원번호    </td>
-			<td style="border:1px solid  #D8D8DC" >   직원이름    </td>
+			<td style="border:0px; background:#296355; color:white; text-align:center" >   직원번호    </td>
+			<td style="border:0px; background:#296355; color:white; text-align:center">   직원이름    </td>
 		</tr>
  
  		  <c:if test="${ !empty sessionScope.loginCompany }">   
 
- 		<c:forEach var="emp" items="${list}">
+ 		<c:forEach var="emp2" items="${list}">
 	
 
-		 <tr> <td style="border:1px solid #D8D8DC"><c:out value="${emp.employeeNum}"/></td> 
-			 <td style="border:1px solid #D8D8DC"><c:out value="${emp.employeeName}"/></td> 
-			 <td><input type="hidden" value="${emp.employeeCode}" name="employeeCode"></td> 
+		 <tr> <td style="border:0px;text-align:center"><c:out value="${emp2.employeeNum}"/></td> 
+			 <td style="border:0px; text-align:center"><c:out value="${emp2.employeeName}"/></td> 
+			 <td style="border:0px; text-align:center"><input type="hidden" value="${emp2.employeeCode}" name="employeeCode"></td> 
 		</tr> 
 		
 		</c:forEach> 
@@ -1536,11 +1598,11 @@ border-radius: 5px;
 
 </div>
 <tr>
-<td> <b id="employee"> <h2>일반근로자-신규추가</h2> </b></td> 
+<td> <b id="employee"> <h2>일반근로자관리</h2> </b></td> 
 </tr>
  <form action="insert.emp" method="POST" encType="multipart/form-data" >
 <tr>
-<td> <button id="save-surr" style="color:white">저장하기 </button>
+<td> <button id="save-surr" style="color:white" >저장하기 </button>
 </tr> 
 
 <tr>
@@ -1558,11 +1620,18 @@ border-radius: 5px;
 <tr>
 <td>
 <b id="salary">월급여</b>
-<input type="text" id="salary-surr" name="salary" onkeyup="inputNumberFormat(this);" >
+<input type="text" id="salary-surr" onkeyup="inputNumberFormat(this);" >
+<input type="hidden" id="result" name="salary" onchange="uncomma(this);" > 
 <b id="email">이메일</b>
 <input type="text" id="email-surr" name="email">
 </td>
 </tr>
+
+<script>
+var salary = $("#salary-surr").val();
+console.log(salary);
+$("#result").val(salary);
+</script>
 
 <tr>
 <td>
@@ -1575,9 +1644,14 @@ border-radius: 5px;
 <input type="text" class="enroll-date-surr" id="datepicker" name="enrollDate"></td>
 <td><b id="leavegongsi">퇴사년월일</b></td>
 <td><input type="text" class="leavegongsi-surr" id="datepicker2" name="leaveDate"></td>
-<td><button id="leaveReason-surr" style="color:white; font-size:6px;">퇴사사유</button></td>
- <td class="thirdLine"><label id="nnResult"></label></td>
-<!-- <input type="text" name="leaveReason" > -->
+<!-- td><button id="leaveReason-surr" style="color:white; font-size:6px;">퇴사사유</button></td> -->
+ <td class="thirdLine"><label id="nnResult" class="leaveReason">퇴사사유</label></td>
+ <select class="leaveReason-surr" name="leaveReason">
+ <option value="" selected disabled hidden>선택</option>
+ <option value="1"> 자진퇴사 </option>
+ <option value="2"> 사직권고 </option>
+ <option value="3"> 기타사유 </option>
+ </select>
 </td>
 </tr>
 
@@ -1765,16 +1839,25 @@ border-radius: 5px;
 	}
 	
 	/* 콤마 등 숫자 이외의 입력값 제거 */
-	function uncomma(str) {
+/* 	function uncomma(str) {
 		str = String(str);
-		return Number(str.replace(/[^\d]+/g, ""));
-	}
+		return parseInt(str.replace(/[^\d]+/g, ""));
+	} */
 	
 	/* 값 입력시 콤마 찍기 */
 	function inputNumberFormat(str) {
 		str.value = comma(uncomma(str.value));
 	}
 	
+	
+    /* 콤마 제거 */
+     function uncomma(str) {
+       str = String(str);
+     var str2=  str.replace(/[^\d]+/g, "");
+     var str3=Number(str2)
+       return str3;
+       
+    }
 
 </script>
 </div>

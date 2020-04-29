@@ -90,4 +90,14 @@ public String selectEmpList(HttpServletRequest request) {
 	System.out.println("리스트다 리스트 잘 출력되니?"+list);
 	return "employee/newEmployee";
 }
+
+@RequestMapping("selectEmpList2.emp")
+public String selectEmpList2(HttpServletRequest request) {
+	List<Employee> list = es.selectEmpList2();
+	request.setAttribute("list", list);
+	return "employee/earnincome";
+}
+	/*
+	 * @RequestMapping("employeeinsert.emp") public
+	 */
 }

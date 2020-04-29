@@ -22,6 +22,7 @@ public class Vender implements java.io.Serializable {
 	private String comManagerEmail; 
 	private String farmersStatus;
 	private String bankCode;
+	private String bankName;
 	private String venderType;
 	
 	public Vender() {}
@@ -30,7 +31,7 @@ public class Vender implements java.io.Serializable {
 			String sellWay, String sellTarget, String venderAddress, String venderTel, String departmentIncharge,
 			String comManagerTel, String remarks, String status, String venderFax, String accountHolder,
 			String accountNum, String personalNum, String comManagerEmail, String farmersStatus, String bankCode,
-			String venderType) {
+			String bankName, String venderType) {
 		super();
 		this.venderCode = venderCode;
 		this.comCode = comCode;
@@ -52,6 +53,7 @@ public class Vender implements java.io.Serializable {
 		this.comManagerEmail = comManagerEmail;
 		this.farmersStatus = farmersStatus;
 		this.bankCode = bankCode;
+		this.bankName = bankName;
 		this.venderType = venderType;
 	}
 
@@ -215,6 +217,14 @@ public class Vender implements java.io.Serializable {
 		this.bankCode = bankCode;
 	}
 
+	public String getBankName() {
+		return bankName;
+	}
+
+	public void setBankName(String bankName) {
+		this.bankName = bankName;
+	}
+
 	public String getVenderType() {
 		return venderType;
 	}
@@ -231,10 +241,10 @@ public class Vender implements java.io.Serializable {
 				+ departmentIncharge + ", comManagerTel=" + comManagerTel + ", remarks=" + remarks + ", status="
 				+ status + ", venderFax=" + venderFax + ", accountHolder=" + accountHolder + ", accountNum="
 				+ accountNum + ", personalNum=" + personalNum + ", comManagerEmail=" + comManagerEmail
-				+ ", farmersStatus=" + farmersStatus + ", bankCode=" + bankCode + ", venderType=" + venderType + "]";
+				+ ", farmersStatus=" + farmersStatus + ", bankCode=" + bankCode + ", bankName=" + bankName
+				+ ", venderType=" + venderType + "]";
 	}
 
-	
-	
+
 	
 }

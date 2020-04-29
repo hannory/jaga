@@ -17,6 +17,8 @@ public interface VenderDao {
 
 	int modifyOne(SqlSessionTemplate sqlSession, Vender v);
 
+	List<Vender> selectBankList(SqlSessionTemplate sqlSession, String comCode);
+
 
 
 }

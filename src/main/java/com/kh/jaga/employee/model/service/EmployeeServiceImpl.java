@@ -53,4 +53,14 @@ public class EmployeeServiceImpl implements EmployeeService {
 		return list;
 	}
 
+	@Override
+	public List<Employee> selectEmpList2() {
+		List<Employee> list = ed.selectEmpList2(sqlSession);
+		
+		if(list==null) {
+			System.out.println("리스트2 널이다");
+		}
+		return list;
+	}
+
 }

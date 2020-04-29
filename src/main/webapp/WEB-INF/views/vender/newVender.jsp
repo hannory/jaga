@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+      <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
 <!DOCTYPE html>
 <html>
@@ -137,7 +138,7 @@ border-radius: 5px;
 
 /*  은행이름칸 bank-code-name-surr */
 
-#bank-code-name-surr{
+.bank-code-name-surr{
 position: absolute;
 width: 228px;
 height: 27px;
@@ -660,7 +661,7 @@ border-radius: 5px;
 
 /*은행코드란 bank-code-surr */
 
-#bank-code-surr{
+.bank-code-surr{
 position: absolute;
 width: 82px;
 height: 27px;
@@ -990,6 +991,55 @@ border: 1px solid #C4C4C4;
 box-sizing: border-box;
 border-radius: 0px 5px 5px 0px; */
  
+/* The Modal (background) */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+    
+        /* Modal Content/Box */
+        .modal-content {
+            background-color: #fefefe;
+            margin: 0 auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 50%; /* Could be more or less, depending on screen size */                          
+        }
+        /* The Close Button */
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .modalTop{
+        	margin: 0;
+        	width:100%;
+        	height:50px;
+        	background:#6E00AB;
+        }
+        
+        .modal-header {
+        	background: #296355;
+        } 
+	
+	#resultReTable input {
+		text-align: center;
+	}
 
 
 
@@ -1027,7 +1077,7 @@ border-radius: 0px 5px 5px 0px; */
 		
 		<tr>
 			<td><b id="biz-num"> 1.사업자등록번호 / 주민번호 / 계좌번호 / 카드번호  </b>
-			<input type="text" name="bizRegNum" id="biz-reg-num-surr">
+			<input type="text" name="bizRegNum" id="biz-reg-num-surr" placeholder="사업자/주민 등록번호의 경우 -로 입력">
 			<!-- <button>사업자등록상태조회</button></td> -->
 		</tr>
 
@@ -1088,7 +1138,12 @@ border-radius: 0px 5px 5px 0px; */
 		
  		<tr>
 			<td><b id="account-income-num">7.입금 계좌 번호</b>
-				<b id=bank>은행</b><input type="text" id="bank-code-surr" name="bankCode"><input type="text" id="bank-code-name-surr">
+				<b id=bank>은행</b>
+				<input type="text" class="bank-code-surr" id="bankCode" name="bankCode">
+				<button type="button" id="searchBtn2"><img alt="" src="${contextPath}/resources/images/search.PNG" width="20px" height="20px">
+								</button>
+
+				<input type="text" class="bank-code-name-surr" id="bankName" name="bankName">
 			</td>
 			<td><b id="account-holder"> 예금주 </b><input type="text" name="accountHolder" id="account-holder-surr">
 				<b id="account-num">계좌번호</b><input type="text" name="accountNum" id="account-num-surr">
@@ -1119,6 +1174,9 @@ border-radius: 0px 5px 5px 0px; */
 			<td><button id="okay" type="submit" style="color:white">확인</button></td>
 		</tr>
 
+
+
+
 		</form>
 		<div style="height: 100vh;"></div>
 		<div class="card mb-4">
@@ -1126,7 +1184,43 @@ border-radius: 0px 5px 5px 0px; */
 				the top of the page. This is the end of the static navigation demo.</div>
 		</div>
 	</main>
-	<jsp:include page="../common/menubar2.jsp" />
+      <!-- Modal 은행코드 -->
+  <div class="modal fade" id="accountModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">은행검색</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        
+        <div class="modal-body">
+          	<table id="bankTable">
+          		<thead>
+	          		<tr>
+	          			<th>은행코드</th>
+	          			<th>은행명</th>
+	          		</tr>
+          		</thead>
+          		<tbody>
+<%--            	<c:forEach var="bank" items="${list}">
+          		<tr>
+          		<td><c:out value="${bank.bankCode}"/></td> 
+          		<td><c:out value="${bank.bankName}"/></td> 
+				</tr>
+				</c:forEach>
+				  --%>
+          		</tbody>
+        
+          	</table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 <!-- </table> -->
 
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -1225,7 +1319,64 @@ function initLayerPosition() {
 			+ 'px';
 }
 
+var bankCo;//출금/입금계정과목
+var bankNN;
+function ccc(value){
+	$(value).parent().parent().children().each(function(index){
+		console.log($(this).text());
+		bankCo += ","+$(this).text();
+	})
+	var account = bankCo.split(",");
+	bankCo = account[1];
+	bankNN = account[2];
+	
+	$("#bankCode").val(bankCo);
+	$("#bankName").val(bankNN);
+	
+	$("div#accountModal").modal("hide");
+}		
+
+
+
+
+
+
+/* 거래처모달 */
+$("#searchBtn2").click(function(){
+	
+	$("#bankTable").dataTable({
+		destroy: true,
+		 ajax:{
+				'url':'bankSearch.ve',
+				'type':'get'
+			},
+		 
+		 columns: [
+			 {data : "bankCode",
+				 "render": function(data, type, row){
+		                if(type=='display'){
+		                    data = '<a href="#" onclick="ccc(this);">' + data + '</a>';
+		                }
+		                return data;}},
+			 {data : "bankName",
+							 "render": function(data, type, row){
+					                if(type=='display'){
+					                    data = '<a href="#" onclick="ccc(this);">' + data + '</a>';
+					                }
+					                return data;}}
+			 
+		 ]
+	});
+	
+	$(".modal-title").text("은행검색");
+	 $("div#accountModal").modal();
+	 
+	 
+});
+
+
 
 </script>
+	<jsp:include page="../common/menubar2.jsp" />
 </body>
 </html>

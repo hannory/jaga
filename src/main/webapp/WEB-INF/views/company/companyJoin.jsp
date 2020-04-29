@@ -20,7 +20,7 @@
   
 <head>
 <meta charset="UTF-8">
-<title>회원 가입 폼 view </title>
+<title>자가 경리</title>
 <style>
 
 	.main{
@@ -367,6 +367,11 @@
 </head>
 <body>
 <%--  	<jsp:include page="../common/menubar.jsp" />   --%>
+
+<c:set var="contextPath"
+      value="${ pageContext.servletContext.contextPath }"
+      scope="application" /> 
+      
 	<div id="main">
 	
 			<div id="layer" style="display:none;position:fixed;overflow:hidden;z-index:1;-webkit-overflow-scrolling:touch;">
@@ -387,7 +392,7 @@
 		<div class="innerLine"></div> -->
 		<br>
 		
-		<form id="joinForm" method="post" action="insert.co" encType="multipart/form-data">
+		<form id="joinForm" method="post" action="insert.lo" encType="multipart/form-data">
 		<div align="center">
 		<table class="tableJoin" align="center">
 		<tr>
@@ -446,10 +451,10 @@
            	
           	<td> 
           	<select name="email2" id="email2">
-            <option value="1">@yaho.co.kr</option>
-            <option value="2">@naver.com</option>
-            <option value="3">@daum.net</option>
-            <option value="4">@gmail.com</option>
+            <option value="1">@naver.com</option>
+            <option value="2">@daum.net</option>
+            <option value="3">@gmail.com</option>
+            <option value="4">직접입력하기</option>
             </select>
             </td>
         </tr>
@@ -464,7 +469,7 @@
         
 		<tr class="licenseTriger">
 		
-            <td class="firstLine"><b>사업자 등록증</b></td>
+            <td class="firstLine"><b>사업자 등록증 (필수)</b></td>
                		
 <!--             <td class="secondLine">
              <div id="licenseImgArea">
@@ -661,7 +666,7 @@
 	
 		//드디어 에이작스
 		$.ajax({
-			url: "doubleCheck.co",
+			url: "doubleCheck.lo",
 			type:"post",
 			data:{userId:userId},
 			

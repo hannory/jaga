@@ -16,4 +16,6 @@ public interface EmployeeDao {
 	int insertAttachment2(SqlSessionTemplate sqlSession, Attachment at2);
 
 	List<Employee> selectEmpList(SqlSessionTemplate sqlSession);
+
+	List<Employee> selectEmpList2(SqlSessionTemplate sqlSession);
 }
