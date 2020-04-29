@@ -13,6 +13,8 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
   
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
 
 <style>
 	input {
@@ -128,6 +130,24 @@
 	#resultReTable input {
 		text-align: center;
 	}
+	
+	#sub{
+		background:#888888;
+		border: 1px solid #888888;
+		color: white;
+	}
+	
+	#update{
+		background:#888888;
+		border: 1px solid #888888;
+		color: white;
+	}
+	
+	#farm{
+		background:#888888;
+		border: 1px solid #888888;
+		color: white;
+	}
 </style>
 </head>
 <body>
@@ -190,7 +210,7 @@
 							</select>
 						</td>
 					</tr>
-					<tr>
+					<tr id="cardVen" style="display:none;">
 						<td> </td>
 						<td colspan="3">
 							<input type="text" id="venderCode2">
@@ -252,9 +272,9 @@
 						</td>
 					</tr>
 					<tr>
-						<td>수수료</td>
+						<td>품목</td>
 						<td colspan="3">
-							<input type="text" id="abc">
+							<input type="text" id="abc" name="item">
 						</td>
 					</tr>
 				</table>
@@ -286,11 +306,12 @@
 				</tbody>
 				</table>
 				<br>
-				<input type="button" value="의제">
-				<input type="submit" value="확인">				
-				<input type="button" value="수정">				
+				<input type="button" id="farm" value="의제" style="display:none;">
+				<input type="submit" id="sub"value="확인">				
+				<input type="button" id="update" value="수정">				
 			</div>
 		</div>
+          		<input type="hidden" id="deemedStatus" name="deemedStatus" value="N">
 		</form>
 		<div style="height: 100vh;"></div>
 		<div class="card mb-4">
@@ -474,6 +495,15 @@
 					$("#valueTax").attr("readonly", true);
 				}else{
 					$("#valueTax").attr("readonly", false);
+				}
+				
+				if($(this).val() == 50 ||$(this).val() == 60 ||$(this).val() == 70 ){
+					$("#cardVen").css("display", "table-row");
+				}
+				
+				if($(this).val() == 20 ||$(this).val() == 70 ||$(this).val() == 90 ){
+					$("#farm").css("display", "inline-block");
+					
 				}
 				
 			});
@@ -748,6 +778,54 @@
 					
 				}
 				
+			});
+			
+			/* 의제매입 */
+			$("#farm").click(function(){
+				
+				if($("#deemedStatus").val() == 'N'){
+					Swal.fire({
+						  title: '의제매입세액공제',
+						  text: "의제세율은 8/108입니다. 의제매입세액 공제를 받으시겠습니까?",
+						  icon: 'warning',
+						  showCancelButton: true,
+						  confirmButtonColor: '#296355',
+						  cancelButtonColor: '#d33',
+						  confirmButtonText: '확인'
+						}).then((result) => {
+						  if (result.value) {
+						    Swal.fire(
+						      '변경완료',
+						      '의제매입세액 공제 설정 완료',
+						      'success'
+						    )
+						    
+						  	$("#deemedStatus").val('Y');
+						    $("#farm").css("background", "white").css("border", "2px solid red").css("color", "red");
+						  }
+						})
+				}else {
+					Swal.fire({
+						  title: '의제매입세액공제',
+						  text: "의제세액이 설정되어있습니다. 취소하시겠습니까?",
+						  icon: 'warning',
+						  showCancelButton: true,
+						  confirmButtonColor: '#296355',
+						  cancelButtonColor: '#d33',
+						  confirmButtonText: '확인'
+						}).then((result) => {
+						  if (result.value) {
+						    Swal.fire(
+						      '변경완료',
+						      '의제매입세액 공제 취소 완료',
+						      'success'
+						    )
+						    
+						  	$("#deemedStatus").val('N');
+						    $("#farm").css("background", "#888888").css("border", "1px solid #888888").css("color", "white");
+						  }
+						})
+				}
 			});
 			
 			/* 거래처모달 */

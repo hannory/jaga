@@ -111,13 +111,13 @@
 							<td><input type="text" class="day" style="width:100%;"></td>
 							<td><input type="text" class="dateSlipCode" name="dateSlipCode" style="width:100%;"></td>
 							<td><input type="text" class="debit" name="debitCredit" style="width:100%;"></td>
-							<td><input type="text" name="accountCode" style="width:100%;"></td>
-							<td><input type="text" name="accName" style="width:100%;"></td>
-							<td><input type="text" name="venderCode" style="width:100%;"></td>
-							<td><input type="text" name="venName" style="width:100%;"></td>
-							<td><input type="text" name="brief" style="width:100%;"></td>
-							<td><input type="text" class="price" name="price" style="width:100%;" onkeyup="inputNumberFormat(this);" onkeydown="addTr(this);"></td>
-							<td><input type="text" class="price" name="price" style="width:100%;" onkeyup="inputNumberFormat(this);"></td>
+							<td><input type="text" class="accountCode" name="accountCode" style="width:100%;"></td>
+							<td><input type="text" class="accName" name="accName" style="width:100%;"></td>
+							<td><input type="text" class="venderCode" name="venderCode" style="width:100%;"></td>
+							<td><input type="text" class="venName" name="venName" style="width:100%;"></td>
+							<td><input type="text" class="brief" name="brief" style="width:100%;"></td>
+							<td><input type="text" class="price" name="price" id='cha' style="width:100%;" onkeyup="inputNumberFormat(this);" onkeydown="addTr(this);"></td>
+							<td><input type="text" class="price" name="price" id='dea' style="width:100%;" onkeyup="inputNumberFormat(this);"></td>
 						</tr>
 					</tbody>
 					</table>
@@ -205,7 +205,6 @@
 		var accountC = "";//계정과목
 		var accountN;
 		function aaa(value, tr){
-			console.log(tr);
 			$(value).parent().parent().children().each(function(index){
 				accountC += ","+$(this).text();
 			})
@@ -254,64 +253,6 @@
 			/* 달력버튼 */
 			$("img.ui-datepicker-trigger")
 					.attr("style","margin-left:2px; vertical-align:middle; cursor: Pointer; width:20px; height:20px");
-			/* 
-			$("#normalReTable").DataTable({
-				// 표시 건수기능 숨기기
-				lengthChange: false,
-				// 검색 기능 숨기기
-				searching: false,
-				// 정렬 기능 숨기기
-				ordering: false,
-				// 정보 표시 숨기기
-				info: false,
-				// 페이징 기능 숨기기
-				paging: false
-				
-			});
-			
-			
-			
-			var t = $('#normalReTable').DataTable();
-		    var counter = 1;
-		 	var $checkbox = "<input type='checkbox'>";
-		 	var $inputText = "<input type='text' value='";
-		 	var $inputText2 = "' style='width:100%;'>"
-		    $('#addRow').on( 'click', function () {
-		        t.row.add( [
-		            $checkbox,
-		            $inputText + counter + $inputText2,
-		            $inputText + counter + $inputText2,
-		            $inputText + counter + $inputText2,
-		            $inputText + counter + $inputText2,
-		            $inputText + counter + $inputText2,
-		            $inputText + counter + $inputText2,
-		            $inputText + counter + $inputText2,
-		            $inputText + counter + $inputText2,
-		            $inputText + counter + $inputText2,
-		            $inputText + counter + $inputText2,
-		            $inputText + counter + $inputText2,
-		            $inputText + counter + $inputText2
-		        ] ).draw( false );
-		 
-		        counter++;
-			
-		        
-		        $("input").focus(function(){
-					console.log("dddddddddddd");
-					$("#normalReTable input").css("background", "white");
-					$("#normalReTable td").css("background", "white");
-					$("#normalReTable tr").css("background", "white"); 
-					
-					$(this).parent().parent().children().css("background", "#DDEBF7");
-					$(this).parent().parent().children().children().css("background", "#DDEBF7");
-					$(this).parent().children().css("background", "#DDEBF7");
-					$(this).parent().css("background", "#b3cfe4");
-					$(this).parent().children().css("background", "#b3cfe4");
-					
-					
-				});
-		    } );
-			 */
 			
 			$("input").focus(function(){
 				$("#normalReTable input").css("background", "white");
@@ -363,6 +304,7 @@
 					}
 				})
 			});
+			
 			$("#normalReTable td:nth-child(8)").children().focus(function(){
 				var thisTr = $(this).parent().parent().children().children();
 				$(this).attr("class", "ven");
@@ -435,7 +377,7 @@
 				var $month = $(".month");
 				
 				var slipNum = 0;
-				$(".month").each(function(index){
+				/* $(".month").each(function(index){
 					var monthVal = $(this).val();
 					$(".day").each(function(index1){
 						var dayVal = $(this).val();
@@ -450,12 +392,12 @@
 				}else if(slipNum > 1){
 					inputs.filter("[name=dateSlipCode]").val("12");
 				}
-				
+				 */
 				if(thisDay < 10){
 					$(this).val("0"+$(this).val());
 				}
 				
-				inputs.filter("[class=debitCredit]").focus();
+				inputs.filter(".debit").focus();
 				
 			});
 			
@@ -474,56 +416,7 @@
 				inputs.filter("[name=accountCode]").focus();
 			});
 			
-			/* $(".price").keydown(function(key){
-				var pr = $(this);
-				if(key.keyCode == 13){
-					var $tbody = $("#normalReTable tbody");
-					var $tr = $("<tr>");
-					
-					var $td1 = $("<td>").html("<input type='checkbox'>");
-					var $td2 = $("<td>").html("<input type='text' class='month' style='width:100%;'>")
-					var $td3 = $("<td>").html("<input type='text' class='day' style='width:100%;'>")
-					var $td4 = $("<td>").html("<input type='text' name='dateSlipCode' style='width:100%;'>")
-					var $td5 = $("<td>").html("<input type='text' class='debit' name='debitCredit' style='width:100%;'>")
-					var $td6 = $("<td>").html("<input type='text' name='accountCode' style='width:100%;'>")
-					var $td7 = $("<td>").html("<input type='text' name='accName' style='width:100%;'>")
-					var $td8 = $("<td>").html("<input type='text' name='venderCode' style='width:100%;'>")
-					var $td9 = $("<td>").html("<input type='text' name='venName' style='width:100%;'>")
-					var $td10 = $("<td>").html("<input type='text' name='brief' style='width:100%;'>")
-					var $td11 = $("<td>").html("<input type='text' class='price' name='price' style='width:100%;' onkeyup='inputNumberFormat(this);'>")
-					var $td12 = $("<td>").html("<input type='text' class='price' name='price' style='width:100%;' onkeyup='inputNumberFormat(this);'>")
-					
-					$tr.append($td1);
-					$tr.append($td2);
-					$tr.append($td3);
-					$tr.append($td4);
-					$tr.append($td5);
-					$tr.append($td6);
-					$tr.append($td7);
-					$tr.append($td8);
-					$tr.append($td9);
-					$tr.append($td10);
-					$tr.append($td11);
-					$tr.append($td12);
-					$tbody.append($tr);
-					
-					$("input").focus(function(){
-						$("#normalReTable input").css("background", "white");
-						$("#normalReTable td").css("background", "white");
-						$("#normalReTable tr").css("background", "white"); 
-						
-						$(this).parent().parent().children().css("background", "#DDEBF7");
-						$(this).parent().parent().children().children().css("background", "#DDEBF7");
-						$(this).parent().children().css("background", "#DDEBF7");
-						$(this).parent().css("background", "#b3cfe4");
-						$(this).parent().children().css("background", "#b3cfe4");
-						
-						
-					});
-					
-					pr.parent().parent().next().children().eq(1).children().focus();
-				}
-			}); */
+			
 			
 		});
 		
@@ -564,8 +457,13 @@
 			})
 		};
 		
+		
+		var chaValue = null;
+		var deaValue = null;
 		function addTr(vvv){
 			var pr = vvv;
+			var inputs_01 = $(pr).parent().parent().children().children();			
+			var numberC = 0;
 			if(event.keyCode == 13){
 				var $tbody = $("#normalReTable tbody");
 				var $tr = $("<tr>");
@@ -575,13 +473,13 @@
 				var $td3 = $("<td>").html("<input type='text' class='day' style='width:100%;'>")
 				var $td4 = $("<td>").html("<input type='text' class='dateSlipCode' name='dateSlipCode' style='width:100%;'>")
 				var $td5 = $("<td>").html("<input type='text' class='debit' name='debitCredit' style='width:100%;'>")
-				var $td6 = $("<td>").html("<input type='text' name='accountCode' style='width:100%;'>")
-				var $td7 = $("<td>").html("<input type='text' name='accName' style='width:100%;'>")
-				var $td8 = $("<td>").html("<input type='text' name='venderCode' style='width:100%;'>")
-				var $td9 = $("<td>").html("<input type='text' name='venName' style='width:100%;'>")
-				var $td10 = $("<td>").html("<input type='text' name='brief' style='width:100%;'>")
-				var $td11 = $("<td>").html("<input type='text' class='price' name='price' style='width:100%;' onkeyup='inputNumberFormat(this);' onkeydown='addTr(this);'>")
-				var $td12 = $("<td>").html("<input type='text' class='price' name='price' style='width:100%;' onkeyup='inputNumberFormat(this);' onkeydown='addTr(this);'>")
+				var $td6 = $("<td>").html("<input type='text' class='accountCode' name='accountCode' style='width:100%;'>")
+				var $td7 = $("<td>").html("<input type='text' class='accName' name='accName' style='width:100%;'>")
+				var $td8 = $("<td>").html("<input type='text' class='venderCode' name='venderCode' style='width:100%;'>")
+				var $td9 = $("<td>").html("<input type='text' class='venName' name='venName' style='width:100%;'>")
+				var $td10 = $("<td>").html("<input type='text' class='brief' name='brief' style='width:100%;'>")
+				var $td11 = $("<td>").html("<input type='text' class='price' name='price' id='cha' style='width:100%;' onkeyup='inputNumberFormat(this);' onkeydown='addTr(this);'>")
+				var $td12 = $("<td>").html("<input type='text' class='price' name='price' id='dea'style='width:100%;' onkeyup='inputNumberFormat(this);' onkeydown='addTr(this);'>")
 				
 				$tr.append($td1);
 				$tr.append($td2);
@@ -596,6 +494,28 @@
 				$tr.append($td11);
 				$tr.append($td12);
 				$tbody.append($tr);
+				
+				$(inputs_01).filter(".accountCode").attr("name", "journalizeList["+numberC+"].accountCode");
+				$(inputs_01).filter(".venderCode").attr("name", "journalizeList["+numberC+"].venderCode");
+				$(inputs_01).filter(".debit").attr("name", "journalizeList["+numberC+"].debitCredit");
+				if($(inputs_01).filter(".debit").val() == '차변'){
+					$(inputs_01).filter("#cha").attr("name", "journalizeList["+numberC+"].price");
+					chaValue += Number(uncomma($(inputs_01).filter("#cha").val()));
+				}else if($(inputs_01).filter(".debit").val() == '대변'){
+					$(inputs_01).filter("#dea").attr("name", "journalizeList["+numberC+"].price");
+					deaValue += Number(uncomma($(inputs_01).filter("#dea").val()));
+				}
+				numberC++;
+				
+				console.log(chaValue);
+				console.log(deaValue);
+				
+				if(chaValue == deaValue){
+					console.log("차대 맞음");
+				}else{
+					console.log("차대 안맞으");
+				}
+				
 				
 				$("input").focus(function(){
 					$("#normalReTable input").css("background", "white");
@@ -613,40 +533,6 @@
 				
 				$(pr).parent().parent().next().children().eq(1).children().focus();
 				
-				$("#normalReTable tbody tr").each(function(index){
-					var month = $(this).children().children().filter(".month").val();
-					var day = $(this).children().children().filter(".day").val();
-					var debit = $(this).children().children().filter(".debit").val();
-					var price = $(this).children().children().filter(".price").val();
-					var dateSlipCode = $(this).children().children().filter(".dateSlipCode").val();
-					
-					$("#normalReTable tbody tr").not("#normalReTable tbody tr:eq(0)").each(function(index1){
-						var month1 = $(this).children().children().filter(".month").val();
-						var day1 = $(this).children().children().filter(".day").val();
-						var debit1 = $(this).children().children().filter(".debit").val();
-						var price1 = $(this).children().children().filter(".price").val();
-						var dateSlipCode1 = $(this).children().children().filter(".dateSlipCode").val();
-						
-						console.log(month);
-						console.log(month1);
-						if(month == month1 && day == day1 && dateSlipCode == dateSlipCode1){
-							var chaPrice = 0;
-							var deaPrice = 0;
-							
-							if(debit == '차변'){
-								chaPrice += price;
-							}
-							if(debit == '대변'){
-								deaPrice += price;
-							}
-							
-							if(chaPrice == deaPrice){
-								
-							}
-						}
-					});
-					
-				});
 				
 				$(".debit").blur(function(){
 					var value = $(this).val();
@@ -683,58 +569,106 @@
 						$(this).val("0"+$(this).val());
 					}
 					
+					
+					
+				});
+				
+			/* 	$(".day").blur(function(){
+					var inputs = $(this).parent().parent().children().children();
+					var thisDay = $(this).val();
+					var thisMonth = inputs.filter(".month").val();
+					var $month = $(".month");
+					
+					if(thisDay < 10){
+						$(this).val("0"+$(this).val());
+					}
+					
 					var slipNum = 0;
 					var num ="";
-					$("#normalReTable tbody tr").each(function(index){
-						var month = $(this).children().children().filter(".month").val();
-						var day = $(this).children().children().filter(".day").val();
-						var debit = $(this).children().children().filter(".debit").val();
-						var price = $(this).children().children().filter(".price").val();
-						var dateSlipCode = $(this).children().children().filter(".dateSlipCode").val();
+					var cha = 0;
+					var dea = 0;
+					
+					var trs = $("#normalReTable tbody tr");
+					
+					for(var i = 0; i < trs.length-1; i++){
+						var month = $(trs).eq(i).children().children().filter(".month").val();
+						var day = $(trs).eq(i).children().children().filter(".day").val();
+						var debit = $(trs).eq(i).children().children().filter(".debit").val();
+						var price = null;
+						var dateSlipCode = $(trs).eq(i).children().children().filter(".dateSlipCode").val();
+						var priceB = null;
+						var debitB = $(trs).eq(i-1).children().children().filter(".debit").val();
 						
-						$("#normalReTable tbody tr").not("#normalReTable tbody tr:eq(0)").each(function(index1){
-							var month1 = $(this).children().children().filter(".month").val();
-							var day1 = $(this).children().children().filter(".day").val();
-							var debit1 = $(this).children().children().filter(".debit").val();
-							var price1 = $(this).children().children().filter(".price").val();
-							var dateSlipCode1 = $(this).children().children().filter(".dateSlipCode").val();
+						if(debit == '차변'){
+							price = $(trs).eq(i).children().children().filter("#cha").val();
+						}else if(debit == '대변'){
+							price = $(trs).eq(i).children().children().filter("#dea").val();
+						}
+						
+						if(debitB == '차변'){
+							priceB = $(trs).eq(i-1).children().children().filter("#cha").val();
+						}else if(debitB == '대변'){
+							priceB = $(trs).eq(i-1).children().children().filter("#dea").val();
+						}
+						
+						
+						for(var j = 1; j < trs.length; j++){
+							var month1 = $(trs).eq(j).children().children().filter(".month").val();
+							var day1 = $(trs).eq(j).children().children().filter(".day").val();
+							var debit1 = $(trs).eq(j).children().children().filter(".debit").val();
+							var price1 = null;
+							var dateSlipCode1 = $(trs).eq(j).children().children().filter(".dateSlipCode").val();
 							
+							if(debit1 == '차변'){
+								price1 = $(trs).eq(j).children().children().filter("#cha").val();
+							}else if(debit1 == '대변'){
+								price1 = $(trs).eq(j).children().children().filter("#dea").val();
+							}
 							
+							console.log(price);
+							console.log("bbb" + priceB);
 							
 							if(month == month1 && day == day1){
 								slipNum++;
-								num = dateSlipCode;
-							}
-							if(month == month1 && day == day1 && dateSlipCode == dateSlipCode1){
-								var chaPrice = 0;
-								var deaPrice = 0;
-								
-								if(debit == '차변'){
-									chaPrice += price;
-								}
-								if(debit == '대변'){
-									deaPrice += price;
-								}
-								
-								if(chaPrice == deaPrice){
+								if(price1 == "" && price != priceB){
+									inputs.filter("[name=dateSlipCode]").val(dateSlipCode);
+								}else{
 									
+									if(debit == '차변'){
+										cha += price;
+									}else{
+										dea += price;
+									}
+									
+									if(debit1 == '대변'){
+										dea += price;
+									}else {
+										cha += price;
+									}
+									
+									if(thisDay==day1 && month1 == thisMonth && cha == dea){
+										inputs.filter("[name=dateSlipCode]").val(dateSlipCode1+1);
+									}
 								}
+								
 							}
-						});
+							
+							
+						}
 						
-					});
-					console.log(slipNum);
-					if(slipNum == 2){
-						inputs.filter("[name=dateSlipCode]").val(num);
+					}
+					
+					if(slipNum == 0){
+						inputs.filter("[name=dateSlipCode]").val("00001");
 					}else if(slipNum == 3){
 						inputs.filter("[name=dateSlipCode]").val("12");
 					}
 					
 					
 					
-					inputs.filter("[class=debitCredit]").focus();
+					inputs.filter(".debit").focus();
 					
-				});
+				}); */
 				
 				
 
