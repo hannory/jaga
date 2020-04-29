@@ -60,7 +60,7 @@
   	WHERE SLIP_DIVISION ='매입매출' 
   	AND DIVISION ='매출' 
   	AND COM_CODE= #{Receiption.comCode}
-  	AND S.EVIDENCE_CODE BETWEEN 50 AND 100
+  	AND EVIDENCE_CODE BETWEEN 50 AND 100
   	AND SLIP_DATE BETWEEN #{Receiption.slipDate} AND #{endDate}
   </select>
   

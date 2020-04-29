@@ -45,18 +45,20 @@ public class CcIssStmtDaoImpl implements CcIssStmtDao{
 		  //전표들을 불러와서 전표구분에따라서 나눠주고 ccIssStmt로 받은 다음에 리턴해주기
 			  if(rc.getEvidenceCode().equals("50")||rc.getEvidenceCode().equals("70")) {
 				  
-				  BigDecimal price=null;//공급대가(공급가액+부가세)
+				  BigDecimal price=new BigDecimal(0);//공급대가(공급가액+부가세)
 				  
 				  price=rc.getSupplyValue().add(rc.getValueTax());
 				  System.out.println("공급대가:"+price);
 	
 				  cardTaxSum=cardTaxSum.add(price);
+				  //합계 더해지는 거 확인
+				  System.out.println("카드 과세 합계:" +cardTaxSum);
 				  cis.setCardTax(cardTaxSum);
 				  
 				  System.out.println("카드 과세합계: "+cis.getCardTax());
 			  }else if(rc.getEvidenceCode().equals("60")) {//카드_면세
 				  
-				  BigDecimal price=null;//공급대가(공급가액+부가세)
+				  BigDecimal price=new BigDecimal(0);;//공급대가(공급가액+부가세)
 				  
 				  price=rc.getSupplyValue().add(rc.getValueTax());
 				  System.out.println("카드면세_공급대가:"+price);
@@ -66,7 +68,7 @@ public class CcIssStmtDaoImpl implements CcIssStmtDao{
 				  
 				  System.out.println("카드 면세합계: "+cis.getCardTaxFree());
 			  }else if(rc.getEvidenceCode().equals("100")||rc.getEvidenceCode().equals("90")) {//현금영수증_과세,영세
-				  BigDecimal price=null;//공급대가(공급가액+부가세)
+				  BigDecimal price=new BigDecimal(0);;//공급대가(공급가액+부가세)
 				  
 				  price=rc.getSupplyValue().add(rc.getValueTax());
 				  System.out.println("현금과세_공급대가:"+price);
@@ -76,7 +78,7 @@ public class CcIssStmtDaoImpl implements CcIssStmtDao{
 				  
 				  System.out.println("현금 과세합계: "+cis.getCashTax());
 			  }else if(rc.getEvidenceCode().equals("80")) {//현금영수증_과세,영세
-				  BigDecimal price=null;//공급대가(공급가액+부가세)
+				  BigDecimal price=new BigDecimal(0);;//공급대가(공급가액+부가세)
 				  
 				  price=rc.getSupplyValue().add(rc.getValueTax());
 				  System.out.println("현금면세_공급대가:"+price);
