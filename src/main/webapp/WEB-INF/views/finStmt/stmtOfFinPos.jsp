@@ -27,18 +27,18 @@
 	text-align:left;
 	padding-left:61px;
 }
-#foldBtn {
-	width:77px;
-	background:#24574A;
-	border-radius:5px;
-	color:white;
-}
-#foldImg {
-	width:70px;
-	height:26px;
-	padding:1px;
-	padding-right:3px;
-}
+	#foldBtn {
+		background:#24574A;
+		border-radius:4px;
+		padding:1px;
+		padding-bottom:7px;
+		color:white;
+	}
+	#foldImg {
+		height:30px;
+		padding:1px;
+		padding-right:3px;
+	}
 </style>
 <title>자가 경리</title>
 </head>
@@ -62,7 +62,7 @@
 				<td><span class="subtitle"><a href="incomeStmt.fs">손익계산서</a></span></td>
 				<td><span class="subtitle"><a href="mfrgCostsStmt.fs">제조원가명세서</a></span></td>
 				<td><span class="subtitle"><a href="stmtOfCashFlow.fs">현금흐름표</a></span></td>
-				<td align="right" style="width:180px;"><div id="foldBtn"><img id="foldImg" src="${contextPath}/resources/images/fold.PNG"></div></td>
+				<td align="right" style="width:180px;"><span id="foldBtn"><img id="foldImg" src="${contextPath}/resources/images/fold.PNG"></span></td>
 			</tr>
 		</table>
 		<table id="contentTable" width="1100px" style="text-align:center;">

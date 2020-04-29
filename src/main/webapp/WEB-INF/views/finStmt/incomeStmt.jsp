@@ -70,9 +70,10 @@
 		background: #e7e6e6;
 		text-align: center;
 	}
-	#pastData {
+	#pastDate {
 		background: #f165b2;
-		padding: 1px;
+		padding-top: 1px;
+		padding-bottom: 1px;
 	}
 </style>
 <title>자가 경리</title>
@@ -100,47 +101,47 @@
 			</tr>
 		</table>
 		<form id="contentForm" action="insertIncomeStmt.fs" method="post">		
-		<ol class="breadcrumb mb-4">
-			<table id="searchReTable">
+			<ol class="breadcrumb mb-4">
+				<table id="searchReTable">
+					<tr>
+						<td style="width:150px;">조회기간 : </td>
+						<td>
+							<input type="number" id="year" name="year" style="width:70px"> 년&nbsp;&nbsp;&nbsp;&nbsp;
+							<select id="month" name="month">
+								<option id="jan" value="01">1</option>
+								<option id="feb" value="02">2</option>
+								<option id="mar" value="03">3</option>
+								<option id="apr" value="04">4</option>
+								<option id="may" value="05">5</option>
+								<option id="jun" value="06">6</option>
+								<option id="jul" value="07">7</option>
+								<option id="aug" value="08">8</option>
+								<option id="sep" value="09">9</option>
+								<option id="oct">10</option>
+								<option id="nov">11</option>
+								<option id="dec">12</option>
+							</select> 월&nbsp;&nbsp;&nbsp;&nbsp;
+							<button onclick="return dateSearch();">검색</button></td>
+					</tr>
+				</table>
+			</ol>
+			<table style="width:100%; max-width:1100px;">
 				<tr>
-					<td style="width:150px;">조회기간 : </td>
 					<td>
-						<input type="number" id="year" name="year" style="width:70px"> 년&nbsp;&nbsp;&nbsp;&nbsp;
-						<select id="month" name="month">
-							<option id="jan" value="01">1</option>
-							<option id="feb" value="02">2</option>
-							<option id="mar" value="03">3</option>
-							<option id="apr" value="04">4</option>
-							<option id="may" value="05">5</option>
-							<option id="jun" value="06">6</option>
-							<option id="jul" value="07">7</option>
-							<option id="aug" value="08">8</option>
-							<option id="sep" value="09">9</option>
-							<option id="oct">10</option>
-							<option id="nov">11</option>
-							<option id="dec">12</option>
-						</select> 월&nbsp;&nbsp;&nbsp;&nbsp;
-						<button onclick="return dateSearch();">검색</button></td>
+						<span style="margin-bottom:10px; color:red;"><img src="${ contextPath }/resources/images/pencil.PNG">기말상품재고액을 입력하세요</span>
+						&nbsp;&nbsp;&nbsp;&nbsp;		
+						<button type="button" onclick="insertIncomeStmt();">마감</button>
+					</td>
+					<td align="right">
+					</td>
 				</tr>
 			</table>
-		</ol>
-		<table style="width:100%; max-width:1100px;">
-			<tr>
-				<td>
-					<span style="margin-bottom:10px; color:red;"><img src="${ contextPath }/resources/images/pencil.PNG">기말상품재고액을 입력하세요</span>
-					&nbsp;&nbsp;&nbsp;&nbsp;		
-					<button type="button" onclick="insertIncomeStmt();">마감</button>
-				</td>
-				<td align="right">
-				</td>
-			</tr>
-		</table>
 			<table id="contentTable" width="1100px" style="text-align:center;">
-				<thead>
+				<thead id="main-thead">
 					<tr>
 						<td class="table-head" width="28%" rowspan="2">과&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;목</td>
 						<td class="table-head" colspan="2">
-							제 <label class="normal-label" id="cur-term"></label>(당)기 2020.01 ~ 2020.<label class="normal-label" id="cur-month">03</label>
+							제 <label class="normal-label" id="cur-term"></label>(당)기 2020.01 ~ 2020.<label class="normal-label" id="cur-month"></label>
 							<input type="hidden" id="login-openDay" value="${ sessionScope.loginCompany.gaeup }">
 						</td>
 						<td class="table-head" colspan="2">제 <label class="normal-label" id="past-term"></label>(전)기 2019.01 ~ 2019.12</td>
@@ -152,7 +153,7 @@
 						<td class="table-head" width="18%">합계</td>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody id="main-tbody">
 					<tr>
 						<td class="table-title">Ⅰ. 매출액</td>
 						<td class="table-title"></td>
@@ -251,6 +252,13 @@
 						<td class="table-title"></td>
 						<td class="table-title-num" id="pSum40"></td>
 					</tr>
+					<tr class="table-detail" id="row81100">
+						<td class="table-subSubTitle">복리후생비</td>
+						<td class="table-content" id="c81100"></td>
+						<td></td>
+						<td class="table-content" id="p81100"></td>
+						<td></td>
+					</tr>
 					<tr class="table-detail" id="row83000">
 						<td class="table-subSubTitle">소모품비</td>
 						<td class="table-content" id="c83000"></td>
@@ -313,6 +321,8 @@
 	</main>
 	<script>
 		$(function() {
+			$("#main-tbody").hide();
+			
 			/* 표에서 하늘색 hover 주기 */
 			$("#contentTable td").mouseover(function() {
 				$(this).parent().css("background", "#DDEBF7");
@@ -322,7 +332,7 @@
 				$(this).parent().css("background", "white");
 			});
 			
-			/* 현재 날짜로 기본값 설정 */
+			// 현재 날짜로 기본값 설정 : 조회기간 영역
 			var curDate = new Date();
 			console.log("curDate : " + curDate);
 			console.log("curYear : " + curDate.getFullYear());
@@ -344,7 +354,16 @@
 			case 11 : $("#dec").prop("selected", true); break;
 			}
 			
-			/* 로그인 회사로 기수 설정 */
+			// 현재 날짜로 기본값 설정 : 테이블의 당기 기간 영역
+			var curMonth = "";
+						
+			if((curDate.getMonth() + 1) < 10) {
+				curMonth = "0" + (curDate.getMonth() + 1);
+			}
+			
+			$("#cur-month").text(curMonth);
+			
+			// 로그인 회사로 기수 설정
 			var openDay = $("#login-openDay").val();
 			var openYear = String(openDay).substring(0,4);
 			
@@ -437,8 +456,10 @@
 			
 		}
 		
-		/* 날짜 옆의 검색 버튼 클릭시 */
+		//(날짜를 통한) 검색 버튼 클릭시
 		function dateSearch() {
+			$("#main-tbody").show();
+			
 			var year = $("#year").val();
 			var month = $("#month").val();
 			
@@ -458,10 +479,12 @@
 					//-------------당기-------------					
 					var c14600 = data["c14600"];
 					var c40100 = data["c40100"];
+					var c81100 = data["c81100"];
 					var c83000 = data["c83000"];
 					
 					$("#c14600").text(comma(c14600));
 					$("#c40100").text(comma(c40100));
+					$("#c81100").text(comma(c81100));
 					$("#c83000").text(comma(c83000));
 					
 					//표 각 합계 계산
@@ -510,11 +533,13 @@
 					//-------------전기-------------					
 					var p14600 = data["p14600"];
 					var p40100 = data["p40100"];
+					var p81100 = data["p81100"];
 					var p83000 = data["p83000"];
 					console.log("p83000 : " + p83000);
 					
 					$("#p14600").text(comma(p14600));
 					$("#p40100").text(comma(p40100));
+					$("#p81100").text(comma(p81100));
 					$("#p83000").text(comma(p83000));
 					
 					//표 각 합계 계산
@@ -574,10 +599,11 @@
 				}
 			});
 			
+			//form 전송이 되지 않도록 처리
 			return false;
 		}
 		
-		/* 접기 버튼 클릭 시 */
+		//접기 버튼 클릭 시
 		$(document).on("click", '#foldBtn', function() {
 			var clicks = $(this).data('clicks');
 			
@@ -586,26 +612,31 @@
 			if(clicks) {
 				$("#foldImg").attr({'src':'${ contextPath }/resources/images/fold.PNG'});
 				$(".table-detail").fadeIn(200);
-				//$(".table-detail").css({'transform':'scaleY(1)', 'transition-duration':'.3s'});
-				//$(".table-detail").parent().css({'overflow':'auto', 'transition':'height ease-in 0.5s'});
 			} else {
 				$("#foldImg").attr({'src':'${ contextPath }/resources/images/unfold.PNG'});
 				$(".table-detail").fadeOut(200);
-				//$(".table-detail").css({'transform':'scaleY(0)', 'transition-duration':'.3s'});
-				//$(".table-detail").parent().css({'overflow':'hidden', 'transition':'height ease-in 0.5s'});
 			}
 			
 			$(this).data('clicks', !clicks);
 		});
 		
-		/* 전표 모달 띄우기 */
+		//원장조회 모달 띄우기
 		$(document).on("dblclick", '.table-content', function() {
 			
-			if($(this).text() == "") {
+			/* if($(this).text() == "") {
 
 				Swal.fire({
 					icon: "warning",
 					text: "먼저 조회기간 검색을 해주세요!"
+				})
+				
+			} else  */
+			
+			if($(this).text() == 0 | $(this).text() == "") {
+				
+				Swal.fire({
+					icon: "warning",
+					text: "조회할 원장내역이 없습니다"
 				})
 				
 			} else {
@@ -616,11 +647,31 @@
 				var accountCode = $(this).attr('id').substring(1,6);
 				var curPast = $(this).attr('id').substring(0,1);
 				
+				console.log("accountCode : " + accountCode);
+				console.log("curPast : " + curPast);
+				console.log("this text : " + $(this).text());
+				
+				$("#modal-account-code").val(accountCode);
+				
+				var fromDate = "";
+				var toDate = "";
+				
 				if(curPast == "p") {
-					$("#pastData").text("전기 데이터 조회중");
+					$("#pastDate").text("전기 데이터 조회중");
+					
+					fromDate = (Number(year) - 1) + "-01";
+					toDate = (Number(year) - 1) + "-" + month;
 				} else {
-					$("#pastData").text("");
+					$("#pastDate").text("");
+					
+					fromDate = year + "-01";
+					toDate = year + "-" + month;				
+
+					console.log("year type : " + typeof(year));
 				}
+
+				$("#datepicker3").val(fromDate);
+				$("#datepicker4").val(toDate);
 				
 				$.ajax({
 					url : "selectSlip.fs",
@@ -633,8 +684,12 @@
 					},
 					success : function(data) {
 						console.log(data);
+						console.log("data.lenght : " + data.length);
 						
-						$tableBody = $("#List_detail tbody");
+						$("#modal-account-title").val(data[0].accountTitle);
+						console.log("data[0].accountTitle : " + data[0].accountTitle);
+						
+						$tableBody = $("#list_detail tbody");
 						//테이블을 갱신하기 위해 비워줌
 						$tableBody.html('');
 						
@@ -644,7 +699,7 @@
 						var monthBalance = 0;
 						
 						//월별로 월계, 누계 계산을 위한 변수
-						monthCheck = 0;
+						var monthCheck = 0;
 						
 						$.each(data, function(index, value) {
 							
@@ -652,18 +707,18 @@
 		
 							console.log("slipDate : " + value.slipDate);
 							
-							// "00월 00일, 0000년" 형식의 반환 String에서 일자 뽑기
-							var dateArray = String((((value.slipDate).split(",", 1)))).split(" ", 2);
+							//"00월 00일, 0000년" 형식의 반환 String에서 일자 뽑기
+							var dateArray = String((value.slipDate).split(",", 1)).split(" ", 2);
 							var date = dateArray[1];
 							
-							// 일을 2자리수로 만들기
+							//일자를 2자리수로 만들기
 							if(date.length == 1) {
 								var date = 0 + date;
 							}
 							
 							var month = (value.slipDate).split('월', 1);
 							
-							// 해당 계정과목 값의 첫 월 계산
+							//해당 계정과목 값의 첫 월 계산
 							if(index == 0) {
 								monthCheck = Number(month);
 							}
@@ -791,6 +846,7 @@
 							$("#last-credit-month").text(comma(monthBalance)).css("text-align", "right");
 							$("#last-credit-acc").text(comma(balance)).css("text-align", "right");
 						}
+						
 					},
 					error : function(status) {
 						console.log(status);
@@ -812,9 +868,9 @@
 		        <div class="modal-body">
 			    	<table width="100%" style="margin-bottom:5px">
 			        	<tr>
-			        		<td>계정과목&nbsp;&nbsp;&nbsp;&nbsp;<div id="modal-account-title"></div>
+			        		<td>계정과목&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="modal-account-title" readonly>&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="modal-account-code" size="4" readonly>
 			        		</td>
-			        		<td align="right"><span id="pastData"></span>&nbsp;&nbsp;<span>조회기간&nbsp;&nbsp;&nbsp;&nbsp;</span><input type="text" id="datepicker3"> ~ <input type="text" id="datepicker4"></td>
+			        		<td align="right"><span id="pastDate"></span>&nbsp;&nbsp;<span>조회기간&nbsp;&nbsp;&nbsp;&nbsp;</span><input type="text" id="datepicker3"> ~ <input type="text" id="datepicker4"></td>
 			        	</tr>
 			        </table>
 					<script>
@@ -840,7 +896,7 @@
 							
 					</script>
 					<div>
-			        	<table id="List_detail" style=" width:100%; margin-left:auto; margin-right: auto;">
+			        	<table id="list_detail" style=" width:100%; margin-left:auto; margin-right: auto;">
 			        		<thead>
 				        		<tr>
 				        			<td class="modal-head" style="width:5%;">일자</td>
