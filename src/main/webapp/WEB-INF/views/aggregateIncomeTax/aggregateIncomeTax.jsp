@@ -85,9 +85,22 @@
 		<!-- 귀속년도 -->
 		<div style="float:right;">
 			<label>귀속년도 : </label>
-			<input type="text" style="border-bottom:1px solid black;">
+			<input id="attrYear" type="text" style="border-bottom:1px solid black;">
 			<label>년</label>
 		</div>
+		
+		<script>
+		/* 귀속연도 받아온 값으로 바꿔줌 */
+		$(function(){
+			/* if(${ dto.attrYear eq null }){
+				alert("null true");
+				console.log(dto.attrYear);
+			} */
+			$("#attrYear").val("2020");
+		});
+			
+		</script>
+		
 		<!-- //귀속년도 -->
 		
 		<div style="height:50px;"></div><!-- 간격 띄우기 위한 용도 -->

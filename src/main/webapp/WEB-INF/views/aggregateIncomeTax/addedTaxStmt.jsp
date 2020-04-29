@@ -45,7 +45,7 @@
 	
 	<h2 class="mt-4">종합소득세</h2>
 		
-		
+		<form action="insertAddedTaxStmt.aggregate" method="post">	<!-- 포스트로 한번 보내보자 -->
 		
 		
 		<!-- 귀속년도 -->
@@ -63,6 +63,8 @@
 			<div class="div-top4menu" onclick="goIncomeDeductStmt();"><h5>소득공제명세서</h5></div>
 			<div class="div-top4menu" style="border-bottom: 3px solid #24574A"><h5>가산세명세서</h5></div>
 			<div class="div-top4menu" onclick="goAggregateCalculated();"><h5>종합소득세액계산서</h5></div>
+			
+			<div style="display:inline-block;"><button style="width:50px; height:30px; background:#24574A; border:none; color:white; border-radius:5px;">저장</button></div>
 		</div>
 		<!-- //class="div-top4menu" -->
 		
@@ -90,7 +92,7 @@
 		
 		<br>
 		
-		<table class="table-center" border="1">
+		<table class="table-center" border="1" style="background:lightgray">
 		
 			<tr>
 				<td colspan="4">구분 및 계산기준</td>
@@ -100,175 +102,175 @@
 			</tr>
 			
 			<tr>
-				<td rowspan="4">무신고</td>
+				<td rowspan="4">(1) 무신고</td>
 				<td rowspan="2" colspan="2">부정무신고</td>
 				<td>무신고납부세액</td>
-				<td><input type="text" id=""></td>
+				<td><input type="text" id="in101" class="left"></td>
 				<td>40/100</td>
-				<td><input type="text" id="" name=""></td>
+				<td><input type="text" id="v101" class="right" name=""></td>
 			</tr>
 			
 			<tr>
 				<td>수입금액</td>
-				<td><input type="text"></td>
+				<td><input type="text" id="in102" class="left"></td>
 				<td>14/10,000</td>
-				<td><input type="text"></td>
+				<td><input type="text" id="v102" class="right"></td>
 			</tr>
 			
 			<tr>
 				<td colspan="2" rowspan="2">일반무신고</td>
 				<td>무신고납부세액</td>
-				<td><input type="text" id=""></td>
+				<td><input type="text" id="in103" class="left"></td>
 				<td>20/100</td>
-				<td><input type="text" id="" name=""></td>
+				<td><input type="text" id="v103"  class="right"name=""></td>
 			</tr>
 			
 			<tr>
 				<td>수입금액</td>
-				<td><input type="text"></td>
+				<td><input type="text" id="in104" class="left"></td>
 				<td>7/10,000</td>
-				<td><input type="text"></td>
+				<td><input type="text" id="v104" class="right"></td>
 			</tr>
 			
 			<tr>
-				<td rowspan="3">과소신고</td>
+				<td rowspan="3">(2) 과소신고</td>
 				<td rowspan="2" colspan="2">부정과서신고</td>
 				<td>과소신고납부세액</td>
-				<td><input type="text"></td>
+				<td><input type="text" id="in201" class="left"></td>
 				<td>40/100</td>
-				<td><input type="text"></td>
+				<td><input type="text" id="v201" class="right"></td>
 			</tr>
 			
 			<tr>
 				<td>수입금액</td>
-				<td><input type="text"></td>
+				<td><input type="text" id="in202" class="left"></td>
 				<td>14/10,000</td>
-				<td><input type="text"></td>
+				<td><input type="text" id="v202" class="right"></td>
 			</tr>
 			
 			<tr>
 				<td colspan="2">일반과소신고</td>
 				<td>과소신고납부세액</td>
-				<td><input type="text"></td>
+				<td><input type="text" id="in203" class="left"></td>
 				<td>10/100</td>
-				<td><input type="text"></td>
+				<td><input type="text" id="v203"></td>
 			</tr>
 			
 			<tr>
-				<td rowspan="2" colspan="2">납부(환급)불성실</td>
+				<td rowspan="2" colspan="2">(3) 납부(환급)불성실</td>
 				<td colspan="2" >미납일수</td>
-				<td><input type="text"></td>
+				<td><input type="text" id="in301" class="left"></td>
 				<td rowspan="2">2.5/10,000</td>
-				<td><input type="text"></td>
+				<td><input type="text" id="v301" class="right"></td>
 			</tr>
 			
 			<tr>
 				<td colspan="2">미납부(환급)세액</td>
-				<td><input type="text"></td>
-				<td><input type="text"></td>
+				<td><input type="text" id="in302" class="left"></td>
+				<td><input type="text" id="v302" class="right"></td>
 			</tr>
 			
 			
 			
 			<tr>
-				<td rowspan="13">보고불성실</td>
+				<td rowspan="13">(4) 보고불성실</td>
 				<td rowspan="2">지급명세서</td>
 				<td>미제출(불명)</td>
 				<td>지급(불명)금액</td>
-				<td><input type="text"></td>
+				<td><input type="text" id="in401" class="left"></td>
 				<td>1/100</td>
-				<td><input type="text"></td>
+				<td><input type="text" id="v401" class="right"></td>
 			</tr>
 			
 			<tr>
 				<td>지연 제출</td>
 				<td>지연 제출 금액</td>
-				<td><input type="text"></td>
+				<td><input type="text" id="in402" class="left"></td>
 				<td>0.5/100</td>
-				<td><input type="text"></td>
+				<td><input type="text" id="v402" class="right"></td>
 			</tr>
 			
 			<tr>
 				<td rowspan="6">계산서</td>
 				<td>미발급(위장)</td>
 				<td>공급가액</td>
-				<td><input type="text"></td>
+				<td><input type="text" id="in403" class="left"></td>
 				<td>2/100</td>
-				<td><input type="text"></td>
+				<td><input type="text" id="v403" class="right"></td>
 			</tr>
 			
 			<tr>
 				<td>지연발급</td>
 				<td>공급가액</td>
-				<td><input type="text"></td>
+				<td><input type="text" id="in404" class="left"></td>
 				<td>2/100</td>
-				<td><input type="text"></td>
+				<td><input type="text" id="v404" class="right"></td>
 			</tr>
 			
 			<tr>
 				<td>불명</td>
 				<td>불명금액</td>
-				<td><input type="text"></td>
+				<td><input type="text" id="in405" class="left"></td>
 				<td>1/100</td>
-				<td><input type="text"></td>
+				<td><input type="text" id="v405" class="right"></td>
 			</tr>
 			
 			<tr>
 				<td>전자계산서 외 발급</td>
 				<td>공급가액</td>
-				<td><input type="text"></td>
+				<td><input type="text" id="in406" class="left"></td>
 				<td>1/100</td>
-				<td><input type="text"></td>
+				<td><input type="text" id="v406" class="right"></td>
 			</tr>
 			
 			<tr>
 				<td>전자계산서 미전송</td>
 				<td>공급가액</td>
-				<td><input type="text"></td>
+				<td><input type="text" id="in407" class="left"></td>
 				<td> - </td>
-				<td><input type="text"></td>
+				<td><input type="text" id="v407" class="right"></td>
 			</tr>
 			
 			<tr>
 				<td>전자계산서 지연전송</td>
 				<td>지연 전송 금액</td>
-				<td><input type="text"></td>
+				<td><input type="text" id="in408" class="left"></td>
 				<td> - </td>
-				<td><input type="text"></td>
+				<td><input type="text" id="v408" class="right"></td>
 			</tr>
 			
 			<tr>
 				<td rowspan="2">계산서합계표</td>
 				<td>미제출(불명)</td>
 				<td>공급(불명)가액</td>
-				<td><input type="text"></td>
+				<td><input type="text" id="in409" class="left"></td>
 				<td>0.5/100</td>
-				<td><input type="text"></td>
+				<td><input type="text" id="v409" class="right"></td>
 			</tr>
 			
 			<tr>
 				<td>지연 제출</td>
 				<td>지연 제출 금액</td>
-				<td><input type="text"></td>
+				<td><input type="text" id="in410" class="left"></td>
 				<td>0.3/100</td>
-				<td><input type="text"></td>
+				<td><input type="text" id="v410" class="right"></td>
 			</tr>
 			
 			<tr>
 				<td rowspan="2">매입처별세금<br>계산서합계표</td>
 				<td>미제출(불명)</td>
 				<td>공급(불명)가액</td>
-				<td><input type="text"></td>
+				<td><input type="text" id="in411" class="left"></td>
 				<td>1/100</td>
-				<td><input type="text"></td>
+				<td><input type="text" id="v411" class="right"></td>
 			</tr>
 			
 			<tr>
 				<td>지연 제출</td>
 				<td>지연 제출 금액</td>
-				<td><input type="text"></td>
+				<td><input type="text" id="in412" class="left"></td>
 				<td>0.3/100</td>
-				<td><input type="text"></td>
+				<td><input type="text" id="v412" class="right"></td>
 			</tr>
 			
 			<tr>
@@ -279,204 +281,204 @@
 			</tr>
 			
 			<tr>
-				<td rowspan="2">증빙불비</td>
+				<td rowspan="2">(5) 증빙불비</td>
 				<td colspan="2">미수취</td>
 				<td>미 수취 금액</td>
-				<td><input type="text"></td>
+				<td><input type="text" id="in501" class="left"></td>
 				<td>2/100</td>
-				<td><input type="text"></td>
+				<td><input type="text" id="v501" class="right"></td>
 			</tr>
 			
 			<tr>
 				<td colspan="2">허위수취</td>
 				<td>허위 수취 금액</td>
-				<td><input type="text"></td>
+				<td><input type="text" id="in502" class="left"></td>
 				<td>2/100</td>
-				<td><input type="text"></td>
+				<td><input type="text" id="v502" class="right"></td>
 			</tr>
 			
 			<tr>
-				<td rowspan="2">영수증 수취<br>명세서미제출</td>
+				<td rowspan="2">(6) 영수증 수취<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;명세서미제출</td>
 				<td colspan="2">미제출</td>
 				<td>미제출금액</td>
-				<td><input type="text"></td>
+				<td><input type="text" id="in601" class="left"></td>
 				<td>1/100</td>
-				<td><input type="text"></td>
+				<td><input type="text" id="v601" class="right"></td>
 			</tr>
 			
 			<tr>
 				<td colspan="2">불명</td>
 				<td>불명금액</td>
-				<td><input type="text"></td>
+				<td><input type="text" id="in602" class="left"></td>
 				<td>1/100</td>
-				<td><input type="text"></td>
+				<td><input type="text" id="v602" class="right"></td>
 			</tr>
 			
 			<tr>
-				<td rowspan="2">사업장현황<br>신고불성실</td>
+				<td rowspan="2">(7) 사업장현황<br>신고불성실</td>
 				<td colspan="2">무신고</td>
 				<td>수입금액</td>
-				<td><input type="text"></td>
+				<td><input type="text" id="in701" class="left"></td>
 				<td>0.5/100</td>
-				<td><input type="text"></td>
+				<td><input type="text" id="v701" class="right"></td>
 			</tr>
 			
 			<tr>
 				<td colspan="2">과소신고</td>
 				<td>수입금액</td>
-				<td><input type="text"></td>
+				<td><input type="text" id="in702" class="left"></td>
 				<td>0.5/100</td>
-				<td><input type="text"></td>
+				<td><input type="text" id="v702" class="right"></td>
 			</tr>
 			
 			<tr>
-				<td rowspan="2">공동사업장<br>등록불성실</td>
+				<td rowspan="2">(8) 공동사업장<br>등록불성실</td>
 				<td colspan="2">미등록/허위등록</td>
 				<td>총 수입금액</td>
-				<td><input type="text"></td>
+				<td><input type="text" id="in801" class="left"></td>
 				<td>0.5/100</td>
-				<td><input type="text"></td>
+				<td><input type="text" id="v801" class="right"></td>
 			</tr>
 			
 			<tr>
 				<td colspan="2">손익분배비율 허위신고 등</td>
 				<td>총 수입금액</td>
-				<td><input type="text"></td>
+				<td><input type="text" id="in802" class="left"></td>
 				<td>0.1/100</td>
-				<td><input type="text"></td>
+				<td><input type="text" id="v802" class="right"></td>
 			</tr>
 			
 			<tr>
-				<td colspan="3">무기장</td>
+				<td colspan="3">(9) 무기장</td>
 				<td>산출세액</td>
-				<td><input type="text"></td>
+				<td><input type="text" id="in901" class="left"></td>
 				<td>20/100</td>
-				<td><input type="text"></td>
+				<td><input type="text" id="v901" class="right"></td>
 			</tr>
 			
 			<tr>
-				<td rowspan="2">사업용계좌<br>미신고 등</td>
+				<td rowspan="2">(10) 사업용계좌<br>미신고 등</td>
 				<td colspan="2">미개설/미신고</td>
 				<td>수입금액 등</td>
-				<td><input type="text"></td>
+				<td><input type="text" id="in1001" class="left"></td>
 				<td>0.2/100</td>
-				<td><input type="text"></td>
+				<td><input type="text" id="v1001" class="right"></td>
 			</tr>
 			
 			<tr>
 				<td colspan="2">미사용</td>
 				<td>미사용 금액</td>
-				<td><input type="text"></td>
+				<td><input type="text" id="in1002" class="left"></td>
 				<td>0.2/100</td>
-				<td><input type="text"></td>
+				<td><input type="text" id="v1002" class="right"></td>
 			</tr>
 			
 			<tr>
-				<td rowspan="3">신용카드거부</td>
+				<td rowspan="3">(11) 신용카드거부</td>
 				<td colspan="3">거래거부/불성실금액</td>
-				<td><input type="text"></td>
+				<td><input type="text" id="in1101" class="left"></td>
 				<td>5/100</td>
-				<td><input type="text"></td>
+				<td><input type="text" id="v1101" class="right"></td>
 			</tr>
 			
 			<tr>
 				<td colspan="3">거래거부/불성실건수</td>
-				<td><input type="text"></td>
+				<td><input type="text" id="in1102" class="left"></td>
 				<td>5,000원</td>
-				<td><input type="text"></td>
+				<td><input type="text" id="v1102" class="right"></td>
 			</tr>
 			
 			<tr>
 				<td colspan="2">위장가공</td>
 				<td>발급수취금액</td>
-				<td><input type="text"></td>
+				<td><input type="text" id="in1103" class="left"></td>
 				<td>2/100</td>
-				<td><input type="text"></td>
+				<td><input type="text" id="v1103" class="right"></td>
 			</tr>
 			
 			<tr>
-				<td rowspan="5">현금영수증<br>미발급</td>
+				<td rowspan="5">(12) 현금영수증<br>미발급</td>
 				<td colspan="2">미가맹</td>
 				<td>수입금액</td>
-				<td><input type="text"></td>
+				<td><input type="text" id="in1201" class="left"></td>
 				<td>1/100</td>
-				<td><input type="text"></td>
+				<td><input type="text" id="v1201" class="right"></td>
 			</tr>
 			
 			<tr>
 				<td colspan="3">미발급/불성실금액</td>
-				<td><input type="text"></td>
+				<td><input type="text" id="in1202" class="left"></td>
 				<td>5/100</td>
-				<td><input type="text"></td>
+				<td><input type="text" id="v1202" class="right"></td>
 			</tr>
 			
 			<tr>
 				<td colspan="3">미발급/불성실건수</td>
-				<td><input type="text"></td>
+				<td><input type="text" id="in1203" class="left"></td>
 				<td>5,000원</td>
-				<td><input type="text"></td>
+				<td><input type="text" id="v1203" class="right"></td>
 			</tr>
 			
 			<tr>
 				<td colspan="2">위장가공</td>
 				<td>발급수취금액</td>
-				<td><input type="text"></td>
+				<td><input type="text" id="in1204" class="left"></td>
 				<td>2/100</td>
-				<td><input type="text"></td>
+				<td><input type="text" id="v1204" class="right"></td>
 			</tr>
 			
 			<tr>
 				<td colspan="3">미발급금액(2019귀속부터적용)</td>
-				<td><input type="text"></td>
+				<td><input type="text" id="in1205" class="left"></td>
 				<td>20/100</td>
-				<td><input type="text"></td>
+				<td><input type="text" id="v1205" class="right"></td>
 			</tr>
 			
 			<tr>
-				<td rowspan="2">기부금영수증<br>불성실</td>
+				<td rowspan="2">(13) 기부금영수증<br>불성실</td>
 				<td colspan="2">영수증 불성실발급</td>
 				<td>불성실기재금액</td>
-				<td><input type="text"></td>
+				<td><input type="text" id="in1301" class="left"></td>
 				<td>2/100</td>
-				<td><input type="text"></td>
+				<td><input type="text" id="v1301" class="right"></td>
 			</tr>
 			
 			<tr>
 				<td colspan="2">발급명세서 미작성/미보관</td>
 				<td>미작성 등 금액</td>
-				<td><input type="text"></td>
+				<td><input type="text" id="in1302" class="left"></td>
 				<td>0.2/100</td>
-				<td><input type="text"></td>
+				<td><input type="text" id="v1302" class="right"></td>
 			</tr>
 			
 			<tr>
-				<td colspan="4">동업기업 배분 가산세</td>
+				<td colspan="4">(14) 동업기업 배분 가산세</td>
 				<td></td>
 				<td></td>
 				<td></td>
 			</tr>
 			
 			<tr>
-				<td colspan="3">성실신고확인서 미제출 가산세</td>
+				<td colspan="3">(15) 성실신고확인서 미제출 가산세</td>
 				<td>산출세액</td>
-				<td><input type="text"></td>
+				<td><input type="text" id="in1501" class="left"></td>
 				<td>5/100</td>
-				<td><input type="text"></td>
+				<td><input type="text" id="v1501" class="right"></td>
 			</tr>
 			
 			<tr>
-				<td colspan="3">유보소득계산명세서 제출 불성실 가산세</td>
+				<td colspan="3">(16) 유보소득계산명세서 제출 불성실 가산세</td>
 				<td>배당가능 유보소득금액</td>
-				<td><input type="text"></td>
+				<td><input type="text" id="in1601" class="left"></td>
 				<td>0.5/100</td>
-				<td><input type="text"></td>
+				<td><input type="text" id="v1601" class="right"></td>
 			</tr>
 			
 			<tr>
-				<td colspan="4">합계</td>
-				<td><input type="text"></td>
+				<td colspan="4">16. 합계</td>
+				<td><input type="text" id="in1602" name="sumLeft"></td>
 				<td></td>
-				<td><input type="text"></td>
+				<td><input type="text" id="v1602" name="sumRight"></td>
 			</tr>
 			
 		
@@ -484,6 +486,385 @@
 		
 		</table>
 		
+		</form><!-- 포스트로 보내는 태그 -->
+	
+	
+		<script>
+			/* 세율 적용해서 계산하는 스크립트 */
+				$(function(){
+				
+					$("#in101").keyup(function(key){
+						if(key.keyCode == 13){
+							/* 계산 해서 v에 넣어줌 */
+							$("#v101").val($("#in101").val()*40/100);
+							/* 다음 인풋으로 이동 */
+							$("#in102").focus();
+						}
+					});
+					
+					/* 반복 */
+					
+					$("#in102").keyup(function(key){
+						if(key.keyCode == 13){
+							$("#v102").val($("#in102").val()*14/10000);
+							$("#in103").focus();
+						}
+					});
+					
+					$("#in103").keyup(function(key){
+						if(key.keyCode == 13){
+							$("#v103").val($("#in103").val()*20/100);
+							$("#in104").focus();
+						}
+					});
+					
+					$("#in104").keyup(function(key){
+						if(key.keyCode == 13){
+							$("#v104").val($("#in104").val()*7/10000);
+							$("#in201").focus();
+						}
+					});
+					
+					$("#in201").keyup(function(key){
+						if(key.keyCode == 13){
+							$("#v201").val($("#in201").val()*40/100);
+							$("#in202").focus();
+						}
+					});
+					
+					$("#in202").keyup(function(key){
+						if(key.keyCode == 13){
+							$("#v202").val($("#in202").val()*14/10000);
+							$("#in203").focus();
+						}
+					});
+					
+					$("#in203").keyup(function(key){
+						if(key.keyCode == 13){
+							$("#v203").val($("#in203").val()*10/100);
+							$("#in301").focus();
+						}
+					});
+					
+					$("#in301").keyup(function(key){
+						if(key.keyCode == 13){
+							$("#v301").val($("#in301").val()*2.5/10000);
+							$("#in302").focus();
+						}
+					});
+					
+					$("#in302").keyup(function(key){
+						if(key.keyCode == 13){
+							$("#v302").val($("#in302").val()*2.5/10000);
+							$("#in401").focus();
+						}
+					});
+					
+					$("#in401").keyup(function(key){
+						if(key.keyCode == 13){
+							$("#v401").val($("#in401").val()*1/100);
+							$("#in402").focus();
+						}
+					});
+					
+					$("#in402").keyup(function(key){
+						if(key.keyCode == 13){
+							$("#v402").val($("#in402").val()*0.5/100);
+							$("#in403").focus();
+						}
+					});
+					
+					$("#in403").keyup(function(key){
+						if(key.keyCode == 13){
+							$("#v403").val($("#in403").val()*2/100);
+							$("#in404").focus();
+						}
+					});
+					
+					$("#in404").keyup(function(key){
+						if(key.keyCode == 13){
+							$("#v404").val($("#in404").val()*2/100);
+							$("#in405").focus();
+						}
+					});
+					
+					$("#in405").keyup(function(key){
+						if(key.keyCode == 13){
+							$("#v405").val($("#in405").val()*1/100);
+							$("#in406").focus();
+						}
+					});
+					
+					$("#in406").keyup(function(key){
+						if(key.keyCode == 13){
+							$("#v406").val($("#in406").val()*1/100);
+							$("#in407").focus();
+						}
+					});
+					
+					$("#in407").keyup(function(key){
+						if(key.keyCode == 13){
+							$("#v407").val($("#in407").val());
+							$("#in408").focus();
+						}
+					});
+					
+					$("#in408").keyup(function(key){
+						if(key.keyCode == 13){
+							$("#v408").val($("#in408").val());
+							$("#in409").focus();
+						}
+					});
+					
+					$("#in409").keyup(function(key){
+						if(key.keyCode == 13){
+							$("#v409").val($("#in409").val()*0.5/100);
+							$("#in410").focus();
+						}
+					});
+					
+					$("#in410").keyup(function(key){
+						if(key.keyCode == 13){                                                                                                                                                                                                                                                                                                                        
+							$("#v410").val($("#in410").val()*0.3/100);
+							$("#in411").focus();
+						}
+					});
+					
+					$("#in411").keyup(function(key){
+						if(key.keyCode == 13){
+							$("#v411").val($("#in411").val()*1/100);
+							$("#in412").focus();
+						}
+					});
+					
+					$("#in412").keyup(function(key){
+						if(key.keyCode == 13){
+							$("#v412").val($("#in412").val()*0.3/100);
+							$("#in501").focus();
+						}
+					});
+					
+					$("#in501").keyup(function(key){
+						if(key.keyCode == 13){
+							$("#v501").val($("#in501").val()*2/100);
+							$("#in502").focus();
+						}
+					});
+					
+					$("#in502").keyup(function(key){
+						if(key.keyCode == 13){
+							$("#v502").val($("#in502").val()*2/100);
+							$("#in601").focus();
+						}
+					});
+					
+					$("#in601").keyup(function(key){
+						if(key.keyCode == 13){
+							$("#v601").val($("#in601").val()*1/100);
+							$("#in602").focus();
+						}
+					});
+					
+					$("#in602").keyup(function(key){
+						if(key.keyCode == 13){
+							$("#v602").val($("#in602").val()*1/100);
+							$("#in701").focus();
+						}
+					});
+					
+					$("#in701").keyup(function(key){
+						if(key.keyCode == 13){
+							$("#v701").val($("#in701").val()*0.5/100);
+							$("#in702").focus();
+						}
+					});
+					
+					$("#in702").keyup(function(key){
+						if(key.keyCode == 13){
+							$("#v702").val($("#in702").val()*0.5/100);
+							$("#in801").focus();
+						}
+					});
+					
+					$("#in801").keyup(function(key){
+						if(key.keyCode == 13){
+							$("#v801").val($("#in801").val()*0.5/100);
+							$("#in802").focus();
+						}
+					});
+					
+					$("#in802").keyup(function(key){
+						if(key.keyCode == 13){
+							$("#v802").val($("#in802").val()*0.1/100);
+							$("#in901").focus();
+						}
+					});
+					
+					$("#in901").keyup(function(key){
+						if(key.keyCode == 13){
+							$("#v901").val($("#in901").val()*20/100);
+							$("#in1001").focus();
+						}
+					});
+					
+					$("#in1001").keyup(function(key){
+						if(key.keyCode == 13){
+							$("#v1001").val($("#in1001").val()*0.2/100);
+							$("#in1002").focus();
+						}
+					});
+					
+					$("#in1002").keyup(function(key){
+						if(key.keyCode == 13){
+							$("#v1002").val($("#in1002").val()*0.2/100);
+							$("#in1101").focus();
+						}
+					});
+					
+					$("#in1101").keyup(function(key){
+						if(key.keyCode == 13){
+							$("#v1101").val($("#in1101").val()*5/100);
+							$("#in1102").focus();
+						}
+					});
+					
+					$("#in1102").keyup(function(key){
+						if(key.keyCode == 13){
+							$("#v1102").val($("#in1102").val()*5000);
+							$("#in1103").focus();
+						}
+					});
+					
+					$("#in1103").keyup(function(key){
+						if(key.keyCode == 13){
+							$("#v1103").val($("#in1103").val()*2/100);
+							$("#in1201").focus();
+						}
+					});
+					
+					
+					$("#in1201").keyup(function(key){
+						if(key.keyCode == 13){
+							$("#v1201").val($("#in1201").val()*1/100);
+							$("#in1202").focus();
+						}
+					});
+					
+					$("#in1202").keyup(function(key){
+						if(key.keyCode == 13){
+							$("#v1202").val($("#in1202").val()*5/100);
+							$("#in1203").focus();
+						}
+					});
+					
+					$("#in1203").keyup(function(key){
+						if(key.keyCode == 13){
+							$("#v1203").val($("#in1203").val()*5000);
+							$("#in1204").focus();
+						}
+					});
+					
+					$("#in1204").keyup(function(key){
+						if(key.keyCode == 13){
+							$("#v1204").val($("#in1204").val()*2/100);
+							$("#in1205").focus();
+						}
+					});
+					
+					$("#in1205").keyup(function(key){
+						if(key.keyCode == 13){
+							$("#v1205").val($("#in1205").val()*20/100);
+							$("#in1301").focus();
+						}
+					});
+					
+					$("#in1301").keyup(function(key){
+						if(key.keyCode == 13){
+							$("#v1301").val($("#in1301").val()*2/100);
+							$("#in1302").focus();
+						}
+					});
+					
+					$("#in1302").keyup(function(key){
+						if(key.keyCode == 13){
+							$("#v1302").val($("#in1302").val()*0.2/100);
+							$("#in1501").focus();
+						}
+					});
+					
+					$("#in1501").keyup(function(key){
+						if(key.keyCode == 13){
+							$("#v1501").val($("#in1501").val()*5/100);
+							$("#in1601").focus();
+						}
+					});
+					
+					$("#in1601").keyup(function(key){
+						if(key.keyCode == 13){
+							$("#v1601").val($("#in1601").val()*0.5/100);
+							$("#in1602").focus();
+						}
+					});
+					
+					/* $("#in1602").keyup(function(key){
+						if(key.keyCode == 13){
+							$("#v1602").val($("#in1602").val()*1/100);
+							
+						}
+					}); */
+					
+					
+				});
+			
+		</script>
+		
+		
+		
+		
+		
+		
+		<script>
+		/* 합계 */
+		let leftSum = Number(0);
+		let rightSum = Number(0);
+		
+		window.onkeyup = function(key){
+			if(key.keyCode == 13){
+				
+				//왼쪽
+				leftSum = 0;
+				var left = $(".left");
+
+				console.log(leftSum);
+				for(var i = 0; i < left.length; i++ ){
+					leftSum += Number(left[i].value);
+				}
+				$("#in1602").val(leftSum);
+				
+				//오른쪽
+				rightSum = 0;
+				var right = $(".right");
+
+				console.log(rightSum);
+				for(var i = 0; i < right.length; i++ ){
+					rightSum += Number(right[i].value);
+				}
+				$("#v1602").val(Math.floor(rightSum / 10) * 10);
+				
+				
+				/* 오른쪽 인풋태그 원단위 절삭 */
+				for(var i = 0; i < right.length; i++){
+					right[i].value = (Math.floor(right[i].value/10))*10;
+				}
+				$("#v1602").val() / 10 * 10;
+				
+				
+				
+			}//if : keyCode == 13
+		}//function
+		
+		
+		</script>
 		
 		
 		

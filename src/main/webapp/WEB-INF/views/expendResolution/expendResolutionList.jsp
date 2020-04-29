@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>자가 경리</title>
 <style>
 
 	.div-menuTap{
@@ -102,6 +102,16 @@
 					</tr>
 				</c:forEach>
 			</c:if>
+			
+			<script>
+			/* 리스트에서 행 클릭 시 해당 문서 번호 가져오기 ,, 이후 문서번호로 데이터 받아와서 모달에 보여주자 */
+				$(function(){
+					$("table tr").click(function(e){
+						console.log(e.target);
+						console.log(String(e.target.nodeName));
+					})	
+				});
+			</script>
 			
 			
 			<!-- 
