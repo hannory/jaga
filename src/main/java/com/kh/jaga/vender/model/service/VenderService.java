@@ -14,5 +14,7 @@ public interface VenderService {
 
 	int modifyOne(Vender v);
 
+	List<Vender> selectBankList(String comCode);
+
 
 }

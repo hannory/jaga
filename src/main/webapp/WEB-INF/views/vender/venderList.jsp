@@ -168,7 +168,6 @@
 		}).mouseout(function(){
 			$(this).parent().css("background","white");
 		}).click(function(){
-			/* var venderCode = $(this).parent().children().eq(5).text(); */
 			var venderCode =$(this).parent().children().eq(4).text();
 			console.log(venderCode);
 			location.href="${contextPath}/venderSelectOne.vi?venderCode="+venderCode;

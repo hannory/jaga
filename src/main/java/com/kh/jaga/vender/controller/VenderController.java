@@ -8,10 +8,13 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.jaga.company.model.vo.Company;
 import com.kh.jaga.vender.model.service.VenderService;
 import com.kh.jaga.vender.model.vo.Vender;
 
@@ -63,6 +66,21 @@ public class VenderController {
 	 return "redirect: venderList.vi";
 	 
 	  }
+	  
+	  @GetMapping("bankSearch.ve")
+	  public ModelAndView searchBank(ModelAndView mv, HttpServletRequest request) {
+		  Company com = (Company)request.getSession().getAttribute("loginCompany");
+		  String comCode=com.getCompanyCode();
+		  
+		  List<Vender> list =null;
+		  
+		  list=vs.selectBankList(comCode);
+		  
+		  mv.addObject("data",list);
+		  mv.setViewName("jsonView");
+		  
+		  return mv;
+}
 }
 
 

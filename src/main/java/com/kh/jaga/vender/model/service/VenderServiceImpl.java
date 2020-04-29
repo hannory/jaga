@@ -43,6 +43,21 @@ public class VenderServiceImpl implements VenderService {
 		return vd.modifyOne(sqlSession,v);
 	}
 
+	@Override
+	public List<Vender> selectBankList(String comCode) {
+
+		List<Vender> list =null;
+		
+		list = vd.selectBankList(sqlSession,comCode);
+		
+		/*
+		 * if(list ==null) {
+		 * 
+		 * }
+		 */
+		return list;
+	}
+
 
 
 }

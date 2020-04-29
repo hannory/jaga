@@ -40,4 +40,9 @@
    SELECT EMPLOYEE_CODE, EMPLOYEE_NUM, EMPLOYEE_NAME
    FROM EMPLOYEE
   </select> 
+  
+  <select id="selectEmpList2" resultMap="employeeResultSet">
+  SELECT EMPLOYEE_CODE, EMPLOYEE_NUM, EMPLOYEE_NAME
+  FROM EMPLOYEE
+  </select>
   </mapper>

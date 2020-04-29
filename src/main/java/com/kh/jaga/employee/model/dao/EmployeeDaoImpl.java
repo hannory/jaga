@@ -37,4 +37,10 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		return list;
 	}
 
+	@Override
+	public List<Employee> selectEmpList2(SqlSessionTemplate sqlSession) {
+		List<Employee> list = sqlSession.selectList("Employee.selectEmpList2");
+		return list;
+	}
+
 }

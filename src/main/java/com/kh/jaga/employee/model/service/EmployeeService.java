@@ -15,4 +15,6 @@ public interface EmployeeService {
 
 	List<Employee> selectEmpList();
 
+	List<Employee> selectEmpList2();
+
 }

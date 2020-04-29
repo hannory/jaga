@@ -61,13 +61,13 @@ public class CompanyController {
 		return "main/main";
 	}
 
-	@GetMapping("companyJoinView.co")
+	@GetMapping("companyJoinView.lo")
 	public String showMemberJoinView() {
 		return "company/companyJoin";
 	}
 	
 	//회원가입
-	@RequestMapping("insert.co")
+	@RequestMapping("insert.lo")
 	public String insertCompany(Model model, Company c, HttpServletRequest request, @RequestParam MultipartFile photo) {
 
 		String root =request.getSession().getServletContext().getRealPath("resources");
@@ -102,7 +102,7 @@ public class CompanyController {
 		return "redirect:index.jsp";
 	}
 	
-	@RequestMapping("doubleCheck.co")
+	@RequestMapping("doubleCheck.lo")
 	public String doubleCheckId(HttpServletRequest request, HttpServletResponse response) {
 		
 		String userId= request.getParameter("userId");
