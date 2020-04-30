@@ -888,10 +888,10 @@
 				
 				
 				/* 오른쪽 인풋태그 원단위 절삭 */
-				for(var i = 0; i < right.length; i++){
+				/* for(var i = 0; i < right.length; i++){
 					right[i].value = (Math.floor(right[i].value/10))*10;
 				}
-				$("#v1602").val() / 10 * 10;
+				$("#v1602").val() / 10 * 10; */
 				
 				
 				

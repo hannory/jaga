@@ -1,5 +1,7 @@
 package com.kh.jaga.aggregateIncomeTax.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -46,16 +48,22 @@ public class AggregateController {
 	}
 	
 	@RequestMapping("insertAddedTaxStmt.aggregate")
-	public String insertAddedTaxStmt(@ModelAttribute AddedTaxStmtDto dto, Model model) {
+	public String insertAddedTaxStmt(@ModelAttribute AddedTaxStmtDto dto, HttpServletRequest request) {
 		System.out.println("저장 버튼 눌렀음 ,, 컨트롤러도착,, dto :::");
 		System.out.println(dto);
 		
 		int result = service.insertAddedTaxStmt(dto);
 		
-		model.addAttribute("result", result);;
+//		model.addAttribute("result", result);
+//		model.addAttribute("message","가산세 입력 성공");
+		if(result == 1) {
+			request.setAttribute("message", "가산세 입력 성공");
+			return "redirect:addedTaxSuccess.jsp";
+		}
+		
+		return "redirect:errorPage.jsp";
 		
 		
-		return "addedTaxStmt";
 	}
 	
 	
