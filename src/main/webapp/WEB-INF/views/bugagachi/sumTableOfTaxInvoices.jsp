@@ -471,10 +471,10 @@
  						pOssAtax=sDtoDivPur[key].tax;
  					}
  				}
- 				 ptSAvc=ssAvc+OssAvc;
-	 			 ptSAdc=ssAdc+OssAdc;
-	 			 ptSAvol=ssAvol+OssAvol;
-	 		     ptSAtax=ssAtax+OssAtax;
+ 				 ptSAvc=pssAvc+pOssAvc;
+	 			 ptSAdc=pssAdc+pOssAdc;
+	 			 ptSAvol=pssAvol+pOssAvol;
+	 		     ptSAtax=pssAtax+pOssAtax;
 	 		     $("#psAvc").text(ptSAvc);
 	 		     $("#psAdc").text(ptSAdc);
 	 		     $("#psAvol").text(ptSAvol);

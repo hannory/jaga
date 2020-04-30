@@ -233,6 +233,19 @@
       <url-pattern>*.soti</url-pattern>
    </servlet-mapping>
    
+   <servlet><!-- 계산서합계표 -->
+      <servlet-name>billTotal</servlet-name>
+      <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+      <init-param>
+         <param-name>contextConfigLocation</param-name>
+         <param-value>/WEB-INF/config/billTotal-servlet.xml</param-value>
+      </init-param>
+   </servlet>
+   <servlet-mapping>
+      <servlet-name>billTotal</servlet-name>
+      <url-pattern>*.soi</url-pattern>
+   </servlet-mapping>
+   
    
       <servlet><!-- 신용카드등 수령명세서 -->
       <servlet-name>CcSalesSlipGap</servlet-name>

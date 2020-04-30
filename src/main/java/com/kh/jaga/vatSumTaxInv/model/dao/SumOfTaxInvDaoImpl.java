@@ -1,6 +1,7 @@
 package com.kh.jaga.vatSumTaxInv.model.dao;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -21,7 +22,13 @@ public class SumOfTaxInvDaoImpl implements SumOfTaxInvDao {
 		// TODO 기존 soti Dao에서 select해오기
 		
 		System.out.println("Dao: selectSotiDto: sDto: "+sDto);
-		SumOfTaxInvDto sDto2=sqlSession.selectOne("SumOfTaxInv.selectSoti",sDto);
+		SumOfTaxInvDto sDto2=new SumOfTaxInvDto();
+		if(sDto.getTabletaxDiv().equals("계산서")) {
+			System.out.println("계산서일때 Dao: selectSotiDto: sDto:");
+			sDto2=sqlSession.selectOne("BillTotal.selectSoti",sDto);
+		}else {
+			sDto2=sqlSession.selectOne("SumOfTaxInv.selectSoti",sDto);
+		}
 		System.out.println("Dao: selectSotiDto: sDto2: "+sDto2);
 		return sDto2;
 	}
@@ -30,11 +37,15 @@ public class SumOfTaxInvDaoImpl implements SumOfTaxInvDao {
 	public List<SumOfTaxInvDiv> selectSotiDiv(SqlSessionTemplate sqlSession, SumOfTaxInvDto sDto2) {
 		// TODO 기존 soti div 매출 dao에서 select해오기
 		System.out.println("Dao: selectSotiDiv: sDto2: "+sDto2);
-		
+		List<SumOfTaxInvDiv> sDivList=new ArrayList<SumOfTaxInvDiv>();
+		if(sDto2.getTabletaxDiv().equals("계산서")) {
+			System.out.println("계산서일때 Dao: selectSotiDiv: sDto:"+sDto2);
+			sDivList=sqlSession.selectList("BillTotal.selectSotiDivSales",sDto2);
+		}else {
 		//매출 리스트 가져오기
-		List<SumOfTaxInvDiv> sDivList=sqlSession.selectList("SumOfTaxInv.selectSotiDivSales",sDto2);
-		System.out.println("Dao: selectSotiDiv: sDivList: "+sDivList);
-		
+			sDivList=sqlSession.selectList("SumOfTaxInv.selectSotiDivSales",sDto2);
+			System.out.println("Dao: selectSotiDiv: sDivList: "+sDivList);
+		}
 		return sDivList;
 	}
 
@@ -42,10 +53,15 @@ public class SumOfTaxInvDaoImpl implements SumOfTaxInvDao {
 	public List<SumOfTaxInvDiv> selectSotiDivPur(SqlSessionTemplate sqlSession, SumOfTaxInvDto sDto2) {
 		// TODO 기존 soti div 매입 dao에서 select해오기
 		System.out.println("Dao: selectSotiDiv: sDto2: "+sDto2);
-				
-		//매입 리스트 가져오기
-		List<SumOfTaxInvDiv> sDivList=sqlSession.selectList("SumOfTaxInv.selectSotiDivPur",sDto2);
-		System.out.println("Dao: selectSotiDiv: sDivList: "+sDivList);
+		List<SumOfTaxInvDiv> sDivList=new ArrayList<SumOfTaxInvDiv>();
+		if(sDto2.getTabletaxDiv().equals("계산서")) {
+			System.out.println("계산서일때 Dao: selectSotiDivPur: sDto:"+ sDto2);
+			sDivList=sqlSession.selectList("BillTotal.selectSotiDivPur",sDto2);
+		}else {	
+			//매입 리스트 가져오기
+			sDivList=sqlSession.selectList("SumOfTaxInv.selectSotiDivPur",sDto2);
+			System.out.println("Dao: selectSotiDiv: sDivList: "+sDivList);
+		}
 				
 		return sDivList;
 	}
@@ -56,7 +72,14 @@ public class SumOfTaxInvDaoImpl implements SumOfTaxInvDao {
 		
 		//매출 상세리스트 가져오기
 		System.out.println("Dao: selectSotiDetailSales: sDto2: "+sDto2);
-		List<SumTaxInvDetail> sDetailSales= sqlSession.selectList("SumOfTaxInv.selectDetailSales",sDto2);
+		List<SumTaxInvDetail> sDetailSales= new ArrayList<SumTaxInvDetail>(); 
+		if(sDto2.getTabletaxDiv().equals("계산서")) {
+			System.out.println("계산서일때 Dao: selectDetailSales: sDto:");
+			sDetailSales=sqlSession.selectList("BillTotal.selectDetailSales",sDto2);
+		}else {		
+				
+			sDetailSales=sqlSession.selectList("SumOfTaxInv.selectDetailSales",sDto2);
+		}
 		System.out.println("Dao: selectSotiDetailSales: sDetailSales: "+sDetailSales);
 		return sDetailSales;
 	}
@@ -67,7 +90,14 @@ public class SumOfTaxInvDaoImpl implements SumOfTaxInvDao {
 		
 		//매출 상세리스트 가져오기
 		System.out.println("Dao: selectSotiDetailPur: sDto2: "+sDto2);
-		List<SumTaxInvDetail> sDetailPur= sqlSession.selectList("SumOfTaxInv.selectDetailPur",sDto2);
+		List<SumTaxInvDetail> sDetailPur= new ArrayList<SumTaxInvDetail>(); 
+		if(sDto2.getTabletaxDiv().equals("계산서")) {
+			System.out.println("계산서일때 Dao: selectDetailSales: sDto:");
+			sDetailPur=sqlSession.selectList("BillTotal.selectDetailPur",sDto2);
+		}else {		
+				
+			sDetailPur= sqlSession.selectList("SumOfTaxInv.selectDetailPur",sDto2);
+		}
 		System.out.println("Dao: selectSotiDetailPur: sDetailSales: "+sDetailPur);
 		return sDetailPur;
 	}
@@ -80,7 +110,12 @@ public class SumOfTaxInvDaoImpl implements SumOfTaxInvDao {
 		HashMap<String, Object> map=new HashMap<String, Object>();
 		map.put("Receiption",receiptionPur);
 		map.put("endDate",eD);
-		List<SumTaxInvDetail> re=sqlSession.selectList("SumOfTaxInv.selectReceiption", map);
+		List<SumTaxInvDetail> re=new ArrayList<SumTaxInvDetail>();
+		if(receiptionPur.getEvidenceCode().equals("20")) {
+			re=sqlSession.selectList("BillTotal.selectReceiption", map);
+		}else {
+			re=sqlSession.selectList("SumOfTaxInv.selectReceiption", map);
+		}
 		return re;
 	}
 
