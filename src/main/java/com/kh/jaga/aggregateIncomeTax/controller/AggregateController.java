@@ -1,9 +1,15 @@
 package com.kh.jaga.aggregateIncomeTax.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.kh.jaga.aggregateIncomeTax.model.dto.AddedTaxStmtDto;
+import com.kh.jaga.aggregateIncomeTax.model.service.AggregateService;
 
 /**
  * @author SWY
@@ -12,6 +18,9 @@ import com.kh.jaga.aggregateIncomeTax.model.dto.AddedTaxStmtDto;
  */
 @Controller
 public class AggregateController {
+	
+	@Autowired
+	AggregateService service;
 	
 	@RequestMapping("showAggregateIncomeTax.aggregate")
 	public String showAggregateIncomeTax() {
@@ -39,11 +48,32 @@ public class AggregateController {
 	}
 	
 	@RequestMapping("insertAddedTaxStmt.aggregate")
-	public String insertAddedTaxStmt(AddedTaxStmtDto dto) {
+	public String insertAddedTaxStmt(@ModelAttribute AddedTaxStmtDto dto, HttpServletRequest request) {
 		System.out.println("저장 버튼 눌렀음 ,, 컨트롤러도착,, dto :::");
 		System.out.println(dto);
-		return "addedTaxStmt";
+		
+		int result = service.insertAddedTaxStmt(dto);
+		
+//		model.addAttribute("result", result);
+//		model.addAttribute("message","가산세 입력 성공");
+		if(result == 1) {
+			request.setAttribute("message", "가산세 입력 성공");
+			return "redirect:addedTaxSuccess.jsp";
+		}
+		
+		return "redirect:errorPage.jsp";
+		
+		
 	}
 	
 	
 }//class
+
+
+
+
+
+
+
+
+

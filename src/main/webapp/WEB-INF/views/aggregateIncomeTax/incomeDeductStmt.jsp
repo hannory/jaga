@@ -62,6 +62,12 @@
 	}
 	
 	
+	#tableTop input{
+	/* 인적공제 테이블 내 인풋태그 사이즈 조정 */
+		width:50px;
+	}
+	
+	
 	
 	.table-top02 tr{
 	/* 상단 테이블02 회색 칠하기 */
@@ -246,20 +252,20 @@
 				<td>출산입양</td>
 			</tr>
 			<tr>
-				<td>1</td>
-				<td>0.본인</td>
-				<td>심원용</td>
-				<td>1.내국인</td>
-				<td>940923-1234567</td>
-				<td>20</td>
-				<td>1.본인</td>
-				<td>1.세대주</td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
+				<td><span>7</span></td>
+				<td><input type="text" id="relationCode01" name="relationCode01" class="relationCode"></td>
+				<td><input type="text" id="personName01" name="personName01" class="personName"></td>
+				<td><input type="text" id="foreigner01" name="foreigner01" class="foreigner"></td>
+				<td><input type="text" id="personId01" name="personId01" class="personId"></td>
+				<td><input type="text" id="age01" name="age01" class="age"></td>
+				<td><input type="text" id="basicDeduct01" name="basicDeduct01" class="basicDeduct"></td>
+				<td><input type="text" id="head01" name="head01" class="head"></td>
+				<td><input type="text" id="woman01" name="woman01" class="woman"></td>
+				<td><input type="text" id="oneParent01" name="oneParent01" class="oneParent"></td>
+				<td><input type="text" id="old01" name="old01" class="old"></td>
+				<td><input type="text" id="disabillity01" name="disabillity01" class="disabillity"></td>
+				<td><input type="text" id="kids01" name="kids01" class="kids"></td>
+				<td><input type="text" id="adopt01" name="adopt01" class="adopt"></td>
 			</tr>
 			<tr>
 				<td>1</td>
@@ -498,7 +504,7 @@
 				<td></td>
 			</tr>
 			<tr>
-				<td>(3)부양가족a</td>
+				<td>(3)부양가족</td>
 				<td></td>
 				<td></td>
 			</tr>
