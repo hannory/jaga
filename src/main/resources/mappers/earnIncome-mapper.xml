@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+   <mapper namespace="EarnIncome">
+  
+  <resultMap type="EarnIncome" id="earnIncomeResultSet">
+  <id property="attributeDate" column="ATTRIBUTE_DATE"></id> 
+  <result property="employeeCode" column="EMPLOYEE_CODE"></result>
+  <result property="payDate" column="PAY_DATE"></result>
+  <result property="salary" column="SALARY"></result>
+  <result property="bonus" column="BONUS"></result>
+  <result property="meals" column="MEALS"></result>
+  <result property="drivingSubsidies" column="DRIVING_SUBSIDIES"></result>
+  <result property="childcareAllowance" column="CHILDCARE_ALLOWANCE"></result>
+  <result property="taxableIncome" column="TAXABLE_INCOME"></result>
+  <result property="nontaxableIncome" column="NONTAXABLE_INCOME"></result>
+  <result property="nationalPension" column="NATIONAL_PENSION"></result>
+  <result property="healthInsurance" column="HEALTH_INSURANCE"></result>
+  <result property="longTermInsurance" column="LONG_TERM_INSURANCE"></result>
+  <result property="employmentInsurance" column="EMPLOYMENT_INSURANCE"></result>
+  <result property="incomeTax" column="INCOME_TAX"></result>
+  <result property="localIncomeTax" column="LOCAL_INCOME_TAX"></result>
+  <result property="differencePymt" column="DIFFERENCE_PYMT"></result>
+  <result property="payStubCount" column="PAY_STUB_COUNT"></result>
+  <result property="nightPay" column="NIGHTPAY"></result>
+  <result property="monthlyPay" column="MONTHLYPAY"></result>
+  <result property="positionPay" column="POSITIONPAY"></result>
+  <result property="totalPayment" column="TOTALPAYMENT"></result>
+  <result property="totalDeduction" column="TOTALDEDUCTION"></result>
+  </resultMap>
+  
+  
+  <insert id="insertEarnEmp" parameterType="EarnIncome">
+  INSERT INTO EARN_INCOME_HISTORY(ATTRIBUTE_DATE,EMPLOYEE_CODE,SALARY,BONUS,MEALS,DRIVING_SUBSIDIES,TAXABLE_INCOME,
+  NONTAXABLE_INCOME,NATIONAL_PENSION,HEALTH_INSURANCE,LONG_TERM_INSURANCE,EMPLOYMENT_INSURANCE,INCOME_TAX,LOCAL_INCOME_TAX,
+  DIFFERENCE_PYMT,NIGHTPAY,MONTHLYPAY,POSITIONPAY,TOTALPAYMENT,TOTALDEDUCTION)
+  VALUES (#{attributeDate},#{employeeCode},#{salary},#{bonus},#{meals},#{drivingSubsidies},#{taxableIncome},
+  			#{nontaxableIncome},#{nationalPension},#{healthInsurance},#{longTermInsurance},#{employmentInsurance},#{incomeTax},#{localIncomeTax},
+  			#{differencePymt},#{nightPay},#{monthlyPay},#{positionPay},#{totalPayment},#{totalDeduction})
+  
+  
+  </insert>
+  </mapper>
+  
+  

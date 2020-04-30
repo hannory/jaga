@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.kh.jaga.common.CommonsUtils;
 import com.kh.jaga.employee.model.service.EmployeeService;
 import com.kh.jaga.employee.model.vo.Attachment;
+import com.kh.jaga.employee.model.vo.EarnIncome;
 import com.kh.jaga.employee.model.vo.Employee;
 
 @Controller
@@ -97,7 +98,14 @@ public String selectEmpList2(HttpServletRequest request) {
 	request.setAttribute("list", list);
 	return "employee/earnincome";
 }
-	/*
-	 * @RequestMapping("employeeinsert.emp") public
-	 */
+	
+ @RequestMapping("insertEarnEmp.emp") 
+ public String insertEarnEmp(@RequestParam String employeeCode,Model model, EarnIncome ei,HttpServletRequest request) {
+	 
+	 System.out.println("임플로이 코드는요"+employeeCode);
+	 es.insertEarnEmp(ei,employeeCode);
+	 
+	 return "redirect:index.jsp";
+ }
+	 
 }

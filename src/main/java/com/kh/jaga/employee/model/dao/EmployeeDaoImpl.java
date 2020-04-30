@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.jaga.accountTitle.model.vo.AccountTitle;
 import com.kh.jaga.employee.model.vo.Attachment;
+import com.kh.jaga.employee.model.vo.EarnIncome;
 import com.kh.jaga.employee.model.vo.Employee;
 @Repository
 public class EmployeeDaoImpl implements EmployeeDao {
@@ -41,6 +42,12 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	public List<Employee> selectEmpList2(SqlSessionTemplate sqlSession) {
 		List<Employee> list = sqlSession.selectList("Employee.selectEmpList2");
 		return list;
+	}
+
+	@Override
+	public int insertEarnEmp(SqlSessionTemplate sqlSession, EarnIncome ei, String employeeCode) {
+		
+		return sqlSession.insert("EarnIncome.insertEarnEmp",ei);
 	}
 
 }

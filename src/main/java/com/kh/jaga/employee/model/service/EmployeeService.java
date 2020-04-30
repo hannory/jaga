@@ -3,6 +3,7 @@ package com.kh.jaga.employee.model.service;
 import java.util.List;
 
 import com.kh.jaga.employee.model.vo.Attachment;
+import com.kh.jaga.employee.model.vo.EarnIncome;
 import com.kh.jaga.employee.model.vo.Employee;
 
 public interface EmployeeService {
@@ -17,4 +18,9 @@ public interface EmployeeService {
 
 	List<Employee> selectEmpList2();
 
+	int insertEarnEmp(EarnIncome ei, String employeeCode);
+
+	/*
+	 * int insertEarnEmp(EarnIncome ei, String employeeCode);
+	 */
 }

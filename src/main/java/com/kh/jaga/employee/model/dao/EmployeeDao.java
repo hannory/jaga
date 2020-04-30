@@ -5,6 +5,7 @@ import java.util.List;
 import org.mybatis.spring.SqlSessionTemplate;
 
 import com.kh.jaga.employee.model.vo.Attachment;
+import com.kh.jaga.employee.model.vo.EarnIncome;
 import com.kh.jaga.employee.model.vo.Employee;
 
 public interface EmployeeDao {
@@ -18,4 +19,7 @@ public interface EmployeeDao {
 	List<Employee> selectEmpList(SqlSessionTemplate sqlSession);
 
 	List<Employee> selectEmpList2(SqlSessionTemplate sqlSession);
+
+
+	int insertEarnEmp(SqlSessionTemplate sqlSession, EarnIncome ei, String employeeCode);
 }
