@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="BillTotal">
+<resultMap type="SumTaxInvDetail" id="SumTaxInvDetailResultSet">
+ <id property ="detaillistCode" column="DETAILLIST_CODE"/>
+
+  <result property="slipDate" column="SLIP_DATE"/>
+  <result property="venderCode" column="VENDER_CODE"/>
+  <result property="bizRegNum" column="BIZ_REG_NUM"/>
+  <result property="venderName" column="VENDER_NAME"/>
+  <result property="dealCount" column="DEAL_COUNT"/>
+  <result property="valOfSupply" column="VAL_OF_SUPPLY"/>
+  <result property="tax" column="TAX"/>
+  <result property="bossName" column="BOSS_NAME"/>
+  <result property="sellWay" column="SELL_WAY"/>
+  <result property="sellTarget" column="SELL_TARGET"/>
+  <result property="taxinvCode" column="TAXINV_CODE"/>
+
+</resultMap>
+  
+  <select id="selectSoti" resultType="SumOfTaxInvDto">
+  SELECT TAXINV_CODE
+      ,TABLETAX_DIV
+      ,YEAR_OF_ATTR
+      ,REPORT_TERM
+      ,REPORT_TYPE
+      ,DEADLINE
+      ,COM_CODE
+FROM SUM_OF_TAX_INV
+WHERE COM_CODE= #{comCode}
+    AND TABLETAX_DIV ='계산서'
+    AND YEAR_OF_ATTR= #{yearOfAttr}
+    AND REPORT_TERM= #{reportTerm}
+    AND DEADLINE LIKE 'Y'
+  	
+  </select>
+  <select id="selectSotiDivSales" resultType="SumOfTaxInvDiv">
+  SELECT DIV_COT_CODE
+    , ACCT_CODE_CT
+    , DEAL_COUNT
+    , VAL_OF_SUPPLY
+    , DIVISION_CODE
+    , TAXINV_CODE
+    , PUR_SALES
+FROM SUM_OF_TAX_INV_DIV_CNT
+WHERE PUR_SALES='매출'
+    AND TAXINV_CODE= #{taxinvCode}
+  
+  </select>
+  <select id="selectSotiDivPur" resultType="SumOfTaxInvDiv">
+  SELECT DIV_COT_CODE
+    , ACCT_CODE_CT
+    , DEAL_COUNT
+    , VAL_OF_SUPPLY
+    , DIVISION_CODE
+    , TAXINV_CODE
+    , PUR_SALES
+FROM SUM_OF_TAX_INV_DIV_CNT
+WHERE PUR_SALES='매입'
+    AND TAXINV_CODE= #{taxinvCode}
+  
+  </select>
+  <select id="selectDetailSales" resultMap="SumTaxInvDetailResultSet" parameterType="SumOfTaxInvDto">
+  SELECT D.DETAILLIST_CODE 	AS DETAILLIST_CODE
+    ,V.BIZ_REG_NUM AS BIZ_REG_NUM 
+    ,V.VENDER_NAME AS VENDER_NAME 
+    ,D.DEAL_COUNT AS DEAL_COUNT 
+    ,D.VAL_OF_SUPPLY AS VAL_OF_SUPPLY 
+    ,V.BOSS_NAME AS BOSS_NAME 
+    ,V.SELL_WAY AS SELL_WAY 
+    ,V.SELL_TARGET AS SELL_TARGET 
+    ,D.TAXINV_CODE AS TAXINV_CODE
+FROM SUM_OF_TAX_INV_DETAIL D 
+JOIN VENDER V ON(D.VENDER_CODE=V.VENDER_CODE)
+JOIN SLIP S ON(D.DETAILlIST_CODE=S.SLIP_CODE)
+WHERE S.SLIP_DIVISION='매입매출'
+AND S.DIVISION='매출'
+AND S.COM_CODE= #{comCode}
+
+  </select>
+  <select id="selectDetailPur" resultType="SumTaxInvDetail">
+  SELECT D.DETAILLIST_CODE
+    , S.SLIP_DATE 
+    ,D.VENDER_CODE 
+    ,V.BIZ_REG_NUM 
+    ,V.VENDER_NAME 
+    ,D.DEAL_COUNT 
+    ,D.VAL_OF_SUPPLY 
+    ,V.BOSS_NAME 
+    ,V.SELL_WAY 
+    ,V.SELL_TARGET 
+    ,D.TAXINV_CODE
+FROM SUM_OF_TAX_INV_DETAIL D 
+JOIN VENDER V ON(D.VENDER_CODE=V.VENDER_CODE)
+JOIN SLIP S ON(D.DETAILlIST_CODE=S.SLIP_CODE)
+WHERE S.SLIP_DIVISION='매입매출'
+AND S.DIVISION='매입'
+AND S.COM_CODE= #{comCode}
+  </select>
+  
+  <select id="selectReceiption" resultType="SumTaxInvDetail" parameterType="java.util.HashMap">
+SELECT VENDER.BIZ_REG_NUM,VENDER.VENDER_NAME,S.DEAL_COUNT, S.VAL_OF_SUPPLY,  BOSS_NAME,SELL_WAY,SELL_TARGET
+FROM(SELECT J.VENDER_CODE AS VENDER_CODE, COUNT(*) AS DEAL_COUNT, SUM(S.SUPPLY_VALUE) AS VAL_OF_SUPPLY
+FROM SLIP S
+JOIN JOURNALIZE J ON(S.SLIP_CODE=J.SLIP_CODE)
+JOIN VENDER V ON(J.VENDER_CODE=V.VENDER_CODE)
+WHERE S.SLIP_DIVISION ='매입매출' 
+    AND S.DIVISION =#{Receiption.division} 
+    AND S.COM_CODE= #{Receiption.comCode}
+    AND S.EVIDENCE_CODE='20'
+    AND SLIP_DATE BETWEEN #{Receiption.slipDate} AND #{endDate}
+    AND J.DEBIT_CREDIT='대변'
+GROUP BY J.VENDER_CODE) S
+JOIN VENDER ON(VENDER.VENDER_CODE=S.VENDER_CODE)
+  </select>
+  
+  <insert id="insertSumOfTaxInv" parameterType="SumOfTaxInv">
+  <!-- NULL처리된 부분은 신고종류(정기/수정)인지 보는 곳 -->
+  INSERT INTO SUM_OF_TAX_INV VALUES(SEQ_SUM_OF_TAX_INV.NEXTVAL, #{tabletaxDiv}, #{yearOfAttr},#{reportTerm}, NULL,'N',#{comCode})
+  </insert>
+  
+  <select id="selectSotiCurrval" resultType="string">
+  SELECT SEQ_SUM_OF_TAX_INV.CURRVAL FROM DUAL
+  </select>
+  <insert id="insertDetailList" parameterType="SumTaxInvDetail">
+  <!--NULL인 부분은 세금영역  -->
+  INSERT INTO SUM_OF_TAX_INV_DETAIL VALUES
+  (SEQ_SUM_OF_TAX_INV_DETAIL.NEXTVAL,#{slipDate},#{venderCode},#{dealCount},#{valOfSupply},NULL,#{taxinvCode})
+  
+  </insert>
+  
+  <insert id="insertDivList" parameterType="SumOfTaxInvDiv">
+  <!-- NULL부분은 세금영역  -->
+  INSERT INTO SUM_OF_TAX_INV_DIV_CNT VALUES
+  (SEQ_SUM_OF_TAX_INV_DIV_CNT.NEXTVAL,#{acctCodeCt},#{dealCount},#{valOfSupply},NULL,#{divisionCode},#{taxinvCode},#{purSales})
+  
+  </insert>
+  <update id="updatesDtoDeadline" parameterType="SumOfTaxInvDto">
+  UPDATE SUM_OF_TAX_INV SET DEADLINE='Y' WHERE TAXINV_CODE=#{taxinvCode}
+  </update>
+  
+  <update id="updatesDtoDeadlineCen" parameterType="SumOfTaxInvDto">
+  UPDATE SUM_OF_TAX_INV SET DEADLINE='N' WHERE TAXINV_CODE=#{taxinvCode} 
+  AND DEADLINE LIKE 'Y'
+  </update>
+  </mapper>
