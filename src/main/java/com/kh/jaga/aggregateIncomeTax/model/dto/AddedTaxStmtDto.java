@@ -8,9 +8,9 @@ import java.math.BigDecimal;
  * @createDate 2020. 4. 29.
  */
 public class AddedTaxStmtDto {
-	String STMT_NO;
-	String ATTR_YEAR;
-	String COM_CODE;
+	String stmtNo;
+	String attrYear;
+	String comCode;
 	BigDecimal in101;
 	BigDecimal in102;
 	BigDecimal in103;
@@ -105,7 +105,7 @@ public class AddedTaxStmtDto {
 	public AddedTaxStmtDto() {
 	} // 기본생성자
 
-	public AddedTaxStmtDto(String sTMT_NO, String aTTR_YEAR, String cOM_CODE, BigDecimal in101, BigDecimal in102,
+	public AddedTaxStmtDto(String stmtNo, String attrYear, String comCode, BigDecimal in101, BigDecimal in102,
 			BigDecimal in103, BigDecimal in104, BigDecimal in201, BigDecimal in202, BigDecimal in203, BigDecimal in301,
 			BigDecimal in302, BigDecimal in401, BigDecimal in402, BigDecimal in403, BigDecimal in404, BigDecimal in405,
 			BigDecimal in406, BigDecimal in407, BigDecimal in408, BigDecimal in409, BigDecimal in410, BigDecimal in411,
@@ -123,9 +123,9 @@ public class AddedTaxStmtDto {
 			BigDecimal v1203, BigDecimal v1204, BigDecimal v1205, BigDecimal v1301, BigDecimal v1302, BigDecimal v1501,
 			BigDecimal v1601, BigDecimal sumRight) {
 		super();
-		STMT_NO = sTMT_NO;
-		ATTR_YEAR = aTTR_YEAR;
-		COM_CODE = cOM_CODE;
+		this.stmtNo = stmtNo;
+		this.attrYear = attrYear;
+		this.comCode = comCode;
 		this.in101 = in101;
 		this.in102 = in102;
 		this.in103 = in103;
@@ -218,28 +218,28 @@ public class AddedTaxStmtDto {
 		this.sumRight = sumRight;
 	}
 
-	public String getSTMT_NO() {
-		return STMT_NO;
+	public String getStmtNo() {
+		return stmtNo;
 	}
 
-	public void setSTMT_NO(String sTMT_NO) {
-		STMT_NO = sTMT_NO;
+	public void setStmtNo(String stmtNo) {
+		this.stmtNo = stmtNo;
 	}
 
-	public String getATTR_YEAR() {
-		return ATTR_YEAR;
+	public String getAttrYear() {
+		return attrYear;
 	}
 
-	public void setATTR_YEAR(String aTTR_YEAR) {
-		ATTR_YEAR = aTTR_YEAR;
+	public void setAttrYear(String attrYear) {
+		this.attrYear = attrYear;
 	}
 
-	public String getCOM_CODE() {
-		return COM_CODE;
+	public String getComCode() {
+		return comCode;
 	}
 
-	public void setCOM_CODE(String cOM_CODE) {
-		COM_CODE = cOM_CODE;
+	public void setComCode(String comCode) {
+		this.comCode = comCode;
 	}
 
 	public BigDecimal getIn101() {
@@ -964,26 +964,28 @@ public class AddedTaxStmtDto {
 
 	@Override
 	public String toString() {
-		return "AddedTaxStmtDto [STMT_NO=" + STMT_NO + ", ATTR_YEAR=" + ATTR_YEAR + ", COM_CODE=" + COM_CODE
-				+ ", in101=" + in101 + ", in102=" + in102 + ", in103=" + in103 + ", in104=" + in104 + ", in201=" + in201
-				+ ", in202=" + in202 + ", in203=" + in203 + ", in301=" + in301 + ", in302=" + in302 + ", in401=" + in401
-				+ ", in402=" + in402 + ", in403=" + in403 + ", in404=" + in404 + ", in405=" + in405 + ", in406=" + in406
-				+ ", in407=" + in407 + ", in408=" + in408 + ", in409=" + in409 + ", in410=" + in410 + ", in411=" + in411
-				+ ", in412=" + in412 + ", in501=" + in501 + ", in502=" + in502 + ", in601=" + in601 + ", in602=" + in602
-				+ ", in701=" + in701 + ", in702=" + in702 + ", in801=" + in801 + ", in802=" + in802 + ", in901=" + in901
-				+ ", in1001=" + in1001 + ", in1002=" + in1002 + ", in1101=" + in1101 + ", in1102=" + in1102
-				+ ", in1103=" + in1103 + ", in1201=" + in1201 + ", in1202=" + in1202 + ", in1203=" + in1203
-				+ ", in1204=" + in1204 + ", in1205=" + in1205 + ", in1301=" + in1301 + ", in1302=" + in1302
-				+ ", in1501=" + in1501 + ", in1601=" + in1601 + ", sumLeft=" + sumLeft + ", v101=" + v101 + ", v102="
-				+ v102 + ", v103=" + v103 + ", v104=" + v104 + ", v201=" + v201 + ", v202=" + v202 + ", v203=" + v203
-				+ ", v301=" + v301 + ", v302=" + v302 + ", v401=" + v401 + ", v402=" + v402 + ", v403=" + v403
-				+ ", v404=" + v404 + ", v405=" + v405 + ", v406=" + v406 + ", v407=" + v407 + ", v408=" + v408
-				+ ", v409=" + v409 + ", v410=" + v410 + ", v411=" + v411 + ", v412=" + v412 + ", v501=" + v501
-				+ ", v502=" + v502 + ", v601=" + v601 + ", v602=" + v602 + ", v701=" + v701 + ", v702=" + v702
-				+ ", v801=" + v801 + ", v802=" + v802 + ", v901=" + v901 + ", v1001=" + v1001 + ", v1002=" + v1002
-				+ ", v1101=" + v1101 + ", v1102=" + v1102 + ", v1103=" + v1103 + ", v1201=" + v1201 + ", v1202=" + v1202
-				+ ", v1203=" + v1203 + ", v1204=" + v1204 + ", v1205=" + v1205 + ", v1301=" + v1301 + ", v1302=" + v1302
-				+ ", v1501=" + v1501 + ", v1601=" + v1601 + ", sumRight=" + sumRight + "]";
+		return "AddedTaxStmtDto [stmtNo=" + stmtNo + "\n attrYear=" + attrYear + "\n comCode=" + comCode + "\n in101="
+				+ in101 + "\n in102=" + in102 + "\n in103=" + in103 + "\n in104=" + in104 + "\n in201=" + in201 + "\n in202="
+				+ in202 + "\n in203=" + in203 + "\n in301=" + in301 + "\n in302=" + in302 + "\n in401=" + in401 + "\n in402="
+				+ in402 + "\n in403=" + in403 + "\n in404=" + in404 + "\n in405=" + in405 + "\n in406=" + in406 + "\n in407="
+				+ in407 + "\n in408=" + in408 + "\n in409=" + in409 + "\n in410=" + in410 + "\n in411=" + in411 + "\n in412="
+				+ in412 + "\n in501=" + in501 + "\n in502=" + in502 + "\n in601=" + in601 + "\n in602=" + in602 + "\n in701="
+				+ in701 + "\n in702=" + in702 + "\n in801=" + in801 + "\n in802=" + in802 + "\n in901=" + in901
+				+ "\n in1001=" + in1001 + "\n in1002=" + in1002 + "\n in1101=" + in1101 + "\n in1102=" + in1102
+				+ "\n in1103=" + in1103 + "\n in1201=" + in1201 + "\n in1202=" + in1202 + "\n in1203=" + in1203
+				+ "\n in1204=" + in1204 + "\n in1205=" + in1205 + "\n in1301=" + in1301 + "\n in1302=" + in1302
+				+ "\n in1501=" + in1501 + "\n in1601=" + in1601 + "\n sumLeft=" + sumLeft + "\n v101=" + v101 + "\n v102="
+				+ v102 + "\n v103=" + v103 + "\n v104=" + v104 + "\n v201=" + v201 + "\n v202=" + v202 + "\n v203=" + v203
+				+ "\n v301=" + v301 + "\n v302=" + v302 + "\n v401=" + v401 + "\n v402=" + v402 + "\n v403=" + v403
+				+ "\n v404=" + v404 + "\n v405=" + v405 + "\n v406=" + v406 + "\n v407=" + v407 + "\n v408=" + v408
+				+ "\n v409=" + v409 + "\n v410=" + v410 + "\n v411=" + v411 + "\n v412=" + v412 + "\n v501=" + v501
+				+ "\n v502=" + v502 + "\n v601=" + v601 + "\n v602=" + v602 + "\n v701=" + v701 + "\n v702=" + v702
+				+ "\n v801=" + v801 + "\n v802=" + v802 + "\n v901=" + v901 + "\n v1001=" + v1001 + "\n v1002=" + v1002
+				+ "\n v1101=" + v1101 + "\n v1102=" + v1102 + "\n v1103=" + v1103 + "\n v1201=" + v1201 + "\n v1202=" + v1202
+				+ "\n v1203=" + v1203 + "\n v1204=" + v1204 + "\n v1205=" + v1205 + "\n v1301=" + v1301 + "\n v1302=" + v1302
+				+ "\n v1501=" + v1501 + "\n v1601=" + v1601 + "\n sumRight=" + sumRight + "]";
 	}
 
+	
+	
 }// class

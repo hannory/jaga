@@ -44,16 +44,42 @@
 	<!-- 작업영역 -->
 	
 	<h2 class="mt-4">종합소득세</h2>
+	
+	<script>
+		/* form 서브밋 체크 */
+		flag = false;
+		tempValue = 0 ;
 		
-		<form action="insertAddedTaxStmt.aggregate" method="post">	<!-- 포스트로 한번 보내보자 -->
+		function checkSubmit(){
+			if(tempValue > 0){
+				return true;
+			}
+			return false;
+		}
+		function submitFunc(){
+			tempValue = 1;
+			$("#formId").submit();
+		}
+	</script>
+	
+		<!-- <button onclick="submitFunc();" style="width:50px; height:30px; background:#24574A; border:none; color:white; border-radius:5px;">저장</button> -->
+		
 		
 		
 		<!-- 귀속년도 -->
 		<div style="float:right;">
 			<label>귀속년도 : </label>
-			<input type="text" style="border-bottom:1px solid black;">
+			<input id="attrYearDisplay" type="text" style="border-bottom:1px solid black;">
 			<label>년</label>
 		</div>
+		
+		<script>
+			$(function(){
+				$("#attrYearDisplay").change(function(){
+					$("#attrYear").val($("#attrYearDisplay").val());
+				});
+			})
+		</script>
 		<!-- //귀속년도 -->
 		
 		<div style="height:50px;"></div><!-- 간격 띄우기 위한 용도 -->
@@ -64,7 +90,7 @@
 			<div class="div-top4menu" style="border-bottom: 3px solid #24574A"><h5>가산세명세서</h5></div>
 			<div class="div-top4menu" onclick="goAggregateCalculated();"><h5>종합소득세액계산서</h5></div>
 			
-			<div style="display:inline-block;"><button style="width:50px; height:30px; background:#24574A; border:none; color:white; border-radius:5px;">저장</button></div>
+			<button onclick="submitFunc();" style="width:50px; height:30px; background:#24574A; border:none; color:white; border-radius:5px;">저장</button>
 		</div>
 		<!-- //class="div-top4menu" -->
 		
@@ -92,6 +118,15 @@
 		
 		<br>
 		
+		<form id="formId" action="insertAddedTaxStmt.aggregate" method="post" onsubmit="return checkSubmit();">	<!-- 포스트로 한번 보내보자 -->
+		
+		
+		<!-- 서버로 보낼 데이터 -->
+		<input type="hidden" id="attrYear" name="attrYear">
+		<input type="hidden" id="comCode" name="comCode" value="${ loginCompany.companyCode }">
+		
+		
+		
 		<table class="table-center" border="1" style="background:lightgray">
 		
 			<tr>
@@ -105,69 +140,69 @@
 				<td rowspan="4">(1) 무신고</td>
 				<td rowspan="2" colspan="2">부정무신고</td>
 				<td>무신고납부세액</td>
-				<td><input type="text" id="in101" class="left"></td>
+				<td><input type="text" id="in101" class="left" name="in101"></td>
 				<td>40/100</td>
-				<td><input type="text" id="v101" class="right" name=""></td>
+				<td><input type="text" id="v101" class="right" name="v101"></td>
 			</tr>
 			
 			<tr>
 				<td>수입금액</td>
-				<td><input type="text" id="in102" class="left"></td>
+				<td><input type="text" id="in102" class="left" name="in102"></td>
 				<td>14/10,000</td>
-				<td><input type="text" id="v102" class="right"></td>
+				<td><input type="text" id="v102" class="right" name="v102"></td>
 			</tr>
 			
 			<tr>
 				<td colspan="2" rowspan="2">일반무신고</td>
 				<td>무신고납부세액</td>
-				<td><input type="text" id="in103" class="left"></td>
+				<td><input type="text" id="in103" class="left" name="in103"></td>
 				<td>20/100</td>
-				<td><input type="text" id="v103"  class="right"name=""></td>
+				<td><input type="text" id="v103"  class="right" name="v103"></td>
 			</tr>
 			
 			<tr>
 				<td>수입금액</td>
-				<td><input type="text" id="in104" class="left"></td>
+				<td><input type="text" id="in104" class="left" name="in104"></td>
 				<td>7/10,000</td>
-				<td><input type="text" id="v104" class="right"></td>
+				<td><input type="text" id="v104" class="right" name="v104"></td>
 			</tr>
 			
 			<tr>
 				<td rowspan="3">(2) 과소신고</td>
 				<td rowspan="2" colspan="2">부정과서신고</td>
 				<td>과소신고납부세액</td>
-				<td><input type="text" id="in201" class="left"></td>
+				<td><input type="text" id="in201" class="left" name="in201"></td>
 				<td>40/100</td>
-				<td><input type="text" id="v201" class="right"></td>
+				<td><input type="text" id="v201" class="right" name="v201"></td>
 			</tr>
 			
 			<tr>
 				<td>수입금액</td>
-				<td><input type="text" id="in202" class="left"></td>
+				<td><input type="text" id="in202" class="left" name="in202"></td>
 				<td>14/10,000</td>
-				<td><input type="text" id="v202" class="right"></td>
+				<td><input type="text" id="v202" class="right" name="v202"></td>
 			</tr>
 			
 			<tr>
 				<td colspan="2">일반과소신고</td>
 				<td>과소신고납부세액</td>
-				<td><input type="text" id="in203" class="left"></td>
+				<td><input type="text" id="in203" class="left" name="in203"></td>
 				<td>10/100</td>
-				<td><input type="text" id="v203"></td>
+				<td><input type="text" id="v203" class="right" name="v203"></td>
 			</tr>
 			
 			<tr>
 				<td rowspan="2" colspan="2">(3) 납부(환급)불성실</td>
 				<td colspan="2" >미납일수</td>
-				<td><input type="text" id="in301" class="left"></td>
+				<td><input type="text" id="in301" class="left" name="in301"></td>
 				<td rowspan="2">2.5/10,000</td>
-				<td><input type="text" id="v301" class="right"></td>
+				<td><input type="text" id="v301" class="right" name="v301"></td>
 			</tr>
 			
 			<tr>
 				<td colspan="2">미납부(환급)세액</td>
-				<td><input type="text" id="in302" class="left"></td>
-				<td><input type="text" id="v302" class="right"></td>
+				<td><input type="text" id="in302" class="left" name="in302"></td>
+				<td><input type="text" id="v302" class="right" name="v302"></td>
 			</tr>
 			
 			
@@ -177,100 +212,100 @@
 				<td rowspan="2">지급명세서</td>
 				<td>미제출(불명)</td>
 				<td>지급(불명)금액</td>
-				<td><input type="text" id="in401" class="left"></td>
+				<td><input type="text" id="in401" class="left" name="in401"></td>
 				<td>1/100</td>
-				<td><input type="text" id="v401" class="right"></td>
+				<td><input type="text" id="v401" class="right" name="v401"></td>
 			</tr>
 			
 			<tr>
 				<td>지연 제출</td>
 				<td>지연 제출 금액</td>
-				<td><input type="text" id="in402" class="left"></td>
+				<td><input type="text" id="in402" class="left" name="in402"></td>
 				<td>0.5/100</td>
-				<td><input type="text" id="v402" class="right"></td>
+				<td><input type="text" id="v402" class="right" name="v402"></td>
 			</tr>
 			
 			<tr>
 				<td rowspan="6">계산서</td>
 				<td>미발급(위장)</td>
 				<td>공급가액</td>
-				<td><input type="text" id="in403" class="left"></td>
+				<td><input type="text" id="in403" class="left" name="in403"></td>
 				<td>2/100</td>
-				<td><input type="text" id="v403" class="right"></td>
+				<td><input type="text" id="v403" class="right" name="v403"></td>
 			</tr>
 			
 			<tr>
 				<td>지연발급</td>
 				<td>공급가액</td>
-				<td><input type="text" id="in404" class="left"></td>
+				<td><input type="text" id="in404" class="left" name="in404"></td>
 				<td>2/100</td>
-				<td><input type="text" id="v404" class="right"></td>
+				<td><input type="text" id="v404" class="right" name="v404"></td>
 			</tr>
 			
 			<tr>
 				<td>불명</td>
 				<td>불명금액</td>
-				<td><input type="text" id="in405" class="left"></td>
+				<td><input type="text" id="in405" class="left" name="in405"></td>
 				<td>1/100</td>
-				<td><input type="text" id="v405" class="right"></td>
+				<td><input type="text" id="v405" class="right" name="v405"></td>
 			</tr>
 			
 			<tr>
 				<td>전자계산서 외 발급</td>
 				<td>공급가액</td>
-				<td><input type="text" id="in406" class="left"></td>
+				<td><input type="text" id="in406" class="left" name="in406"></td>
 				<td>1/100</td>
-				<td><input type="text" id="v406" class="right"></td>
+				<td><input type="text" id="v406" class="right" name="v406"></td>
 			</tr>
 			
 			<tr>
 				<td>전자계산서 미전송</td>
 				<td>공급가액</td>
-				<td><input type="text" id="in407" class="left"></td>
+				<td><input type="text" id="in407" class="left" name="in407"></td>
 				<td> - </td>
-				<td><input type="text" id="v407" class="right"></td>
+				<td><input type="text" id="v407" class="right" name="v407"></td>
 			</tr>
 			
 			<tr>
 				<td>전자계산서 지연전송</td>
 				<td>지연 전송 금액</td>
-				<td><input type="text" id="in408" class="left"></td>
+				<td><input type="text" id="in408" class="left" name="in408"></td>
 				<td> - </td>
-				<td><input type="text" id="v408" class="right"></td>
+				<td><input type="text" id="v408" class="right" name="v408"></td>
 			</tr>
 			
 			<tr>
 				<td rowspan="2">계산서합계표</td>
 				<td>미제출(불명)</td>
 				<td>공급(불명)가액</td>
-				<td><input type="text" id="in409" class="left"></td>
+				<td><input type="text" id="in409" class="left" name="in409"></td>
 				<td>0.5/100</td>
-				<td><input type="text" id="v409" class="right"></td>
+				<td><input type="text" id="v409" class="right" name="v409"></td>
 			</tr>
 			
 			<tr>
 				<td>지연 제출</td>
 				<td>지연 제출 금액</td>
-				<td><input type="text" id="in410" class="left"></td>
+				<td><input type="text" id="in410" class="left" name="in410"></td>
 				<td>0.3/100</td>
-				<td><input type="text" id="v410" class="right"></td>
+				<td><input type="text" id="v410" class="right" name="v410"></td>
 			</tr>
 			
 			<tr>
 				<td rowspan="2">매입처별세금<br>계산서합계표</td>
 				<td>미제출(불명)</td>
 				<td>공급(불명)가액</td>
-				<td><input type="text" id="in411" class="left"></td>
+				<td><input type="text" id="in411" class="left" name="in411"></td>
 				<td>1/100</td>
-				<td><input type="text" id="v411" class="right"></td>
+				<td><input type="text" id="v411" class="right" name="v411"></td>
 			</tr>
 			
 			<tr>
 				<td>지연 제출</td>
 				<td>지연 제출 금액</td>
-				<td><input type="text" id="in412" class="left"></td>
+				<td><input type="text" id="in412" class="left" name="in412"></td>
 				<td>0.3/100</td>
-				<td><input type="text" id="v412" class="right"></td>
+				<td><input type="text" id="v412" class="right" name="v412"></td>
 			</tr>
 			
 			<tr>
@@ -284,171 +319,171 @@
 				<td rowspan="2">(5) 증빙불비</td>
 				<td colspan="2">미수취</td>
 				<td>미 수취 금액</td>
-				<td><input type="text" id="in501" class="left"></td>
+				<td><input type="text" id="in501" class="left" name="in501"></td>
 				<td>2/100</td>
-				<td><input type="text" id="v501" class="right"></td>
+				<td><input type="text" id="v501" class="right" name="v501"></td>
 			</tr>
 			
 			<tr>
 				<td colspan="2">허위수취</td>
 				<td>허위 수취 금액</td>
-				<td><input type="text" id="in502" class="left"></td>
+				<td><input type="text" id="in502" class="left" name="in502"></td>
 				<td>2/100</td>
-				<td><input type="text" id="v502" class="right"></td>
+				<td><input type="text" id="v502" class="right" name="v502"></td>
 			</tr>
 			
 			<tr>
 				<td rowspan="2">(6) 영수증 수취<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;명세서미제출</td>
 				<td colspan="2">미제출</td>
 				<td>미제출금액</td>
-				<td><input type="text" id="in601" class="left"></td>
+				<td><input type="text" id="in601" class="left" name="in601"></td>
 				<td>1/100</td>
-				<td><input type="text" id="v601" class="right"></td>
+				<td><input type="text" id="v601" class="right" name="v601"></td>
 			</tr>
 			
 			<tr>
 				<td colspan="2">불명</td>
 				<td>불명금액</td>
-				<td><input type="text" id="in602" class="left"></td>
+				<td><input type="text" id="in602" class="left" name="in602"></td>
 				<td>1/100</td>
-				<td><input type="text" id="v602" class="right"></td>
+				<td><input type="text" id="v602" class="right" name="v602"></td>
 			</tr>
 			
 			<tr>
 				<td rowspan="2">(7) 사업장현황<br>신고불성실</td>
 				<td colspan="2">무신고</td>
 				<td>수입금액</td>
-				<td><input type="text" id="in701" class="left"></td>
+				<td><input type="text" id="in701" class="left" name="in701"></td>
 				<td>0.5/100</td>
-				<td><input type="text" id="v701" class="right"></td>
+				<td><input type="text" id="v701" class="right" name="v701"></td>
 			</tr>
 			
 			<tr>
 				<td colspan="2">과소신고</td>
 				<td>수입금액</td>
-				<td><input type="text" id="in702" class="left"></td>
+				<td><input type="text" id="in702" class="left" name="in702"></td>
 				<td>0.5/100</td>
-				<td><input type="text" id="v702" class="right"></td>
+				<td><input type="text" id="v702" class="right" name="v702"></td>
 			</tr>
 			
 			<tr>
 				<td rowspan="2">(8) 공동사업장<br>등록불성실</td>
 				<td colspan="2">미등록/허위등록</td>
 				<td>총 수입금액</td>
-				<td><input type="text" id="in801" class="left"></td>
+				<td><input type="text" id="in801" class="left" name="in801"></td>
 				<td>0.5/100</td>
-				<td><input type="text" id="v801" class="right"></td>
+				<td><input type="text" id="v801" class="right" name="v801"></td>
 			</tr>
 			
 			<tr>
 				<td colspan="2">손익분배비율 허위신고 등</td>
 				<td>총 수입금액</td>
-				<td><input type="text" id="in802" class="left"></td>
+				<td><input type="text" id="in802" class="left" name="in802"></td>
 				<td>0.1/100</td>
-				<td><input type="text" id="v802" class="right"></td>
+				<td><input type="text" id="v802" class="right" name="v802"></td>
 			</tr>
 			
 			<tr>
 				<td colspan="3">(9) 무기장</td>
 				<td>산출세액</td>
-				<td><input type="text" id="in901" class="left"></td>
+				<td><input type="text" id="in901" class="left" name="in901"></td>
 				<td>20/100</td>
-				<td><input type="text" id="v901" class="right"></td>
+				<td><input type="text" id="v901" class="right" name="v901"></td>
 			</tr>
 			
 			<tr>
 				<td rowspan="2">(10) 사업용계좌<br>미신고 등</td>
 				<td colspan="2">미개설/미신고</td>
 				<td>수입금액 등</td>
-				<td><input type="text" id="in1001" class="left"></td>
+				<td><input type="text" id="in1001" class="left" name="in1001"></td>
 				<td>0.2/100</td>
-				<td><input type="text" id="v1001" class="right"></td>
+				<td><input type="text" id="v1001" class="right" name="v1001"></td>
 			</tr>
 			
 			<tr>
 				<td colspan="2">미사용</td>
 				<td>미사용 금액</td>
-				<td><input type="text" id="in1002" class="left"></td>
+				<td><input type="text" id="in1002" class="left" name="in1002"></td>
 				<td>0.2/100</td>
-				<td><input type="text" id="v1002" class="right"></td>
+				<td><input type="text" id="v1002" class="right" name="v1002"></td>
 			</tr>
 			
 			<tr>
 				<td rowspan="3">(11) 신용카드거부</td>
 				<td colspan="3">거래거부/불성실금액</td>
-				<td><input type="text" id="in1101" class="left"></td>
+				<td><input type="text" id="in1101" class="left" name="in1101"></td>
 				<td>5/100</td>
-				<td><input type="text" id="v1101" class="right"></td>
+				<td><input type="text" id="v1101" class="right" name="v1101"></td>
 			</tr>
 			
 			<tr>
 				<td colspan="3">거래거부/불성실건수</td>
-				<td><input type="text" id="in1102" class="left"></td>
+				<td><input type="text" id="in1102" class="left" name="in1102"></td>
 				<td>5,000원</td>
-				<td><input type="text" id="v1102" class="right"></td>
+				<td><input type="text" id="v1102" class="right" name="v1102"></td>
 			</tr>
 			
 			<tr>
 				<td colspan="2">위장가공</td>
 				<td>발급수취금액</td>
-				<td><input type="text" id="in1103" class="left"></td>
+				<td><input type="text" id="in1103" class="left" name="in1103"></td>
 				<td>2/100</td>
-				<td><input type="text" id="v1103" class="right"></td>
+				<td><input type="text" id="v1103" class="right" name="v1103"></td>
 			</tr>
 			
 			<tr>
 				<td rowspan="5">(12) 현금영수증<br>미발급</td>
 				<td colspan="2">미가맹</td>
 				<td>수입금액</td>
-				<td><input type="text" id="in1201" class="left"></td>
+				<td><input type="text" id="in1201" class="left" name="in1201"></td>
 				<td>1/100</td>
-				<td><input type="text" id="v1201" class="right"></td>
+				<td><input type="text" id="v1201" class="right" name="v1201"></td>
 			</tr>
 			
 			<tr>
 				<td colspan="3">미발급/불성실금액</td>
-				<td><input type="text" id="in1202" class="left"></td>
+				<td><input type="text" id="in1202" class="left" name="in1202"></td>
 				<td>5/100</td>
-				<td><input type="text" id="v1202" class="right"></td>
+				<td><input type="text" id="v1202" class="right" name="v1202"></td>
 			</tr>
 			
 			<tr>
 				<td colspan="3">미발급/불성실건수</td>
-				<td><input type="text" id="in1203" class="left"></td>
+				<td><input type="text" id="in1203" class="left" name="in1203"></td>
 				<td>5,000원</td>
-				<td><input type="text" id="v1203" class="right"></td>
+				<td><input type="text" id="v1203" class="right" name="v1203"></td>
 			</tr>
 			
 			<tr>
 				<td colspan="2">위장가공</td>
 				<td>발급수취금액</td>
-				<td><input type="text" id="in1204" class="left"></td>
+				<td><input type="text" id="in1204" class="left" name="in1204"></td>
 				<td>2/100</td>
-				<td><input type="text" id="v1204" class="right"></td>
+				<td><input type="text" id="v1204" class="right" name="v1204"></td>
 			</tr>
 			
 			<tr>
 				<td colspan="3">미발급금액(2019귀속부터적용)</td>
-				<td><input type="text" id="in1205" class="left"></td>
+				<td><input type="text" id="in1205" class="left" name="in1205"></td>
 				<td>20/100</td>
-				<td><input type="text" id="v1205" class="right"></td>
+				<td><input type="text" id="v1205" class="right" name="v1205"></td>
 			</tr>
 			
 			<tr>
 				<td rowspan="2">(13) 기부금영수증<br>불성실</td>
 				<td colspan="2">영수증 불성실발급</td>
 				<td>불성실기재금액</td>
-				<td><input type="text" id="in1301" class="left"></td>
+				<td><input type="text" id="in1301" class="left" name="in1301"></td>
 				<td>2/100</td>
-				<td><input type="text" id="v1301" class="right"></td>
+				<td><input type="text" id="v1301" class="right" name="v1301"></td>
 			</tr>
 			
 			<tr>
 				<td colspan="2">발급명세서 미작성/미보관</td>
 				<td>미작성 등 금액</td>
-				<td><input type="text" id="in1302" class="left"></td>
+				<td><input type="text" id="in1302" class="left" name="in1302"></td>
 				<td>0.2/100</td>
-				<td><input type="text" id="v1302" class="right"></td>
+				<td><input type="text" id="v1302" class="right" name="v1302"></td>
 			</tr>
 			
 			<tr>
@@ -461,17 +496,17 @@
 			<tr>
 				<td colspan="3">(15) 성실신고확인서 미제출 가산세</td>
 				<td>산출세액</td>
-				<td><input type="text" id="in1501" class="left"></td>
+				<td><input type="text" id="in1501" class="left" name="in1501"></td>
 				<td>5/100</td>
-				<td><input type="text" id="v1501" class="right"></td>
+				<td><input type="text" id="v1501" class="right" name="v1501"></td>
 			</tr>
 			
 			<tr>
 				<td colspan="3">(16) 유보소득계산명세서 제출 불성실 가산세</td>
 				<td>배당가능 유보소득금액</td>
-				<td><input type="text" id="in1601" class="left"></td>
+				<td><input type="text" id="in1601" class="left" name="in1601"></td>
 				<td>0.5/100</td>
-				<td><input type="text" id="v1601" class="right"></td>
+				<td><input type="text" id="v1601" class="right" name="v1601"></td>
 			</tr>
 			
 			<tr>
@@ -487,7 +522,7 @@
 		</table>
 		
 		</form><!-- 포스트로 보내는 태그 -->
-	
+		
 	
 		<script>
 			/* 세율 적용해서 계산하는 스크립트 */
@@ -865,6 +900,8 @@
 		
 		
 		</script>
+		
+		
 		
 		
 		
