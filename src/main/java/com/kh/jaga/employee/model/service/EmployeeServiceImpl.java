@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.jaga.employee.model.dao.EmployeeDao;
 import com.kh.jaga.employee.model.vo.Attachment;
+import com.kh.jaga.employee.model.vo.EarnIncome;
 import com.kh.jaga.employee.model.vo.Employee;
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
@@ -62,5 +63,12 @@ public class EmployeeServiceImpl implements EmployeeService {
 		}
 		return list;
 	}
+
+	@Override
+	public int insertEarnEmp(EarnIncome ei, String employeeCode) {
+
+		return ed.insertEarnEmp(sqlSession, ei, employeeCode);
+	}
+
 
 }
