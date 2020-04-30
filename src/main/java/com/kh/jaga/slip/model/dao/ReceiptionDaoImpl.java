@@ -9,7 +9,9 @@ import com.kh.jaga.company.model.vo.Company;
 import com.kh.jaga.slip.model.exception.receiptionException;
 import com.kh.jaga.slip.model.vo.AccountTitle;
 import com.kh.jaga.slip.model.vo.Journalize;
+import com.kh.jaga.slip.model.vo.NormalReceiptionDTO;
 import com.kh.jaga.slip.model.vo.Receiption;
+import com.kh.jaga.slip.model.vo.Receiption2;
 import com.kh.jaga.slip.model.vo.Vender;
 import com.kh.jaga.taxInvoice.model.vo.TaxInvoice;
 
@@ -65,6 +67,18 @@ public class ReceiptionDaoImpl implements ReceiptionDao {
 	@Override
 	public int insertTaxInvoice(SqlSessionTemplate sqlSession, TaxInvoice ti) {
 		return sqlSession.insert("Receiption.insertTaxInvoice", ti);
+	}
+
+	@Override
+	public List<NormalReceiptionDTO> selectNormalList(SqlSessionTemplate sqlSession, String comCode) {
+		return sqlSession.selectList("Receiption.selectNomalSlip", comCode);
+	}
+
+	@Override
+	public String selectDateSlipCode(SqlSessionTemplate sqlSession, Receiption rp) {
+		
+		
+		return sqlSession.selectOne("Receiption.selectDSCode", rp);
 	}
 	
 }
