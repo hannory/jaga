@@ -26,6 +26,8 @@ public class Receiption2 {
 	private String comCode;			//회사코드
 	private String dateSlipCode;	//회사별, 일자별 전표번호
 	private String evidence;
+	private String month;
+	private String day;
 	private List<Journalize> journalizeList;
 	
 	public Receiption2() {}
@@ -33,7 +35,7 @@ public class Receiption2 {
 	public Receiption2(String slipCode, String slipDivision, String division, String slipDate, String evidenceCode,
 			BigDecimal supplyValue, BigDecimal valueTax, BigDecimal supplyDeaga, String deemedStatus,
 			String resolutionCode, String brief, String item, String comCode, String dateSlipCode, String evidence,
-			List<Journalize> journalizeList) {
+			String month, String day, List<Journalize> journalizeList) {
 		super();
 		this.slipCode = slipCode;
 		this.slipDivision = slipDivision;
@@ -50,6 +52,8 @@ public class Receiption2 {
 		this.comCode = comCode;
 		this.dateSlipCode = dateSlipCode;
 		this.evidence = evidence;
+		this.month = month;
+		this.day = day;
 		this.journalizeList = journalizeList;
 	}
 
@@ -173,6 +177,22 @@ public class Receiption2 {
 		this.evidence = evidence;
 	}
 
+	public String getMonth() {
+		return month;
+	}
+
+	public void setMonth(String month) {
+		this.month = month;
+	}
+
+	public String getDay() {
+		return day;
+	}
+
+	public void setDay(String day) {
+		this.day = day;
+	}
+
 	public List<Journalize> getJournalizeList() {
 		return journalizeList;
 	}
@@ -187,11 +207,9 @@ public class Receiption2 {
 				+ ", slipDate=" + slipDate + ", evidenceCode=" + evidenceCode + ", supplyValue=" + supplyValue
 				+ ", valueTax=" + valueTax + ", supplyDeaga=" + supplyDeaga + ", deemedStatus=" + deemedStatus
 				+ ", resolutionCode=" + resolutionCode + ", brief=" + brief + ", item=" + item + ", comCode=" + comCode
-				+ ", dateSlipCode=" + dateSlipCode + ", evidence=" + evidence + ", journalizeList=" + journalizeList
-				+ "]";
+				+ ", dateSlipCode=" + dateSlipCode + ", evidence=" + evidence + ", month=" + month + ", day=" + day
+				+ ", journalizeList=" + journalizeList + "]";
 	}
 
-	
-	
 	
 }

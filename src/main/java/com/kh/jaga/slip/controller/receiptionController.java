@@ -100,8 +100,14 @@ public class receiptionController {
 		
 		receiption.setDivision(division);
 		receiption.setComCode(comCode);
-		
-		System.out.println(receiption);
+
+		String dateSlipCode = rs.selectDateSlipCode(receiption);
+		if(dateSlipCode == null) {
+			dateSlipCode = "10001";
+		}else {
+			dateSlipCode = (Integer.parseInt(dateSlipCode)+1) + "";
+		}
+		receiption.setDateSlipCode(dateSlipCode);
 		
 		int result = rs.insertReceiption(receiption);
 		

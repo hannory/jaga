@@ -76,8 +76,10 @@ public class BusinessPaymentController {
 	 * @return
 	 */
 	@RequestMapping("insertBPay.bp")
-	public String insertBPay(BusinessPayList bpl, Model model, String employeeCode) {
-		System.out.println(bpl); 
+	public String insertBPay(BusinessPayList bpl, Model model, String employeeCode, HttpServletRequest request) {
+		Company com = (Company)request.getSession().getAttribute("loginCompany");
+		String comCode = com.getCompanyCode();
+		
 		
 		List<BusinessPayment> list = bpl.getBpList();
 		
@@ -87,7 +89,12 @@ public class BusinessPaymentController {
 			bp.setAttributeDate(Integer.parseInt(bp.getAttYear()+bp.getAttMonth()));
 			bp.setPayDate(bp.getPayYear()+"-"+bp.getPayMonth()+"-"+bp.getPayDay());
 			
-			Date date = new Date(Integer.parseInt(bp.getPayYear()), Integer.parseInt(bp.getPayMonth()),Integer.parseInt(bp.getPayDay()));
+			Date date = Date.valueOf(bp.getPayYear()+"-"+bp.getPayMonth()+"-"+bp.getPayDay());
+			
+			System.out.println(bp.getPayYear());
+			System.out.println(Integer.parseInt(bp.getPayYear()));
+			System.out.println(date);
+			
 			
 			Receiption rp = new Receiption();
 			rp.setSlipDivision("일반");
@@ -97,6 +104,17 @@ public class BusinessPaymentController {
 			BigDecimal zero = new BigDecimal("0");
 			rp.setValueTax(zero);
 			rp.setDeemedStatus("N");
+			rp.setComCode(comCode);
+			rp.setBrief("사업소득자 급여지급");
+			
+			String dateSlipCode = rs.selectDateSlipCode(rp);
+			if(dateSlipCode == null) {
+				dateSlipCode = "10001";
+			}else {
+				dateSlipCode = (Integer.parseInt(dateSlipCode)+1) + "";
+			}
+		
+			rp.setDateSlipCode(dateSlipCode);
 			
 			Journalize j = new Journalize();
 			j.setDebitCredit("차변");

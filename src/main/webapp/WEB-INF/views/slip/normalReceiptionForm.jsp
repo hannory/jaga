@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,6 +19,18 @@
 	}
 	#normalReTable td {
 		height: 25px;
+	}
+	#normalReTable tbody td:last-of-type {
+		text-align:right;
+	}
+	#normalReTable tbody td:nth-last-of-type(2) {
+		text-align:right;
+	}
+	#normalReTable tbody td:last-of-type input{
+		text-align:right;
+	}
+	#normalReTable tbody td:nth-last-of-type(2) input{
+		text-align:right;
 	}
 	input {
 		border:none;
@@ -77,7 +90,6 @@
 		</ol>
 		<div class="card mb-4">
 			<div class="card-body">
-			<form action="normalValue.nr" method="post">
 					<table id="normalReTable" border="1">
 					<colgroup>
 						<col width="3%"/>
@@ -105,6 +117,29 @@
 						</tr>
 					</thead>
 					<tbody>
+					<c:forEach var="r" items="${ list }">
+						<tr>
+							<td><input type="checkbox"></td>
+							<td><input type="text" class="month" style="width:100%;" value="${ r.month }"></td>
+							<td><input type="text" class="day" style="width:100%;" value="${ r.day }"></td>
+							<td><input type="text" class="dateSlipCode" name="dateSlipCode" style="width:100%;" value="${ r.dateSlipCode }"></td>
+							<td><c:out value="${ r.debitCredit }"/></td>
+							<td><c:out value="${ r.accountCode }"/></td>
+							<td><c:out value="${ r.accountTitle }"/></td>
+							<td><c:out value="${ r.venderCode }"/></td>
+							<td><c:out value="${ r.venderName }"/></td>
+							<td><c:out value="${ r.brief }"/></td>
+							
+							<c:if test="${ r.debitCredit eq '차변'}">
+							<td><fmt:formatNumber value="${ r.price }" type="currency" currencySymbol=""/></td>
+							<td></td>
+							</c:if>
+							<c:if test="${ r.debitCredit eq '대변' }">
+							<td></td>
+							<td><fmt:formatNumber value="${ r.price }" type="currency" currencySymbol=""/></td>
+							</c:if>
+						</tr>
+					</c:forEach>
 						<tr>
 							<td><input type="checkbox"></td>
 							<td><input type="text" class="month" style="width:100%;"></td>
@@ -117,11 +152,10 @@
 							<td><input type="text" class="venName" name="venName" style="width:100%;"></td>
 							<td><input type="text" class="brief" name="brief" style="width:100%;"></td>
 							<td><input type="text" class="price" name="price" id='cha' style="width:100%;" onkeyup="inputNumberFormat(this);" onkeydown="addTr(this);"></td>
-							<td><input type="text" class="price" name="price" id='dea' style="width:100%;" onkeyup="inputNumberFormat(this);"></td>
+							<td><input type="text" class="price" name="price" id='dea' style="width:100%;" onkeyup="inputNumberFormat(this);" onkeydown="addTr(this);"></td>
 						</tr>
 					</tbody>
 					</table>
-				</form>
 			</div>
 		</div>	
 		<div class="card mb-4">
@@ -188,6 +222,11 @@
   </div>
 	</main>
 	
+	<form action="normalValue.nr" method="post" id="realForm">
+		<input type="hidden" name="slipDate">
+		<input type="hidden" name="supplyValue">
+		<input type="hidden" name="dateSlipCode">
+	</form>
 	
 	
   
@@ -249,7 +288,70 @@
 		
 		$(function() {
 			$("#datepicker").datepicker({});
-			$("#datepicker1").datepicker({});
+			$("#datepicker1").datepicker({onSelect:function(data){
+				
+				if($("#datepicker").val() != null){
+					
+					var date1 = $("#datepicker").val();
+					var date2 = $("#datepicker1").val();
+					
+					$.ajax({
+						url:"normalReceipSearch.nr",
+						data:{
+							date1:date1,
+							date2:date2
+							},
+						success:function(data){
+							$("#resultTranTable tbody tr").remove();
+							var list = data.list;
+							var $tbody = $("#resultTranTable tbody");
+							
+							for(var i = 0; i < list.length; i++){
+								var $tr = $("<tr>");
+								
+								var $td1 = $("<td>").html("<input type='checkbox'>");
+								var $td2 = $("<td>").text(list[i].division);
+								var $td3 = $("<td>").text(list[i].slipDate);
+								var $td9 = $("<td>").text(list[i].evidence);
+								var $td4 = $("<td>").text(list[i].journalizeList[0].venderName);
+								var $td5 = $("<td>").text(list[i].supplyValue);
+								var $td6 = $("<td>").text(list[i].valueTax);
+								var $td7 = $("<td>").text(list[i].supplyDeaga);
+								var $td8 = $("<td>").html("<button onclick='detail("+list[i].slipCode+");'>상세</button>");
+								
+								$tr.append($td1);
+								$tr.append($td2);
+								$tr.append($td3);
+								$tr.append($td9);
+								$tr.append($td4);
+								$tr.append($td5);
+								$tr.append($td6);
+								$tr.append($td7);
+								$tr.append($td8);
+								$tbody.append($tr);
+							}
+							
+							
+							$("#resultTranTable tr td:nth-of-type(2)").each(function(){
+								if($(this).text() == '매출'){
+									$(this).css("color", "red");
+								}else{
+									$(this).css("color", "blue");
+								}
+								
+							});
+							
+							
+							$("#sumTranTable td:first-of-type").text(data.minus);
+							$("#sumTranTable td:nth-of-type(2)").text(data.sale);
+							$("#sumTranTable td:nth-of-type(3)").text(data.buy);
+							
+							
+							
+						}
+					});
+				}
+			}});
 			/* 달력버튼 */
 			$("img.ui-datepicker-trigger")
 					.attr("style","margin-left:2px; vertical-align:middle; cursor: Pointer; width:20px; height:20px");
@@ -460,10 +562,10 @@
 		
 		var chaValue = null;
 		var deaValue = null;
+		var numberC = 0;
 		function addTr(vvv){
 			var pr = vvv;
 			var inputs_01 = $(pr).parent().parent().children().children();			
-			var numberC = 0;
 			if(event.keyCode == 13){
 				var $tbody = $("#normalReTable tbody");
 				var $tr = $("<tr>");
@@ -510,8 +612,58 @@
 				console.log(chaValue);
 				console.log(deaValue);
 				
+				var tMonth = $(inputs_01).filter(".month").val();
+				var tDay = $(inputs_01).filter(".day").val();
+				var tdsCode = "10001";
+				
+				
 				if(chaValue == deaValue){
 					console.log("차대 맞음");
+					$("#normalReTable tbody tr").each( function (index) {
+						var month = $(this).children().children().filter(".month").val();
+						var day = $(this).children().children().filter(".day").val();
+						var dsCode = $(this).children().children().filter(".dateSlipCode").val();
+						if(tMonth == month && tDay == day && dsCode != ""){
+							tdsCode = Number(dsCode) + 1;
+						}
+						
+					});
+					
+					var slipDate = null;
+					var numberD = 0;
+					$("#normalReTable tbody tr").each(function(index){
+						var dsCode = $(this).children().children().filter(".dateSlipCode").val();
+						var mmonth =  $(this).children().children().filter(".month").val();
+						var mday = $(this).children().children().filter(".day").val();
+						var inputs = $(this).children().children();
+						if(dsCode == "" && mmonth != ""){
+							$(this).children().children().filter(".dateSlipCode").val(tdsCode);
+							slipDate = "2020-"+mmonth+"-"+mday;
+							
+							$("#realForm input").filter("[name=slipDate]").val(slipDate);
+							$("#realForm input").filter("[name=dateSlipCode]").val(tdsCode);
+							$("#realForm input").filter("[name=supplyValue]").val(chaValue);
+							$("#realForm").append($(this).children().children().filter(".debit"));
+							if($(inputs).filter(".debit").val()=='차변'){
+								$("#realForm").append($("<input></input>").attr("type", "hidden").attr("name", "journalizeList["+numberD+"].price").val(uncomma($(inputs).filter("#cha").val())));
+							}else{
+								$("#realForm").append($("<input></input>").attr("type", "hidden").attr("name", "journalizeList["+numberD+"].price").val(uncomma($(inputs).filter("#dea").val())));
+							}
+							
+							$("#realForm").append($("<input></input>").attr("type", "hidden").attr("name", "journalizeList["+numberD+"].accountCode").val($(inputs).filter("[name=accountCode]").val()));
+							$("#realForm").append($("<input></input>").attr("type", "hidden").attr("name", "journalizeList["+numberD+"].venderCode").val($(inputs).filter("[name=venderCode]").val()));
+							
+							//$("#realForm").append($(this).children().children().filter(".accountCode"));
+							//$("#realForm").append($(this).children().children().filter(".venderCode"));
+							numberD++;
+						}
+					});
+					
+					$("#realForm").submit();
+					
+					
+					
+					
 				}else{
 					console.log("차대 안맞으");
 				}
@@ -569,7 +721,7 @@
 						$(this).val("0"+$(this).val());
 					}
 					
-					
+					inputs.filter(".debit").focus();
 					
 				});
 				
