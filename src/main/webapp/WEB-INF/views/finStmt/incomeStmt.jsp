@@ -95,7 +95,7 @@
 				<td><span class="subtitle"><a href="compTrialBal.fs">합계잔액시산표</a></span></td>
 				<td><span class="subtitle"><a href="stmtOfFinPos.fs">재무상태표</a></span></td>
 				<td><span class="subtitle" style="border-bottom:1px solid #24574A"><a href="incomeStmt.fs">손익계산서</a></span></td>
-				<td><span class="subtitle"><a href="mfrgCostsStmt.fs">제조원가명세서</a></span></td>
+				<td><span class="subtitle"><a href="mfrgStmt.fs">제조원가명세서</a></span></td>
 				<td><span class="subtitle"><a href="stmtOfCashFlow.fs">현금흐름표</a></span></td>
 				<td align="right" style="width:180px;"><span id="foldBtn" data-clicks="false" align="left"><img id="foldImg" src="${ contextPath }/resources/images/fold.PNG"></span></td>
 			</tr>
@@ -153,7 +153,7 @@
 						<td class="table-head" width="18%">합계</td>
 					</tr>
 				</thead>
-				<tbody id="main-tbody">
+				<tbody id="main-tbody" style="display:none;">
 					<tr>
 						<td class="table-title">Ⅰ. 매출액</td>
 						<td class="table-title"></td>
@@ -266,6 +266,13 @@
 						<td class="table-content" id="p83000"></td>
 						<td></td>
 					</tr>
+					<tr class="table-detail" id="row83100">
+						<td class="table-subSubTitle">수수료비용</td>
+						<td class="table-content" id="c83100"></td>
+						<td></td>
+						<td class="table-content" id="p83100"></td>
+						<td></td>
+					</tr>
 					<tr>
 						<td class="table-title">Ⅴ. 영업이익</td>
 						<td class="table-title"></td>
@@ -321,7 +328,7 @@
 	</main>
 	<script>
 		$(function() {
-			$("#main-tbody").hide();
+			//$("#main-tbody").hide();
 			
 			/* 표에서 하늘색 hover 주기 */
 			$("#contentTable td").mouseover(function() {
@@ -416,49 +423,10 @@
 			str.value = comma(uncomma(str.value));
 		}
 		
-		/* 마감버튼 입력시 */
-		function insertIncomeStmt() {
-			console.log("마감 버튼 입력 : " + $("#cSum10").text());
-			
-			if($("#cSum10").text() == "") {
-				
-				Swal.fire({
-					icon: "warning",
-					text: "먼저 조회기간 검색을 해주세요!"
-				})
-				
-			} else if($("#inputNum").val() == "") {
-				
-				console.log("기말상품재고액 : " + Number(uncomma($("#inputNum").val())));
-				console.log("기말상품재고액2 : " + $("#inputNum").val());
-				console.log("기말상품재고액2 : " + Number($("#inputNum").val()));
-				
-				Swal.fire({
-					icon: "warning",
-					text: "기말상품재고액을 입력해주세요!"
-				})
-				
-			} else {
-				$("#inputNum").val(Number(uncomma($("#inputNum").val())));
-				$("#cSum10-input").val(Number(uncomma($("#cSum10").text())));
-				
-				Swal.fire({
-					icon: "success",
-					title: "마감 성공",
-					text: "마감이 완료되었습니다!"
-				}).then((result) => {
-					if(result.value) {
-						$("#contentForm").submit();
-					}
-				}) 
-
-			}			
-			
-		}
-		
 		//(날짜를 통한) 검색 버튼 클릭시
 		function dateSearch() {
-			$("#main-tbody").show();
+			//$("#main-tbody").show();
+			$("#main-tbody").css("display", "");
 			
 			var year = $("#year").val();
 			var month = $("#month").val();
@@ -481,11 +449,13 @@
 					var c40100 = data["c40100"];
 					var c81100 = data["c81100"];
 					var c83000 = data["c83000"];
+					var c83100 = data["c83100"];
 					
 					$("#c14600").text(comma(c14600));
 					$("#c40100").text(comma(c40100));
 					$("#c81100").text(comma(c81100));
 					$("#c83000").text(comma(c83000));
+					$("#c83100").text(comma(c83100));
 					
 					//표 각 합계 계산
 					var cSum10 = c40100 + 0;
@@ -509,7 +479,7 @@
 					var cSum30 = cSum10 - cSum20;
 					$("#cSum30").text(comma(cSum30));
 					
-					var cSum40 = c83000 + 0;
+					var cSum40 = c81100 + c83000 + c83100;
 					$("#cSum40").text(comma(cSum40));
 					
 					var cSum50 = cSum30 - cSum40;
@@ -535,12 +505,13 @@
 					var p40100 = data["p40100"];
 					var p81100 = data["p81100"];
 					var p83000 = data["p83000"];
-					console.log("p83000 : " + p83000);
+					var p83100 = data["p83100"];
 					
 					$("#p14600").text(comma(p14600));
 					$("#p40100").text(comma(p40100));
 					$("#p81100").text(comma(p81100));
 					$("#p83000").text(comma(p83000));
+					$("#p83100").text(comma(p83100));
 					
 					//표 각 합계 계산
 					var pSum10 = p40100 + 0;
@@ -565,7 +536,7 @@
 					var pSum30 = pSum10 - pSum20;
 					$("#pSum30").text(comma(pSum30));
 					
-					var pSum40 = p83000 + 0;
+					var pSum40 = p81100 + p83000 + p83100;
 					$("#pSum40").text(comma(pSum40));
 					
 					var pSum50 = pSum30 - pSum40;
@@ -588,10 +559,22 @@
 					//------------전기 끝------------	
 					
 					//행 보여주기/숨기기
+					if(c81100 == 0 && p81100 == 0) {
+						$("#row81100").fadeOut(200);
+					} else {
+						$("#row81100").fadeIn(200);
+					}
+					
 					if(c83000 == 0 && p83000 == 0) {
 						$("#row83000").fadeOut(200);
 					} else {
 						$("#row83000").fadeIn(200);
+					}
+					
+					if(c83100 == 0 && p83100 == 0) {
+						$("#row83100").fadeOut(200);
+					} else {
+						$("#row83100").fadeIn(200);
 					}
 				},
 				error : function(status) {
@@ -855,6 +838,42 @@
 			}
 			
 		});
+		
+		//마감버튼 클릭시 
+		function insertIncomeStmt() {
+			console.log("마감 버튼 입력 : " + $("#cSum10").text());
+			
+			if($("#cSum10").text() == "") {
+				
+				Swal.fire({
+					icon: "warning",
+					text: "먼저 조회기간 검색을 해주세요!"
+				})
+				
+			} else if($("#inputNum").val() == "") {
+				
+				Swal.fire({
+					icon: "warning",
+					text: "기말상품재고액을 입력해주세요!"
+				})
+				
+			} else {
+				$("#inputNum").val(Number(uncomma($("#inputNum").val())));
+				$("#cSum10-input").val(Number(uncomma($("#cSum10").text())));
+				
+				Swal.fire({
+					icon: "success",
+					title: "마감 성공",
+					text: "마감이 완료되었습니다!"
+				}).then((result) => {
+					if(result.value) {
+						$("#contentForm").submit();
+					}
+				}) 
+
+			}			
+			
+		}
 	</script>
 	
 	<!-- Bootstrap 원장조회 모달 -->

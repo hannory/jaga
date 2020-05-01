@@ -23,6 +23,7 @@ import com.kh.jaga.company.model.vo.Company;
 import com.kh.jaga.finStmt.model.service.FinStmtService;
 import com.kh.jaga.finStmt.model.vo.IncomeStmt;
 import com.kh.jaga.finStmt.model.vo.IncomeStmtAccount;
+import com.kh.jaga.finStmt.model.vo.MfrgStmt;
 
 import net.sf.json.JSONObject;
 
@@ -61,9 +62,9 @@ public class FinStmtController {
 		return "finStmt/incomeStmt";
 	}
 	
-	@GetMapping("mfrgCostsStmt.fs")
-	public String showMfrgCostsStmt() {
-		return "finStmt/mfrgCostsStmt";
+	@GetMapping("mfrgStmt.fs")
+	public String showMfrgStmt() {
+		return "finStmt/mfrgStmt";
 	}
 	
 	@GetMapping("stmtOfCashFlow.fs")
@@ -146,11 +147,11 @@ public class FinStmtController {
 		}
 	}
 	
-	@RequestMapping("selectMfrgCostStmt.fs")
+	@RequestMapping("selectMfrgStmt.fs")
 	public void selectMfrgCostStmt(IncomeStmtAccount isa, HttpServletRequest request, HttpServletResponse response) {
 		isa.setComCode(((Company) request.getSession().getAttribute("loginCompany")).getCompanyCode());
 		
-		HashMap hmap = fss.selectMfrgCostStmt(isa);
+		HashMap hmap = fss.selectMfrgStmt(isa);
 		
 		try {
 			response.setContentType("application/json");
@@ -164,6 +165,18 @@ public class FinStmtController {
 		}
 	}
 	
+	@RequestMapping("insertMfrgStmt.fs")
+	public String insertMfrgStmt(MfrgStmt ms, HttpServletRequest request) {
+		
+		ms.setComCode(((Company) request.getSession().getAttribute("loginCompany")).getCompanyCode());
+		
+		int result = fss.insertMfrgStmt(ms);
+		
+		if(result > 0) {
+		}
+		
+		return "finStmt/mfrgStmt";
+	}
 }
 
 

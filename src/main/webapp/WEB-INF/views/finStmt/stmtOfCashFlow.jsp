@@ -67,7 +67,7 @@
 				<td><span class="subtitle"><a href="compTrialBal.fs">합계잔액시산표</a></span></td>
 				<td><span class="subtitle"><a href="stmtOfFinPos.fs">재무상태표</a></span></td>
 				<td><span class="subtitle"><a href="incomeStmt.fs">손익계산서</a></span></td>
-				<td><span class="subtitle"><a href="mfrgCostsStmt.fs">제조원가명세서</a></span></td>
+				<td><span class="subtitle"><a href="mfrgStmt.fs">제조원가명세서</a></span></td>
 				<td><span class="subtitle" style="border-bottom:1px solid #24574A"><a href="stmtOfCashFlow.fs">현금흐름표</a></span></td>
 				<td align="right" style="width:180px;"><span id="foldBtn"><img id="foldImg" src="${ contextPath }/resources/images/fold.PNG"></span></td>
 			</tr>

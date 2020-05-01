@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import com.kh.jaga.finStmt.model.vo.IncomeStmt;
 import com.kh.jaga.finStmt.model.vo.IncomeStmtAccount;
+import com.kh.jaga.finStmt.model.vo.MfrgStmt;
 
 public interface FinStmtService {
 
@@ -14,5 +15,7 @@ public interface FinStmtService {
 
 	ArrayList<IncomeStmtAccount> selectSlip(IncomeStmtAccount isa);
 
-	HashMap selectMfrgCostStmt(IncomeStmtAccount isa);
+	HashMap selectMfrgStmt(IncomeStmtAccount isa);
+
+	int insertMfrgStmt(MfrgStmt ms);
 }
