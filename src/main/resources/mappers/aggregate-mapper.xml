@@ -196,13 +196,18 @@
 			#{v1601}, 
 			#{sumRight}
   		)
-  		
-  		
   </insert>
   
   
-  
-  
+  <select id="selectBizCodeList" resultType="com.kh.jaga.aggregateIncomeTax.model.vo.BizCodeVo">
+  	SELECT
+	  	TYPE_OF_BIZ_CODE,
+	  	SELL_wAY_NAME,
+	  	SELL_TARGET_NAME,
+	  	TOBC_PK_CODE
+  	FROM 
+  		TYPE_OF_BIZ_CODE
+  </select>
   
   
   
