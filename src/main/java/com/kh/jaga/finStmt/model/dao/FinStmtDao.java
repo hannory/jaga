@@ -28,4 +28,8 @@ public interface FinStmtDao {
 
 	int selectMfrgStmt(SqlSessionTemplate sqlSession, MfrgStmt ms);
 
+	int updateMfrgStmt(SqlSessionTemplate sqlSession, MfrgStmt ms);
+
+	int selectVal13(SqlSessionTemplate sqlSession, MfrgStmt ms);
+
 }

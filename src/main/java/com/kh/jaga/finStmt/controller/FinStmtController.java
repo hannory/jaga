@@ -79,9 +79,19 @@ public class FinStmtController {
 		
 		i.setComCode(((Company) request.getSession().getAttribute("loginCompany")).getCompanyCode());
 		
-		fss.insertIncomeStmt(i);
+		int result = fss.insertIncomeStmt(i);
 		
-		return "finStmt/incomeStmt";
+		if(result > 0) {
+			request.getSession().setAttribute("alertCode", "successIncome");
+			
+			return "common/alertPage";
+		} else {
+			request.getSession().setAttribute("alertCode", "failIncome");
+			
+			return "common/alertPage";
+		}
+
+		//return "finStmt/incomeStmt";
 	}
 	
 	@RequestMapping("selectIncomeStmt.fs")
@@ -165,17 +175,35 @@ public class FinStmtController {
 		}
 	}
 	
+	//제조원가명세서에서 저장 또는 마감 버튼을 눌렀을 시
 	@RequestMapping("insertMfrgStmt.fs")
 	public String insertMfrgStmt(MfrgStmt ms, HttpServletRequest request) {
 		
 		ms.setComCode(((Company) request.getSession().getAttribute("loginCompany")).getCompanyCode());
 		
-		int result = fss.insertMfrgStmt(ms);
+		String closing = ms.getClosing();
+
+		
+		int result = fss.insertMfrgStmt(ms);			
+		
+		System.out.println("result Servie : " + result);
 		
 		if(result > 0) {
+			request.getSession().setAttribute("alertCode", "successMfrg");
+			
+			return "common/alertPage";
+		} else {
+			request.getSession().setAttribute("alertCode", "failMfrg");
+			
+			return "common/alertPage";
 		}
+	}
+	
+	@RequestMapping("selectVal13.fs")
+	public void selectVal13(MfrgStmt ms, HttpServletRequest request) {
+		ms.setComCode(((Company) request.getSession().getAttribute("loginCompany")).getCompanyCode());
 		
-		return "finStmt/mfrgStmt";
+		int val13 = fss.selectVal13(ms);
 	}
 }
 

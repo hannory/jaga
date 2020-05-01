@@ -162,11 +162,22 @@ public class FinStmtServiceImpl implements FinStmtService {
 	@Override
 	public int insertMfrgStmt(MfrgStmt ms) {
 		
-		//selectMfrgStmt하여 result 값이 1이면 update, 0이면 insert
+		int selectResult = fsd.selectMfrgStmt(sqlSession, ms);
 		
-		//int selectResult = fsd.selectMfrgStmt(sqlSession, ms);
+		if(selectResult > 0) {
+			//기존 값이 있으면
+			return fsd.updateMfrgStmt(sqlSession, ms);
+		} else {
+			//기존 값이 없으면
+			return fsd.insertMfrgStmt(sqlSession, ms);
+		}
 		
-		return fsd.insertMfrgStmt(sqlSession, ms);
+	}
+
+	@Override
+	public int selectVal13(MfrgStmt ms) {
+
+		return fsd.selectVal13(sqlSession, ms);
 	}
 
 }

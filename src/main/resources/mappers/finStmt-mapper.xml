@@ -51,6 +51,23 @@
 		VALUES(SEQ_MFRG_STMT_CODE.NEXTVAL, #{comCode}, #{year}, #{term}, #{closing}, #{val13}, #{sum90})
 	</insert>
 	
+	<select id="selectMfrgStmt" parameterType="MfrgStmt" resultType="_int">
+		SELECT COUNT(*)
+		FROM MFRG_STMT
+		WHERE COM_CODE = #{comCode}
+		AND YEAR = #{year}
+	</select>
+	
+	<update id="updateMfrgStmt" parameterType="MfrgStmt">
+		UPDATE MFRG_STMT
+		SET VAL13 = #{val13}, SUM90 = #{sum90}, CLOSING = #{closing}
+		WHERE COM_CODE = #{comCode}
+		AND YEAR = #{year}
+	</update>
+	
+	<select id="selectVal13">
+	
+	</select>
 	
 </mapper>
 
