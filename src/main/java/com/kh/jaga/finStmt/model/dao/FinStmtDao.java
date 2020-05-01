@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 
 import com.kh.jaga.finStmt.model.vo.IncomeStmt;
 import com.kh.jaga.finStmt.model.vo.IncomeStmtAccount;
+import com.kh.jaga.finStmt.model.vo.MfrgStmt;
 
 public interface FinStmtDao {
 
@@ -22,5 +23,9 @@ public interface FinStmtDao {
 	List selectCurFinStmt(SqlSessionTemplate sqlSession, IncomeStmtAccount isa);
 
 	List selectPastFinStmt(SqlSessionTemplate sqlSession, IncomeStmtAccount isa);
+
+	int insertMfrgStmt(SqlSessionTemplate sqlSession, MfrgStmt ms);
+
+	int selectMfrgStmt(SqlSessionTemplate sqlSession, MfrgStmt ms);
 
 }

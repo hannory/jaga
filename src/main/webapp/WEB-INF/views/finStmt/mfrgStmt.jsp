@@ -21,6 +21,11 @@
 		text-align:left;
 		padding-left:20px;
 	}
+	.table-title-num {
+		background:#7edfc6;
+		text-align:right;
+		padding-left:20px;
+	}
 	.table-subTitle {
 		background:#d3ede6;
 		text-align:left;
@@ -85,7 +90,7 @@
 				<td align="right" style="width:180px;"><span id="foldBtn"><img id="foldImg" src="${ contextPath }/resources/images/fold.PNG"></span></td>
 			</tr>
 		</table>
-		<form id="contentForm" action="" method="post">
+		<form id="contentForm" action="insertMfrgStmt.fs" method="post">
 			<ol class="breadcrumb mb-4">
 				<table id="searchReTable">
 					<tr>
@@ -115,176 +120,184 @@
 					<td>
 						<span style="margin-bottom:10px; color:red;"><img src="${ contextPath }/resources/images/pencil.PNG">기말원재료재고액을 입력하세요</span>
 						&nbsp;&nbsp;&nbsp;&nbsp;		
-						<button type="button" onclick="insertIncomeStmt();">마감</button>
+						<button type="button" onclick="saveMfrgStmt();">저장</button>
+						&nbsp;&nbsp;
+						<button type="button" onclick="insertMfrgStmt();">마감</button>
+						<input type="hidden" id="closing" name="closing">
 					</td>
 					<td align="right">
 					</td>
 				</tr>
 			</table>
 			<table id="contentTable" width="1100px" style="text-align:center;">
-				<tr>
-					<td class="table-head" width="28%" rowspan="2">과&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;목</td>
-					<td class="table-head" colspan="2">
-						제 <label class="normal-label" id="cur-term"></label>(당)기 2020.01 ~ 2020.<label class="normal-label" id="cur-month"></label>
-						<input type="hidden" id="login-openDay" value="${ sessionScope.loginCompany.gaeup }">
-					</td>
-					<td class="table-head" colspan="2">제 <label class="normal-label" id="past-term"></label>(전)기 2019.01 ~ 2019.12</td>
-				</tr>
-				<tr>
-					<td class="table-head" colspan="2">금액</td>
-					<td class="table-head" colspan="2">금액</td>
-				</tr>
-				<tr>
-					<td class="table-title">1. 원재료비</td>
-					<td class="table-title" width="18%"></td>
-					<td class="table-title" width="18%"></td>
-					<td class="table-title" width="18%"></td>
-					<td class="table-title" width="18%"></td>
-				</tr>
-				<tr>
-					<td class="table-subSubTitle">기초원재료재고액</td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td class="table-subSubTitle">당기원재료매입액</td>
-					<td class="table-content" id="c15300"></td>
-					<td></td>
-					<td class="table-content" id="p15300"></td>
-					<td></td>
-				</tr>
-				<!-- <tr>
-					<td class="table-subSubTitle">타계정으로대체액</td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr> -->
-				<tr>
-					<td class="table-subSubTitle">기말원재료재고액</td>
-					<td><input type="text" id="inputNum" onkeyup="inputNumberFormat(this)"></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td class="table-title">2. 노무비</td>
-					<td class="table-title"></td>
-					<td class="table-title"></td>
-					<td class="table-title"></td>
-					<td class="table-title"></td>
-				</tr>
-				<tr>
-					<td class="table-subSubTitle">임금</td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td class="table-subSubTitle">상여금</td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td class="table-title">3. 경비</td>
-					<td class="table-title"></td>
-					<td class="table-title"></td>
-					<td class="table-title"></td>
-					<td class="table-title"></td>
-				</tr>
-				<tr >
-					<td class="table-subSubTitle">복리후생비</td>
-					<td class="table-content" id="c51100"></td>
-					<td></td>
-					<td class="table-content" id="p51100"></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td class="table-subSubTitle">여비교통비</td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td class="table-subSubTitle">접대비</td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td class="table-subSubTitle">가스수도료</td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td class="table-subSubTitle">전력비</td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td class="table-title">4. 당기 총 제조비용</td>
-					<td class="table-title"></td>
-					<td class="table-title"></td>
-					<td class="table-title"></td>
-					<td class="table-title"></td>
-				</tr>
-				<tr>
-					<td class="table-title">5. 기초재공품 재고액</td>
-					<td class="table-title"></td>
-					<td class="table-title"></td>
-					<td class="table-title"></td>
-					<td class="table-title"></td>
-				</tr>
-				<tr>
-					<td class="table-title">6. 합계</td>
-					<td class="table-title"></td>
-					<td class="table-title"></td>
-					<td class="table-title"></td>
-					<td class="table-title"></td>
-				</tr>
-				<tr>
-					<td class="table-title">7. 기말재공품 재고액</td>
-					<td class="table-title"></td>
-					<td class="table-title"></td>
-					<td class="table-title"></td>
-					<td class="table-title"></td>
-				</tr>
-				<tr>
-					<td class="table-title">8. 타계정으로 대체액</td>
-					<td class="table-title"></td>
-					<td class="table-title"></td>
-					<td class="table-title"></td>
-					<td class="table-title"></td>
-				</tr>
-				<tr>
-					<td class="table-title">9. 당기제품 제조원가</td>
-					<td class="table-title"></td>
-					<td class="table-title"></td>
-					<td class="table-title"></td>
-					<td class="table-title"></td>
-				</tr>
+				<thead>
+					<tr>
+						<td class="table-head" width="28%" rowspan="2">과&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;목</td>
+						<td class="table-head" colspan="2">
+							제 <label class="normal-label" id="cur-term"></label>(당)기 2020.01 ~ 2020.<label class="normal-label" id="cur-month"></label>
+							<input type="hidden" id="login-openDay" value="${ sessionScope.loginCompany.gaeup }">
+						</td>
+						<td class="table-head" colspan="2">제 <label class="normal-label" id="past-term"></label>(전)기 2019.01 ~ 2019.12</td>
+					</tr>
+					<tr>
+						<td class="table-head" colspan="2">금액</td>
+						<td class="table-head" colspan="2">금액</td>
+					</tr>
+				</thead>
+				<tbody id="main-tbody" style="display:none;">
+					<tr>
+						<td class="table-title">1. 원재료비</td>
+						<td class="table-title" width="18%"></td>
+						<td class="table-title-num" width="18%"><span id="cSum10"></span></td>
+						<td class="table-title" width="18%"></td>
+						<td class="table-title-num" width="18%"><span id="pSum10"></span></td>
+					</tr>
+					<tr class="table-detail">
+						<td class="table-subSubTitle">기초원재료재고액</td>
+						<td id="cVal11"></td>
+						<td></td>
+						<td id="pVal11"></td>
+						<td></td>
+					</tr>
+					<tr class="table-detail">
+						<td class="table-subSubTitle">당기원재료매입액</td>
+						<td class="table-content" id="c15300"></td>
+						<td></td>
+						<td class="table-content" id="p15300"></td>
+						<td></td>
+					</tr>
+					<!-- <tr>
+						<td class="table-subSubTitle">타계정으로대체액</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr> -->
+					<tr class="table-detail">
+						<td class="table-subSubTitle">기말원재료재고액</td>
+						<td><input type="text" id="inputNum" name="val13" onkeyup="inputNumberFormat(this)" style="width:195px;"></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td class="table-title">2. 노무비</td>
+						<td class="table-title"></td>
+						<td class="table-title-num"><span id="cSum20"></span></td>
+						<td class="table-title"></td>
+						<td class="table-title-num"><span id="pSum20"></span></td>
+					</tr>
+					<tr class="table-detail">
+						<td class="table-subSubTitle">임금</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr class="table-detail">
+						<td class="table-subSubTitle">상여금</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td class="table-title">3. 경비</td>
+						<td class="table-title"></td>
+						<td class="table-title-num"><span id="cSum30"></span></td>
+						<td class="table-title"></td>
+						<td class="table-title-num"><span id="pSum30"></span></td>
+					</tr>
+					<tr class="table-detail">
+						<td class="table-subSubTitle">복리후생비</td>
+						<td class="table-content" id="c51100"></td>
+						<td></td>
+						<td class="table-content" id="p51100"></td>
+						<td></td>
+					</tr>
+					<tr class="table-detail">
+						<td class="table-subSubTitle">여비교통비</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr class="table-detail">
+						<td class="table-subSubTitle">접대비</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr class="table-detail">
+						<td class="table-subSubTitle">가스수도료</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr class="table-detail">
+						<td class="table-subSubTitle">전력비</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td class="table-title">4. 당기 총 제조비용</td>
+						<td class="table-title"></td>
+						<td class="table-title-num"><span id="cSum40"></span></td>
+						<td class="table-title"></td>
+						<td class="table-title-num"><span id="pSum40"></span></td>
+					</tr>
+					<tr>
+						<td class="table-title">5. 기초재공품 재고액</td>
+						<td class="table-title"></td>
+						<td class="table-title-num"><span id="cSum50"></span></td>
+						<td class="table-title"></td>
+						<td class="table-title-num"><span id="pSum50"></span></td>
+					</tr>
+					<tr>
+						<td class="table-title">6. 합계</td>
+						<td class="table-title"></td>
+						<td class="table-title-num"><span id="cSum60"></span></td>
+						<td class="table-title"></td>
+						<td class="table-title-num"><span id="pSum60"></span></td>
+					</tr>
+					<tr>
+						<td class="table-title">7. 기말재공품 재고액</td>
+						<td class="table-title"></td>
+						<td class="table-title-num"><span id="cSum70"></span></td>
+						<td class="table-title"></td>
+						<td class="table-title-num"><span id="pSum70"></span></td>
+					</tr>
+					<tr>
+						<td class="table-title">8. 타계정으로 대체액</td>
+						<td class="table-title"></td>
+						<td class="table-title-num"><span id="cSum80"></span></td>
+						<td class="table-title"></td>
+						<td class="table-title-num"><span id="pSum80"></span></td>
+					</tr>
+					<tr>
+						<td class="table-title">9. 당기제품 제조원가</td>
+						<td class="table-title"></td>
+						<td class="table-title-num"><span id="cSum90"></span><input type="hidden" id="sum90" name="sum90"></td>
+						<td class="table-title"></td>
+						<td class="table-title-num"><span id="pSum90"></span></td>
+					</tr>
+				</tbody>
 			</table>
 		</form>
 		<div style="height: 10vh;"></div>
 		<div class="card mb-4">
-			<div class="card-body">When scrolling, the navigation stays at
-				the top of the page. This is the end of the static navigation demo.</div>
+			<div class="card-body">제조원가보고서는 각 원가 요소별로 그 발생액을 표시하고 당기의 총 제조비용에 기초하여 재공품 재고액을 공제, 당기 완성품의 제조원가를 계산한다.</div>
 		</div>
 	</div>
 	</main>
 	<script>
 		$(function() {
+			//$("#main-tbody").hide();
+			
 			/* 표에서 하늘색 hover 주기 */
 			$("#contentTable td").mouseover(function() {
 				$(this).parent().css("background", "#DDEBF7");
@@ -346,11 +359,14 @@
 		
 		//(날짜를 통한) 검색 버튼 클릭시
 		function dateSearch() {
+			//$("#main-tbody").show();
+			$("#main-tbody").css("display", "");
+			
 			var year = $("#year").val();
 			var month = $("#month").val();
 			
 			$.ajax({
-				url : "selectMfrgCostStmt.fs",
+				url : "selectMfrgStmt.fs",
 				type : "get",
 				data : {
 					year : year,
@@ -365,6 +381,35 @@
 					
 					$("#c15300").text(comma(c15300));
 					$("#c51100").text(comma(c51100));
+					
+					//표 각 합계 계산
+					var cSum10 = c15300;
+					$("#cSum10").text(comma(cSum10));
+					
+					var cSum20 = 0;
+					$("#cSum20").text(cSum20);
+					
+					var cSum30 = c51100;
+					$("#cSum30").text(comma(cSum30));
+					
+					var cSum40 = cSum10 + cSum20 + cSum30;
+					$("#cSum40").text(comma(cSum40));
+					
+					var cSum50 = 0;
+					$("#cSum50").text(comma(cSum50));
+					
+					var cSum60 = cSum40 + cSum50;
+					$("#cSum60").text(comma(cSum60));
+					
+					var cSum70 = 0;
+					$("#cSum70").text(comma(cSum70));
+					
+					var cSum80 = 0;
+					$("#cSum80").text(comma(cSum80));
+					
+					var cSum90 = cSum60 - (cSum70 + cSum80);
+					$("#cSum90").text(comma(cSum90));
+					
 					//------------당기 끝------------					
 					//-------------전기-------------	
 					var p15300 = data["p15300"];
@@ -372,6 +417,35 @@
 					
 					$("#p15300").text(comma(p15300));
 					$("#p51100").text(comma(p51100));
+					
+					//표 각 합계 계산
+					var pSum10 = p15300;
+					$("#pSum10").text(comma(pSum10));
+					
+					var pSum20 = 0;
+					$("#pSum20").text(pSum20);
+					
+					var pSum30 = p51100;
+					$("#pSum30").text(comma(pSum30));
+					
+					var pSum40 = pSum10 + pSum20 + pSum30;
+					$("#pSum40").text(comma(pSum40));
+					
+					var pSum50 = 0;
+					$("#pSum50").text(comma(pSum50));
+					
+					var pSum60 = pSum40 + pSum50;
+					$("#pSum60").text(comma(pSum60));
+					
+					var pSum70 = 0;
+					$("#pSum70").text(comma(pSum70));
+					
+					var pSum80 = 0;
+					$("#pSum80").text(comma(pSum80));
+					
+					var pSum90 = pSum60 - (pSum70 + pSum80);
+					$("#pSum90").text(comma(pSum90));
+					//------------전기 끝------------	
 				},
 				error : function(status) {
 					console.log(status);
@@ -380,6 +454,20 @@
 			
 			return false;
 		}
+		
+		$(document).on("click", "#foldBtn", function() {
+			var clicks = $(this).data('clicks');
+			
+			if(clicks) {
+				$("#foldImg").attr({'src':'${ contextPath }/resources/images/fold.PNG'});
+				$(".table-detail").fadeIn(200);
+			} else {
+				$("#foldImg").attr({'src':'${ contextPath }/resources/images/unfold.PNG'});
+				$(".table-detail").fadeOut(200);
+			}
+			
+			$(this).data('clicks', !clicks);
+		})
 		
 		//원장조회 모달 띄우기
 		$(document).on("dblclick", '.table-content', function() {
@@ -586,6 +674,42 @@
 				})
 			}
 		})
+		
+		//저장버튼 클릭시
+		function saveMfrgStmt() {
+			
+			if($("#cSum10").text() == "") {
+				
+				Swal.fire({
+					icon: "warning",
+					text: "먼저 조회기간 검색을 해주세요!"
+				})
+			} else if($("#inputNum").val() == "") {
+				
+				Swal.fire({
+					icon: "warning",
+					text: "기말원재료재고액을 입력해주세요!"
+				})
+			} else {
+				//천단위 콤마를 붙인 값을 다시 숫자 타입으로 변경
+				$("#inputNum").val(Number(uncomma($("#inputNum").val())));
+				//저장의 경우 마감여부는 'N'으로 설정
+				$("#closing").val('N');
+				
+				$("#sum90").val(Number(uncomma($("#cSum90").text()))); 
+				
+				Swal.fire({
+					icon: "success",
+					title: "마감 성공",
+					text: "마감이 완료되었습니다!"
+				}).then((result) => {
+					if(result.value) {
+						$("#contentForm").submit();
+					}
+				})
+			}
+			
+		}
 	</script>
 	
 	<!-- Bootstrap 원장조회 모달 -->

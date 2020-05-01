@@ -46,6 +46,12 @@
 		ORDER BY S.SLIP_DATE
 	</select>
 	
+	<insert id="insertMfrgStmt" parameterType="MfrgStmt">
+		INSERT INTO MFRG_STMT(MFRG_STMT_CODE, COM_CODE, YEAR, TERM, CLOSING, VAL13, SUM90)
+		VALUES(SEQ_MFRG_STMT_CODE.NEXTVAL, #{comCode}, #{year}, #{term}, #{closing}, #{val13}, #{sum90})
+	</insert>
+	
+	
 </mapper>
 
 

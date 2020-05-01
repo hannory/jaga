@@ -60,7 +60,7 @@
 				<td><span class="subtitle"><a href="compTrialBal.fs">합계잔액시산표</a></span></td>
 				<td><span class="subtitle" style="border-bottom:1px solid #24574A">재무상태표</span></td>
 				<td><span class="subtitle"><a href="incomeStmt.fs">손익계산서</a></span></td>
-				<td><span class="subtitle"><a href="mfrgCostsStmt.fs">제조원가명세서</a></span></td>
+				<td><span class="subtitle"><a href="mfrgStmt.fs">제조원가명세서</a></span></td>
 				<td><span class="subtitle"><a href="stmtOfCashFlow.fs">현금흐름표</a></span></td>
 				<td align="right" style="width:180px;"><span id="foldBtn"><img id="foldImg" src="${contextPath}/resources/images/fold.PNG"></span></td>
 			</tr>
@@ -262,8 +262,8 @@
 		</table>
 		<div style="height: 10vh;"></div>
 		<div class="card mb-4">
-			<div class="card-body">When scrolling, the navigation stays at
-				the top of the page. This is the end of the static navigation demo.</div>
+			<div class="card-body">재무상태표는 일정시점 현재 기업이 보유하고 있는 경제적 자원인 자산과 경제적 의무인 부채, 그리고 자본에 대한 정보를 제공하는 재무보고서로서, 정보이용자들이 기업의 유동성
+			, 재무적 탄력성, 수익성과 위험 등을 평가하는 데 유용한 정보를 제공한다.</div>
 		</div>
 	</div>
 	</main>
