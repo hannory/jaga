@@ -82,7 +82,6 @@ AND D.TAXINV_CODE= #{taxinvCode}
   </select>
   <select id="selectDetailPur" resultType="SumTaxInvDetail">
   SELECT D.DETAILLIST_CODE
-    , S.SLIP_DATE 
     ,D.VENDER_CODE 
     ,V.BIZ_REG_NUM 
     ,V.VENDER_NAME 
@@ -95,7 +94,7 @@ AND D.TAXINV_CODE= #{taxinvCode}
 FROM SUM_OF_TAX_INV_DETAIL D 
 JOIN VENDER V ON(D.VENDER_CODE=V.VENDER_CODE)
 WHERE D.PUR_SALES='매입'
-AND D.TAXINV_CODE= #{taxinvCode}}
+AND D.TAXINV_CODE= #{taxinvCode}
   </select>
   
   <select id="selectReceiption" resultType="SumTaxInvDetail" parameterType="java.util.HashMap">
