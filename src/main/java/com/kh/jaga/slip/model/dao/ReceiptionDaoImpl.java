@@ -1,5 +1,6 @@
 package com.kh.jaga.slip.model.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -79,6 +80,11 @@ public class ReceiptionDaoImpl implements ReceiptionDao {
 		
 		
 		return sqlSession.selectOne("Receiption.selectDSCode", rp);
+	}
+
+	@Override
+	public List<NormalReceiptionDTO> selectNormalDateList(SqlSessionTemplate sqlSession, HashMap<String, Object> hm) {
+		return sqlSession.selectList("Receiption.selectNormalDateList", hm);
 	}
 	
 }

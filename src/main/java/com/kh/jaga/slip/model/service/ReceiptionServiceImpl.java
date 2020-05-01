@@ -1,18 +1,17 @@
 package com.kh.jaga.slip.model.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.kh.jaga.company.model.vo.Company;
 import com.kh.jaga.slip.model.dao.ReceiptionDao;
 import com.kh.jaga.slip.model.exception.receiptionException;
 import com.kh.jaga.slip.model.vo.AccountTitle;
 import com.kh.jaga.slip.model.vo.NormalReceiptionDTO;
 import com.kh.jaga.slip.model.vo.Receiption;
-import com.kh.jaga.slip.model.vo.Receiption2;
 import com.kh.jaga.slip.model.vo.Vender;
 import com.kh.jaga.taxInvoice.model.vo.TaxInvoice;
 
@@ -90,6 +89,12 @@ public class ReceiptionServiceImpl implements ReceiptionService{
 	@Override
 	public String selectDateSlipCode(Receiption rp) {
 		return receiptionDao.selectDateSlipCode(sqlSession, rp);
+	}
+
+	@Override
+	public List<NormalReceiptionDTO> selectNormalDateList(HashMap<String, Object> hm) {
+		// TODO Auto-generated method stub
+		return receiptionDao.selectNormalDateList(sqlSession, hm);
 	}
 
 

@@ -44,6 +44,10 @@
 </style>
 </head>
 <body>
+<!-- 로딩? -->
+	<div id="loading">
+        <img id="loading-image" src="${ contextPath }/resources/images/loading36.gif" alt="Loading..." />
+    </div>
 <div id="taxInvoiceLap">
 	<table id="saleTaxInvoice">
 		<!-- 세액 칸 25 -->

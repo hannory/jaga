@@ -131,6 +131,11 @@
 	</main>
 	
 	
+	<!-- 로딩? -->
+	<div id="loading">
+        <img id="loading-image" src="${ contextPath }/resources/images/loading36.gif" alt="Loading..." />
+    </div>
+	
 	<script>
 	/* 날짜 input jquery ui */
 		$.datepicker.setDefaults({

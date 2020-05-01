@@ -164,6 +164,10 @@
 </head>
 <body>
 	<jsp:include page="../common/menubar.jsp" />
+	<!-- 로딩? -->
+	<div id="loading">
+        <img id="loading-image" src="${ contextPath }/resources/images/loading36.gif" alt="Loading..." />
+    </div>
 	<main>
 		<div class="container-fluid">
 		<h2 class="mt-4">직원관리</h2>
