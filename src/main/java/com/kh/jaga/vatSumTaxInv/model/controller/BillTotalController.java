@@ -175,15 +175,12 @@ public class BillTotalController {
 				int pBizCount_Biz=0;						//매입처수 사업자번호
 				int pDealCount_Biz=0;						//매수 사업자번호
 				BigDecimal pSupplySum_Biz=new BigDecimal(0);//공급가액 사업자번호
-				BigDecimal pTaxSum_Biz=new BigDecimal(0);	//세액 사업자번호
 				int pBizCount_Per=0;						//매입처수 민번
 				int pDealCount_Per=0;						//매수 민번
 				BigDecimal pSupplySum_Per=new BigDecimal(0);//공급가액 민번
-				BigDecimal pTaxSum_Per=new BigDecimal(0);	//세액 민번
 				
 				//매입 구분 리스트
 				List<SumOfTaxInvDiv> sDivPur=new ArrayList<SumOfTaxInvDiv>();
-				SumOfTaxInvDiv sDivSum=new SumOfTaxInvDiv();
 				SumOfTaxInvDiv sDiv=new SumOfTaxInvDiv(); 
 				for(SumTaxInvDetail rPur: rePur ) {
 					
@@ -192,14 +189,12 @@ public class BillTotalController {
 						pBizCount_Biz++;
 						pDealCount_Biz+=rPur.getDealCount();
 						pSupplySum_Biz=pSupplySum_Biz.add(rPur.getValOfSupply());
-						pTaxSum_Biz=pTaxSum_Biz.add(rPur.getTax());
 					
 				}
 				
 				sDiv.setAcctCodeCt(pBizCount_Biz);
 				sDiv.setDealCount(pDealCount_Biz);
 				sDiv.setValOfSupply(pSupplySum_Biz);
-				sDiv.setTax(pTaxSum_Biz);
 				sDiv.setTaxinvCode(sotiCurrval);
 				sDiv.setPurSales("매입");
 				sDiv.setDivisionCode("21");
@@ -217,15 +212,12 @@ public class BillTotalController {
 				int sBizCount=0;							//매입처수 소계
 				int sDealCount=0;							//매수소계
 				BigDecimal sSupplySum=new BigDecimal(0);	//공급가액소계
-				BigDecimal sTaxSum=new BigDecimal(0);		//세액소계
 				int sBizCount_Biz=0;						//매입처수 사업자번호
 				int sDealCount_Biz=0;						//매수 사업자번호
 				BigDecimal sSupplySum_Biz=new BigDecimal(0);//공급가액 사업자번호
-				BigDecimal sTaxSum_Biz=new BigDecimal(0);	//세액 사업자번호
 				int sBizCount_Per=0;						//매입처수 민번
 				int sDealCount_Per=0;						//매수 민번
 				BigDecimal sSupplySum_Per=new BigDecimal(0);//공급가액 민번
-				BigDecimal sTaxSum_Per=new BigDecimal(0);	//세액 민번
 				
 				//매출 구분 리스트
 				List<SumOfTaxInvDiv> sDivSales=new ArrayList<SumOfTaxInvDiv>();
@@ -236,26 +228,22 @@ public class BillTotalController {
 					sBizCount++;
 					sDealCount+=rSales.getDealCount();
 					sSupplySum=sSupplySum.add(rSales.getValOfSupply());
-					sTaxSum=sTaxSum.add(rSales.getTax());
 					//주민번호
 					if(rSales.getBizRegNum().length()==14) {
 						sBizCount_Per++;
 						sDealCount_Per+=rSales.getDealCount();
 						sSupplySum_Per=sSupplySum_Per.add(rSales.getValOfSupply());
-						sTaxSum_Per=sTaxSum_Per.add(rSales.getTax());
 						
 					}else{//사업자번호
 						sBizCount_Biz++;
 						sDealCount_Biz+=rSales.getDealCount();
 						sSupplySum_Biz=sSupplySum_Biz.add(rSales.getValOfSupply());
-						sTaxSum_Biz=sTaxSum_Biz.add(rSales.getTax());
 					}
 				}
 				if(sBizCount_Per>0) {
 				sDivS.setAcctCodeCt(sBizCount_Per);
 				sDivS.setDealCount(sDealCount_Per);
 				sDivS.setValOfSupply(sSupplySum_Per);
-				sDivS.setTax(sTaxSum_Per);
 				sDivS.setTaxinvCode(sotiCurrval);
 				sDivS.setPurSales("매출");
 				sDivS.setDivisionCode("22");
@@ -265,7 +253,6 @@ public class BillTotalController {
 				sDivS.setAcctCodeCt(sBizCount_Biz);
 				sDivS.setDealCount(sDealCount_Biz);
 				sDivS.setValOfSupply(sSupplySum_Biz);
-				sDivS.setTax(sTaxSum_Biz);
 				sDivS.setTaxinvCode(sotiCurrval);
 				sDivS.setPurSales("매출");
 				sDivS.setDivisionCode("21");
@@ -275,7 +262,6 @@ public class BillTotalController {
 				sDivSumSales.setAcctCodeCt(sBizCount);
 				sDivSumSales.setDealCount(sDealCount);
 				sDivSumSales.setValOfSupply(sSupplySum);
-				sDivSumSales.setTax(sTaxSum);
 				sDivSumSales.setTaxinvCode(sotiCurrval);
 				sDivSumSales.setPurSales("매출");
 				sDivSumSales.setDivisionCode("23");
@@ -285,6 +271,7 @@ public class BillTotalController {
 				//매출
 				
 				//detailList , divList insert하기
+				System.out.println("insert직전 값:");
 				int insertDetailPurList= ss.insertDetailList(rePur);
 				int insertDetailSalesList= ss.insertDetailList(reSales);
 				
@@ -325,6 +312,18 @@ public class BillTotalController {
 		
 		return mv;
 	}
-
+	@RequestMapping("deadLine.soi")
+	public String deadLine(Model model, SumOfTaxInvDto sDto ,HttpServletRequest request) {
+		System.out.println("Controller: deadLine: "+sDto);
+		int result=ss.insertSdto(sDto);
+		return "bugagachi/billTotalTable";
+	}
+	
+	@RequestMapping("updatdDeadLineCen.soi")
+	public String deadlineCen(Model model, SumOfTaxInvDto sDto ,HttpServletRequest request) {
+		System.out.println("Controller: deadLine: "+sDto);
+		int result=ss.updateSdto(sDto);
+		return "bugagachi/billTotalTable";
+	}
 	
 }

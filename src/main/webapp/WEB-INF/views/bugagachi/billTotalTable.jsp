@@ -208,7 +208,7 @@
     <!-- ajax영역!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
     <script type="text/javascript">
 		function cencelDeadline(){
-			$("form").attr("action", "updatdDeadLineCen.soti");
+			$("form").attr("action", "updatdDeadLineCen.soi");
 		}
 		/* 조회버튼 */
 	    function search_cis(){
@@ -417,16 +417,24 @@
  						$("#pbAvc").text(sDtoDivPur[key].acctCodeCt);
  						$("#pbAdc").text(sDtoDivPur[key].dealCount);
  						$("#pbAvol").text(sDtoDivPur[key].valOfSupply);
+ 						pOssAvc=sDtoDivPur[key].acctCodeCt;
+ 						pOssAdc=sDtoDivPur[key].dealCount;
+ 						pOssAvol=sDtoDivPur[key].valOfSupply;
+ 						pOssAtax=sDtoDivPur[key].tax;
  					
  					}else if(sDtoDivPur[key].divisionCode=="21"){/* 12일 이후 세금계산서 사업자번호*/
  						$("#pObAvc").text(sDtoDivPur[key].acctCodeCt);
  						$("#pObAdc").text(sDtoDivPur[key].dealCount);
  						$("#pObAvol").text(sDtoDivPur[key].valOfSupply);
+ 						pOssAvc=sDtoDivPur[key].acctCodeCt;
+ 						pOssAdc=sDtoDivPur[key].dealCount;
+ 						pOssAvol=sDtoDivPur[key].valOfSupply;
+ 						pOssAtax=sDtoDivPur[key].tax;
  					}
  				}
- 				 ptSAvc=ssAvc+OssAvc;
-	 			 ptSAdc=ssAdc+OssAdc;
-	 			 ptSAvol=ssAvol+OssAvol;
+ 				 ptSAvc=pssAvc+pOssAvc;
+	 			 ptSAdc=pssAdc+pOssAdc;
+	 			 ptSAvol=pssAvol+pOssAvol;
 	 		     $("#psAvc").text(ptSAvc);
 	 		     $("#psAdc").text(ptSAdc);
 	 		     $("#psAvol").text(ptSAvol);

@@ -118,6 +118,7 @@
 		    background-color: #fff;  
 		    z-index: 99;  
 		    text-align: center;
+		    display: none;
 		 } 
      
 	   #loading-image {  
@@ -167,15 +168,7 @@
         <img id="loading-image" src="${ contextPath }/resources/images/loading36.gif" alt="Loading..." />
     </div>
     <!-- 로딩스크립트 -->
-    <script type="text/javascript">
-    window.onbeforeunload=function(){
-        $("#loading").show();
-     }
-     $(window).load(function(){
-        $("#loading").hide();
-     });
     
-    </script>
 		
 		
 		
@@ -229,6 +222,7 @@
             $("form").attr("action", "updateCcIssStmt.cis");
         }
 	 	function search_cis(){
+	 		 $("#loading").show();
 	 		var search_ye= $("#search_ye").val();
 	 		var search_mon1= $("#search_mon1").val();
 	 		var search_mon2= $("#search_mon2").val();
@@ -244,13 +238,8 @@
 	 			data:{search_ye:search_ye, search_mon1:search_mon1, search_mon2:search_mon2, comCode:comCode },
 	 			success: function(data){
 	 				console.log(data);
-                  /*       
-                 var accCo = $("<input type='hidden' name='accountCode'>").val(accountCo);
-               var venCo = $("<input type='hidden' name='venderCode'>").val(venderCode);
-               var debitCredit = $("<input type='hidden' name='debitCredit'>").val('차변');
-               var $bit = $("<td>").html($("<input type='text' name='price'>").val(supplydeaga));
-               var $vender = $("<td>").html($("<input type='text'>").val(venderName));
-               var $accN = $("<td>").html($("<input type='text'>").val(accountNN));*/
+	 				 $("#loading").hide();
+                  
 	 				var cis=data.cis; 
 	 				$("#tAc").text(cis.cardTax);
 	 				$("#tAcash").text(cis.cashTax);

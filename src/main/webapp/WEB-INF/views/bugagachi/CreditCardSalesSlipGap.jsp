@@ -124,7 +124,8 @@
 		    opacity: 0.7;  
 		    background-color: #fff;  
 		    z-index: 99;  
-		    text-align: center; 
+		    text-align: center;
+		    display: none; 
 		} 
      
 	   #loading-image {  
@@ -174,15 +175,7 @@
         <img id="loading-image" src="${ contextPath }/resources/images/loading36.gif" alt="Loading..." />
     </div>
     <!-- 로딩스크립트 -->
-    <script type="text/javascript">
-    window.onbeforeunload=function(){
-        $("#loading").show();
-     }
-     $(window).load(function(){
-        $("#loading").hide();
-     });
     
-    </script>
     
     
     
@@ -220,6 +213,7 @@
 		   $("form").attr("action", "updateccSalesSilpGap.cssg");
 		}
 	 	function search_cssg(){
+	 		 $("#loading").show();
 	 		var search_ye1= $("#search_ye1").val();
 	 		var search_mon1= $("#search_mon1").val();
 	 		var search_mon2= $("#search_mon2").val();
@@ -234,6 +228,7 @@
 	 			type:"post",
 	 			data:{search_ye1:search_ye1, search_mon1:search_mon1, search_mon2:search_mon2, comCode:comCode },
 	 			success: function(data){
+	 				 $("#loading").hide();
 	 				console.log(data);
 	 				var cssg=data.cssg; 
 	 				console.log(cssg);
