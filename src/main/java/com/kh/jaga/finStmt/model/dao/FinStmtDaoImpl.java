@@ -53,8 +53,28 @@ public class FinStmtDaoImpl implements FinStmtDao {
 
 	@Override
 	public int selectMfrgStmt(SqlSessionTemplate sqlSession, MfrgStmt ms) {
-
+				
 		return sqlSession.selectOne("FinStmt.selectMfrgStmt", ms);
+	}
+
+	@Override
+	public int updateMfrgStmt(SqlSessionTemplate sqlSession, MfrgStmt ms) {
+
+		System.out.println("dao의 update 메소드 진입");
+		
+		int result = sqlSession.update("FinStmt.updateMfrgStmt", ms);
+		
+		System.out.println("result dao : " + result);
+		
+		return result;
+	}
+
+	@Override
+	public int selectVal13(SqlSessionTemplate sqlSession, MfrgStmt ms) {
+		
+		//sqlSession.selectOne("FinStmt.selectVal13", ms);
+		
+		return sqlSession.selectOne("FinStmt.selectVal13", ms);
 	}
 
 }

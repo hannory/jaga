@@ -861,7 +861,9 @@
 				$("#inputNum").val(Number(uncomma($("#inputNum").val())));
 				$("#cSum10-input").val(Number(uncomma($("#cSum10").text())));
 				
-				Swal.fire({
+				$("#contentForm").submit();
+				
+				/* Swal.fire({
 					icon: "success",
 					title: "마감 성공",
 					text: "마감이 완료되었습니다!"
@@ -869,7 +871,7 @@
 					if(result.value) {
 						$("#contentForm").submit();
 					}
-				}) 
+				}) */ 
 
 			}			
 			

@@ -12,13 +12,52 @@
 <body>
 	<script>
 		$(function() {
+			var alertCode = "${ sessionScope.alertCode }";
+						
+			console.log("alertCode : " + alertCode);
 			
-			Swal.fire({
-				icon: "warning",
-				text: "${ sessionScope.msg }"
-			}).then((result) => {
-				location.href = "<%= request.getContextPath() %>"
-			}) 
+			switch(alertCode) {
+			case "withoutLogin" : 
+				Swal.fire({
+					icon: "warning",
+					text: "로그인이 필요합니다"
+				}).then((result) => {
+					location.href = "<%= request.getContextPath() %>"
+				})
+				break;
+			case "failMfrg" :
+				Swal.fire({
+					icon: "warning",
+					text: "실패하였습니다"
+				}).then((result) => {
+					location.href = "mfrgStmt.fs"
+				})
+				break;
+			case "successMfrg" :
+				Swal.fire({
+					icon: "success",
+					text: "완료되었습니다!"
+				}).then((result) => {
+					location.href = "mfrgStmt.fs"
+				})
+				break;
+			case "failIncome" :
+				Swal.fire({
+					icon: "warning",
+					text: "실패하였습니다"
+				}).then((result) => {
+					location.href = "incomeStmt.fs"
+				})
+				break;
+			case "successIncome" :
+				Swal.fire({
+					icon: "success",
+					text: "완료되었습니다!"
+				}).then((result) => {
+					location.href = "incomeStmt.fs"
+				})
+				break;
+			}
 		})
 	</script>
 </body>

@@ -18,4 +18,6 @@ public interface FinStmtService {
 	HashMap selectMfrgStmt(IncomeStmtAccount isa);
 
 	int insertMfrgStmt(MfrgStmt ms);
+
+	int selectVal13(MfrgStmt ms);
 }

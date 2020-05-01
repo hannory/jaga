@@ -85,7 +85,7 @@
 				<td><span class="subtitle"><a href="compTrialBal.fs">합계잔액시산표</a></span></td>
 				<td><span class="subtitle"><a href="stmtOfFinPos.fs">재무상태표</a></span></td>
 				<td><span class="subtitle"><a href="incomeStmt.fs">손익계산서</a></span></td>
-				<td><span class="subtitle" style="border-bottom:1px solid #24574A">제조원가명세서</span></td>
+				<td><span class="subtitle" style="border-bottom:1px solid #24574A"><a href="mfrgStmt.fs">제조원가명세서</a></span></td>
 				<td><span class="subtitle"><a href="stmtOfCashFlow.fs">현금흐름표</a></span></td>
 				<td align="right" style="width:180px;"><span id="foldBtn"><img id="foldImg" src="${ contextPath }/resources/images/fold.PNG"></span></td>
 			</tr>
@@ -452,6 +452,18 @@
 				}
 			});
 			
+			$.ajax({
+				url: "selectVal13.fs",
+				type: "get",
+				data : {
+					year : year
+				},
+				success: function(data) {
+					
+				}
+			});
+			
+			//sumbit 차단 위하여 false 처리
 			return false;
 		}
 		
@@ -698,7 +710,9 @@
 				
 				$("#sum90").val(Number(uncomma($("#cSum90").text()))); 
 				
-				Swal.fire({
+				$("#contentForm").submit();
+				
+				/* Swal.fire({
 					icon: "success",
 					title: "마감 성공",
 					text: "마감이 완료되었습니다!"
@@ -706,7 +720,45 @@
 					if(result.value) {
 						$("#contentForm").submit();
 					}
+				}) */
+			}
+			
+		}
+		
+		//마감 버튼 클릭시
+		function insertMfrgStmt() {
+			
+			if($("#cSum10").text() == "") {
+				
+				Swal.fire({
+					icon: "warning",
+					text: "먼저 조회기간 검색을 해주세요!"
 				})
+			} else if($("#inputNum").val() == "") {
+				
+				Swal.fire({
+					icon: "warning",
+					text: "기말원재료재고액을 입력해주세요!"
+				})
+			} else {
+				//천단위 콤마를 붙인 값을 다시 숫자 타입으로 변경
+				$("#inputNum").val(Number(uncomma($("#inputNum").val())));
+				//저장의 경우 마감여부는 'N'으로 설정
+				$("#closing").val('Y');
+				
+				$("#sum90").val(Number(uncomma($("#cSum90").text()))); 
+				
+				$("#contentForm").submit();
+				
+				/* Swal.fire({
+					icon: "success",
+					title: "마감 성공",
+					text: "마감이 완료되었습니다!"
+				}).then((result) => {
+					if(result.value) {
+						$("#contentForm").submit();
+					}
+				}) */
 			}
 			
 		}

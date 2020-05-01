@@ -37,7 +37,8 @@ public class LoginCheckFilter implements Filter {
 		if(loginCompany != null) {
 			chain.doFilter(req, resp);
 		} else {
-			request.getSession().setAttribute("msg", "로그인이 필요합니다");
+			//request.getSession().setAttribute("msg", "로그인이 필요합니다");
+			request.getSession().setAttribute("alertCode", "withoutLogin");
 			
 			req.getRequestDispatcher("/WEB-INF/views/common/alertPage.jsp").forward(req, resp);
 		}
