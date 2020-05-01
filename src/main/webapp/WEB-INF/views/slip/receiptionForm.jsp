@@ -152,6 +152,10 @@
 </head>
 <body>
 <jsp:include page="../common/menubar.jsp" />
+<!-- 로딩? -->
+	<div id="loading">
+        <img id="loading-image" src="${ contextPath }/resources/images/loading36.gif" alt="Loading..." />
+    </div>
 	<main>
 	<div class="container-fluid">
 		<h2 class="mt-4">매입매출전표입력</h2>
@@ -275,6 +279,7 @@
 						<td>품목</td>
 						<td colspan="3">
 							<input type="text" id="abc" name="item">
+          		<input type="hidden" id="deemedStatus" name="deemedStatus" value="N">
 						</td>
 					</tr>
 				</table>
@@ -311,7 +316,6 @@
 				<input type="button" id="update" value="수정">				
 			</div>
 		</div>
-          		<input type="hidden" id="deemedStatus" name="deemedStatus" value="N">
 		</form>
 		<div style="height: 100vh;"></div>
 		<div class="card mb-4">
@@ -463,7 +467,7 @@
 			
 			/* 폼전송시 콤마 빼기++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++= */
 			$("form").submit(function(){
-				$("input").not("#datepicker").not("[name*=debitCredit]").not("#brief").not("[name=division]").each(function(){
+				$("input").not("#datepicker").not("[name*=debitCredit]").not("#brief").not("[name=division]").not("[name=deemedStatus]").not("[name=item]").each(function(){
 					$(this).val(uncomma($(this).val()));
 				});
 			});
@@ -800,7 +804,7 @@
 						      'success'
 						    )
 						    
-						  	$("#deemedStatus").val('Y');
+						  	$("#deemedStatus").val("Y");
 						    $("#farm").css("background", "white").css("border", "2px solid red").css("color", "red");
 						  }
 						})
@@ -821,7 +825,7 @@
 						      'success'
 						    )
 						    
-						  	$("#deemedStatus").val('N');
+						  	$("#deemedStatus").val("N");
 						    $("#farm").css("background", "#888888").css("border", "1px solid #888888").css("color", "white");
 						  }
 						})

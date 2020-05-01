@@ -66,6 +66,10 @@ input {
 </head>
 <body>
 	<jsp:include page="../common/menubar.jsp" />
+	<!-- 로딩? -->
+	<div id="loading">
+        <img id="loading-image" src="${ contextPath }/resources/images/loading36.gif" alt="Loading..." />
+    </div>
 	<main>
 	<div class="container-fluid">
 		<h2 class="mt-4">퇴직소득원천징수영수증</h2>

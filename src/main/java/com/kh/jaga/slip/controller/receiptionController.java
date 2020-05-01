@@ -103,11 +103,12 @@ public class receiptionController {
 
 		String dateSlipCode = rs.selectDateSlipCode(receiption);
 		if(dateSlipCode == null) {
-			dateSlipCode = "10001";
+			dateSlipCode = "50001";
 		}else {
 			dateSlipCode = (Integer.parseInt(dateSlipCode)+1) + "";
 		}
 		receiption.setDateSlipCode(dateSlipCode);
+		
 		
 		int result = rs.insertReceiption(receiption);
 		

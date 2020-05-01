@@ -1,5 +1,6 @@
 package com.kh.jaga.slip.model.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -24,6 +25,8 @@ public interface ReceiptionService {
 	List<NormalReceiptionDTO> selectNormalList(String comCode);
 
 	String selectDateSlipCode(Receiption rp);
+
+	List<NormalReceiptionDTO> selectNormalDateList(HashMap<String, Object> hm);
 
 
 }

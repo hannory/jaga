@@ -2,6 +2,7 @@ package com.kh.jaga.slip.controller;
 
 import java.math.BigDecimal;
 import java.sql.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -28,14 +29,25 @@ public class normalReceiptionController {
 	private ReceiptionService rs;
 
 	@RequestMapping("normalReceipSearch.nr")
-	public ModelAndView normalReceipSearch(@RequestParam Date date1, @RequestParam Date date2, ModelAndView mv, HttpServletRequest request) {
+	public ModelAndView normalReceipSearch(String date1,String date2, ModelAndView mv, HttpServletRequest request) {
 		System.out.println("date1 : " + date1);
 		System.out.println("date2 : " + date1);
+		
+		Date date11 = Date.valueOf(date1);
+		Date date22 = Date.valueOf(date2);
+		
+		HashMap<String, Object> hm = new HashMap<String, Object>();
+		
+		hm.put("date1", date11);
+		hm.put("date2", date22);
+		
 		
 		Company com = (Company)request.getSession().getAttribute("loginCompany");
 		String comCode = com.getCompanyCode();
 		
-		List<NormalReceiptionDTO> receiption = rs.selectNormalList(comCode);
+		hm.put("comCode", comCode);
+		
+		List<NormalReceiptionDTO> receiption = rs.selectNormalDateList(hm);
 		
 		for(int i = 0; i < receiption.size(); i++) {
 			String date = receiption.get(i).getSlipDate();

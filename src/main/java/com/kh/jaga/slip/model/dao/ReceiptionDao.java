@@ -1,5 +1,6 @@
 package com.kh.jaga.slip.model.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -31,5 +32,7 @@ public interface ReceiptionDao {
 	List<NormalReceiptionDTO> selectNormalList(SqlSessionTemplate sqlSession, String comCode);
 
 	String selectDateSlipCode(SqlSessionTemplate sqlSession, Receiption rp);
+
+	List<NormalReceiptionDTO> selectNormalDateList(SqlSessionTemplate sqlSession, HashMap<String, Object> hm);
 
 }

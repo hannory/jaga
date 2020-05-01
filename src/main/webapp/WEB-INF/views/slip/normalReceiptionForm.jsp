@@ -20,16 +20,16 @@
 	#normalReTable td {
 		height: 25px;
 	}
-	#normalReTable tbody td:last-of-type {
-		text-align:right;
-	}
-	#normalReTable tbody td:nth-last-of-type(2) {
-		text-align:right;
-	}
 	#normalReTable tbody td:last-of-type input{
 		text-align:right;
 	}
 	#normalReTable tbody td:nth-last-of-type(2) input{
+		text-align:right;
+	}
+	#resultReTable tbody td:last-of-type{
+		text-align:right;
+	}
+	#resultReTable tbody td:nth-last-of-type(2){
 		text-align:right;
 	}
 	input {
@@ -58,9 +58,6 @@
 		width: 100%;
 	}
 	
-	main td {
-		height: 50px;
-	}
 	
 	.modal-header{
 		background: #24574A;
@@ -68,6 +65,7 @@
 	}
 	
 	
+
 </style>
 
 </head>
@@ -81,10 +79,7 @@
 			<table id="searchReTable">
 				<tr>
 					<td>전표일자 : </td>
-					<td>
-						<input type="text" id="datepicker">~<input type="text" id="datepicker1">&nbsp;
-						<button onclick="dateSearch();">검색</button></td>
-					<td><div style="color:red;">대차차액 : </div></td>
+					<td><input type="text" id="datepicker">~<input type="text" id="datepicker1"></td>
 				</tr>
 			</table>
 		</ol>
@@ -116,30 +111,38 @@
 							<th>대변</th>
 						</tr>
 					</thead>
-					<tbody>
+					<tbody id="tbody1">
 					<c:forEach var="r" items="${ list }">
-						<tr>
+						<tr onclick="detailBungea('${r.month}','${ r.day }', '${ r.dateSlipCode }');">
 							<td><input type="checkbox"></td>
 							<td><input type="text" class="month" style="width:100%;" value="${ r.month }"></td>
 							<td><input type="text" class="day" style="width:100%;" value="${ r.day }"></td>
 							<td><input type="text" class="dateSlipCode" name="dateSlipCode" style="width:100%;" value="${ r.dateSlipCode }"></td>
-							<td><c:out value="${ r.debitCredit }"/></td>
-							<td><c:out value="${ r.accountCode }"/></td>
-							<td><c:out value="${ r.accountTitle }"/></td>
-							<td><c:out value="${ r.venderCode }"/></td>
-							<td><c:out value="${ r.venderName }"/></td>
-							<td><c:out value="${ r.brief }"/></td>
+							<td><input type="text" class="debit" name="debitCredit" value="${ r.debitCredit }" style="width:100%;"></td>
+							<td><input type="text" class="accountCode" name="accountCode" value="${ r.accountCode }" style="width:100%;"></td>
+							<td><input type="text" class="accName" name="accName" value="${ r.accountTitle }" style="width:100%;"></td>
+							<td><input type="text" class="venderCode" name="venderCode" value="${ r.venderCode }" style="width:100%;"></td>
+							<td><input type="text" class="venName" name="venName" value="${ r.venderName }" style="width:100%;"></td>
+							<td><input type="text" class="brief" name="brief" style="width:100%;"></td>
 							
 							<c:if test="${ r.debitCredit eq '차변'}">
-							<td><fmt:formatNumber value="${ r.price }" type="currency" currencySymbol=""/></td>
+							<td>
+							<input type="text" class="price" name="price" id='cha' style="width:100%;"  value="<fmt:formatNumber value='${ r.price }' type='currency' currencySymbol=''/>"
+							onkeyup="inputNumberFormat(this);" onkeydown="addTr(this);">
+							</td>
 							<td></td>
 							</c:if>
 							<c:if test="${ r.debitCredit eq '대변' }">
 							<td></td>
-							<td><fmt:formatNumber value="${ r.price }" type="currency" currencySymbol=""/></td>
+							<td>
+							<input type="text" class="price" name="price" id='dea' style="width:100%;"  value="<fmt:formatNumber value='${ r.price }' type='currency' currencySymbol=''/>"
+							onkeyup="inputNumberFormat(this);" onkeydown="addTr(this);">
+							</td>
 							</c:if>
 						</tr>
 					</c:forEach>
+					</tbody>
+					<tbody id="tbody2">
 						<tr>
 							<td><input type="checkbox"></td>
 							<td><input type="text" class="month" style="width:100%;"></td>
@@ -169,12 +172,23 @@
 			<br>
 			
 			<table id="resultReTable" border="1">
+			<colgroup>
+				<col width="10%">
+				<col width="20%">
+				<col width="10%">
+				<col width="20%">
+				<col>
+				<col>
+			</colgroup>
+			<thead>
 				<tr>
+					<th colspan="2">계정과목</th>
 					<th colspan="2">거래처</th>
-					<th colspan="2">적요</th>
 					<th>차변</th>
 					<th>대변</th>
 				</tr>
+			</thead>
+			<tbody>
 				<tr>
 					<td></td>
 					<td></td>
@@ -183,6 +197,7 @@
 					<td></td>
 					<td></td>
 				</tr>
+			</tbody>
 			</table>
 			</div>
 		</div>
@@ -192,6 +207,8 @@
 				the top of the page. This is the end of the static navigation demo.</div>
 		</div>
 	</div>
+	
+	
 	 <!-- 모달 시작-->
       <!-- Modal 계정과목 -->
   <div class="modal fade" id="accountModal" role="dialog">
@@ -222,6 +239,8 @@
   </div>
 	</main>
 	
+	
+	<!-- 전송용 폼 영역 -->
 	<form action="normalValue.nr" method="post" id="realForm">
 		<input type="hidden" name="slipDate">
 		<input type="hidden" name="supplyValue">
@@ -229,6 +248,10 @@
 	</form>
 	
 	
+	<!-- 로딩? -->
+	<div id="loading">
+        <img id="loading-image" src="${ contextPath }/resources/images/loading36.gif" alt="Loading..." />
+    </div>
   
   
 	<script>
@@ -240,7 +263,8 @@
 			dateFormat : 'yy-mm-dd'
 
 		});
-
+	
+		
 		var accountC = "";//계정과목
 		var accountN;
 		function aaa(value, tr){
@@ -285,6 +309,49 @@
 			$("div#accountModal").modal("hide");
 		}	
 		
+		/* 아래 표 */
+		function detailBungea(month, day, dsNumber){
+			console.log(month);
+			console.log(day);
+			console.log(dsNumber);
+			$("#resultReTable tbody tr").remove();
+			var $tbody = $("#resultReTable tbody");
+			
+			$("#normalReTable tbody tr").each(function(index){
+				var inputs = $(this).children().children();
+				var dsCode = $(inputs).filter(".dateSlipCode").val();
+				var mmonth =  $(inputs).filter(".month").val();
+				var mday = $(inputs).filter(".day").val();
+				if(mmonth == month && mday == day && dsNumber == dsCode){
+					var $tr = $("<tr>");
+					
+					var $td1 = $("<td>").text($(inputs).filter(".accountCode").val());
+					var $td2 = $("<td>").text($(inputs).filter(".accName").val());
+					var $td3 = $("<td>").text($(inputs).filter(".venderCode").val());
+					var $td4 = $("<td>").text($(inputs).filter(".venName").val());
+					var $td5 = null;
+					var $td6 = null;
+					
+					if($(inputs).filter(".debit").val() == '차변'){
+						$td5 = $("<td>").text($(inputs).filter("#cha").val());
+						$td6 = $("<td>");
+					}else{
+						$td6 = $("<td>").text($(inputs).filter("#dea").val());
+						$td5 = $("<td>");
+					}
+					
+					$tr.append($td1);
+					$tr.append($td2);
+					$tr.append($td3);
+					$tr.append($td4);
+					$tr.append($td5);
+					$tr.append($td6);
+					$tbody.append($tr);
+				}
+				
+			});
+			
+		}
 		
 		$(function() {
 			$("#datepicker").datepicker({});
@@ -302,51 +369,53 @@
 							date2:date2
 							},
 						success:function(data){
-							$("#resultTranTable tbody tr").remove();
+							$("#tbody1 tr").remove();
+							$("#resultReTable tbody tr").remove();
 							var list = data.list;
-							var $tbody = $("#resultTranTable tbody");
+							var $tbody = $("#tbody1");
+							console.log(list);
 							
 							for(var i = 0; i < list.length; i++){
-								var $tr = $("<tr>");
+								var $tr = $("<tr onclick='detailBungea(\""+list[i].month+"\",\""+list[i].day+"\",\""+list[i].dateSlipCode+"\");'>");
 								
 								var $td1 = $("<td>").html("<input type='checkbox'>");
-								var $td2 = $("<td>").text(list[i].division);
-								var $td3 = $("<td>").text(list[i].slipDate);
-								var $td9 = $("<td>").text(list[i].evidence);
-								var $td4 = $("<td>").text(list[i].journalizeList[0].venderName);
-								var $td5 = $("<td>").text(list[i].supplyValue);
-								var $td6 = $("<td>").text(list[i].valueTax);
-								var $td7 = $("<td>").text(list[i].supplyDeaga);
-								var $td8 = $("<td>").html("<button onclick='detail("+list[i].slipCode+");'>상세</button>");
-								
+								var $td2 = $("<td>").html("<input type='text' class='month' style='width:100%;' value='"+ list[i].month +"'>")
+								var $td3 = $("<td>").html("<input type='text' class='day' style='width:100%;' value='"+ list[i].day +"'>")
+								var $td4 = $("<td>").html("<input type='text' class='dateSlipCode' name='dateSlipCode' value='"+ list[i].dateSlipCode +"' style='width:100%;'>")
+								var $td5 = $("<td>").html("<input type='text' class='debit' name='debitCredit' value='"+ list[i].debitCredit +"' style='width:100%;'>")
+								var $td6 = $("<td>").html("<input type='text' class='accountCode' name='accountCode' value='"+ list[i].accountCode +"' style='width:100%;'>")
+								var $td7 = $("<td>").html("<input type='text' class='accName' name='accName' value='"+ list[i].accountTitle +"' style='width:100%;'>")
+								var $td8 = $("<td>").html("<input type='text' class='venderCode' name='venderCode' value='"+ list[i].venderCode +"' style='width:100%;'>")
+								var $td9 = $("<td>").html("<input type='text' class='venName' name='venName' value='"+ list[i].venderName +"' style='width:100%;'>")
+								var $td10 = $("<td>").html("<input type='text' class='brief' name='brief' value='"+ list[i].brief +"' style='width:100%;'>")
+								var $td11 = null;
+								var $td12 = null;
+								var price = 0;
+								if(list[i].debitCredit == '차변'){
+									price = comma(Number(list[i].price));
+									
+									$td11 = $("<td>").html("<input type='text' class='price' name='price' id='cha' value='"+price+"' style='width:100%;' onkeyup='inputNumberFormat(this);' onkeydown='addTr(this);'>")
+									$td12 = $("<td>")
+								}else{
+									price = comma(Number(list[i].price));
+									
+									$td11 = $("<td>")
+									$td12 = $("<td>").html("<input type='text' class='price' name='price' id='dea' value='"+price+"' style='width:100%;' onkeyup='inputNumberFormat(this);' onkeydown='addTr(this);'>")
+								}
 								$tr.append($td1);
 								$tr.append($td2);
 								$tr.append($td3);
-								$tr.append($td9);
 								$tr.append($td4);
 								$tr.append($td5);
 								$tr.append($td6);
 								$tr.append($td7);
 								$tr.append($td8);
+								$tr.append($td9);
+								$tr.append($td10);
+								$tr.append($td11);
+								$tr.append($td12);
 								$tbody.append($tr);
 							}
-							
-							
-							$("#resultTranTable tr td:nth-of-type(2)").each(function(){
-								if($(this).text() == '매출'){
-									$(this).css("color", "red");
-								}else{
-									$(this).css("color", "blue");
-								}
-								
-							});
-							
-							
-							$("#sumTranTable td:first-of-type").text(data.minus);
-							$("#sumTranTable td:nth-of-type(2)").text(data.sale);
-							$("#sumTranTable td:nth-of-type(3)").text(data.buy);
-							
-							
 							
 						}
 					});
@@ -356,7 +425,11 @@
 			$("img.ui-datepicker-trigger")
 					.attr("style","margin-left:2px; vertical-align:middle; cursor: Pointer; width:20px; height:20px");
 			
-			$("input").focus(function(){
+			
+			
+			
+			
+			$("#normalReTable input").focus(function(){
 				$("#normalReTable input").css("background", "white");
 				$("#normalReTable td").css("background", "white");
 				$("#normalReTable tr").css("background", "white"); 
@@ -567,7 +640,7 @@
 			var pr = vvv;
 			var inputs_01 = $(pr).parent().parent().children().children();			
 			if(event.keyCode == 13){
-				var $tbody = $("#normalReTable tbody");
+				var $tbody = $("#tbody2");
 				var $tr = $("<tr>");
 				
 				var $td1 = $("<td>").html("<input type='checkbox'>");
@@ -669,7 +742,7 @@
 				}
 				
 				
-				$("input").focus(function(){
+				$("#normalReTable input").focus(function(){
 					$("#normalReTable input").css("background", "white");
 					$("#normalReTable td").css("background", "white");
 					$("#normalReTable tr").css("background", "white"); 
