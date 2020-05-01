@@ -159,6 +159,7 @@ public class BillTotalController {
 				//매입리스트에 soitCurrval 넣어주기
 				for(SumTaxInvDetail de:rePur) {
 					de.setTaxinvCode(sotiCurrval);
+					de.setPurSales("매입");
 				}
 				//매출리스트 값 가지러 가기
 				List<SumTaxInvDetail> reSales=ss.selectReceiption(receiptionSales,eD);
@@ -166,6 +167,7 @@ public class BillTotalController {
 				System.out.println("Controller: BillTotalSearch: reSales: "+reSales);
 				for(SumTaxInvDetail de:reSales) {
 					de.setTaxinvCode(sotiCurrval);
+					de.setPurSales("매출");
 				}
 				
 				//매입구분표 값 넣기 for안에 if문 으로  민번, 사업자번호로 나누고 소계 계산하기!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -188,7 +190,7 @@ public class BillTotalController {
 					
 						System.out.println("사업자 번호 영역 들어오나?");
 						pBizCount_Biz++;
-						pDealCount_Biz+=rPur.getDeal_count();
+						pDealCount_Biz+=rPur.getDealCount();
 						pSupplySum_Biz=pSupplySum_Biz.add(rPur.getValOfSupply());
 						pTaxSum_Biz=pTaxSum_Biz.add(rPur.getTax());
 					
@@ -232,19 +234,19 @@ public class BillTotalController {
 				for(SumTaxInvDetail rSales: reSales ) {
 					//소계 계산
 					sBizCount++;
-					sDealCount+=rSales.getDeal_count();
+					sDealCount+=rSales.getDealCount();
 					sSupplySum=sSupplySum.add(rSales.getValOfSupply());
 					sTaxSum=sTaxSum.add(rSales.getTax());
 					//주민번호
-					if(rSales.getBizRerNum().length()==14) {
+					if(rSales.getBizRegNum().length()==14) {
 						sBizCount_Per++;
-						sDealCount_Per+=rSales.getDeal_count();
+						sDealCount_Per+=rSales.getDealCount();
 						sSupplySum_Per=sSupplySum_Per.add(rSales.getValOfSupply());
 						sTaxSum_Per=sTaxSum_Per.add(rSales.getTax());
 						
 					}else{//사업자번호
 						sBizCount_Biz++;
-						sDealCount_Biz+=rSales.getDeal_count();
+						sDealCount_Biz+=rSales.getDealCount();
 						sSupplySum_Biz=sSupplySum_Biz.add(rSales.getValOfSupply());
 						sTaxSum_Biz=sTaxSum_Biz.add(rSales.getTax());
 					}

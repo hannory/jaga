@@ -75,15 +75,13 @@ WHERE PUR_SALES='매입'
     ,D.TAXINV_CODE AS TAXINV_CODE
 FROM SUM_OF_TAX_INV_DETAIL D 
 JOIN VENDER V ON(D.VENDER_CODE=V.VENDER_CODE)
-JOIN SLIP S ON(D.DETAILlIST_CODE=S.SLIP_CODE)
-WHERE S.SLIP_DIVISION='매입매출'
-AND S.DIVISION='매출'
-AND S.COM_CODE= #{comCode}
+WHERE D.PUR_SALES='매출'
+AND D.TAXINV_CODE= #{taxinvCode}
+
 
   </select>
   <select id="selectDetailPur" resultType="SumTaxInvDetail">
   SELECT D.DETAILLIST_CODE
-    , S.SLIP_DATE 
     ,D.VENDER_CODE 
     ,V.BIZ_REG_NUM 
     ,V.VENDER_NAME 
@@ -95,10 +93,8 @@ AND S.COM_CODE= #{comCode}
     ,D.TAXINV_CODE
 FROM SUM_OF_TAX_INV_DETAIL D 
 JOIN VENDER V ON(D.VENDER_CODE=V.VENDER_CODE)
-JOIN SLIP S ON(D.DETAILlIST_CODE=S.SLIP_CODE)
-WHERE S.SLIP_DIVISION='매입매출'
-AND S.DIVISION='매입'
-AND S.COM_CODE= #{comCode}
+WHERE D.PUR_SALES='매입'
+AND D.TAXINV_CODE= #{taxinvCode}
   </select>
   
   <select id="selectReceiption" resultType="SumTaxInvDetail" parameterType="java.util.HashMap">
