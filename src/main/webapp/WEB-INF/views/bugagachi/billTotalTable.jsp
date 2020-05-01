@@ -58,6 +58,26 @@
             background-color:#E7E6E6;
             height: 25px;
         }
+        #loading {
+		    width: 100%;  
+		    height: 100%;  
+		    top: 0px;
+		    left: 0px;
+		    position: fixed;  
+		    display: block;  
+		    opacity: 0.7;  
+		    background-color: #fff;  
+		    z-index: 99;  
+		    text-align: center; 
+		    display: none;
+		 } 
+     
+   		#loading-image {  
+		    position: absolute;  
+		    top: 50%;  
+		    left: 50%; 
+		    z-index: 100;
+		 }
         #Tex_bill_code{
             border: 1px solid black;
             height: 100px; 
@@ -99,7 +119,7 @@
    			width:100%;
    		}
    		.Tex_bill_code_p{
-   			font-size:23px;
+   			font-size:14px;
    		}
    		.tdSalesPur{
 	   		width: 8%;
@@ -156,7 +176,12 @@
 			<li><input type="button" name="report" value="신고서미리보기" onclick="print()"></li>	
 		</ol>
 		
-		
+		<!-- 로딩? -->
+   <div id="loading">
+        <img id="loading-image" src="${ contextPath }/resources/images/loading36.gif" alt="Loading..." />
+    </div>
+    
+
 		<!-- 인풋모음!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1 -->
 	<c:set var="comCode" value="${ sessionScope.loginCompany.companyCode }"/>
    	<input type="hidden" value="${comCode}" name="comCode">
@@ -187,6 +212,8 @@
 		}
 		/* 조회버튼 */
 	    function search_cis(){
+	    	 $("#loading").show();
+	    	 
 	    	var search_ye= $("#search_ye").val();
 	 		var search_mon1= $("#search_mon1").val();
 	 		var search_mon2= $("#search_mon2").val();
@@ -201,6 +228,7 @@
 	 			type:"post",
 	 			data:{search_ye:search_ye,search_mon1:search_mon1,search_mon2:search_mon2,comCode:comCode},
 	 			success: function (data){
+	 				 $("#loading").hide();
 	 				var sDto=data.sDto;
 	 				var sDtoDivSales=data.sDto.sumOfTaxInvDivSales;
 	 				var sDtoDetailSales=data.sDto.sumTaxInvDetailSales;

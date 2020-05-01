@@ -17,27 +17,29 @@ public class SumTaxInvDetail implements Serializable{
 	  private String sellWay;				//거래처 업태명
 	  private String sellTarget;			//거래처 종목명
 	  private String taxinvCode;			//계산서합계표코드
+	  private String purSales;				//계산서 매출매입 구분
 	  
 	  
 	  public SumTaxInvDetail() {}
 
 
-	public SumTaxInvDetail(String detaillistCode, String slipDate, String venderCode, String bizRerNum,
-			String venderName, int deal_count, BigDecimal valOfSupply, BigDecimal tax, String bossName, String sellWay,
-			String sellTarget, String taxinvCode) {
+	public SumTaxInvDetail(String detaillistCode, String slipDate, String venderCode, String bizRegNum,
+			String venderName, int dealCount, BigDecimal valOfSupply, BigDecimal tax, String bossName, String sellWay,
+			String sellTarget, String taxinvCode, String purSales) {
 		super();
 		this.detaillistCode = detaillistCode;
 		this.slipDate = slipDate;
 		this.venderCode = venderCode;
-		this.bizRegNum = bizRerNum;
+		this.bizRegNum = bizRegNum;
 		this.venderName = venderName;
-		this.dealCount = deal_count;
+		this.dealCount = dealCount;
 		this.valOfSupply = valOfSupply;
 		this.tax = tax;
 		this.bossName = bossName;
 		this.sellWay = sellWay;
 		this.sellTarget = sellTarget;
 		this.taxinvCode = taxinvCode;
+		this.purSales = purSales;
 	}
 
 
@@ -56,8 +58,8 @@ public class SumTaxInvDetail implements Serializable{
 	}
 
 
-	public void setSlipDate(String silpDate) {
-		this.slipDate = silpDate;
+	public void setSlipDate(String slipDate) {
+		this.slipDate = slipDate;
 	}
 
 
@@ -71,13 +73,13 @@ public class SumTaxInvDetail implements Serializable{
 	}
 
 
-	public String getBizRerNum() {
+	public String getBizRegNum() {
 		return bizRegNum;
 	}
 
 
-	public void setBizRerNum(String bizRerNum) {
-		this.bizRegNum = bizRerNum;
+	public void setBizRegNum(String bizRegNum) {
+		this.bizRegNum = bizRegNum;
 	}
 
 
@@ -91,13 +93,13 @@ public class SumTaxInvDetail implements Serializable{
 	}
 
 
-	public int getDeal_count() {
+	public int getDealCount() {
 		return dealCount;
 	}
 
 
-	public void setDeal_count(int deal_count) {
-		this.dealCount = deal_count;
+	public void setDealCount(int dealCount) {
+		this.dealCount = dealCount;
 	}
 
 
@@ -161,14 +163,25 @@ public class SumTaxInvDetail implements Serializable{
 	}
 
 
+	public String getPurSales() {
+		return purSales;
+	}
+
+
+	public void setPurSales(String purSales) {
+		this.purSales = purSales;
+	}
+
+
 	@Override
 	public String toString() {
-		return "SumTaxInvDetail [detaillistCode=" + detaillistCode + ", silpDate=" + slipDate + ", venderCode="
+		return "SumTaxInvDetail [detaillistCode=" + detaillistCode + ", slipDate=" + slipDate + ", venderCode="
 				+ venderCode + ", bizRegNum=" + bizRegNum + ", venderName=" + venderName + ", dealCount=" + dealCount
 				+ ", valOfSupply=" + valOfSupply + ", tax=" + tax + ", bossName=" + bossName + ", sellWay=" + sellWay
-				+ ", sellTarget=" + sellTarget + ", taxinvCode=" + taxinvCode + "]";
+				+ ", sellTarget=" + sellTarget + ", taxinvCode=" + taxinvCode + ", purSales=" + purSales + "]";
 	}
-	  
+
+
 	
 	  
 	  

@@ -146,6 +146,7 @@ public class SumOfTaxInvDaoImpl implements SumOfTaxInvDao {
 		int result=0;
 		for(SumTaxInvDetail stid: rePur) {
 			stid.setSlipDate("2020-01-01");// slipDate에 임의의 데이트
+			System.out.println();
 			result=sqlSession.insert("SumOfTaxInv.insertDetailList",stid);
 		}
 		System.out.println("Dao: insertDetailList리스트 형식으로 insert: result: "+result);
