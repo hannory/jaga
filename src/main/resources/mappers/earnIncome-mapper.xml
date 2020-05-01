@@ -33,10 +33,10 @@
   
   
   <insert id="insertEarnEmp" parameterType="EarnIncome">
-  INSERT INTO EARN_INCOME_HISTORY(ATTRIBUTE_DATE,EMPLOYEE_CODE,SALARY,BONUS,MEALS,DRIVING_SUBSIDIES,TAXABLE_INCOME,
+  INSERT INTO EARN_INCOME_HISTORY(ATTRIBUTE_DATE,PAY_DATE,EMPLOYEE_CODE,SALARY,BONUS,MEALS,DRIVING_SUBSIDIES,TAXABLE_INCOME,
   NONTAXABLE_INCOME,NATIONAL_PENSION,HEALTH_INSURANCE,LONG_TERM_INSURANCE,EMPLOYMENT_INSURANCE,INCOME_TAX,LOCAL_INCOME_TAX,
   DIFFERENCE_PYMT,NIGHTPAY,MONTHLYPAY,POSITIONPAY,TOTALPAYMENT,TOTALDEDUCTION)
-  VALUES (#{attributeDate},#{employeeCode},#{salary},#{bonus},#{meals},#{drivingSubsidies},#{taxableIncome},
+  VALUES (#{attributeDate},#{payDate},#{employeeCode},#{salary},#{bonus},#{meals},#{drivingSubsidies},#{taxableIncome},
   			#{nontaxableIncome},#{nationalPension},#{healthInsurance},#{longTermInsurance},#{employmentInsurance},#{incomeTax},#{localIncomeTax},
   			#{differencePymt},#{nightPay},#{monthlyPay},#{positionPay},#{totalPayment},#{totalDeduction})
   
