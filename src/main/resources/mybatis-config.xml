@@ -42,7 +42,10 @@
    		<typeAlias type="com.kh.jaga.employee.model.vo.EarnIncome" alias="EarnIncome"/>
     	<typeAlias type="com.kh.jaga.aggregateIncomeTax.model.dto.AddedTaxStmtDto" alias="AddedTaxStmtDto"/> 
 		<typeAlias type="com.kh.jaga.slip.model.vo.NormalReceiptionDTO" alias="NormalReceiptionDTO"/>
-	 	 <typeAlias type="com.kh.jaga.finStmt.model.vo.MfrgStmt" alias="MfrgStmt"/>
+	 	<typeAlias type="com.kh.jaga.finStmt.model.vo.MfrgStmt" alias="MfrgStmt"/>
+	 	<typeAlias type="com.kh.jaga.accountBook.model.vo.GenderLedgerDTO" alias="GenderLedgerDTO"/>
+	 	<typeAlias type="com.kh.jaga.vat.model.vo.Vat" alias="Vat"/> 
+	 	<typeAlias type="com.kh.jaga.vat.model.vo.BizEstStmt" alias="BizEstStmt"/>
 	</typeAliases>
 
 	<mappers>
@@ -64,7 +67,9 @@
  		<mapper resource="mappers/businessPayment-mapper.xml"/>
  		<mapper resource="mappers/earnIncome-mapper.xml"/>
  		<mapper resource="mappers/vatBillTotal-mapper.xml"/> 
-		 <mapper resource="mappers/aggregate-mapper.xml"/> 
+		<mapper resource="mappers/aggregate-mapper.xml"/> 
+		<mapper resource="mappers/accountBook-mapper.xml"/> 
+		<mapper resource="mappers/vat-mapper.xml"/>
   	</mappers>
 
 </configuration>
