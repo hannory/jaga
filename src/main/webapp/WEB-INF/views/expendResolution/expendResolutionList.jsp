@@ -42,6 +42,14 @@
 	<main>
 	<div class="container-fluid">
 	<!-- 작업공간 -->
+	
+	
+	<!-- 로딩화면 -->
+   <div id="loading">
+        <img id="loading-image" src="${ contextPath }/resources/images/loading36.gif" alt="Loading..." />
+    </div>
+   <!-- 로딩화면 끝-->
+	
 		
 		
 		
