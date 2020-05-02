@@ -63,6 +63,9 @@ public class FinStmtServiceImpl implements FinStmtService {
 			}
 		}
 		
+		int cVal222 = fsd.selectMfrgSum90(sqlSession, isa);		//당기제품제조원가
+		
+		
 		//전기
 		List pList = fsd.selectPastFinStmt(sqlSession, isa);
 		
@@ -95,6 +98,7 @@ public class FinStmtServiceImpl implements FinStmtService {
 		hmap.put("c81100", cSum81100);
 		hmap.put("c83000", cSum83000);
 		hmap.put("c83100", cSum83100);
+		hmap.put("cVal222", cVal222);
 		
 		hmap.put("p14600", pSum14600);
 		hmap.put("p40100", pSum40100);
@@ -162,7 +166,7 @@ public class FinStmtServiceImpl implements FinStmtService {
 	@Override
 	public int insertMfrgStmt(MfrgStmt ms) {
 		
-		int selectResult = fsd.selectMfrgStmt(sqlSession, ms);
+		int selectResult = fsd.countMfrgStmt(sqlSession, ms);
 		
 		if(selectResult > 0) {
 			//기존 값이 있으면
@@ -175,10 +179,59 @@ public class FinStmtServiceImpl implements FinStmtService {
 	}
 
 	@Override
-	public int selectVal13(MfrgStmt ms) {
+	public MfrgStmt searchMfrg(MfrgStmt ms) {
 
-		return fsd.selectVal13(sqlSession, ms);
+		return fsd.searchMfrg(sqlSession, ms);
 	}
+
+	@Override
+	public int checkMfrgStmt(MfrgStmt ms) {
+
+		return fsd.countMfrgStmt(sqlSession, ms);
+	}
+
+	@Override
+	public HashMap selectFinPos(IncomeStmtAccount isa) {
+		//당기
+		List<IncomeStmtAccount> cList = fsd.selectCurFinStmt(sqlSession, isa);
+		
+		int cSum10100 = 0;		//현금
+
+		for(int i = 0; i < cList.size(); i++) {
+			int accountCode = ((IncomeStmtAccount) cList.get(i)).getAccountCode();
+			int price = ((IncomeStmtAccount) cList.get(i)).getPrice();
+			
+			if(accountCode == 10100) {
+				cSum10100 += price;
+			} else if(accountCode == 51100) {
+
+			}
+		}
+		
+		//당기
+		List pList = fsd.selectPastFinStmt(sqlSession, isa);
+		
+		int pSum10100 = 0;		//현금
+
+		for(int i = 0; i < cList.size(); i++) {
+			int accountCode = ((IncomeStmtAccount) cList.get(i)).getAccountCode();
+			int price = ((IncomeStmtAccount) cList.get(i)).getPrice();
+			
+			if(accountCode == 10100) {
+				pSum10100 += price;
+			} else if(accountCode == 51100) {
+
+			}
+		}
+		
+		HashMap<String, Integer> hmap = new HashMap();
+		hmap.put("c10100", cSum10100);
+		
+		hmap.put("p10100", pSum10100);
+		
+		return hmap;
+	}
+	
 
 }
 

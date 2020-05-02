@@ -10,8 +10,8 @@
 	</resultMap> -->
 	
 	<insert id="insertIncomeStmt" parameterType="IncomeStmt">
-		INSERT INTO INCOME_STMT(INCOME_STMT_CODE, COM_CODE, YEAR, TERM, SALES, ENDING_INV_OF_MERCHANDISE) 
-		VALUES(SEQ_INCOME_STMT_CODE.NEXTVAL, #{comCode}, #{year}, #{term}, #{sales}, #{endingInvOfMerchandise})
+		INSERT INTO INCOME_STMT(INCOME_STMT_CODE, COM_CODE, YEAR, TERM, CLOSING, SUM10, V40100, VAL213, SUM30, SUM40, SUM50, SUM100) 
+		VALUES(SEQ_INCOME_STMT_CODE.NEXTVAL, #{comCode}, #{year}, #{term}, #{closing}, #{sum10}, #{v40100}, #{val213}, #{sum30}, #{sum40}, #{sum50}, #{sum100})
 	</insert>
 
 	<!-- (거래처 미입력 등) 분개가 제대로 안되어 NULL 값이 나오는 경우가 있어 RIGHT JOIN -->
@@ -51,7 +51,7 @@
 		VALUES(SEQ_MFRG_STMT_CODE.NEXTVAL, #{comCode}, #{year}, #{term}, #{closing}, #{val13}, #{sum90})
 	</insert>
 	
-	<select id="selectMfrgStmt" parameterType="MfrgStmt" resultType="_int">
+	<select id="countMfrgStmt" parameterType="MfrgStmt" resultType="_int">
 		SELECT COUNT(*)
 		FROM MFRG_STMT
 		WHERE COM_CODE = #{comCode}
@@ -65,8 +65,18 @@
 		AND YEAR = #{year}
 	</update>
 	
-	<select id="selectVal13">
-	
+	<select id="searchMfrg" parameterType="MfrgStmt" resultType="MfrgStmt">
+		SELECT VAL13, CLOSING
+		FROM MFRG_STMT
+		WHERE COM_CODE = #{comCode}
+		AND YEAR = #{year}
+	</select>
+
+	<select id="selectMfrgSum90" parameterType="IncomeStmtAccount" resultType="_int">
+		SELECT SUM90
+		FROM MFRG_STMT
+		WHERE COM_CODE = #{comCode}
+		AND YEAR = #{year}
 	</select>
 	
 </mapper>

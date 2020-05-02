@@ -14,11 +14,7 @@ public interface FinStmtDao {
 
 	int insertIncomeStmt(SqlSessionTemplate sqlSession, IncomeStmt i);
 
-	//HashMap selectIncomeStmt(SqlSessionTemplate sqlSession, IncomeStmtAccount isa);
-
 	ArrayList selectSlip(SqlSessionTemplate sqlSession, IncomeStmtAccount isa);
-
-	//HashMap selectMfrgCostStmt(SqlSessionTemplate sqlSession, IncomeStmtAccount isa);
 
 	List selectCurFinStmt(SqlSessionTemplate sqlSession, IncomeStmtAccount isa);
 
@@ -26,10 +22,12 @@ public interface FinStmtDao {
 
 	int insertMfrgStmt(SqlSessionTemplate sqlSession, MfrgStmt ms);
 
-	int selectMfrgStmt(SqlSessionTemplate sqlSession, MfrgStmt ms);
+	int countMfrgStmt(SqlSessionTemplate sqlSession, MfrgStmt ms);
 
 	int updateMfrgStmt(SqlSessionTemplate sqlSession, MfrgStmt ms);
 
-	int selectVal13(SqlSessionTemplate sqlSession, MfrgStmt ms);
+	MfrgStmt searchMfrg(SqlSessionTemplate sqlSession, MfrgStmt ms);
+
+	int selectMfrgSum90(SqlSessionTemplate sqlSession, IncomeStmtAccount isa);
 
 }

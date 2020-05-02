@@ -9,6 +9,26 @@
 		font-size:21px;
 		margin-right:60px;
 	}
+	#foldBtn {
+		background:#24574A;
+		border-radius:4px;
+		padding:1px;
+		padding-bottom:7px;
+		color:white;
+	}
+	#foldImg {
+		height:30px;
+		padding:1px;
+		padding-right:3px;
+	}
+	#saveBtn, #closeBtn {
+		display: none;
+	}
+	#cancleBtn {
+		display: none;
+		border:1px solid red; 
+		color:red;
+	}
 	.normal-label {
 		margin:0px;
 	}
@@ -37,18 +57,6 @@
 	}
 	.table-content {
 		text-align:right;
-	}
-	#foldBtn {
-		background:#24574A;
-		border-radius:4px;
-		padding:1px;
-		padding-bottom:7px;
-		color:white;
-	}
-	#foldImg {
-		height:30px;
-		padding:1px;
-		padding-right:3px;
 	}
 	#inputNum {
 		text-align:right;
@@ -118,12 +126,13 @@
 			<table style="width:100%; max-width:1100px;">
 				<tr>
 					<td>
-						<span style="margin-bottom:10px; color:red;"><img src="${ contextPath }/resources/images/pencil.PNG">기말원재료재고액을 입력하세요</span>
+						<span style="margin-bottom:10px; color:red;"><img src="${ contextPath }/resources/images/pencil.PNG"><label class="normal=lable" id="requestMsg">기말원재료재고액을 입력하세요</label></span>
 						&nbsp;&nbsp;&nbsp;&nbsp;		
-						<button type="button" onclick="saveMfrgStmt();">저장</button>
+						<button type="button" id="saveBtn" onclick="saveMfrgStmt();">저장</button>
 						&nbsp;&nbsp;
-						<button type="button" onclick="insertMfrgStmt();">마감</button>
+						<button type="button" id="closeBtn" onclick="closeMfrgStmt();">마감</button>
 						<input type="hidden" id="closing" name="closing">
+						<button type="button" id="cancleBtn" onclick="cancleClosing();">마감 취소</button>
 					</td>
 					<td align="right">
 					</td>
@@ -136,6 +145,7 @@
 						<td class="table-head" colspan="2">
 							제 <label class="normal-label" id="cur-term"></label>(당)기 2020.01 ~ 2020.<label class="normal-label" id="cur-month"></label>
 							<input type="hidden" id="login-openDay" value="${ sessionScope.loginCompany.gaeup }">
+							<input type="hidden" id="term" name="term">
 						</td>
 						<td class="table-head" colspan="2">제 <label class="normal-label" id="past-term"></label>(전)기 2019.01 ~ 2019.12</td>
 					</tr>
@@ -306,39 +316,70 @@
 			$("#contentTable td").mouseout(function() {
 				$(this).parent().css("background", "white");
 			});			
+		
+			/* 현재 날짜로 기본값 설정 */
+			var curDate = new Date();
+			console.log("curDate : " + curDate);
+			console.log("curYear : " + curDate.getFullYear());
+			
+			$("#year").val(curDate.getFullYear());
+			
+			switch (curDate.getMonth()) {
+			case 0 : $("#jan").prop("selected", true); break;
+			case 1 : $("#feb").prop("selected", true); break;
+			case 2 : $("#mar").prop("selected", true); break;
+			case 3 : $("#apr").prop("selected", true); break;
+			case 4 : $("#may").prop("selected", true); break;
+			case 5 : $("#jun").prop("selected", true); break;
+			case 6 : $("#jul").prop("selected", true); break;
+			case 7 : $("#aug").prop("selected", true); break;
+			case 8 : $("#sep").prop("selected", true); break;
+			case 9 : $("#oct").prop("selected", true); break;
+			case 10 : $("#nov").prop("selected", true); break;
+			case 11 : $("#dec").prop("selected", true); break;
+			}
+			
+			//로그인 회사로 기수 설정
+			var openDay = $("#login-openDay").val();
+			var openYear = String(openDay).substring(0,4);
+			
+			var curTerm = Number(curDate.getFullYear()) - Number(openYear) + 1;
+			var pastTerm = curTerm - 1;
+			
+			$("#cur-term").text(curTerm);
+			$("#term").val(curTerm);
+			$("#past-term").text(pastTerm);
+			
+			//키 입력창에 값을 입력시 발생하는 이벤트
+			$("#inputNum").keyup(function() {
+				var cSum10 = Number(uncomma($("#c15300").text())) + Number(uncomma($("#inputNum").val()));
+				$("#cSum10").text(comma(cSum10));
+				
+				var cSum20 = 0;
+				$("#cSum20").text(cSum20);
+				
+				var cSum30 = Number(uncomma($("#c51100").text()));
+				$("#cSum30").text(comma(cSum30));
+				
+				var cSum40 = cSum10 + cSum20 + cSum30;
+				$("#cSum40").text(comma(cSum40));
+				
+				var cSum50 = 0;
+				$("#cSum50").text(comma(cSum50));
+				
+				var cSum60 = cSum40 + cSum50;
+				$("#cSum60").text(comma(cSum60));
+				
+				var cSum70 = 0;
+				$("#cSum70").text(comma(cSum70));
+				
+				var cSum80 = 0;
+				$("#cSum80").text(comma(cSum80));
+				
+				var cSum90 = cSum60 - (cSum70 + cSum80);
+				$("#cSum90").text(comma(cSum90));
+			})
 		});
-		
-		/* 현재 날짜로 기본값 설정 */
-		var curDate = new Date();
-		console.log("curDate : " + curDate);
-		console.log("curYear : " + curDate.getFullYear());
-		
-		$("#year").val(curDate.getFullYear());
-		
-		switch (curDate.getMonth()) {
-		case 0 : $("#jan").prop("selected", true); break;
-		case 1 : $("#feb").prop("selected", true); break;
-		case 2 : $("#mar").prop("selected", true); break;
-		case 3 : $("#apr").prop("selected", true); break;
-		case 4 : $("#may").prop("selected", true); break;
-		case 5 : $("#jun").prop("selected", true); break;
-		case 6 : $("#jul").prop("selected", true); break;
-		case 7 : $("#aug").prop("selected", true); break;
-		case 8 : $("#sep").prop("selected", true); break;
-		case 9 : $("#oct").prop("selected", true); break;
-		case 10 : $("#nov").prop("selected", true); break;
-		case 11 : $("#dec").prop("selected", true); break;
-		}
-		
-		/* 로그인 회사로 기수 설정 */
-		var openDay = $("#login-openDay").val();
-		var openYear = String(openDay).substring(0,4);
-		
-		var curTerm = Number(curDate.getFullYear()) - Number(openYear) + 1;
-		var pastTerm = curTerm - 1;
-		
-		$("#cur-term").text(curTerm);
-		$("#past-term").text(pastTerm);
 		
 		/* 콤마 찍기 */
 		function comma(str) {
@@ -357,13 +398,39 @@
 			str.value = comma(uncomma(str.value));
 		}
 		
-		//(날짜를 통한) 검색 버튼 클릭시
+		//(날짜를 통한) 검색 버튼 클릭 시
 		function dateSearch() {
-			//$("#main-tbody").show();
 			$("#main-tbody").css("display", "");
 			
 			var year = $("#year").val();
 			var month = $("#month").val();
+			
+			$.ajax({
+				url : "searchMfrg.fs",
+				type : "get",
+				data : {
+					year : year
+				},
+				success: function(data) {
+					
+					if(data.closing == "Y") {
+						$("#cancleBtn").show();
+						$("#requestMsg").text("마감이 완료되었습니다");
+						$("#inputNum").attr("readonly", "readonly");
+					} else {
+						$("#saveBtn").show();
+						$("#closeBtn").show();
+					}
+					
+					if(data == "") {
+						console.log("data is NULL");
+					} else {
+						var val13 = data.val13;
+						
+						$("#inputNum").val(comma(val13));						
+					}
+				}
+			});
 			
 			$.ajax({
 				url : "selectMfrgStmt.fs",
@@ -383,7 +450,7 @@
 					$("#c51100").text(comma(c51100));
 					
 					//표 각 합계 계산
-					var cSum10 = c15300;
+					var cSum10 = c15300 + Number(uncomma($("#inputNum").val()));
 					$("#cSum10").text(comma(cSum10));
 					
 					var cSum20 = 0;
@@ -452,21 +519,11 @@
 				}
 			});
 			
-			$.ajax({
-				url: "selectVal13.fs",
-				type: "get",
-				data : {
-					year : year
-				},
-				success: function(data) {
-					
-				}
-			});
-			
 			//sumbit 차단 위하여 false 처리
 			return false;
 		}
 		
+		//접기 버튼 클릭시
 		$(document).on("click", "#foldBtn", function() {
 			var clicks = $(this).data('clicks');
 			
@@ -712,21 +769,12 @@
 				
 				$("#contentForm").submit();
 				
-				/* Swal.fire({
-					icon: "success",
-					title: "마감 성공",
-					text: "마감이 완료되었습니다!"
-				}).then((result) => {
-					if(result.value) {
-						$("#contentForm").submit();
-					}
-				}) */
 			}
 			
 		}
 		
 		//마감 버튼 클릭시
-		function insertMfrgStmt() {
+		function closeMfrgStmt() {
 			
 			if($("#cSum10").text() == "") {
 				
@@ -761,6 +809,15 @@
 				}) */
 			}
 			
+		}
+		
+		//마감 취소 클릭 시
+		function cancleClosing() {
+			$("#saveBtn").show();
+			$("#closeBtn").show();
+			$("#cancleBtn").hide();
+			$("#requestMsg").text("기말원재료재고액을 입력하세요");
+			$("#inputNum").removeAttr("readonly");
 		}
 	</script>
 	
