@@ -20,6 +20,8 @@ public interface EmployeeService {
 
 	int insertEarnEmp(EarnIncome ei, String employeeCode);
 
+	String seletcIncomeTax(String taxableIncome);
+
 	/*
 	 * int insertEarnEmp(EarnIncome ei, String employeeCode);
 	 */

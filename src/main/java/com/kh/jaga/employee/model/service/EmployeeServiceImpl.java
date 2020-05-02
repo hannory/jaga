@@ -70,5 +70,17 @@ public class EmployeeServiceImpl implements EmployeeService {
 		return ed.insertEarnEmp(sqlSession, ei, employeeCode);
 	}
 
+	@Override
+	public String seletcIncomeTax(String taxableIncome) {
+		
+		String result=ed.selectIncomeTax(sqlSession,taxableIncome);
+		if(result==null) {
+			System.out.println("소득세 불러오는 결과값이 널이다.");
+
+		}
+		
+		return result;
+	}
+
 
 }

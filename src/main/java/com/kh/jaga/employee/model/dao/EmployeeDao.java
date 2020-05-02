@@ -22,4 +22,8 @@ public interface EmployeeDao {
 
 
 	int insertEarnEmp(SqlSessionTemplate sqlSession, EarnIncome ei, String employeeCode);
+
+	String selectIncomeTax(SqlSessionTemplate sqlSession, String taxableIncome);
+
+
 }
