@@ -108,7 +108,7 @@ public class SumOfTaxInvController {
 			Receiption receiptionPur=new Receiption();
 			Receiption receiptionSales=new Receiption();
 			
-			//전표구분:매입매출, 구분:매입/매출, 증빙종류:50,70,90,100
+			//전표구분:매입매출, 구분:매입/매출, 증빙종류:10
 			
 			//매입 리스트 
 			receiptionPur.setSlipDivision("매입매출");
