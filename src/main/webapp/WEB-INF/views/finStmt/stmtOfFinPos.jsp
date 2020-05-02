@@ -481,10 +481,11 @@
 						//테이블을 갱신하기 위해 비워줌
 						$tableBody.html('');
 						
-						//잔액과 누계
-						var balance = 0;
-						//월계
-						var monthBalance = 0;
+						var balance = 0;			//잔액
+						var monthDebitBal = 0;		//차변 월계
+						var monthCreditBal = 0;		//대변 월계
+						var accDebitBal = 0;		//차변 누계
+						var accCreditBal = 0;		//대변 누계
 						
 						//월별로 월계, 누계 계산을 위한 변수
 						var monthCheck = 0;
@@ -506,9 +507,9 @@
 								monthCheck = Number(month);
 							}
 							
-							//월계, 누계 계산
+							//달이 바뀌어 월계, 누계 계산이 필요한 경우
 							if(month != monthCheck) {
-								
+								//월계 계산
 								var $mtr = $("<tr>").attr("class", "modal-head");
 								var $mtd1 = $("<td>").attr("class", "modal-head");
 								var $mtd2 = $("<td>").attr("class", "modal-head");
@@ -516,13 +517,16 @@
 								var $mtd4 = $("<td>").attr("class", "modal-head");
 								var $mtd5 = $("<td>").attr("class", "modal-head");
 								
-								if(value.debitCredit == "차변") {
+								var $mtd6 = $("<td>").attr("class", "modal-head").text(comma(monthDebitBal)).css("text-align", "right");
+								var $mtd7 = $("<td>").attr("class", "modal-head").text(comma(monthCreditBal)).css("text-align", "right");
+								
+								/* if(value.debitCredit == "차변") {
 									var $mtd6 = $("<td>").attr("class", "modal-head").text(comma(monthBalance)).css("text-align", "right");
 									var $mtd7 = $("<td>").attr("class", "modal-head");
 								} else {
 									var $mtd6 = $("<td>").attr("class", "modal-head");
 									var $mtd7 = $("<td>").attr("class", "modal-head").text(comma(monthBalance)).css("text-align", "right");
-								}
+								} */
 								
 								var $mtd8 = $("<td>").attr("class", "modal-head");
 								
@@ -536,6 +540,7 @@
 								$mtr.append($mtd8);
 								$tableBody.append($mtr);
 								
+								//누계 계산
 								var $atr = $("<tr>").attr("class", "modal-head");
 								var $atd1 = $("<td>").attr("class", "modal-head");
 								var $atd2 = $("<td>").attr("class", "modal-head");
@@ -543,13 +548,16 @@
 								var $atd4 = $("<td>").attr("class", "modal-head");
 								var $atd5 = $("<td>").attr("class", "modal-head");
 								
-								if(value.debitCredit == '차변') {
+								var $atd6 = $("<td>").attr("class", "modal-head").text(comma(accDebitBal)).css("text-align", "right");
+								var $atd7 = $("<td>").attr("class", "modal-head").text(comma(accCreditBal)).css("text-align", "right");
+								
+								/* if(value.debitCredit == '차변') {
 									var $atd6 = $("<td>").attr("class", "modal-head").text(comma(balance)).css("text-align", "right");
 									var $atd7 = $("<td>").attr("class", "modal-head");
 								} else {
 									var $atd6 = $("<td>").attr("class", "modal-head");
 									var $atd7 = $("<td>").attr("class", "modal-head").text(comma(balance)).css("text-align", "right");
-								}
+								} */
 								
 								var $atd8 = $("<td>").attr("class", "modal-head");
 								
@@ -564,7 +572,8 @@
 								$tableBody.append($atr);
 								
 								//월계 초기화
-								monthBalance = 0;
+								monthDebitBal = 0;
+								monthCreditBal = 0;
 							}
 							
 							if(month != monthCheck) {
@@ -585,21 +594,25 @@
 							var $venderCodeTd = $("<td>").text(value.venderCode).css("text-align", "center");
 							var $venderNameTd = $("<td>").text(value.venderName);
 							
-							//차변 대변 구분
+							//차변 대변 구분 출력 및 계산
 							if(value.debitCredit == '차변') {
 								var $debitTd = $("<td>").text(comma(value.price)).css("text-align", "right");
 								var $creditTd = $("<td>");
+								
+								balance += value.price;
+								monthDebitBal += value.price;
+								accDebitBal += value.price;
 							} else {
 								var $debitTd = $("<td>");
 								var $creditTd = $("<td>").text(comma(value.price)).css("text-align", "right");
+								
+								balance -= value.price;
+								monthCreditBal += value.price;
+								accCreditBal += value.price;
 							}
 							
-							//잔액, 누계 계산
-							balance += value.price;
+							//누계 출력
 							var $balanceTd = $("<td>").text(comma(balance)).css("text-align", "right");
-							
-							//월계 계산
-							monthBalance += value.price;
 							
 							$tr.append($dateTd);
 							$tr.append($dateSlipCodeTd);
@@ -613,7 +626,12 @@
 						});
 						
 						//마지막행 월계, 누게에 값 입력
-						if(data[0].debitCredit == "차변") {
+						$("#last-debit-month").text(comma(monthDebitBal)).css("text-align", "right");
+						$("#last-debit-acc").text(comma(accDebitBal)).css("text-align", "right");
+						$("#last-credit-month").text(comma(monthCreditBal)).css("text-align", "right");
+						$("#last-credit-acc").text(comma(accCreditBal)).css("text-align", "right");
+						
+						/* if(data[0].debitCredit == "차변") {
 							$("#last-debit-month").text(comma(monthBalance)).css("text-align", "right");
 							$("#last-debit-acc").text(comma(balance)).css("text-align", "right");
 							$("#last-credit-month").text("");
@@ -623,7 +641,7 @@
 							$("#last-debit-acc").text("");
 							$("#last-credit-month").text(comma(monthBalance)).css("text-align", "right");
 							$("#last-credit-acc").text(comma(balance)).css("text-align", "right");
-						}
+						} */
 						
 					},
 					error : function(status) {

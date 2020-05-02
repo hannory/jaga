@@ -199,10 +199,15 @@ public class FinStmtServiceImpl implements FinStmtService {
 
 		for(int i = 0; i < cList.size(); i++) {
 			int accountCode = ((IncomeStmtAccount) cList.get(i)).getAccountCode();
+			String debitCredit = ((IncomeStmtAccount) cList.get(i)).getDebitCredit();
 			int price = ((IncomeStmtAccount) cList.get(i)).getPrice();
 			
 			if(accountCode == 10100) {
-				cSum10100 += price;
+				if(debitCredit.equals("차변")) {
+					cSum10100 += price;
+				} else {
+					cSum10100 -= price;
+				}
 			} else if(accountCode == 51100) {
 
 			}
