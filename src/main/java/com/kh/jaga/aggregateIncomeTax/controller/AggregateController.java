@@ -10,9 +10,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import com.kh.jaga.aggregateIncomeTax.model.dto.AddedTaxStmtDto;
 import com.kh.jaga.aggregateIncomeTax.model.service.AggregateService;
 import com.kh.jaga.aggregateIncomeTax.model.vo.BizCodeVo;
+
+import net.sf.json.JSONArray;
 
 /**
  * @author SWY
@@ -37,7 +41,8 @@ public class AggregateController {
 		System.out.println("============================================================");
 		model.addAttribute("bizCodeList", bizCodeList);
 		
-		
+		JSONArray bizCodeArray = JSONArray.fromObject(bizCodeList);
+		model.addAttribute("bizCodeArray", bizCodeArray);
 		
 		return "aggregateIncomeTax";
 	}

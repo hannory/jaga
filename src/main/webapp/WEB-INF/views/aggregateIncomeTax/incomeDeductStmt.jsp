@@ -127,6 +127,13 @@
 	<div class="container-fluid">
 	<!-- 작업영역 -->
 	
+	<!-- 로딩화면 -->
+   <div id="loading">
+        <img id="loading-image" src="${ contextPath }/resources/images/loading36.gif" alt="Loading..." />
+    </div>
+   <!-- 로딩화면 끝-->
+	
+	
 		<h2 class="mt-4">종합소득세</h2>
 		
 		<!-- 귀속년도 -->

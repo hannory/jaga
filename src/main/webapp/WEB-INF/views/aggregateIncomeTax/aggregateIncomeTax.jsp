@@ -88,6 +88,108 @@
 <body>
 
 
+   
+   <!-- zzzzzzzzzzz -->
+		<h1 id="testTag" onclick="testTagFunc();">zzz</h1>
+		<script>
+		function testTagFunc(){
+			var tempList = '${ bizCodeArray }';
+			var bizCodeArray = new Array(JSON.parse('${ bizCodeArray }'))[0];
+			console.log(bizCodeArray[0]);
+			console.log(bizCodeArray[1]);
+			console.log(bizCodeArray[2]);
+		}
+		</script>
+	<!-- zzzzzzzzzzzzzz -->
+		
+		<!-- 업종 검색 모달영역 -->
+		
+		<div style="width:100%; height:100%; background-color:rgba(125, 125, 125, 0.5); overflow:auto;">
+			
+			<div style="width:800px; height:600px; background:white; margin:auto; margin-top:50px;">
+				<div style="background:#24574A; color:white; width:100%; height:10%;">
+					<h4 style="margin:auto; margin-left:50px; text-align:center; width:80%; line-height:50px; display:inline-block;">소득금액</h4>
+					<div style="display:inline-block; width:30px; height:30px; text-align:center; background:white; color:black; border-radius:30px; float:right; margin-top:15px; margin-right:10px;">X</div>
+				</div>
+				<div style="width:100%; height:100%;"><!-- div for scroll -->
+						<div style="overflow: auto; width:80%; height:500px; margin:0 auto; margin-top:30px; border:1px solid black;">
+				<table border="1" id="tableSearchBiz" style="width:100%; text-align:center;">
+					<tr>
+						<td style="background:#24574A; color:white;"><span>검색</span></td>
+						<td colspan="2"><input style="width:90%; margin-left:-10px; border-right:1px solid black;" type="text" id="inputSearchBiz"><div style="display:inline-block;"><img style="width:20px; height:20px; margin-left:15px;" src="${contextPath}/resources/images/search.PNG"></div></td>
+					</tr>
+					<tr id="trSearchBizSubject" style="background:#24574A; color:white;">
+						<td style="width:20%">업종코드</td>
+						<td style="width:40%">업태명</td>
+						<td style="width:40%">종목명</td>
+					</tr>
+					
+					<c:if test="${ bizCodeArray ne null }">
+						<c:forEach var="target" items="${ bizCodeArray }">
+							<tr class="cursorPointer trBizCode" onclick="trSearchBizClick(this);">
+								<td><input type="hidden" class="BizPkCode" value="${ target.tobcPkCode }">${ target.typeOfBizCode }</td>
+								<td>${ target.sellWayName }</td>
+								<td>${ target.sellTargetName }</td>
+							</tr>
+						</c:forEach>
+					</c:if>
+				</table>
+						</div>
+				</div><!-- div for scroll -->
+			</div>
+			
+		</div>
+		
+		<script>
+		function trSearchBizClick(tr){
+			console.log(tr);
+		}
+		
+		window.onload = function(){
+			var bizCodeArray = new Array(JSON.parse('${ bizCodeArray }'))[0];
+			
+			$("#inputSearchBiz").keyup(function(){
+				
+				if($("#inputSearchBiz").val() == ""){
+					console.log("zzz 빈칸임");
+					
+				}else{
+					console.log("zzz 빈칸아님 ㅎzz");
+					var tempStr = ""; 
+					
+					for(var i = 0; i < bizCodeArray.length; i++ ){
+						
+						if( bizCodeArray[i].sellWayName.includes($("#inputSearchBiz").val()) || bizCodeArray[i].typeOfBizCode.includes($("#inputSearchBiz").val()) ||bizCodeArray[i].sellTargetName.includes($("#inputSearchBiz").val()) ){
+							console.log(bizCodeArray[i].sellWayName);
+							
+							
+							tempStr += "<td>" + bizCodeArray[i].typeOfBizCode + "</td>";
+							tempStr += "<td>" + bizCodeArray[i].sellWayName + "</td>";
+							tempStr += "<td>" + bizCodeArray[i].sellTargetName + "</td>";
+							
+							
+						}
+						
+						
+					}//for
+
+					$("#trSearchBizSubject").after(
+					"<tr class='cursorPointer trBizCode' onclick='trSearchBizClick(this);'>" + tempStr + "</tr>"		
+					);
+					
+					
+				}
+				
+				
+			});
+		}
+		</script>
+
+
+		<!-- 업종 검색 모달영역 끝 -->
+		
+
+
 	
 
 	<jsp:include page="../common/menubar.jsp" />
@@ -100,6 +202,54 @@
         <img id="loading-image" src="${ contextPath }/resources/images/loading36.gif" alt="Loading..." />
     </div>
    <!-- 로딩화면 끝-->
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
 	
 		<h2 class="mt-4">종합소득세</h2>
 		
@@ -113,7 +263,7 @@
 		</div>
 		
 		<script>
-		/* 귀속연도 받아온 값으로 바꿔줌 */
+		/* 귀속년도 받아온 값으로 바꿔줌 */
 		$(function(){
 			/* if(${ dto.attrYear eq null }){
 				alert("null true");
@@ -160,6 +310,12 @@
 		</script>		
 		
 		<br>
+		
+		
+		
+		
+		
+		
 		
 		
 		
