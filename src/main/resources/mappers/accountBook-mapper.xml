@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="AccountBook">
+	<select id="selectAccountList" resultType="AccountTitle" parameterType="java.lang.String">
+		SELECT B.ACCOUNT_CODE, A.ACCOUNT_TITLE
+		FROM (SELECT ACCOUNT_CODE
+		      FROM (SELECT J.JOURNAL_CODE, A.ACCOUNT_TITLE, J.ACCOUNT_CODE
+		            FROM JOURNALIZE J
+		            JOIN SLIP S ON(S.SLIP_CODE = J.SLIP_CODE)
+		            JOIN ACCOUNT_TITLE A ON(A.ACCOUNT_CODE = J.ACCOUNT_CODE)
+		            WHERE S.COM_CODE = #{comCode}
+		            	  AND TO_CHAR(S.SLIP_DATE, 'YYYY') = TO_CHAR(SYSDATE,'YYYY'))
+		      GROUP BY ACCOUNT_CODE) B
+		JOIN ACCOUNT_TITLE A ON(B.ACCOUNT_CODE = A.ACCOUNT_CODE)
+	</select>
+
+	<select id="selectOneAccount" resultType="GenderLedgerDTO" parameterType="java.util.HashMap">
+		SELECT YEAR_MONTH_ALL
+		     , YEAR_MONTH_CHA
+		     , DEBIT_CREDIT_CHA
+		     , PRICE_SUM_CHA
+		     , YEAR_MONTH_DEA
+		     , DEBIT_CREDIT_DEA
+		     , PRICE_SUM_DEA     
+		     , SUM_ALL     
+		FROM(SELECT CASE WHEN A.YEAR_MONTH IS NOT NULL THEN  A.YEAR_MONTH
+		                 ELSE B.YEAR_MONTH
+		            END AS YEAR_MONTH_ALL
+		          , NVL(A.YEAR_MONTH,B.YEAR_MONTH) "YEAR_MONTH_CHA"
+		          , NVL(A.DEBIT_CREDIT,'차변') "DEBIT_CREDIT_CHA"
+		          , NVL(A.PRICE_SUM,0) "PRICE_SUM_CHA"
+		          , NVL(B.YEAR_MONTH,A.YEAR_MONTH) "YEAR_MONTH_DEA"
+		          , NVL(B.DEBIT_CREDIT,'대변') "DEBIT_CREDIT_DEA"
+		          , NVL(B.PRICE_SUM,0) "PRICE_SUM_DEA"                   
+		          , CASE WHEN (SELECT ACCOUNT_SYSTEM
+		                       FROM ACCOUNT_TITLE
+		                       WHERE ACCOUNT_CODE = #{accountCode}) LIKE '%매출%' THEN SUM(NVL(B.PRICE_SUM,0)-NVL(A.PRICE_SUM,0)) OVER(ORDER BY NVL(A.YEAR_MONTH,B.YEAR_MONTH))
+		                 WHEN (SELECT ACCOUNT_SYSTEM
+		                       FROM ACCOUNT_TITLE
+		                       WHERE ACCOUNT_CODE = #{accountCode}) LIKE '%부채%' THEN SUM(NVL(B.PRICE_SUM,0)-NVL(A.PRICE_SUM,0)) OVER(ORDER BY NVL(A.YEAR_MONTH,B.YEAR_MONTH))
+		                 WHEN (SELECT ACCOUNT_SYSTEM
+		                       FROM ACCOUNT_TITLE
+		                       WHERE ACCOUNT_CODE = #{accountCode}) LIKE '%자본%' THEN SUM(NVL(B.PRICE_SUM,0)-NVL(A.PRICE_SUM,0)) OVER(ORDER BY NVL(A.YEAR_MONTH,B.YEAR_MONTH))
+		                 WHEN (SELECT ACCOUNT_SYSTEM
+		                       FROM ACCOUNT_TITLE
+		                       WHERE ACCOUNT_CODE = #{accountCode}) LIKE '%수익%' THEN SUM(NVL(B.PRICE_SUM,0)-NVL(A.PRICE_SUM,0)) OVER(ORDER BY NVL(A.YEAR_MONTH,B.YEAR_MONTH))
+		                 ELSE SUM(NVL(A.PRICE_SUM,0)-NVL(B.PRICE_SUM,0)) OVER(ORDER BY NVL(A.YEAR_MONTH,B.YEAR_MONTH))
+		                 END AS SUM_ALL
+		     FROM (SELECT TO_CHAR(S.SLIP_DATE,'YYYY/MM') "YEAR_MONTH"
+		                , J.DEBIT_CREDIT
+		                , SUM(J.PRICE) PRICE_SUM
+		                , COUNT(*)
+		           FROM JOURNALIZE J
+		           JOIN SLIP S ON(J.SLIP_CODE = S.SLIP_CODE)
+		           WHERE J.ACCOUNT_CODE = #{accountCode}
+		                 AND J.DEBIT_CREDIT = '차변'
+		                 AND S.COM_CODE = #{comCode}
+		           GROUP BY TO_CHAR(S.SLIP_DATE,'YYYY/MM'), J.DEBIT_CREDIT) A
+		     FULL JOIN (SELECT TO_CHAR(S.SLIP_DATE,'YYYY/MM') "YEAR_MONTH"
+		                     , J.DEBIT_CREDIT
+		                     , SUM(J.PRICE) PRICE_SUM
+		                     , COUNT(*)
+		                FROM JOURNALIZE J
+		                JOIN SLIP S ON(J.SLIP_CODE = S.SLIP_CODE)
+		                WHERE J.ACCOUNT_CODE = #{accountCode}
+		                      AND J.DEBIT_CREDIT = '대변'
+		                      AND S.COM_CODE = #{comCode}
+		                GROUP BY TO_CHAR(S.SLIP_DATE,'YYYY/MM'), J.DEBIT_CREDIT) B ON(A.YEAR_MONTH = B.YEAR_MONTH)
+		     ORDER BY YEAR_MONTH_ALL)
+		WHERE SUBSTR(YEAR_MONTH_ALL,1,4) = EXTRACT(YEAR FROM SYSDATE)
+	</select>
+	
+	<select id="selectDetailAccount" resultType="GenderLedgerDTO" parameterType="java.util.HashMap">
+		SELECT YEAR_MONTH_ALL
+		     , YEAR_MONTH_CHA
+		     , DEBIT_CREDIT_CHA
+		     , PRICE_SUM_CHA
+		     , YEAR_MONTH_DEA
+		     , DEBIT_CREDIT_DEA
+		     , PRICE_SUM_DEA
+		     , SUM_MONTH_CHA
+		     , SUM_MONTH_DEA
+		     , SUM_ALL     
+		FROM(SELECT CASE WHEN A.YEAR_MONTH IS NOT NULL THEN  A.YEAR_MONTH
+		                 ELSE B.YEAR_MONTH
+		            END AS YEAR_MONTH_ALL
+		          , NVL(A.YEAR_MONTH,B.YEAR_MONTH) "YEAR_MONTH_CHA"
+		          , NVL(A.DEBIT_CREDIT,'차변') "DEBIT_CREDIT_CHA"
+		          , NVL(A.PRICE_SUM,0) "PRICE_SUM_CHA"
+		          , NVL(B.YEAR_MONTH,A.YEAR_MONTH) "YEAR_MONTH_DEA"
+		          , NVL(B.DEBIT_CREDIT,'대변') "DEBIT_CREDIT_DEA"
+		          , NVL(B.PRICE_SUM,0) "PRICE_SUM_DEA"
+		          , SUM(NVL(B.PRICE_SUM,0)) OVER(PARTITION BY SUBSTR(NVL(A.YEAR_MONTH,B.YEAR_MONTH),1,7) ORDER BY NVL(A.YEAR_MONTH,B.YEAR_MONTH)) AS SUM_MONTH_DEA
+		          , SUM(NVL(A.PRICE_SUM,0)) OVER(PARTITION BY SUBSTR(NVL(A.YEAR_MONTH,B.YEAR_MONTH),1,7) ORDER BY NVL(A.YEAR_MONTH,B.YEAR_MONTH)) AS SUM_MONTH_CHA
+		          , CASE WHEN (SELECT ACCOUNT_SYSTEM
+		                       FROM ACCOUNT_TITLE
+		                       WHERE ACCOUNT_CODE = #{accountCode}) LIKE '%매출%' THEN SUM(NVL(B.PRICE_SUM,0)-NVL(A.PRICE_SUM,0)) OVER(ORDER BY NVL(A.YEAR_MONTH,B.YEAR_MONTH))
+		                 WHEN (SELECT ACCOUNT_SYSTEM
+		                       FROM ACCOUNT_TITLE
+		                       WHERE ACCOUNT_CODE = #{accountCode}) LIKE '%부채%' THEN SUM(NVL(B.PRICE_SUM,0)-NVL(A.PRICE_SUM,0)) OVER(ORDER BY NVL(A.YEAR_MONTH,B.YEAR_MONTH))
+		                 WHEN (SELECT ACCOUNT_SYSTEM
+		                       FROM ACCOUNT_TITLE
+		                       WHERE ACCOUNT_CODE = #{accountCode}) LIKE '%자본%' THEN SUM(NVL(B.PRICE_SUM,0)-NVL(A.PRICE_SUM,0)) OVER(ORDER BY NVL(A.YEAR_MONTH,B.YEAR_MONTH))
+		                 WHEN (SELECT ACCOUNT_SYSTEM
+		                       FROM ACCOUNT_TITLE
+		                       WHERE ACCOUNT_CODE = #{accountCode}) LIKE '%수익%' THEN SUM(NVL(B.PRICE_SUM,0)-NVL(A.PRICE_SUM,0)) OVER(ORDER BY NVL(A.YEAR_MONTH,B.YEAR_MONTH))
+		                 ELSE SUM(NVL(A.PRICE_SUM,0)-NVL(B.PRICE_SUM,0)) OVER(ORDER BY NVL(A.YEAR_MONTH,B.YEAR_MONTH))
+		                 END AS SUM_ALL
+		     FROM (SELECT TO_CHAR(S.SLIP_DATE,'YYYY/MM/DD') "YEAR_MONTH"
+		                , J.DEBIT_CREDIT
+		                , SUM(J.PRICE) PRICE_SUM
+		                , COUNT(*)
+		           FROM JOURNALIZE J
+		           JOIN SLIP S ON(J.SLIP_CODE = S.SLIP_CODE)
+		           WHERE J.ACCOUNT_CODE = #{accountCode}
+		                 AND J.DEBIT_CREDIT = '차변'
+		                 AND S.COM_CODE = #{accountCode}
+		           GROUP BY TO_CHAR(S.SLIP_DATE,'YYYY/MM/DD'), J.DEBIT_CREDIT) A
+		     FULL JOIN (SELECT TO_CHAR(S.SLIP_DATE,'YYYY/MM/DD') "YEAR_MONTH"
+		                     , J.DEBIT_CREDIT
+		                     , SUM(J.PRICE) PRICE_SUM
+		                     , COUNT(*)
+		                FROM JOURNALIZE J
+		                JOIN SLIP S ON(J.SLIP_CODE = S.SLIP_CODE)
+		                WHERE J.ACCOUNT_CODE = #{accountCode}
+		                      AND J.DEBIT_CREDIT = '대변'
+		                      AND S.COM_CODE = #{comCode}
+		                GROUP BY TO_CHAR(S.SLIP_DATE,'YYYY/MM/DD'), J.DEBIT_CREDIT) B ON(A.YEAR_MONTH = B.YEAR_MONTH)
+		     ORDER BY YEAR_MONTH_ALL)
+		WHERE SUBSTR(YEAR_MONTH_ALL,1,4) = EXTRACT(YEAR FROM SYSDATE)
+	</select>
+</mapper>

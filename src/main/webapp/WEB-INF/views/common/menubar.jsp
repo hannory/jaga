@@ -175,7 +175,7 @@ $(window).load(function(){
                                     <div class="collapse" id="pagesCollapseA" aria-labelledby="headingOne" data-parent="#sidenavAccordionPages">
                                         <nav class="sb-sidenav-menu-nested nav">
 	                                        <a class="nav-link" href="purchase.vi">매입매출장</a>
-	                                        <a class="nav-link" href="generalLedger.vi">총계정원장</a>
+	                                        <a class="nav-link" href="generalLedger.ab">총계정원장</a>
 	                                        <a class="nav-link" href="500.html">계정별원장</a>
 	                                        <a class="nav-link" href="500.html">거래처원장</a>
 	                                        <a class="nav-link" href="500.html">거래처별<br>계정과목별원장</a>
@@ -284,7 +284,7 @@ $(window).load(function(){
                             
                     <div class="sb-sidenav-footer">
                         <div class="small">Logged in as:</div>
-                        Start Bootstrap
+                         ${sessionScope.loginCompany.bizName}
                     </div>
                 </nav>
             </div>
