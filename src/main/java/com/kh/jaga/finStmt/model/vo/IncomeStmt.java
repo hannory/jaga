@@ -4,54 +4,50 @@ public class IncomeStmt implements java.io.Serializable {
 	private String comCode;					//회사코드
 	private int year;						//연도
 	private int term;						//기수
-	private int sales;						//매출액
-	private int salesOfMerchandise;			//상품매출
-	private int salesOfFinishedGoods;		//제품매출
-	private int costOfSales;				//매출원가
-	private int costOfMerchandisesSold;		//상품매출원가
-	private int beginningInvOfMerchandise;	//기초상품재고액 
-	private int costOfMerchandisePurchased;	//당기상품매입액
-	private int endingInvOfMerchandise;		//기말상품재고액
-	private int costOfFinishedGoods;		//제품매출원가
-	private int grossProfit;				//매출총이익
-	private int sellingAndAdminExpense;		//판매비와관리비
-	private int consumablesExpenses;		//소모품비
-	private int operatingIncome;			//영업이익
-	private int nonOperatingRevenue;		//영업외수익
-	private int nonOperatingExpense;		//영업외비용
-	private int incomeBeforeIncomeTax;		//소득세차감전이익
-	private int incomeTax;					//소득세
-	private int netIncome;					//당기순이익
+	private String closing;					//마감여부
+	private int sum10;
+	private int v40100;
+	private int val213;
+	private int sum30;
+	private int sum40;
+	private int sum50;
+	private int sum100;	
+	
+//	private int sales;						//매출액
+//	private int salesOfMerchandise;			//상품매출
+//	private int salesOfFinishedGoods;		//제품매출
+//	private int costOfSales;				//매출원가
+//	private int costOfMerchandisesSold;		//상품매출원가
+//	private int beginningInvOfMerchandise;	//기초상품재고액 
+//	private int costOfMerchandisePurchased;	//당기상품매입액
+//	private int endingInvOfMerchandise;		//기말상품재고액
+//	private int costOfFinishedGoods;		//제품매출원가
+//	private int grossProfit;				//매출총이익
+//	private int sellingAndAdminExpense;		//판매비와관리비
+//	private int consumablesExpenses;		//소모품비
+//	private int operatingIncome;			//영업이익
+//	private int nonOperatingRevenue;		//영업외수익
+//	private int nonOperatingExpense;		//영업외비용
+//	private int incomeBeforeIncomeTax;		//소득세차감전이익
+//	private int incomeTax;					//소득세
+//	private int netIncome;					//당기순이익
 		
 	public IncomeStmt() {}
 
-	public IncomeStmt(String comCode, int year, int term, int sales, int salesOfMerchandise, int salesOfFinishedGoods,
-			int costOfSales, int costOfMerchandisesSold, int beginningInvOfMerchandise, int costOfMerchandisePurchased,
-			int endingInvOfMerchandise, int costOfFinishedGoods, int grossProfit, int sellingAndAdminExpense,
-			int consumablesExpenses, int operatingIncome, int nonOperatingRevenue, int nonOperatingExpense,
-			int incomeBeforeIncomeTax, int incomeTax, int netIncome) {
+	public IncomeStmt(String comCode, int year, int term, String closing, int sum10, int v40100, int val213, int sum30,
+		int sum40, int sum50, int sum100) {
 		super();
 		this.comCode = comCode;
 		this.year = year;
 		this.term = term;
-		this.sales = sales;
-		this.salesOfMerchandise = salesOfMerchandise;
-		this.salesOfFinishedGoods = salesOfFinishedGoods;
-		this.costOfSales = costOfSales;
-		this.costOfMerchandisesSold = costOfMerchandisesSold;
-		this.beginningInvOfMerchandise = beginningInvOfMerchandise;
-		this.costOfMerchandisePurchased = costOfMerchandisePurchased;
-		this.endingInvOfMerchandise = endingInvOfMerchandise;
-		this.costOfFinishedGoods = costOfFinishedGoods;
-		this.grossProfit = grossProfit;
-		this.sellingAndAdminExpense = sellingAndAdminExpense;
-		this.consumablesExpenses = consumablesExpenses;
-		this.operatingIncome = operatingIncome;
-		this.nonOperatingRevenue = nonOperatingRevenue;
-		this.nonOperatingExpense = nonOperatingExpense;
-		this.incomeBeforeIncomeTax = incomeBeforeIncomeTax;
-		this.incomeTax = incomeTax;
-		this.netIncome = netIncome;
+		this.closing = closing;
+		this.sum10 = sum10;
+		this.v40100 = v40100;
+		this.val213 = val213;
+		this.sum30 = sum30;
+		this.sum40 = sum40;
+		this.sum50 = sum50;
+		this.sum100 = sum100;
 	}
 
 	public String getComCode() {
@@ -78,163 +74,75 @@ public class IncomeStmt implements java.io.Serializable {
 		this.term = term;
 	}
 
-	public int getSales() {
-		return sales;
+	public String getClosing() {
+		return closing;
 	}
 
-	public void setSales(int sales) {
-		this.sales = sales;
+	public void setClosing(String closing) {
+		this.closing = closing;
 	}
 
-	public int getSalesOfMerchandise() {
-		return salesOfMerchandise;
+	public int getSum10() {
+		return sum10;
 	}
 
-	public void setSalesOfMerchandise(int salesOfMerchandise) {
-		this.salesOfMerchandise = salesOfMerchandise;
+	public void setSum10(int sum10) {
+		this.sum10 = sum10;
 	}
 
-	public int getSalesOfFinishedGoods() {
-		return salesOfFinishedGoods;
+	public int getVal213() {
+		return val213;
 	}
 
-	public void setSalesOfFinishedGoods(int salesOfFinishedGoods) {
-		this.salesOfFinishedGoods = salesOfFinishedGoods;
+	public void setVal213(int val213) {
+		this.val213 = val213;
 	}
 
-	public int getCostOfSales() {
-		return costOfSales;
+	public int getSum30() {
+		return sum30;
 	}
 
-	public void setCostOfSales(int costOfSales) {
-		this.costOfSales = costOfSales;
+	public void setSum30(int sum30) {
+		this.sum30 = sum30;
 	}
 
-	public int getCostOfMerchandisesSold() {
-		return costOfMerchandisesSold;
+	public int getSum40() {
+		return sum40;
 	}
 
-	public void setCostOfMerchandisesSold(int costOfMerchandisesSold) {
-		this.costOfMerchandisesSold = costOfMerchandisesSold;
+	public void setSum40(int sum40) {
+		this.sum40 = sum40;
 	}
 
-	public int getBeginningInvOfMerchandise() {
-		return beginningInvOfMerchandise;
+	public int getSum50() {
+		return sum50;
 	}
 
-	public void setBeginningInvOfMerchandise(int beginningInvOfMerchandise) {
-		this.beginningInvOfMerchandise = beginningInvOfMerchandise;
+	public void setSum50(int sum50) {
+		this.sum50 = sum50;
 	}
 
-	public int getCostOfMerchandisePurchased() {
-		return costOfMerchandisePurchased;
+	public int getSum100() {
+		return sum100;
 	}
 
-	public void setCostOfMerchandisePurchased(int costOfMerchandisePurchased) {
-		this.costOfMerchandisePurchased = costOfMerchandisePurchased;
+	public void setSum100(int sum100) {
+		this.sum100 = sum100;
+	}
+	
+	public int getV40100() {
+		return v40100;
 	}
 
-	public int getEndingInvOfMerchandise() {
-		return endingInvOfMerchandise;
-	}
-
-	public void setEndingInvOfMerchandise(int endingInvOfMerchandise) {
-		this.endingInvOfMerchandise = endingInvOfMerchandise;
-	}
-
-	public int getCostOfFinishedGoods() {
-		return costOfFinishedGoods;
-	}
-
-	public void setCostOfFinishedGoods(int costOfFinishedGoods) {
-		this.costOfFinishedGoods = costOfFinishedGoods;
-	}
-
-	public int getGrossProfit() {
-		return grossProfit;
-	}
-
-	public void setGrossProfit(int grossProfit) {
-		this.grossProfit = grossProfit;
-	}
-
-	public int getSellingAndAdminExpense() {
-		return sellingAndAdminExpense;
-	}
-
-	public void setSellingAndAdminExpense(int sellingAndAdminExpense) {
-		this.sellingAndAdminExpense = sellingAndAdminExpense;
-	}
-
-	public int getConsumablesExpenses() {
-		return consumablesExpenses;
-	}
-
-	public void setConsumablesExpenses(int consumablesExpenses) {
-		this.consumablesExpenses = consumablesExpenses;
-	}
-
-	public int getOperatingIncome() {
-		return operatingIncome;
-	}
-
-	public void setOperatingIncome(int operatingIncome) {
-		this.operatingIncome = operatingIncome;
-	}
-
-	public int getNonOperatingRevenue() {
-		return nonOperatingRevenue;
-	}
-
-	public void setNonOperatingRevenue(int nonOperatingRevenue) {
-		this.nonOperatingRevenue = nonOperatingRevenue;
-	}
-
-	public int getNonOperatingExpense() {
-		return nonOperatingExpense;
-	}
-
-	public void setNonOperatingExpense(int nonOperatingExpense) {
-		this.nonOperatingExpense = nonOperatingExpense;
-	}
-
-	public int getIncomeBeforeIncomeTax() {
-		return incomeBeforeIncomeTax;
-	}
-
-	public void setIncomeBeforeIncomeTax(int incomeBeforeIncomeTax) {
-		this.incomeBeforeIncomeTax = incomeBeforeIncomeTax;
-	}
-
-	public int getIncomeTax() {
-		return incomeTax;
-	}
-
-	public void setIncomeTax(int incomeTax) {
-		this.incomeTax = incomeTax;
-	}
-
-	public int getNetIncome() {
-		return netIncome;
-	}
-
-	public void setNetIncome(int netIncome) {
-		this.netIncome = netIncome;
+	public void setV40100(int v40100) {
+		this.v40100 = v40100;
 	}
 
 	@Override
 	public String toString() {
-		return "IncomeStmt [comCode=" + comCode + ", year=" + year + ", term=" + term + ", sales=" + sales
-				+ ", salesOfMerchandise=" + salesOfMerchandise + ", salesOfFinishedGoods=" + salesOfFinishedGoods
-				+ ", costOfSales=" + costOfSales + ", costOfMerchandisesSold=" + costOfMerchandisesSold
-				+ ", beginningInvOfMerchandise=" + beginningInvOfMerchandise + ", costOfMerchandisePurchased="
-				+ costOfMerchandisePurchased + ", endingInvOfMerchandise=" + endingInvOfMerchandise
-				+ ", costOfFinishedGoods=" + costOfFinishedGoods + ", grossProfit=" + grossProfit
-				+ ", sellingAndAdminExpense=" + sellingAndAdminExpense + ", consumablesExpenses=" + consumablesExpenses
-				+ ", operatingIncome=" + operatingIncome + ", nonOperatingRevenue=" + nonOperatingRevenue
-				+ ", nonOperatingExpense=" + nonOperatingExpense + ", incomeBeforeIncomeTax=" + incomeBeforeIncomeTax
-				+ ", incomeTax=" + incomeTax + ", netIncome=" + netIncome + "]";
+		return "IncomeStmt [comCode=" + comCode + ", year=" + year + ", term=" + term + ", closing=" + closing
+				+ ", sum10=" + sum10 + ", v40100=" + v40100 + ", val213=" + val213 + ", sum30=" + sum30 + ", sum40="
+				+ sum40 + ", sum50=" + sum50 + ", sum100=" + sum100 + "]";
 	}
 
-	
 }

@@ -167,10 +167,8 @@ public class FinStmtController {
 			response.setContentType("application/json");
 			new Gson().toJson(hmap, response.getWriter());
 		} catch (JsonIOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -199,11 +197,47 @@ public class FinStmtController {
 		}
 	}
 	
-	@RequestMapping("selectVal13.fs")
-	public void selectVal13(MfrgStmt ms, HttpServletRequest request) {
+	@RequestMapping("searchMfrg.fs")
+	public void searchMfrg(MfrgStmt ms, HttpServletRequest request, HttpServletResponse response) {
 		ms.setComCode(((Company) request.getSession().getAttribute("loginCompany")).getCompanyCode());
 		
-		int val13 = fss.selectVal13(ms);
+		int check = fss.checkMfrgStmt(ms);
+		
+		if(check > 0) {
+			MfrgStmt resultMs = fss.searchMfrg(ms);
+			
+			JSONObject result = new JSONObject();
+			result.put("val13", resultMs.getVal13());
+			result.put("closing", resultMs.getClosing());
+			
+			
+			try {
+				response.setContentType("application/json");
+				PrintWriter out = response.getWriter();
+				out.print(result.toString());
+				out.flush();
+				out.close();
+				
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	@RequestMapping("selectFinPos.fs")
+	public void selectFinPos(IncomeStmtAccount isa, HttpServletRequest request, HttpServletResponse response) {
+		isa.setComCode(((Company) request.getSession().getAttribute("loginCompany")).getCompanyCode());
+		
+		HashMap hmap = fss.selectFinPos(isa);
+		
+		try {
+			response.setContentType("application/json");
+			new Gson().toJson(hmap, response.getWriter());
+		} catch (JsonIOException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }
 

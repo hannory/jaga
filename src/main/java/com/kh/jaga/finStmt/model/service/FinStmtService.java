@@ -19,5 +19,9 @@ public interface FinStmtService {
 
 	int insertMfrgStmt(MfrgStmt ms);
 
-	int selectVal13(MfrgStmt ms);
+	MfrgStmt searchMfrg(MfrgStmt ms);
+
+	int checkMfrgStmt(MfrgStmt ms);
+
+	HashMap selectFinPos(IncomeStmtAccount isa);
 }

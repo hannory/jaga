@@ -75,6 +75,18 @@
 		padding-top: 1px;
 		padding-bottom: 1px;
 	}
+	#loading-table {
+	    width: 100%;  
+	    height: 100%;  
+	    top: 0px;
+	    left: 0px;
+	    position: fixed;  
+	    display: block;  
+	    opacity: 0.7;  
+	    background-color: #fff;  
+	    z-index: 99;  
+	    text-align: center; 
+    } 
 </style>
 <title>자가 경리</title>
 </head>
@@ -84,6 +96,9 @@
 		value="${ pageContext.servletContext.contextPath }"
 		scope="application" />
 	<main>
+	<div id="loading-table">
+        <img id="loading-image" src="${ contextPath }/resources/images/loading36.gif" alt="Loading..." />
+    </div>
 	<div class="container-fluid">
 		<table style="width:100%; max-width:1100px;">
 			<tr>
@@ -130,7 +145,10 @@
 					<td>
 						<span style="margin-bottom:10px; color:red;"><img src="${ contextPath }/resources/images/pencil.PNG">기말상품재고액을 입력하세요</span>
 						&nbsp;&nbsp;&nbsp;&nbsp;		
+						<button type="button" onclick="saveIncomeStmt();">저장</button>
+						&nbsp;&nbsp;
 						<button type="button" onclick="insertIncomeStmt();">마감</button>
+						<input type="hidden" id="closing" name="closing">
 					</td>
 					<td align="right">
 					</td>
@@ -143,29 +161,28 @@
 						<td class="table-head" colspan="2">
 							제 <label class="normal-label" id="cur-term"></label>(당)기 2020.01 ~ 2020.<label class="normal-label" id="cur-month"></label>
 							<input type="hidden" id="login-openDay" value="${ sessionScope.loginCompany.gaeup }">
+							<input type="hidden" id="term" name="term">
 						</td>
 						<td class="table-head" colspan="2">제 <label class="normal-label" id="past-term"></label>(전)기 2019.01 ~ 2019.12</td>
 					</tr>
 					<tr>
-						<td class="table-head" width="18%">잔액</td>
-						<td class="table-head" width="18%">합계</td>
-						<td class="table-head" width="18%">잔액</td>
-						<td class="table-head" width="18%">합계</td>
+						<td class="table-head" colspan="2">금액</td>
+						<td class="table-head" colspan="2">금액</td>
 					</tr>
 				</thead>
 				<tbody id="main-tbody" style="display:none;">
 					<tr>
 						<td class="table-title">Ⅰ. 매출액</td>
-						<td class="table-title"></td>
-						<td class="table-title-num"><span id="cSum10"></span><input type="hidden" id="cSum10-input" name="sales"></td>
-						<td class="table-title"></td>
-						<td class="table-title-num" id="pSum10"></td>
+						<td class="table-title" width="18%"></td>
+						<td class="table-title-num" width="18%"><span id="cSum10"></span><input type="hidden" id="sum10" name="sum10"></td>
+						<td class="table-title" width="18%"></td>
+						<td class="table-title-num" id="pSum10" width="18%"></td>
 					</tr>
 					<tr class="table-detail">
 						<td class="table-subSubTitle">상품매출</td>
-						<td class="table-content" id="c40100" name="salesOfMerchandise"><input type="hidden"></td>
+						<td class="table-content"><span id="c40100"></span><input type="hidden" id="v40100" name="v40100"></td>
 						<td></td>
-						<td class="table-content" id="p40100"></td>
+						<td class="table-content"><span id="p40100"></span></td>
 						<td></td>
 					</tr>
 					<tr class="table-detail">
@@ -178,7 +195,7 @@
 					<tr>
 						<td class="table-title">Ⅱ. 매출원가</td>
 						<td class="table-title"></td>
-						<td class="table-title-num" id="cSum20" name="costOfSales"></td>
+						<td class="table-title-num" id="cSum20" name="sum20"></td>
 						<td class="table-title"></td>
 						<td class="table-title-num" id="pSum20"></td>
 					</tr>
@@ -205,7 +222,7 @@
 					</tr>
 					<tr class="table-detail">
 						<td class="table-subSubTitle">기말상품재고액</td>
-						<td><input type="text" id="inputNum" name="endingInvOfMerchandise" onkeyup="inputNumberFormat(this);" style="width:195px;"></td>
+						<td><input type="text" id="inputNum" name="val213" onkeyup="inputNumberFormat(this);" style="width:195px;"></td>
 						<td></td>
 						<td class="table-content" id="pVal213"></td>
 						<td></td>
@@ -241,42 +258,42 @@
 					<tr>
 						<td class="table-title">Ⅲ. 매출총이익</td>
 						<td class="table-title"></td>
-						<td class="table-title-num" id="cSum30"></td>
+						<td class="table-title-num"><span id="cSum30"></span><input type="hidden" id="sum30" name="sum30"></td>
 						<td class="table-title"></td>
 						<td class="table-title-num" id="pSum30"></td>
 					</tr>
 					<tr>
 						<td class="table-title">Ⅳ. 판매비와관리비</td>
 						<td class="table-title"></td>
-						<td class="table-title-num" id="cSum40"></td>
+						<td class="table-title-num"><span id="cSum40"></span><input type="hidden" id="sum40" name="sum40"></td>
 						<td class="table-title"></td>
 						<td class="table-title-num" id="pSum40"></td>
 					</tr>
 					<tr class="table-detail" id="row81100">
 						<td class="table-subSubTitle">복리후생비</td>
-						<td class="table-content" id="c81100"></td>
+						<td class="table-content"><span id="c81100"></span></td>
 						<td></td>
-						<td class="table-content" id="p81100"></td>
+						<td class="table-content"><span id="p81100"></span></td>
 						<td></td>
 					</tr>
 					<tr class="table-detail" id="row83000">
 						<td class="table-subSubTitle">소모품비</td>
-						<td class="table-content" id="c83000"></td>
+						<td class="table-content"><span id="c83000"></span></td>
 						<td></td>
-						<td class="table-content" id="p83000"></td>
+						<td class="table-content"><span id="p83000"></span></td>
 						<td></td>
 					</tr>
 					<tr class="table-detail" id="row83100">
 						<td class="table-subSubTitle">수수료비용</td>
-						<td class="table-content" id="c83100"></td>
+						<td class="table-content"><span id="c83100"></span></td>
 						<td></td>
-						<td class="table-content" id="p83100"></td>
+						<td class="table-content"><span id="p83100"></span></td>
 						<td></td>
 					</tr>
 					<tr>
 						<td class="table-title">Ⅴ. 영업이익</td>
 						<td class="table-title"></td>
-						<td class="table-title-num" id="cSum50"></td>
+						<td class="table-title-num"><span id="cSum50"></span><input type="hidden" id="sum50" name="sum50"></td>
 						<td class="table-title"></td>
 						<td class="table-title-num" id="pSum50"></td>
 					</tr>
@@ -311,7 +328,7 @@
 					<tr>
 						<td class="table-title">Ⅹ. 당기순이익</td>
 						<td class="table-title"></td>
-						<td class="table-title-num" id="cSum100"></td>
+						<td class="table-title-num"><span id="cSum100"></span><input type="hidden" id="sum100" name="sum100"></td>
 						<td class="table-title"></td>
 						<td class="table-title-num" id="pSum100"></td>
 					</tr>
@@ -328,7 +345,7 @@
 	</main>
 	<script>
 		$(function() {
-			//$("#main-tbody").hide();
+			$("#loading-table").hide();
 			
 			/* 표에서 하늘색 hover 주기 */
 			$("#contentTable td").mouseover(function() {
@@ -378,6 +395,7 @@
 			var pastTerm = curTerm - 1;
 			
 			$("#cur-term").text(curTerm);
+			$("#term").val(curTerm);
 			$("#past-term").text(pastTerm);
 			
 			/* 키 입력창에 값을 입력시 발생하는 이벤트 */
@@ -425,7 +443,9 @@
 		
 		//(날짜를 통한) 검색 버튼 클릭시
 		function dateSearch() {
-			//$("#main-tbody").show();
+			
+			$("#loading-table").show();
+		    
 			$("#main-tbody").css("display", "");
 			
 			var year = $("#year").val();
@@ -450,12 +470,14 @@
 					var c81100 = data["c81100"];
 					var c83000 = data["c83000"];
 					var c83100 = data["c83100"];
+					var cVal222 = data["cVal222"];
 					
 					$("#c14600").text(comma(c14600));
 					$("#c40100").text(comma(c40100));
 					$("#c81100").text(comma(c81100));
 					$("#c83000").text(comma(c83000));
 					$("#c83100").text(comma(c83100));
+					$("#cVal222").text(comma(cVal222));
 					
 					//표 각 합계 계산
 					var cSum10 = c40100 + 0;
@@ -467,7 +489,6 @@
 					$("#cSum21").text(comma(cSum21));
 					
 					var cVal221 = 0;
-					var cVal222 = 0;
 					var cVal223 = 0;
 
 					var cSum22 = cVal221 + cVal222 + cVal223;
@@ -576,6 +597,8 @@
 					} else {
 						$("#row83100").fadeIn(200);
 					}
+					
+					$("#loading-table").hide();
 				},
 				error : function(status) {
 					console.log(status);
@@ -627,8 +650,8 @@
 				
 				var year = $("#year").val();
 				var month = $("#month").val();
-				var accountCode = $(this).attr('id').substring(1,6);
-				var curPast = $(this).attr('id').substring(0,1);
+				var accountCode = $(this).children('span').attr('id').substring(1,6);
+				var curPast = $(this).children('span').attr('id').substring(0,1);
 				
 				console.log("accountCode : " + accountCode);
 				console.log("curPast : " + curPast);
@@ -839,6 +862,40 @@
 			
 		});
 		
+		//저장버튼 클릭시 
+		function saveIncomeStmt() {
+			console.log("마감 버튼 입력 : " + $("#cSum10").text());
+			
+			if($("#cSum10").text() == "") {
+				
+				Swal.fire({
+					icon: "warning",
+					text: "먼저 조회기간 검색을 해주세요!"
+				})
+				
+			} else if($("#inputNum").val() == "") {
+				
+				Swal.fire({
+					icon: "warning",
+					text: "기말상품재고액을 입력해주세요!"
+				})
+				
+			} else {
+				$("#inputNum").val(Number(uncomma($("#inputNum").val())));
+				$("#sum10").val(Number(uncomma($("#cSum10").text())));
+				$("#v40100").val(Number(uncomma($("#c40100").text())));
+				$("#sum30").val(Number(uncomma($("#cSum30").text())));
+				$("#sum40").val(Number(uncomma($("#cSum40").text())));
+				$("#sum50").val(Number(uncomma($("#cSum50").text())));
+				$("#sum100").val(Number(uncomma($("#cSum100").text())));
+				
+				$("#closing").val('N');
+				
+				$("#contentForm").submit();
+				
+			}			
+		}
+		
 		//마감버튼 클릭시 
 		function insertIncomeStmt() {
 			console.log("마감 버튼 입력 : " + $("#cSum10").text());
@@ -859,22 +916,18 @@
 				
 			} else {
 				$("#inputNum").val(Number(uncomma($("#inputNum").val())));
-				$("#cSum10-input").val(Number(uncomma($("#cSum10").text())));
+				$("#sum10").val(Number(uncomma($("#cSum10").text())));
+				$("#v40100").val(Number(uncomma($("#c40100").text())));
+				$("#sum30").val(Number(uncomma($("#cSum30").text())));
+				$("#sum40").val(Number(uncomma($("#cSum40").text())));
+				$("#sum50").val(Number(uncomma($("#cSum50").text())));
+				$("#sum100").val(Number(uncomma($("#cSum100").text())));
+				
+				$("#closing").val('Y');
 				
 				$("#contentForm").submit();
 				
-				/* Swal.fire({
-					icon: "success",
-					title: "마감 성공",
-					text: "마감이 완료되었습니다!"
-				}).then((result) => {
-					if(result.value) {
-						$("#contentForm").submit();
-					}
-				}) */ 
-
 			}			
-			
 		}
 	</script>
 	
