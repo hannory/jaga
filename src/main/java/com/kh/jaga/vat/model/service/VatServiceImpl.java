@@ -11,14 +11,15 @@ import com.kh.jaga.vat.model.vo.Vat;
 public class VatServiceImpl implements VatService{
 
 	@Autowired
-	private VatDao vd;
 	private SqlSessionTemplate sqlSession;
+	@Autowired
+	private VatDao vd;
 	
 	@Override
 	public Vat selectVat(Vat vat) {
 		System.out.println("Service: selectVat: vat: "+vat );
-		
-		return vd.selectVat(sqlSession,vat);
+		Vat vat2=vd.selectVat(sqlSession,vat);
+		return vat2;
 	}
 
 }
