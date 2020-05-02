@@ -1,5 +1,7 @@
 package com.kh.jaga.vat.controller;
 
+import java.math.BigDecimal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -51,6 +53,16 @@ public class VatController {
 			mv.setViewName("jsonView");
 			
 		}else{
+			System.out.println("vat2에 값 없!!을때");
+			
+			//마감 처리된 4개 항목을 우선 체크하기?
+			
+			
+			
+			
+			
+			
+			
 			
 		}
 		
