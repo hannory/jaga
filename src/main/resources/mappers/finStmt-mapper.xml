@@ -16,7 +16,7 @@
 
 	<!-- (거래처 미입력 등) 분개가 제대로 안되어 NULL 값이 나오는 경우가 있어 RIGHT JOIN -->
 	<select id="selectCurFinStmt" parameterType="IncomeStmtAccount" resultType="IncomeStmtAccount">
-		SELECT J.PRICE, J.ACCOUNT_CODE
+		SELECT J.PRICE, J.ACCOUNT_CODE, J.DEBIT_CREDIT
 		FROM SLIP S
 		RIGHT JOIN JOURNALIZE J ON(S.SLIP_CODE = J.SLIP_CODE)
 		WHERE TO_CHAR(S.SLIP_DATE, 'YYYY') = #{year}
@@ -25,7 +25,7 @@
 	</select>
 	
 	<select id="selectPastFinStmt" parameterType="IncomeStmtAccount" resultType="IncomeStmtAccount">
-		SELECT J.PRICE, J.ACCOUNT_CODE
+		SELECT J.PRICE, J.ACCOUNT_CODE, J.DEBIT_CREDIT
 		FROM SLIP S
 		RIGHT JOIN JOURNALIZE J ON(S.SLIP_CODE = J.SLIP_CODE)
 		WHERE TO_CHAR(S.SLIP_DATE, 'YYYY') = #{year} - 1
