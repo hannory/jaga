@@ -46,7 +46,37 @@ public class AggregateController {
 		
 		return "aggregateIncomeTax";
 	}
+	
+	
+	//소득금액명세서 입력하기
+	@RequestMapping("")
+	public String insertAggregateIncomeStmt() {
+		
+		
+		
+		return "zzz";
+	}
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	@RequestMapping("showIncomeDeductStmt.aggregate")
 	public String showIncomeDeductStmt() {
 		/* 소득공제명세서 */
@@ -54,18 +84,37 @@ public class AggregateController {
 		return "incomeDeductStmt";
 	}
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//가산명세서 조회
 	@RequestMapping("showAddedTaxStmt.aggregate")
 	public String showAddedTaxStmt() {
 		/* 가산세명세서 */
 		return "addedTaxStmt";
 	}
 	
-	@RequestMapping("showAggregateCalculated.aggregate")
-	public String showAggregateCalculated() {
-		/* 종합소득세액계산서 */
-		return "aggregateCalculated";
-	}
 	
+
+	
+	
+	//가산명세서 입력
 	@RequestMapping("insertAddedTaxStmt.aggregate")
 	public String insertAddedTaxStmt(@ModelAttribute AddedTaxStmtDto dto, HttpServletRequest request) {
 		System.out.println("저장 버튼 눌렀음 ,, 컨트롤러도착,, dto :::");
@@ -81,9 +130,42 @@ public class AggregateController {
 		}
 		
 		return "redirect:errorPage.jsp";
-		
-		
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	@RequestMapping("showAggregateCalculated.aggregate")
+	public String showAggregateCalculated() {
+		/* 종합소득세액계산서 */
+		return "aggregateCalculated";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 }//class
