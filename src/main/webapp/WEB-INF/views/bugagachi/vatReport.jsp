@@ -125,6 +125,11 @@
    		.yellow{
    			background-color: #EFD5B9;
    		}
+   		#deadlineCen{
+			display: none;
+			border:1px solid red; 
+			color:red;
+		}
    		#vat_mainDiv{
    			width: 50%; 
    			float: left; 
@@ -140,6 +145,9 @@
    		#vat_subDiv3{
    			width: 100%;
    		}
+   		#report_type{
+   			height: 30px;
+   		}
    		.mainSubDiv{
 	   		width: 100%; 
 	   		text-align: center;
@@ -150,6 +158,30 @@
    		.subTable{
    			display: none;
    		}
+   		#termDiv{
+   			width:80px; 
+   			height: 30px;
+   		}
+   		#loading {
+		    width: 100%;  
+		    height: 100%;  
+		    top: 0px;
+		    left: 0px;
+		    position: fixed;  
+		    display: block;  
+		    opacity: 0.7;  
+		    background-color: #fff;  
+		    z-index: 99;  
+		    text-align: center; 
+		    display: none;
+		} 
+		     
+		#loading-image {  
+		    position: absolute;  
+		    top: 50%;  
+		    left: 50%; 
+		    z-index: 100; 
+		 }
     </style>
 </head>
 <body>
@@ -159,33 +191,101 @@
 		scope="application" />
 	<main>
 	<script type="text/javascript">
-function pri_VATReport(){
-	console.log("프린트 버튼누름")
-	var vatReport=window.open("vatReportPrint.vi","","width=1200,height=1000");
-	
-}
-</script>
+		function pri_VATReport(){
+			console.log("프린트 버튼누름")
+			var vatReport=window.open("vatReportPrint.vi","","width=1200,height=1000");
+			
+		}
+	</script>
 	<div class="container-fluid">
 			<h2 class="mt-4">부가가치세 신고서</h2>
+<form action="deadLine.vat" method="post">
 	<ol class="breadcrumb mb-4">
-			<li><button id="deadlineBtn">마감</button></li>
-			<li>1기예정</li>
+			<li><button id="deadlineBtn" type="submit">마감</button></li>
+			<li><button id="deadlineCen" onclick="cencelDeadline()">마감 취소</button></li>
+			<li><input type="text" readonly  id="termDiv" name="termDiv"></li>
 			<li>신고구분: 
-                <select name="report_type">
-                    <option>1.정기신고</option>
-                    <option>2.수정신고</option>
+                <select name="report_type" id="report_type">
+                    <option value="정기신고">1.정기신고</option>
+                    <option value="수정신고">2.수정신고</option>
                 </select></li>
             <li>신고차수: <input type="text" name="report_order" style="width: 40px;"></li>
-            <li>조회기간:
-            	<input type="text" name="search_st" class="datepicker"> ~ <input type="text" name="search_ed"class="datepicker">
+             <li>조회기간:
+            	<input type="text" id="search_ye" class="cc_year" name="yearOfAttr" maxlength="4">
+            	<select class="cc_month" id="search_mon1">
+            		<option value="">월</option>
+            		<option value="01">1</option>
+            		<option value="07">7</option>
+            	</select> 
+            	~
+            	<select class="cc_month" id="search_mon2">
+            		<option value="">월</option>
+            		<option value="06">6</option>
+            		<option value="12">12</option>
+            	</select> 
             </li>
-			<li><input type="button" name="search" value="조회"></li>
+			<li><input type="button" onclick="search_cis()" value="조회"></li>
 			<li>부가율: <input type="text" name="vatRate" readonly style="width: 50px;">
 			<input type="text" name="vatRateDiv" readonly  style="width: 50px; background-color:#D9EAD3 "> </li>
 			<li><input type="button" name="report" value="신고서미리보기" onclick="pri_VATReport()"></li>
 			
 		</ol>
 		
+	<!-- 인풋모음!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1 -->
+	<c:set var="comCode" value="${ sessionScope.loginCompany.companyCode }"/>
+   	<input type="hidden" value="${comCode}" name="comCode">
+   	
+   	
+   	
+   	
+		<script type="text/javascript">
+		function cencelDeadline(){
+			$("form").attr("action", "updatdDeadLineCen.vat");
+		}
+		 function search_cis(){
+	    	 $("#loading").show();
+	    	 
+	    	var report_type=$("#report_type").val();
+	    	var search_ye= $("#search_ye").val();
+	 		var search_mon1= $("#search_mon1").val();
+	 		var search_mon2= $("#search_mon2").val();
+	 		var comCode=${comCode};
+	 		console.log(report_type);
+	 		console.log(search_ye);
+	 		console.log(search_mon1);
+	 		console.log(search_mon2);
+	 		console.log(comCode);
+	    	
+	 		$.ajax({
+	 			url:"vatReport.vat",
+	 			type:"post",
+	 			data:{report_type:report_type,search_ye:search_ye,search_mon1:search_mon1,search_mon2:search_mon2,comCode:comCode},
+	 			success: function (data){
+	 				$("#loading").hide();
+	 				alert("success");
+	 				var vat=data.vat;
+	 				console.log("값 : "+vat);
+	 				
+	 				
+	 				
+	 				
+	 				
+	 				
+	 				//마감여부에따라 버튼 보이기
+	 				 if(Vat.deadline == 'Y'){
+							console.log("마감된 애임")
+							$("#deadlineCen").show();
+							$("#deadlineBtn").hide();
+						} 
+	 			},
+	 			error:function(error){
+	 				console.log(error);
+	 			}
+	 			
+	 		});
+	 	}
+		
+		</script>
 			<script type="text/javascript">/* subTable 보이게하기  */
 				function showsubTable1(){
 			    	$("#vat_subDiv2").hide();
@@ -204,7 +304,17 @@ function pri_VATReport(){
 			    }
 				
 			</script>
+						<!-- 로딩? -->
+   <div id="loading">
+        <img id="loading-image" src="${ contextPath }/resources/images/loading36.gif" alt="Loading..." />
+    </div>
+
 		
+		
+   	
+   	
+   	
+   	
 		<div style="width: 100%;"><!-- 전체 div start -->
 		
 			<div id="vat_mainDiv"><!-- vat_main div start -->
@@ -899,6 +1009,7 @@ function pri_VATReport(){
 		
  
 	</div>
+	</form>
 	</main>
 	<jsp:include page="../common/menubar2.jsp" />
 </body>
