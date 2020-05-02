@@ -1601,11 +1601,7 @@ box-sizing: border-box;
 <td> <b id="employee"> <h2>일반근로자관리</h2> </b></td> 
 </tr>
  <form action="insert.emp" method="POST" encType="multipart/form-data" id="form2">
- <script>
- $("#form2").submit(function(){
-	 $("#salary-surr").val(uncomma($("#salary-surr").val()));
- })
- </script>
+
 <tr>
 <td> <button id="save-surr" style="color:white" >저장하기 </button>
 </tr> 
@@ -1625,18 +1621,24 @@ box-sizing: border-box;
 <tr>
 <td>
 <b id="salary">월급여</b>
-<input type="text" id="salary-surr" onkeyup="inputNumberFormat(this);" >
+<input type="text" id="salary-surr" name="salary" onkeyup="inputNumberFormat(this);" >
 <!-- <input type="hidden" id="result" name="salary" onchange="uncomma(this);" >  -->
 <b id="email">이메일</b>
 <input type="text" id="email-surr" name="email">
 </td>
 </tr>
 
+ <script>
+ $("#form2").submit(function(){
+	 $("#salary-surr").val(uncomma($("#salary-surr").val()));
+ })
+ </script>
+<!-- 
 <script>
 var salary = $("#salary-surr").val();
 console.log(salary);
 $("#result").val(salary);
-</script>
+</script> -->
 
 <tr>
 <td>

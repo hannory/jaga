@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -106,6 +107,16 @@ public String selectEmpList2(HttpServletRequest request) {
 	 es.insertEarnEmp(ei,employeeCode);
 	 
 	 return "redirect:index.jsp";
+ }
+ 
+ @RequestMapping("selectIncomeTax.emp")
+ public String selectIncomeTax(HttpServletRequest request, HttpServletResponse response ) {
+	  String taxableIncome = request.getParameter("taxableIncome");
+	 System.out.println("과세 값 잘 넘어오니?" + taxableIncome);
+	 
+	String result= es.seletcIncomeTax(taxableIncome);
+	 
+	 return "employee/earnincome";
  }
 	 
 }

@@ -323,7 +323,7 @@ left:1600px;
 	});
     </script>
 
-	<form action="insertEarnEmp.emp" method="post">
+	<form action="insertEarnEmp.emp" method="post" id="form1">
 	<span id="payList">
 	
 	<table>
@@ -341,37 +341,32 @@ left:1600px;
 	<td style="border:0px; background:#296355; color:white; text-align:center; padding:5px; width:200px;">급여항목</td><td  style="border:0px; background:#296355; color:white; text-align:center; padding:5px" >금액</td>
 	</tr>
 	<tr>
-	<td>기본급</td><td><input type="text" name="salary" id="salary"></td>
+	<td>기본급</td><td><input type="text" id="salary" name="salary"></td>
+<!-- 	<td></td><td><input type="hidden" name="salary" id="salary" value="#salary1"></td> -->
 	</tr>
 	<tr>
-	<td>상여</td><td><input type="text" name="bonus" id="bonus"></td>
+	<td>상여</td><td><input type="text"" id="bonus"  name="bonus"></td>
+<!-- 	<td></td><td><input type="hidden" name="bonus" id="bonus"  value="#bonus1"   ></td> -->
 	</tr>
 	<tr>
-	<td>식대</td><td><input type="text" name="meals" id="meals"></td>
+	<td>식대</td><td><input type="text"  id="meals" name="meals"></td>
+<!-- 	<td></td><td><input type="hidden" name="meals" id="meals" ></td>
+ -->	</tr>
+	<tr>
+	<td>야간근로수당</td><td><input type="text" id="nightPay"  name="nightPay" ></td>
+<!-- 	<td></td><td><input type="hidden" name="nightPay" id="nightPay" ></td> -->
 	</tr>
 	<tr>
-	<td>야간근로수당</td><td><input type="text" name="nightPay" id="nightPay"></td>
+	<td>월차수당</td><td><input type="text" id="monthlyPay" name="monthlyPay"></td>
+<!-- 	<td></td><td><input type="hidden" name="monthlyPay" id="monthlyPay" ></td>
+ -->	</tr>
+	<tr>
+	<td>자가운전보조금</td><td><input type="text" id="drivingSubsidies" name="drivingSubsidies" ></td>
+<!-- 	<td></td><td><input type="hidden" name="drivingSubsidies" id="drivingSubsidies" ></td> -->
 	</tr>
 	<tr>
-	<td>월차수당</td><td><input type="text" name="monthlyPay" id="monthlyPay"></td>
-	</tr>
-	<tr>
-	<td>자가운전보조금</td><td><input type="text" name="drivingSubsidies" id="drivingSubsidies"></td>
-	</tr>
-	<tr>
-	<td>직책수당</td><td><input type="text" name="positionPay" id="positionPay"></td>
-	</tr>
-	<tr>
-	<td></td><td></td>
-	</tr>
-	<tr>
-	<td></td><td></td>
-	</tr>
-	<tr>
-	<td></td><td></td>
-	</tr>
-	<tr>
-	<td></td><td></td>
+	<td>직책수당</td><td><input type="text" id="positionPay" name="positionPay" ></td>
+<!-- 	<td></td><td><input type="hidden" name="positionPay" id="positionPay" ></td> -->
 	</tr>
 	<tr>
 	<td></td><td></td>
@@ -389,13 +384,25 @@ left:1600px;
 	<td></td><td></td>
 	</tr>
 	<tr>
-	<td style="background:#F2F1F1">과세</td><td style="background:#F2F1F1"><input type="text" name="taxableIncome" id="taxableIncome"></td>
+	<td></td><td></td>
+	</tr>
+	<tr>
+	<td></td><td></td>
+	</tr>
+	<tr>
+	<td></td><td></td>
+	</tr>
+	<tr>
+	<td></td><td></td>
+	</tr>
+	<tr>
+	<td style="background:#F2F1F1">과세</td><td style="background:#F2F1F1"><input type="text" name="taxableIncome" id="taxableIncome" ></td>
 	</tr>
 	<tr>
 	<td style="background:#F2F1F1">비과세</td><td style="background:#F2F1F1"><input type="text" name="nontaxableIncome" id="nontaxableIncome"></td>
 	</tr>
 	<tr>
-	<td style="background:#F2F1F1">지급총액</td><td style="background:#F2F1F1"><input type="text" name="totalPayment" id="totalPayment"></td>
+	<td style="background:#F2F1F1">지급총액</td><td style="background:#F2F1F1"><input type="text" name="totalPayment" id="totalPayment" ></td>
 	
 	</tr>
 	
@@ -500,6 +507,25 @@ left:1600px;
 	</main>
 	<jsp:include page="../common/menubar2.jsp" />
 	
+
+ <script>
+/*   $("#form1").submit(function(){
+	 $("#salary").val(uncomma($("#salary").val()));
+	 $("#bonus").val(uncomma($("#bonus").val()));
+	 $("#meals").val(uncomma($("#meals").val()));
+	 $("#nightPay").val(uncomma($("#nightPay").val()));
+	 $("#monthlyPay").val(uncomma($("#monthlyPay").val()));
+	 $("#drivingSubsidies").val(uncomma($("#drivingSubsidies").val()));
+	 $("#positionPay").val(uncomma($("#positionPay").val()));
+	 $("#taxableIncome").val(uncomma($("#taxableIncome").val()));
+	 $("#nontaxableIncome").val(uncomma($("#nontaxableIncome").val()));
+	 $("#totalPayment").val(uncomma($("#nontaxableIncome").val()));
+
+	 
+ })  */
+ </script>
+	
+	
 	
 		<script>
 	$.datepicker.setDefaults({
@@ -547,6 +573,9 @@ left:1600px;
 		var meals=0;
 		var salarybonus=0;
 		var m=0;
+	       
+	     var salary= ($("#salary").val());
+	     var bonus=($("#bonus").val());
 		salarybonus=Number($("#salary").val())+Number($("#bonus").val());
 		var meals=($("#meals").val());
 		
@@ -560,6 +589,9 @@ left:1600px;
  		$("#nontaxableIncome").val(m); 
 		$("#totalPayment").val(sbm);
 		
+		if(m>100000){
+			$("#nontaxableIncome").val(100000);
+		}
 		
 	})
 	
@@ -567,39 +599,212 @@ left:1600px;
 		
 		var sbmn=0;
 		var nightPay=0;
+		var sbn=0;
+		var sbm=0;
+		var m=0;
 
 		salarybonus=Number($("#salary").val())+Number($("#bonus").val());
 		sbm=Number(salarybonus)+Number($("#meals").val());
+	
+		sbn=Number(salarybonus)+Number($("#nightPay").val());
+		
 		sbmn=Number(sbm)+Number($("#nightPay").val());
+		
 		/*비과세에 들어갈 식대 */
 		m=Number($("#meals").val());
 		
-		$("#taxableIncome").val(salarybonus);
- 		$("#nontaxableIncome").val(m); 
-		$("#totalPayment").val(sbm);
+		$("#taxableIncome").val(sbn);
+		if(m>100000){
+ 		$("#nontaxableIncome").val(100000); 
+		}
+		$("#totalPayment").val(sbmn);
 
 	})
 		
 	$("#monthlyPay").keyup(function(key){
 		var sbmnm=0;
+		var sbn=0;
+		var sbm=0;
+		var m=0;
 		var monthlyPay=0;
+		m=Number($("#meals").val());
+		salarybonus=Number($("#salary").val())+Number($("#bonus").val());
+		sbm=Number(salarybonus)+Number($("#meals").val());
+		sbn=Number(salarybonus)+Number($("#nightPay").val());
+		sbmn=Number(sbm)+Number($("#nightPay").val());
+		sbmnm=Number(sbmn)+Number($("#monthlyPay").val());
+		sbnm=Number(sbn)+Number($("#monthlyPay").val());
 		
+		$("#taxableIncome").val(sbnm);
+		$("#totalPayment").val(sbmnm);
+		if(m>100000){
+	 		$("#nontaxableIncome").val(100000); 
+			}
+		})	
+		
+	$("#drivingSubsidies").keyup(function(key){
+		
+		var sbmnmd =0;
+		var drivingSubsidies=0;
+		var m=0;
+		var d=0;
+		m=Number($("#meals").val());
+		d=Number($("#drivingSubsidies").val());
 		salarybonus=Number($("#salary").val())+Number($("#bonus").val());
 		sbm=Number(salarybonus)+Number($("#meals").val());
 		sbmn=Number(sbm)+Number($("#nightPay").val());
-		
 		sbmnm=Number(sbmn)+Number($("#monthlyPay").val());
-		$("#taxableIncome").val(sbmnm);
-		$("#totalPayment").val(sbmnm);
+		/*총*/
+		sbmnmd=Number(sbmnm)+Number($("#drivingSubsidies").val());
 		
+		/*비과*/		md=Number(m)+Number($("#drivingSubsidies").val());
+		
+		$("#taxableIncome").val(sbnm);
+		$("#totalPayment").val(sbmnmd);
+		
+		if(d>200000){
+			$("#nontaxableIncome").val(200000);
+		}
+		if(m>100000&&d>200000){
+			$("#nontaxableIncome").val(300000);
+		}
+		if(m>0&&m<100000&&d>0&&d<200000){
+			$("#nontaxableIncome").val(m+d);
+		}
+		if(m<100000&&d>200000){
+			$("#nontaxableIncome").val(m+200000);
+		}
+		if(m>100000&&d<200000){
+			$("#nontaxableIncome").val(d+100000);
+		}
 		})	
+
 		
-		$("#dri")
+    $("#positionPay").keyup(function(key){
+    	
+		var sbmnmd =0;
+		var drivingSubsidies=0;
+		var positionPay=0;
+		var m=0;
+		var sbnmp=0;
+		var sbmnmdp=0;
+		var md=0;
+		var monthlyPay=0;
+		m=Number($("#meals").val());
+		d=Number($("#drivingSubsidies").val());
+		salarybonus=Number($("#salary").val())+Number($("#bonus").val());
+		sbm=Number(salarybonus)+Number($("#meals").val());
+		sbmn=Number(sbm)+Number($("#nightPay").val());
+		sbmnm=Number(sbmn)+Number($("#monthlyPay").val());
+		sbmnmd=Number(sbmnm)+Number($("#drivingSubsidies").val());
+		md=Number(m)+Number($("#drivingSubsidies").val());
+    	sbn=Number(salarybonus)+Number($("#nightPay").val());
+    	sbnm=Number(sbn)+Number($("#monthlyPay").val());
+		/*총sbmnmdp*/
+		p=Number($("#positionPay").val());
+		sbmnmdp=Number(sbmnmd)+Number($("#positionPay").val());
 		
+		
+		/*과세sbnmp*/
+    	sbnmp=Number(sbnm)+Number($("#positionPay").val());
+		
+    	
+		$("#taxableIncome").val(sbnmp);
+		$("#totalPayment").val(sbmnmdp);
+		$("#employmentInsurance").val(Math.round(sbmnmdp*0.08));
+ 		$("#totalDeduction").val(Math.round(sbmnmdp*0.08));
+ 		
+
+    })
+    
+    $("#incomeTax").click(function(){
+    	var taxableIncome= Number($("#taxableIncome").val(sbnmp));
+    	
+    	$.ajax({
+    		url:"selectIncomeTax.emp",
+    		type:"post",
+    		data:{taxableIncome:taxableIncome},
+    		
+    		success:function(data){
+/*     			swal({
+    				title:data,
+    				text:"",
+    				icon:"warning"  */
+    				$("#incomeTax").val(taxableIncome);
+    			});
+    			var msg=data;
+    		},
+    		error:function(error){
+    			alert(error);
+    		}
+    	});
+    })
+/*         $(function(){
+    
+		var tp = Number($("#taxableIncome").val());
+		
+		if(tp>1060000 && tp<1065000){
+			$("incomeTax").val(1040);
+			else if(tp>1065000 &&tp<1070000){
+				$("incomeTax").val(1110);
+			}
+			
+		}
+        }); */
+        
+        
+        
+        /*국민연금 입력 - 공제총액 + */
+/*              $("#nationalPension").keyup(function(key){
+            	var a=Number($("#nationalPension").val());
+            	$("#totalDeduction").val(a);
+            }  */
+        /*건강보험 입력 - 공제총액 + */
+        
+        /*장기요양보험 입력 - 공제총액 + */
+        
+        /*고용보험 계산*/
+        
+        /*공제총액 계산 */
+        	
+        /*차인 지급액 계산 (지급총액-공제총액)*/
+        
+        
+        
+    
     
 	
-	
-	
 	</script>
+<!-- 	
+	
+	<script>
+	
+	function comma(str) {
+		str = String(str);
+		return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, "$1,");
+	}
+	
+	/* 콤마 등 숫자 이외의 입력값 제거 */
+/* 	function uncomma(str) {
+		str = String(str);
+		return parseInt(str.replace(/[^\d]+/g, ""));
+	} */
+	
+	/* 값 입력시 콤마 찍기 */
+	function inputNumberFormat(str) {
+		str.value = comma(uncomma(str.value));
+	}
+	
+	
+    /* 콤마 제거 */
+     function uncomma(str) {
+       str = String(str);
+     var str2=  str.replace(/[^\d]+/g, "");
+     var str3=Number(str2)
+       return str3;
+       
+    }
+	
+	</script> -->
 </body>
 </html>

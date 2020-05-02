@@ -50,4 +50,11 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		return sqlSession.insert("EarnIncome.insertEarnEmp",ei);
 	}
 
+	@Override
+	public String selectIncomeTax(SqlSessionTemplate sqlSession, String taxableIncome) {
+
+		return sqlSession.selectOne("EarnIncome.selectIncomeTax",taxableIncome);
+	}
+
+
 }

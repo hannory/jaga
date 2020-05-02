@@ -27,8 +27,46 @@ public class EarnIncome implements java.io.Serializable {
 	private int positionPay;
 	private int totalPayment;
 	private int totalDeduction;
+	private int min;
+	private int max;
+	private int result;
 	
 	public EarnIncome() {}
+
+	public EarnIncome(String employeeCode, String employeeName, int attributeDate, Date payDate, int salary, int bonus,
+			int meals, int drivingSubsidies, int childcareAllowance, int taxableIncome, int nontaxableIncome,
+			int nationalPension, int healthInsurance, int longTermInsurance, int employmentInsurance, int incomeTax,
+			int localIncomeTax, int differencePymt, int payStubCount, int nightPay, int monthlyPay, int positionPay,
+			int totalPayment, int totalDeduction, int min, int max, int result) {
+		super();
+		this.employeeCode = employeeCode;
+		this.employeeName = employeeName;
+		this.attributeDate = attributeDate;
+		this.payDate = payDate;
+		this.salary = salary;
+		this.bonus = bonus;
+		this.meals = meals;
+		this.drivingSubsidies = drivingSubsidies;
+		this.childcareAllowance = childcareAllowance;
+		this.taxableIncome = taxableIncome;
+		this.nontaxableIncome = nontaxableIncome;
+		this.nationalPension = nationalPension;
+		this.healthInsurance = healthInsurance;
+		this.longTermInsurance = longTermInsurance;
+		this.employmentInsurance = employmentInsurance;
+		this.incomeTax = incomeTax;
+		this.localIncomeTax = localIncomeTax;
+		this.differencePymt = differencePymt;
+		this.payStubCount = payStubCount;
+		this.nightPay = nightPay;
+		this.monthlyPay = monthlyPay;
+		this.positionPay = positionPay;
+		this.totalPayment = totalPayment;
+		this.totalDeduction = totalDeduction;
+		this.min = min;
+		this.max = max;
+		this.result = result;
+	}
 
 	public String getEmployeeCode() {
 		return employeeCode;
@@ -222,36 +260,28 @@ public class EarnIncome implements java.io.Serializable {
 		this.totalDeduction = totalDeduction;
 	}
 
-	public EarnIncome(String employeeCode, String employeeName, int attributeDate, Date payDate, int salary, int bonus,
-			int meals, int drivingSubsidies, int childcareAllowance, int taxableIncome, int nontaxableIncome,
-			int nationalPension, int healthInsurance, int longTermInsurance, int employmentInsurance, int incomeTax,
-			int localIncomeTax, int differencePymt, int payStubCount, int nightPay, int monthlyPay, int positionPay,
-			int totalPayment, int totalDeduction) {
-		super();
-		this.employeeCode = employeeCode;
-		this.employeeName = employeeName;
-		this.attributeDate = attributeDate;
-		this.payDate = payDate;
-		this.salary = salary;
-		this.bonus = bonus;
-		this.meals = meals;
-		this.drivingSubsidies = drivingSubsidies;
-		this.childcareAllowance = childcareAllowance;
-		this.taxableIncome = taxableIncome;
-		this.nontaxableIncome = nontaxableIncome;
-		this.nationalPension = nationalPension;
-		this.healthInsurance = healthInsurance;
-		this.longTermInsurance = longTermInsurance;
-		this.employmentInsurance = employmentInsurance;
-		this.incomeTax = incomeTax;
-		this.localIncomeTax = localIncomeTax;
-		this.differencePymt = differencePymt;
-		this.payStubCount = payStubCount;
-		this.nightPay = nightPay;
-		this.monthlyPay = monthlyPay;
-		this.positionPay = positionPay;
-		this.totalPayment = totalPayment;
-		this.totalDeduction = totalDeduction;
+	public int getMin() {
+		return min;
+	}
+
+	public void setMin(int min) {
+		this.min = min;
+	}
+
+	public int getMax() {
+		return max;
+	}
+
+	public void setMax(int max) {
+		this.max = max;
+	}
+
+	public int getResult() {
+		return result;
+	}
+
+	public void setResult(int result) {
+		this.result = result;
 	}
 
 	@Override
@@ -264,7 +294,8 @@ public class EarnIncome implements java.io.Serializable {
 				+ ", employmentInsurance=" + employmentInsurance + ", incomeTax=" + incomeTax + ", localIncomeTax="
 				+ localIncomeTax + ", differencePymt=" + differencePymt + ", payStubCount=" + payStubCount
 				+ ", nightPay=" + nightPay + ", monthlyPay=" + monthlyPay + ", positionPay=" + positionPay
-				+ ", totalPayment=" + totalPayment + ", totalDeduction=" + totalDeduction + "]";
+				+ ", totalPayment=" + totalPayment + ", totalDeduction=" + totalDeduction + ", min=" + min + ", max="
+				+ max + ", result=" + result + "]";
 	}
 
 	
