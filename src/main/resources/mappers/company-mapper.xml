@@ -53,6 +53,28 @@
 		FROM COMPANY
 		WHERE COM_ID=#{companyId}  
 	</select>
+	
+	
+	<!-- 사내계정로그인 체크 -->
+	<select id="selectLoginEmp" parameterType="java.util.HashMap" resultType="com.kh.jaga.companyInnerId.model.vo.ComInIdVo">
+		SELECT 
+			C.COM_INNER_ID_NUM,
+			C.COM_CODE,
+			C.POSITION_CODE,
+			C.ID,
+			C.PWD,
+			C.EMAIL,
+			C.NAME,
+			C.FILE_NAME,
+			J.POSITION_NAME
+		FROM COM_INNER_ID C
+		JOIN JOB_POSITION J
+		ON C.POSITION_CODE = J.POSITION_CODE
+		JOIN COMPANY COM
+		ON COM.COM_CODE = C.COM_CODE
+		WHERE COM.COM_ID = #{comId}
+		AND	  ID = #{id}
+	</select>
   
   
   

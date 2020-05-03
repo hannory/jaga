@@ -33,12 +33,19 @@
   <!-- com.kh.jaga.companyInnerId.vo.SelectCompanyIdVo -->
   <select id="selectComInIdList" parameterType="String" resultMap="SelectCompanyIdVo">
   	SELECT 
-  			COM_INNER_ID_NUM, COM_CODE, ID, PWD, EMAIL, NAME, FILE_NAME
+  			TO_NUMBER(COM_INNER_ID_NUM) AS COM_INNER_ID_NUM
+  		,	COM_CODE
+  		,	ID
+  		,	PWD
+  		, 	EMAIL
+  		,	NAME
+  		, 	FILE_NAME
   		,	POSITION_NAME AS POSITION_CODE
   	FROM COM_INNER_ID C
   	JOIN JOB_POSITION J 
   	ON C.POSITION_CODE = J.POSITION_CODE
   	WHERE COM_CODE = #{ companyCode }
+  	ORDER BY 1
   </select>
   
   

@@ -1,9 +1,12 @@
 package com.kh.jaga.company.model.dao;
 
+import java.util.HashMap;
+
 import org.mybatis.spring.SqlSessionTemplate;
 
 import com.kh.jaga.company.model.exception.LoginException;
 import com.kh.jaga.company.model.vo.Company;
+import com.kh.jaga.companyInnerId.model.vo.ComInIdVo;
 
 public interface CompanyDao {
 
@@ -16,5 +19,7 @@ public interface CompanyDao {
 	int insertCompany(SqlSessionTemplate sqlSession, Company c);
  
 	Company doubleCheckId(SqlSessionTemplate sqlSession, String userId);
+
+	ComInIdVo loginEmp(SqlSessionTemplate sqlSession, HashMap<String, String> empData);
 
 }

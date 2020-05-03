@@ -108,8 +108,8 @@
 		<form action ="login.lo" method="post">
 		
 		<div style="width:500px; margin-left:-20px;">
-			<div style="display:inline-block; width:240px; text-align:left;"><input id="accountCom" type="radio" name="accountType"><label for="accountCom">회사계정</label></div>
-			<div style="display:inline-block; width:240px; text-align:left;"><input id="accountEmp" type="radio" name="accountType"><label for="accountEmp">사내계정</label></div>
+			<div style="display:inline-block; width:240px; text-align:left;"><input id="accountCom" type="radio" name="accountType" value="accountCom" checked><label for="accountCom">회사계정</label></div>
+			<div style="display:inline-block; width:240px; text-align:left;"><input id="accountEmp" type="radio" name="accountType" value="accountEmp"><label for="accountEmp">사내계정</label></div>
 		</div>
 		
 			<table id="loginTable" style="text-align:center">
