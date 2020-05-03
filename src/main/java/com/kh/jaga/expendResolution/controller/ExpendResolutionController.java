@@ -105,7 +105,16 @@ public class ExpendResolutionController {
 		
 		mv.setViewName("expendResolutionList");
 		return mv;
+	}//method
+	
+	
+	//지출결의서 리스트에서 행 클릭시 동작하는 ajax
+	@RequestMapping("swyTestUrl")
+	public void testMethod() {
+		System.out.println("swyTestUrl 요청 받은 컨트롤러 ㅎㅎㅎㅎㅎ");
 	}
+	
+	
 	
 	
 	
