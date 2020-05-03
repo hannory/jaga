@@ -7,10 +7,12 @@ public class PageInfo {
 	private int maxPage;
 	private int startPage;
 	private int endPage;
+	private String companyCode;
 	
 	public PageInfo() {}
 
-	public PageInfo(int currentPage, int listCount, int limit, int maxPage, int startPage, int endPage) {
+	public PageInfo(int currentPage, int listCount, int limit, int maxPage, int startPage, int endPage,
+			String companyCode) {
 		super();
 		this.currentPage = currentPage;
 		this.listCount = listCount;
@@ -18,6 +20,7 @@ public class PageInfo {
 		this.maxPage = maxPage;
 		this.startPage = startPage;
 		this.endPage = endPage;
+		this.companyCode = companyCode;
 	}
 
 	public int getCurrentPage() {
@@ -68,11 +71,20 @@ public class PageInfo {
 		this.endPage = endPage;
 	}
 
+	public String getCompanyCode() {
+		return companyCode;
+	}
+
+	public void setCompanyCode(String companyCode) {
+		this.companyCode = companyCode;
+	}
+
 	@Override
 	public String toString() {
 		return "PageInfo [currentPage=" + currentPage + ", listCount=" + listCount + ", limit=" + limit + ", maxPage="
-				+ maxPage + ", startPage=" + startPage + ", endPage=" + endPage + "]";
+				+ maxPage + ", startPage=" + startPage + ", endPage=" + endPage + ", companyCode=" + companyCode + "]";
 	}
+
 	
 	
 	

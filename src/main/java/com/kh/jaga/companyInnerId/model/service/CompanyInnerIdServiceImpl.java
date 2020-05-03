@@ -62,9 +62,9 @@ public class CompanyInnerIdServiceImpl implements CompanyInnerIdService {
 
 	//전체 행 갯수 가져오기
 	@Override
-	public int selectComIdListCount() {
+	public int selectComIdListCount(String companyCode) {
 		//페이징
-		int listCount = dao.selectComIdListCount(sqlSession);
+		int listCount = dao.selectComIdListCount(sqlSession, companyCode);
 		
 		return listCount;
 	}

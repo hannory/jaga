@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <meta charset="UTF-8">
 <title>자가 경리</title>
  
@@ -105,10 +106,22 @@
 	 	<c:if test="${empty sessionScope.loginCompany }">
 		
 		<form action ="login.lo" method="post">
+		
+		<div style="width:500px; margin-left:-20px;">
+			<div style="display:inline-block; width:240px; text-align:left;"><input id="accountCom" type="radio" name="accountType" value="accountCom" checked><label for="accountCom">회사계정</label></div>
+			<div style="display:inline-block; width:240px; text-align:left;"><input id="accountEmp" type="radio" name="accountType" value="accountEmp"><label for="accountEmp">사내계정</label></div>
+		</div>
+		
 			<table id="loginTable" style="text-align:center">
 				<tr>
 					<td><input type="text" name="companyId" class="userId" placeholder="아이디"></td>
 					<td class="blank"></td>
+					<td></td>
+				</tr>
+				
+				<tr>
+					<td><input type="text" name="empId" class="userId" placeholder="사내계정" id="inputAccountEmp" style="display:none;"></td>
+					<td></td>
 					<td></td>
 				</tr>
 				
@@ -144,6 +157,26 @@
 	 		location.href="${contextPath}/gomain.co"
 	 	}
 	</script>
+	
+	
+	
+	<script>
+	/* 사내계정 클릭 시 display 바꿔줌 */
+	$(function(){
+		$("#accountEmp").click(function(){
+			$("#inputAccountEmp").css("display","block");
+		});
+	});
+	
+	$(function(){
+		$("#accountCom").click(function(){
+			$("#inputAccountEmp").css("display","none");
+		});
+	});
+	
+	</script>
+	
+	
 	
 </body>
 </html>

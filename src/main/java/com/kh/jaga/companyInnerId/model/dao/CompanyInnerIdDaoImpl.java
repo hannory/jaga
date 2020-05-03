@@ -34,7 +34,7 @@ public class CompanyInnerIdDaoImpl implements CompanyInnerIdDao {
 		int offset = (pi.getCurrentPage() - 1) * pi.getLimit();
 		
 		RowBounds rb = new RowBounds(offset, pi.getLimit());
-		List<SelectCompanyIdVo> list = sqlSession.selectList("ComInnerId.selectComInIdList", null, rb); 
+		List<SelectCompanyIdVo> list = sqlSession.selectList("ComInnerId.selectComInIdList", pi.getCompanyCode(), rb); 
 		return list;
 	}
 
@@ -42,9 +42,9 @@ public class CompanyInnerIdDaoImpl implements CompanyInnerIdDao {
 
 	//전체 행 갯수 체크
 	@Override
-	public int selectComIdListCount(SqlSessionTemplate sqlSession) {
+	public int selectComIdListCount(SqlSessionTemplate sqlSession,String companyCode) {
 		//페이징
-		int listCount = sqlSession.selectOne("ComInnerId.selectListCount");
+		int listCount = sqlSession.selectOne("ComInnerId.selectListCount", companyCode);
 		System.out.println("dao > listCount 갯수 : " + listCount);
 		return listCount;
 	}

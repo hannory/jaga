@@ -12,6 +12,6 @@ public interface CompanyInnerIdService {
 
 	public abstract List selectComInIdList(PageInfo pi);
 
-	public abstract int selectComIdListCount();
+	public abstract int selectComIdListCount(String companyCode);
 	
 }

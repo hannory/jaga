@@ -18,7 +18,7 @@ public interface CompanyInnerIdDao {
 
 	public abstract int insertTest(CreateCompanyInnerIdDto data, SqlSessionTemplate sqlSession) throws ComInIdException;
 
-	public abstract int selectComIdListCount(SqlSessionTemplate sqlSession);
+	public abstract int selectComIdListCount(SqlSessionTemplate sqlSession, String companyCode);
 
 
 	

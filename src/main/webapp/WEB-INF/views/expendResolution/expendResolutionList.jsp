@@ -11,7 +11,7 @@
 
 	.div-menuTap{
 		display: inline-block;
-		background: #8DABA3;
+		background: #24574A;
 		color:white;
 		width:160px;
 		height:30px;
@@ -89,7 +89,7 @@
 		<form action="" method="post">
 		<table border="1" style="width:80%; text-align:center;">
 		
-			<tr style="background:#24574A; height:20px;">
+			<tr style="background:#24574A; color:white; height:20px;">
 				<td style="width:8%">문서번호</td>
 				<td style="width:38%">지출일</td>
 				<td style="width:13%">계정과목</td>
@@ -115,8 +115,29 @@
 			/* 리스트에서 행 클릭 시 해당 문서 번호 가져오기 ,, 이후 문서번호로 데이터 받아와서 모달에 보여주자 */
 				$(function(){
 					$("table tr").click(function(e){
-						console.log(e.target);
-						console.log(String(e.target.nodeName));
+						var resolutionNo = this.children[0].innerText;
+						console.log(resolutionNo);
+						
+						
+						
+						$.ajax({
+							url: "swyTestUrl",
+							data : {
+								"k01":"v01",
+								"k02":"v02"
+							},
+							success: function(data){
+								alert("success");
+								alert(data);
+							},
+							error: function(status){
+								alert("error");
+								alert(status);
+							}
+						});//ajax
+						
+						
+						
 					})	
 				});
 			</script>

@@ -1,5 +1,7 @@
 package com.kh.jaga.company.model.service;
 
+import java.util.HashMap;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.kh.jaga.company.model.dao.CompanyDao;
 import com.kh.jaga.company.model.exception.LoginException;
 import com.kh.jaga.company.model.vo.Company;
+import com.kh.jaga.companyInnerId.model.vo.ComInIdVo;
 
 @Service
 public class CompanyServiceImpl implements CompanyService {
@@ -58,5 +61,13 @@ public class CompanyServiceImpl implements CompanyService {
 			checkIdresult=99;
 		}
 		 return checkIdresult;
+	}
+
+	@Override
+	public ComInIdVo loginEmp(HashMap<String, String> empData) {
+		
+		ComInIdVo loginEmp = cd.loginEmp(sqlSession, empData); 
+		
+		return loginEmp;
 	}
 } 

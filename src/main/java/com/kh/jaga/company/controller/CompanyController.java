@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,9 +26,15 @@ import com.kh.jaga.common.CommonsUtils;
 import com.kh.jaga.company.model.exception.LoginException;
 import com.kh.jaga.company.model.service.CompanyService;
 import com.kh.jaga.company.model.vo.Company;
+import com.kh.jaga.companyInnerId.model.vo.ComInIdVo;
 
+/**
+ * @author 주석을 달아주세용
+ * @comment 유지연님.. 언제 이걸 발견하는지 기다리겠습니다 ..
+ * @createDate 1994. 09. 23.
+ */
 @Controller
-@SessionAttributes("loginCompany")
+@SessionAttributes({"loginCompany","loginEmp"})
 public class CompanyController {
 	@Autowired
 	private CompanyService cs;
@@ -37,24 +44,87 @@ public class CompanyController {
 
 	//로그인
 	@PostMapping("login.lo")
-	public String loginCheck(Company c,Model model) {
+	public String loginCheck(Company c,Model model, @RequestParam(required = false) String accountType, String empId, String companyPwd) {
 
-		Company loginCompany = null;
-
-		try {
-
-			loginCompany = cs.loginCompany(c);
-			System.out.println(loginCompany+"로그인컴퍼니다");
-			model.addAttribute("loginCompany",loginCompany);
-
-			return "redirect:gomain.co";
-
-		} catch (LoginException e) {
-			model.addAttribute("msg",e.getMessage());
+		System.out.println("===============================");
+		System.out.println(accountType);
+		System.out.println(empId);
+		System.out.println(companyPwd);
+		System.out.println("===============================");
+		
+		if(accountType.equals("accountEmp")) {
+			//사내계정 로그인
 			
-			return "common/errorPage";
+			HashMap<String, String> empData = new HashMap<String, String>();
+			empData.put("id", empId);					//사내계정 아이디
+			empData.put("pwd", companyPwd);				//사내계정 비번 //컴퍼니말고 사내계정 맞음
+			empData.put("comId", c.getCompanyId());		//회사계정 아이디
+			
+			ComInIdVo loginEmp = cs.loginEmp(empData);
+			
+//			System.out.println(loginEmp);
+			if(passwordEncoder.matches(companyPwd, loginEmp.getPwd())) {
+				//로그인 성공
+				model.addAttribute("loginEmp", loginEmp);
+				
+				try {
+					Company loginCompany = cs.loginCompany(c);
+					model.addAttribute("loginCompany",loginCompany);
+				} catch (LoginException e) {
+					System.out.println("사내계정 로그인 성공,, but 회사계정 로그인 익셉션");
+					e.printStackTrace();
+				}
+
+				
+				return "redirect:gomain.co";
+
+			}else {
+				//로그인 실패
+				
+				try {
+					throw new LoginException("사내계정 로그인 실패 !");
+				} catch (LoginException e) {
+					
+					model.addAttribute("msg",e.getMessage());
+					
+					return "common/errorPage";
+				}
+				
+			}
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+		}else {
+			//회사계정 로그인
+			Company loginCompany = null;
+
+			try {
+
+				loginCompany = cs.loginCompany(c);
+				System.out.println(loginCompany+"로그인컴퍼니다");
+				model.addAttribute("loginCompany",loginCompany);
+
+				return "redirect:gomain.co";
+
+			} catch (LoginException e) {
+				model.addAttribute("msg",e.getMessage());
+				
+				return "common/errorPage";
+			}
+			
+			
 		}
-	}
+		
+		
+		
+	}//method
 	
 	@GetMapping("gomain.co")
 	public String gomain() {

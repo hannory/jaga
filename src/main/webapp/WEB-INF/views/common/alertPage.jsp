@@ -57,6 +57,14 @@
 					location.href = "incomeStmt.fs"
 				})
 				break;
+			case "createComInIdOk" :
+				Swal.fire({
+					icon: "success",
+					text: "사내계정 생성 완료 !"
+				}).then((result) => {
+					location.href = "showViewComInnerIdList.comInId"
+				})
+				break;
 			}
 		})
 	</script>

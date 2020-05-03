@@ -1,10 +1,13 @@
 package com.kh.jaga.company.model.dao;
 
+import java.util.HashMap;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.jaga.company.model.exception.LoginException;
 import com.kh.jaga.company.model.vo.Company;
+import com.kh.jaga.companyInnerId.model.vo.ComInIdVo;
 
 @Repository
 public class CompanyDaoImpl implements CompanyDao {
@@ -14,7 +17,7 @@ public class CompanyDaoImpl implements CompanyDao {
 		
 		Company loginCompany = sqlSession.selectOne("Company.loginCheck",c);
 		
-		if(loginCompany ==null) {
+		if(loginCompany == null) {
 			
 			throw new LoginException("로그인 정보가 존재하지 않습니다.");
 		}
@@ -40,6 +43,14 @@ public class CompanyDaoImpl implements CompanyDao {
 	@Override
 	public Company doubleCheckId(SqlSessionTemplate sqlSession, String userId) {
 		return sqlSession.selectOne("Company.doubleIdCheck", userId);
+	}
+
+	@Override
+	public ComInIdVo loginEmp(SqlSessionTemplate sqlSession, HashMap<String, String> empData) {
+		
+		ComInIdVo loginEmp = sqlSession.selectOne("Company.selectLoginEmp", empData);
+		
+		return loginEmp;
 	}
 
 }

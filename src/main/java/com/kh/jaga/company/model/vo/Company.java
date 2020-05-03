@@ -4,7 +4,6 @@ import java.sql.Date;
 
 public class Company implements java.io.Serializable {
 
-	public Company() {}
 	
 	private String companyCode;
 	private String companyPwd;
@@ -25,6 +24,9 @@ public class Company implements java.io.Serializable {
 	private String payStatus;
 	private String enrollStatus;
 	private Date gaeup;
+	
+	public Company() {}
+	
 	public Company(String companyCode, String companyPwd, String companyPwd2, String companyId, String email,
 			String phone, String bizName, String bizNum, String bossName, String personalNum, Date openDay,
 			String bizLocation, String bossAddress, String bizType, Date enrollDate, Date modifyDate, String payStatus,

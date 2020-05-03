@@ -18,7 +18,7 @@ public interface ExpendResolutionDao {
 
 	List<AccountTitleVo> selectAccountTitleList(SqlSessionTemplate sqlSession);
 
-	List<ComInIdVo> selectComInIdListList(SqlSessionTemplate sqlSession);
+	List<ComInIdVo> selectComInIdListList(SqlSessionTemplate sqlSession, String comCome);
 
 	List<ExpendResolutionDto> selectExpendResolutionList(SqlSessionTemplate sqlSession);
 

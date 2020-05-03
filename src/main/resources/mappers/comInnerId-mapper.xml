@@ -18,7 +18,7 @@
   	)
   	VALUES(
   		SEQ_SWY_SEQUENCE.NEXTVAL
-  	,	'10'
+  	,	#{companyCode}
   	,	#{position}	
   	,	#{id}
   	,	#{pwd}
@@ -31,9 +31,21 @@
   
   
   <!-- com.kh.jaga.companyInnerId.vo.SelectCompanyIdVo -->
-  <select id="selectComInIdList" resultMap="SelectCompanyIdVo">
-  	SELECT COM_INNER_ID_NUM, COM_CODE, POSITION_CODE, ID, PWD, EMAIL, NAME, FILE_NAME
-  	FROM COM_INNER_ID
+  <select id="selectComInIdList" parameterType="String" resultMap="SelectCompanyIdVo">
+  	SELECT 
+  			TO_NUMBER(COM_INNER_ID_NUM) AS COM_INNER_ID_NUM
+  		,	COM_CODE
+  		,	ID
+  		,	PWD
+  		, 	EMAIL
+  		,	NAME
+  		, 	FILE_NAME
+  		,	POSITION_NAME AS POSITION_CODE
+  	FROM COM_INNER_ID C
+  	JOIN JOB_POSITION J 
+  	ON C.POSITION_CODE = J.POSITION_CODE
+  	WHERE COM_CODE = #{ companyCode }
+  	ORDER BY 1
   </select>
   
   
@@ -45,9 +57,10 @@
   </insert>
   
   
-  <select id="selectListCount" resultType="int">
+  <select id="selectListCount" parameterType="String" resultType="int">
   	SELECT COUNT(COM_INNER_ID_NUM)
   	FROM COM_INNER_ID
+  	WHERE COM_CODE = #{ companyCode }
   </select>
   
   
