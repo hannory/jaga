@@ -5,7 +5,7 @@
   
   <mapper namespace="Vender">
   
-      <resultMap type="Bank" id="bankResultMap">
+     <resultMap type="Bank" id="bankResultMap">
   	<id property="bankCode" column="BANK_CODE"/>
   	<result property="bankName" column="BANK_NAME"/>
   	</resultMap>
@@ -47,7 +47,7 @@
 	</insert>
 	
 	<select id="selectVenderList" resultMap="venderResultSet">
-	SELECT VENDER_NAME,BOSS_NAME,ACCOUNT_NUM,STATUS,VENDER_TEL,VENDER_CODE
+	SELECT VENDER_NAME,BOSS_NAME,ACCOUNT_NUM,STATUS,VENDER_TEL,VENDER_CODE,VENDER_TYPE
 	FROM VENDER
 	</select>
 
@@ -66,7 +66,7 @@
   	
   	
   	<select id="selectBankList" resultMap="bankResultMap">
-  	SELECT *
+  	SELECT BANK_CODE,BANK_NAME
   	FROM BANK
   	</select>
  

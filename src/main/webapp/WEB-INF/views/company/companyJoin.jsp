@@ -446,18 +446,29 @@
             <td class="firstLine"><b>이메일</b></td>
             
             <td class="secondLine">
-           	<input type="text" maxlength="13" name="email" id="email1">
+           	<input type="text" maxlength="13" name="email" id="email1" placeholder="직접입력가능">
            	</td>
-           	
+            	
           	<td> 
           	<select name="email2" id="email2">
-            <option value="1">@naver.com</option>
-            <option value="2">@daum.net</option>
-            <option value="3">@gmail.com</option>
-            <option value="4">직접입력하기</option>
+          	<option value="" select disalbed hidden>선택</option>
+            <option value="@naver.com">@naver.com</option>
+            <option value="@daum.net">@daum.net</option>
+            <option value="@gmail.com">@gmail.com</option>
+            <option value="">직접입력하기</option>
             </select>
             </td>
         </tr>
+        
+        <script>
+        $("#email2").click(function(){
+        	var email=$("#email1").val();
+        	
+        	
+        	var email2 =$("#email2").val();
+        	$("#email1").val(email+email2);
+        	});
+        </script>
         
         <tr>
         	<td class="firstLine"><b>전화번호</b></td>
@@ -469,7 +480,7 @@
         
 		<tr class="licenseTriger">
 		
-            <td class="firstLine"><b>사업자 등록증 (필수)</b></td>
+            <td class="firstLine"><b>사업자 등록증 <br> (필수)</b></td>
                		
 <!--             <td class="secondLine">
              <div id="licenseImgArea">
@@ -585,11 +596,32 @@
 			</tr>
 		
  		    <tr class="licenseTriger">
-<!--                <td class="firstLine" ><b>업종코드</b></td>
-               <td class="secondLine"><input type="text" id="address2" name="bizType" placeholder="업종코드"></td>
-                <td>  <button type="button" class="thirdLine" data-dismiss="modal">&times;</button>
-                <button type="button">하하하..</button>
-                </td> -->
+                <td class="firstLine" ><b>업종코드</b></td>
+               <td class="secondLine"><input type="text" id="bizType" name="bizType" placeholder="업종코드"></td>
+                 <td> <button type="button" class="thirdLine" id="searchBtn2"> <img alt="" src="${contextPath}/resources/images/search.PNG" width="20px" height="20px"></button></td>
+				<td> <input type="text" id="bizName" placeholder="업종명"></td>
+               
+                
+           </tr>	
+			
+			
+		   <tr class="hidesub">
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+
+		</table>
+		</div>
+		<div style="margin-left:500px; margin-top:80px">
+			<button type="reset">작성취소</button>
+			<button type="submit">가입하기</button>
+		</div>
+		</form>
+		</div>
+		</div>
+		
+		           
                   <div class="modal fade" id="typeofbizModal" role="dialog">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
@@ -616,28 +648,11 @@
       </div>
     </div>
   </div>
-                
-                
-           </tr>	
-			
-			
-			
-		   <tr class="hidesub">
-				<td></td>
-				<td></td>
-				<td></td>
-			</tr>
 
-		</table>
-		</div>
-		<div style="margin-left:500px; margin-top:80px">
-			<button type="reset">작성취소</button>
-			<button type="submit">가입하기</button>
-		</div>
-		</form>
-		</div>
-		</div>
-		
+	</main>
+
+
+
 	
 	<script>
 	/*아이디 비밀번호 비밀번호 확인 이메일 전화번호 사업자 등록증 사업자등록번호 개업년월일 회사명(상호) 대표자명 주민등록번호 회사주소 업종코드 
@@ -869,7 +884,7 @@
 		}
 		
 		/*업종*/
-		var typeofbizC = "";
+/* 		var typeofbizC = "";
 		var typeofbizN;
 		function aaa(value){
 			$(value).parent().parent().children().each(function(index){
@@ -885,42 +900,47 @@
 			
 			$("div#typeofbizModal").modal("hide");
 			
-		}		
+		}		 */
 		
 		//업종 모달
-			$("#searchBtn3").click(function(){
-				/* $("#venderTable td").remove(); */
-				/* var $tbody = $("#venderTable tbody"); */
-				$("#typeofbizTable").dataTable({
-					destroy: true,
-					 ajax:{
-							'url':'typeofbizSearch.rp',
-							'type':'get'
-						},
-					 
-					 columns: [
-						 {data : "bizType",
-							 "render": function(data, type, row){
-					                if(type=='display'){
-					                    data = '<a href="#" onclick="aaa(this);">' + data + '</a>';
-					                }
-					                return data;}},
-						 {data : "bizName",
-										 "render": function(data, type, row){
-								                if(type=='display'){
-								                    data = '<a href="#" onclick="aaa(this);">' + data + '</a>';
-								                }
-								                return data;}}
-						 
-					 ]
-				});
-				 $("div#typeofbizModal").modal();
-			});
+/* $("#searchBtn2").click(function(){
+	
+	$("#bankTable").dataTable({
+		destroy: true,
+		 ajax:{
+				'url':'bizTypeSearch.co',
+				'type':'get'
+			},
+		 
+		 columns: [
+			 {data : "bizType",
+				 "render": function(data, type, row){
+		                if(type=='display'){
+		                    data = '<a href="#" onclick="ccc(this);">' + data + '</a>';
+		                }
+		                return data;} 
+			 },
+			 {data : "bizName",
+				 "render": function(data, type, row){
+		                if(type=='display'){
+		                    data = '<a href="#" onclick="ccc(this);">' + data + '</a>';
+		                }
+		                return data;}
+			 }
+			 
+		 ]
+	});
+	
+	$(".modal-title").text("업종검색");
+	 $("div#accountModal").modal();
+	 
+	 
+});
+ */
+
 			
 		
 		
 	</script>
-
-	</main>
 </body>
 </html>

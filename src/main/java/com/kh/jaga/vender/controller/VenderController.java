@@ -1,5 +1,6 @@
 package com.kh.jaga.vender.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonIOException;
 import com.kh.jaga.company.model.vo.Company;
 import com.kh.jaga.vender.model.service.VenderService;
 import com.kh.jaga.vender.model.vo.Vender;
@@ -31,7 +34,7 @@ public class VenderController {
 		System.out.println(v);
 		vs.insertVender(v);
 		
-		return "redirect:index.jsp";
+		return "redirect:venderList.vi";
 		
 	}
 	
@@ -68,18 +71,27 @@ public class VenderController {
 	  }
 	  
 	  @GetMapping("bankSearch.ve")
-	  public ModelAndView searchBank(ModelAndView mv, HttpServletRequest request) {
-		  Company com = (Company)request.getSession().getAttribute("loginCompany");
+	  public void searchBank(HttpServletRequest request,HttpServletResponse response) {
+		  Company com=(Company)request.getSession().getAttribute("loginCompany");
 		  String comCode=com.getCompanyCode();
 		  
 		  List<Vender> list =null;
 		  
 		  list=vs.selectBankList(comCode);
 		  
-		  mv.addObject("data",list);
-		  mv.setViewName("jsonView");
 		  
-		  return mv;
+		  try {
+			  response.setContentType("application/json");
+			new Gson().toJson(list,response.getWriter());
+			System.out.println("은행리스트는요"+list);
+		} catch (JsonIOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		  
 }
 }
 

@@ -12,8 +12,8 @@
 
 #table-total{
 position: absolute;
-width: 650px;
-height: 600px;
+width: 1000px;
+height: 1000px;
 left: 270px;
 top: 139px;
 background: pink;
@@ -24,7 +24,7 @@ margin-left:70px;
 
 #table1{
 position:auto;
-width:240px;
+width:285px;
 height:600px;
 left:283px;
 top:139px;
@@ -36,8 +36,8 @@ background:white;
 
 #table2{
 position:auto;
-width:379px;
-height:600px;
+width:399px;
+height:620px;
 left:300px;
 top:139px;
 float:left;
@@ -48,15 +48,15 @@ background:white;
 
 #account-code{
 position: absolute;
-width: 81px;
+width: 110px;
 height: 29px;
-left: 837px;
-top: 146px;
+left: 800px;
+top: 160px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 14px;
+font-size: 16px;
 line-height: 16px;
 }
 
@@ -66,7 +66,7 @@ position: absolute;
 width: 44px;
 height: 27px;
 left: 940px;
-top: 139px;
+top: 160px;
 
 background: #FFFFFF;
 border: 1px solid #C4C4C4;
@@ -79,7 +79,7 @@ position: absolute;
 width: 158px;
 height: 27px;
 left: 1000px;
-top: 139px;
+top: 160px;
 
 background: #FFFFFF;
 border: 1px solid #C4C4C4;
@@ -91,13 +91,13 @@ border-radius: 5px;
 position: absolute;
 width: 39px;
 height: 14px;
-left: 837px;
-top: 188px;
+left: 800px;
+top: 200px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 14px;
+font-size: 16px;
 line-height: 16px;
 
 color: #000000;
@@ -108,7 +108,7 @@ position: absolute;
 width: 108px;
 height: 27px;
 left: 940px;
-top: 183px;
+top: 200px;
 
 background: #FFFFFF;
 border: 1px solid #C4C4C4;
@@ -126,7 +126,7 @@ top: 235px;
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 14px;
+font-size: 16px;
 line-height: 16px;
 
 color: #000000;
@@ -173,7 +173,7 @@ top: 285px;
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 14px;
+font-size: 16px;
 line-height: 16px;
 
 color: #000000;
@@ -327,14 +327,14 @@ background: #F1F8FE;
 width:210px;
 text-align:left;
 background:white;
-font-size:13px;
+font-size:16px;
 }
 
 #td2{
 width:175px;
 text-align:center;
 background: #F3F4F6;
-font-size:15px;
+font-size:16px;
 
 }
 
@@ -342,7 +342,7 @@ font-size:15px;
 width:95px;
 background:  #F3F4F6;
 text-align:center;
-font-size:13px;
+font-size:16px;
 
 }
 
@@ -350,34 +350,34 @@ font-size:13px;
 width:80px;
 background:  #F3F4F6;
 text-align:center;
-font-size:13px;
+font-size:16px;
 }
 
 #td5{
 width:50px;
 background:white;
 text-aling:left;
-font-size:13px;
+font-size:16px;
 }
 #td5-2{
 width:130px;
 background:white;
 text-aling:left;
-font-size:13px;
+font-size:16px;
 }
 
 #td6{
 width:90px;
 background:white;
 text-aling:left;
-font-size:13px;
+font-size:16px;
 }
 
 #td7{
 width:40px;
 background:white;
 text-aling:left;
-font-size:13px;
+font-size:16px;
 }
 
 #td-blank{
@@ -399,7 +399,7 @@ background:white;
 
  #main{
 position: relative;
-height:1000px;
+height:1800px;
 width:1800px;
 background:white;
 } 
@@ -408,18 +408,19 @@ background:white;
 
 #accountSystem{
 position: absolute;
-width: 65px;
-height: 15px;
-left: 1074px;
-top: 187px;
+width: 70px;
+/* height: 15px; */
+left: 1090px;
+top: 203px;
 
 font-family: Roboto;
 font-style: normal;
-font-weight: normal;
-font-size: 14px;
+font-weight: bold;
+font-size: 15px;
 line-height: 16px;
 
-color: #000000;
+/* color: #000000; */
+
 }
 
 
@@ -430,7 +431,7 @@ position: absolute;
 width: 106px;
 height: 27px;
 left: 1169px;
-top: 183px;
+top: 200px;
 
 background: #FFFFFF;
 border: 1px solid #C4C4C4;
@@ -442,7 +443,7 @@ border-radius: 5px;
 #enroll{
 position: absolute;
 left: 1295px;
-top: 183px;
+top: 200px;
 
 background: #FFFFFF;
 border: 1px solid #C4C4C4;
@@ -467,59 +468,59 @@ border-radius: 5px;
 		</tr>
 		<tr> <td id="td-blank"></td> 
 		</tr>
-		<tr> <td style="border:1px solid #D8D8DC" id="td1"> 당  좌   자   산  : 0101-0145 </td> 
+		<tr> <td style="border:1px solid #D8D8DC" id="td1"> 당  좌   자   산  : 10100-14000 </td> 
 		</tr>
-		<tr> <td style="border:1px solid #D8D8DC" id="td1"> 재  고   자   산  : 0146-0175 </td> 
+		<tr> <td style="border:1px solid #D8D8DC" id="td1"> 재  고   자   산  : 14600-17500 </td> 
 		</tr>				
-		<tr> <td style="border:1px solid #D8D8DC" id="td1"> 투  자   자   산  : 0176-0194 </td> 
+		<tr> <td style="border:1px solid #D8D8DC" id="td1"> 투  자   자   산  : 17600-19400 </td> 
 		</tr>		
-		<tr> <td style="border:1px solid #D8D8DC" id="td1"> 유형자산 :0195-0217/0471-0500 </td> 
+		<tr> <td style="border:1px solid #D8D8DC" id="td1"> 유형자산 : 20100-21800 </td> 
 		</tr>		
-		<tr> <td style="border:1px solid #D8D8DC" id="td1"> 무형자산 :0218-0230/0431-0450 </td> 
+		<tr> <td style="border:1px solid #D8D8DC" id="td1"> 무형자산 : 23100-24000 </td> 
 		</tr>		
-		<tr> <td style="border:1px solid #D8D8DC" id="td1"> 기타비유동자산  : 0231-0250 </td> 
+		<tr> <td style="border:1px solid #D8D8DC" id="td1"> 기타비유동자산  : 96100-97800 </td> 
 		</tr>		
-		<tr> <td style="border:1px solid #D8D8DC" id="td1"> 유   동   부   채  : 0251-0290 </td> 
+		<tr> <td style="border:1px solid #D8D8DC" id="td1"> 유   동   부   채  : 25100-29000 </td> 
 		</tr>		
-		<tr> <td style="border:1px solid #D8D8DC" id="td1"> 비  유  동  부  채  : 0291-0330 </td> 
+		<tr> <td style="border:1px solid #D8D8DC" id="td1"> 비  유  동  부  채  : 29100-33000 </td> 
 		</tr>		
-		<tr> <td style="border:1px solid #D8D8DC" id="td1"> 자      본      금  : 0331-0340 </td> 
+		<tr> <td style="border:1px solid #D8D8DC" id="td1"> 자      본      금  : 33100-34000 </td> 
 		</tr>		
-		<tr> <td style="border:1px solid #D8D8DC" id="td1"> 자  본  잉  여  금  : 0341-0350 </td> 
+		<tr> <td style="border:1px solid #D8D8DC" id="td1"> 자  본  잉  여  금  : 34100-35000 </td> 
 		</tr>		
-		<tr> <td style="border:1px solid #D8D8DC" id="td1"> 자   본   조   정  : 0381-0391 </td> 
+		<tr> <td style="border:1px solid #D8D8DC" id="td1"> 자   본   조   정  : 38100-39100 </td> 
 		</tr>		
-		<tr> <td style="border:1px solid #D8D8DC" id="td1"> 기타  포괄손익  : 0392-0399 </td> 
+		<tr> <td style="border:1px solid #D8D8DC" id="td1"> 기타  포괄손익  : 39200-39900 </td> 
 		</tr>		
-		<tr> <td style="border:1px solid #D8D8DC" id="td1"> 이  익  잉  여  금  : 0351-0380 </td> 
-		</tr>		
-		<tr> <td id="td-blank"></td> 
-		</tr>		
-		<tr>  <td style="border:1px solid #D8D8DC" id="td1"> 매             출  : 0401-0430 </td> 
-		</tr>		
-		<tr>  <td style="border:1px solid #D8D8DC" id="td1"> 매   출   원   가  : 0451-0470 </td> 
-		</tr>		
-		<tr>  <td style="border:1px solid #D8D8DC" id="td1"> 제   조   원   가  : 0501-0600 </td> 
-		</tr>		
-		<tr>  <td style="border:1px solid #D8D8DC" id="td1"> 도   급   원   가  : 0601-0650 </td> 
-		</tr>		
-		<tr>  <td style="border:1px solid #D8D8DC" id="td1"> 보   관   원   가  : 0651-0700 </td> 
-		</tr>		
-		<tr>  <td style="border:1px solid #D8D8DC" id="td1"> 분   양   원   가  : 0701-0750 </td> 
-		</tr>		
-		<tr>  <td style="border:1px solid #D8D8DC" id="td1"> 운   송   원   가   : 0751-0800 </td> 
-		</tr>		
-		<tr>  <td style="border:1px solid #D8D8DC" id="td1"> 판  매  관  리  비  : 0801-0900 </td> 
-		</tr>		
-		<tr>  <td style="border:1px solid #D8D8DC" id="td1"> 영  업  외  수  익  : 0901-0950 </td> 
-		</tr>		
-		<tr>  <td style="border:1px solid #D8D8DC" id="td1"> 영  업  외  비  용  : 0951-0997 </td> 
-		</tr>		
-		<tr>  <td style="border:1px solid #D8D8DC" id="td1"> 법   인  (소  득) : 0998-0999 </td> 
+		<tr> <td style="border:1px solid #D8D8DC" id="td1"> 이  익  잉  여  금  : 35100-38000 </td> 
 		</tr>		
 		<tr> <td id="td-blank"></td> 
 		</tr>		
-		<tr> <td style="border:1px solid #D8D8DC" id="td1"> 특수  계정  과목: 1000-1010 </td> 
+		<tr>  <td style="border:1px solid #D8D8DC" id="td1"> 매             출  : 40100-43000 </td> 
+		</tr>		
+		<tr>  <td style="border:1px solid #D8D8DC" id="td1"> 매   출   원   가  : 45100-47000 </td> 
+		</tr>		
+		<tr>  <td style="border:1px solid #D8D8DC" id="td1"> 제   조   원   가  : 50100-60000 </td> 
+		</tr>		
+		<tr>  <td style="border:1px solid #D8D8DC" id="td1"> 도   급   원   가  : 60100-65000 </td> 
+		</tr>		
+		<tr>  <td style="border:1px solid #D8D8DC" id="td1"> 보   관   원   가  : 65100-70000 </td> 
+		</tr>		
+		<tr>  <td style="border:1px solid #D8D8DC" id="td1"> 분   양   원   가  : 70100-75000 </td> 
+		</tr>		
+		<tr>  <td style="border:1px solid #D8D8DC" id="td1"> 운   송   원   가   : 75100-80000 </td> 
+		</tr>		
+		<tr>  <td style="border:1px solid #D8D8DC" id="td1"> 판  매  관  리  비  : 80100-90000 </td> 
+		</tr>		
+		<tr>  <td style="border:1px solid #D8D8DC" id="td1"> 영  업  외  수  익  : 90100-95000 </td> 
+		</tr>		
+		<tr>  <td style="border:1px solid #D8D8DC" id="td1"> 영  업  외  비  용  : 95100-99700 </td> 
+		</tr>		
+		<tr>  <td style="border:1px solid #D8D8DC" id="td1"> 법   인  (소  득) : 99800-999000 </td> 
+		</tr>		
+		<tr> <td id="td-blank"></td> 
+		</tr>		
+		<tr> <td style="border:1px solid #D8D8DC" id="td1"> 특수  계정  과목: 100000-101000 </td> 
 		</tr>		
 	
 		
