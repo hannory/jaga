@@ -1556,8 +1556,8 @@ box-sizing: border-box;
 <div id="employee-manage">직원관리</div>
 <div id="big-employee">일반근로자</div>
 <div id="row-employee"></div>
-<div id="big-one-imployee">일용근로자</div>
-<div id="big-income-employee">사업소득자</div>
+<div id="big-one-imployee"> <a href="BPaymentList.bp"/>사업소득자</div>
+<!-- <div id="big-income-employee">사업소득자</div> -->
 <div id="border2"></div>
 <!-- <input type="search" id="search-surr"> -->
 
@@ -1621,7 +1621,7 @@ box-sizing: border-box;
 <tr>
 <td>
 <b id="salary">월급여</b>
-<input type="text" id="salary-surr" name="salary" onkeyup="inputNumberFormat(this);" >
+<input type="text" id="salary-surr" name="salary" onkeyup="inputNumberFormat(this);" style="text-align:right">
 <!-- <input type="hidden" id="result" name="salary" onchange="uncomma(this);" >  -->
 <b id="email">이메일</b>
 <input type="text" id="email-surr" name="email">
@@ -1654,7 +1654,7 @@ $("#result").val(salary);
 <!-- td><button id="leaveReason-surr" style="color:white; font-size:6px;">퇴사사유</button></td> -->
  <td class="thirdLine"><label id="nnResult" class="leaveReason">퇴사사유</label></td>
  <select class="leaveReason-surr" name="leaveReason">
- <option value="" selected disabled hidden>선택</option>
+ <option value="0" selected disabled hidden>해당사항없음</option>
  <option value="1"> 자진퇴사 </option>
  <option value="2"> 사직권고 </option>
  <option value="3"> 기타사유 </option>

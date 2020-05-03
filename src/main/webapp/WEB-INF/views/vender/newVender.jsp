@@ -114,7 +114,7 @@ height: 27px;
 left: 455px;
 top: 457px;
 
-background: #D9E3E3;
+/* background: #D9E3E3; */
 border: 1px solid #C4C4C4;
 box-sizing: border-box;
 border-radius: 5px;
@@ -1040,6 +1040,23 @@ border-radius: 0px 5px 5px 0px; */
 	#resultReTable input {
 		text-align: center;
 	}
+	#sub{
+		background:#888888;
+		border: 1px solid #888888;
+		color: white;
+	}
+	
+	#update{
+		background:#888888;
+		border: 1px solid #888888;
+		color: white;
+	}
+	
+	#farm{
+		background:#888888;
+		border: 1px solid #888888;
+		color: white;
+	}
 
 
 
@@ -1067,7 +1084,6 @@ border-radius: 0px 5px 5px 0px; */
 <!-- 		<td><b id="vender-info">거래처 신규등록</b></td> -->
 			<td><b id="vender-name">거래처명</b><input type="text" name="venderName" id="vender-name-surr" name="venderName"></td>
 			<td><b id ="vendertype">구분</b><select id="vendertype-surr" name="venderType">
-			<option value="1"selected disabled hidden>일반거래처</option>
 			<option value="1">일반거래처</option>
 			<option value="2">은행</option>
 			<option value="3">카드</option>
@@ -1076,20 +1092,20 @@ border-radius: 0px 5px 5px 0px; */
 		</tr>
 		
 		<tr>
-			<td><b id="biz-num"> 1.사업자등록번호 / 주민번호 / 계좌번호 / 카드번호  </b>
+			<td><b id="biz-num"> 사업자등록번호 / 주민번호 / 계좌번호 / 카드번호  </b>
 			<input type="text" name="bizRegNum" id="biz-reg-num-surr" placeholder="사업자/주민 등록번호의 경우 -로 입력">
 			<!-- <button>사업자등록상태조회</button></td> -->
 		</tr>
 
 
 		<tr>
-			<td><b id="boss-name">2.대표자성명</b>
+			<td><b id="boss-name"> 대표자성명</b>
 			<input type="text" name="bossName" id="boss-name-surr"></td>
 		</tr>
 		
 		<tr>
 			<td>
-				<b id="sell">3.업종</b> <b id="sell-way">업태</b> <input type="text" name="sellWay" id="sell-way-surr" >
+				<b id="sell"> 업종</b> <b id="sell-way">업태</b> <input type="text" name="sellWay" id="sell-way-surr" >
 				<b id="sell-target">종목</b> <input type="text" name="sellTarget" id="sell-target-surr">
 				<b id="farmers-status">농어민</b><input type="checkbox" value="1" id="farmers-status-surr" name="farmersStatus">
 			</td>
@@ -1110,7 +1126,7 @@ border-radius: 0px 5px 5px 0px; */
 		
 		
 		<tr>
-			<td><b id="address">4.주소</b>
+			<td><b id="address"> 주소</b>
 			<input type="text" name="postcode" placeholder="우편번호" id="vender-address1-surr">
 			<td><input type="button" onclick="sample2_execDaumPostcode()" id="addressbtn" value="검색"></td>
 			<td><input type="text" id="vender-address2-surr" name="venderAddress" placeholder="주소"></td>
@@ -1122,7 +1138,7 @@ border-radius: 0px 5px 5px 0px; */
 		</tr> -->
 
 		<tr>
-			<td><b id="phone">5.연 락 처</b> 
+			<td><b id="phone"> 연 락 처</b> 
 			<b id="vender-tel">전화번호</b> <input type="tel" name="venderTel" id="vender-tell-surr">
 			<b id="vender-fax">팩스번호</b> <input type="tel" name="venderFax" id="vender-fax-surr">
 			</td>
@@ -1130,14 +1146,14 @@ border-radius: 0px 5px 5px 0px; */
 		</tr>
 		
 		<tr>
-			<td><b id="department-incharge">6.담당(부서)사원</b>
+			<td><b id="department-incharge"> 담당(부서)사원</b>
 <!-- 			`<input type="text" id="department-incharge1-surr"> -->
 			`<input type="text" name="departmentIncharge" id="department-incharge2-surr">
 			</td>
 		</tr>
 		
  		<tr>
-			<td><b id="account-income-num">7.입금 계좌 번호</b>
+			<td><b id="account-income-num"> 입금 계좌 번호</b>
 				<b id=bank>은행</b>
 				<input type="text" class="bank-code-surr" id="bankCode" name="bankCode">
 				<button type="button" id="searchBtn2"><img alt="" src="${contextPath}/resources/images/search.PNG" width="20px" height="20px">
@@ -1151,7 +1167,7 @@ border-radius: 0px 5px 5px 0px; */
 		</tr>
 		
 		<tr>
-			<td><b id="com-manage-tel"> 8.업체담당자연락처 </b>
+			<td><b id="com-manage-tel"> 업체담당자연락처 </b>
 				<input type="text" name="comManagerTel" id="com-manager1-tel-surr" placeholder="숫자만 입력">
 
 			</td>
@@ -1203,15 +1219,8 @@ border-radius: 0px 5px 5px 0px; */
 	          		</tr>
           		</thead>
           		<tbody>
-<%--            	<c:forEach var="bank" items="${list}">
-          		<tr>
-          		<td><c:out value="${bank.bankCode}"/></td> 
-          		<td><c:out value="${bank.bankName}"/></td> 
-				</tr>
-				</c:forEach>
-				  --%>
+
           		</tbody>
-        
           	</table>
         </div>
         <div class="modal-footer">
@@ -1327,8 +1336,8 @@ function ccc(value){
 		bankCo += ","+$(this).text();
 	})
 	var account = bankCo.split(",");
-	bankCo = account[1];
-	bankNN = account[2];
+	bankCo = bank[1];
+	bankNN = bank[2];
 	
 	$("#bankCode").val(bankCo);
 	$("#bankName").val(bankNN);
@@ -1357,13 +1366,15 @@ $("#searchBtn2").click(function(){
 		                if(type=='display'){
 		                    data = '<a href="#" onclick="ccc(this);">' + data + '</a>';
 		                }
-		                return data;}},
+		                return data;} 
+			 },
 			 {data : "bankName",
-							 "render": function(data, type, row){
-					                if(type=='display'){
-					                    data = '<a href="#" onclick="ccc(this);">' + data + '</a>';
-					                }
-					                return data;}}
+				 "render": function(data, type, row){
+		                if(type=='display'){
+		                    data = '<a href="#" onclick="ccc(this);">' + data + '</a>';
+		                }
+		                return data;}
+			 }
 			 
 		 ]
 	});

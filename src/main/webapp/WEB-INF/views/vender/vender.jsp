@@ -57,7 +57,7 @@ color: #000000;
 
 #biz-num{
 position: absolute;
-width: 300px;
+width: 400px;
 height: 24px;
 left: 320px;
 top: 124px;
@@ -65,7 +65,7 @@ top: 124px;
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -80,7 +80,7 @@ color: #4C4C4C;
 position: absolute;
 width: 360px;
 height: 27px;
-left: 631px;
+left: 731px;
 top: 124px;
 
 background: #FFFFFF;
@@ -177,7 +177,7 @@ top: 300px;
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -198,7 +198,7 @@ top: 160px;
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -220,7 +220,7 @@ top: 197px;
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -242,7 +242,7 @@ top: 237px;
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -265,7 +265,7 @@ top: 347px;
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -279,7 +279,7 @@ color: #4C4C4C;
 
 #department-incharge{
 position: absolute;
-width: 104px;
+width: 130px;
 height: 24px;
 left: 321px;
 top: 387px;
@@ -287,7 +287,7 @@ top: 387px;
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -309,11 +309,11 @@ top: 467px;
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
 line-height: 14px;
 display: flex;
 align-items: center;
 text-align: right;
+font-size: 16px;
 
 color: #4C4C4C;
 }
@@ -323,15 +323,15 @@ color: #4C4C4C;
 
 #com-manage-tel{
 position: absolute;
-width: 120px;
+width: 160px;
 height: 24px;
 left: 320px;
-top: 547px;
+top: 555px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -347,13 +347,13 @@ color: #4C4C4C;
 position: absolute;
 width: 104px;
 height: 24px;
-left: 331px;
+left: 320px;
 top: 627px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -369,13 +369,13 @@ color: #4C4C4C;
 position: absolute;
 width: 104px;
 height: 24px;
-left: 331px;
+left: 320px;
 top: 667px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -397,7 +397,7 @@ top: 197px;
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 15px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -419,7 +419,7 @@ top: 347px;
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 15px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -441,7 +441,7 @@ top: 467px;
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 15px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -463,7 +463,7 @@ top: 507px;
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 15px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -485,7 +485,7 @@ top: 507px;
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 15px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -507,7 +507,7 @@ top: 347px;
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 15px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -529,7 +529,7 @@ top: 197px;
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 15px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -575,7 +575,7 @@ border-radius: 5px;
 position: absolute;
 width: 180px;
 height: 27px;
-left: 515px;
+left: 525px;
 top: 344px;
 
 background: #FFFFFF;
@@ -590,7 +590,7 @@ border-radius: 5px;
 position: absolute;
 width: 201px;
 height: 27px;
-left: 785px;
+left: 805px;
 top: 344px;
 
 background: #FFFFFF;
@@ -663,18 +663,18 @@ border-radius: 5px;
 
 /*  업체담당자연락처 코드란 com-manager1-tel-surr*/
 
-#com-manager1-tel-surr{
+/* #com-manager1-tel-surr{
 position: absolute;
 width: 82px;
 height: 27px;
-left: 545px;
+left: 600px;
 top: 544px;
 
 background: #D9E3E3;
 border: 1px solid #C4C4C4;
 box-sizing: border-box;
 border-radius: 5px;
-}
+} */
 
 /* 예금주란 account-holder-surr */
 
@@ -713,7 +713,7 @@ border-radius: 5px;
 position: absolute;
 width: 201px;
 height: 27px;
-left: 660px;
+left: 750px;
 top: 544px;
 
 background: #D9E3E3;
@@ -837,7 +837,7 @@ line-height: 15px;
 
 #account-income-num{
 position: absolute;
-width: 104px;
+width: 130px;
 height: 24px;
 left: 321px;
 top: 467px;
@@ -845,7 +845,7 @@ top: 467px;
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -872,15 +872,15 @@ border-radius: 5px;
 /*거래처 명 : vender-name*/
 #vender-name{
 position: absolute;
-width: 58px;
+width: 70px;
 height: 24px;
-left: 326px;
-top: 94px;
+left: 321px;
+top: 90px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -916,7 +916,7 @@ top: 197px;
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 15px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -928,10 +928,10 @@ color: #4C4C4C;
 #farmers-status-surr{
 
 position: absolute;
-width: 25px;
-height: 25px;
+width: 20px;
+height: 20px;
 left: 1082px;
-top: 192px;
+top: 200px;
 
 background: #FFFFFF;
 border: 1px solid #C4C4C4;
@@ -944,8 +944,8 @@ border-radius: 5px;
 position: absolute;
 width: 190px;
 height: 27px;
-left: 460px;
-top: 544px;
+left: 500px;
+top: 555px;
 border: 1px solid #C4C4C4;
 box-sizing: border-box;
 border-radius: 5px;
@@ -955,16 +955,16 @@ border-radius: 5px;
 
 #vendertype{
 position: absolute;
-width: 26px;
+width: 40px;
 height: 24px;
 left: 733px;
-top: 94px;
+top: 90px;
 
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 15px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -1036,26 +1036,26 @@ font-size:6px;
 		</tr>
 		
 		<tr>
-			<td><b id="biz-num"> 1.사업자등록번호 / 주민번호 / 계좌번호 / 카드번호</b>
+			<td><b id="biz-num"> 사업자등록번호 / 주민번호 / 계좌번호 / 카드번호</b>
 			<input type="text" name="bizRegNum" id="biz-reg-num-surr" value="${v.bizRegNum}"></td>
 		</tr>
 
 
 		<tr>
-			<td><b id="boss-name">2.대표자성명</b>
+			<td><b id="boss-name"> 대표자성명</b>
 			<input type="text" name="bossName" id="boss-name-surr" value="${v.bossName}"></td>
 		</tr>
 		
 		<tr>
 			<td>
-				<b id="sell">3.업종</b> <b id="sell-way">업태</b> <input type="text" name="sellWay" id="sell-way-surr" value="${v.sellWay}">
+				<b id="sell"> 업종</b> <b id="sell-way">업태</b> <input type="text" name="sellWay" id="sell-way-surr" value="${v.sellWay}">
 				<b id="sell-target">종목</b> <input type="text" name="sellTarget" id="sell-target-surr" value="${v.sellTarget}">
 					<b id="farmers-status">농어민</b><input type="checkbox" value="1" id="farmers-status-surr" name="farmersStatus">
 			</td>
 		</tr>
 		
 		<tr>
-			<td><b id="address">4.주소</b>
+			<td><b id="address"> 주소</b>
 			<input type="text" name="postcode" id="vender-address1-surr" placeholder="우편번호">
 			<td><input type="button" onclick="sample2_execDaumPostcode()" id="addressbtn" value="검색"></td>
 			<td><input type="text" id="vender-address2-surr" name="venderAddress" placeholder="주소" value="${v.venderAddress}"></td>
@@ -1067,7 +1067,7 @@ font-size:6px;
 		</tr>
 
 		<tr>
-			<td><b id="phone" >5.연 락 처</b> 
+			<td><b id="phone" > 연 락 처</b> 
 			<b id="vender-tel">전화번호</b> <input type="tel" name="venderTel" id="vender-tell-surr" value="${v.venderTel}">
 			<b id="vender-fax">팩스번호</b> <input type="tel" name="venderFax" id="vender-fax-surr" value="${v.venderFax}">
 			</td>
@@ -1075,14 +1075,14 @@ font-size:6px;
 		</tr>
 		
 		<tr>
-			<td><b id="department-incharge">6.담당(부서)사원</b>
+			<td><b id="department-incharge"> 담당(부서)사원</b>
 			`<input type="text" id="department-incharge1-surr" name="departmentIncharge" value="${v.departmentIncharge}">
 <!-- 			`<input type="text" id="department-incharge2-surr"> -->
 			</td>
 		</tr>
 		
  		<tr>
-			<td><b id="account-income-num">7.입금 계좌 번호</b>
+			<td><b id="account-income-num"> 입금 계좌 번호</b>
 				<b id=bank>은행</b><input type="text" id="bank-code-surr" value="${v.bankCode}" name="bankCode">
 			 <c:if test="${v.bankCode==1}"><input type="text" id="bank-code-name-surr" value="한국은행"></c:if> 
 			 <c:if test="${v.bankCode==2}"><input type="text" id="bank-code-name-surr" value="산업은행"></c:if> 
@@ -1102,7 +1102,7 @@ font-size:6px;
 		</tr>
 		
 		<tr>
-		<td><b id="com-manage-tel"> 8.업체담당자연락처 </b>
+		<td><b id="com-manage-tel">  업체담당자연락처 </b>
 				<input type="text" name="comManagerTel" id="com-manager1-tel-surr" placeholder="숫자만 입력"  value="${v.comManagerTel}" >
 			<td></td>
 		</tr>

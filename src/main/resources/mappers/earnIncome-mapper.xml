@@ -54,7 +54,7 @@
   SELECT RESULT
   FROM INCOME_TAX
   WHERE MIN>=#{taxableIncome} AND MAX<=#{taxableIncome}
-  </select> -->
+  </select>  -->
   
   </mapper>
   

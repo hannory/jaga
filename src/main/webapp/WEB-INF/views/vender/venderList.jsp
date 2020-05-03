@@ -116,6 +116,7 @@
             <table border="0" class="table table-hover vender-list-main-table-2nd" id="listArea2">
               <thead>
                 <tr class="my-page-table-top">
+                	<th>구분</th>
                   <th colspan="2" style="width:300px; text-align:center;">거래처명</th>
                   <th>대표자명</th>
                   <th>연락처</th>
@@ -128,6 +129,11 @@
 				<c:if test="${!empty sessionScope.loginCompany}">
               	<c:forEach var="v" items="${list}">
                 <tr>
+                <td id="venderType" style="text-align:center"><c:if test="${v.venderType==1}">일반거래처</c:if>
+                					<c:if test="${v.venderType==null}">일반거래처</c:if>
+                					<c:if test="${v.venderType==2}">은행</c:if>
+                					<c:if test="${v.venderType==3 }">카드</c:if>
+                </td>
                  <td colspan="2" id="vender-Name"><c:out value="${v.venderName}"/></td>
                  <td id="boss-name"><c:out value="${v.bossName}"/></td>
                	 <td id="vender-tel"><c:out value="${v.venderTel}"/></td>

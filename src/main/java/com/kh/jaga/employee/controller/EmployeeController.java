@@ -1,12 +1,14 @@
 package com.kh.jaga.employee.controller;
 
 import java.io.File;
+import java.sql.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,9 +28,9 @@ public class EmployeeController {
 @Autowired
 private EmployeeService es;
 
-	
+@DateTimeFormat	
 @RequestMapping("insert.emp")
-public String insertEmployee(Model model, Employee e, HttpServletRequest request, @RequestParam MultipartFile idDocument, MultipartFile accountDocument) {
+public String insertEmployee(Model model, Employee e, HttpServletRequest request, @RequestParam MultipartFile idDocument, MultipartFile accountDocument,@DateTimeFormat(pattern="yyyy-MM-dd") Date leaveDate) {
 	
 	String root = request.getSession().getServletContext().getRealPath("resources");
 	String root2 = request.getSession().getServletContext().getRealPath("resources");
