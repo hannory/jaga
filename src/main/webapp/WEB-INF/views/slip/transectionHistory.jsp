@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>자가경리</title>
 <style>
 	input {
 		border:none;
@@ -34,7 +35,34 @@
 		border-bottom: 1px solid lightgray;
 	}
 	
+	#resultReTable th {
+		background: #296355;
+		color: white;
+	}
+	#resultReTable {
+		text-align: center;
+		width : 80%;
+		margin: 0 auto;
+	}
+	#resultReTable tbody td:nth-child(4) {
+		text-align: right;
+		padding-right: 5px;
+	}
+	#resultReTable tbody td:nth-child(5) {
+		text-align: right;
+		padding-right: 5px;
+	}
+	
 
+	#detailBtn{
+		border-top-left-radius: 5px;
+		border-top-right-radius: 5px;
+		border-bottom-left-radius: 5px;
+		border-bottom-right-radius: 5px;
+		background: #D9E3E3;
+		border: 1px solid #D9E3E3;
+		color: #5A5A5A;
+	}
 </style>
 </head>
 <body>
@@ -65,9 +93,9 @@
 					<th>매입</th>
 				</tr>
 				<tr>
-					<td><c:out value="${ minus }"></c:out></td>
-					<td><c:out value="${ sale }"></c:out></td>
-					<td><c:out value="${ buy }"></c:out></td>
+					<td><fmt:formatNumber value="${ minus }" type="currency" currencySymbol=""/></td>
+					<td><fmt:formatNumber value="${ sale }" type="currency" currencySymbol=""/></td>
+					<td><fmt:formatNumber value="${ buy }" type="currency" currencySymbol=""/></td>
 				</tr>
 			</table>
 			</div>
@@ -100,20 +128,19 @@
 						<td><c:out value="${ t.slipDate }"/></td>
 						<td><c:out value="${ t.evidence }"/></td>
 						<td><c:out value="${ t.journalizeList[0].venderName }"/></td>
-						<td><c:out value="${ t.supplyValue }"/></td>
-						<td><c:out value="${ t.valueTax }"/></td>
-						<td><c:out value="${ t.supplyDeaga }"/></td>
-						<td><button onclick="detail(${t.slipCode});">상세</button></td>
+						<td><fmt:formatNumber value="${ t.supplyValue }" type="currency" currencySymbol=""/></td>
+						<td><fmt:formatNumber value="${ t.valueTax }" type="currency" currencySymbol=""/></td>
+						<td><fmt:formatNumber value="${ t.supplyDeaga }" type="currency" currencySymbol=""/></td>
+						<td><button onclick="detail(${t.slipCode});" id="detailBtn">상세</button></td>
 					</tr>
 				</c:forEach>
 				</tbody>
 			</table>
 			</div>
 		</div>
-		<div style="height: 100vh;"></div>
+		<div style="height: 10vh;"></div>
 		<div class="card mb-4">
-			<div class="card-body">When scrolling, the navigation stays at
-				the top of the page. This is the end of the static navigation demo.</div>
+			<div class="card-body">매입매출전표에 입력한 전표를 조회할 수 있습니다.</div>
 		</div>
 	</div>
 	
@@ -122,8 +149,8 @@
   <div class="modal fade" id="accountModal" role="dialog">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title">거래처검색</h4>
+        <div class="modal-header" style="background:#296355; color:white">
+          <h4 class="modal-title">전표 상세보기</h4>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         <div class="modal-body">
@@ -176,6 +203,23 @@
 			dateFormat : 'yy-mm-dd'
 
 		});
+	
+		/* 콤마 찍기 */
+		function comma(str) {
+			str = String(str);
+			return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, "$1,");
+		}
+		
+		/* 콤마 등 숫자 이외의 입력값 제거 */
+		function uncomma(str) {
+			str = String(str);
+			return str.replace(/[^\d]+/g, "");
+		}
+		
+		/* 값 입력시 콤마 찍기 */
+		function inputNumberFormat(str) {
+			str.value = comma(uncomma(str.value));
+		}
 		$(function() {
 			$("#datepicker").datepicker({});
 			$("#datepicker1").datepicker({onSelect:function(data){
@@ -204,9 +248,9 @@
 								var $td3 = $("<td>").text(list[i].slipDate);
 								var $td9 = $("<td>").text(list[i].evidence);
 								var $td4 = $("<td>").text(list[i].journalizeList[0].venderName);
-								var $td5 = $("<td>").text(list[i].supplyValue);
-								var $td6 = $("<td>").text(list[i].valueTax);
-								var $td7 = $("<td>").text(list[i].supplyDeaga);
+								var $td5 = $("<td>").text(comma(list[i].supplyValue));
+								var $td6 = $("<td>").text(comma(list[i].valueTax));
+								var $td7 = $("<td>").text(comma(list[i].supplyDeaga));
 								var $td8 = $("<td>").html("<button onclick='detail("+list[i].slipCode+");'>상세</button>");
 								
 								$tr.append($td1);
@@ -232,9 +276,9 @@
 							});
 							
 							
-							$("#sumTranTable td:first-of-type").text(data.minus);
-							$("#sumTranTable td:nth-of-type(2)").text(data.sale);
-							$("#sumTranTable td:nth-of-type(3)").text(data.buy);
+							$("#sumTranTable td:first-of-type").text(comma(data.minus));
+							$("#sumTranTable td:nth-of-type(2)").text(comma(data.sale));
+							$("#sumTranTable td:nth-of-type(3)").text(comma(data.buy));
 							
 							
 							
@@ -278,10 +322,10 @@
 						
 						if(list[i].debitCredit=='차변'){
 							
-							$priceCha = $("<td>").text(list[i].price);
+							$priceCha = $("<td>").text(comma(list[i].price));
 						}else if(list[i].debitCredit=='대변'){
 							
-						    $priceDea = $("<td>").text(list[i].price);
+						    $priceDea = $("<td>").text(comma(list[i].price));
 						}
 						
 						$tr.append($codeTd);

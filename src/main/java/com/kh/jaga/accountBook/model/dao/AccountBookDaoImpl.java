@@ -26,4 +26,11 @@ public class AccountBookDaoImpl implements AccountBookDao{
 		return list;
 	}
 
+	@Override
+	public List<GenderLedgerDTO> selectOneAccountDay(SqlSessionTemplate sqlSession, HashMap<String, String> hm) {
+		List<GenderLedgerDTO> list = sqlSession.selectList("AccountBook.selectDetailAccount", hm);
+		
+		return list;
+	}
+
 }

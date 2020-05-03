@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>자가경리</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     
@@ -80,53 +80,6 @@
 		padding-top: 8px;
 		padding-bottom: 8px;
 	}
-	
-	/* The Modal (background) */
-        .modal {
-            display: none; /* Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 1; /* Sit on top */
-            left: 0;
-            top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgb(0,0,0); /* Fallback color */
-            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-        }
-    
-        /* Modal Content/Box */
-        .modal-content {
-            background-color: #fefefe;
-            margin: 0 auto; /* 15% from the top and centered */
-            padding: 20px;
-            border: 1px solid #888;
-            width: 50%; /* Could be more or less, depending on screen size */                          
-        }
-        /* The Close Button */
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-        }
-        .close:hover,
-        .close:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
-        }
-        .modalTop{
-        	margin: 0;
-        	width:100%;
-        	height:50px;
-        	background:#6E00AB;
-        }
-        
-        .modal-header {
-        	background: #296355;
-        } 
-	
 	#resultReTable input {
 		text-align: center;
 	}
@@ -148,6 +101,9 @@
 		border: 1px solid #888888;
 		color: white;
 	}
+	
+	
+	
 </style>
 </head>
 <body>
@@ -317,10 +273,9 @@
 			</div>
 		</div>
 		</form>
-		<div style="height: 100vh;"></div>
+		<div style="height: 10vh;"></div>
 		<div class="card mb-4">
-			<div class="card-body">When scrolling, the navigation stays at
-				the top of the page. This is the end of the static navigation demo.</div>
+			<div class="card-body" id="infoFoot">적격증빙(세금계산서,카드,현금영수증)을 받은 거래를 입력해주세요.</div>
 		</div>
 	</div>
 	</main>
@@ -331,7 +286,7 @@
   <div class="modal fade" id="accountModal" role="dialog">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
-        <div class="modal-header">
+        <div class="modal-header"  style="background:#296355; color:white">
           <h4 class="modal-title">거래처검색</h4>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
@@ -789,12 +744,13 @@
 				
 				if($("#deemedStatus").val() == 'N'){
 					Swal.fire({
-						  title: '의제매입세액공제',
-						  text: "의제세율은 8/108입니다. 의제매입세액 공제를 받으시겠습니까?",
+						  title: '의제세액 8/108',
+						  text: "의제매입세액 공제를 받으시겠습니까?",
 						  icon: 'warning',
 						  showCancelButton: true,
 						  confirmButtonColor: '#296355',
 						  cancelButtonColor: '#d33',
+						  cancelButtonText: '취소',
 						  confirmButtonText: '확인'
 						}).then((result) => {
 						  if (result.value) {
@@ -837,6 +793,7 @@
 				
 				$("#venderTable").dataTable({
 					destroy: true,
+					autoWidth: false,
 					 ajax:{
 							'url':'venderSearch.rp',
 							'type':'get'
@@ -868,6 +825,7 @@
 				
 				$("#venderTable").dataTable({
 					destroy: true,
+					autoWidth: false,
 					 ajax:{
 							'url':'venderSearch.rp',
 							'type':'get'
@@ -890,7 +848,7 @@
 					 ]
 				});
 				 $("div#accountModal").modal();
-				 
+				 $(".modal-title").text("거래처검색");
 				 
 			});
 			
@@ -901,6 +859,7 @@
 				/* var $tbody = $("#venderTable tbody"); */
 				$("#venderTable").dataTable({
 					destroy: true,
+					autoWidth: false,
 					 ajax:{
 							'url':'accountSearch.rp',
 							'type':'get'
@@ -923,6 +882,7 @@
 					 ]
 				});
 				 $("div#accountModal").modal();
+				 $(".modal-title").text("계정과목검색");
 			});
 			
 			
@@ -932,6 +892,7 @@
 				/* var $tbody = $("#venderTable tbody"); */
 				$("#venderTable").dataTable({
 					destroy: true,
+					autoWidth: false,
 					 ajax:{
 							'url':'accountSearch.rp',
 							'type':'get'
@@ -940,6 +901,7 @@
 					 
 					 
 					 columns: [
+						 
 						 {data : "accountCode",
 							 "render": function(data, type, row){
 					                if(type=='display'){
@@ -956,6 +918,7 @@
 					 ]
 				});
 				 $("div#accountModal").modal();
+				 $(".modal-title").text("계정과목검색");
 			});
 			
 			function print(){

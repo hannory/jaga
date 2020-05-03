@@ -13,9 +13,9 @@ import com.kh.jaga.slip.model.vo.Receiption2;
 @Controller
 public interface TransectionHistoryService {
 
-	List<Receiption> selectTListAll();
+	List<Receiption> selectTListAll(String comCode);
 
-	List<Receiption2> selectDateList(HashMap<String, Date> hm);
+	List<Receiption2> selectDateList(HashMap<String, Object> hm);
 
 	List<Journalize> selectDetailJournal(String slipCode);
 

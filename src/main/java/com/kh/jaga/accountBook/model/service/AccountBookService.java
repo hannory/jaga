@@ -12,4 +12,6 @@ public interface AccountBookService {
 
 	List<GenderLedgerDTO> selectOneAccount(HashMap<String, String> hm);
 
+	List<GenderLedgerDTO> selectOneAccountDay(HashMap<String, String> hm);
+
 }

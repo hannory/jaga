@@ -9,7 +9,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     
-<title>Insert title here</title>
+<title>자가경리</title>
 <style>
 	#searchBtn{
 		background: none;
@@ -115,51 +115,39 @@
 		display: none;
 	}
 	
-	/* The Modal (background) */
-        .modal {
-            display: none; /* Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 1; /* Sit on top */
-            left: 0;
-            top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgb(0,0,0); /* Fallback color */
-            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-        }
-    
-        /* Modal Content/Box */
-        .modal-content {
-            background-color: #fefefe;
-            margin: 0 auto; /* 15% from the top and centered */
-            padding: 20px;
-            border: 1px solid #888;
-            width: 50%; /* Could be more or less, depending on screen size */                          
-        }
-        /* The Close Button */
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-        }
-        .close:hover,
-        .close:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
-        }
-        .modalTop{
-        	margin: 0;
-        	width:100%;
-        	height:50px;
-        	background:#6E00AB;
-        }
-        
-        .modal-header {
-        	background: #296355;
-        } 
+	.idTTr {
+		display: none;
+	}
+	
+	.accTTr {
+		display: none;
+	}
+	#contentC button {
+		border-top-left-radius: 5px;
+		border-top-right-radius: 5px;
+		border-bottom-left-radius: 5px;
+		border-bottom-right-radius: 5px;
+		background: #D9E3E3;
+		border: 1px solid #D9E3E3;
+		color: #5A5A5A;
+		font-weight: bold;
+	}
+	
+	#reTable th{
+		background:#296355; 
+		color:white;
+		border: 1px solid #296355;
+		text-align: center;
+	}
+	
+	#reTable {
+		margin: 0 auto;
+		
+	}
+	#reTable td{
+		border: 1px solid gray;
+		padding-left: 5px;
+	}
 </style>
 </head>
 <body>
@@ -255,7 +243,6 @@
 							<th>급여이체은행</th>
 							<td>
 								<select name="backCode" id="backCode">
-									<option value="001">한국은행</option>
 									<option value="002">산업은행</option>
 									<option value="003">기업은행</option>
 									<option value="004">국민은행</option>
@@ -329,28 +316,39 @@
 								</select>
 							</td>
 							<th>급여</th>
-							<td><input type="number" name="salary" placeholder="소득세포함 월급" id="salary"></td>
+							<td><input type="text" name="salary" placeholder="소득세포함 월급" id="salary" onkeyup="inputNumberFormat(this);" style="text-align: right;"></td>
 						</tr>
 					</table>
 					<div id="fileArea">
 						<table id="contentC">
-							<tr>
+							<tr class="idPTr">
 								<th>신분증명서류</th>
 								<td>
 									<input type="file" name="idPhoto" id="idPhoto">
+								</td>
+							</tr>
+							<tr class="idTTr">
+								<th>신분증명서류</th>
+								<td>
+									<input type="text" name="yeah" id="idText">
 									<button type="button" id="idPhotoDown">다운</button>
 									<button type="button" id="idPhotoDel">삭제</button>
 								</td>
 							</tr>
-							<tr>
+							<tr class="accPTr">
 								<th>급여계좌사본</th>
 								<td>
 									<input type="file" name="accountPhoto" id="accountPhoto">
+								</td>
+							</tr>
+							<tr class="accTTr">
+								<th>급여계좌사본</th>
+								<td>
+									<input type="text" name="yeah" id="accountText">
 									<button type="button" id="accPhotoDown">다운</button>
 									<button type="button" id="accPhotoDel">삭제</button>
 								</td>
 							</tr>
-							
 						</table>
 					</div>
 					</form>
@@ -370,12 +368,12 @@
   <div class="modal fade" id="accountModal" role="dialog">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
-        <div class="modal-header">
+        <div class="modal-header" style="background:#296355; color:white;">
           <h4 class="modal-title">소득구분</h4>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         <div class="modal-body">
-          	<table id="reTable">
+          	<table id="reTable" style="width:80%;">
           		<thead>
 	          		<tr>
 	          			<th>소득코드</th>
@@ -406,6 +404,25 @@
 	
 		});
 		
+
+		/* 콤마 찍기 */
+	function comma(str) {
+		str = String(str);
+		return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, "$1,");
+	}
+	
+	/* 콤마 등 숫자 이외의 입력값 제거 */
+	function uncomma(str) {
+		str = String(str);
+		return str.replace(/[^\d]+/g, "");
+	}
+	
+	/* 값 입력시 콤마 찍기 */
+	function inputNumberFormat(str) {
+		str.value = comma(uncomma(str.value));
+	}
+	
+		
 		$(function(){
 			$("#datepicker").datepicker({});
 			/* 달력버튼 */
@@ -416,6 +433,10 @@
 			if($("#empNamee").text() != '신규추가'){
 				$("form").attr("action", "addBusinessEmp.be");
 			}
+			
+			$("form").submit(function(){
+				$("#salary").val(uncomma($("#salary").val()));
+			});
 		});
 		
 		function detail(data){
@@ -438,22 +459,32 @@
 					var department = emp.department;
 					var positionCode = emp.positionCode;
 					var accountHolder = emp.accountHolder;
-					var salary = emp.salary;
+					var salary = comma(emp.salary);
 					var typeOfBixCode = emp.typeOfBixCode;
 					var sellTargetName = emp.sellTargetName;
 					var incomeClass = emp.incomeClass;
 					
 					var date1 = new Date(enrollDate); 
+					
+					$(".idPTr").css("display", "table-row");
+					$(".idTTr").css("display", "none");
+					$(".accPTr").css("display", "table-row");
+					$(".accTTr").css("display", "none");
+					
 					for(var i = 0; i < emp.attList.length; i++){
 						if(emp.attList[i].type == 3){
 							console.log("신분증명서류");
-							$("#idPhoto").attr("type", "text").val(emp.attList[i].newFileName).attr("readonly", "true").attr("name","yeah");
+							/* 신분증명서류 */
+							$(".idPTr").css("display", "none");
+							$(".idTTr").css("display", "table-row");
+							$("#idText").val(emp.attList[i].newFileName).attr("readonly", "true");
 							$("#idPhotoDel").attr("onclick","deletePhoto("+emp.attList[i].fileCode+");");
 							$("#idPhotoDown").attr("onclick","downPhoto("+emp.attList[i].fileCode+");");
 						}else if(emp.attList[i].type == 4) {
-							console.log("뭐시기");
 							var zzz = emp.attList[i].filePath;
-							$("#accountPhoto").attr("type", "text").val(emp.attList[i].newFileName).attr("readonly", "true").attr("name","yeah");
+							$(".accPTr").css("display", "none");
+							$(".accTTr").css("display", "table-row")
+							$("#accountText").val(emp.attList[i].newFileName).attr("readonly", "true");
 							$("#accPhotoDel").attr("onclick",'deletePhoto('+emp.attList[i].fileCode+');');
 							$("#accPhotoDown").attr("onclick",'downPhoto('+emp.attList[i].fileCode+');');
 							
@@ -515,7 +546,6 @@
 		
 		
 		function deletePhoto(code){
-			console.log(code);
 			
 			location.href="deletePhoto.be?fileCode="+code;
 			
@@ -530,7 +560,6 @@
 		
 		
 		function downPhoto(code){
-			console.log(code);
 			
 			location.href="downloadPhoto.be?fileCode="+code;
 			

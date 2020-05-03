@@ -29,4 +29,9 @@ public class AccountBookServiceImpl implements AccountBookService{
 		return abd.selectOneAccount(sqlSession, hm);
 	}
 
+	@Override
+	public List<GenderLedgerDTO> selectOneAccountDay(HashMap<String, String> hm) {
+		return abd.selectOneAccountDay(sqlSession, hm);
+	}
+
 }

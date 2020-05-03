@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>자가경리</title>
 <style>
 	#searchTable {
 		width: 100%;
@@ -58,8 +58,13 @@
 	.one tfoot td:first-child {
 		text-align: center;
 	}
+	
 	.listBody2 {
 		display:none;
+	} 
+	
+	#tbody1 {
+		background: #D9E3E3;
 		
 	}
 </style>
@@ -74,17 +79,12 @@
 					<tr>
 						<th>조회구분</th>
 						<td>
-							<input type="radio" name="division" value="all" id="all" checked><label for="all">월별</label>
-							<input type="radio" name="division" value="sale" id="sale"><label for="sale">일별</label>
+							<input type="radio" name="division" value="wal" id="wal" checked><label for="wal">월별</label>
+							<input type="radio" name="division" value="il" id="il"><label for="il">일별</label>
 						</td>
 						<th>조회기간</th>
 						<td>
-							<input type="text">
-								<button id="searchBtn">
-									<img alt="" src="${contextPath}/resources/images/search.PNG" width="20px" height="20px">
-								</button>
-							
-							<input type="text">
+							<input type="text" id="datepicker">~<input type="text" id="datepicker1">
 						</td>
 					</tr>
 				</table>
@@ -111,11 +111,11 @@
 				</c:forEach>
 				</tbody>
 				<tbody class="listBody2">
-				<c:forEach var="a" items="${ list }">
-					<tr onclick="searchOne(${a.accountCode}, this);">
+				<c:forEach var="b" items="${ list }">
+					<tr onclick="searchOneDay(${b.accountCode}, this);">
 						<td><input type="checkbox" id="checkk"></td>
-						<td><c:out value="${ a.accountCode }"></c:out></td>
-						<td><c:out value="${ a.accountTitle }"></c:out></td>
+						<td><c:out value="${ b.accountCode }"></c:out></td>
+						<td><c:out value="${ b.accountTitle }"></c:out></td>
 					</tr>
 				</c:forEach>
 				</tbody>
@@ -161,7 +161,7 @@
 				</div>
 			</div>
 		</div>
-		<div style="height: 100vh;"></div>
+		<div style="height: 10vh;"></div>
 		<div class="card mb-4">
 			<div class="card-body">When scrolling, the navigation stays at
 				the top of the page. This is the end of the static navigation demo.</div>
@@ -175,6 +175,15 @@
     </div>
 	
 	<script>
+	
+		/* 날짜 input jquery ui */
+		$.datepicker.setDefaults({
+			showOn : "both",
+			buttonImageOnly : true,
+			buttonImage : "${contextPath}/resources/images/calendar.png",
+			dateFormat : 'yy-mm-dd'
+	
+		});
 		function searchOne(code, t){
 			var acCode = code;
 			$(t).css("background", "#D9E3E3");
@@ -185,6 +194,8 @@
 				success:function(data){
 					var list = data.list;
 					var last = data.lastSum;
+					
+					$("#tbody1").css("background", "#D9E3E3");
 					
 					$("#tbody1 td:last-child").text(comma(last));
 					
@@ -208,6 +219,84 @@
 						$tr.append($td3);
 						$tr.append($td4);
 						$tbody2.append($tr);
+					}
+				}
+			});
+		}
+		
+		
+		function searchOneDay(code, t){
+			var acCode = code;
+			$(t).css("background", "#D9E3E3");
+			$("#accountTable tr").not(t).css("background", "white");
+			$.ajax({
+				url:"selectOneAccountDay.ab",
+				data:{accountCode:acCode},
+				success:function(data){
+					var list = data.list;
+					var last = data.lastSum;
+					
+					$("#tbody1 td:last-child").text(comma(last));
+					$("#tbody1").css("background", "#D9E3E3");
+					
+					$(".one tfoot td:nth-child(2)").text(comma(data.chaSum));
+					$(".one tfoot td:nth-child(3)").text(comma(data.deaSum));
+					
+					$("#tbody2 tr").remove();
+					
+					var $tbody2 = $("#tbody2");
+					
+					for(var i = 0; i < list.length; i++){
+						var $tr = $("<tr>").attr("onclick", "searchDetail(\""+acCode+"\",\""+list[i].yearMonthAll+"\");");
+						
+						var $td1 = $("<td>").text(list[i].yearMonthAll);
+						var $td2 = $("<td>").text(comma(list[i].priceSumCha));
+						var $td3 = $("<td>").text(comma(list[i].priceSumDea));
+						var $td4 = $("<td>").text(comma(list[i].sumAll));
+						
+						var num = i+1;
+						
+						
+						
+						
+						$tr.append($td1);
+						$tr.append($td2);
+						$tr.append($td3);
+						$tr.append($td4);
+						$tbody2.append($tr);
+						
+						if(typeof list[num] != "undefined"){
+							if(list[i].yearMonthAll.substr(5,2) != list[num].yearMonthAll.substr(5,2)){
+								var $tr1 = $("<tr>");
+								
+								var $td5 = $("<td>").text("[월계]").css("background", "#D9E3E3");
+								var $td6 = $("<td>").text(comma(list[i].sumMonthCha)).css("background", "#D9E3E3");
+								var $td7 = $("<td>").text(comma(list[i].sumMonthDea)).css("background", "#D9E3E3");
+								var $td8 = $("<td>").css("background", "#D9E3E3");
+								
+								$tr1.append($td5);
+								$tr1.append($td6);
+								$tr1.append($td7);
+								$tr1.append($td8);
+								$tbody2.append($tr1);
+							}
+						}
+						
+						if(i == list.length-1){
+							var $tr1 = $("<tr>");
+							
+							var $td5 = $("<td>").text("[월계]").css("background", "#D9E3E3");
+							var $td6 = $("<td>").text(comma(list[i].sumMonthCha)).css("background", "#D9E3E3");
+							var $td7 = $("<td>").text(comma(list[i].sumMonthDea)).css("background", "#D9E3E3");
+							var $td8 = $("<td>").css("background", "#D9E3E3");
+							
+							$tr1.append($td5);
+							$tr1.append($td6);
+							$tr1.append($td7);
+							$tr1.append($td8);
+							$tbody2.append($tr1);
+						}
+						
 					}
 				}
 			});
@@ -245,6 +334,25 @@
 		function inputNumberFormat(str) {
 			str.value = comma(uncomma(str.value));
 		}
+		
+		$(function(){
+			$("input").filter("[name=division]").click(function(){
+				console.log($(this).val());
+				if($(this).val() == 'wal'){
+					$(".listBody1").css("display", "table-row-group");
+					$(".listBody2").css("display", "none");
+				}else if($(this).val() == "il"){
+					$(".listBody2").css("display", "table-row-group");
+					$(".listBody1").css("display", "none");
+				}
+			});
+			
+			$("#datepicker").datepicker({});
+			$("#datepicker1").datepicker({});
+			/* 달력버튼 */
+			$("img.ui-datepicker-trigger")
+					.attr("style","margin-left:2px; vertical-align:middle; cursor: Pointer; width:20px; height:20px");
+		});
 	</script>
 	
 	

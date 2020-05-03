@@ -130,9 +130,8 @@
 		JOIN TYPE_OF_BIZ_CODE T ON(T.TOBC_PK_CODE = B.INCOME_CLASS)
 		LEFT JOIN (SELECT *
                     FROM ATTACHMENT
-                    WHERE FK_CODE = 4
-                        AND TYPE = 3
-                        OR TYPE = 4) A ON(A.FK_CODE = B.EMPLOYEE_CODE)
+                    WHERE FK_CODE = #{empCode}
+                        AND TYPE IN (3,4)) A ON(A.FK_CODE = B.EMPLOYEE_CODE)
   		WHERE EMPLOYEE_CODE = #{empCode}
   	</select>
   	

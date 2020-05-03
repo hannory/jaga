@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.jaga.company.model.vo.Company;
 import com.kh.jaga.slip.model.service.TransectionHistoryService;
 import com.kh.jaga.slip.model.vo.Journalize;
 import com.kh.jaga.slip.model.vo.Receiption;
@@ -27,8 +28,10 @@ public class transectionHistoryController {
 	
 	@RequestMapping("transListAll.th")
 	public String transHistoryListAll(Model model, HttpServletRequest request) {
+		Company com = (Company)request.getSession().getAttribute("loginCompany");
+		String comCode = com.getCompanyCode();
 		
-		List<Receiption> list = ths.selectTListAll();
+		List<Receiption> list = ths.selectTListAll(comCode);
 		
 		BigDecimal saleValue = new BigDecimal("0");
 		BigDecimal buyValue = new BigDecimal("0");
@@ -62,17 +65,18 @@ public class transectionHistoryController {
 	
 	
 	@RequestMapping("selectDateList.th")
-	public ModelAndView selectDateList(ModelAndView mv, String date1, String date2) {
-		System.out.println("date1 : " + date1);
-		System.out.println("date2 : " + date2);
-		
+	public ModelAndView selectDateList(ModelAndView mv, String date1, String date2, HttpServletRequest request) {
 		Date date11 = Date.valueOf(date1);
 		Date date22 = Date.valueOf(date2);
 		
-		HashMap<String, Date> hm = new HashMap<String, Date>();
+		Company com = (Company)request.getSession().getAttribute("loginCompany");
+		String comCode = com.getCompanyCode();
+		
+		HashMap<String, Object> hm = new HashMap<String, Object>();
 		
 		hm.put("date1", date11);
 		hm.put("date2", date22);
+		hm.put("comCode", comCode);
 		
 		
 		List<Receiption2> list = ths.selectDateList(hm);
