@@ -7,10 +7,12 @@ public class CreateCompanyInnerIdDto {
 	private String name;
 	private String position;
 	private String sign;
+	private String companyCode;
 	
 	public CreateCompanyInnerIdDto() {}
 
-	public CreateCompanyInnerIdDto(String id, String pwd, String email, String name, String position, String sign) {
+	public CreateCompanyInnerIdDto(String id, String pwd, String email, String name, String position, String sign,
+			String companyCode) {
 		super();
 		this.id = id;
 		this.pwd = pwd;
@@ -18,6 +20,7 @@ public class CreateCompanyInnerIdDto {
 		this.name = name;
 		this.position = position;
 		this.sign = sign;
+		this.companyCode = companyCode;
 	}
 
 	public String getId() {
@@ -68,11 +71,23 @@ public class CreateCompanyInnerIdDto {
 		this.sign = sign;
 	}
 
+	public String getCompanyCode() {
+		return companyCode;
+	}
+
+	public void setCompanyCode(String companyCode) {
+		this.companyCode = companyCode;
+	}
+
 	@Override
 	public String toString() {
 		return "CreateCompanyInnerIdDto [id=" + id + ", pwd=" + pwd + ", email=" + email + ", name=" + name
-				+ ", position=" + position + ", sign=" + sign + "]";
+				+ ", position=" + position + ", sign=" + sign + ", companyCode=" + companyCode + "]";
 	}
+	
+	
+
+
 	
 	
 	

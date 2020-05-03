@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.jaga.common.CommonsUtils;
 import com.kh.jaga.common.Pagination;
+import com.kh.jaga.company.model.vo.Company;
 import com.kh.jaga.companyInnerId.model.dto.CreateCompanyInnerIdDto;
 import com.kh.jaga.companyInnerId.model.exception.ComInIdException;
 import com.kh.jaga.companyInnerId.model.service.CompanyInnerIdService;
@@ -65,13 +66,15 @@ public class CompanyInnerIdController {
 			
 			data.setPwd(pwdEncoder.encode(data.getPwd()));
 			
-			System.out.println("완성된 data : " + data);
-			
 			int result = service.insertComInnerId(data);
 			
-			System.out.println("ctrl > result (예외가 있다면 여긴 출력 X여야함)::: " + result);
+			System.out.println("ctrl > DB 인설트 후 result (정상)::: " + result);
 			
-			return "redirect:index.jsp";
+			if(result > 0) {
+				request.getSession().setAttribute("alertCode", "createComInIdOk");
+			}
+			
+			return "common/alertPage";
 
 		} catch (IllegalStateException e) {
 			System.out.println("컨트롤러 캐치 1111111111");
@@ -96,15 +99,20 @@ public class CompanyInnerIdController {
 	public String selectComInIdList(HttpServletRequest request) {
 
 		//페이징 처리하기
+		Company tempObj = (Company) request.getSession().getAttribute("loginCompany");
+		String companyCode = tempObj.getCompanyCode();
+		
 		int currentPage = 1;
 		if(request.getParameter("currentPage") != null) {
 			currentPage = Integer.parseInt(((String) request.getParameter("currentPage")));
 		}
 		//리스트 카운트 값 확인하고
-		int listCount = service.selectComIdListCount();
+		int listCount = service.selectComIdListCount(companyCode);
 
 		//페이지 정보 객체 생성
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+		
+		pi.setCompanyCode(companyCode);
 		System.out.println("pi 정보 ::: " + pi);
 		request.setAttribute("pi", pi);
 
@@ -126,7 +134,7 @@ public class CompanyInnerIdController {
 		
 		
 		
-		return "selectCompanyId";
+		return "companyInnerId/selectCompanyId";
 	}
 	
 	

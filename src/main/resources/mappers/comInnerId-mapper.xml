@@ -18,7 +18,7 @@
   	)
   	VALUES(
   		SEQ_SWY_SEQUENCE.NEXTVAL
-  	,	'10'
+  	,	#{companyCode}
   	,	#{position}	
   	,	#{id}
   	,	#{pwd}
@@ -34,6 +34,7 @@
   <select id="selectComInIdList" resultMap="SelectCompanyIdVo">
   	SELECT COM_INNER_ID_NUM, COM_CODE, POSITION_CODE, ID, PWD, EMAIL, NAME, FILE_NAME
   	FROM COM_INNER_ID
+  	WHERE COM_CODE = #{ companyCode }
   </select>
   
   
@@ -45,9 +46,10 @@
   </insert>
   
   
-  <select id="selectListCount" resultType="int">
+  <select id="selectListCount" parameterType="String" resultType="int">
   	SELECT COUNT(COM_INNER_ID_NUM)
   	FROM COM_INNER_ID
+  	WHERE COM_CODE = #{ companyCode }
   </select>
   
   

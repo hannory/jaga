@@ -12,6 +12,7 @@ public class Pagination {
 		int maxPage;
 		int startPage;
 		int endPage;
+		String companyCode;
 		
 		maxPage=(int)((double) listCount/limit+0.99);
 		
@@ -22,7 +23,9 @@ public class Pagination {
 			endPage=maxPage;
 		}
 		
-		pi = new PageInfo(currentPage,listCount,limit,maxPage,startPage,endPage);
+		companyCode = null;
+		pi = new PageInfo(currentPage,listCount,limit,maxPage,startPage,endPage, companyCode);
+		
 		
 		return pi;
 	}

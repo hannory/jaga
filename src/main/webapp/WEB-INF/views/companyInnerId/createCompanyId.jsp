@@ -101,6 +101,9 @@
 		<form action="createComInnerId.comInId" method="post" enctype="multipart/form-data">
 		<div class="div-box-area">
 		<div class="div-input-area">
+		
+		<input type="hidden" name="companyCode" value="${ loginCompany.companyCode }">
+		
 		<table cellpadding="20px">
 		
 			<tr>
