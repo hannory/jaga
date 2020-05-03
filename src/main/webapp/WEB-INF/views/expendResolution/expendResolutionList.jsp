@@ -11,7 +11,7 @@
 
 	.div-menuTap{
 		display: inline-block;
-		background: #8DABA3;
+		background: #24574A;
 		color:white;
 		width:160px;
 		height:30px;
@@ -89,7 +89,7 @@
 		<form action="" method="post">
 		<table border="1" style="width:80%; text-align:center;">
 		
-			<tr style="background:#24574A; height:20px;">
+			<tr style="background:#24574A; color:white; height:20px;">
 				<td style="width:8%">문서번호</td>
 				<td style="width:38%">지출일</td>
 				<td style="width:13%">계정과목</td>

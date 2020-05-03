@@ -13,6 +13,7 @@
 	/* background: gray; */
 	float: right;
 	text-align: center;
+	margin-top:-50px;
 }
 
 .topTr {
@@ -38,7 +39,7 @@
 
 .div-menuTap {
 	display: inline-block;
-	background: #8DABA3;
+	background: #24574A;
 	color: white;
 	width: 160px;
 	height: 30px;
@@ -87,6 +88,7 @@
 
 .color-green {
 	background: #24574A;
+	color:white;
 }
 
 .label-sign:hover {
@@ -152,6 +154,12 @@
 	background: gray;
 	opacity: 30%;
 	color: white;
+}
+
+.cursorPointer:hover{
+	cursor: pointer;
+	background:gray;
+	opacity: 50%;
 }
 
 </style>
@@ -611,8 +619,8 @@
 
 			<table class="confirmTable" border="1">
 				<tr class="topTr" id="confirmTopRow">
-					<td class="" style="width: 30px;" onclick="addBtn()">+</td>
-					<td class="topTd">작성자</td>
+					<td class="cursorPointer" style="width: 30px;" onclick="addBtn()">+</td>
+					<td class="topTd">${ loginEmp.name }</td>
 					<td class="topTd">
 						<input type="hidden" id="apprInfoCode" name="apprInfoCode">
 						<!-- <input type="text" id="apprEmpCode" name="apprEmpCode" class='topTdInput'> -->
@@ -628,7 +636,7 @@
 
 				<tr class="botTr" id="confirmBotRow">
 					<td class="">결재</td>
-					<td class="botTd">본인싸인</td>
+					<td class="botTd" id="defaultEmpSign">본인싸인</td>
 					<td class="botTd" id="apprSignImg01">싸인</td>
 				</tr>
 
@@ -645,7 +653,12 @@
 				
 				var topTdStr = "<td class='topTd'>"
 							 + "<input style='width:100px;' type='hidden' id='apprInfoCodeㅋㅋㅋ" + apprCount + "' name='apprInfoCodeㅋㅋㅋ" + apprCount + "'>"
-							 + "<input type='text' id='apprEmpCodeㅋㅋㅋ" + apprCount + "' class='topTdInput' name='apprEmpCodeㅋㅋㅋ" + apprCount + "'></td>";
+							 /* + "<input type='text' id='apprEmpCodeㅋㅋㅋ" + apprCount + "' class='topTdInput' name='apprEmpCodeㅋㅋㅋ" + apprCount + "'></td>" ;*/
+							 + "<select>" 
+							 + "<option>김사장</option>"
+							 + "<option>222</option>"
+							 + "<option>333</option>"
+							 + "</select>"
 				var botTdStr = "<td class='botTd' id='apprSignImg01'>싸인</td>";
 				
 				$(".topTd:last-child").after(topTdStr);
@@ -766,7 +779,7 @@
 				</table>
 				<!-- //테이블 1번 -->
 
-				<hr>
+				<br><br>
 
 				<!-- 테이블 2번 -->
 				<table class="table02" id="detailListTable" border="1">
@@ -802,7 +815,8 @@
 				</table>
 				<!-- //테이블 2번 -->
 
-				<hr>
+				<br><br>
+
 
 				<!-- 테이블 3번 -->
 				<table class="table03" border="1">
@@ -814,9 +828,9 @@
 						<td style="width: 10%;"><input type="radio"
 							name="paymentTypeCode" value="card" id="radioCard"><label
 							for="radioCard">카드</label></td>
-						<td style="width: 10%; border-top: 1px solid white;"></td>
-						<td style="width: 10%;" class="color-green">합계</td>
-						<td style="width: 20%;"><span id="totalSumDisplay"></span></td>
+						<td style="width: 10%; border-top: 1px solid white; border-right:white;"></td>
+						<!-- <td style="width: 10%;" class="color-green">합계</td>
+						<td style="width: 20%;"><span id="totalSumDisplay"></span></td> -->
 					</tr>
 					<tr>
 						<td class="color-green">관련증빙</td>
@@ -831,7 +845,7 @@
 							for="radiocardReception">카드영수증</label></td>
 						<td><input type="radio" name="evidenceCode" class="evidenceTemp"
 							value="999" id="radioetcReception"><label
-							for="radioetcReception">ㅇㅇㅇㅇㅇ</label></td>
+							for="radioetcReception">기타</label></td>
 						<td><span id="receptionLabel">증빙파일을 선택하세요</span></td>
 					</tr>
 				</table>
@@ -857,7 +871,7 @@
 					<input type="text" maxlength="2" style="width:50px; text-align:right; border:1px solid white; border-bottom:1px solid black">일
 					 -->
 						<br> <label>작성자</label><input type="text"
-							style="text-align: right; border: 1px solid white; border-bottom: 1px solid black;">
+							style="text-align: right; border: 1px solid white; border-bottom: 1px solid black;" readonly value="${ loginEmp.name }">
 						<label class="label-sign" for="signInput">(인)</label> <input
 							id="signInput" type="file" style="display: none"
 							onchange="loadFileName(this)"> <br> <label
@@ -868,8 +882,8 @@
 				<!-- //두개 묶어주기 위한 div -->
 				<div class="buttonArea"
 					style="margin-top: 70px; margin-left: 500px;">
-					<button type="submit">등록</button>
-					<button type="reset">취소</button>
+					<button type="submit" style="background:#24574A; color:white; border-radius:5px; border:1px solid white;">등록</button>
+					<button type="reset" style="background:#24574A; color:white; border-radius:5px; border:1px solid white;">취소</button>
 				</div>
 				<br> <br> <br> <input type="file" id="receptionFile"
 					style="display: none;">
@@ -1029,8 +1043,12 @@
 
 
 
-
-
+		<script>
+		/* 본인싸인 기본으로 넣어놓는 스크립트 */
+		
+		
+		
+		</script>
 
 
 
