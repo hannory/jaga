@@ -89,6 +89,7 @@
         .sumTableSales{
         	width: 100%;
         	padding-left:5%;
+	   		border-bottom:5px solid white;
         }
    		#List_detail td{
    			border:1px solid #D2D2D6;
@@ -145,6 +146,9 @@
 		    left: 50%; 
 		    z-index: 100; 
 		 }
+		 .numberArea{
+   			text-align: right;
+   		}
     </style>
 </head>
 <body>
@@ -229,7 +233,7 @@
 	    	var search_ye= $("#search_ye").val();
 	 		var search_mon1= $("#search_mon1").val();
 	 		var search_mon2= $("#search_mon2").val();
-	 		var comCode=${comCode};
+	 		var comCode='${comCode}';
 	 		console.log(report_type);
 	 		console.log(search_ye);
 	 		console.log(search_mon1);
@@ -339,9 +343,9 @@
 						var $bizRegNumTd = $("<td>").text(sDtoDetailSales[key].bizRegNum);
 						var $venderTd = $("<td>").text(sDtoDetailSales[key].venderCode);
 						var $venderNameTd = $("<td>").text(sDtoDetailSales[key].venderName);
-						var $dealCountTd = $("<td>").text(sDtoDetailSales[key].dealCount);
-						var $valOfSupplyTd = $("<td>").text(sDtoDetailSales[key].valOfSupply);
-						var $taxTd = $("<td>").text(sDtoDetailSales[key].tax);
+						var $dealCountTd = $("<td class='numberArea'>").text(sDtoDetailSales[key].dealCount);
+						var $valOfSupplyTd = $("<td class='numberArea'>").text(sDtoDetailSales[key].valOfSupply);
+						var $taxTd = $("<td class='numberArea'>").text(sDtoDetailSales[key].tax);
 						var $bossNameTd = $("<td>").text(sDtoDetailSales[key].bossName);
 						var $sellWayTd = $("<td>").text(sDtoDetailSales[key].sellWay);
 						var $sellTargetTd = $("<td>").text(sDtoDetailSales[key].sellTarget);
@@ -379,9 +383,9 @@
 						var $bizRegNumTd = $("<td>").text(sDtoDetailSales[key].bizRegNum);
 						var $venderTd = $("<td>").text(sDtoDetailSales[key].venderCode);
 						var $venderNameTd = $("<td>").text(sDtoDetailSales[key].venderName);
-						var $dealCountTd = $("<td>").text(sDtoDetailSales[key].dealCount);
-						var $valOfSupplyTd = $("<td>").text(sDtoDetailSales[key].valOfSupply);
-						var $taxTd = $("<td>").text(sDtoDetailSales[key].tax);
+						var $dealCountTd = $("<td class='numberArea'>").text(sDtoDetailSales[key].dealCount);
+						var $valOfSupplyTd = $("<td class='numberArea'>").text(sDtoDetailSales[key].valOfSupply);
+						var $taxTd = $("<td class='numberArea'>").text(sDtoDetailSales[key].tax);
 						var $bossNameTd = $("<td>").text(sDtoDetailSales[key].bossName);
 						var $sellWayTd = $("<td>").text(sDtoDetailSales[key].sellWay);
 						var $sellTargetTd = $("<td>").text(sDtoDetailSales[key].sellTarget);
@@ -412,9 +416,9 @@
 		 		   
 		 		   /* 합계 */
 		 		   //12일
-		 		   $Tex_bill_detailList3.append("<tr id='Tex_bill_th' style=;font-weight: 600;'><td id='Text_billNo' style='height: 50px;'> </td><td colspan='3'> 합   계 </td><td id='dealCount1'> </td><td id='volCount1'> </td><td id='taxCount1'> </td><td> </td><td> </td><td> </td></tr>");
+		 		   $Tex_bill_detailList3.append("<tr id='Tex_bill_th' style=;font-weight: 600;'><td id='Text_billNo' style='height: 50px;'> </td><td colspan='3'> 합   계 </td><td  class='numberArea' id='dealCount1'> </td><td  class='numberArea' id='volCount1'> </td><td  class='numberArea' id='taxCount1'> </td><td> </td><td> </td><td> </td></tr>");
 		 		   //전체
-		 		   $Tex_bill_detailList.append("<tr id='Tex_bill_th' style=;font-weight: 600;'><td id='Text_billNo' style='height: 50px;'> </td><td colspan='3'> 합   계 </td><td id='dealCount2'> </td><td id='volCount2'> </td><td id='taxCount2'> </td><td> </td><td> </td><td> </td></tr>");
+		 		   $Tex_bill_detailList.append("<tr id='Tex_bill_th' style=;font-weight: 600;'><td id='Text_billNo' style='height: 50px;'> </td><td colspan='3'> 합   계 </td><td class='numberArea' id='dealCount2'> </td><td class='numberArea' id='volCount2'> </td><td  class='numberArea' id='taxCount2'> </td><td> </td><td> </td><td> </td></tr>");
 		 		   
 		 		  
 		 		 
@@ -524,9 +528,9 @@
 					var $bizRegNumTd = $("<td>").text(sDtoDetailPur[key].bizRegNum);
 					var $venderTd = $("<td>").text(sDtoDetailPur[key].venderCode);
 					var $venderNameTd = $("<td>").text(sDtoDetailPur[key].venderName);
-					var $dealCountTd = $("<td>").text(sDtoDetailPur[key].dealCount);
-					var $valOfSupplyTd = $("<td>").text(sDtoDetailPur[key].valOfSupply);
-					var $taxTd = $("<td>").text(sDtoDetailPur[key].tax);
+					var $dealCountTd = $("<td class='numberArea'>").text(sDtoDetailPur[key].dealCount);
+					var $valOfSupplyTd = $("<td class='numberArea'>").text(sDtoDetailPur[key].valOfSupply);
+					var $taxTd = $("<td class='numberArea'>").text(sDtoDetailPur[key].tax);
 					var $bossNameTd = $("<td>").text(sDtoDetailPur[key].bossName);
 					var $sellWayTd = $("<td>").text(sDtoDetailPur[key].sellWay);
 					var $sellTargetTd = $("<td>").text(sDtoDetailPur[key].sellTarget);
@@ -552,7 +556,7 @@
 					$Tex_bill_detailListPur2.append($tr);
 	 		    }
 		 		    
-		 		   $Tex_bill_detailListPur2.append("<tr id='Tex_bill_th' style=;font-weight: 600;'><td id='Text_billNo' style='height: 50px;'> </td><td colspan='3'> 합   계 </td><td id='dealCountPur1'> </td><td id='volCountPur1'> </td><td id='taxCountPur1'> </td><td> </td><td> </td><td> </td></tr>");
+		 		   $Tex_bill_detailListPur2.append("<tr id='Tex_bill_th' style=;font-weight: 600;'><td id='Text_billNo' style='height: 50px;'> </td><td colspan='3'> 합   계 </td><td class='numberArea' id='dealCountPur1'> </td><td class='numberArea' id='volCountPur1'> </td><td class='numberArea' id='taxCountPur1'> </td><td> </td><td> </td><td> </td></tr>");
 	 			
 		 		   
 		 		   
@@ -573,10 +577,10 @@
 					console.log("사업자번호: "+sDtoDetailPur[key].bizRegNum)
 					var $venderTd = $("<td>").text(sDtoDetailPur[key].venderCode);
 					var $venderNameTd = $("<td>").text(sDtoDetailPur[key].venderName);
-					var $dealCountTd = $("<td>").text(sDtoDetailPur[key].dealCount);
+					var $dealCountTd = $("<td class='numberArea'>").text(sDtoDetailPur[key].dealCount);
 					console.log("거래건수: "+sDtoDetailPur[key].dealCount)
-					var $valOfSupplyTd = $("<td>").text(sDtoDetailPur[key].valOfSupply);
-					var $taxTd = $("<td>").text(sDtoDetailPur[key].tax);
+					var $valOfSupplyTd = $("<td class='numberArea'>").text(sDtoDetailPur[key].valOfSupply);
+					var $taxTd = $("<td class='numberArea'>").text(sDtoDetailPur[key].tax);
 					var $bossNameTd = $("<td>").text(sDtoDetailPur[key].bossName);
 					var $sellWayTd = $("<td>").text(sDtoDetailPur[key].sellWay);
 					var $sellTargetTd = $("<td>").text(sDtoDetailPur[key].sellTarget);
@@ -602,7 +606,7 @@
 					$Tex_bill_detailListPur3.append($tr);
 	 		    }
 		 		    
-		 		   $Tex_bill_detailListPur3.append("<tr id='Tex_bill_th' style=;font-weight: 600;'><td id='Text_billNo' style='height: 50px;'> </td><td colspan='3'> 합   계 </td><td id='dealCountPur3'> </td><td id='volCountPur3'> </td><td id='taxCountPur3'> </td><td> </td><td> </td><td> </td></tr>");
+		 		   $Tex_bill_detailListPur3.append("<tr id='Tex_bill_th' style=;font-weight: 600;'><td id='Text_billNo' style='height: 50px;'> </td><td colspan='3'> 합   계 </td><td  class='numberArea'id='dealCountPur3'> </td><td class='numberArea' id='volCountPur3'> </td><td class='numberArea' id='taxCountPur3'> </td><td> </td><td> </td><td> </td></tr>");
 	 			
 		 		   $("#dealCountPur3").text(dealCountPur3);
 		 		   $("#volCountPur3").text(volCountPur3);
@@ -666,7 +670,7 @@
     <table align="center" class="mainTable">
         
         <tr>
-            <td class="tdSalesPur"><div class="sumTableSales" onclick="showsumTable_sales()" id="showsumTable_sales"><h4>매출</h4></div></td>            
+            <td class="tdSalesPur"><div style="width: 70%;" class="sumTableSales" onclick="showsumTable_sales()" id="showsumTable_sales"><h4>매출</h4></div></td>            
             <td class="tdSalesPur"><div class="sumTableSales" onclick="showsumTable_purchase()"><h4>매입</h4></div></td>
             <td></td>
             <td></td>
@@ -701,35 +705,35 @@
                     </tr>
                     <tr>
                         <td colspan="2" style="width: 45%;" id="green">합  계</td>
-                        <td style="width: 15%;" id="sAvc"> </td>
-                        <td style="width: 10%;" id="sAdc"> </td>
-                        <td style="width: 15%;" id="sAvol"> </td>
-                        <td style="width: 15%;" id="sAtax"> </td>
+                        <td style="width: 15%;" class="numberArea" id="sAvc"> </td>
+                        <td style="width: 10%;" class="numberArea" id="sAdc"> </td>
+                        <td style="width: 15%;" class="numberArea" id="sAvol"> </td>
+                        <td style="width: 15%;" class="numberArea" id="sAtax"> </td>
                     </tr>
                     <tr>
                         <td rowspan="3" style="width: 25%;" id="green">과세기간 종료일 다음달<br>11일 까지 전송된<br>
                         전자세금계산서 발급분</td>
                         <td style="width: 25%;" id="green">사업자 번호 발급분</td>
-                        <td style="width: 15%;" id="bAvc"> </td>
-                        <td style="width: 10%;" id="bAdc"> </td>
-                        <td style="width: 15%;" id="bAvol"> </td>
-                        <td style="width: 15%;" id="bAtax"> </td>
+                        <td style="width: 15%;" class="numberArea" id="bAvc"> </td>
+                        <td style="width: 10%;" class="numberArea" id="bAdc"> </td>
+                        <td style="width: 15%;" class="numberArea" id="bAvol"> </td>
+                        <td style="width: 15%;" class="numberArea" id="bAtax"> </td>
 
                     </tr>
                     <tr>
                         <td style="width: 25%;" id="green">주민등록 번호 발급분</td>
-                        <td style="width: 15%;" id="pAvc"> </td>
-                        <td style="width: 10%;" id="pAdc"> </td>
-                        <td style="width: 15%;" id="pAvol"> </td>
-                        <td style="width: 15%;" id="pAtax"> </td>
+                        <td style="width: 15%;" class="numberArea" id="pAvc"> </td>
+                        <td style="width: 10%;" class="numberArea" id="pAdc"> </td>
+                        <td style="width: 15%;" class="numberArea" id="pAvol"> </td>
+                        <td style="width: 15%;" class="numberArea" id="pAtax"> </td>
 
                     </tr>
                     <tr>
                         <td style="width: 25%;" id="green">소계</td>
-                        <td style="width: 15%;" id="ssAvc"> </td>
-                        <td style="width: 10%;" id="ssAdc"> </td>
-                        <td style="width: 15%;" id="ssAvol"> </td>
-                        <td style="width: 15%;" id="ssAtax"> </td>
+                        <td style="width: 15%;" class="numberArea" id="ssAvc"> </td>
+                        <td style="width: 10%;" class="numberArea" id="ssAdc"> </td>
+                        <td style="width: 15%;" class="numberArea" id="ssAvol"> </td>
+                        <td style="width: 15%;" class="numberArea" id="ssAtax"> </td>
 
                     </tr>
 
@@ -737,26 +741,26 @@
                         <td rowspan="3" style="width: 25%;" id="green">위 전자세금계산서 외의<br>발급분(종이발급분+과세기간<br>
                         종료일 다움달 12일 이후분)</td>
                         <td style="width: 25%;" id="green">사업자 번호 발급분</td>
-                        <td style="width: 15%;" id="ObAvc"> </td>
-                        <td style="width: 10%;" id="ObAdc"> </td>
-                        <td style="width: 15%;" id="ObAvol"> </td>
-                        <td style="width: 15%;" id="ObAtax"> </td>
+                        <td style="width: 15%;" class="numberArea" id="ObAvc"> </td>
+                        <td style="width: 10%;" class="numberArea" id="ObAdc"> </td>
+                        <td style="width: 15%;" class="numberArea" id="ObAvol"> </td>
+                        <td style="width: 15%;" class="numberArea" id="ObAtax"> </td>
 
                     </tr>
                     <tr>
                         <td style="width: 25%;" id="green">주민등록 번호 발급분</td>
-                        <td style="width: 15%;" id="OpAvc"> </td>
-                        <td style="width: 10%;" id="OpAdc"> </td>
-                        <td style="width: 15%;" id="OpAvol"> </td>
-                        <td style="width: 15%;" id="OpAtax"> </td>
+                        <td style="width: 15%;" class="numberArea" id="OpAvc"> </td>
+                        <td style="width: 10%;" class="numberArea" id="OpAdc"> </td>
+                        <td style="width: 15%;" class="numberArea" id="OpAvol"> </td>
+                        <td style="width: 15%;" class="numberArea" id="OpAtax"> </td>
 
                     </tr>
                     <tr>
                         <td style="width: 25%;" id="green">소계</td>
-                        <td style="width: 15%;" id="OssAvc"> </td>
-                        <td style="width: 10%;" id="OssAdc"> </td>
-                        <td style="width: 15%;" id="OssAvol"> </td>
-                        <td style="width: 15%;" id="OssAtax"> </td>
+                        <td style="width: 15%;" class="numberArea" id="OssAvc"> </td>
+                        <td style="width: 10%;" class="numberArea" id="OssAdc"> </td>
+                        <td style="width: 15%;" class="numberArea" id="OssAvol"> </td>
+                        <td style="width: 15%;" class="numberArea" id="OssAtax"> </td>
 
                     </tr>
                 </table>
@@ -1065,35 +1069,35 @@
                     </tr>
                     <tr>
                         <td colspan="2" style="width: 45%;" id="green">합  계</td>
-                        <td style="width: 15%;" id="psAvc"> </td>
-                        <td style="width: 10%;" id="psAdc"> </td>
-                        <td style="width: 15%;" id="psAvol"> </td>
-                        <td style="width: 15%;" id="psAtax"> </td>
+                        <td style="width: 15%;" class="numberArea" id="psAvc"> </td>
+                        <td style="width: 10%;" class="numberArea" id="psAdc"> </td>
+                        <td style="width: 15%;" class="numberArea" id="psAvol"> </td>
+                        <td style="width: 15%;" class="numberArea" id="psAtax"> </td>
                     </tr>
                     <tr>
                         <td rowspan="3" style="width: 25%;" id="green">과세기간 종료일 다음달<br>11일 까지 전송된<br>
                         전자세금계산서 발급받은분</td>
-                        <td style="width: 25%;" id="green">사업자 번호 발급받은분</td>
-                        <td style="width: 15%;" id="pbAvc"> </td>
-                        <td style="width: 10%;" id="pbAdc"> </td>
-                        <td style="width: 15%;" id="pbAvol"> </td>
-                        <td style="width: 15%;" id="pbAtax"> </td>
+                        <td style="width: 25%;" class="numberArea" id="green">사업자 번호 발급받은분</td>
+                        <td style="width: 15%;" class="numberArea" id="pbAvc"> </td>
+                        <td style="width: 10%;" class="numberArea" id="pbAdc"> </td>
+                        <td style="width: 15%;" class="numberArea" id="pbAvol"> </td>
+                        <td style="width: 15%;" class="numberArea" id="pbAtax"> </td>
 
                     </tr>
                     <tr>
                         <td style="width: 25%;" id="green">주민등록 번호 발급받은분</td>
-                        <td style="width: 15%;" id="ppAvc"> </td>
-                        <td style="width: 10%;" id="ppAdc"> </td>
-                        <td style="width: 15%;" id="ppAvol"> </td>
-                        <td style="width: 15%;" id="ppAtax"> </td>
+                        <td style="width: 15%;" class="numberArea" id="ppAvc"> </td>
+                        <td style="width: 10%;" class="numberArea" id="ppAdc"> </td>
+                        <td style="width: 15%;" class="numberArea" id="ppAvol"> </td>
+                        <td style="width: 15%;" class="numberArea" id="ppAtax"> </td>
 
                     </tr>
                     <tr>
                         <td style="width: 25%;" id="green">소계</td>
-                        <td style="width: 15%;" id="pssAvc"> </td>
-                        <td style="width: 10%;" id="pssAdc"> </td>
-                        <td style="width: 15%;" id="pssAvol"> </td>
-                        <td style="width: 15%;" id="pssAtax"> </td>
+                        <td style="width: 15%;" class="numberArea" id="pssAvc"> </td>
+                        <td style="width: 10%;" class="numberArea" id="pssAdc"> </td>
+                        <td style="width: 15%;" class="numberArea" id="pssAvol"> </td>
+                        <td style="width: 15%;" class="numberArea" id="pssAtax"> </td>
 
                     </tr>
 
@@ -1101,10 +1105,10 @@
                         <td rowspan="3" style="width: 25%;" id="green">위 전자세금계산서 외의<br>발급받은분(종이발급분+과세기간<br>
                         종료일 다움달 12일 이후분)</td>
                         <td style="width: 25%;" id="green">사업자 번호 발급받은분</td>
-                        <td style="width: 15%;" id="pObAvc"> </td>
-                        <td style="width: 10%;" id="pObAdc"> </td>
-                        <td style="width: 15%;" id="pObAvol"> </td>
-                        <td style="width: 15%;" id="pObAtax"> </td>
+                        <td style="width: 15%;" class="numberArea" id="pObAvc"> </td>
+                        <td style="width: 10%;" class="numberArea" id="pObAdc"> </td>
+                        <td style="width: 15%;" class="numberArea" id="pObAvol"> </td>
+                        <td style="width: 15%;" class="numberArea" id="pObAtax"> </td>
 
                     </tr>
                     <tr>
@@ -1117,10 +1121,10 @@
                     </tr>
                     <tr>
                         <td style="width: 25%;" id="green">소계</td>
-                        <td style="width: 15%;" id="pOssAvc"> </td>
-                        <td style="width: 10%;" id="pOssAdc"> </td>
-                        <td style="width: 15%;" id="pOssAvol"> </td>
-                        <td style="width: 15%;" id="pOssAtax"> </td>
+                        <td style="width: 15%;" class="numberArea" id="pOssAvc"> </td>
+                        <td style="width: 10%;" class="numberArea" id="pOssAdc"> </td>
+                        <td style="width: 15%;" class="numberArea" id="pOssAvol"> </td>
+                        <td style="width: 15%;" class="numberArea" id="pOssAtax"> </td>
 
                     </tr>
                 </table>

@@ -9,6 +9,7 @@
 <title>자가 경리</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
      <style>
         *{
             font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
@@ -134,6 +135,9 @@
 		    left: 50%; 
 		    z-index: 100; 
 	    }
+	    .numberArea{
+   			text-align: right;
+   		}
     </style>
 </head>
 <body>
@@ -185,8 +189,9 @@
                 <div class="middleMenu">
                     <h4>2.신용카드 등 매입내역 합계</h4>
             <c:set var="comCode" value="${ sessionScope.loginCompany.companyCode }"/>
+            
             <input type="hidden" name="rcptstmtCode" id="rcptstmtCode">
-            <input type="hidden" name="comCode" value="${comCode }">
+            <input type="hidden" name="comCode" id="comCode" value="${comCode}">
             
             <!-- Detail항목 -->
             <!-- <input type="text" name="eventDiv" id="eventDiv">Detail항목명
@@ -217,7 +222,7 @@
 	 		var search_ye1= $("#search_ye1").val();
 	 		var search_mon1= $("#search_mon1").val();
 	 		var search_mon2= $("#search_mon2").val();
-	 		var comCode=${comCode};
+	 		var comCode='${comCode}';
 	 		console.log(search_ye1);
 	 		console.log(search_mon1);
 	 		console.log(search_mon2);
@@ -229,6 +234,8 @@
 	 			data:{search_ye1:search_ye1, search_mon1:search_mon1, search_mon2:search_mon2, comCode:comCode },
 	 			success: function(data){
 	 				 $("#loading").hide();
+	 				 
+	 				 
 	 				console.log(data);
 	 				var cssg=data.cssg; 
 	 				console.log(cssg);
@@ -380,9 +387,9 @@
 						var $prodNameTd = $("<td>").text(cssgHisList[key].proNum);
 						var $prodNumTd = $("<td>").text(cssgHisList[key].producer);
 						var $cardmemNumTd = $("<td>").text(cssgHisList[key].cardmemNum);
-						var $numOfTxnTd = $("<td>").text(cssgHisList[key].numOfTxn);
-						var $valOfSupplyTd = $("<td>").text(cssgHisList[key].valOfSupply);
-						var $taxTd = $("<td>").text(cssgHisList[key].tax);
+						var $numOfTxnTd = $("<td class='numberArea'>").text(cssgHisList[key].numOfTxn);
+						var $valOfSupplyTd = $("<td class='numberArea'>").text(cssgHisList[key].valOfSupply);
+						var $taxTd = $("<td class='numberArea'>").text(cssgHisList[key].tax);
 						
 						
 						$("#slipCode").val(cssgHisList[key].slipCode);
@@ -410,9 +417,9 @@
                   	
 					var $endTr=$("<tr class='Tex_bill_th' style='font-weight: 600;'>");
 					var $endTd1=$("<td colspan='6'>").text("합계");
-					var $endTd2=$("<td>").text(dealCtn);
-					var $endTd3=$("<td>").text(vos);
-					var $endTd4=$("<td>").text(vat);
+					var $endTd2=$("<td class='numberArea'>").text(dealCtn);
+					var $endTd3=$("<td class='numberArea'>").text(vos);
+					var $endTd4=$("<td class='numberArea'>").text(vat);
 					$endTr.append($endTd1);
 					$endTr.append($endTd2);
 					$endTr.append($endTd3);
@@ -450,33 +457,33 @@
                     </tr>
                     <tr><!-- 합계영역  -->
                         <td id="sum"> </td>
-                        <td id="sumDeal"> </td>
-                        <td id="sumVos"> </td>
-                        <td id="sumTax"> </td>
+                        <td class="numberArea" id="sumDeal"> </td>
+                        <td class="numberArea" id="sumVos"> </td>
+                        <td class="numberArea" id="sumTax"> </td>
                     </tr>
                      <tr><!-- 현금영수증  -->
                         <td id="cash"> </td> 
-                        <td id="cashDeal"> </td>
-                        <td id="cashVos"> </td>
-                        <td id="cashTax"> </td>
+                        <td class="numberArea" id="cashDeal"> </td>
+                        <td class="numberArea" id="cashVos"> </td>
+                        <td class="numberArea" id="cashTax"> </td>
                     </tr>
                      <tr><!-- 화물운전자 복지카드 -->
                         <td id="driver"> </td>
-                        <td id="driverDeal"> </td>
-                        <td id="driverVos"> </td>
-                        <td id="driverTax"> </td>
+                        <td class="numberArea" id="driverDeal"> </td>
+                        <td class="numberArea" id="driverVos"> </td>
+                        <td class="numberArea" id="driverTax"> </td>
                     </tr>
                      <tr><!-- 사업용 신용카드 -->
                         <td id="bCard"> </td>
-                        <td id="bCardDeal"> </td>
-                        <td id="bCardVos"> </td>
-                        <td id="bCardTax"> </td>
+                        <td class="numberArea" id="bCardDeal"> </td>
+                        <td class="numberArea" id="bCardVos"> </td>
+                        <td class="numberArea" id="bCardTax"> </td>
                     </tr>
                     <tr><!-- 그 밖의 신용카드 -->
                         <td id="oCard"> </td>
-                        <td id="oCardDeal"> </td>
-                        <td id="oCardVos"> </td>
-                        <td id="oCardTax"> </td>
+                        <td class="numberArea" id="oCardDeal"> </td>
+                        <td class="numberArea" id="oCardVos"> </td>
+                        <td class="numberArea" id="oCardTax"> </td>
                     </tr>
                     
                 </table>

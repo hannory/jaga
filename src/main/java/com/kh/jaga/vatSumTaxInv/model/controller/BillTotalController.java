@@ -24,6 +24,11 @@ import com.kh.jaga.vatSumTaxInv.model.vo.SumOfTaxInvDiv;
 import com.kh.jaga.vatSumTaxInv.model.vo.SumOfTaxInvDto;
 import com.kh.jaga.vatSumTaxInv.model.vo.SumTaxInvDetail;
 
+/**
+ * @author 조지연
+ * @comment 계산서 합계표
+ * @createDate 2020. 4. 28.
+ */
 @Controller
 public class BillTotalController {
 	//계산서 합계표 조회
