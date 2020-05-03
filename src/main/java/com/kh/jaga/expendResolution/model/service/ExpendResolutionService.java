@@ -16,7 +16,7 @@ public interface ExpendResolutionService {
 
 	List<AccountTitleVo> selectAccountTitleList();
 
-	List<ComInIdVo> selectComInIdList();
+	List<ComInIdVo> selectComInIdList(String comCome);
 
 	List<ExpendResolutionDto> selectExpendResolutionList();
 

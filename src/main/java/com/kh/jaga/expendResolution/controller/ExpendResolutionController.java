@@ -3,6 +3,7 @@ package com.kh.jaga.expendResolution.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,9 +33,12 @@ public class ExpendResolutionController {
 
 	//지출결의서 뷰 보여주는 페이지 //검색할 정보들도 한번에 읽어와서 페이지 이동하기
 	@RequestMapping("showExpendResolutionWriteForm.expendResolution")
-	public ModelAndView ShowExpendResolutionForm(ModelAndView mv, HttpServletResponse response) {
+	public ModelAndView ShowExpendResolutionForm(ModelAndView mv, HttpServletResponse response, HttpServletRequest request) {
 		
 		//검색할 정보들 가져오기	
+		ComInIdVo empVo = (ComInIdVo) request.getSession().getAttribute("loginEmp");
+		String comCome = empVo.getComCode();
+		
 		//1.부서정보
 		List<DepartmentVo> deptList = service.selectDeptList();
 		mv.addObject("deptList",deptList);		//리스트 추가
@@ -54,7 +58,7 @@ public class ExpendResolutionController {
 		mv.addObject("jsonAccountTitleList", jsonAccountTitleList);		//json타입 리스트 추가
 		
 		//3.담당자
-		List<ComInIdVo> comInIdList = service.selectComInIdList();
+		List<ComInIdVo> comInIdList = service.selectComInIdList(comCome);
 		mv.addObject("comInIdList", comInIdList);				//리스트 추가
 		JSONArray jsonComInIdList = JSONArray.fromObject(comInIdList);
 		mv.addObject("jsonComInIdList", jsonComInIdList);		//json타입 리스트 추가

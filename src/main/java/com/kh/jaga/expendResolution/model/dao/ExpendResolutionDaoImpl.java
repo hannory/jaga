@@ -43,9 +43,9 @@ public class ExpendResolutionDaoImpl implements ExpendResolutionDao{
 	}
 
 	@Override
-	public List<ComInIdVo> selectComInIdListList(SqlSessionTemplate sqlSession) {
+	public List<ComInIdVo> selectComInIdListList(SqlSessionTemplate sqlSession, String comCome) {
 		
-		List<ComInIdVo> ComInIdList = sqlSession.selectList("ExpendResolution.selectComInIdList");
+		List<ComInIdVo> ComInIdList = sqlSession.selectList("ExpendResolution.selectComInIdList", comCome);
 		
 		return ComInIdList;
 	}

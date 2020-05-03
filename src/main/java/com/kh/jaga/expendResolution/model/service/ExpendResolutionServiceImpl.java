@@ -51,9 +51,9 @@ public class ExpendResolutionServiceImpl implements ExpendResolutionService{
 	}
 
 	@Override
-	public List<ComInIdVo> selectComInIdList() {
+	public List<ComInIdVo> selectComInIdList(String comCome) {
 		
-		List<ComInIdVo> ComInIdList = dao.selectComInIdListList(sqlSession);
+		List<ComInIdVo> ComInIdList = dao.selectComInIdListList(sqlSession, comCome );
 
 		return ComInIdList;
 	}
