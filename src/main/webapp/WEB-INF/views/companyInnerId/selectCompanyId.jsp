@@ -99,7 +99,94 @@
 				<td><c:out value="${ target.comInnerIdNum }"></c:out></td>
 				<td><c:out value="${ target.email }"></c:out></td>
 				<td><c:out value="${ target.name }"></c:out></td>
+				
+				
+				<!-- 
+				
+				차장	009
+				과장	010
+				대리	011
+				주임	012
+				사원	013
+				인턴	014
+				알바	015
+				
+				 -->
+				 
+				
+				<%--
+				
+				<c:if test="${ target.name eq '000' }">
+					<td><c:out value="대표"></c:out></td>
+				</c:if>
+				
+				<c:if test="${ target.name eq '001' }">
+					<td><c:out value="회장"></c:out></td>
+				</c:if>
+				
+				<c:if test="${ target.name eq '002' }">
+					<td><c:out value="부회장"></c:out></td>
+				</c:if>
+				
+				<c:if test="${ target.name eq '003' }">
+					<td><c:out value="사장"></c:out></td>
+				</c:if>
+				
+				<c:if test="${ target.name eq '004' }">
+					<td><c:out value="부사장"></c:out></td>
+				</c:if>
+				
+				<c:if test="${ target.name eq '005' }">
+					<td><c:out value="전무"></c:out></td>
+				</c:if>
+				
+				<c:if test="${ target.name eq '006' }">
+					<td><c:out value="상무"></c:out></td>
+				</c:if>
+				
+				<c:if test="${ target.name eq '007' }">
+					<td><c:out value="이사"></c:out></td>
+				</c:if>
+				
+				<c:if test="${ target.name eq '008' }">
+					<td><c:out value="부장"></c:out></td>
+				</c:if>
+				
+				<c:if test="${ target.name eq '009' }">
+					<td><c:out value="차장"></c:out></td>
+				</c:if>
+				
+				<c:if test="${ target.name eq '010' }">
+					<td><c:out value="과장"></c:out></td>
+				</c:if>
+				
+				<c:if test="${ target.name eq '011' }">
+					<td><c:out value="대리"></c:out></td>
+				</c:if>
+				
+				<c:if test="${ target.name eq '012' }">
+					<td><c:out value="주임"></c:out></td>
+				</c:if>
+				
+				<c:if test="${ target.name eq '013' }">
+					<td><c:out value="사원"></c:out></td>
+				</c:if>
+				
+				<c:if test="${ target.name eq '014' }">
+					<td><c:out value="인턴"></c:out></td>
+				</c:if>
+				
+				<c:if test="${ target.name eq '015' }">
+					<td><c:out value="알바"></c:out></td>
+				</c:if>
+				
+				--%>
+				
+				
+				
 				<td><c:out value="${ target.positionCode }"></c:out></td>
+				
+				
 				<td><button>정보수정</button></td>
 			</tr>
 				
