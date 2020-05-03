@@ -15,5 +15,55 @@
   AND REPORT_TERM=#{reportTerm}
   
   </select>
+  <select id="selectSumOfTaxInv" parameterType="SumOfTaxInv" resultType="SumOfTaxInv">
+  SELECT TAXINV_CODE  
+  FROM SUM_OF_TAX_INV 
+  WHERE COM_CODE=#{comCode} 
+  AND DEADLINE='Y' 
+  AND TABLETAX_DIV='세금계산서' 
+  AND YEAR_OF_ATTR=#{yearOfAttr}
+  AND REPORT_TERM=#{reportTerm} 
+  AND REPORT_TYPE=#{reportType}
+  </select>
+  <select id="selectSumOfTaxInvDiv" parameterType="SumOfTaxInvDiv" resultType="SumOfTaxInvDiv">
+  SELECT VAL_OF_SUPPLY,TAX
+  FROM SUM_OF_TAX_INV_DIV_CNT
+  WHERE TAXINV_CODE=#{taxinvCode} 
+  AND PUR_SALES='매출' 
+  AND DIVISION_CODE='23'
+  </select>
+  
+  <select id="selectCcIssStmt" parameterType="CcIssStmt" resultType="CcIssStmt">
+  
+  SELECT *
+  		FROM CC_ISS_STMT
+  		WHERE YEAR_OF_ATTR= #{yearOfAttr}
+  		AND TERM_DIV = #{termDiv}
+  		AND COM_CODE = #{comCode}
+  		AND DEADLINE LIKE 'Y'
+  </select>
+  
+  <select id="selectCcIssStmtRe" parameterType="java.util.HashMap" resultType="Receiption">
+  SELECT SUM(SUPPLY_VALUE) AS SUPPLY_VALUE, SUM(VALUE_TAX) AS VALUE_TAX
+  	FROM SLIP 
+  	WHERE SLIP_DIVISION ='매입매출' 
+  	AND DIVISION ='매출' 
+  	AND COM_CODE= #{Receiption.comCode}
+  	AND EVIDENCE_CODE IN('50','100')
+  	AND SLIP_DATE BETWEEN #{Receiption.slipDate} AND #{endDate}
+    GROUP BY COM_CODE
+  </select>
+  <select id="selectCcIssStmtRe0" parameterType="java.util.HashMap" resultType="Receiption">
+  SELECT SUM(SUPPLY_VALUE) AS SUPPLY_VALUE, SUM(VALUE_TAX) AS VALUE_TAX
+  	FROM SLIP 
+  	WHERE SLIP_DIVISION ='매입매출' 
+  	AND DIVISION ='매출' 
+  	AND COM_CODE= #{Receiption.comCode}
+  	AND EVIDENCE_CODE IN('70','90')
+  	AND SLIP_DATE BETWEEN #{Receiption.slipDate} AND #{endDate}
+    GROUP BY COM_CODE
+  </select>
+  
+  
   
   </mapper>

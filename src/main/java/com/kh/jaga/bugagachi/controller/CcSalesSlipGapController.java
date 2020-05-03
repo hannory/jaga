@@ -117,76 +117,78 @@ public class CcSalesSlipGapController {
 				System.out.println("Controller: cssgHisList: "+cssgHisList);
 				//중간합계효!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!11
 				List<CcSalesSlipDetail> cgDetailList=new ArrayList<CcSalesSlipDetail>();
-				int cardCount=0; 
-				BigDecimal cardValOfSupply=new BigDecimal("0");
-				BigDecimal cardTax=new BigDecimal("0");
-				int cashCount=0; 
-				BigDecimal cashValOfSupply=new BigDecimal("0");
-				BigDecimal cashTax=new BigDecimal("0");
-				CcSalesSlipDetail cd= new CcSalesSlipDetail();
-				CcSalesSlipDetail cd2= new CcSalesSlipDetail();
-				for(TnxHis th:cssgHisList) {
-					if(th.getDivision().equals("신용")) {
-						
-						cardCount++;
-						cardValOfSupply=cardValOfSupply.add(th.getValOfSupply());
-						cardTax=cardTax.add(th.getTax());
-						
-					}else if(th.getDivision().equals("현금")){
-						cashCount++;
-						cashValOfSupply=cashValOfSupply.add(th.getValOfSupply());
-						cashTax=cashTax.add(th.getTax());
+				if(! cssgHisList.isEmpty()) {//전표값이 없을때
+					System.out.println("전표있을때");
+					int cardCount=0; 
+					BigDecimal cardValOfSupply=new BigDecimal("0");
+					BigDecimal cardTax=new BigDecimal("0");
+					int cashCount=0; 
+					BigDecimal cashValOfSupply=new BigDecimal("0");
+					BigDecimal cashTax=new BigDecimal("0");
+					CcSalesSlipDetail cd= new CcSalesSlipDetail();
+					CcSalesSlipDetail cd2= new CcSalesSlipDetail();
+					for(TnxHis th:cssgHisList) {
+						if(th.getDivision().equals("신용")) {
+
+							cardCount++;
+							cardValOfSupply=cardValOfSupply.add(th.getValOfSupply());
+							cardTax=cardTax.add(th.getTax());
+
+						}else if(th.getDivision().equals("현금")){
+							cashCount++;
+							cashValOfSupply=cashValOfSupply.add(th.getValOfSupply());
+							cashTax=cashTax.add(th.getTax());
+						}
+
 					}
-					
-				}
-				
-				if(cashCount>0) {
-					cd.setEventDiv("현금영수증");
-					
-				}
-				cd.setDealCount(cashCount);
-				cd.setValOfSupply(cashValOfSupply);
-				cd.setTax(cashTax);
-				cgDetailList.add(cd);
-				
-				if(cardCount>0) {
-					cd2.setEventDiv("그 밖의 신용카드");
-				}
-				cd2.setDealCount(cardCount);
-				cd2.setValOfSupply(cardValOfSupply);
-				cd2.setTax(cardTax);
-				cgDetailList.add(cd2);
-				//css.setCssDetail(cgDetailList);
-				//중간합계효!!!!!!!!!!!!!!!!!!!!!!!!!!!끝끝끝끝
-				//CcSalesSlipGap cssg= new CcSalesSlipGap(); 
-				cssg.setComCode(comCode);
-				cssg.setYearOfAttr(yearInt);
-				cssg.setTermDiv(term);
-				cssg.setDeadline("N");
-				
-				System.out.println("Controller: 값게삲 다하고 dto로 css: "+cssg);
-				System.out.println("Controller: 값게삲 다하고 dto로 cd: "+cgDetailList);
-				
-				//인설트를 뷰페이지까지 안가고 여기서 테이블에 넣어주고 마감유무를 Y/N으로 구분 시킬꺼임!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
-				int insertResult=csser.insertCssg(cssg);
-				if(insertResult>0) {
-					try {
-						String pk=csser.selectCssgPk2(cssg);
-						//DetailList 인설트 시켜주기
-						System.out.println("Controller: pk: "+pk);
-						int insertCssd=csser.insertCssgDetail(cgDetailList,pk);
-						System.out.println("Controller: isnertCssd: "+insertCssd);
-						
-						int insertCssHis=csser.insertCssgHis(cssgHisList,pk);
-						System.out.println("Controller: insertCssHis: "+insertCssHis);
-						
-					} catch (Exception e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
+
+					if(cashCount>0) {
+						cd.setEventDiv("현금영수증");
+
 					}
+					cd.setDealCount(cashCount);
+					cd.setValOfSupply(cashValOfSupply);
+					cd.setTax(cashTax);
+					cgDetailList.add(cd);
+
+					if(cardCount>0) {
+						cd2.setEventDiv("그 밖의 신용카드");
+					}
+					cd2.setDealCount(cardCount);
+					cd2.setValOfSupply(cardValOfSupply);
+					cd2.setTax(cardTax);
+					cgDetailList.add(cd2);
+					//css.setCssDetail(cgDetailList);
+					//중간합계효!!!!!!!!!!!!!!!!!!!!!!!!!!!끝끝끝끝
+					//CcSalesSlipGap cssg= new CcSalesSlipGap(); 
+					cssg.setComCode(comCode);
+					cssg.setYearOfAttr(yearInt);
+					cssg.setTermDiv(term);
+					cssg.setDeadline("N");
+
+					System.out.println("Controller: 값게삲 다하고 dto로 css: "+cssg);
+					System.out.println("Controller: 값게삲 다하고 dto로 cd: "+cgDetailList);
+
+					//인설트를 뷰페이지까지 안가고 여기서 테이블에 넣어주고 마감유무를 Y/N으로 구분 시킬꺼임!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+					int insertResult=csser.insertCssg(cssg);
+					if(insertResult>0) {
+						try {
+							String pk=csser.selectCssgPk2(cssg);
+							//DetailList 인설트 시켜주기
+							System.out.println("Controller: pk: "+pk);
+							int insertCssd=csser.insertCssgDetail(cgDetailList,pk);
+							System.out.println("Controller: isnertCssd: "+insertCssd);
+
+							int insertCssHis=csser.insertCssgHis(cssgHisList,pk);
+							System.out.println("Controller: insertCssHis: "+insertCssHis);
+
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+
 				}
-				
-				
 				
 				
 				
@@ -236,15 +238,7 @@ public class CcSalesSlipGapController {
 	@RequestMapping("updateccSalesSilpGap.cssg")
 	public String updateCcSalesSlipGap(Model model,CcSalesSlipGap cssg,HttpServletRequest request  ) {
 		System.out.println("controller: updateCcSalesSlipGap 진입");
-		
-		//pk찾아오기(필요없어 집)
-//		String cssgCode=csser.selectCssgPk(cssg);
-//		
-//		System.out.println("controller: updateCcSalesSlipGap pk: "+cssgCode);
-//		
-//		if(cssgCode==null) {
-//			return "common/error";
-//		}
+	
 		
 		//PK이를 기준으로 deadline y->n으로 바꾸기
 		int result= csser.updateCcSalesSlipGap(cssg);

@@ -127,6 +127,9 @@
 		    left: 50%; 
 		    z-index: 100; 
 	    }
+	    .numberArea{
+   			text-align: right;
+   		}
     </style>
 </head>
 <body>
@@ -226,7 +229,7 @@
 	 		var search_ye= $("#search_ye").val();
 	 		var search_mon1= $("#search_mon1").val();
 	 		var search_mon2= $("#search_mon2").val();
-	 		var comCode=${comCode};
+	 		var comCode='${comCode}';
 	 		console.log(search_ye);
 	 		console.log(search_mon1);
 	 		console.log(search_mon2);
@@ -326,31 +329,31 @@
                         </tr>
  						<tr>
  							<td class="green" align="center"><div class="table-justify3"><div>합</div><div>계</div></td>
- 							<td class="green_value" id="sAs"></td>
- 							<td class="green_value" id="cAs"></td>
- 							<td class="green_value" id="cashAs"></td>
- 							<td class="green_value" id="dAs"></td>
+ 							<td class="green_value numberArea" id="sAs"></td>
+ 							<td class="green_value numberArea" id="cAs"></td>
+ 							<td class="green_value numberArea" id="cashAs"></td>
+ 							<td class="green_value numberArea" id="dAs"></td>
  						</tr>
  						<tr>
  							<td class="green" align="center"><div class="table-justify3"><div>과</div><div>세</div><div>매</div><div>출</div><div>분</div></td>
- 							<td class="green_value" id="tAs"></td>
- 							<td id="tAc"></td>
- 							<td id="tAcash"></td>
- 							<td id="tAd"></td>
+ 							<td class="green_value numberArea" id="tAs"></td>
+ 							<td class="numberArea" id="tAc"></td>
+ 							<td class="numberArea" id="tAcash"></td>
+ 							<td class="numberArea" id="tAd"></td>
  						</tr>
  						<tr>
  							<td class="green" align="center"><div class="table-justify3"><div>면</div><div>세</div><div>매</div><div>출</div><div>분</div></td>
- 							<td class="green_value" id="fAs"></td>
- 							<td id="fAc"></td>
- 							<td id="fAcash"></td>
- 							<td id="fAd"></td>
+ 							<td class="green_value numberArea" id="fAs"></td>
+ 							<td class="numberArea" id="fAc"></td>
+ 							<td class="numberArea" id="fAcash"></td>
+ 							<td class="numberArea" id="fAd"></td>
  						</tr>
  						<tr>
  							<td class="green" align="center"><div class="table-justify3"><div>봉</div><div>사</div><div>료</div></td>
- 							<td class="green_value" id="serAs"></td>
- 							<td id="serAc"></td>
- 							<td id="serAcash"></td>
- 							<td id="serAd"></td>
+ 							<td class="green_value numberArea" id="serAs"></td>
+ 							<td class="numberArea" id="serAc"></td>
+ 							<td class="numberArea" id="serAcash"></td>
+ 							<td class="numberArea" id="serAd"></td>
  						</tr>
                         
                     </table>
@@ -370,9 +373,9 @@
         	<table id="tax_pur">
         		<tr>
         			<td class="green">세금계산서발급금액</td>
-        			<td class="green_value" style="width: 30%" id="dTax"></td>
+        			<td class="green_value numberArea" style="width: 30%" id="dTax"></td>
         			<td class="green">계산서발급금액</td>
-        			<td class="green_value" style="width: 30%" id="ndTax"></td>
+        			<td class="green_value numberArea" style="width: 30%" id="ndTax"></td>
         		</tr>
         	
         	</table>
