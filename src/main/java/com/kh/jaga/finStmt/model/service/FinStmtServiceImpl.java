@@ -24,17 +24,18 @@ public class FinStmtServiceImpl implements FinStmtService {
 	private SqlSessionTemplate sqlSession;
 	
 	@Override
-	public int insertIncomeStmt(IncomeStmt i) {
+	public int insertIncomeStmt(IncomeStmt is) {
 		
-		return fsd.insertIncomeStmt(sqlSession, i);
+		int selectResult = fsd.countSavedIncomeStmt(sqlSession, is);
+		
+		if(selectResult > 0) {
+			return fsd.updateIncomeStmt(sqlSession, is);
+		} else {
+			return fsd.insertIncomeStmt(sqlSession, is);
+		}
+		
 	}
 
-//	@Override
-//	public HashMap selectIncomeStmt(IncomeStmtAccount isa) {
-//
-//		return fsd.selectIncomeStmt(sqlSession, isa);
-//	}
-	
 	@Override
 	public HashMap selectIncomeStmt(IncomeStmtAccount isa) {
 		//당기
@@ -112,7 +113,39 @@ public class FinStmtServiceImpl implements FinStmtService {
 	@Override
 	public ArrayList<IncomeStmtAccount> selectSlip(IncomeStmtAccount isa) {
 
-		ArrayList list = fsd.selectSlip(sqlSession, isa);
+		ArrayList list;
+		
+		if(isa.getCurPast().equals("c")) {
+			//당기일 경우
+			list = fsd.selectSlip(sqlSession, isa);
+		} else {
+			//전기일 경우
+			int curYear = isa.getYear();
+			isa.setYear(curYear - 1);
+			isa.setMonth(12);
+			isa.setDate(31);
+			list = fsd.selectSlip(sqlSession, isa);
+		}
+		
+		return list;
+	}
+	
+	@Override
+	public ArrayList<IncomeStmtAccount> selectSlipByDate(IncomeStmtAccount isa) {
+
+		ArrayList<IncomeStmtAccount> list;
+		
+		if(isa.getCurPast().equals("c")) {
+			//당기일 경우
+			list = fsd.selectSlipByDate(sqlSession, isa);
+		} else {
+			//전기일 경우
+			int curYear = isa.getYear();
+			isa.setYear(curYear - 1);
+			isa.setMonth(12);
+			isa.setDate(31);
+			list = fsd.selectSlipByDate(sqlSession, isa);
+		}
 		
 		return list;
 	}
@@ -166,13 +199,14 @@ public class FinStmtServiceImpl implements FinStmtService {
 	@Override
 	public int insertMfrgStmt(MfrgStmt ms) {
 		
-		int selectResult = fsd.countMfrgStmt(sqlSession, ms);
+		//기존 저장값 확인
+		int selectResult = fsd.countSavedMfrgStmt(sqlSession, ms);
 		
 		if(selectResult > 0) {
-			//기존 값이 있으면
+			//기존 저장 값이 있으면
 			return fsd.updateMfrgStmt(sqlSession, ms);
 		} else {
-			//기존 값이 없으면
+			//기존 저장 값이 없거나 마감을 하려면
 			return fsd.insertMfrgStmt(sqlSession, ms);
 		}
 		
@@ -180,22 +214,33 @@ public class FinStmtServiceImpl implements FinStmtService {
 
 	@Override
 	public MfrgStmt searchMfrg(MfrgStmt ms) {
-
-		return fsd.searchMfrg(sqlSession, ms);
+		
+		int count = fsd.countMfrgStmt(sqlSession, ms);
+		
+		System.out.println("count Service : " + count);
+		
+		if(count > 0) {
+			return fsd.searchMfrg(sqlSession, ms);
+		} else {
+			return null;
+		}
+		
 	}
 
 	@Override
-	public int checkMfrgStmt(MfrgStmt ms) {
-
+	public int countMfrgStmt(MfrgStmt ms) {
+		//기존 저장값이나 마감값이 있는지 확인
 		return fsd.countMfrgStmt(sqlSession, ms);
 	}
 
 	@Override
 	public HashMap selectFinPos(IncomeStmtAccount isa) {
 		//당기
-		List<IncomeStmtAccount> cList = fsd.selectCurFinStmt(sqlSession, isa);
+		List<IncomeStmtAccount> cList = fsd.selectCurFinStmtByDate(sqlSession, isa);
 		
 		int cSum10100 = 0;		//현금
+		int cSum10800 = 0;		//외상매출금
+		int cSum12000 = 0;		//미수금
 
 		for(int i = 0; i < cList.size(); i++) {
 			int accountCode = ((IncomeStmtAccount) cList.get(i)).getAccountCode();
@@ -208,34 +253,100 @@ public class FinStmtServiceImpl implements FinStmtService {
 				} else {
 					cSum10100 -= price;
 				}
-			} else if(accountCode == 51100) {
-
+			} else if(accountCode == 10800) {
+				if(debitCredit.equals("차변")) {
+					cSum10800 += price;
+				} else {
+					cSum10800 -= price;
+				}
+			} else if(accountCode == 12000) {
+				if(debitCredit.equals("차변")) {
+					cSum12000 += price;
+				} else {
+					cSum12000 -= price;
+				}
 			}
 		}
 		
-		//당기
-		List pList = fsd.selectPastFinStmt(sqlSession, isa);
+		//전기
+		List pList = fsd.selectPastFinStmtByDate(sqlSession, isa);
 		
 		int pSum10100 = 0;		//현금
+		int pSum10800 = 0;		//외상매출금
+		int pSum12000 = 0;		//미수금
 
-		for(int i = 0; i < cList.size(); i++) {
-			int accountCode = ((IncomeStmtAccount) cList.get(i)).getAccountCode();
-			int price = ((IncomeStmtAccount) cList.get(i)).getPrice();
+		for(int i = 0; i < pList.size(); i++) {
+			int accountCode = ((IncomeStmtAccount) pList.get(i)).getAccountCode();
+			String debitCredit = ((IncomeStmtAccount) pList.get(i)).getDebitCredit();
+			int price = ((IncomeStmtAccount) pList.get(i)).getPrice();
 			
 			if(accountCode == 10100) {
-				pSum10100 += price;
-			} else if(accountCode == 51100) {
-
+				if(debitCredit.equals("차변")) {
+					pSum10100 += price;
+				} else {
+					pSum10100 -= price;
+				}
+			} else if(accountCode == 10800) {
+				if(debitCredit.equals("차변")) {
+					pSum10800 += price;
+				} else {
+					pSum10800 -= price;
+				}
+			} else if(accountCode == 12000) {
+				if(debitCredit.equals("차변")) {
+					pSum12000 += price;
+				} else {
+					pSum12000 -= price;
+				}
 			}
 		}
 		
 		HashMap<String, Integer> hmap = new HashMap();
 		hmap.put("c10100", cSum10100);
+		hmap.put("c10800", cSum10800);
+		hmap.put("c12000", cSum12000);
 		
 		hmap.put("p10100", pSum10100);
+		hmap.put("p10800", pSum10800);
+		hmap.put("p12000", pSum12000);
+		
+		System.out.println("SERVICE hmap : " + hmap);
 		
 		return hmap;
 	}
+
+	@Override
+	public int countClosedMfrg(MfrgStmt ms) {
+
+		return fsd.countClosedMfrg(sqlSession, ms);
+	}
+
+	@Override
+	public int countIncomeStmt(IncomeStmt is) {
+
+		return fsd.countIncomeStmt(sqlSession, is);
+	}
+
+	@Override
+	public IncomeStmt searchIncomeStmt(IncomeStmt is) {
+		
+		int count = fsd.countIncomeStmt(sqlSession, is);
+		
+		if(count > 0) {
+			return fsd.searchIncomeStmt(sqlSession, is);
+		} else {
+			return null;
+		}
+
+	}
+
+	@Override
+	public int countClosedIncomeStmt(IncomeStmt is) {
+	
+		return fsd.countClosedIncometStmt(sqlSession, is);
+	}
+
+	
 	
 
 }

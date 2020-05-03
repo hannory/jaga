@@ -9,6 +9,21 @@
 		font-size:21px;
 		margin-right:60px;
 	}
+	#saveBtn, #closeBtn {
+		display: none;
+	}
+	#cancleBtn {
+		display: none;
+		border:1px solid red; 
+		color:red;
+	}
+	#closingMsg{
+		display: none;
+		color: #296355;
+	}
+	#closingNum{
+		font-weight: bold;
+	}
 	.normal-label {
 		margin:0px;
 	}
@@ -71,7 +86,9 @@
 		text-align: center;
 	}
 	#pastDate {
-		background: #f165b2;
+		background: #cf1d7f;
+		color: white;
+		/* background: #f165b2 */
 		padding-top: 1px;
 		padding-bottom: 1px;
 	}
@@ -145,12 +162,14 @@
 					<td>
 						<span style="margin-bottom:10px; color:red;"><img src="${ contextPath }/resources/images/pencil.PNG">기말상품재고액을 입력하세요</span>
 						&nbsp;&nbsp;&nbsp;&nbsp;		
-						<button type="button" onclick="saveIncomeStmt();">저장</button>
+						<button type="button" id="saveBtn" onclick="saveIncomeStmt();">저장</button>
 						&nbsp;&nbsp;
-						<button type="button" onclick="insertIncomeStmt();">마감</button>
+						<button type="button" id="closeBtn" onclick="insertIncomeStmt();">마감</button>
 						<input type="hidden" id="closing" name="closing">
+						<button type="button" id="cancleBtn" onclick="cancleClosing();">마감 취소</button>
 					</td>
 					<td align="right">
+						<span id="closingMsg">당기 <label class="normal-label" id="closingNum"></label>번째 마감 후 재수정 중</span>
 					</td>
 				</tr>
 			</table>
@@ -451,8 +470,42 @@
 			var year = $("#year").val();
 			var month = $("#month").val();
 			
-			console.log(year);
-			console.log(month);
+			$.ajax({
+				url : "searchIncomeStmt.fs",
+				type : "get",
+				data : {
+					year : year
+				},
+				success : function(data) {
+					
+					if(data == "") {
+						console.log("data is empty");
+					} else {
+						if(data.closing == "Y") {
+							$("#cancleBtn").show();
+							$("#requestMsg").text("마감이 완료되었습니다");
+							$("#inputNum").attr("readonly", "readonly");
+						} else {
+							$("#saveBtn").show();
+							$("#closeBtn").show();
+							
+							if(data.countClosed != 0) {
+								$("#closingNum").text(data.countClosed);
+								$("#closingMsg").show();
+							}
+						}
+					
+						var val213 = data.val213;
+						
+						$("#inputNum").val(comma(val213));
+					}
+					
+					
+				},
+				error : function(status) {
+					console.log(status);
+				}
+			})
 			
 			$.ajax({
 				url : "selectIncomeStmt.fs",
@@ -684,8 +737,8 @@
 					type : "get",
 					data : {
 						year : year,
-						curPast : curPast,
 						month : month,
+						curPast : curPast,
 						accountCode : accountCode
 					},
 					success : function(data) {
@@ -795,18 +848,9 @@
 								monthCheck += gap;
 							}
 							
-							//월을 2자리수로 만들기
-							console.log("month : " + month);
-							console.log("month typeof : " + typeof(month));
-							console.log("month.length : " + month.length);
-							console.log("String month.length : " + String(month).length);
-							if(String(month).length == 1) {
-								var month = 0 + month;
-							}
-							
 							//전표별 값 입력
 							var $tr = $("<tr>");
-							var $dateTd = $("<td>").text(month + "-" + date).css("text-align", "center");
+							var $dateTd = $("<td>").text((("0") + month).slice(-2) + "-" + date).css("text-align", "center");
 							var $dateSlipCodeTd = $("<td>").text(value.dateSlipCode).css("text-align", "center");
 							var $briefTd = $("<td>").text(value.brief);
 							var $venderCodeTd = $("<td>").text(value.venderCode).css("text-align", "center");
@@ -928,6 +972,35 @@
 				$("#contentForm").submit();
 				
 			}			
+		}
+		
+		//마감 취소 클릭 시
+		function cancleClosing() {
+			$("#saveBtn").show();
+			$("#closeBtn").show();
+			$("#cancleBtn").hide();
+			$("#requestMsg").text("기말상품재고액을 입력하세요");
+			$("#inputNum").removeAttr("readonly");
+			
+			var year = $("#year").val();
+			
+			$.ajax({
+				url : "countClosedIncomeStmt.fs",
+				type : "get",
+				data : {
+					year : year
+				},
+				success : function(data) {
+					console.log("마감횟수 : " + data);
+					
+					$("#closingNum").text(data);
+				},
+				error : function(status) {
+					console.log(status);
+				}
+			})
+			
+			$("#closingMsg").show();
 		}
 	</script>
 	
