@@ -184,13 +184,12 @@
 											<th>급여이체 은행</th>
 											<td>
 												<select name="backCode" id="backCode">
-													<option value="001">한국은행</option>
 													<option value="002">산업은행</option>
 													<option value="003">기업은행</option>
 													<option value="004">국민은행</option>
 													<option value="005">신한은행</option>
 													<option value="006">농협은행</option>
-													<option value="00H7">SC은행</option>
+													<option value="007">SC은행</option>
 													<option value="008">한국씨티은행</option>
 													<option value="009">우리은행</option>
 												</select>

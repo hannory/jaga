@@ -51,13 +51,13 @@
  		<collection property="journalizeList" javaType="java.util.List" resultMap="journalizeResultMap"/>
  	</resultMap>
  	
- 	<select id="selectTListAll" resultMap="receiptionResultMap">
+ 	<select id="selectTListAll" resultMap="receiptionResultMap" parameterType="java.lang.String">
  		SELECT S.SLIP_CODE, S.DIVISION, S.SLIP_DATE, S.EVIDENCE_CODE, S.SUPPLY_VALUE, S.VALUE_TAX, V.VENDER_NAME, E.EVIDENCE
 		FROM SLIP S
 		JOIN JOURNALIZE J ON(S.SLIP_CODE = J.SLIP_CODE)
 		JOIN VENDER V ON(V.VENDER_CODE = J.VENDER_CODE)
 		JOIN EVIDENCE E ON(E.EVIDENCE_CODE = S.EVIDENCE_CODE)
-		WHERE S.COM_CODE = 42
+		WHERE S.COM_CODE = #{comCode}
 		    AND SUBSTR(TO_CHAR(S.SLIP_DATE,'YYYYMMDD'), 1, 4) = 2020
 		    AND (J.SLIP_CODE, J.PRICE) IN (SELECT SLIP_CODE, MIN(PRICE)
 		                                    FROM (SELECT SLIP_CODE, PRICE, JOURNAL_CODE
@@ -77,7 +77,7 @@
 		JOIN JOURNALIZE J ON(S.SLIP_CODE = J.SLIP_CODE)
 		JOIN VENDER V ON(V.VENDER_CODE = J.VENDER_CODE)
 		JOIN EVIDENCE E ON(E.EVIDENCE_CODE = S.EVIDENCE_CODE)
-		WHERE S.COM_CODE = 42
+		WHERE S.COM_CODE = #{comCode}
 		    AND SUBSTR(TO_CHAR(S.SLIP_DATE,'YYYYMMDD'), 1, 4) = 2020
 		    AND (J.SLIP_CODE, J.PRICE) IN (SELECT SLIP_CODE, MIN(PRICE)
 		                                    FROM (SELECT SLIP_CODE, PRICE, JOURNAL_CODE

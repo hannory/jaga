@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="textFit.min.js"></script>
-<title>Insert title here</title>
+<title>자가경리</title>
 <style>
 	#saleTaxInvoice td{
 		border:1px solid red;
@@ -40,15 +40,12 @@
 		height: 30px;
 	}
 	
-	
 </style>
 </head>
 <body>
-<!-- 로딩? -->
-	<div id="loading">
-        <img id="loading-image" src="${ contextPath }/resources/images/loading36.gif" alt="Loading..." />
-    </div>
+
 <div id="taxInvoiceLap">
+
 	<table id="saleTaxInvoice">
 		<!-- 세액 칸 25 -->
 		<tr>

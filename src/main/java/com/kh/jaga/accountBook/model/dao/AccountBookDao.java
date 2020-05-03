@@ -14,4 +14,6 @@ public interface AccountBookDao {
 
 	List<GenderLedgerDTO> selectOneAccount(SqlSessionTemplate sqlSession, HashMap<String, String> hm);
 
+	List<GenderLedgerDTO> selectOneAccountDay(SqlSessionTemplate sqlSession, HashMap<String, String> hm);
+
 }

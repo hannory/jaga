@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>자가경리</title>
 <style>
 	#searchTable{
 		width: 100%;
@@ -55,6 +55,19 @@
 		border-bottom-right-radius: 5px;
 		border: 1px solid lightgray;
 	}
+	
+	.tbody1 td:nth-child(5){
+		text-align: right;
+		padding-right: 5px;
+	}
+	.tbody1 td:nth-child(6){
+		text-align: right;
+		padding-right: 5px;
+	}
+	.tbody1 td:nth-child(7){
+		text-align: right;
+		padding-right: 5px;
+	}
 </style>
 </head>
 <body>
@@ -95,6 +108,7 @@
 		<div class="card mb-4">
 			<div class="card-body">
 				<table id="resultTable" border="1">
+				<thead>
 					<tr>
 						<th><input type="checkbox" class="checkk"></th>
 						<th>작성일자</th>
@@ -105,6 +119,8 @@
 						<th>출력여부</th>
 						<th>인쇄</th>
 					</tr>
+				</thead>
+				<tbody class="tbody1">
 					<c:forEach var="t" items="${ list }">
 					<tr>
 						<td><input type="checkbox" class="checkk"></td>
@@ -118,6 +134,7 @@
 						<td><button id="printBtn" onclick="printBtn('${t.slipCode}');"><img alt="" src="${ contextPath }/resources/images/print.PNG" width="30px" height="30px"></button></td>
 					</tr>
 					</c:forEach>
+				</tbody>
 				</table>
 			</div>
 		</div>

@@ -22,15 +22,19 @@
 	}
 	#normalReTable tbody td:last-of-type input{
 		text-align:right;
+		padding-right: 5px;
 	}
 	#normalReTable tbody td:nth-last-of-type(2) input{
 		text-align:right;
+		padding-right: 5px;
 	}
 	#resultReTable tbody td:last-of-type{
 		text-align:right;
+		padding-right: 5px;
 	}
 	#resultReTable tbody td:nth-last-of-type(2){
 		text-align:right;
+		padding-right: 5px;
 	}
 	input {
 		border:none;
@@ -64,8 +68,16 @@
 		color: white;
 	}
 	
-	
+	tbody {
+		text-align: center;
+	}
+	tbody input {
+		text-align: center;
+	}
 
+	a:hover {
+		cursor: pointer;
+	}
 </style>
 
 </head>
@@ -165,7 +177,7 @@
 			<div class="card-body">
 			<table id="dateReTable">
 				<tr>
-					<th>일자 : 2020 년  월  일</th>
+					<th>일자 : 2020 년  <span class="bottomMonth"></span> 월  <span class="bottomDay"></span> 일</th>
 				</tr>
 			</table>
 			
@@ -201,10 +213,9 @@
 			</table>
 			</div>
 		</div>
-		<div style="height: 100vh;"></div>
+		<div style="height: 10vh;"></div>
 		<div class="card mb-4">
-			<div class="card-body">When scrolling, the navigation stays at
-				the top of the page. This is the end of the static navigation demo.</div>
+			<div class="card-body" id="infoFoot">부가세신고와는 상관없는 전표를 입력해 주세요</div>
 		</div>
 	</div>
 	
@@ -287,6 +298,7 @@
 			
 			$("div#accountModal").modal("hide");
 			
+			
 		}		
 	
 
@@ -311,9 +323,10 @@
 		
 		/* 아래 표 */
 		function detailBungea(month, day, dsNumber){
-			console.log(month);
-			console.log(day);
-			console.log(dsNumber);
+			
+			$(".bottomMonth").text(month);
+			$(".bottomDay").text(day);
+			
 			$("#resultReTable tbody tr").remove();
 			var $tbody = $("#resultReTable tbody");
 			
@@ -373,7 +386,6 @@
 							$("#resultReTable tbody tr").remove();
 							var list = data.list;
 							var $tbody = $("#tbody1");
-							console.log(list);
 							
 							for(var i = 0; i < list.length; i++){
 								var $tr = $("<tr onclick='detailBungea(\""+list[i].month+"\",\""+list[i].day+"\",\""+list[i].dateSlipCode+"\");'>");
@@ -426,8 +438,21 @@
 					.attr("style","margin-left:2px; vertical-align:middle; cursor: Pointer; width:20px; height:20px");
 			
 			
+			$(".debit").focus(function(){
+				$("#infoFoot").text("3. 차변 / 4. 대변");
+			});
 			
+			$(".accountCode").focus(function(){
+				$("#infoFoot").text("계정과목 검색 : F2");
+			});
 			
+			$(".venderCode").focus(function(){
+				$("#infoFoot").text("거래처 검색 : F2");
+			});
+			
+			$("input").not(".venderCode").not(".accountCode").not(".debit").focus(function(){
+				$("#infoFoot").text("부가세신고와는 상관없는 전표를 입력해 주세요");
+			});
 			
 			$("#normalReTable input").focus(function(){
 				$("#normalReTable input").css("background", "white");
@@ -462,13 +487,13 @@
 								 {data : "accountCode",
 									 "render": function(data, type, row){
 							                if(type=='display'){
-							                    data = '<a href="#" onclick="aaa(this);">' + data + '</a>';
+							                    data = '<a onclick="aaa(this);">' + data + '</a>';
 							                }
 							                return data;}},
 								 {data : "accountTitle",
 												 "render": function(data, type, row){
 										                if(type=='display'){
-										                    data = '<a href="#" onclick="aaa(this);">' + data + '</a>';
+										                    data = '<a onclick="aaa(this);">' + data + '</a>';
 										                }
 										                return data;}}
 								 
@@ -476,6 +501,7 @@
 						});
 						$(".modal-title").text("계정과목검색");
 						 $("div#accountModal").modal();
+						 
 					}
 				})
 			});
@@ -498,13 +524,13 @@
 								 {data : "venderCode",
 									 "render": function(data, type, row){
 							                if(type=='display'){
-							                    data = '<a href="#" onclick="ddd(this);">' + data + '</a>';
+							                    data = '<a onclick="ddd(this);">' + data + '</a>';
 							                }
 							                return data;}},
 								 {data : "venderName",
 												 "render": function(data, type, row){
 										                if(type=='display'){
-										                    data = '<a href="#" onclick="ddd(this);">' + data + '</a>';
+										                    data = '<a onclick="ddd(this);">' + data + '</a>';
 										                }
 										                return data;}}
 								 
@@ -512,6 +538,7 @@
 						});
 						$(".modal-title").text("거래처검색");
 						 $("div#accountModal").modal();
+						 
 					}
 				})
 			});
@@ -552,22 +579,7 @@
 				var $month = $(".month");
 				
 				var slipNum = 0;
-				/* $(".month").each(function(index){
-					var monthVal = $(this).val();
-					$(".day").each(function(index1){
-						var dayVal = $(this).val();
-						
-						if(thisDay == dayVal && thisMonth == monthVal){
-							slipNum++;
-						}
-					});
-				});
-				if(slipNum == 1){
-					inputs.filter("[name=dateSlipCode]").val("00001");
-				}else if(slipNum > 1){
-					inputs.filter("[name=dateSlipCode]").val("12");
-				}
-				 */
+				
 				if(thisDay < 10){
 					$(this).val("0"+$(this).val());
 				}
@@ -612,25 +624,6 @@
 			str.value = comma(uncomma(str.value));
 		}
 		
-		function dateSearch(){
-			var date1 = $("#datepicker").val();
-			var date2 = $("#datepicker1").val();
-			
-			console.log("date1 : " + date1);
-			console.log("date2 : " + date2);
-			
-			$.ajax({
-				url:"normalReceipSearch.nr",
-				type:"get",
-				data:{
-					date1 : date1,
-					date2 : date2
-				},
-				success:function(data){
-					console.log(data);
-				}
-			})
-		};
 		
 		
 		var chaValue = null;
@@ -682,8 +675,6 @@
 				}
 				numberC++;
 				
-				console.log(chaValue);
-				console.log(deaValue);
 				
 				var tMonth = $(inputs_01).filter(".month").val();
 				var tDay = $(inputs_01).filter(".day").val();
@@ -726,8 +717,6 @@
 							$("#realForm").append($("<input></input>").attr("type", "hidden").attr("name", "journalizeList["+numberD+"].accountCode").val($(inputs).filter("[name=accountCode]").val()));
 							$("#realForm").append($("<input></input>").attr("type", "hidden").attr("name", "journalizeList["+numberD+"].venderCode").val($(inputs).filter("[name=venderCode]").val()));
 							
-							//$("#realForm").append($(this).children().children().filter(".accountCode"));
-							//$("#realForm").append($(this).children().children().filter(".venderCode"));
 							numberD++;
 						}
 					});
@@ -757,6 +746,23 @@
 				});
 				
 				$(pr).parent().parent().next().children().eq(1).children().focus();
+				
+				
+				$(".debit").focus(function(){
+					$("#infoFoot").text("3. 차변 / 4. 대변");
+				});
+				
+				$(".accountCode").focus(function(){
+					$("#infoFoot").text("계정과목 검색 : F2");
+				});
+				
+				$(".venderCode").focus(function(){
+					$("#infoFoot").text("거래처 검색 : F2");
+				});
+				
+				$("input").not(".venderCode").not(".accountCode").not(".debit").focus(function(){
+					$("#infoFoot").text("부가세신고와는 상관없는 전표를 입력해 주세요");
+				});
 				
 				
 				$(".debit").blur(function(){
@@ -798,102 +804,6 @@
 					
 				});
 				
-			/* 	$(".day").blur(function(){
-					var inputs = $(this).parent().parent().children().children();
-					var thisDay = $(this).val();
-					var thisMonth = inputs.filter(".month").val();
-					var $month = $(".month");
-					
-					if(thisDay < 10){
-						$(this).val("0"+$(this).val());
-					}
-					
-					var slipNum = 0;
-					var num ="";
-					var cha = 0;
-					var dea = 0;
-					
-					var trs = $("#normalReTable tbody tr");
-					
-					for(var i = 0; i < trs.length-1; i++){
-						var month = $(trs).eq(i).children().children().filter(".month").val();
-						var day = $(trs).eq(i).children().children().filter(".day").val();
-						var debit = $(trs).eq(i).children().children().filter(".debit").val();
-						var price = null;
-						var dateSlipCode = $(trs).eq(i).children().children().filter(".dateSlipCode").val();
-						var priceB = null;
-						var debitB = $(trs).eq(i-1).children().children().filter(".debit").val();
-						
-						if(debit == '차변'){
-							price = $(trs).eq(i).children().children().filter("#cha").val();
-						}else if(debit == '대변'){
-							price = $(trs).eq(i).children().children().filter("#dea").val();
-						}
-						
-						if(debitB == '차변'){
-							priceB = $(trs).eq(i-1).children().children().filter("#cha").val();
-						}else if(debitB == '대변'){
-							priceB = $(trs).eq(i-1).children().children().filter("#dea").val();
-						}
-						
-						
-						for(var j = 1; j < trs.length; j++){
-							var month1 = $(trs).eq(j).children().children().filter(".month").val();
-							var day1 = $(trs).eq(j).children().children().filter(".day").val();
-							var debit1 = $(trs).eq(j).children().children().filter(".debit").val();
-							var price1 = null;
-							var dateSlipCode1 = $(trs).eq(j).children().children().filter(".dateSlipCode").val();
-							
-							if(debit1 == '차변'){
-								price1 = $(trs).eq(j).children().children().filter("#cha").val();
-							}else if(debit1 == '대변'){
-								price1 = $(trs).eq(j).children().children().filter("#dea").val();
-							}
-							
-							console.log(price);
-							console.log("bbb" + priceB);
-							
-							if(month == month1 && day == day1){
-								slipNum++;
-								if(price1 == "" && price != priceB){
-									inputs.filter("[name=dateSlipCode]").val(dateSlipCode);
-								}else{
-									
-									if(debit == '차변'){
-										cha += price;
-									}else{
-										dea += price;
-									}
-									
-									if(debit1 == '대변'){
-										dea += price;
-									}else {
-										cha += price;
-									}
-									
-									if(thisDay==day1 && month1 == thisMonth && cha == dea){
-										inputs.filter("[name=dateSlipCode]").val(dateSlipCode1+1);
-									}
-								}
-								
-							}
-							
-							
-						}
-						
-					}
-					
-					if(slipNum == 0){
-						inputs.filter("[name=dateSlipCode]").val("00001");
-					}else if(slipNum == 3){
-						inputs.filter("[name=dateSlipCode]").val("12");
-					}
-					
-					
-					
-					inputs.filter(".debit").focus();
-					
-				}); */
 				
 				
 

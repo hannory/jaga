@@ -51,7 +51,7 @@
 		WHERE S.DIVISION = '매출'
 		    AND S.SLIP_DIVISION = '매입매출'
 		    AND EVIDENCE_CODE = 10
-		    AND S.COM_CODE = '42'
+		    AND S.COM_CODE = #{comCode}
 		    AND SUBSTR(TO_CHAR(S.SLIP_DATE, 'YYYYMMDD'), 1, 4) = 2020
 		ORDER BY S.SLIP_DATE DESC
 	</select>

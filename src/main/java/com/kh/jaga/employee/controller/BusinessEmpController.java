@@ -170,7 +170,7 @@ public class BusinessEmpController {
 				accountPhoto.transferTo(new File(filePath + "\\" + changeName2 + ext2));
 				Attachment at2 = new Attachment();
 				at2.setFilePath(filePath);
-				at2.setNewFileName(changeName2+ext);
+				at2.setNewFileName(changeName2+ext2);
 				at2.setType(4);
 				at2.setComCode(be.getEmployeeCode());
 				attList.add(at2);

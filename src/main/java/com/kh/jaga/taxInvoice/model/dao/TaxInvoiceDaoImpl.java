@@ -14,7 +14,8 @@ public class TaxInvoiceDaoImpl implements TaxInvoiceDao{
 
 	@Override
 	public List<Receiption> selectTListAll(SqlSessionTemplate sqlSession, Company com) {
-		return sqlSession.selectList("TaxInvoice.selectTList", com);
+		String comCode = com.getCompanyCode();
+		return sqlSession.selectList("TaxInvoice.selectTList", comCode);
 	}
 
 	@Override

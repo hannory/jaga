@@ -22,13 +22,13 @@ public class TransectionHistoryServiceImpl implements TransectionHistoryService{
 	private TransectionHistoryDao thd;
 
 	@Override
-	public List<Receiption> selectTListAll() {
+	public List<Receiption> selectTListAll(String comCode) {
 		
-		return thd.selectTListAll(sqlSession);
+		return thd.selectTListAll(sqlSession, comCode);
 	}
 
 	@Override
-	public List<Receiption2> selectDateList(HashMap<String, Date> hm) {
+	public List<Receiption2> selectDateList(HashMap<String, Object> hm) {
 		return thd.selectDateList(sqlSession, hm);
 	}
 

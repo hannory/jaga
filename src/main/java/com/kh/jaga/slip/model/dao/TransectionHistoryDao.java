@@ -12,9 +12,9 @@ import com.kh.jaga.slip.model.vo.Receiption2;
 
 public interface TransectionHistoryDao {
 
-	List<Receiption> selectTListAll(SqlSessionTemplate sqlSession);
+	List<Receiption> selectTListAll(SqlSessionTemplate sqlSession, String comCode);
 
-	List<Receiption2> selectDateList(SqlSessionTemplate sqlSession, HashMap<String, Date> hm);
+	List<Receiption2> selectDateList(SqlSessionTemplate sqlSession, HashMap<String, Object> hm);
 
 	List<Journalize> selectDetailJournal(SqlSessionTemplate sqlSession, String slipCode);
 

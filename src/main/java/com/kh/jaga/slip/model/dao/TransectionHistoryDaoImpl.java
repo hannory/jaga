@@ -16,14 +16,14 @@ public class TransectionHistoryDaoImpl implements TransectionHistoryDao{
 	
 
 	@Override
-	public List<Receiption> selectTListAll(SqlSessionTemplate sqlSession) {
-		List<Receiption> list = sqlSession.selectList("TransectionHistory.selectTListAll");
+	public List<Receiption> selectTListAll(SqlSessionTemplate sqlSession, String comCode) {
+		List<Receiption> list = sqlSession.selectList("TransectionHistory.selectTListAll", comCode);
 		
 		return list;
 	}
 
 	@Override
-	public List<Receiption2> selectDateList(SqlSessionTemplate sqlSession, HashMap<String, Date> hm) {
+	public List<Receiption2> selectDateList(SqlSessionTemplate sqlSession, HashMap<String, Object> hm) {
 		List<Receiption2> list = sqlSession.selectList("TransectionHistory.selectDateList", hm);
 		
 		

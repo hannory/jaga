@@ -74,6 +74,7 @@
 	</select>
 	
 	<select id="selectDetailAccount" resultType="GenderLedgerDTO" parameterType="java.util.HashMap">
+		
 		SELECT YEAR_MONTH_ALL
 		     , YEAR_MONTH_CHA
 		     , DEBIT_CREDIT_CHA
@@ -83,7 +84,7 @@
 		     , PRICE_SUM_DEA
 		     , SUM_MONTH_CHA
 		     , SUM_MONTH_DEA
-		     , SUM_ALL     
+		     , SUM_ALL
 		FROM(SELECT CASE WHEN A.YEAR_MONTH IS NOT NULL THEN  A.YEAR_MONTH
 		                 ELSE B.YEAR_MONTH
 		            END AS YEAR_MONTH_ALL
@@ -117,7 +118,7 @@
 		           JOIN SLIP S ON(J.SLIP_CODE = S.SLIP_CODE)
 		           WHERE J.ACCOUNT_CODE = #{accountCode}
 		                 AND J.DEBIT_CREDIT = '차변'
-		                 AND S.COM_CODE = #{accountCode}
+		                 AND S.COM_CODE = #{comCode}
 		           GROUP BY TO_CHAR(S.SLIP_DATE,'YYYY/MM/DD'), J.DEBIT_CREDIT) A
 		     FULL JOIN (SELECT TO_CHAR(S.SLIP_DATE,'YYYY/MM/DD') "YEAR_MONTH"
 		                     , J.DEBIT_CREDIT
