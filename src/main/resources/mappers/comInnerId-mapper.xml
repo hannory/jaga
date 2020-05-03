@@ -31,7 +31,7 @@
   
   
   <!-- com.kh.jaga.companyInnerId.vo.SelectCompanyIdVo -->
-  <select id="selectComInIdList" resultMap="SelectCompanyIdVo">
+  <select id="selectComInIdList" parameterType="String" resultMap="SelectCompanyIdVo">
   	SELECT COM_INNER_ID_NUM, COM_CODE, POSITION_CODE, ID, PWD, EMAIL, NAME, FILE_NAME
   	FROM COM_INNER_ID
   	WHERE COM_CODE = #{ companyCode }

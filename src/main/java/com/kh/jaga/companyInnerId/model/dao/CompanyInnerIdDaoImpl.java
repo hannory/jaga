@@ -34,7 +34,7 @@ public class CompanyInnerIdDaoImpl implements CompanyInnerIdDao {
 		int offset = (pi.getCurrentPage() - 1) * pi.getLimit();
 		
 		RowBounds rb = new RowBounds(offset, pi.getLimit());
-		List<SelectCompanyIdVo> list = sqlSession.selectList("ComInnerId.selectComInIdList", null, rb); 
+		List<SelectCompanyIdVo> list = sqlSession.selectList("ComInnerId.selectComInIdList", pi.getCompanyCode(), rb); 
 		return list;
 	}
 
