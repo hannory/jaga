@@ -6,9 +6,10 @@ public class IncomeStmtAccount implements java.io.Serializable {
 	private String comCode;
 	private int accountCode;		//계정코드
 	private String accountTitle;	//계정명
-	private int year;				//조회 연도
 	private String curPast;			//당기, 전기여부
+	private int year;				//조회 연도
 	private int month;				//조회 월
+	private int date;				//조회 일
 	private Date slipDate;			//전표일
 	private String dateSlipCode;	//회사별, 일별 전표코드
 	private String brief;			//적요
@@ -19,16 +20,17 @@ public class IncomeStmtAccount implements java.io.Serializable {
 	
 	public IncomeStmtAccount() {}
 
-	public IncomeStmtAccount(String comCode, int accountCode, String accountTitle, int year, String curPast, int month,
-			Date slipDate, String dateSlipCode, String brief, String venderCode, String venderName, String debitCredit,
-			int price) {
+	public IncomeStmtAccount(String comCode, int accountCode, String accountTitle, String curPast, int year, int month,
+			int date, Date slipDate, String dateSlipCode, String brief, String venderCode, String venderName,
+			String debitCredit, int price) {
 		super();
 		this.comCode = comCode;
 		this.accountCode = accountCode;
 		this.accountTitle = accountTitle;
-		this.year = year;
 		this.curPast = curPast;
+		this.year = year;
 		this.month = month;
+		this.date = date;
 		this.slipDate = slipDate;
 		this.dateSlipCode = dateSlipCode;
 		this.brief = brief;
@@ -142,13 +144,20 @@ public class IncomeStmtAccount implements java.io.Serializable {
 		this.venderName = venderName;
 	}
 
+	public int getDate() {
+		return date;
+	}
+
+	public void setDate(int date) {
+		this.date = date;
+	}
+
 	@Override
 	public String toString() {
 		return "IncomeStmtAccount [comCode=" + comCode + ", accountCode=" + accountCode + ", accountTitle="
-				+ accountTitle + ", year=" + year + ", curPast=" + curPast + ", month=" + month + ", slipDate="
-				+ slipDate + ", dateSlipCode=" + dateSlipCode + ", brief=" + brief + ", venderCode=" + venderCode
-				+ ", venderName=" + venderName + ", debitCredit=" + debitCredit + ", price=" + price + "]";
+				+ accountTitle + ", curPast=" + curPast + ", year=" + year + ", month=" + month + ", date=" + date
+				+ ", slipDate=" + slipDate + ", dateSlipCode=" + dateSlipCode + ", brief=" + brief + ", venderCode="
+				+ venderCode + ", venderName=" + venderName + ", debitCredit=" + debitCredit + ", price=" + price + "]";
 	}
-
 
 }

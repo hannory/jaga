@@ -29,6 +29,13 @@
 		border:1px solid red; 
 		color:red;
 	}
+	#closingMsg{
+		display: none;
+		color: #296355;
+	}
+	#closingNum{
+		font-weight: bold;
+	}
 	.normal-label {
 		margin:0px;
 	}
@@ -72,6 +79,13 @@
 		border: 1px solid #a6a6a6;
 		background: #e7e6e6;
 		text-align: center;
+	}
+	#pastDate {
+		background: #cf1d7f;
+		color: white;
+		/* background: #f165b2 */
+		padding-top: 1px;
+		padding-bottom: 1px;
 	}
 </style>
 <title>자가 경리</title>
@@ -126,7 +140,7 @@
 			<table style="width:100%; max-width:1100px;">
 				<tr>
 					<td>
-						<span style="margin-bottom:10px; color:red;"><img src="${ contextPath }/resources/images/pencil.PNG"><label class="normal=lable" id="requestMsg">기말원재료재고액을 입력하세요</label></span>
+						<span style="margin-bottom:10px; color:red;"><img src="${ contextPath }/resources/images/pencil.PNG"><label class="normal-lable" id="requestMsg">기말원재료재고액을 입력하세요</label></span>
 						&nbsp;&nbsp;&nbsp;&nbsp;		
 						<button type="button" id="saveBtn" onclick="saveMfrgStmt();">저장</button>
 						&nbsp;&nbsp;
@@ -135,6 +149,7 @@
 						<button type="button" id="cancleBtn" onclick="cancleClosing();">마감 취소</button>
 					</td>
 					<td align="right">
+						<span id="closingMsg">당기 <label class="normal-label" id="closingNum"></label>번째 마감 후 재수정 중</span>
 					</td>
 				</tr>
 			</table>
@@ -339,7 +354,7 @@
 			case 11 : $("#dec").prop("selected", true); break;
 			}
 			
-			//로그인 회사로 기수 설정
+			//로그인 회사로 기수 및 날짜 설정
 			var openDay = $("#login-openDay").val();
 			var openYear = String(openDay).substring(0,4);
 			
@@ -349,6 +364,7 @@
 			$("#cur-term").text(curTerm);
 			$("#term").val(curTerm);
 			$("#past-term").text(pastTerm);
+			$("#cur-month").text(("0" + (curDate.getMonth() + 1)).slice(-2));
 			
 			//키 입력창에 값을 입력시 발생하는 이벤트
 			$("#inputNum").keyup(function() {
@@ -413,22 +429,33 @@
 				},
 				success: function(data) {
 					
-					if(data.closing == "Y") {
-						$("#cancleBtn").show();
-						$("#requestMsg").text("마감이 완료되었습니다");
-						$("#inputNum").attr("readonly", "readonly");
-					} else {
+					if(data == "") {
+						console.log("data is empty");
+						
 						$("#saveBtn").show();
 						$("#closeBtn").show();
-					}
-					
-					if(data == "") {
-						console.log("data is NULL");
 					} else {
+						if(data.closing == "Y") {
+							$("#cancleBtn").show();
+							$("#requestMsg").text("마감이 완료되었습니다");
+							$("#inputNum").attr("readonly", "readonly");
+						} else {
+							$("#saveBtn").show();
+							$("#closeBtn").show();
+							
+							if(data.countClosed != 0) {
+								$("#closingNum").text(data.countClosed);
+								$("#closingMsg").show();
+							}
+						}
+						
 						var val13 = data.val13;
 						
 						$("#inputNum").val(comma(val13));						
 					}
+				},
+				error : function(status) {
+					console.log(status);
 				}
 			});
 			
@@ -683,14 +710,9 @@
 								monthCheck += gap;
 							}
 							
-							//월을 두자리수로 만들기
-							if(String(month).lenght == 1) {
-								var month = 0 + month;
-							}
-							
 							//전표별 값 입력
 							var $tr = $("<tr>");
-							var $dateTd = $("<td>").text(month + "-" + date).css("text-align", "center");
+							var $dateTd = $("<td>").text((("0") + month).slice(-2) + "-" + date).css("text-align", "center");
 							var $dateSlipCodeTd = $("<td>").text(value.dateSlipCode).css("text-align", "center");
 							var $briefTd = $("<td>").text(value.brief);
 							var $venderCodeTd = $("<td>").text(value.venderCode).css("text-align", "center");
@@ -798,15 +820,6 @@
 				
 				$("#contentForm").submit();
 				
-				/* Swal.fire({
-					icon: "success",
-					title: "마감 성공",
-					text: "마감이 완료되었습니다!"
-				}).then((result) => {
-					if(result.value) {
-						$("#contentForm").submit();
-					}
-				}) */
 			}
 			
 		}
@@ -818,6 +831,26 @@
 			$("#cancleBtn").hide();
 			$("#requestMsg").text("기말원재료재고액을 입력하세요");
 			$("#inputNum").removeAttr("readonly");
+			
+			var year = $("#year").val();
+			
+			$.ajax({
+				url : "countClosedMfrg.fs",
+				type : "get",
+				data : {
+					year : year
+				},
+				success : function(data) {
+					console.log("마감횟수 : " + data);
+					
+					$("#closingNum").text(data);
+				},
+				error : function(status) {
+					console.log(status);
+				}
+			})
+			
+			$("#closingMsg").show();
 		}
 	</script>
 	

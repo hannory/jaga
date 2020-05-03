@@ -73,13 +73,13 @@ public class FinStmtController {
 	}	
 	
 	@RequestMapping("insertIncomeStmt.fs")
-	public String insertIncomeStmt(IncomeStmt i, Model model, HttpServletRequest request) {
-		
-		System.out.println("incomeStmt : " + i);
+	public String insertIncomeStmt(IncomeStmt i, HttpServletRequest request) {
 		
 		i.setComCode(((Company) request.getSession().getAttribute("loginCompany")).getCompanyCode());
 		
 		int result = fss.insertIncomeStmt(i);
+		
+		System.out.println("CHECK : result Controller : " + result);
 		
 		if(result > 0) {
 			request.getSession().setAttribute("alertCode", "successIncome");
@@ -132,19 +132,24 @@ public class FinStmtController {
 	public void selectSlip(IncomeStmtAccount isa, HttpServletRequest request, HttpServletResponse response) {
 		isa.setComCode(((Company) request.getSession().getAttribute("loginCompany")).getCompanyCode());
 		
-		System.out.println("curPast : " + isa.getCurPast());
+		ArrayList<IncomeStmtAccount> list = fss.selectSlip(isa);
 		
-		ArrayList<IncomeStmtAccount> list;
+		response.setContentType("application/json");
 		
-		if(isa.getCurPast().equals("c")) {
-			//당기일 경우
-			list = fss.selectSlip(isa);
-		} else {
-			//전기일 경우
-			int curYear = isa.getYear();
-			isa.setYear(curYear - 1);
-			list = fss.selectSlip(isa);
+		try {
+			new Gson().toJson(list, response.getWriter());
+		} catch (JsonIOException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
+	}
+	
+	@RequestMapping("selectSlipByDate.fs")
+	public void selectSlipByDate(IncomeStmtAccount isa, HttpServletRequest request, HttpServletResponse response) {
+		isa.setComCode(((Company) request.getSession().getAttribute("loginCompany")).getCompanyCode());
+		
+		ArrayList<IncomeStmtAccount> list = fss.selectSlipByDate(isa);
 		
 		response.setContentType("application/json");
 		
@@ -179,8 +184,7 @@ public class FinStmtController {
 		
 		ms.setComCode(((Company) request.getSession().getAttribute("loginCompany")).getCompanyCode());
 		
-		String closing = ms.getClosing();
-
+		//String closing = ms.getClosing();
 		
 		int result = fss.insertMfrgStmt(ms);			
 		
@@ -200,15 +204,44 @@ public class FinStmtController {
 	@RequestMapping("searchMfrg.fs")
 	public void searchMfrg(MfrgStmt ms, HttpServletRequest request, HttpServletResponse response) {
 		ms.setComCode(((Company) request.getSession().getAttribute("loginCompany")).getCompanyCode());
+//		
+//		//COUNT를 여기서 할게 아니고 SERVICE에서
+//		int count = fss.countMfrgStmt(ms);
+//		
+//		if(count > 0) {
+//			MfrgStmt resultMs = fss.searchMfrg(ms);
+//			
+//			int countClosed = fss.countClosedMfrg(ms);
+//			String sCountClosed = Integer.toString(countClosed);
+//			
+//			JSONObject result = new JSONObject();
+//			result.put("val13", resultMs.getVal13());
+//			result.put("closing", resultMs.getClosing());
+//			result.put("countClosed", sCountClosed);
+//			
+//			
+//			try {
+//				response.setContentType("application/json");
+//				PrintWriter out = response.getWriter();
+//				out.print(result.toString());
+//				out.flush();
+//				out.close();
+//				
+//			} catch (IOException e) {
+//				e.printStackTrace();
+//			}
+//		}
 		
-		int check = fss.checkMfrgStmt(ms);
+		MfrgStmt resultMs = fss.searchMfrg(ms);
 		
-		if(check > 0) {
-			MfrgStmt resultMs = fss.searchMfrg(ms);
+		if(resultMs != null) {
+			int countClosed = fss.countClosedMfrg(ms);
+			String sCountClosed = Integer.toString(countClosed);
 			
 			JSONObject result = new JSONObject();
 			result.put("val13", resultMs.getVal13());
 			result.put("closing", resultMs.getClosing());
+			result.put("countClosed", sCountClosed);
 			
 			
 			try {
@@ -221,6 +254,22 @@ public class FinStmtController {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+			
+		}
+		
+	}
+	
+	@RequestMapping("countClosedMfrg.fs")
+	public void countClosedMfrg(MfrgStmt ms, HttpServletRequest request, HttpServletResponse response) {
+		ms.setComCode(((Company) request.getSession().getAttribute("loginCompany")).getCompanyCode());
+		
+		int count = fss.countClosedMfrg(ms);
+		String sCount = Integer.toString(count);
+		
+		try {
+			response.getWriter().print(sCount);
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 	
@@ -238,6 +287,51 @@ public class FinStmtController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	@RequestMapping("searchIncomeStmt.fs")
+	public void searchIncomeStmt(IncomeStmt is, HttpServletRequest request, HttpServletResponse response) {
+		is.setComCode(((Company) request.getSession().getAttribute("loginCompany")).getCompanyCode());
+		
+		IncomeStmt resultIs = fss.searchIncomeStmt(is);
+		
+		if(resultIs != null) {
+			int countClosed = fss.countClosedIncomeStmt(is);
+			String sCountClosed = Integer.toString(countClosed);
+			
+			JSONObject result = new JSONObject();
+			result.put("val213", resultIs.getVal213());
+			result.put("closing", resultIs.getClosing());
+			result.put("countClosed", sCountClosed);
+			
+			try {
+				response.setContentType("application/json");
+				PrintWriter out = response.getWriter();
+				out.print(result.toString());
+				out.flush();
+				out.close();
+				
+			} catch (IOException e) {
+				
+				e.printStackTrace();
+			}
+					
+		}
+	}
+	
+	@RequestMapping("countClosedIncomeStmt.fs")
+	public void countClosedIncomeStmt(IncomeStmt is, HttpServletRequest request, HttpServletResponse response) {
+		is.setComCode(((Company) request.getSession().getAttribute("loginCompany")).getCompanyCode());
+		
+		int count = fss.countClosedIncomeStmt(is);
+		String sCount = Integer.toString(count);
+		
+		try {
+			response.getWriter().print(sCount);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 	}
 }
 

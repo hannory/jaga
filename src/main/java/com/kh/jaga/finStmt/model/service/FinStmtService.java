@@ -21,7 +21,17 @@ public interface FinStmtService {
 
 	MfrgStmt searchMfrg(MfrgStmt ms);
 
-	int checkMfrgStmt(MfrgStmt ms);
+	int countMfrgStmt(MfrgStmt ms);
 
 	HashMap selectFinPos(IncomeStmtAccount isa);
+
+	int countClosedMfrg(MfrgStmt ms);
+
+	int countIncomeStmt(IncomeStmt is);
+
+	IncomeStmt searchIncomeStmt(IncomeStmt is);
+
+	int countClosedIncomeStmt(IncomeStmt is);
+
+	ArrayList<IncomeStmtAccount> selectSlipByDate(IncomeStmtAccount isa);
 }

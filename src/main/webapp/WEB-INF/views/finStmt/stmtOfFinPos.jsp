@@ -59,7 +59,9 @@
 		text-align: center;
 	}
 	#pastDate {
-		background: #f165b2;
+		background: #cf1d7f;
+		color: white;
+		/* background: #f165b2 */
 		padding-top: 1px;
 		padding-bottom: 1px;
 	}
@@ -166,6 +168,13 @@
 					<td></td>
 					<td></td>
 					<td></td>
+					<td></td>
+				</tr>
+				<tr class="table-detail">
+					<td class="table-subSubTitle">미수금</td>
+					<td class="table-content"><span id="c12000"></span></td>
+					<td></td>
+					<td class="table-content"><span id="p12000"></span></td>
 					<td></td>
 				</tr>
 				<tr class="table-detail">
@@ -401,8 +410,20 @@
 					
 					//-------------당기-------------
 					var c10100 = data["c10100"];
+					var c12000 = data["c12000"];
 					
 					$("#c10100").text(comma(c10100));
+					$("#c12000").text(comma(c12000));
+					//------------당기 끝------------					
+					//-------------전기-------------	
+					var p10100 = data["p10100"];
+					var p12000 = data["p12000"];
+					
+					$("#p10100").text(comma(p10100));
+					$("#p12000").text(comma(p12000));
+					//------------전기 끝------------	
+					
+					//행 보여주기/숨기기
 				}
 			})
 			
@@ -439,6 +460,7 @@
 				
 				var year = dateArray[0];
 				var month = dateArray[1];
+				var date = dateArray[2];
 				var accountCode = $(this).children('span').attr('id').substring(1,6);
 				var curPast = $(this).children('span').attr('id').substring(0,1);
 				
@@ -462,14 +484,13 @@
 				$("#datepicker3").val(fromDate);
 				$("#datepicker4").val(toDate);
 				
-				console.log("FinPos AJAX 넘어가는 값 테스트 : " + year + ", " + month + ", " + curPast + ", " + accountCode);
-				
 				$.ajax({
-					url : "selectSlip.fs",
+					url : "selectSlipByDate.fs",
 					type : "get",
 					data : {
 						year : year,
 						month : month,
+						date : date,
 						curPast : curPast,
 						accountCode : accountCode
 					},
@@ -581,14 +602,9 @@
 								monthCheck += gap;
 							}
 							
-							//월을 두자리수로 만들기
-							if(String(month).lenght == 1) {
-								var month = 0 + month;
-							}
-							
 							//전표별 값 입력
 							var $tr = $("<tr>");
-							var $dateTd = $("<td>").text(month + "-" + date).css("text-align", "center");
+							var $dateTd = $("<td>").text((("0") + month).slice(-2) + "-" + date).css("text-align", "center");
 							var $dateSlipCodeTd = $("<td>").text(value.dateSlipCode).css("text-align", "center");
 							var $briefTd = $("<td>").text(value.brief);
 							var $venderCodeTd = $("<td>").text(value.venderCode).css("text-align", "center");

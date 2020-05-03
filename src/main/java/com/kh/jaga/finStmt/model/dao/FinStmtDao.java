@@ -30,4 +30,24 @@ public interface FinStmtDao {
 
 	int selectMfrgSum90(SqlSessionTemplate sqlSession, IncomeStmtAccount isa);
 
+	int countSavedMfrgStmt(SqlSessionTemplate sqlSession, MfrgStmt ms);
+
+	int countClosedMfrg(SqlSessionTemplate sqlSession, MfrgStmt ms);
+
+	int countIncomeStmt(SqlSessionTemplate sqlSession, IncomeStmt is);
+
+	IncomeStmt searchIncomeStmt(SqlSessionTemplate sqlSession, IncomeStmt is);
+
+	int countSavedIncomeStmt(SqlSessionTemplate sqlSession, IncomeStmt is);
+
+	int updateIncomeStmt(SqlSessionTemplate sqlSession, IncomeStmt is);
+
+	int countClosedIncometStmt(SqlSessionTemplate sqlSession, IncomeStmt is);
+
+	List<IncomeStmtAccount> selectCurFinStmtByDate(SqlSessionTemplate sqlSession, IncomeStmtAccount isa);
+
+	List selectPastFinStmtByDate(SqlSessionTemplate sqlSession, IncomeStmtAccount isa);
+
+	ArrayList<IncomeStmtAccount> selectSlipByDate(SqlSessionTemplate sqlSession, IncomeStmtAccount isa);
+
 }

@@ -9,10 +9,6 @@
 		<result property="accountCode" column="ACCOUNT_CODE"/>
 	</resultMap> -->
 	
-	<insert id="insertIncomeStmt" parameterType="IncomeStmt">
-		INSERT INTO INCOME_STMT(INCOME_STMT_CODE, COM_CODE, YEAR, TERM, CLOSING, SUM10, V40100, VAL213, SUM30, SUM40, SUM50, SUM100) 
-		VALUES(SEQ_INCOME_STMT_CODE.NEXTVAL, #{comCode}, #{year}, #{term}, #{closing}, #{sum10}, #{v40100}, #{val213}, #{sum30}, #{sum40}, #{sum50}, #{sum100})
-	</insert>
 
 	<!-- (거래처 미입력 등) 분개가 제대로 안되어 NULL 값이 나오는 경우가 있어 RIGHT JOIN -->
 	<select id="selectCurFinStmt" parameterType="IncomeStmtAccount" resultType="IncomeStmtAccount">
@@ -24,12 +20,27 @@
 		AND COM_CODE = #{comCode}
 	</select>
 	
+	<select id="selectCurFinStmtByDate" parameterType="IncomeStmtAccount" resultType="IncomeStmtAccount">
+		SELECT J.PRICE, J.ACCOUNT_CODE, J.DEBIT_CREDIT
+		FROM SLIP S
+		RIGHT JOIN JOURNALIZE J ON(S.SLIP_CODE = J.SLIP_CODE)
+		WHERE TO_CHAR(S.SLIP_DATE, 'YYYYMMDD') <![CDATA[<=]]> #{year} || LPAD(#{month}, 2, 0) || LPAD(#{date}, 2, 0)
+		AND COM_CODE = #{comCode}
+	</select>
+	
 	<select id="selectPastFinStmt" parameterType="IncomeStmtAccount" resultType="IncomeStmtAccount">
 		SELECT J.PRICE, J.ACCOUNT_CODE, J.DEBIT_CREDIT
 		FROM SLIP S
 		RIGHT JOIN JOURNALIZE J ON(S.SLIP_CODE = J.SLIP_CODE)
 		WHERE TO_CHAR(S.SLIP_DATE, 'YYYY') = #{year} - 1
-		AND TO_NUMBER(TO_CHAR(S.SLIP_DATE, 'MM')) <![CDATA[<=]]> #{month}
+		AND COM_CODE = #{comCode}
+	</select>
+	
+	<select id="selectPastFinStmtByDate" parameterType="IncomeStmtAccount" resultType="IncomeStmtAccount">
+		SELECT J.PRICE, J.ACCOUNT_CODE, J.DEBIT_CREDIT
+		FROM SLIP S
+		RIGHT JOIN JOURNALIZE J ON(S.SLIP_CODE = J.SLIP_CODE)
+		WHERE TO_CHAR(S.SLIP_DATE, 'YYYY') <![CDATA[<=]]> #{year} - 1
 		AND COM_CODE = #{comCode}
 	</select>
 
@@ -41,6 +52,18 @@
 		LEFT JOIN ACCOUNT_TITLE A ON(J.ACCOUNT_CODE = A.ACCOUNT_CODE)
 		WHERE TO_CHAR(S.SLIP_DATE, 'YYYY') = #{year}
 		AND TO_NUMBER(TO_CHAR(S.SLIP_DATE, 'MM')) <![CDATA[<=]]> #{month}
+		AND S.COM_CODE = #{comCode}
+		AND J.ACCOUNT_CODE = #{accountCode}
+		ORDER BY S.SLIP_DATE
+	</select>
+	
+	<select id="selectSlipByDate" parameterType="IncomeStmtAccount" resultType="IncomeStmtAccount">
+		SELECT S.SLIP_DATE, S.DATE_SLIP_CODE, S.BRIEF, J.VENDER_CODE, V.VENDER_NAME, J.DEBIT_CREDIT, J.PRICE, A.ACCOUNT_TITLE 
+		FROM SLIP S
+		RIGHT JOIN JOURNALIZE J ON(S.SLIP_CODE = J.SLIP_CODE)
+		LEFT JOIN VENDER V ON(J.VENDER_CODE = V.VENDER_CODE)
+		LEFT JOIN ACCOUNT_TITLE A ON(J.ACCOUNT_CODE = A.ACCOUNT_CODE)
+		WHERE TO_CHAR(S.SLIP_DATE, 'YYYYMMDD') <![CDATA[<=]]> #{year} || LPAD(#{month}, 2, 0) || LPAD(#{date}, 2, 0)
 		AND S.COM_CODE = #{comCode}
 		AND J.ACCOUNT_CODE = #{accountCode}
 		ORDER BY S.SLIP_DATE
@@ -58,18 +81,39 @@
 		AND YEAR = #{year}
 	</select>
 	
+	<select id="countSavedMfrgStmt" parameterType="MfrgStmt" resultType="_int">
+		SELECT COUNT(*)
+		FROM MFRG_STMT
+		WHERE COM_CODE = #{comCode}
+		AND YEAR = #{year}
+		AND CLOSING = 'N'
+	</select>
+	
+	<select id="countClosedMfrg" parameterType="MfrgStmt" resultType="_int">
+		SELECT COUNT(*)
+		FROM MFRG_STMT
+		WHERE COM_CODE = #{comCode}
+		AND YEAR = #{year}
+		AND CLOSING = 'Y'
+	</select>
+	
 	<update id="updateMfrgStmt" parameterType="MfrgStmt">
 		UPDATE MFRG_STMT
 		SET VAL13 = #{val13}, SUM90 = #{sum90}, CLOSING = #{closing}
 		WHERE COM_CODE = #{comCode}
 		AND YEAR = #{year}
+		AND MFRG_STMT_CODE = (SELECT MAX(MFRG_STMT_CODE)
+		                      FROM MFRG_STMT)
 	</update>
 	
 	<select id="searchMfrg" parameterType="MfrgStmt" resultType="MfrgStmt">
-		SELECT VAL13, CLOSING
+		SELECT ROWNUM, MFRG_STMT_CODE, VAL13, CLOSING
+		FROM (SELECT MFRG_STMT_CODE, VAL13, CLOSING
 		FROM MFRG_STMT
 		WHERE COM_CODE = #{comCode}
 		AND YEAR = #{year}
+        ORDER BY MFRG_STMT_CODE DESC)
+		WHERE ROWNUM = 1
 	</select>
 
 	<select id="selectMfrgSum90" parameterType="IncomeStmtAccount" resultType="_int">
@@ -77,6 +121,56 @@
 		FROM MFRG_STMT
 		WHERE COM_CODE = #{comCode}
 		AND YEAR = #{year}
+        AND MFRG_STMT_CODE = (SELECT MAX(MFRG_STMT_CODE)
+                              FROM MFRG_STMT
+                              WHERE CLOSING = 'Y')
+	</select>
+	
+	<insert id="insertIncomeStmt" parameterType="IncomeStmt">
+		INSERT INTO INCOME_STMT(INCOME_STMT_CODE, COM_CODE, YEAR, TERM, CLOSING, SUM10, V40100, VAL213, SUM30, SUM40, SUM50, SUM100) 
+		VALUES(SEQ_INCOME_STMT_CODE.NEXTVAL, #{comCode}, #{year}, #{term}, #{closing}, #{sum10}, #{v40100}, #{val213}, #{sum30}, #{sum40}, #{sum50}, #{sum100})
+	</insert>
+	
+	<update id="updateIncomeStmt" parameterType="IncomeStmt">
+		UPDATE INCOME_STMT
+		SET CLOSING = #{closing}, SUM10 = #{sum10}, V40100 = #{v40100}, VAL213 = #{val213}, SUM30 = #{sum30}, SUM40 = #{sum40}, SUM50 = #{sum50}, SUM100 = #{sum100}
+		WHERE COM_CODE = #{comCode}
+		AND YEAR = #{year}
+		AND INCOME_STMT_CODE = (SELECT MAX(INCOME_STMT_CODE)
+						   		FROM INCOME_STMT)
+	</update>
+	
+	<select id="countIncomeStmt" parameterType="IncomeStmt" resultType="_int">
+		SELECT COUNT(*)
+		FROM INCOME_STMT
+		WHERE COM_CODE = #{comCode}
+		AND YEAR = #{year}
+	</select>
+	
+	<select id="countSavedIncomeStmt" parameterType="IncomeStmt" resultType="_int">
+		SELECT COUNT(*)
+		FROM INCOME_STMT
+		WHERE COM_CODE = #{comCode}
+		AND YEAR = #{year}
+		AND CLOSING = 'N' 
+	</select>
+	
+	<select id="countClosedIncomeStmt" parameterType="IncomeStmt" resultType="_int">
+		SELECT COUNT(*)
+		FROM INCOME_STMT
+		WHERE COM_CODE = #{comCode}
+		AND YEAR = #{year}
+		AND CLOSING = 'Y' 
+	</select>
+	
+	<select id="searchIncomeStmt" parameterType="IncomeStmt" resultType="IncomeStmt">
+		SELECT ROWNUM, INCOME_STMT_CODE, VAL213, CLOSING
+		FROM (SELECT INCOME_STMT_CODE, VAL213, CLOSING
+              FROM INCOME_STMT
+              WHERE COM_CODE = #{comCode}
+              AND YEAR = #{year}
+              ORDER BY INCOME_STMT_CODE DESC)
+		WHERE ROWNUM = 1
 	</select>
 	
 </mapper>
