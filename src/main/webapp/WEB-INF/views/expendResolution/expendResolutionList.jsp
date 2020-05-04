@@ -121,11 +121,9 @@
 						
 						
 						$.ajax({
-							url: "swyTestUrl",
-							data : {
-								"k01":"v01",
-								"k02":"v02"
-							},
+							url: "selectExpendResolutionDetail.expendResolution",
+							type: "post",
+							data : {"expendResolutionNo":resolutionNo},
 							success: function(data){
 								alert("success");
 								alert(data);

@@ -69,17 +69,68 @@
 		EXPEND_RESOLUTION_NO
   	)
   	VALUES(
-  		SEQ_EXPEND_RESOLUTION_DETAIL.NEXTVAL,
-  		#{expendDate},
-  		#{brief},
-  		#{venderCode},
-  		#{price},
-  		#{memo},
+  		(SELECT GET_SEQ_EXPEND() FROM DUAL),
+  		#{detailDate01},
+  		#{detailBrief01},
+  		#{detailVenderCode01},
+  		#{detailPrice01},
+  		#{detailMemo01},
   		SEQ_EXPEND_RESOLUTION.CURRVAL
   	)
+  	<if test="detailDate02 != ''">
+  	INTO EXPEND_RESOLUTION_DETAIL(
+	  	EXPEND_DETAIL_NO,
+		EXPEND_DATE,
+		BRIEF,
+		VENDER_CODE,
+		PRICE,
+		MEMO,
+		EXPEND_RESOLUTION_NO
+  	)
+  	VALUES(
+  		(SELECT GET_SEQ_EXPEND() FROM DUAL),
+  		#{detailDate02},
+  		#{detailBrief02},
+  		#{detailVenderCode02},
+  		#{detailPrice02},
+  		#{detailMemo02},
+  		SEQ_EXPEND_RESOLUTION.CURRVAL
+  	)
+  	</if>
+  	<if test="detailDate03 != ''">
+  	INTO EXPEND_RESOLUTION_DETAIL(
+	  	EXPEND_DETAIL_NO,
+		EXPEND_DATE,
+		BRIEF,
+		VENDER_CODE,
+		PRICE,
+		MEMO,
+		EXPEND_RESOLUTION_NO
+  	)
+  	VALUES(
+  		(SELECT GET_SEQ_EXPEND() FROM DUAL),
+  		#{detailDate03},
+  		#{detailBrief03},
+  		#{detailVenderCode03},
+  		#{detailPrice03},
+  		#{detailMemo03},
+  		SEQ_EXPEND_RESOLUTION.CURRVAL
+  	)
+  	</if>
   	SELECT * FROM DUAL
   	
   </insert>
+  
+  
+  <!-- 
+						<td><input name="detailDate02" type="date"></td>
+						<td><input name="detailBrief02" type="text"></td>
+						<td><input name="detailVenderCode02" type="text"></td>
+						<td><input name="detailPrice02" type="text" class="price"></td>
+						<td><input name="detailMemo02" type="text"></td>
+   -->
+  
+  
   
   
   <!-- 

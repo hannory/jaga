@@ -65,6 +65,14 @@
 					location.href = "showViewComInnerIdList.comInId"
 				})
 				break;
+			case "insertExpendResolutionOk" :
+				Swal.fire({
+					icon: "success",
+					text: "지출결의서 발의 완료!"
+				}).then((result) => {
+					location.href = "showExpendResolutionList.expendResolution"
+				})
+				break;
 			}
 		})
 	</script>

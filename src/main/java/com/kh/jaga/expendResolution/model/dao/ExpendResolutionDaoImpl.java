@@ -18,7 +18,7 @@ public class ExpendResolutionDaoImpl implements ExpendResolutionDao{
 	@Override
 	public int insertExpendResoltion(ExpendResolutionDto dto, SqlSessionTemplate sqlSession) {
 //		System.out.println("지출결의서 dao 진입");
-		System.out.println("DAO > 받아온 데이터 (dto): " + dto);
+		System.out.println("DAO > 받아온 지출결의서 데이터 (dto): " + dto);
 		
 //		String date = sqlSession.selectOne("ExpendResolution.selectTest");
 //		System.out.println("!!!!!!!!!! sql date ? " + date);

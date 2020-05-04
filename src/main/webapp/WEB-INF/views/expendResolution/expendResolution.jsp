@@ -793,8 +793,8 @@
 					<tr>
 						<td><input name="detailDate01" type="date"></td>
 						<td><input name="detailBrief01" type="text"></td>
-						<td><input name="venderCode" type="text"></td>
-						<td><input name="price" type="text" class="price"></td>
+						<td><input name="detailVenderCode01" type="text"></td>
+						<td><input name="detailPrice01" type="text" class="price"></td>
 						<td><input name="detailMemo01" type="text"></td>
 					</tr>
 					<tr>

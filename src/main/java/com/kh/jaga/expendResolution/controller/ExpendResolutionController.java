@@ -1,5 +1,6 @@
 package com.kh.jaga.expendResolution.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,7 +65,7 @@ public class ExpendResolutionController {
 		mv.addObject("jsonComInIdList", jsonComInIdList);		//json타입 리스트 추가
 
 		//이제 화면 보여주기
-		mv.setViewName("expendResolution");
+		mv.setViewName("expendResolution/expendResolution");
 		return mv;
 	}//method
 	
@@ -72,15 +73,19 @@ public class ExpendResolutionController {
 	
 	//지출결의서 디비에 저장(인서트)
 	@RequestMapping("insertExpendResolution.expendResolution")
-	public ModelAndView insertExpendResolution(ModelAndView mv, ExpendResolutionDto dto) {
+	public ModelAndView insertExpendResolution(ModelAndView mv, ExpendResolutionDto dto, HttpServletRequest request) {
 		
-		System.out.println("dto ::: ");
-		System.out.println(dto);
+//		System.out.println("dto ::: ");
+//		System.out.println(dto);
 		
 		int result = service.insertExpendResolution(dto);
 		System.out.println("지출결의서 인서트 결과 ::::: " + result);
+		
+		if(result > 0) {
+			request.getSession().setAttribute("alertCode", "insertExpendResolutionOk");
+		}
 
-		mv.setViewName("redirect:index.jsp");
+		mv.setViewName("common/alertPage");
 		return mv;
 	}//method
 	
@@ -92,8 +97,8 @@ public class ExpendResolutionController {
 		//리스트 조회해오기
 		List<ExpendResolutionDto> dtoList = service.selectExpendResolutionList(); 
 		
-		System.out.println("조회결과 :::::::");
-		System.out.println(dtoList);
+//		System.out.println("조회결과 :::::::");
+//		System.out.println(dtoList);
 		
 		
 //		for(int i = 0; i < dtoList.size(); i++) {
@@ -103,16 +108,33 @@ public class ExpendResolutionController {
 		
 		mv.addObject("dtoList", dtoList);
 		
-		mv.setViewName("expendResolutionList");
+		mv.setViewName("expendResolution/expendResolutionList");
 		return mv;
 	}//method
 	
 	
+	
+	
+	
 	//지출결의서 리스트에서 행 클릭시 동작하는 ajax
-	@RequestMapping("swyTestUrl")
-	public void testMethod() {
-		System.out.println("swyTestUrl 요청 받은 컨트롤러 ㅎㅎㅎㅎㅎ");
-	}
+	@RequestMapping("selectExpendResolutionDetail.expendResolution")
+	public void testMethod(HttpServletResponse response, String expendResolutionNo) {
+//		System.out.println(expendResolutionNo);
+		
+		
+		
+		
+		
+		
+		
+		
+		try {
+			response.getWriter().print("testValuezzz");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+	}//method
 	
 	
 	

@@ -26,10 +26,10 @@ public class ExpendResolutionServiceImpl implements ExpendResolutionService{
 	@Override
 	public int insertExpendResolution(ExpendResolutionDto dto) {
 
-		System.out.println("지출결의서 인설트 서비스 진입");
+//		System.out.println("지출결의서 인설트 서비스 진입");
 		
 		int result = dao.insertExpendResoltion(dto, sqlSession);
-		System.out.println("지출결의서 서비스 > 쿼리문 실행결과 result ::: " + result);
+//		System.out.println("지출결의서 서비스 > 쿼리문 실행결과 result ::: " + result);
 		
 		return result;
 	}
