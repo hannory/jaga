@@ -108,28 +108,28 @@
    				</tr>
    			</table>
    			
-   			<table border="1" style="width:60%; height:40%; margin:5%; margin-left:5%">
+   			<table id="modalTable01" border="1" style="width:60%; height:40%; margin:5%; margin-left:5%">
    				<tr>
-   					<td class="colorGreen">1</td>
-   					<td>1</td>
-   					<td class="colorGreen">1</td>
-   					<td>1</td>
+   					<td class="colorGreen">발의일</td>
+   					<td id="modalTableValue101">1</td>
+   					<td class="colorGreen">지출일</td>
+   					<td id="modalTableValue102">1</td>
    				</tr>
    				<tr>
-   					<td class="colorGreen">1</td>
-   					<td>1</td>
-   					<td class="colorGreen">1</td>
-   					<td>1</td>
+   					<td class="colorGreen">담당부서</td>
+   					<td id="modalTableValue103">1</td>
+   					<td class="colorGreen">계정과목</td>
+   					<td id="modalTableValue104">1</td>
    				</tr>
    				<tr>
-   					<td class="colorGreen">1</td>
-   					<td>1</td>
-   					<td class="colorGreen">1</td>
-   					<td>1</td>
+   					<td class="colorGreen">담당자</td>
+   					<td id="modalTableValue105">1</td>
+   					<td class="colorGreen">지출합계</td>
+   					<td id="modalTableValue106">1</td>
    				</tr>
    				<tr>
-   					<td class="colorGreen">1</td>
-   					<td colspan="3">1</td>
+   					<td class="colorGreen">지출목적</td>
+   					<td id="modalTableValue107" colspan="3">1</td>
    					
    				</tr>
    			</table>
@@ -139,34 +139,13 @@
    				<div id="" class="colorGreen cursorPointer" style="border-radius:5px; display:inline-block; width:30%; height:30px; line-height:30px; margin-top:10%;">반려</div>
    			</div>
    			
-   			<table border="1" style="margin:0 auto; width:90%; height:30%;">
-   				<tr class="colorGreen">
+   			<table id="modalTable02" border="1" style="margin:0 auto; width:90%; height:30%;">
+   				<tr id="modalTable02Row01" class="colorGreen">
    					<td>일자</td>
    					<td>적요</td>
    					<td>거래처</td>
    					<td>금액</td>
    					<td>비고</td>
-   				</tr>
-   				<tr>
-   					<td>1</td>
-   					<td>1</td>
-   					<td>1</td>
-   					<td>1</td>
-   					<td>1</td>
-   				</tr>
-   				<tr>
-   					<td>1</td>
-   					<td>1</td>
-   					<td>1</td>
-   					<td>1</td>
-   					<td>1</td>
-   				</tr>
-   				<tr>
-   					<td>1</td>
-   					<td>1</td>
-   					<td>1</td>
-   					<td>1</td>
-   					<td>1</td>
    				</tr>
    			</table>
    		
@@ -260,11 +239,42 @@
 							type: "post",
 							data : {"expendResolutionNo":resolutionNo},
 							success: function(data){
-								alert("success");
 								var data = JSON.parse(data);
 								console.log(data);
 								console.log(data.selectOneResult);
 								console.log(data.detailList);
+								console.log(data.detailList.length);
+								
+								
+								var detailList = data.detailList;
+								var selectOneResult = data.selectOneResult;
+								
+								$("#modalTableValue101").text(selectOneResult.initiativeDate.substring(0,10));
+								$("#modalTableValue102").text(selectOneResult.expendDate);
+								$("#modalTableValue103").text(selectOneResult.departmentCode);
+								$("#modalTableValue104").text(selectOneResult.accountTitleCode);
+								$("#modalTableValue105").text(selectOneResult.managerNo);
+								$("#modalTableValue106").text(selectOneResult.expendSummary);
+								$("#modalTableValue107").text(selectOneResult.expendPurpose);
+								
+								
+								for(var i = 0; i < detailList.length; i++){
+									var tempRow = "<tr>"
+					   					+ "<td>" + detailList[i].detailDate.substring(0,10) + "</td>"
+					   					+ "<td>" + detailList[i].detailBrief + "</td>"
+					   					+ "<td>" + detailList[i].detailVenderCode + "</td>"
+					   					+ "<td>" + detailList[i].detailPrice + "</td>"
+					   					+ "<td>" + detailList[i].detailMemo + "</td>"
+					   					+ "</tr>";
+									
+									$("#modalTable02Row01").after(tempRow);
+								}
+								
+								
+								
+								
+								
+								
 							},
 							error: function(status){
 								alert("error");
