@@ -47,7 +47,7 @@
 		width: 100%;
 		height: 100%;
 		z-index: 1;
-		display: block;
+		display: none;
 		background: rgba(150, 150, 150, 0.9);
 		margin-left: -25px;
 		margin-top:-30px;
@@ -89,7 +89,7 @@
    
    <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 상세내역 모달 창 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
    
-   <div id="" class="modal-layer">
+   <div id="divModal" class="modal-layer">
    	<div id="" class="white-layer" style="border:1px solid #24574A">
    		<div style="width:100%; height:10%; background:#24574A;">
    			<h1 style="color:white; margin:0 auto; line-height:65px;">지출결의서 상세내역</h1>
@@ -247,6 +247,9 @@
 			/* 리스트에서 행 클릭 시 해당 문서 번호 가져오기 ,, 이후 문서번호로 데이터 받아와서 모달에 보여주자 */
 				$(function(){
 					$("table tr").click(function(e){
+						
+						$("#divModal").css("display","block");
+						
 						var resolutionNo = this.children[0].innerText;
 						console.log(resolutionNo);
 						
@@ -258,7 +261,10 @@
 							data : {"expendResolutionNo":resolutionNo},
 							success: function(data){
 								alert("success");
-								alert(data);
+								var data = JSON.parse(data);
+								console.log(data);
+								console.log(data.selectOneResult);
+								console.log(data.detailList);
 							},
 							error: function(status){
 								alert("error");

@@ -2,6 +2,7 @@ package com.kh.jaga.expendResolution.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,11 +13,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 import com.kh.jaga.companyInnerId.model.vo.ComInIdVo;
 import com.kh.jaga.expendResolution.model.dto.ExpendResolutionDto;
 import com.kh.jaga.expendResolution.model.service.ExpendResolutionService;
 import com.kh.jaga.expendResolution.model.vo.AccountTitleVo;
 import com.kh.jaga.expendResolution.model.vo.DepartmentVo;
+import com.kh.jaga.expendResolution.model.vo.ExpendResolutionDetailVo;
 
 import net.sf.json.JSONArray;
 
@@ -122,14 +126,39 @@ public class ExpendResolutionController {
 //		System.out.println(expendResolutionNo);
 		
 		
+		ExpendResolutionDto selectOneResult = service.selectExpendResolutionOne(expendResolutionNo);
 		
-		
-		
+		System.out.println("============조회결과==============");
+		System.out.println(selectOneResult);
+
+		List<ExpendResolutionDetailVo> detailVoList = null;
+		if(selectOneResult != null) {
+			detailVoList = service.selectDetailList(expendResolutionNo);
+//			System.out.println("==========리스트==========");
+//			System.out.println(detailVoList);
+		}else {
+			System.out.println("ExpendResolutionController > Exception");
+		}
 		
 		
 		
 		try {
-			response.getWriter().print("testValuezzz");
+			//view 로 값 전달하기
+//			response.getWriter().print(selectOneResult);
+//			response.getWriter().print(detailVoList);
+			
+			
+			HashMap<String, Object> hmap = new HashMap<String, Object>();
+			hmap.put("selectOneResult", selectOneResult);
+			hmap.put("detailList", detailVoList);
+//			response.getWriter().print(new Gson().toJson(hmap));
+			
+			ObjectMapper mapper = new ObjectMapper();
+			String tempStr = mapper.writeValueAsString(hmap);
+			response.getWriter().print(tempStr);
+			
+			
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -7,6 +7,7 @@ import com.kh.jaga.companyInnerId.model.vo.ComInIdVo;
 import com.kh.jaga.expendResolution.model.dto.ExpendResolutionDto;
 import com.kh.jaga.expendResolution.model.vo.AccountTitleVo;
 import com.kh.jaga.expendResolution.model.vo.DepartmentVo;
+import com.kh.jaga.expendResolution.model.vo.ExpendResolutionDetailVo;
 
 public interface ExpendResolutionService {
 
@@ -19,5 +20,9 @@ public interface ExpendResolutionService {
 	List<ComInIdVo> selectComInIdList(String comCome);
 
 	List<ExpendResolutionDto> selectExpendResolutionList();
+
+	ExpendResolutionDto selectExpendResolutionOne(String expendResolutionNo);
+
+	List<ExpendResolutionDetailVo> selectDetailList(String expendResolutionNo);
 
 }

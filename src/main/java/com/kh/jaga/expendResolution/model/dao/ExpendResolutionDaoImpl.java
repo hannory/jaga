@@ -11,6 +11,7 @@ import com.kh.jaga.companyInnerId.model.vo.ComInIdVo;
 import com.kh.jaga.expendResolution.model.dto.ExpendResolutionDto;
 import com.kh.jaga.expendResolution.model.vo.AccountTitleVo;
 import com.kh.jaga.expendResolution.model.vo.DepartmentVo;
+import com.kh.jaga.expendResolution.model.vo.ExpendResolutionDetailVo;
 
 @Repository
 public class ExpendResolutionDaoImpl implements ExpendResolutionDao{
@@ -57,6 +58,22 @@ public class ExpendResolutionDaoImpl implements ExpendResolutionDao{
 		List<ExpendResolutionDto> dtoList = sqlSession.selectList("ExpendResolution.selectExpendResolutionList");
 		
 		return dtoList;
+	}
+
+	@Override
+	public ExpendResolutionDto selectExpendResolutionOne(SqlSessionTemplate sqlSession, String expendResolutionNo) {
+		
+		ExpendResolutionDto dto = sqlSession.selectOne("ExpendResolution.selectExpendResolutionOne", expendResolutionNo);
+		
+		return dto;
+	}
+
+	@Override
+	public List<ExpendResolutionDetailVo> selectDetailList(SqlSessionTemplate sqlSession, String expendResolutionNo) {
+		
+		List<ExpendResolutionDetailVo> list = sqlSession.selectList("ExpendResolution.selectDetailList", expendResolutionNo);
+		
+		return list;
 	}
 
 }
