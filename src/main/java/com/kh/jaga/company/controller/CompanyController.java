@@ -25,6 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kh.jaga.common.CommonsUtils;
 import com.kh.jaga.company.model.exception.LoginException;
 import com.kh.jaga.company.model.service.CompanyService;
+import com.kh.jaga.company.model.service.DashBoardService;
 import com.kh.jaga.company.model.vo.Company;
 import com.kh.jaga.company.model.vo.TypeOfBiz;
 import com.kh.jaga.companyInnerId.model.vo.ComInIdVo;

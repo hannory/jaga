@@ -208,7 +208,7 @@
 					<tr>
 						<td>공급대가</td>
 						<td colspan="3">
-							<input type="text" name="supplydeaga" id="supplydeaga" placeholder="부가세포함금액" onkeyup="inputNumberFormat(this);" onkeydown="inputPlus(this);">
+							<input type="text" name="supplydeaga" id="supplydeaga" placeholder="부가세포함금액" onkeyup="inputNumberFormat(this);">
 						</td>
 					</tr>
 					<tr>
@@ -408,16 +408,6 @@
 			$("div#accountModal").modal("hide");
 		}		
 		
-		function inputPlus(num){
-		/* 	var n = $(num).val();
-			
-			if(event.keyCode == 187){
-				console.log(n);
-				n.replace(/\+/g, '000');
-			}
-			 */
-			
-		}
 		
 		/* 콤마찍기+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 		//콤마찍기
