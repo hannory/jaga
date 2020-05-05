@@ -396,6 +396,11 @@
 		        });
 		    </script>
 			<script type="text/javascript">/* div 히든, 쇼 */
+			/* 콤마 찍기 */
+			function comma(str) {
+				str = String(str);
+				return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, "$1,");
+			}
 			function showTax1(){
 		    	$("#tax2").hide();
 		    	$("#tax1").show();

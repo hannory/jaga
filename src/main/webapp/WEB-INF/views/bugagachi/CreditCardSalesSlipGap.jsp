@@ -217,6 +217,11 @@
 		function cencelDeadline(){  
 		   $("form").attr("action", "updateccSalesSilpGap.cssg");
 		}
+		/* 콤마 찍기 */
+		function comma(str) {
+			str = String(str);
+			return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, "$1,");
+		}
 	 	function search_cssg(){
 	 		 $("#loading").show();
 	 		var search_ye1= $("#search_ye1").val();

@@ -224,6 +224,11 @@
         function cencelDeadline(){  
             $("form").attr("action", "updateCcIssStmt.cis");
         }
+        /* 콤마 찍기 */
+		function comma(str) {
+			str = String(str);
+			return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, "$1,");
+		}
 	 	function search_cis(){
 	 		 $("#loading").show();
 	 		var search_ye= $("#search_ye").val();

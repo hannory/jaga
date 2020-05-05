@@ -201,7 +201,7 @@
 			<h2 class="mt-4">부가가치세 신고서</h2>
 <form action="deadLine.vat" method="post">
 	<ol class="breadcrumb mb-4">
-			<li><button id="deadlineBtn" type="submit">마감</button></li>
+			<li><button id="deadlineBtns" onclick="PopModalTexList()">마감</button></li>
 			<li><button id="deadlineCen" onclick="cencelDeadline()">마감 취소</button></li>
 			<li><input type="text" readonly  id="termDiv" name="termDiv"></li>
 			<li>신고구분: 
@@ -225,7 +225,7 @@
             	</select> 
             </li>
 			<li><input type="button" onclick="search_cis()" value="조회"></li>
-			<li>부가율: <input type="text" name="vatRate" readonly style="width: 50px;">
+			<li>부가율: <input type="text" id="vatRate" name="vatRate" readonly style="width: 50px;">
 			<input type="text" name="vatRateDiv" readonly  style="width: 50px; background-color:#D9EAD3 "> </li>
 			<li><input type="button" name="report" value="신고서미리보기" onclick="pri_VATReport()"></li>
 			
@@ -239,6 +239,7 @@
    	
    	
 		<script type="text/javascript">
+		var deadCk;
 		function cencelDeadline(){
 			$("form").attr("action", "updatdDeadLineCen.vat");
 		}
@@ -255,6 +256,7 @@
 	 		console.log(search_mon1);
 	 		console.log(search_mon2);
 	 		console.log(comCode);
+	 		
 	    	
 	 		$.ajax({
 	 			url:"vatReport.vat",
@@ -264,6 +266,13 @@
 	 				$("#loading").hide();
 	 				var vat=data.vat;
 	 				console.log(vat);
+	 				deadCk=data.deadCk;
+	 				console.log(deadCk);
+	 				
+	 				/* 부가율 넣어주기 */
+	 				$("#vatRate").val(vat.valueRate);
+	 				
+	 				/* 다 를 여기서 계산해줘야함(가 9 -나 17) */
 	 				for(var i=1;i<=85;i++){
 	 					console.log("i값: "+i)
 	 					
@@ -272,12 +281,14 @@
 	 					
 	 					console.log("p: "+p);
 	 					console.log("pt: "+pt);
-	 					$('#p'+i).text(eval(p));
-	 					$('#p'+i+'T').text(eval(pt));
+	 					$('#p'+i).text(comma(eval(p)));
+	 					$('#p'+i+'T').text(comma(eval(pt)));
 	 					
 	 				}
-	 				
-	 				
+	 				console.log("다: ");
+	 				console.log(vat.p9T-vat.p17T);
+	 				var da=vat.p9T-vat.p17T;
+	 				$("#da").text(comma(da));
 	 				
 	 				
 	 				
@@ -286,7 +297,7 @@
 	 				 if(vat.deadline == 'Y'){
 							console.log("마감된 애임")
 							$("#deadlineCen").show();
-							$("#deadlineBtn").hide();
+							$("#deadlineBtns").hide();
 						} 
 	 			},
 	 			error:function(error){
@@ -296,6 +307,10 @@
 	 		});
 	 	}
 		
+		 function PopModalTexList(){
+	    	  console.log("모달확인");
+	    	  $("div#detailList_detail").modal();
+	      }
 		</script>
 			<script type="text/javascript">/* subTable 보이게하기  */
 				function showsubTable1(){
@@ -313,7 +328,11 @@
 			    	$("#vat_subDiv1").hide();
 			    	$("#vat_subDiv3").show();
 			    }
-				
+				/* 콤마 찍기 */
+				function comma(str) {
+					str = String(str);
+					return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, "$1,");
+				}
 			</script>
 						<!-- 로딩? -->
    <div id="loading">
@@ -767,7 +786,7 @@
 			
 			<div class="subTable" id="vat_subDiv2"><!--16,18 vat_sub2 start  -->
 				<table class="mainSubDiv">
-					<tr class="green_value">
+					<tr  class="Tex_bill_th">
 						<td colspan="5">구분</td>
 						<td>금액</td>
 						<td>세율</td>
@@ -854,13 +873,13 @@
 						<td class="green_value">60</td>
 						<td class="green numberArea" id="p60"></td>
 						<td class="green"></td>
-						<td class="green_value" id="p60T"></td>
+						<td class="green_value numberArea" id="p60T"></td>
 					</tr>
 				</table>
 			</div><!--16,18 vat_sub2 end -->
 			<div  class="subTable" id="vat_subDiv3"><!--25 vat_sub3 start  -->
 				<table class="mainSubDiv">
-					<tr class="green_value">
+					<tr class="Tex_bill_th">
 						<td colspan="5">구분</td>
 						<td>금액</td>
 						<td>세율</td>
@@ -1005,9 +1024,9 @@
 					<tr class="green_value">
 						<td colspan="4" class="textArea">합계</td>
 						<td>79</td>
-						<td id="p79"></td>
+						<td class="numberArea"  id="p79"></td>
 						<td class="green"></td>
-						<td id="p79T"></td>
+						<td  class="numberArea" id="p79T"></td>
 					</tr>
 					</table>
 			
@@ -1015,6 +1034,40 @@
 	</div><!-- 오른쪽 서브영역 -->
 		</div><!-- 전체 div end -->
             
+
+<!-- 모달 시작-->
+      <!-- 세부거래내역 -->
+  <div class="modal fade" id="detailList_detail" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header" style="background-color:#1B5748">
+          <h4 class="modal-title" style="color:white;">전표조회</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+        
+        <div>
+        	<table id="List_detail" style=" width:100%; margin-left:auto; margin-right: auto;">
+        		<thead>
+        		<tr class="modal_detailList" style="background-color:#E7E6E6;">
+        			<td>신고서 번호</td>
+        			<td>신고서 이름</td>
+        			<td>마감여부</td>
+        		</tr>
+        		</thead>
+        		
+        		
+        	</table>
+        </div>
+        <div class="modal-footer">
+          <input type="submit" class="btn btn-default" value="마감">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- 모달 끝-->
+
 
 		<div style="height: 100vh;"></div>
 		
