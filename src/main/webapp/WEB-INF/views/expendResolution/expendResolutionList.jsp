@@ -32,6 +32,38 @@
 		opacity:80%;
 	}
 	
+	.colorGreen{
+		background:#24574A;
+		color:white;
+	}
+	.cursorPointer:hover{
+		background:gray;
+		opacity:80%;
+	}
+	
+	/* 모달 */
+	.modal-layer {
+		position: fixed;
+		width: 100%;
+		height: 100%;
+		z-index: 1;
+		display: none;
+		background: rgba(150, 150, 150, 0.9);
+		margin-left: -25px;
+		margin-top:-30px;
+		animation: fadein 2s;
+		text-align:center;
+	}
+	.white-layer {
+		z-index: -1;
+		width: 60%;
+		height: 80%;
+		background: white;
+		margin-left: 150px;
+		margin-top: 50px;
+		border: 1px solid white;
+}
+	
 </style>
 </head>
 <body>
@@ -49,6 +81,132 @@
         <img id="loading-image" src="${ contextPath }/resources/images/loading36.gif" alt="Loading..." />
     </div>
    <!-- 로딩화면 끝-->
+   
+   
+   
+   
+   
+   
+   <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 상세내역 모달 창 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+   
+   <script>
+   
+   	function closeModal(){
+   		$("#divModal").css('display','none');
+   	}
+   
+   </script>
+   
+   <div id="divModal" class="modal-layer">
+   	<div id="" class="white-layer" style="border:1px solid #24574A">
+   		<div style="width:100%; height:10%; background:#24574A;">
+   			<h1 style="color:white; margin:0 auto; line-height:65px;">지출결의서 상세내역</h1>
+   			<div style="float:right; width:50px; height:30px; line-height:30px; background:white; border-radius:5px; margin-top:-50px; margin-right:20px;" onclick="closeModal();"><strong>닫기</strong></b></div>
+   		</div>
+   		
+   		<table id="" class="" border="1" style="text-align:center; float:right; width:220px; height:120px; margin-right:5%; margin-top:5%;">
+   				<tr style="height:20px;">
+   					<td style="width:20px;"></td>
+   					<td style="width:100px;" id="tdManagerName"></td>
+   					<td style="width:100px;" id="tdApprName">결재자</td>
+   				</tr>
+   				<tr>
+   					<td>결재</td>
+   					<td><img id="managerSign" style="width:100%; height:100px;"></td>
+   					<td>싸인</td>
+   				</tr>
+   			</table>
+   			
+   			<table id="modalTable01" border="1" style="width:60%; height:40%; margin:5%; margin-left:5%">
+   				<tr>
+   					<td class="colorGreen">발의일</td>
+   					<td id="modalTableValue101">1</td>
+   					<td class="colorGreen">지출일</td>
+   					<td id="modalTableValue102">1</td>
+   				</tr>
+   				<tr>
+   					<td class="colorGreen">담당부서</td>
+   					<td id="modalTableValue103">1</td>
+   					<td class="colorGreen">계정과목</td>
+   					<td id="modalTableValue104">1</td>
+   				</tr>
+   				<tr>
+   					<td class="colorGreen">담당자</td>
+   					<td id="modalTableValue105">1</td>
+   					<td class="colorGreen">지출합계</td>
+   					<td id="modalTableValue106">1</td>
+   				</tr>
+   				<tr>
+   					<td class="colorGreen">지출목적</td>
+   					<td id="modalTableValue107" colspan="3">1</td>
+   					
+   				</tr>
+   			</table>
+   			
+   			<div style="width:220px; height:50px; float:right; margin-top:-100px; margin-right:5%;">
+   				<div id="" class="colorGreen cursorPointer" style="border-radius:5px; display:inline-block; width:30%; height:30px%; line-height:30px; margin-top:5%;" onclick="apprOk();">승인</div>
+   				<div id="" class="colorGreen cursorPointer" style="border-radius:5px; display:inline-block; width:30%; height:30px; line-height:30px; margin-top:10%;" onclick="apprNo();">반려</div>
+   			</div>
+   			
+   			<table id="modalTable02" border="1" style="margin:0 auto; width:90%; height:30%;">
+   				<tr id="modalTable02Row01" class="colorGreen">
+   					<td>일자</td>
+   					<td>적요</td>
+   					<td>거래처</td>
+   					<td>금액</td>
+   					<td>비고</td>
+   				</tr>
+   			</table>
+   		
+   	</div>
+   </div>
+   
+   <script>
+   /* 승인버튼 눌렀을 때 */
+   function apprOk(){
+	   Swal.fire({
+		   title: '정말 승인하시겠습니까? ',
+		   icon: 'warning',
+		   showCancelButton: true,
+		   confirmButtonColor: '#24574A',
+		   cancelButtonColor: '#d33',
+		   confirmButtonText: '승인'
+		 }).then((result) => {
+		   if (result.value) {
+			   console.log(resolutionNo);
+			   //진짜 승인 눌렀을 때
+			   $.ajax(
+					   url: "expendApprOk.expendResolution",
+					   type: "post",
+					   data: zzzzzzzzzzzzzzzzzzz,
+					   success: function(data){
+						   console.log("success");
+						   console.log(data);
+					   },
+					   error: function(status){
+						   alert("error ...")
+						   alert(status)
+					   }
+					   
+			   );// ajax
+		   }
+		 })
+   }
+   
+   /* 반려버튼 눌렀을 때 */
+   function apprNo(){
+	   alert("반려 ㅠ");
+   }
+   </script>
+   
+   <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 상세내역 모달 창 끝 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+   
+   
+   
+   
+   
+   
+   
 	
 		
 		
@@ -115,20 +273,55 @@
 			/* 리스트에서 행 클릭 시 해당 문서 번호 가져오기 ,, 이후 문서번호로 데이터 받아와서 모달에 보여주자 */
 				$(function(){
 					$("table tr").click(function(e){
-						var resolutionNo = this.children[0].innerText;
-						console.log(resolutionNo);
 						
-						
+						//지출결의서 번호	//전역변수로 설정
+						resolutionNo = this.children[0].innerText;
 						
 						$.ajax({
-							url: "swyTestUrl",
-							data : {
-								"k01":"v01",
-								"k02":"v02"
-							},
+							url: "selectExpendResolutionDetail.expendResolution",
+							type: "post",
+							data : {"expendResolutionNo":resolutionNo},
 							success: function(data){
-								alert("success");
-								alert(data);
+								var data = JSON.parse(data);
+								console.log(data);
+								console.log(data.selectOneResult);
+								console.log(data.detailList);
+								console.log(data.detailList.length);
+								
+								
+								var detailList = data.detailList;
+								var selectOneResult = data.selectOneResult;
+								
+								$("#modalTableValue101").text(selectOneResult.initiativeDate.substring(0,10));
+								$("#modalTableValue102").text(selectOneResult.expendDate);
+								$("#modalTableValue103").text(selectOneResult.departmentCode);
+								$("#modalTableValue104").text(selectOneResult.accountTitleCode);
+								$("#modalTableValue105").text(selectOneResult.managerNo);
+								$("#modalTableValue106").text(selectOneResult.expendSummary);
+								$("#modalTableValue107").text(selectOneResult.expendPurpose);
+								
+								
+								$("#tdManagerName").text(selectOneResult.managerNo);
+								$("#tdApprName").text('${ loginEmp.name}');
+								
+								
+								for(var i = 0; i < detailList.length; i++){
+									var tempRow = "<tr>"
+					   					+ "<td>" + detailList[i].detailDate.substring(0,10) + "</td>"
+					   					+ "<td>" + detailList[i].detailBrief + "</td>"
+					   					+ "<td>" + detailList[i].detailVenderCode + "</td>"
+					   					+ "<td>" + detailList[i].detailPrice + "</td>"
+					   					+ "<td>" + detailList[i].detailMemo + "</td>"
+					   					+ "</tr>";
+									
+									$("#modalTable02Row01").after(tempRow);
+								}
+								
+								$("#managerSign").attr("src",'${contextPath}/resources/uploadFiles/signs/' + selectOneResult.managerSign);
+								
+								
+								
+								
 							},
 							error: function(status){
 								alert("error");
@@ -136,9 +329,9 @@
 							}
 						});//ajax
 						
+						$("#divModal").css("display","block");
 						
-						
-					})	
+					})	//click anonymous function
 				});
 			</script>
 			

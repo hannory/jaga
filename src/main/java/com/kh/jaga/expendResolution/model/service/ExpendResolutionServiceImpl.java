@@ -13,6 +13,8 @@ import com.kh.jaga.expendResolution.model.dao.ExpendResolutionDao;
 import com.kh.jaga.expendResolution.model.dto.ExpendResolutionDto;
 import com.kh.jaga.expendResolution.model.vo.AccountTitleVo;
 import com.kh.jaga.expendResolution.model.vo.DepartmentVo;
+import com.kh.jaga.expendResolution.model.vo.ExpendResolutionDetailVo;
+import com.kh.jaga.vender.model.vo.Vender;
 
 @Service
 public class ExpendResolutionServiceImpl implements ExpendResolutionService{
@@ -26,10 +28,10 @@ public class ExpendResolutionServiceImpl implements ExpendResolutionService{
 	@Override
 	public int insertExpendResolution(ExpendResolutionDto dto) {
 
-		System.out.println("지출결의서 인설트 서비스 진입");
+//		System.out.println("지출결의서 인설트 서비스 진입");
 		
 		int result = dao.insertExpendResoltion(dto, sqlSession);
-		System.out.println("지출결의서 서비스 > 쿼리문 실행결과 result ::: " + result);
+//		System.out.println("지출결의서 서비스 > 쿼리문 실행결과 result ::: " + result);
 		
 		return result;
 	}
@@ -64,6 +66,30 @@ public class ExpendResolutionServiceImpl implements ExpendResolutionService{
 		List<ExpendResolutionDto> dtoList = dao.selectExpendResolutionList(sqlSession);
 		
 		return dtoList;
+	}
+
+	@Override
+	public ExpendResolutionDto selectExpendResolutionOne(String expendResolutionNo) {
+		
+		ExpendResolutionDto dto = dao.selectExpendResolutionOne(sqlSession, expendResolutionNo);
+		
+		return dto;
+	}
+
+	@Override
+	public List<ExpendResolutionDetailVo> selectDetailList(String expendResolutionNo) {
+
+		List<ExpendResolutionDetailVo> list = dao.selectDetailList(sqlSession, expendResolutionNo);
+		
+		return list;
+	}
+
+	@Override
+	public List<Vender> selectVenderList(String comCode) {
+		
+		List<Vender> list = dao.selectVenderList(sqlSession, comCode);
+		
+		return list;
 	}
 	
 	

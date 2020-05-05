@@ -229,6 +229,7 @@
 						var selectedDeptName = target.children[1].innerHTML;
 						$("#inputDeptName").val(selectedDeptName);
 						$("#inputDept").val(selectedDeptCode);
+						console.log(selectedDeptCode);
 						closeModal();
 					}
 					/* 부서 행 클릭 시 동작 끝 */
@@ -510,11 +511,6 @@
 						<td>직원명</td>
 						<td>직급</td>
 					</tr>
-					<tr>
-						<td>923</td>
-						<td>홍길동</td>
-						<td>팀장</td>
-					</tr>
 					
 					<c:if test="${ comInIdList ne null }">
 							<c:forEach var="obj" items="${ comInIdList }">
@@ -636,7 +632,7 @@
 
 				<tr class="botTr" id="confirmBotRow">
 					<td class="">결재</td>
-					<td class="botTd" id="defaultEmpSign">본인싸인</td>
+					<td class="botTd" id="tdDefaultEmpSign"><img id="defaultEmpSign" style="width:100%; height:100px;"></td>
 					<td class="botTd" id="apprSignImg01">싸인</td>
 				</tr>
 
@@ -793,8 +789,8 @@
 					<tr>
 						<td><input name="detailDate01" type="date"></td>
 						<td><input name="detailBrief01" type="text"></td>
-						<td><input name="venderCode" type="text"></td>
-						<td><input name="price" type="text" class="price"></td>
+						<td><input name="detailVenderCode01" type="text"></td>
+						<td><input name="detailPrice01" type="text" class="price"></td>
 						<td><input name="detailMemo01" type="text"></td>
 					</tr>
 					<tr>
@@ -807,7 +803,16 @@
 					<tr>
 						<td><input name="detailDate03" type="date"></td>
 						<td><input name="detailBrief03" type="text"></td>
-						<td><input name="detailVenderCode03" type="text"></td>
+						<!-- <td><input name="detailVenderCode03" type="text"></td> -->
+						<td>
+							<c:if test="${ venderList ne null }">
+								<select name="detailVenderCode03" style="width:100%;">
+									<c:forEach items="${ venderList }" var="target">
+										<option value="${ target.venderCode }">${ target.venderName }</option>
+									</c:forEach>
+								</select>
+							</c:if>
+						</td>
 						<td><input name="detailPrice03" type="text" class="price"></td>
 						<td><input name="detailMemo03" type="text"></td>
 					</tr>
@@ -874,9 +879,8 @@
 							style="text-align: right; border: 1px solid white; border-bottom: 1px solid black;" readonly value="${ loginEmp.name }">
 						<label class="label-sign" for="signInput">(인)</label> <input
 							id="signInput" type="file" style="display: none"
-							onchange="loadFileName(this)"> <br> <label
-							id="signFileName" for="signInput" style="float: right;">서명
-							파일을 업로드하세요</label>
+							onchange="loadFileName(this)"> <br> 
+							<label id="signFileName" for="signInput" style="float: right; display:none;">서명파일을 업로드하세요</label>
 					</div>
 				</div>
 				<!-- //두개 묶어주기 위한 div -->
@@ -1038,18 +1042,26 @@
 		</script>
 
 
-
-
+	
+		
 
 
 
 		<script>
 		/* 본인싸인 기본으로 넣어놓는 스크립트 */
+		var loginEmp = '${ loginEmp}';
 		
+		var startIndex = loginEmp.indexOf('fileName');
+		var tempStr = loginEmp.substring(startIndex);
+		
+		var fileName = tempStr.substring(9,tempStr.indexOf(","));
+
+		$("#defaultEmpSign").attr("src",'${contextPath}/resources/uploadFiles/signs/' + fileName);
 		
 		
 		</script>
-
+		
+		
 
 
 

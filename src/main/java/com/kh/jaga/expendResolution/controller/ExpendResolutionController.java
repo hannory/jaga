@@ -1,6 +1,8 @@
 package com.kh.jaga.expendResolution.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,11 +13,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 import com.kh.jaga.companyInnerId.model.vo.ComInIdVo;
 import com.kh.jaga.expendResolution.model.dto.ExpendResolutionDto;
 import com.kh.jaga.expendResolution.model.service.ExpendResolutionService;
 import com.kh.jaga.expendResolution.model.vo.AccountTitleVo;
 import com.kh.jaga.expendResolution.model.vo.DepartmentVo;
+import com.kh.jaga.expendResolution.model.vo.ExpendResolutionDetailVo;
+import com.kh.jaga.vender.model.vo.Vender;
 
 import net.sf.json.JSONArray;
 
@@ -37,7 +43,7 @@ public class ExpendResolutionController {
 		
 		//검색할 정보들 가져오기	
 		ComInIdVo empVo = (ComInIdVo) request.getSession().getAttribute("loginEmp");
-		String comCome = empVo.getComCode();
+		String comCode = empVo.getComCode();
 		
 		//1.부서정보
 		List<DepartmentVo> deptList = service.selectDeptList();
@@ -58,13 +64,19 @@ public class ExpendResolutionController {
 		mv.addObject("jsonAccountTitleList", jsonAccountTitleList);		//json타입 리스트 추가
 		
 		//3.담당자
-		List<ComInIdVo> comInIdList = service.selectComInIdList(comCome);
+		List<ComInIdVo> comInIdList = service.selectComInIdList(comCode);
 		mv.addObject("comInIdList", comInIdList);				//리스트 추가
 		JSONArray jsonComInIdList = JSONArray.fromObject(comInIdList);
 		mv.addObject("jsonComInIdList", jsonComInIdList);		//json타입 리스트 추가
+		
+		//4.거래처
+		List<Vender> venderList = service.selectVenderList(comCode);
+		mv.addObject("venderList", venderList);
+		JSONArray jsonVenderList = JSONArray.fromObject(venderList);
+		mv.addObject("jsonVenderList",jsonVenderList);
 
 		//이제 화면 보여주기
-		mv.setViewName("expendResolution");
+		mv.setViewName("expendResolution/expendResolution");
 		return mv;
 	}//method
 	
@@ -72,15 +84,19 @@ public class ExpendResolutionController {
 	
 	//지출결의서 디비에 저장(인서트)
 	@RequestMapping("insertExpendResolution.expendResolution")
-	public ModelAndView insertExpendResolution(ModelAndView mv, ExpendResolutionDto dto) {
+	public ModelAndView insertExpendResolution(ModelAndView mv, ExpendResolutionDto dto, HttpServletRequest request) {
 		
-		System.out.println("dto ::: ");
-		System.out.println(dto);
+//		System.out.println("dto ::: ");
+//		System.out.println(dto);
 		
 		int result = service.insertExpendResolution(dto);
 		System.out.println("지출결의서 인서트 결과 ::::: " + result);
+		
+		if(result > 0) {
+			request.getSession().setAttribute("alertCode", "insertExpendResolutionOk");
+		}
 
-		mv.setViewName("redirect:index.jsp");
+		mv.setViewName("common/alertPage");
 		return mv;
 	}//method
 	
@@ -92,8 +108,8 @@ public class ExpendResolutionController {
 		//리스트 조회해오기
 		List<ExpendResolutionDto> dtoList = service.selectExpendResolutionList(); 
 		
-		System.out.println("조회결과 :::::::");
-		System.out.println(dtoList);
+//		System.out.println("조회결과 :::::::");
+//		System.out.println(dtoList);
 		
 		
 //		for(int i = 0; i < dtoList.size(); i++) {
@@ -103,16 +119,83 @@ public class ExpendResolutionController {
 		
 		mv.addObject("dtoList", dtoList);
 		
-		mv.setViewName("expendResolutionList");
+		mv.setViewName("expendResolution/expendResolutionList");
 		return mv;
 	}//method
 	
 	
+	
+	
+	
 	//지출결의서 리스트에서 행 클릭시 동작하는 ajax
-	@RequestMapping("swyTestUrl")
-	public void testMethod() {
-		System.out.println("swyTestUrl 요청 받은 컨트롤러 ㅎㅎㅎㅎㅎ");
+	@RequestMapping("selectExpendResolutionDetail.expendResolution")
+	public void testMethod(HttpServletResponse response, String expendResolutionNo) {
+//		System.out.println(expendResolutionNo);
+		
+		
+		ExpendResolutionDto selectOneResult = service.selectExpendResolutionOne(expendResolutionNo);
+		
+		System.out.println("============조회결과==============");
+		System.out.println(selectOneResult);
+
+		List<ExpendResolutionDetailVo> detailVoList = null;
+		if(selectOneResult != null) {
+			detailVoList = service.selectDetailList(expendResolutionNo);
+//			System.out.println("==========리스트==========");
+//			System.out.println(detailVoList);
+		}else {
+			System.out.println("ExpendResolutionController > Exception");
+		}
+		
+		
+		
+		try {
+			//view 로 값 전달하기
+//			response.getWriter().print(selectOneResult);
+//			response.getWriter().print(detailVoList);
+			
+			
+			HashMap<String, Object> hmap = new HashMap<String, Object>();
+			hmap.put("selectOneResult", selectOneResult);
+			hmap.put("detailList", detailVoList);
+//			response.getWriter().print(new Gson().toJson(hmap));
+			
+			ObjectMapper mapper = new ObjectMapper();
+			String tempStr = mapper.writeValueAsString(hmap);
+			response.getWriter().print(tempStr);
+			
+			
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+	}//method
+	
+	
+	
+	
+	
+	
+	
+	//지출결의서리스트 > 상세보기 > 진짜로 승인 ajax
+	@RequestMapping("expendApprOk.expendResolution")
+	public void expendApprOk(HttpServletResponse response, String data) {
+		System.out.println(data);
+		
+		try {
+			response.getWriter().print("value~~~!!! \nfromcontroller");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		
 	}
+	
+	
+	
+	
+	
 	
 	
 	

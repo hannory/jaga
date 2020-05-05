@@ -69,17 +69,68 @@
 		EXPEND_RESOLUTION_NO
   	)
   	VALUES(
-  		SEQ_EXPEND_RESOLUTION_DETAIL.NEXTVAL,
-  		#{expendDate},
-  		#{brief},
-  		#{venderCode},
-  		#{price},
-  		#{memo},
+  		(SELECT GET_SEQ_EXPEND() FROM DUAL),
+  		#{detailDate01},
+  		#{detailBrief01},
+  		#{detailVenderCode01},
+  		#{detailPrice01},
+  		#{detailMemo01},
   		SEQ_EXPEND_RESOLUTION.CURRVAL
   	)
+  	<if test="detailDate02 != ''">
+  	INTO EXPEND_RESOLUTION_DETAIL(
+	  	EXPEND_DETAIL_NO,
+		EXPEND_DATE,
+		BRIEF,
+		VENDER_CODE,
+		PRICE,
+		MEMO,
+		EXPEND_RESOLUTION_NO
+  	)
+  	VALUES(
+  		(SELECT GET_SEQ_EXPEND() FROM DUAL),
+  		#{detailDate02},
+  		#{detailBrief02},
+  		#{detailVenderCode02},
+  		#{detailPrice02},
+  		#{detailMemo02},
+  		SEQ_EXPEND_RESOLUTION.CURRVAL
+  	)
+  	</if>
+  	<if test="detailDate03 != ''">
+  	INTO EXPEND_RESOLUTION_DETAIL(
+	  	EXPEND_DETAIL_NO,
+		EXPEND_DATE,
+		BRIEF,
+		VENDER_CODE,
+		PRICE,
+		MEMO,
+		EXPEND_RESOLUTION_NO
+  	)
+  	VALUES(
+  		(SELECT GET_SEQ_EXPEND() FROM DUAL),
+  		#{detailDate03},
+  		#{detailBrief03},
+  		#{detailVenderCode03},
+  		#{detailPrice03},
+  		#{detailMemo03},
+  		SEQ_EXPEND_RESOLUTION.CURRVAL
+  	)
+  	</if>
   	SELECT * FROM DUAL
   	
   </insert>
+  
+  
+  <!-- 
+						<td><input name="detailDate02" type="date"></td>
+						<td><input name="detailBrief02" type="text"></td>
+						<td><input name="detailVenderCode02" type="text"></td>
+						<td><input name="detailPrice02" type="text" class="price"></td>
+						<td><input name="detailMemo02" type="text"></td>
+   -->
+  
+  
   
   
   <!-- 
@@ -134,26 +185,102 @@
   <!-- 지출결의서 리스트 조회 -->
   <select id="selectExpendResolutionList" resultType="com.kh.jaga.expendResolution.model.dto.ExpendResolutionDto">
   	SELECT
-		RESOLUTION_NO,
-		COM_RESOLUTION_CODE,
-		INITIATIVE_DATE,
-		DEPARTMENT_CODE,
-		MANAGER_NO,
-		MANAGER_POSITION,
-		EXPEND_PURPOSE,
-		TO_CHAR(EXPEND_DATE,'YYYY-MM-DD') AS EXPEND_DATE,
-		ACCOUNT_TITLE_CODE,
-		EXPEND_SUMMARY,
-		CREATE_USER,
-		CREATE_DATE,
-		APPROVAL_STATUS,
-		PAYMENT_TYPE_CODE,
-		EVIDENCE_CODE,
-		COM_CODE
-	FROM EXPEND_RESOLUTION
+		E.RESOLUTION_NO,
+		E.COM_RESOLUTION_CODE,
+		E.INITIATIVE_DATE,
+		E.DEPARTMENT_CODE,
+		E.MANAGER_NO,
+		E.MANAGER_POSITION,
+		E.EXPEND_PURPOSE,
+		TO_CHAR(E.EXPEND_DATE,'YYYY-MM-DD') AS EXPEND_DATE,
+		A.ACCOUNT_TITLE AS ACCOUNT_TITLE_CODE,
+		E.EXPEND_SUMMARY,
+		E.CREATE_USER,
+		E.CREATE_DATE,
+		E.APPROVAL_STATUS,
+		E.PAYMENT_TYPE_CODE,
+		E.EVIDENCE_CODE,
+		E.COM_CODE
+	FROM EXPEND_RESOLUTION E
+	JOIN ACCOUNT_TITLE A
+	ON E.ACCOUNT_TITLE_CODE = A.ACCOUNT_CODE
+	ORDER BY E.CREATE_DATE
   </select>
   
   
+  <select id="selectExpendResolutionOne" parameterType="String" resultType="com.kh.jaga.expendResolution.model.dto.ExpendResolutionDto">
+  	SELECT
+		E.RESOLUTION_NO,
+		E.COM_RESOLUTION_CODE,
+		E.INITIATIVE_DATE,
+		DEPT.DEPT_NAME AS DEPARTMENT_CODE,
+		CID.NAME AS MANAGER_NO,
+		E.MANAGER_POSITION,
+		E.EXPEND_PURPOSE,
+		TO_CHAR(E.EXPEND_DATE,'YYYY-MM-DD') AS EXPEND_DATE,
+		A.ACCOUNT_TITLE AS ACCOUNT_TITLE_CODE,
+		E.EXPEND_SUMMARY,
+		E.CREATE_USER,
+		E.CREATE_DATE,
+		E.APPROVAL_STATUS,
+		E.PAYMENT_TYPE_CODE,
+		E.EVIDENCE_CODE,
+		E.COM_CODE,
+		CID.FILE_NAME AS MANAGER_SIGN
+	FROM EXPEND_RESOLUTION E
+	JOIN ACCOUNT_TITLE A
+	ON E.ACCOUNT_TITLE_CODE = A.ACCOUNT_CODE
+	JOIN DEPARTMENT DEPT
+	ON DEPT.DEPT_CODE = E.DEPARTMENT_CODE
+	JOIN COM_INNER_ID CID
+	ON CID.COM_INNER_ID_NUM = E.MANAGER_NO
+	WHERE E.RESOLUTION_NO = #{expendResolutionNo}
+  </select>
+  
+  <select id="selectDetailList" parameterType="String" resultType="com.kh.jaga.expendResolution.model.vo.ExpendResolutionDetailVo">
+ 	 SELECT
+		
+		D.EXPEND_DETAIL_NO AS EXPEND_DETAIL_NO,
+        D.EXPEND_DATE AS DETAIL_DATE,
+        D.BRIEF AS DETAIL_BRIEF,
+        D.VENDER_CODE AS DETAIL_VENDER_CODE,
+        D.PRICE AS DETAIL_PRICE,
+        D.MEMO AS DETAIL_MEMO,
+        D.EXPEND_RESOLUTION_NO AS EXPEND_RESOLUTION_NO
+	FROM EXPEND_RESOLUTION E
+	JOIN ACCOUNT_TITLE A
+	ON E.ACCOUNT_TITLE_CODE = A.ACCOUNT_CODE
+	JOIN EXPEND_RESOLUTION_DETAIL D
+    ON E.RESOLUTION_NO = D.EXPEND_RESOLUTION_NO
+	WHERE E.RESOLUTION_NO = #{expendResolutionNo}
+  </select>
+  
+  <select id="selectVenderList" parameterType="String" resultType="com.kh.jaga.vender.model.vo.Vender">
+  	SELECT
+  		VENDER_CODE,
+		COM_CODE,
+		BIZ_REG_NUM,
+		VENDER_NAME,
+		BOSS_NAME,
+		SELL_WAY,
+		SELL_TARGET,
+		VENDER_ADDRESS,
+		VENDER_TEL,
+		DEPARTMENT_INCHARGE,
+		COM_MANAGER_TEL,
+		REMARKS,
+		STATUS,
+		VENDER_FAX,
+		ACCOUNT_HOLDER,
+		ACCOUNT_NUM,
+		PERSONAL_NUM,
+		COM_MANAGER_EMAIL,
+		BANK_CODE,
+		FARMERS_STATUS,
+		VENDER_TYPE
+	FROM VENDER V
+	WHERE COM_CODE = #{ comCode }
+  </select>
   
   
   
