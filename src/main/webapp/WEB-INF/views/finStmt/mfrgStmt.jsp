@@ -81,20 +81,45 @@
 		text-align: center;
 	}
 	#pastDate {
-		background: #cf1d7f;
 		color: white;
-		/* background: #f165b2 */
-		padding-top: 1px;
-		padding-bottom: 1px;
+		/* background: #cf1d7f */;
+		background: #e73d1fc5;
+		padding: 2px 4px;
 	}
+	#modal-inner-head {
+    	padding-top: 16px;
+    	padding-right: 33px;
+    	padding-left: 16px;
+    }
+    .modal-body {
+    	overflow: scroll;
+    	overflow-x: hidden;
+    	height: 578px;
+    	padding-top: 0px !important;
+    }
+	#loading-div {
+	    width: 100%;  
+	    height: 100%;  
+	    top: 0px;
+	    left: 0px;
+	    position: fixed;  
+	    display: none;  
+	    opacity: 0.7;  
+	    background-color: #fff;  
+	    z-index: 99;  
+	    text-align: center; 
+    } 
 </style>
 <title>자가 경리</title>
 </head>
 <body>
 	<jsp:include page="../common/menubar.jsp" />
-	<c:set var="contextPath"
+	<%-- <c:set var="contextPath"
 		value="${ pageContext.servletContext.contextPath }"
-		scope="application" />
+		scope="application" /> --%>
+	<div id="loading-div">
+        <img id="loading-image" src="${ contextPath }/resources/images/loading36.gif" alt="Loading..." />
+    </div>
 	<main>
 	<div class="container-fluid">
 		<table width="1100px">
@@ -416,6 +441,8 @@
 		
 		//(날짜를 통한) 검색 버튼 클릭 시
 		function dateSearch() {
+			$("#loading-div").show();
+			
 			$("#main-tbody").css("display", "");
 			
 			var year = $("#year").val();
@@ -539,7 +566,9 @@
 					
 					var pSum90 = pSum60 - (pSum70 + pSum80);
 					$("#pSum90").text(comma(pSum90));
-					//------------전기 끝------------	
+					//------------전기 끝------------
+					
+					$("#loading-div").hide();
 				},
 				error : function(status) {
 					console.log(status);
@@ -589,12 +618,12 @@
 				var toDate = "";
 				
 				if(curPast == "p") {
-					$("#pastDate").text("전기 데이터 조회중");
+					$("#pastDate").text("전기 데이터 조회중").show();
 					
 					fromDate = (Number(year) - 1) + "-01";
 					toDate = (Number(year) - 1) + "-" + month;
 				} else {
-					$("#pastDate").text("");
+					$("#pastDate").hide();
 					
 					fromDate = year + "-01";
 					toDate = year + "-" + month;
@@ -862,7 +891,7 @@
 					<h4 class="modal-title" style="color:white;">원장조회</h4>
 		        	<button type="button" class="close" data-dismiss="modal">&times;</button>
 				</div>
-				<div class="modal-body">
+				<div id="modal-inner-head">
 					<table width="100%" style="margin-bottom:5px">
 			        	<tr>
 			        		<td>계정과목&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="modal-account-title" readonly>&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="modal-account-code" size="4" readonly>
@@ -892,20 +921,24 @@
 							
 							
 					</script>
+					<table style=" width:100%; margin-left:auto; margin-right: auto;">
+						<thead>
+			        		<tr>
+			        			<td class="modal-head" style="width:5%;">일자</td>
+			        			<td class="modal-head" style="width:6%;">번호</td>
+			        			<td class="modal-head" style="width:20%;">적요</td>
+			        			<td class="modal-head" style="width:6%;">코드</td>
+			        			<td class="modal-head" style="width:18%;">거래처명</td>
+			        			<td class="modal-head" style="width:15%;">차변</td>
+			        			<td class="modal-head" style="width:15%;">대변</td>
+			        			<td class="modal-head" style="width:15%;">잔액</td>
+			        		</tr>
+			        	</thead>
+					</table>
+				</div>
+				<div class="modal-body">
 					<div>
 			        	<table id="list_detail" style=" width:100%; margin-left:auto; margin-right: auto;">
-			        		<thead>
-				        		<tr>
-				        			<td class="modal-head" style="width:5%;">일자</td>
-				        			<td class="modal-head" style="width:6%;">번호</td>
-				        			<td class="modal-head" style="width:20%;">적요</td>
-				        			<td class="modal-head" style="width:6%;">코드</td>
-				        			<td class="modal-head" style="width:18%;">거래처명</td>
-				        			<td class="modal-head" style="width:15%;">차변</td>
-				        			<td class="modal-head" style="width:15%;">대변</td>
-				        			<td class="modal-head" style="width:15%;">잔액</td>
-				        		</tr>
-				        	</thead>
 				        	<tbody>
 				        	</tbody>
 				        	<tfoot>
@@ -933,7 +966,7 @@
 			        	</table>
 			        </div>
 			        <div class="modal-footer">
-			        	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			        	<button type="button" class="btn btn-default" data-dismiss="modal" style="font-weight: bold; color: #1B5748;">Close</button>
 			        </div>
 				</div>
 			</div>

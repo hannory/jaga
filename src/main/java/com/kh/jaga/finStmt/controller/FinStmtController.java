@@ -146,10 +146,10 @@ public class FinStmtController {
 	}
 	
 	@RequestMapping("selectSlipByDate.fs")
-	public void selectSlipByDate(IncomeStmtAccount isa, HttpServletRequest request, HttpServletResponse response) {
+	public void selectSlipByDate(IncomeStmtAccount isa, String accountClass, HttpServletRequest request, HttpServletResponse response) {
 		isa.setComCode(((Company) request.getSession().getAttribute("loginCompany")).getCompanyCode());
 		
-		ArrayList<IncomeStmtAccount> list = fss.selectSlipByDate(isa);
+		ArrayList<IncomeStmtAccount> list = fss.selectSlipByDate(isa, accountClass);
 		
 		response.setContentType("application/json");
 		

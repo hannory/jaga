@@ -41,9 +41,19 @@
 		text-align:left;
 		padding-left:20px;
 	}
+	.table-title-num {
+		background:#7edfc6;
+		text-align:right;
+		padding-left:20px;
+	}
 	.table-subTitle {
 		background:#d3ede6;
 		text-align:left;
+		padding-left:40px;
+	}
+	.table-subTitle-num {
+		background:#d3ede6;
+		text-align:right;
 		padding-left:40px;
 	}
 	.table-subSubTitle {
@@ -59,20 +69,45 @@
 		text-align: center;
 	}
 	#pastDate {
-		background: #cf1d7f;
 		color: white;
-		/* background: #f165b2 */
-		padding-top: 1px;
-		padding-bottom: 1px;
+		/* background: #ff4400c7; */
+		background: #e73d1fc5;
+		padding: 2px 4px;
 	}
+    #modal-inner-head {
+    	padding-top: 16px;
+    	padding-right: 33px;
+    	padding-left: 16px;
+    }
+    .modal-body {
+    	overflow: scroll;
+    	overflow-x: hidden;
+    	height: 578px;
+    	padding-top: 0px !important;
+    }
+	#loading-div {
+	    width: 100%;  
+	    height: 100%;  
+	    top: 0px;
+	    left: 0px;
+	    position: fixed;  
+	    display: none;  
+	    opacity: 0.7;  
+	    background-color: #fff;  
+	    z-index: 99;  
+	    text-align: center; 
+    }
 </style>
 <title>자가 경리</title>
 </head>
 <body>
 	<jsp:include page="../common/menubar.jsp" />
-	<c:set var="contextPath"
+	<%-- <c:set var="contextPath"
 		value="${ pageContext.servletContext.contextPath }"
-		scope="application" />
+		scope="application" /> --%>
+	<div id="loading-div">
+        <img id="loading-image" src="${ contextPath }/resources/images/loading36.gif" alt="Loading..." />
+    </div>
 	<main>
 	<div class="container-fluid">
 		<table width="1100px">
@@ -138,93 +173,170 @@
 				<tr>
 					<td class="table-title">Ⅰ. 유동자산</td>
 					<td class="table-title"></td>
+					<td class="table-title-num"><span id="cSumAssests10"></span><input type="hidden" id="sum10" name="sum10"></td>
 					<td class="table-title"></td>
-					<td class="table-title"></td>
-					<td class="table-title"></td>
+					<td class="table-title-num"><span id="pSumAssests10"></span></td>
 				</tr>
 				<tr class="table-detail">
 					<td class="table-subTitle">① 당좌자산</td>
 					<td class="table-subTitle"></td>
+					<td class="table-subTitle-num"><span id="cSumAssests11"></span><input type="hidden" id="sum11" name="sum11"></td>
 					<td class="table-subTitle"></td>
-					<td class="table-subTitle"></td>
-					<td class="table-subTitle"></td>
+					<td class="table-subTitle-num"><span id="pSumAssests11"></span></td>
 				</tr>
 				<tr class="table-detail">
 					<td class="table-subSubTitle">현금및현금성자산</td>
-					<td class="table-content"><span id="c10100"></span></td>
+					<td class="table-content"><span id="cCash"></span><input type="hidden" id="cash" name="cash"></td>
 					<td></td>
-					<td class="table-content"><span id="p10100"></span></td>
+					<td class="table-content"><span id="pCash"></span></td>
 					<td></td>
 				</tr>
 				<tr class="table-detail">
 					<td class="table-subSubTitle">단기투자자산</td>
+					<td class="table-content"><span id="cShortTermInv"></span><input type="hidden" id="shortTermInv" name="shortTermInv"></td>
 					<td></td>
-					<td></td>
-					<td></td>
+					<td class="table-content"><span id="pShortTermInv"></span></td>
 					<td></td>
 				</tr>
 				<tr class="table-detail">
 					<td class="table-subSubTitle">매출채권</td>
+					<td class="table-content"><span id="cAccountRecievable"></span><input type="hidden" id="accountRecievable" name="accountRecievable"></td>
 					<td></td>
-					<td></td>
-					<td></td>
+					<td class="table-content"><span id="pAccountRecievable"></span></td>
 					<td></td>
 				</tr>
 				<tr class="table-detail">
 					<td class="table-subSubTitle">미수금</td>
-					<td class="table-content"><span id="c12000"></span></td>
+					<td class="table-content"><span id="cNonTradeRecievable"></span><input type="hidden" id="nonTradeRecievable" name="nonTradeRecievable"></td>
 					<td></td>
-					<td class="table-content"><span id="p12000"></span></td>
+					<td class="table-content"><span id="pNonTradeRecievable"></span></td>
+					<td></td>
+				</tr>
+				<tr class="table-detail">
+					<td class="table-subSubTitle">부가세대급금</td>
+					<td class="table-content"><span id="cVatPayment"></span><input type="hidden" id="vatPayment" name="vatPayment"></td>
+					<td></td>
+					<td class="table-content"><span id="pVatPayment"></span></td>
 					<td></td>
 				</tr>
 				<tr class="table-detail">
 					<td class="table-subTitle">② 재고자산</td>
 					<td class="table-subTitle"></td>
+					<td class="table-subTitle-num"><span id="cSumAssests12"></span><input type="hidden" id="sum12" name="sum12"></td>
 					<td class="table-subTitle"></td>
-					<td class="table-subTitle"></td>
-					<td class="table-subTitle"></td>
+					<td class="table-subTitle-num"><span id="pSumAssests12"></span></td>
+				</tr>
+				<tr class="table-detail">
+					<td class="table-subSubTitle">상품</td>
+					<td class="table-content"><span id="cMerchandises"></span><input type="hidden" id="merchandises" name="merchandises"></td>
+					<td></td>
+					<td class="table-content"><span id="pMerchandises"></span></td>
+					<td></td>
+				</tr>
+				<tr class="table-detail">
+					<td class="table-subSubTitle">제품</td>
+					<td class="table-content"><span id="cFinishedGoods"></span><input type="hidden" id="finishedGoods" name="finishedGoods"></td>
+					<td></td>
+					<td class="table-content"><span id="pFinishedGoods"></span></td>
+					<td></td>
+				</tr>
+				<tr class="table-detail">
+					<td class="table-subSubTitle">원재료</td>
+					<td class="table-content"><span id="cRawMaterials"></span><input type="hidden" id="rawMaterials" name="rawMaterials"></td>
+					<td></td>
+					<td class="table-content"><span id="pRawMaterials"></span></td>
+					<td></td>
+				</tr>
+				<tr class="table-detail">
+					<td class="table-subSubTitle">재공품</td>
+					<td class="table-content"><span id="cWorkInProcess"></span><input type="hidden" id="workInProcess" name="workInProcess"></td>
+					<td></td>
+					<td class="table-content"><span id="pWorkInProcess"></span></td>
+					<td></td>
 				</tr>
 				<tr>
 					<td class="table-title">Ⅱ. 비유동자산</td>
 					<td class="table-title"></td>
+					<td class="table-title-num"><span id="cSumAssests20"></span><input type="hidden" id="sum20" name="sum20"></td>
 					<td class="table-title"></td>
-					<td class="table-title"></td>
-					<td class="table-title"></td>
+					<td class="table-title-num"><span id="pSumAssests20"></span></td>
 				</tr>
 				<tr class="table-detail">
 					<td class="table-subTitle">① 투자자산</td>
 					<td class="table-subTitle"></td>
+					<td class="table-subTitle-num"><span id="cSumAssests21"></span><input type="hidden" id="sum21" name="sum21"></td>
 					<td class="table-subTitle"></td>
-					<td class="table-subTitle"></td>
-					<td class="table-subTitle"></td>
+					<td class="table-subTitle-num"><span id="pSumAssests21"></span></td>
+				</tr>
+				<tr class="table-detail">
+					<td class="table-subSubTitle">장기투자증권</td>
+					<td class="table-content"><span id="cLongInvSecurities"></span><input type="hidden" id="longInvSecurities" name="longInvSecurities"></td>
+					<td></td>
+					<td class="table-content"><span id="pLongInvSecurities"></span></td>
+					<td></td>
 				</tr>
 				<tr class="table-detail">
 					<td class="table-subTitle">② 유형자산</td>
 					<td class="table-subTitle"></td>
+					<td class="table-subTitle-num"><span id="cSumAssests22"></span><input type="hidden" id="sum22" name="sum22"></td>
 					<td class="table-subTitle"></td>
-					<td class="table-subTitle"></td>
-					<td class="table-subTitle"></td>
+					<td class="table-subTitle-num"><span id="pSumAssests22"></span></td>
+				</tr>
+				<!-- <tr class="table-detail">
+					<td class="table-subSubTitle">기계장치</td>
+					<td class="table-content"><span id="cMachinery"></span><input type="hidden" id="machinery" name="machinery"></td>
+					<td></td>
+					<td class="table-content"><span id="pMachinery"></span></td>
+					<td></td>
+				</tr>
+				<tr class="table-detail">
+					<td class="table-subSubTitle">감가상각누계액</td>
+					<td class="table-content"><span id="cAdOfMachinery"></span><input type="hidden" id="adOfMachinery" name="adOfMachinery"></td>
+					<td></td>
+					<td class="table-content"><span id="pAdOfMachinery"></span></td>
+					<td></td>
+				</tr>
+				<tr class="table-detail">
+					<td class="table-subSubTitle">차량운반구</td>
+					<td class="table-content"><span id="cVehicles"></span><input type="hidden" id="vehicles" name="vehicles"></td>
+					<td></td>
+					<td class="table-content"><span id="pVehicles"></span></td>
+					<td></td>
+				</tr>
+				<tr class="table-detail">
+					<td class="table-subSubTitle">감가상각누계액</td>
+					<td class="table-content"><span id="cAdOfVehicles"></span><input type="hidden" id="adOfVehicles" name="adOfVehicles"></td>
+					<td></td>
+					<td class="table-content"><span id="pAdOfVehicles"></span></td>
+					<td></td>
+				</tr> -->
+				<tr class="table-detail">
+					<td class="table-subSubTitle">비품</td>
+					<td class="table-content"><span id="cOfficeEquipment"></span><input type="hidden" id="officeEquipment" name="officeEquipment"></td>
+					<td></td>
+					<td class="table-content"><span id="pOfficeEquipment"></span></td>
+					<td></td>
 				</tr>
 				<tr class="table-detail">
 					<td class="table-subTitle">③ 무형자산</td>
 					<td class="table-subTitle"></td>
+					<td class="table-subTitle-num"><span id="cSumAssests23"></span><input type="hidden" id="sum23" name="sum23"></td>
 					<td class="table-subTitle"></td>
-					<td class="table-subTitle"></td>
-					<td class="table-subTitle"></td>
+					<td class="table-subTitle-num"><span id="pSumAssests23"></span></td>
 				</tr>
 				<tr class="table-detail">
 					<td class="table-subTitle">④ 기타비유동자산</td>
 					<td class="table-subTitle"></td>
+					<td class="table-subTitle-num"><span id="cSumAssests24"></span><input type="hidden" id="sum24" name="sum24"></td>
 					<td class="table-subTitle"></td>
-					<td class="table-subTitle"></td>
-					<td class="table-subTitle"></td>
+					<td class="table-subTitle-num"><span id="pSumAssests24"></span></td>
 				</tr>
 				<tr>
 					<td class="table-title" style="padding-left:0px;">자산총계</td>
 					<td class="table-title"></td>
+					<td class="table-title-num"><span id="cTotalAssests"></span><input type="hidden" id="totalAssests" name="totalAssests"></td>
 					<td class="table-title"></td>
-					<td class="table-title"></td>
-					<td class="table-title"></td>
+					<td class="table-title-num"><span id="pTotalAssests"></span></td>
 				</tr>
 				<tr>
 					<td class="table-title" style="padding-left:0px;">부채</td>
@@ -236,23 +348,65 @@
 				<tr>
 					<td class="table-title">Ⅰ. 유동부채</td>
 					<td class="table-title"></td>
+					<td class="table-title-num"><span id="cSumLiabilities10"></span><input type="hidden" id="sumLiabilities10" name="sumLiabilities10"></td>
 					<td class="table-title"></td>
-					<td class="table-title"></td>
-					<td class="table-title"></td>
+					<td class="table-title-num"><span id="pSumLiabilities10"></span></td>
+				</tr>
+				<tr class="table-detail">
+					<td class="table-subSubTitle">매입채무</td>
+					<td class="table-content"><span id="cAccountPayables"></span><input type="hidden" id="accountPayables" name="accountPayables"></td>
+					<td></td>
+					<td class="table-content"><span id="pAccountPayables"></span></td>
+					<td></td>
+				</tr>
+				<tr class="table-detail">
+					<td class="table-subSubTitle">미지급금</td>
+					<td class="table-content"><span id="cNonTradePayables"></span><input type="hidden" id="nonTradePayables" name="nonTradePayables"></td>
+					<td></td>
+					<td class="table-content"><span id="pNonTradePayables"></span></td>
+					<td></td>
+				</tr>
+				<tr class="table-detail">
+					<td class="table-subSubTitle">예수금</td>
+					<td class="table-content"><span id="cWitholdings"></span><input type="hidden" id="witholdings" name="witholdings"></td>
+					<td></td>
+					<td class="table-content"><span id="pWitholdings"></span></td>
+					<td></td>
+				</tr>
+				<tr class="table-detail">
+					<td class="table-subSubTitle">부가세예수금</td>
+					<td class="table-content"><span id="cVatDeposit"></span><input type="hidden" id="vatDeposit" name="vatDeposit"></td>
+					<td></td>
+					<td class="table-content"><span id="pVatDeposit"></span></td>
+					<td></td>
 				</tr>
 				<tr>
 					<td class="table-title">Ⅱ. 비유동부채</td>
 					<td class="table-title"></td>
+					<td class="table-title-num"><span id="cSumLiabilities20"></span><input type="hidden" id="sumLiabilities20" name="sumLiabilities20"></td>
 					<td class="table-title"></td>
-					<td class="table-title"></td>
-					<td class="table-title"></td>
+					<td class="table-title-num"><span id="pSumLiabilities20"></span></td>
+				</tr>
+				<tr class="table-detail">
+					<td class="table-subSubTitle">장기차입금</td>
+					<td class="table-content"><span id="cLongBorrowings"></span><input type="hidden" id="longBorrowings" name="longBorrowings"></td>
+					<td></td>
+					<td class="table-content"><span id="pLongBorrowings"></span></td>
+					<td></td>
+				</tr>
+				<tr class="table-detail">
+					<td class="table-subSubTitle">퇴직급여충당부채</td>
+					<td class="table-content"><span id="cRetirementLiabilities"></span><input type="hidden" id="retirementLiabilities" name="retirementLiabilities"></td>
+					<td></td>
+					<td class="table-content"><span id="pRetirementLiabilities"></span></td>
+					<td></td>
 				</tr>
 				<tr>
 					<td class="table-title" style="padding-left:0px;">부채총계</td>
 					<td class="table-title"></td>
+					<td class="table-title-num"><span id="cTotalLiabilities"></span><input type="hidden" id="totalLiabilities" name="totalLiabilities"></td>
 					<td class="table-title"></td>
-					<td class="table-title"></td>
-					<td class="table-title"></td>
+					<td class="table-title-num"><span id="pTotalLiabilities"></span></td>
 				</tr>
 				<tr>
 					<td class="table-title" style="padding-left:0px;">자본</td>
@@ -390,11 +544,9 @@
 		
 		//(날짜를 통한) 검색 버튼 클릭 시
 		function dateSearch() {
-			console.log("달력값 : " + $("#datepicker").val());
+			$("#loading-div").show();
 			
 			dateArray = ($("#datepicker").val()).split("-");
-			
-			console.log(dateArray[0] + "|" + dateArray[1] + "|" + dateArray[2]);
 			
 			$.ajax({
 				url : "selectFinPos.fs",
@@ -409,21 +561,159 @@
 					$("#cur-date").text(dateArray[2]);
 					
 					//-------------당기-------------
-					var c10100 = data["c10100"];
-					var c12000 = data["c12000"];
+					var cCash = data["cCash"];
+					var cShortTermInv = data["cShortTermInv"];
+					var cAccountRecievable = data["cAccountRecievable"];
+					var cNonTradeRecievable = data["cNonTradeRecievable"];
+					var cVatPayment = data["cVatPayment"];
+					var cMerchandises = data["cMerchandises"];
+					var cFinishedGoods = data["cFinishedGoods"];
+					var cRawMaterials = data["cRawMaterials"];
+					var cWorkInProcess = data["cWorkInProcess"];
+					var cLongInvSecurities = data["cLongInvSecurities"];
+					var cOfficeEquipment = data["cOfficeEquipment"];
+					var cAccountPayables = data["cAccountPayables"];
+					var cNonTradePayables = data["cNonTradePayables"];
+					var cWitholdings = data["cWitholdings"];
+					var cVatDeposit = data["cVatDeposit"];
+					var cLongBorrowings = data["cLongBorrowings"];
+					var cRetirementLiabilities = data["cRetirementLiabilities"];
 					
-					$("#c10100").text(comma(c10100));
-					$("#c12000").text(comma(c12000));
+					$("#cCash").text(comma(cCash));
+					$("#cShortTermInv").text(comma(cShortTermInv));
+					$("#cAccountRecievable").text(comma(cAccountRecievable));
+					$("#cNonTradeRecievable").text(comma(cNonTradeRecievable));
+					$("#cVatPayment").text(comma(cVatPayment));
+					$("#cMerchandises").text(comma(cMerchandises));
+					$("#cFinishedGoods").text(comma(cFinishedGoods));
+					$("#cRawMaterials").text(comma(cRawMaterials));
+					$("#cWorkInProcess").text(comma(cWorkInProcess));
+					$("#cLongInvSecurities").text(comma(cLongInvSecurities));
+					$("#cOfficeEquipment").text(comma(cOfficeEquipment));
+					$("#cAccountPayables").text(comma(cAccountPayables));
+					$("#cNonTradePayables").text(comma(cNonTradePayables));
+					$("#cWitholdings").text(comma(cWitholdings));
+					$("#cVatDeposit").text(comma(cVatDeposit));
+					$("#cLongBorrowings").text(comma(cLongBorrowings));
+					$("#cRetirementLiabilities").text(comma(cRetirementLiabilities));
+					
+					//표 각 합계 계산
+					var cSumAssests11 = cCash + cShortTermInv + cAccountRecievable + cNonTradeRecievable + cVatPayment;
+					$("#cSumAssests11").text(comma(cSumAssests11));
+					
+					var cSumAssests12 = cMerchandises + cFinishedGoods + cRawMaterials + cWorkInProcess;
+					$("#cSumAssests12").text(comma(cSumAssests12));
+					
+					var cSumAssests10 = cSumAssests11 + cSumAssests12;
+					$("#cSumAssests10").text(comma(cSumAssests10));
+					
+					var cSumAssests21 = cLongInvSecurities;
+					$("#cSumAssests21").text(comma(cSumAssests21));
+					
+					var cSumAssests22 = cOfficeEquipment;
+					$("#cSumAssests22").text(comma(cSumAssests22));
+					
+					var cSumAssests23 = 0;
+					$("#cSumAssests23").text(comma(cSumAssests23));
+					
+					var cSumAssests24 = 0;
+					$("#cSumAssests24").text(comma(cSumAssests24));
+					
+					var cSumAssests20 = cSumAssests21 + cSumAssests22 + cSumAssests23 + cSumAssests24;
+					$("#cSumAssests20").text(comma(cSumAssests20));
+					
+					var cTotalAssests = cSumAssests10 + cSumAssests20;
+					$("#cTotalAssests").text(comma(cTotalAssests));
+					
+					var cSumLiabilities10 = cAccountPayables + cNonTradePayables + cWitholdings + cVatDeposit;
+					$("#cSumLiabilities10").text(comma(cSumLiabilities10));
+					
+					var cSumLiabilities20 = cLongBorrowings + cRetirementLiabilities;
+					$("#cSumLiabilities20").text(comma(cSumLiabilities20));
+					
+					var cTotalLiabilities = cSumLiabilities10 + cSumLiabilities20;
+					$("#cTotalLiabilities").text(comma(cTotalLiabilities));
+					
 					//------------당기 끝------------					
 					//-------------전기-------------	
-					var p10100 = data["p10100"];
-					var p12000 = data["p12000"];
+					var pCash = data["pCash"];
+					var pShortTermInv = data["pShortTermInv"];
+					var pAccountRecievable = data["pAccountRecievable"];
+					var pNonTradeRecievable = data["pNonTradeRecievable"];
+					var pVatPayment = data["pVatPayment"];
+					var pMerchandises = data["pMerchandises"];
+					var pFinishedGoods = data["pFinishedGoods"];
+					var pRawMaterials = data["pRawMaterials"];
+					var pWorkInProcess = data["pWorkInProcess"];
+					var pLongInvSecurities = data["pLongInvSecurities"];
+					var pOfficeEquipment = data["pOfficeEquipment"];
+					var pAccountPayables = data["pAccountPayables"];
+					var pNonTradePayables = data["pNonTradePayables"];
+					var pWitholdings = data["pWitholdings"];
+					var pVatDeposit = data["pVatDeposit"];
+					var pLongBorrowings = data["pLongBorrowings"];
+					var pRetirementLiabilities = data["pRetirementLiabilities"];
 					
-					$("#p10100").text(comma(p10100));
-					$("#p12000").text(comma(p12000));
+					$("#pCash").text(comma(pCash));
+					$("#pShortTermInv").text(comma(pShortTermInv));
+					$("#pAccountRecievable").text(comma(pAccountRecievable));
+					$("#pNonTradeRecievable").text(comma(pNonTradeRecievable));
+					$("#pVatPayment").text(comma(pVatPayment));
+					$("#pMerchandises").text(comma(pMerchandises));
+					$("#pFinishedGoods").text(comma(pFinishedGoods));
+					$("#pRawMaterials").text(comma(pRawMaterials));
+					$("#pWorkInProcess").text(comma(pWorkInProcess));
+					$("#pLongInvSecurities").text(comma(pLongInvSecurities));
+					$("#pOfficeEquipment").text(comma(pOfficeEquipment));
+					$("#pAccountPayables").text(comma(pAccountPayables));
+					$("#pNonTradePayables").text(comma(pNonTradePayables));
+					$("#pWitholdings").text(comma(pWitholdings));
+					$("#pVatDeposit").text(comma(pVatDeposit));
+					$("#pLongBorrowings").text(comma(pLongBorrowings));
+					$("#pRetirementLiabilities").text(comma(pRetirementLiabilities));
+					
+					//표 각 합계 계산
+					var pSumAssests11 = pCash + pShortTermInv + pAccountRecievable + pNonTradeRecievable + pVatPayment;
+					$("#pSumAssests11").text(comma(pSumAssests11));
+					
+					var pSumAssests12 = pMerchandises + pFinishedGoods + pRawMaterials + pWorkInProcess;
+					$("#pSumAssests12").text(comma(pSumAssests12));
+					
+					var pSumAssests10 = pSumAssests11 + pSumAssests12;
+					$("#pSumAssests10").text(comma(pSumAssests10));
+					
+					var pSumAssests21 = pLongInvSecurities;
+					$("#pSumAssests21").text(comma(pSumAssests21));
+					
+					var pSumAssests22 = pOfficeEquipment;
+					$("#pSumAssests22").text(comma(pSumAssests22));
+					
+					var pSumAssests23 = 0;
+					$("#pSumAssests23").text(comma(pSumAssests23));
+					
+					var pSumAssests24 = 0;
+					$("#pSumAssests24").text(comma(pSumAssests24));
+					
+					var pSumAssests20 = pSumAssests21 + pSumAssests22 + pSumAssests23 + pSumAssests24;
+					$("#pSumAssests20").text(comma(pSumAssests20));
+					
+					var pTotalAssests = pSumAssests10 + pSumAssests20;
+					$("#pTotalAssests").text(comma(pTotalAssests));
+					
+					var pSumLiabilities10 = pAccountPayables + pNonTradePayables + pWitholdings + pVatDeposit;
+					$("#pSumLiabilities10").text(comma(pSumLiabilities10));
+					
+					var pSumLiabilities20 = pLongBorrowings + pRetirementLiabilities;
+					$("#pSumLiabilities20").text(comma(pSumLiabilities20));
+					
+					var pTotalLiabilities = pSumLiabilities10 + pSumLiabilities20;
+					$("#pTotalLiabilities").text(comma(pTotalLiabilities));
+					
 					//------------전기 끝------------	
 					
 					//행 보여주기/숨기기
+					
+					$("#loading-div").hide();
 				}
 			})
 			
@@ -461,21 +751,21 @@
 				var year = dateArray[0];
 				var month = dateArray[1];
 				var date = dateArray[2];
-				var accountCode = $(this).children('span').attr('id').substring(1,6);
+				var accountClass = $(this).children('span').attr('id').substring(1);
 				var curPast = $(this).children('span').attr('id').substring(0,1);
 				
-				$("#modal-account-code").val(accountCode);
+				//$("#modal-account-code").val(accountCode);
 				
 				var fromDate = "";
 				var toDate = "";
 				
 				if(curPast == "p") {
-					$("#pastDate").text("전기 데이터 조회중");
+					$("#pastDate").text("전기 데이터 조회중").show();
 					
 					fromDate = (Number(year) - 1) + "-01";
 					toDate = (Number(year) - 1) + "-" + month;
 				} else {
-					$("#pastDate").text("");
+					$("#pastDate").hide();
 					
 					fromDate = year + "-01";
 					toDate = year + "-" + month;
@@ -491,14 +781,14 @@
 						year : year,
 						month : month,
 						date : date,
-						curPast : curPast,
-						accountCode : accountCode
+						accountClass : accountClass,
+						curPast : curPast
 					},
 					success : function(data) {
 						console.log("data[0] FinPos" + data[0]);
 						$("#modal-account-title").val(data[0].accountTitle);
 						
-						$tableBody = $("#list_detail tbody");
+						$tableBody = $("#list-detail tbody");
 						//테이블을 갱신하기 위해 비워줌
 						$tableBody.html('');
 						
@@ -676,39 +966,37 @@
 		        	<h4 class="modal-title" style="color:white;">원장조회</h4>
 		        	<button type="button" class="close" data-dismiss="modal">&times;</button>
 		        </div>
-		        <div class="modal-body">
-			    	<table width="100%" style="margin-bottom:5px">
-			        	<tr>
-			        		<td>계정과목&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="modal-account-title" readonly>&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="modal-account-code" size="4" readonly>
-			        		</td>
-			        		<td align="right"><span id="pastDate"></span>&nbsp;&nbsp;<span>조회기간&nbsp;&nbsp;&nbsp;&nbsp;</span><input type="text" id="datepicker3"> ~ <input type="text" id="datepicker4"></td>
-			        	</tr>
-			        </table>
-					<script>
-							/* 날짜 input jquery ui */
-							$.datepicker
-									.setDefaults({
-										showOn : "both",
-										buttonImageOnly : true,
-										buttonImage : "${contextPath}/resources/images/calendar.png",
-										dateFormat : 'yy-mm-dd'
-	
-									});
-							$(function() {
-								$("#datepicker3").datepicker({});
-								$("#datepicker4").datepicker({});
-								/* 달력버튼 */
-								$("img.ui-datepicker-trigger")
-										.attr(
-												"style",
-												"margin-left:2px; vertical-align:middle; cursor: Pointer; width:20px; height:20px");
-							});
-							
-							
-					</script>
-					<div>
-			        	<table id="list_detail" style=" width:100%; margin-left:auto; margin-right: auto;">
-			        		<thead>
+		        <div >
+		        	<div id="modal-inner-head">
+				    	<table width="100%" style="margin-bottom:5px">
+				        	<tr>
+				        		<td>계정과목&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="modal-account-title" readonly>&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="modal-account-code" size="4" readonly>
+				        		</td>
+				        		<td align="right"><span id="pastDate"></span>&nbsp;&nbsp;<span>조회기간&nbsp;&nbsp;&nbsp;&nbsp;</span><input type="text" id="datepicker3"> ~ <input type="text" id="datepicker4"></td>
+				        	</tr>
+				        </table>
+						<script>
+								/* 날짜 input jquery ui */
+								$.datepicker
+										.setDefaults({
+											showOn : "both",
+											buttonImageOnly : true,
+											buttonImage : "${contextPath}/resources/images/calendar.png",
+											dateFormat : 'yy-mm-dd'
+		
+										});
+								$(function() {
+									$("#datepicker3").datepicker({});
+									$("#datepicker4").datepicker({});
+									/* 달력버튼 */
+									$("img.ui-datepicker-trigger")
+											.attr(
+													"style",
+													"margin-left:2px; vertical-align:middle; cursor: Pointer; width:20px; height:20px");
+								});
+						</script>
+						<table style=" width:100%; margin-left:auto; margin-right: auto;">
+							<thead>
 				        		<tr>
 				        			<td class="modal-head" style="width:5%;">일자</td>
 				        			<td class="modal-head" style="width:6%;">번호</td>
@@ -720,18 +1008,34 @@
 				        			<td class="modal-head" style="width:15%;">잔액</td>
 				        		</tr>
 				        	</thead>
+						</table>
+					</div>
+					<div class="modal-body">
+			        	<table id="list-detail" style=" width:100%; margin-left:auto; margin-right: auto;">
+			        		<!-- <thead>
+				        		<tr>
+				        			<td class="modal-head" style="width:5%;">일자</td>
+				        			<td class="modal-head" style="width:6%;">번호</td>
+				        			<td class="modal-head" style="width:20%;">적요</td>
+				        			<td class="modal-head" style="width:6%;">코드</td>
+				        			<td class="modal-head" style="width:18%;">거래처명</td>
+				        			<td class="modal-head" style="width:15%;">차변</td>
+				        			<td class="modal-head" style="width:15%;">대변</td>
+				        			<td class="modal-head" style="width:15%;">잔액</td>
+				        		</tr>
+				        	</thead> -->
 				        	<tbody>
 				        	</tbody>
 				        	<tfoot>
 				        		<tr>
-				        			<td class="modal-head"></td>
-				        			<td class="modal-head"></td>
-				        			<td class="modal-head" style="text-align:left;">[월&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;계]</td>
-				        			<td class="modal-head"></td>
-				        			<td class="modal-head"></td>
-				        			<td class="modal-head" id="last-debit-month"></td>
-				        			<td class="modal-head" id="last-credit-month"></td>
-				        			<td class="modal-head"></td>
+				        			<td class="modal-head" style="width:5%;"></td>
+				        			<td class="modal-head" style="width:6%;"></td>
+				        			<td class="modal-head" style="width:20%; text-align:left;">[월&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;계]</td>
+				        			<td class="modal-head" style="width:6%;"></td>
+				        			<td class="modal-head" style="width:18%;"></td>
+				        			<td class="modal-head" id="last-debit-month" style="width:15%;"></td>
+				        			<td class="modal-head" id="last-credit-month" style="width:15%;"></td>
+				        			<td class="modal-head" style="width:15%;"></td>
 				        		</tr>
 				        		<tr>
 				        			<td class="modal-head"></td>
@@ -745,9 +1049,9 @@
 				        		</tr>
 			        		</tfoot>
 			        	</table>
-			        </div>
-			        <div class="modal-footer">
-			          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				        <div class="modal-footer">
+				          <button type="button" class="btn btn-default" data-dismiss="modal" style="font-weight: bold; color: #1B5748;">Close</button>
+				        </div>
 			        </div>
 				</div>        
 	        </div>
