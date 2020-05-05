@@ -255,6 +255,33 @@
 	WHERE E.RESOLUTION_NO = #{expendResolutionNo}
   </select>
   
+  <select id="selectVenderList" parameterType="String" resultType="com.kh.jaga.vender.model.vo.Vender">
+  	SELECT
+  		VENDER_CODE,
+		COM_CODE,
+		BIZ_REG_NUM,
+		VENDER_NAME,
+		BOSS_NAME,
+		SELL_WAY,
+		SELL_TARGET,
+		VENDER_ADDRESS,
+		VENDER_TEL,
+		DEPARTMENT_INCHARGE,
+		COM_MANAGER_TEL,
+		REMARKS,
+		STATUS,
+		VENDER_FAX,
+		ACCOUNT_HOLDER,
+		ACCOUNT_NUM,
+		PERSONAL_NUM,
+		COM_MANAGER_EMAIL,
+		BANK_CODE,
+		FARMERS_STATUS,
+		VENDER_TYPE
+	FROM VENDER V
+	WHERE COM_CODE = #{ comCode }
+  </select>
+  
   
   
   

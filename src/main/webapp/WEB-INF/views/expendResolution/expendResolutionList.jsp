@@ -89,10 +89,19 @@
    
    <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 상세내역 모달 창 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
    
+   <script>
+   
+   	function closeModal(){
+   		$("#divModal").css('display','none');
+   	}
+   
+   </script>
+   
    <div id="divModal" class="modal-layer">
    	<div id="" class="white-layer" style="border:1px solid #24574A">
    		<div style="width:100%; height:10%; background:#24574A;">
    			<h1 style="color:white; margin:0 auto; line-height:65px;">지출결의서 상세내역</h1>
+   			<div style="float:right; width:50px; height:30px; line-height:30px; background:white; border-radius:5px; margin-top:-50px; margin-right:20px;" onclick="closeModal();"><strong>닫기</strong></b></div>
    		</div>
    		
    		<table id="" class="" border="1" style="text-align:center; float:right; width:220px; height:120px; margin-right:5%; margin-top:5%;">
@@ -135,8 +144,8 @@
    			</table>
    			
    			<div style="width:220px; height:50px; float:right; margin-top:-100px; margin-right:5%;">
-   				<div id="" class="colorGreen cursorPointer" style="border-radius:5px; display:inline-block; width:30%; height:30px%; line-height:30px; margin-top:5%;">승인</div>
-   				<div id="" class="colorGreen cursorPointer" style="border-radius:5px; display:inline-block; width:30%; height:30px; line-height:30px; margin-top:10%;">반려</div>
+   				<div id="" class="colorGreen cursorPointer" style="border-radius:5px; display:inline-block; width:30%; height:30px%; line-height:30px; margin-top:5%;" onclick="apprOk();">승인</div>
+   				<div id="" class="colorGreen cursorPointer" style="border-radius:5px; display:inline-block; width:30%; height:30px; line-height:30px; margin-top:10%;" onclick="apprNo();">반려</div>
    			</div>
    			
    			<table id="modalTable02" border="1" style="margin:0 auto; width:90%; height:30%;">
@@ -151,6 +160,44 @@
    		
    	</div>
    </div>
+   
+   <script>
+   /* 승인버튼 눌렀을 때 */
+   function apprOk(){
+	   Swal.fire({
+		   title: '정말 승인하시겠습니까? ',
+		   icon: 'warning',
+		   showCancelButton: true,
+		   confirmButtonColor: '#24574A',
+		   cancelButtonColor: '#d33',
+		   confirmButtonText: '승인'
+		 }).then((result) => {
+		   if (result.value) {
+			   console.log(resolutionNo);
+			   //진짜 승인 눌렀을 때
+			   $.ajax(
+					   url: "expendApprOk.expendResolution",
+					   type: "post",
+					   data: zzzzzzzzzzzzzzzzzzz,
+					   success: function(data){
+						   console.log("success");
+						   console.log(data);
+					   },
+					   error: function(status){
+						   alert("error ...")
+						   alert(status)
+					   }
+					   
+			   );// ajax
+		   }
+		 })
+   }
+   
+   /* 반려버튼 눌렀을 때 */
+   function apprNo(){
+	   alert("반려 ㅠ");
+   }
+   </script>
    
    <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 상세내역 모달 창 끝 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
    
@@ -227,10 +274,8 @@
 				$(function(){
 					$("table tr").click(function(e){
 						
-						var resolutionNo = this.children[0].innerText;
-						console.log(resolutionNo);
-						
-						
+						//지출결의서 번호	//전역변수로 설정
+						resolutionNo = this.children[0].innerText;
 						
 						$.ajax({
 							url: "selectExpendResolutionDetail.expendResolution",

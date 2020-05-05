@@ -21,6 +21,7 @@ import com.kh.jaga.expendResolution.model.service.ExpendResolutionService;
 import com.kh.jaga.expendResolution.model.vo.AccountTitleVo;
 import com.kh.jaga.expendResolution.model.vo.DepartmentVo;
 import com.kh.jaga.expendResolution.model.vo.ExpendResolutionDetailVo;
+import com.kh.jaga.vender.model.vo.Vender;
 
 import net.sf.json.JSONArray;
 
@@ -42,7 +43,7 @@ public class ExpendResolutionController {
 		
 		//검색할 정보들 가져오기	
 		ComInIdVo empVo = (ComInIdVo) request.getSession().getAttribute("loginEmp");
-		String comCome = empVo.getComCode();
+		String comCode = empVo.getComCode();
 		
 		//1.부서정보
 		List<DepartmentVo> deptList = service.selectDeptList();
@@ -63,10 +64,16 @@ public class ExpendResolutionController {
 		mv.addObject("jsonAccountTitleList", jsonAccountTitleList);		//json타입 리스트 추가
 		
 		//3.담당자
-		List<ComInIdVo> comInIdList = service.selectComInIdList(comCome);
+		List<ComInIdVo> comInIdList = service.selectComInIdList(comCode);
 		mv.addObject("comInIdList", comInIdList);				//리스트 추가
 		JSONArray jsonComInIdList = JSONArray.fromObject(comInIdList);
 		mv.addObject("jsonComInIdList", jsonComInIdList);		//json타입 리스트 추가
+		
+		//4.거래처
+		List<Vender> venderList = service.selectVenderList(comCode);
+		mv.addObject("venderList", venderList);
+		JSONArray jsonVenderList = JSONArray.fromObject(venderList);
+		mv.addObject("jsonVenderList",jsonVenderList);
 
 		//이제 화면 보여주기
 		mv.setViewName("expendResolution/expendResolution");
@@ -164,6 +171,31 @@ public class ExpendResolutionController {
 		}
 		
 	}//method
+	
+	
+	
+	
+	
+	
+	
+	//지출결의서리스트 > 상세보기 > 진짜로 승인 ajax
+	@RequestMapping("expendApprOk.expendResolution")
+	public void expendApprOk(HttpServletResponse response, String data) {
+		System.out.println(data);
+		
+		try {
+			response.getWriter().print("value~~~!!! \nfromcontroller");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		
+	}
+	
+	
+	
+	
+	
 	
 	
 	
