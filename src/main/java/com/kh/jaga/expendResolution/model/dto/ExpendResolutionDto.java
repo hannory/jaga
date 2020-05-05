@@ -45,6 +45,7 @@ public class ExpendResolutionDto implements java.io.Serializable{
 	private String paymentTypeCode;		//결재코드
 	private String evidenceCode;		//관련증빙코드
 	private String comCode;				//회사코드
+	private String managerSign;			//담당자 싸인 파일명 
 	
 	//EXPEND_RESOLUTION_DETAIL 테이블		//[지출결의서 상세]
 	private String expendDetailNo = "시퀀스넣기";		//상세내역번호
@@ -82,11 +83,12 @@ public class ExpendResolutionDto implements java.io.Serializable{
 			String initiativeDate, String departmentCode, String managerNo, String managerPosition,
 			String expendPurpose, String expendDate, String accountTitleCode, String expendSummary, String createUser,
 			String createDate, String approvalStatus, String paymentTypeCode, String evidenceCode, String comCode,
-			String expendDetailNo, String expendDetailDate, String brief, String venderCode, String price, String memo,
-			String expendResolutionNo, String detailDate01, String detailBrief01, String detailVenderCode01,
-			String detailPrice01, String detailMemo01, String detailDate02, String detailBrief02,
-			String detailVenderCode02, String detailPrice02, String detailMemo02, String detailDate03,
-			String detailBrief03, String detailVenderCode03, String detailPrice03, String detailMemo03) {
+			String managerSign, String expendDetailNo, String expendDetailDate, String brief, String venderCode,
+			String price, String memo, String expendResolutionNo, String detailDate01, String detailBrief01,
+			String detailVenderCode01, String detailPrice01, String detailMemo01, String detailDate02,
+			String detailBrief02, String detailVenderCode02, String detailPrice02, String detailMemo02,
+			String detailDate03, String detailBrief03, String detailVenderCode03, String detailPrice03,
+			String detailMemo03) {
 		super();
 		this.apprInfoCode = apprInfoCode;
 		this.apprEmpCode = apprEmpCode;
@@ -110,6 +112,7 @@ public class ExpendResolutionDto implements java.io.Serializable{
 		this.paymentTypeCode = paymentTypeCode;
 		this.evidenceCode = evidenceCode;
 		this.comCode = comCode;
+		this.managerSign = managerSign;
 		this.expendDetailNo = expendDetailNo;
 		this.expendDetailDate = expendDetailDate;
 		this.brief = brief;
@@ -310,6 +313,14 @@ public class ExpendResolutionDto implements java.io.Serializable{
 		this.comCode = comCode;
 	}
 
+	public String getManagerSign() {
+		return managerSign;
+	}
+
+	public void setManagerSign(String managerSign) {
+		this.managerSign = managerSign;
+	}
+
 	public String getExpendDetailNo() {
 		return expendDetailNo;
 	}
@@ -488,32 +499,31 @@ public class ExpendResolutionDto implements java.io.Serializable{
 
 	@Override
 	public String toString() {
-		return "ExpendResolutionDto:::\n [apprInfoCode=" + apprInfoCode + ", \napprEmpCode=" + apprEmpCode
-				+ ", \napprEmpPosition=" + apprEmpPosition + ", \nexpendResolution=" + expendResolution + ", \nemployeeCode="
-				+ employeeCode + ", \napprStatus=" + apprStatus + ", \nresolutionNo=" + resolutionNo
-				+ ", \ncomResolutionCode=" + comResolutionCode + ", \ninitiativeDate=" + initiativeDate
-				+ ", \ndepartmentCode=" + departmentCode + ", \nmanagerNo=" + managerNo + ", \nmanagerPosition="
-				+ managerPosition + ", \nexpendPurpose=" + expendPurpose + ", \nexpendDate=" + expendDate
-				+ ", \naccountTitleCode=" + accountTitleCode + ", \nexpendSummary=" + expendSummary + ", \ncreateUser="
-				+ createUser + ", \ncreateDate=" + createDate + ", \napprovalStatus=" + approvalStatus
-				+ ", \npaymentTypeCode=" + paymentTypeCode + ", \nevidenceCode=" + evidenceCode + ", \ncomCode=" + comCode
-				+ ", \nexpendDetailNo=" + expendDetailNo + ", \nexpendDetailDate=" + expendDetailDate + ", \nbrief=" + brief
-				+ ", \nvenderCode=" + venderCode + ", \nprice=" + price + ", \nmemo=" + memo + ", \nexpendResolutionNo="
-				+ expendResolutionNo + ", \ndetailDate01=" + detailDate01 + ", \ndetailBrief01=" + detailBrief01
-				+ ", \ndetailVenderCode01=" + detailVenderCode01 + ", \ndetailPrice01=" + detailPrice01 + ", \ndetailMemo01="
-				+ detailMemo01 + ", \ndetailDate02=" + detailDate02 + ", \ndetailBrief02=" + detailBrief02
-				+ ", \ndetailVenderCode02=" + detailVenderCode02 + ", \ndetailPrice02=" + detailPrice02 + ", \ndetailMemo02="
-				+ detailMemo02 + ", \ndetailDate03=" + detailDate03 + ", \ndetailBrief03=" + detailBrief03
-				+ ", \ndetailVenderCode03=" + detailVenderCode03 + ", \ndetailPrice03=" + detailPrice03 + ", \ndetailMemo03="
-				+ detailMemo03 + "]";
+		return "ExpendResolutionDto [apprInfoCode=" + apprInfoCode + ", apprEmpCode=" + apprEmpCode
+				+ ", apprEmpPosition=" + apprEmpPosition + ", expendResolution=" + expendResolution + ", employeeCode="
+				+ employeeCode + ", apprStatus=" + apprStatus + ", resolutionNo=" + resolutionNo
+				+ ", comResolutionCode=" + comResolutionCode + ", initiativeDate=" + initiativeDate
+				+ ", departmentCode=" + departmentCode + ", managerNo=" + managerNo + ", managerPosition="
+				+ managerPosition + ", expendPurpose=" + expendPurpose + ", expendDate=" + expendDate
+				+ ", accountTitleCode=" + accountTitleCode + ", expendSummary=" + expendSummary + ", createUser="
+				+ createUser + ", createDate=" + createDate + ", approvalStatus=" + approvalStatus
+				+ ", paymentTypeCode=" + paymentTypeCode + ", evidenceCode=" + evidenceCode + ", comCode=" + comCode
+				+ ", managerSign=" + managerSign + ", expendDetailNo=" + expendDetailNo + ", expendDetailDate="
+				+ expendDetailDate + ", brief=" + brief + ", venderCode=" + venderCode + ", price=" + price + ", memo="
+				+ memo + ", expendResolutionNo=" + expendResolutionNo + ", detailDate01=" + detailDate01
+				+ ", detailBrief01=" + detailBrief01 + ", detailVenderCode01=" + detailVenderCode01 + ", detailPrice01="
+				+ detailPrice01 + ", detailMemo01=" + detailMemo01 + ", detailDate02=" + detailDate02
+				+ ", detailBrief02=" + detailBrief02 + ", detailVenderCode02=" + detailVenderCode02 + ", detailPrice02="
+				+ detailPrice02 + ", detailMemo02=" + detailMemo02 + ", detailDate03=" + detailDate03
+				+ ", detailBrief03=" + detailBrief03 + ", detailVenderCode03=" + detailVenderCode03 + ", detailPrice03="
+				+ detailPrice03 + ", detailMemo03=" + detailMemo03 + "]";
 	}
-	
-	
 
 	
 	
 	
-}
+	
+}//class
 
 
 

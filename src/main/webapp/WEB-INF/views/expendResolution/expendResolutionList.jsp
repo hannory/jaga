@@ -98,12 +98,12 @@
    		<table id="" class="" border="1" style="text-align:center; float:right; width:220px; height:120px; margin-right:5%; margin-top:5%;">
    				<tr style="height:20px;">
    					<td style="width:20px;"></td>
-   					<td style="width:100px;">${ loginEmp.name }</td>
-   					<td style="width:100px;">결재자</td>
+   					<td style="width:100px;" id="tdManagerName"></td>
+   					<td style="width:100px;" id="tdApprName">결재자</td>
    				</tr>
    				<tr>
    					<td>결재</td>
-   					<td>싸인</td>
+   					<td><img id="managerSign" style="width:100%; height:100px;"></td>
    					<td>싸인</td>
    				</tr>
    			</table>
@@ -227,8 +227,6 @@
 				$(function(){
 					$("table tr").click(function(e){
 						
-						$("#divModal").css("display","block");
-						
 						var resolutionNo = this.children[0].innerText;
 						console.log(resolutionNo);
 						
@@ -258,6 +256,10 @@
 								$("#modalTableValue107").text(selectOneResult.expendPurpose);
 								
 								
+								$("#tdManagerName").text(selectOneResult.managerNo);
+								$("#tdApprName").text('${ loginEmp.name}');
+								
+								
 								for(var i = 0; i < detailList.length; i++){
 									var tempRow = "<tr>"
 					   					+ "<td>" + detailList[i].detailDate.substring(0,10) + "</td>"
@@ -270,7 +272,7 @@
 									$("#modalTable02Row01").after(tempRow);
 								}
 								
-								
+								$("#managerSign").attr("src",'${contextPath}/resources/uploadFiles/signs/' + selectOneResult.managerSign);
 								
 								
 								
@@ -282,9 +284,9 @@
 							}
 						});//ajax
 						
+						$("#divModal").css("display","block");
 						
-						
-					})	
+					})	//click anonymous function
 				});
 			</script>
 			

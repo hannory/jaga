@@ -636,7 +636,7 @@
 
 				<tr class="botTr" id="confirmBotRow">
 					<td class="">결재</td>
-					<td class="botTd" id="defaultEmpSign">본인싸인</td>
+					<td class="botTd" id="tdDefaultEmpSign"><img id="defaultEmpSign" style="width:100%; height:100px;"></td>
 					<td class="botTd" id="apprSignImg01">싸인</td>
 				</tr>
 
@@ -1038,14 +1038,21 @@
 		</script>
 
 
-
-
+	
+		
 
 
 
 		<script>
 		/* 본인싸인 기본으로 넣어놓는 스크립트 */
+		var loginEmp = '${ loginEmp}';
 		
+		var startIndex = loginEmp.indexOf('fileName');
+		var tempStr = loginEmp.substring(startIndex);
+		
+		var fileName = tempStr.substring(9,tempStr.indexOf(","));
+
+		$("#defaultEmpSign").attr("src",'${contextPath}/resources/uploadFiles/signs/' + fileName);
 		
 		
 		</script>
