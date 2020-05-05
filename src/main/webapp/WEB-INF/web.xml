@@ -247,6 +247,20 @@
       <url-pattern>*.soti</url-pattern>
    </servlet-mapping>
    
+   <servlet><!-- 의제매입신고서-->
+      <servlet-name>vatDeem</servlet-name>
+      <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+      <init-param>
+         <param-name>contextConfigLocation</param-name>
+         <param-value>/WEB-INF/config/vatDeem-servlet.xml</param-value>
+      </init-param>
+   </servlet>
+   <servlet-mapping>
+      <servlet-name>vatDeem</servlet-name>
+      <url-pattern>*.vd</url-pattern>
+   </servlet-mapping>
+   
+   
    <servlet><!-- 계산서합계표 -->
       <servlet-name>billTotal</servlet-name>
       <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>

@@ -64,6 +64,297 @@
     GROUP BY COM_CODE
   </select>
   
+  <select id="selectSumOfTaxInvPur" parameterType="java.util.HashMap" resultType="Receiption">
+  SELECT SUM(SUPPLY_VALUE) AS SUPPLY_VALUE, SUM(VALUE_TAX) AS VALUE_TAX
+  	FROM SLIP 
+  	WHERE SLIP_DIVISION ='매입매출' 
+  	AND DIVISION ='매입' 
+  	AND COM_CODE= #{Receiption.comCode}
+  	AND EVIDENCE_CODE ='10'
+  	AND SLIP_DATE BETWEEN #{Receiption.slipDate} AND #{endDate}
+    GROUP BY COM_CODE
+  
+  
+  </select>
+  
+  <select id="selectRe14" parameterType="java.util.HashMap" resultType="Receiption">
+  SELECT SUM(SUPPLY_VALUE) AS SUPPLY_VALUE, SUM(VALUE_TAX) AS VALUE_TAX
+  	FROM SLIP 
+  	WHERE SLIP_DIVISION ='매입매출' 
+  	AND DIVISION ='매입' 
+  	AND COM_CODE= #{Receiption.comCode}
+  	AND EVIDENCE_CODE IN('50','100')
+  	AND SLIP_DATE BETWEEN #{Receiption.slipDate} AND #{endDate}
+    GROUP BY COM_CODE
+  
+  
+  </select>
+  <select id="selectComTypeOfBizCode" parameterType="Company" resultType="Company">
+  
+  	SELECT COM_CODE, TYPE_OF_BIZ AS bizType
+	FROM COMPANY
+	WHERE COM_CODE= #{companyCode}  
+  </select>
+  
+  <select id="selectBizCode" resultType="string">
+  SELECT TYPE_OF_BIZ_CODE
+	FROM TYPE_OF_BIZ_CODE 
+	WHERE SELL_TARGET_NAME LIKE('%소매%')
+	OR SELL_TARGET_NAME LIKE('%택시%')
+	OR SELL_TARGET_NAME LIKE('%숙박%')
+	OR SELL_TARGET_NAME LIKE('%음식%')
+	OR SELL_TARGET_NAME LIKE('%미용%')
+	OR SELL_TARGET_NAME LIKE('%욕탕%')
+	OR SELL_TARGET_NAME LIKE('%변호사%')
+	OR SELL_TARGET_NAME LIKE('%변론%')
+	OR SELL_TARGET_NAME LIKE('%변리%')
+	OR SELL_TARGET_NAME LIKE('%부동산%')
+	OR SELL_TARGET_NAME LIKE('%숙박%')
+	OR SELL_TARGET_NAME LIKE('%약사사%')
+	OR SELL_TARGET_NAME LIKE('%수의사%')
+	OR SELL_TARGET_NAME LIKE('%한의사%')
+	OR SELL_TARGET_NAME LIKE('운전학원%')
+	OR SELL_TARGET_NAME LIKE('%떡%')
+	OR SELL_TARGET_NAME LIKE('%주차장%')
+	OR SELL_TARGET_NAME LIKE('주거용 건물%')
+	OR SELL_TARGET_NAME LIKE('%양장점%')
+  </select>
+  
+  
+  <select id="selectRe19" parameterType="java.util.HashMap" resultType="Receiption">
+    SELECT SUM(SUPPLY_VALUE) AS SUPPLY_VALUE, SUM(VALUE_TAX) AS VALUE_TAX
+  	FROM SLIP 
+  	WHERE SLIP_DIVISION ='매입매출' 
+  	AND DIVISION ='매출' 
+  	AND COM_CODE= #{Receiption.comCode}
+  	AND EVIDENCE_CODE IN('50','100')
+  	AND SLIP_DATE BETWEEN #{Receiption.slipDate} AND #{endDate}
+    GROUP BY COM_CODE
+  
+  
+  </select>
+  <select id="selectDeem" parameterType="Deem" resultType="Deem">
+  SELECT *
+FROM DEEMED_INPUT_TAX
+WHERE COM_CODE=#{comCode}
+AND VAT_TERM=#{vatTerm}
+AND YEAR_OF_ATTR= #{yearOfAttr}
+AND DEADLINE='Y'
+  
+  </select>
+  
+  <select id="selectRe43" parameterType="java.util.HashMap" resultType="Receiption">
+    SELECT SUM(SUPPLY_VALUE) AS SUPPLY_VALUE, SUM(VALUE_TAX) AS VALUE_TAX
+  	FROM SLIP 
+  	WHERE SLIP_DIVISION ='매입매출' 
+  	AND DIVISION ='매입' 
+  	AND COM_CODE= #{Receiption.comCode}
+  	AND EVIDENCE_CODE ='20'
+  	AND SLIP_DATE BETWEEN #{Receiption.slipDate} AND #{endDate}
+  	AND DEEMED_STATUS='Y'
+    GROUP BY COM_CODE
+  
+  
+  </select>
+  
+  <select id="selectCcSalesSlip" parameterType="CcSalesSlip" resultType="CcSalesSlip">
+  SELECT RCPTSTMT_CODE
+,YEAR_OF_ATTR
+,TERM_DIV
+,DEADLINE
+,COM_CODE
+FROM CC_RCPT_STMT_GAP
+WHERE DEADLINE='Y'
+AND COM_CODE=#{comCode}
+AND YEAR_OF_ATTR=#{yearOfAttr}
+AND TERM_DIV=#{termDiv}
+  </select>
+  
+  
+  <insert id="insertVat" parameterType="Vat">
+  INSERT INTO VAT VALUES(#{reportType}
+,SEQ_VAT.NEXTVAL	
+,#{valueRate}
+,#{reportTerm}
+,#{vatTerm}
+,#{yearOfAttr}
+,#{deadline}
+,#{comCode}
+,#{p1}
+,#{p1T}
+,#{p2}
+,#{p2T}
+,#{p3}
+,#{p3T}
+,#{p4}
+,#{p4T}
+,#{p5}
+,#{p5T}
+,#{p6}
+,#{p6T}
+,#{p7}
+,#{p7T}
+,#{p8}
+,#{p8T}
+,#{p9}
+,#{p9T}
+,#{p10}
+,#{p10T}
+,#{p11}
+,#{p11T}
+,#{p12}
+,#{p12T}
+,#{p13}
+,#{p13T}
+,#{p14}
+,#{p14T}
+,#{p15}
+,#{p15T}
+,#{p16}
+,#{p16T}
+,#{p17}
+,#{p17T}
+,#{p18}
+,#{p18T}
+,#{p19}
+,#{p19T}
+,#{p20}
+,#{p20T}
+,#{p21}
+,#{p21T}
+,#{p22}
+,#{p22T}
+,#{p23}
+,#{p23T}
+,#{p24}
+,#{p24T}
+,#{p25}
+,#{p25T}
+,#{p26}
+,#{p26T}
+,#{p27}
+,#{p27T}
+,#{p28}
+,#{p28T}
+,#{p29}
+,#{p29T}
+,#{p30}
+,#{p30T}
+,#{p31}
+,#{p31T}
+,#{p32}
+,#{p32T}
+,#{p33}
+,#{p33T}
+,#{p34}
+,#{p34T}
+,#{p35}
+,#{p35T}
+,#{p36}
+,#{p36T}
+,#{p37}
+,#{p37T}
+,#{p38}
+,#{p38T}
+,#{p39}
+,#{p39T}
+,#{p40}
+,#{p40T}
+,#{p41}
+,#{p41T}
+,#{p42}
+,#{p42T}
+,#{p43}
+,#{p43T}
+,#{p44}
+,#{p44T}
+,#{p45}
+,#{p45T}
+,#{p46}
+,#{p46T}
+,#{p47}
+,#{p47T}
+,#{p48}
+,#{p48T}
+,#{p49}
+,#{p49T}
+,#{p50}
+,#{p50T}
+,#{p51}
+,#{p51T}
+,#{p52}
+,#{p52T}
+,#{p53}
+,#{p53T}
+,#{p54}
+,#{p54T}
+,#{p55}
+,#{p55T}
+,#{p56}
+,#{p56T}
+,#{p57}
+,#{p57T}
+,#{p58}
+,#{p58T}
+,#{p59}
+,#{p59T}
+,#{p60}
+,#{p60T}
+,#{p61}
+,#{p61T}
+,#{p62}
+,#{p62T}
+,#{p63}
+,#{p63T}
+,#{p64}
+,#{p64T}
+,#{p65}
+,#{p65T}
+,#{p66}
+,#{p66T}
+,#{p67}
+,#{p67T}
+,#{p68}
+,#{p68T}
+,#{p69}
+,#{p69T}
+,#{p70}
+,#{p70T}
+,#{p71}
+,#{p71T}
+,#{p72}
+,#{p72T}
+,#{p73}
+,#{p73T}
+,#{p74}
+,#{p74T}
+,#{p75}
+,#{p75T}
+,#{p76}
+,#{p76T}
+,#{p77}
+,#{p77T}
+,#{p78}
+,#{p78T}
+,#{p79}
+,#{p79T}
+,#{p80}
+,#{p80T}
+,#{p81}
+,#{p81T}
+,#{p82}
+,#{p82T}
+,#{p83}
+,#{p83T}
+,#{p84}
+,#{p84T}
+,#{p85}
+,#{p85T})
+  </insert>
+ 
+  
+  
+  
   
   
   </mapper>
