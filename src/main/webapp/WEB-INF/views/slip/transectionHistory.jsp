@@ -251,7 +251,7 @@
 								var $td5 = $("<td>").text(comma(list[i].supplyValue));
 								var $td6 = $("<td>").text(comma(list[i].valueTax));
 								var $td7 = $("<td>").text(comma(list[i].supplyDeaga));
-								var $td8 = $("<td>").html("<button onclick='detail("+list[i].slipCode+");'>상세</button>");
+								var $td8 = $("<td>").html("<button onclick='detail("+list[i].slipCode+");' id='detailBtn'>상세</button>");
 								
 								$tr.append($td1);
 								$tr.append($td2);
