@@ -1,6 +1,7 @@
 package com.kh.jaga.employee.controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.sql.Date;
 import java.util.List;
 
@@ -21,6 +22,7 @@ import com.kh.jaga.employee.model.service.EmployeeService;
 import com.kh.jaga.employee.model.vo.Attachment;
 import com.kh.jaga.employee.model.vo.EarnIncome;
 import com.kh.jaga.employee.model.vo.Employee;
+import com.kh.jaga.employee.model.vo.incomeTax;
 
 @Controller
 @SessionAttributes("loginCompany")
@@ -112,13 +114,23 @@ public String selectEmpList2(HttpServletRequest request) {
  }
  
  @RequestMapping("selectIncomeTax.emp")
- public String selectIncomeTax(HttpServletRequest request, HttpServletResponse response ) {
-	  String taxableIncome = request.getParameter("taxableIncome");
+ public void selectIncomeTax( HttpServletRequest request, HttpServletResponse response,String taxableIncome ) {
+	 System.out.println("컨트롤러 진입했니");
+	   taxableIncome = request.getParameter("taxableIncome");
 	 System.out.println("과세 값 잘 넘어오니?" + taxableIncome);
-	 
-	String result= es.seletcIncomeTax(taxableIncome);
-	 
-	 return "employee/earnincome";
+	int taxableIncome2= Integer.parseInt(taxableIncome);
+	System.out.println("컨트롤러 진입 전 값 "+taxableIncome2);
+	incomeTax result= es.seletcIncomeTax(taxableIncome2);
+	System.out.println("컨트롤러 진입 후 리절트값 :"+ result.getResult());
+	
+	try {
+		response.getWriter().print(result.getResult());
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+		/* return "employee/earnincome"; */
+ 
  }
 	 
 }

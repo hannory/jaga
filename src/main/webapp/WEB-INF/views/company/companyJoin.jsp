@@ -14,12 +14,22 @@
    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-      <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
-  
-  
+          <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="${ contextPath }/resources/js/scripts.js"></script>
+        <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
+        <script src="${ contextPath }/resources/demo/datatables-demo.js"></script>
+  <script
+   src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+   integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+   crossorigin="anonymous"></script>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
 <title>자가 경리</title>
 <style>
 
@@ -595,13 +605,11 @@
 				<td></td>
 			</tr>
 		
- 		    <tr class="licenseTriger">
-                <td class="firstLine" ><b>업종코드</b></td>
-               <td class="secondLine"><input type="text" id="bizType" name="bizType" placeholder="업종코드"></td>
-                 <td> <button type="button" class="thirdLine" id="searchBtn2"> <img alt="" src="${contextPath}/resources/images/search.PNG" width="20px" height="20px"></button></td>
-				<td> <input type="text" id="bizName" placeholder="업종명"></td>
-               
-                
+ 		    <tr>
+                <td ><b>업종코드</b></td>
+               <td><input type="text" id="typeOfBizCode" name="bizType" placeholder="업종코드">
+                  <button type="button" class="thirdLine" id="searchBtn2"> <img alt="" src="${contextPath}/resources/images/search.PNG" width="20px" height="20px"></button>
+				 <input type="text" id="sellTargetName" name="sellTargetName" placeholder="업종명"></td>
            </tr>	
 			
 			
@@ -620,12 +628,13 @@
 		</form>
 		</div>
 		</div>
-		
-		           
-                  <div class="modal fade" id="typeofbizModal" role="dialog">
+		</main>
+	
+	<!-- 업종코드 모달시작 -->	           
+    <div class="modal fade" id="typeofbizModal" role="dialog">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
-        <div class="modal-header">
+        <div class="modal-header" style="background:#296355; color:white">
           <h4 class="modal-title">업종검색</h4>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
@@ -649,7 +658,6 @@
     </div>
   </div>
 
-	</main>
 
 
 
@@ -883,64 +891,64 @@
 					+ 'px';
 		}
 		
-		/*업종*/
-/* 		var typeofbizC = "";
-		var typeofbizN;
-		function aaa(value){
-			$(value).parent().parent().children().each(function(index){
-				console.log($(this).text());
-				typeofbizC += ","+$(this).text();
-			})
-			var typeofbiz = typeofbizC.split(",");
-			typeofbizC = typeofbiz[1];
-			typeofbizN = typeofbiz[2];
-			
-			$("#typeofbizCode").val(typeofbizC);
-			$("#typeofbizName").val(typeofbizN);
-			
-			$("div#typeofbizModal").modal("hide");
-			
-		}		 */
-		
-		//업종 모달
-/* $("#searchBtn2").click(function(){
-	
-	$("#bankTable").dataTable({
-		destroy: true,
-		 ajax:{
-				'url':'bizTypeSearch.co',
-				'type':'get'
-			},
-		 
-		 columns: [
-			 {data : "bizType",
-				 "render": function(data, type, row){
-		                if(type=='display'){
-		                    data = '<a href="#" onclick="ccc(this);">' + data + '</a>';
-		                }
-		                return data;} 
-			 },
-			 {data : "bizName",
-				 "render": function(data, type, row){
-		                if(type=='display'){
-		                    data = '<a href="#" onclick="ccc(this);">' + data + '</a>';
-		                }
-		                return data;}
-			 }
-			 
-		 ]
-	});
-	
-	$(".modal-title").text("업종검색");
-	 $("div#accountModal").modal();
-	 
-	 
-});
- */
+	</script>
 
+	<script>
+	
+	var typeOfBizCode;
+	var sellTargetName;
+	function ccc(value){
+		$(value).parent().parent().children().each(function(index){
+			console.log($(this).text());
+			typeOfBizCode += ","+$(this).text();
+		})
+		var biz =typeOfBizCode.split(",");
+		typeOfBizCode = biz[1];
+		sellTargetName = biz[2];
+		
+		$("#typeOfBizCode").val(typeOfBizCode);
+		$("#sellTargetName").val(sellTargetName);
+		
+		$("div#accountModal").modal("hide");
+	}		
+
+	
+	
+	/* 거래처모달 */
+			$("#searchBtn2").click(function(){
+				
+				 $("#typeofbizTable").dataTable({
+
+					 ajax:{
+							'url':'biztypeSearch.lo',
+							'type':'get'
+						},
+					 
+					 columns: [
+						 {data : "typeOfBizCode",
+							  "render": function(data, type, row){
+					                if(type=='display'){
+					                    data = '<a href="#" onclick="ccc(this);">' + data + '</a>';
+					                }
+					                return data;} },
+						 {data : "sellTargetName",
+										 "render": function(data, type, row){
+								                if(type=='display'){
+								                    data = '<a href="#" onclick="ccc(this);">' + data + '</a>';
+								                }
+								                return data;} }
+						 
+					 ]
+				}); 
+				
+				$(".modal-title").text("업종검색");
+				 $("div#typeofbizModal").modal();
+				 
+				 
+			});
 			
-		
-		
+			
+
 	</script>
 </body>
 </html>

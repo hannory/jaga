@@ -35,4 +35,15 @@
 				class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 				<beans:property name="maxUploadSize" value="10000000"/> 
 				</beans:bean>
+				
+				
+		<!-- ajax 설정 -->
+	<beans:bean id="jsonView" class="net.sf.json.spring.web.servlet.view.JsonView"/>
+	<!-- 위에 설정된 뷰 리졸버는 기존에 있는 jsp에 대해 view를 보여주는 템플릿 뷰이다. -->
+	<!-- 없는 자원에 대해서 논리적 이름을 가지고 view를 지정한다. -->
+	<!-- 밑에 있는 애를 먼저 읽고(우선순위) jsonView라는 값이 있으면 실행시킴 -->
+	<beans:bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
+		<beans:property name="order" value="1"/>
+	</beans:bean>
+				
 </beans:beans>

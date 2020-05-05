@@ -5,10 +5,10 @@ import java.util.List;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.kh.jaga.accountTitle.model.vo.AccountTitle;
 import com.kh.jaga.employee.model.vo.Attachment;
 import com.kh.jaga.employee.model.vo.EarnIncome;
 import com.kh.jaga.employee.model.vo.Employee;
+import com.kh.jaga.employee.model.vo.incomeTax;
 @Repository
 public class EmployeeDaoImpl implements EmployeeDao {
 
@@ -51,9 +51,9 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	}
 
 	@Override
-	public String selectIncomeTax(SqlSessionTemplate sqlSession, String taxableIncome) {
-
-		return sqlSession.selectOne("EarnIncome.selectIncomeTax",taxableIncome);
+	public incomeTax selectIncomeTax(SqlSessionTemplate sqlSession, int taxableIncome2) {
+		System.out.println("dao 값 2:"+taxableIncome2);
+		return sqlSession.selectOne("incomeTax.selectIncomeTax",taxableIncome2);
 	}
 
 

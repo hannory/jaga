@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import com.kh.jaga.employee.model.vo.Attachment;
 import com.kh.jaga.employee.model.vo.EarnIncome;
 import com.kh.jaga.employee.model.vo.Employee;
+import com.kh.jaga.employee.model.vo.incomeTax;
 
 public interface EmployeeDao {
 
@@ -23,7 +24,7 @@ public interface EmployeeDao {
 
 	int insertEarnEmp(SqlSessionTemplate sqlSession, EarnIncome ei, String employeeCode);
 
-	String selectIncomeTax(SqlSessionTemplate sqlSession, String taxableIncome);
+	incomeTax selectIncomeTax(SqlSessionTemplate sqlSession, int taxableIncome2);
 
 
 }

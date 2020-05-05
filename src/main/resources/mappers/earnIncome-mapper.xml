@@ -29,17 +29,10 @@
   <result property="positionPay" column="POSITIONPAY"></result>
   <result property="totalPayment" column="TOTALPAYMENT"></result>
   <result property="totalDeduction" column="TOTALDEDUCTION"></result>
-  
   </resultMap>
   
   
-    	<resultMap type="EarnIncome" id="earnIncomeResultMap">
-		<id property="min" column="MIN"/>
-		<result property="max" column="MAX"/>
-		<result property="result" column="RESULT"/>
-  	</resultMap>
-  
-  <insert id="insertEarnEmp" parameterType="EarnIncome">
+  <insert id="insertEarnEmp" parameterType="EarnIncome" >
   INSERT INTO EARN_INCOME_HISTORY(ATTRIBUTE_DATE,PAY_DATE,EMPLOYEE_CODE,SALARY,BONUS,MEALS,DRIVING_SUBSIDIES,TAXABLE_INCOME,
   NONTAXABLE_INCOME,NATIONAL_PENSION,HEALTH_INSURANCE,LONG_TERM_INSURANCE,EMPLOYMENT_INSURANCE,INCOME_TAX,LOCAL_INCOME_TAX,
   DIFFERENCE_PYMT,NIGHTPAY,MONTHLYPAY,POSITIONPAY,TOTALPAYMENT,TOTALDEDUCTION)
@@ -50,12 +43,8 @@
   
   </insert>
   
-<!--   <select id="selectIncomeTax" parameterType="java.lang.String" resultMap="earnIncomeResultMap">
-  SELECT RESULT
-  FROM INCOME_TAX
-  WHERE MIN>=#{taxableIncome} AND MAX<=#{taxableIncome}
-  </select>  -->
-  
+
+ 
   </mapper>
   
   

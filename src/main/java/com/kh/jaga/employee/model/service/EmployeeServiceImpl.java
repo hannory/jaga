@@ -11,6 +11,7 @@ import com.kh.jaga.employee.model.dao.EmployeeDao;
 import com.kh.jaga.employee.model.vo.Attachment;
 import com.kh.jaga.employee.model.vo.EarnIncome;
 import com.kh.jaga.employee.model.vo.Employee;
+import com.kh.jaga.employee.model.vo.incomeTax;
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
@@ -71,14 +72,16 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 
 	@Override
-	public String seletcIncomeTax(String taxableIncome) {
+	public incomeTax seletcIncomeTax(int taxableIncome2) {
 		
-		String result=ed.selectIncomeTax(sqlSession,taxableIncome);
+		incomeTax result=ed.selectIncomeTax(sqlSession,taxableIncome2);
 		if(result==null) {
 			System.out.println("소득세 불러오는 결과값이 널이다.");
 
 		}
 		
+		System.out.println("서비스 진입 후 값 2:"+taxableIncome2);
+		System.out.println("서비스리절트는"+result);
 		return result;
 	}
 

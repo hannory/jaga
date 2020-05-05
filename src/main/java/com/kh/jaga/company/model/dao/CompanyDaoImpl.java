@@ -1,12 +1,14 @@
 package com.kh.jaga.company.model.dao;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.jaga.company.model.exception.LoginException;
 import com.kh.jaga.company.model.vo.Company;
+import com.kh.jaga.company.model.vo.TypeOfBiz;
 import com.kh.jaga.companyInnerId.model.vo.ComInIdVo;
 
 @Repository
@@ -51,6 +53,15 @@ public class CompanyDaoImpl implements CompanyDao {
 		ComInIdVo loginEmp = sqlSession.selectOne("Company.selectLoginEmp", empData);
 		
 		return loginEmp;
+	}
+
+	@Override
+	public List<TypeOfBiz> selectbizTypeList(SqlSessionTemplate sqlSession) {
+		List<TypeOfBiz> list= null;
+		System.out.println("dao 업종코드 출력되니"+list);
+		list = sqlSession.selectList("TypeOfBiz.selectbizType");
+		System.out.println("dao 업종코드 출력되니"+list);
+		return list;
 	}
 
 }
