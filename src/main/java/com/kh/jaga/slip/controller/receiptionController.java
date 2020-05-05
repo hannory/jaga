@@ -10,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.jaga.company.model.vo.Company;
@@ -113,6 +115,14 @@ public class receiptionController {
 		int result = rs.insertReceiption(receiption);
 		
 		
+		
+		return "slip/receiptionForm";
+	}
+	
+	
+	@RequestMapping("excelUpload.rp")
+	public String excelUpload(@RequestParam MultipartFile excelFile) {
+		List<Receiption> exList = rs.uploadExcel(excelFile);
 		
 		return "slip/receiptionForm";
 	}

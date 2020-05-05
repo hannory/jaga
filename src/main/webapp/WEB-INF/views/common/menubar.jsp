@@ -92,7 +92,7 @@ $(window).load(function(){
 </head>
 <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-            <a class="navbar-brand" href="main.vi"><img src="${ contextPath }/resources/images/logo_vertical.PNG" width="90%"></a><button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button
+            <a class="navbar-brand" href="gomain.co"><img src="${ contextPath }/resources/images/logo_vertical.PNG" width="90%"></a><button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button
             >
             <button id="helpBtn" style="color:#296355; font-weight: bold;"><img src="${ contextPath }/resources/images/help.PNG" width="30px"> 도움!</button>
             <button id="printWinBtn" style="color:#296355; font-weight: bold;"><img src="${ contextPath }/resources/images/print.PNG" width="30px"> 인쇄</button>

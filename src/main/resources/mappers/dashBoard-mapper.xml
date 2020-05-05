@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+  
+<mapper namespace="DashBoard">
+
+	<select id="selectProfit" parameterType="java.lang.String" resultType="DashBoard">
+		SELECT (SELECT SUM(SUPPLY_VALUE+VALUE_TAX)
+		        FROM SLIP
+		        WHERE SLIP_DIVISION = '매입매출'
+		              AND DIVISION = '매출'
+		              AND COM_CODE = #{comCode}
+		              AND SLIP_DATE BETWEEN ADD_MONTHS(SYSDATE,-1) AND SYSDATE)-(SELECT SUM(SUPPLY_VALUE+VALUE_TAX)
+		                                                                         FROM SLIP
+		                                                                         WHERE SLIP_DIVISION = '매입매출'
+		                                                                               AND DIVISION = '매입'
+		                                                                               AND COM_CODE = #{comCode}
+		                                                                               AND SLIP_DATE BETWEEN ADD_MONTHS(SYSDATE,-1) AND SYSDATE) "profit",
+		        (SELECT SUM(SUPPLY_VALUE+VALUE_TAX)
+		         FROM SLIP
+		         WHERE SLIP_DIVISION = '매입매출'
+		               AND DIVISION = '매출'
+		               AND COM_CODE = #{comCode}
+		               AND SLIP_DATE BETWEEN ADD_MONTHS(SYSDATE,-1) AND SYSDATE) "sale",
+		        (SELECT SUM(SUPPLY_VALUE+VALUE_TAX)
+		         FROM SLIP
+		         WHERE SLIP_DIVISION = '매입매출'
+		               AND DIVISION = '매입'
+		               AND COM_CODE = #{comCode}
+		               AND SLIP_DATE BETWEEN ADD_MONTHS(SYSDATE,-1) AND SYSDATE) "buy"
+		FROM DUAL
+	
+	</select>
+	
+	
+	<select id="selectCreditS" resultType="DashBoard" parameterType="java.lang.String">
+	 <![CDATA[
+		SELECT ROWNUM, TOTAL_VENDER, VENDER_NAME
+		FROM(SELECT SUM_PRICE_CHA-SUM_PRICE_DEA "TOTAL_VENDER", V.VENDER_NAME
+		     FROM (SELECT DEBIT_CREDIT_CHA
+		                , NVL(SUM_PRICE_CHA,0) "SUM_PRICE_CHA"
+		                , NVL(VENDER_CODE_CHA, VENDER_CODE_DEA) "VENDER_CODE_CHA"
+		                , DEBIT_CREDIT_DEA
+		                , NVL(SUM_PRICE_DEA,0) "SUM_PRICE_DEA"
+		                , NVL(VENDER_CODE_DEA, VENDER_CODE_CHA) "VENDER_CODE_DEA"
+		           FROM (SELECT J.DEBIT_CREDIT "DEBIT_CREDIT_CHA", SUM(J.PRICE) "SUM_PRICE_CHA", J.VENDER_CODE "VENDER_CODE_CHA"
+		                 FROM SLIP S
+		                 JOIN JOURNALIZE J ON(S.SLIP_CODE = J.SLIP_CODE)
+		                 WHERE J.ACCOUNT_CODE = '10800'
+		                       AND S.COM_CODE = #{comCode}
+		                       AND J.DEBIT_CREDIT = '차변'
+		                 GROUP BY J.VENDER_CODE, J.DEBIT_CREDIT) A
+		           FULL JOIN (SELECT J.DEBIT_CREDIT "DEBIT_CREDIT_DEA", SUM(J.PRICE) "SUM_PRICE_DEA", J.VENDER_CODE "VENDER_CODE_DEA"
+		                      FROM SLIP S
+		                      JOIN JOURNALIZE J ON(S.SLIP_CODE = J.SLIP_CODE)
+		                      WHERE J.ACCOUNT_CODE = '10800'
+		                            AND S.COM_CODE = #{comCode}
+		                            AND J.DEBIT_CREDIT = '대변'
+		                      GROUP BY J.VENDER_CODE, J.DEBIT_CREDIT) B ON(A.VENDER_CODE_CHA = B.VENDER_CODE_DEA)) A
+		     JOIN VENDER V ON(V.VENDER_CODE = A.VENDER_CODE_CHA)
+		     ORDER BY SUM_PRICE_CHA-SUM_PRICE_DEA DESC)
+		WHERE ROWNUM <= 5
+		
+		]]>
+	</select>
+	
+	
+	
+	<select id="selectCreditB" resultType="DashBoard" parameterType="java.lang.String">
+	<![CDATA[
+		SELECT ROWNUM, TOTAL_VENDER, VENDER_NAME
+		FROM(SELECT SUM_PRICE_DEA-SUM_PRICE_CHA "TOTAL_VENDER", V.VENDER_NAME
+		     FROM (SELECT DEBIT_CREDIT_CHA
+		                , NVL(SUM_PRICE_CHA,0) "SUM_PRICE_CHA"
+		                , NVL(VENDER_CODE_CHA, VENDER_CODE_DEA) "VENDER_CODE_CHA"
+		                , DEBIT_CREDIT_DEA
+		                , NVL(SUM_PRICE_DEA,0) "SUM_PRICE_DEA"
+		                , NVL(VENDER_CODE_DEA, VENDER_CODE_CHA) "VENDER_CODE_DEA"
+		           FROM (SELECT J.DEBIT_CREDIT "DEBIT_CREDIT_CHA", SUM(J.PRICE) "SUM_PRICE_CHA", J.VENDER_CODE "VENDER_CODE_CHA"
+		                 FROM SLIP S
+		                 JOIN JOURNALIZE J ON(S.SLIP_CODE = J.SLIP_CODE)
+		                 WHERE J.ACCOUNT_CODE = '25100'
+		                       AND S.COM_CODE = #{comCode}
+		                       AND J.DEBIT_CREDIT = '차변'
+		                 GROUP BY J.VENDER_CODE, J.DEBIT_CREDIT) A
+		           FULL JOIN (SELECT J.DEBIT_CREDIT "DEBIT_CREDIT_DEA", SUM(J.PRICE) "SUM_PRICE_DEA", J.VENDER_CODE "VENDER_CODE_DEA"
+		                      FROM SLIP S
+		                      JOIN JOURNALIZE J ON(S.SLIP_CODE = J.SLIP_CODE)
+		                      WHERE J.ACCOUNT_CODE = '25100'
+		                            AND S.COM_CODE = #{comCode}
+		                            AND J.DEBIT_CREDIT = '대변'
+		                      GROUP BY J.VENDER_CODE, J.DEBIT_CREDIT) B ON(A.VENDER_CODE_CHA = B.VENDER_CODE_DEA)) A
+		     JOIN VENDER V ON(V.VENDER_CODE = A.VENDER_CODE_CHA)
+		     ORDER BY SUM_PRICE_CHA-SUM_PRICE_DEA DESC)
+		WHERE ROWNUM <= 5
+		]]>
+	</select>
+	
+	<select id="selectChart1" resultType="GenderLedgerDTO" parameterType="java.lang.String">
+	<![CDATA[
+		SELECT NVL(YEAR_MONTH_CHA,REAL_DAY) "YEAR_MONTH_ALL"
+		    , NVL(YEAR_MONTH_CHA,REAL_DAY) YEAR_MONTH_CHA
+		    , NVL(SUM_VALUE_CHA, 0) "SUM_MONTH_CHA"
+		    , NVL(YEAR_MONTH_DEA,REAL_DAY) YEAR_MONTH_DEA
+		    , NVL(SUM_VALUE_DEA,0) "SUM_MONTH_DEA"
+		    , NVL(SUM_VALUE_CHA, 0)-NVL(SUM_VALUE_DEA,0) "SUM_ALL"
+		FROM (SELECT TO_CHAR(S.SLIP_DATE, 'YYYY/MM') "YEAR_MONTH_DEA", SUM(SUPPLY_VALUE+VALUE_TAX) "SUM_VALUE_DEA", S.DIVISION 
+		      FROM SLIP S
+		      WHERE S.COM_CODE = #{comCode}
+		            AND S.SLIP_DIVISION = '매입매출'
+		            AND S.DIVISION = '매입'
+		            AND SLIP_DATE BETWEEN ADD_MONTHS(SYSDATE,-5) AND SYSDATE
+		      GROUP BY TO_CHAR(S.SLIP_DATE, 'YYYY/MM'), S.DIVISION) A
+		FULL JOIN (SELECT TO_CHAR(S.SLIP_DATE, 'YYYY/MM') "YEAR_MONTH_CHA", SUM(SUPPLY_VALUE+VALUE_TAX) "SUM_VALUE_CHA", S.DIVISION
+		          FROM SLIP S
+		          WHERE S.COM_CODE = #{comCode}
+		                AND S.SLIP_DIVISION = '매입매출'
+		                AND S.DIVISION = '매출'
+		                AND SLIP_DATE BETWEEN ADD_MONTHS(SYSDATE,-5) AND SYSDATE
+		          GROUP BY TO_CHAR(S.SLIP_DATE, 'YYYY/MM'), S.DIVISION) B ON (A.YEAR_MONTH_DEA = B.YEAR_MONTH_CHA)
+		FULL JOIN (SELECT TO_CHAR(ADD_MONTHS(SYSDATE, - (LEVEL-1)),'YYYY/MM') "REAL_DAY"
+			      FROM DUAL
+			      CONNECT BY LEVEL <= 6) C ON(B.YEAR_MONTH_CHA = C.REAL_DAY)
+		ORDER BY YEAR_MONTH_ALL
+	]]>
+		
+	</select>
+
+</mapper>

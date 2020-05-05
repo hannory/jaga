@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.jaga.company.model.vo.Company;
 import com.kh.jaga.slip.model.exception.receiptionException;
@@ -27,6 +28,8 @@ public interface ReceiptionService {
 	String selectDateSlipCode(Receiption rp);
 
 	List<NormalReceiptionDTO> selectNormalDateList(HashMap<String, Object> hm);
+
+	List<Receiption> uploadExcel(MultipartFile excelFile);
 
 
 }

@@ -1,11 +1,21 @@
 package com.kh.jaga.slip.model.service;
 
+import java.io.IOException;
+import java.sql.Date;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.openxml4j.opc.OPCPackage;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.jaga.slip.model.dao.ReceiptionDao;
 import com.kh.jaga.slip.model.exception.receiptionException;
@@ -93,8 +103,51 @@ public class ReceiptionServiceImpl implements ReceiptionService{
 
 	@Override
 	public List<NormalReceiptionDTO> selectNormalDateList(HashMap<String, Object> hm) {
-		// TODO Auto-generated method stub
 		return receiptionDao.selectNormalDateList(sqlSession, hm);
+	}
+
+	@Override
+	public List<Receiption> uploadExcel(MultipartFile excelFile) {
+		List<Receiption> list = new ArrayList<Receiption>();
+		
+		try {
+			OPCPackage opcPackage = OPCPackage.open(excelFile.getInputStream());
+			XSSFWorkbook workbook = new XSSFWorkbook(opcPackage);
+			
+			XSSFSheet sheet = workbook.getSheetAt(0);
+			
+			for(int i = 1; i< sheet.getLastRowNum()+1; i++) {
+				Receiption r = new Receiption();
+				r.setSlipDivision("매입매출");
+				XSSFRow row = sheet.getRow(i);
+				
+				if(row != null) {
+					continue;
+				}
+				
+				XSSFCell cell = row.getCell(0);
+				
+				if(cell != null) {
+					r.setDivision(cell.getStringCellValue());
+				}
+				cell=row.getCell(1);
+				
+				if(cell != null) {
+					
+				}
+				
+			}
+		} catch (InvalidFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
+		return null;
 	}
 
 

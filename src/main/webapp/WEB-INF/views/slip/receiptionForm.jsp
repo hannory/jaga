@@ -49,6 +49,15 @@
 		color:white;
 	}
 	
+	#resultReTable tbody td:nth-child(3) input{
+		text-align: right;
+		padding-right: 5px;
+	}
+	#resultReTable tbody td:nth-child(4) input{
+		text-align: right;
+		padding-right: 5px;
+	}
+	
 	#insertReTable td:first-child {
 		background: #296355;
 		color:white;
@@ -115,6 +124,10 @@
 	<main>
 	<div class="container-fluid">
 		<h2 class="mt-4">매입매출전표입력</h2>
+		<!-- <form action="excelUpload.rp" method="post" enctype="multipart/form-data">
+			<input type="file" name="excelFile">
+		
+		</form> -->
 			<form action="insertReceiption.rp" method="post">
 		<div class="card mb-4">
 			<div class="card-body">
@@ -195,7 +208,7 @@
 					<tr>
 						<td>공급대가</td>
 						<td colspan="3">
-							<input type="text" name="supplydeaga" id="supplydeaga" placeholder="부가세포함금액" onkeyup="inputNumberFormat(this);">
+							<input type="text" name="supplydeaga" id="supplydeaga" placeholder="부가세포함금액" onkeyup="inputNumberFormat(this);" onkeydown="inputPlus(this);">
 						</td>
 					</tr>
 					<tr>
@@ -395,11 +408,22 @@
 			$("div#accountModal").modal("hide");
 		}		
 		
+		function inputPlus(num){
+		/* 	var n = $(num).val();
+			
+			if(event.keyCode == 187){
+				console.log(n);
+				n.replace(/\+/g, '000');
+			}
+			 */
+			
+		}
+		
 		/* 콤마찍기+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 		//콤마찍기
 		function comma(str) {
 		    str = String(str);
-		    return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+		    return str.replace(/(\d)(?!h)(?=(?:\d{3})+(?!\d))/g, '$1,');
 		}
 		
 		//콤마풀기
@@ -409,7 +433,8 @@
 		}
 		
 		function inputNumberFormat(obj) {
-		    obj.value = comma(uncomma(obj.value));
+			$(obj).val($(obj).val().replace('+', '000'));
+		    $(obj).val(comma(uncomma($(obj).val())));
 		}
 		/* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 	

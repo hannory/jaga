@@ -59,7 +59,8 @@
 	}
 	
 	#searchReTable {
-		width: 100%;
+		width: 40%;
+		text-align: left;
 	}
 	
 	
@@ -95,7 +96,7 @@
 				</tr>
 			</table>
 		</ol>
-		<div class="card mb-4">
+		<div class="card mb-4"  style="overflow: auto; height:400px">
 			<div class="card-body">
 					<table id="normalReTable" border="1">
 					<colgroup>
@@ -621,7 +622,8 @@
 		
 		/* 값 입력시 콤마 찍기 */
 		function inputNumberFormat(str) {
-			str.value = comma(uncomma(str.value));
+			$(str).val($(str).val().replace('+', '000'));
+		    $(str).val(comma(uncomma($(str).val())));
 		}
 		
 		
@@ -815,6 +817,7 @@
 						if(key.keyCode == 113){
 							$("#venderTable").dataTable({
 								destroy: true,
+								autoWidth: false,
 								 ajax:{
 										'url':'accountSearch.rp',
 										'type':'get'
@@ -824,13 +827,13 @@
 									 {data : "accountCode",
 										 "render": function(data, type, row){
 								                if(type=='display'){
-								                    data = '<a href="#" onclick="aaa(this);">' + data + '</a>';
+								                    data = '<a onclick="aaa(this);">' + data + '</a>';
 								                }
 								                return data;}},
 									 {data : "accountTitle",
 													 "render": function(data, type, row){
 											                if(type=='display'){
-											                    data = '<a href="#" onclick="aaa(this);">' + data + '</a>';
+											                    data = '<a onclick="aaa(this);">' + data + '</a>';
 											                }
 											                return data;}}
 									 
@@ -850,6 +853,7 @@
 						if(key.keyCode == 113){
 							$("#venderTable").dataTable({
 								destroy: true,
+								autoWidth: false,
 								 ajax:{
 										'url':'venderSearch.rp',
 										'type':'get'
@@ -859,13 +863,13 @@
 									 {data : "venderCode",
 										 "render": function(data, type, row){
 								                if(type=='display'){
-								                    data = '<a href="#" onclick="ddd(this);">' + data + '</a>';
+								                    data = '<a onclick="ddd(this);">' + data + '</a>';
 								                }
 								                return data;}},
 									 {data : "venderName",
 													 "render": function(data, type, row){
 											                if(type=='display'){
-											                    data = '<a href="#" onclick="ddd(this);">' + data + '</a>';
+											                    data = '<a onclick="ddd(this);">' + data + '</a>';
 											                }
 											                return data;}}
 									 
