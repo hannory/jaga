@@ -24,7 +24,8 @@
 		SELECT J.PRICE, J.ACCOUNT_CODE, J.DEBIT_CREDIT
 		FROM SLIP S
 		RIGHT JOIN JOURNALIZE J ON(S.SLIP_CODE = J.SLIP_CODE)
-		WHERE TO_CHAR(S.SLIP_DATE, 'YYYYMMDD') <![CDATA[<=]]> #{year} || LPAD(#{month}, 2, 0) || LPAD(#{date}, 2, 0)
+		WHERE TO_CHAR(S.SLIP_DATE, 'YYYY') = #{year}
+		AND TO_CHAR(S.SLIP_DATE, 'MMDD') <![CDATA[<=]]> LPAD(#{month}, 2, 0) || LPAD(#{date}, 2, 0)
 		AND COM_CODE = #{comCode}
 	</select>
 	
@@ -63,9 +64,13 @@
 		RIGHT JOIN JOURNALIZE J ON(S.SLIP_CODE = J.SLIP_CODE)
 		LEFT JOIN VENDER V ON(J.VENDER_CODE = V.VENDER_CODE)
 		LEFT JOIN ACCOUNT_TITLE A ON(J.ACCOUNT_CODE = A.ACCOUNT_CODE)
-		WHERE TO_CHAR(S.SLIP_DATE, 'YYYYMMDD') <![CDATA[<=]]> #{year} || LPAD(#{month}, 2, 0) || LPAD(#{date}, 2, 0)
+		WHERE TO_CHAR(S.SLIP_DATE, 'YYYY') = #{year}
+		AND TO_CHAR(S.SLIP_DATE, 'MMDD') <![CDATA[<=]]> LPAD(#{month}, 2, 0) || LPAD(#{date}, 2, 0)
 		AND S.COM_CODE = #{comCode}
-		AND J.ACCOUNT_CODE = #{accountCode}
+		AND J.ACCOUNT_CODE IN
+		<foreach item="item" collection="accountArr" open="(" separator="," close=")">
+			#{item}
+		</foreach>
 		ORDER BY S.SLIP_DATE
 	</select>
 	

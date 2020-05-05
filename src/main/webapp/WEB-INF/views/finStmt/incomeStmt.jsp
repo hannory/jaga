@@ -86,19 +86,28 @@
 		text-align: center;
 	}
 	#pastDate {
-		background: #cf1d7f;
 		color: white;
-		/* background: #f165b2 */
-		padding-top: 1px;
-		padding-bottom: 1px;
+		background: #e73d1fc5;
+		padding: 2px 4px;
 	}
-	#loading-table {
+	#modal-inner-head {
+    	padding-top: 16px;
+    	padding-right: 33px;
+    	padding-left: 16px;
+    }
+    .modal-body {
+    	overflow: scroll;
+    	overflow-x: hidden;
+    	height: 578px;
+    	padding-top: 0px !important;
+    }
+	#loading-div {
 	    width: 100%;  
 	    height: 100%;  
 	    top: 0px;
 	    left: 0px;
 	    position: fixed;  
-	    display: block;  
+	    display: none;  
 	    opacity: 0.7;  
 	    background-color: #fff;  
 	    z-index: 99;  
@@ -109,13 +118,13 @@
 </head>
 <body>
 	<jsp:include page="../common/menubar.jsp" />
-	<c:set var="contextPath"
+	<%-- <c:set var="contextPath"
 		value="${ pageContext.servletContext.contextPath }"
-		scope="application" />
-	<main>
-	<div id="loading-table">
+		scope="application" /> --%>
+	<div id="loading-div">
         <img id="loading-image" src="${ contextPath }/resources/images/loading36.gif" alt="Loading..." />
     </div>
+	<main>
 	<div class="container-fluid">
 		<table style="width:100%; max-width:1100px;">
 			<tr>
@@ -214,57 +223,57 @@
 					<tr>
 						<td class="table-title">Ⅱ. 매출원가</td>
 						<td class="table-title"></td>
-						<td class="table-title-num" id="cSum20" name="sum20"></td>
+						<td class="table-title-num"><span id="cSum20"></span><input type="hidden" id="sum20" name="sum20"></td>
 						<td class="table-title"></td>
-						<td class="table-title-num" id="pSum20"></td>
+						<td class="table-title-num"><span id="pSum20"></span></td>
 					</tr>
 					<tr class="table-detail">
 						<td class="table-subTitle">상품매출원가</td>
 						<td class="table-subTitle"></td>
-						<td class="table-subTitle-num" id="cSum21"></td>
+						<td class="table-subTitle-num"><span id="cSum21"></span><input type="hidden" id="sum21" name="sum21"></td>
 						<td class="table-subTitle"></td>
-						<td class="table-subTitle-num" id="pSum21"></td>
+						<td class="table-subTitle-num"><span id="pSum21"></span></td>
 					</tr>
 					<tr class="table-detail">
 						<td class="table-subSubTitle">기초상품재고액</td>
-						<td class="table-content" id="cVal211"></td>
+						<td class="table-content"><span id="cVal211"></span><input type="hidden" id="val211" name="val211"></td>
 						<td></td>
-						<td class="table-content" id="pVal211"></td>
+						<td class="table-content"><span id="pVal211"></span></td>
 						<td></td>
 					</tr>
 					<tr class="table-detail">
 						<td class="table-subSubTitle">당기상품매입액</td>
-						<td class="table-content" id="c14600"></td>
+						<td class="table-content"><span id="c14600"></span><input type="hidden" id="v14600" name="v14600"></td>
 						<td></td>
-						<td class="table-content" id="p14600"></td>
+						<td class="table-content"><span id="p14600"></span></td>
 						<td></td>
 					</tr>
 					<tr class="table-detail">
 						<td class="table-subSubTitle">기말상품재고액</td>
 						<td><input type="text" id="inputNum" name="val213" onkeyup="inputNumberFormat(this);" style="width:195px;"></td>
 						<td></td>
-						<td class="table-content" id="pVal213"></td>
+						<td class="table-content"><span id="pVal213"></span></td>
 						<td></td>
 					</tr>
 					<tr class="table-detail">
 						<td class="table-subTitle">제품매출원가</td>
 						<td class="table-subTitle"></td>
-						<td class="table-subTitle-num" id="cSum22"></td>
+						<td class="table-subTitle-num"><span id="cSum22"></span></td>
 						<td class="table-subTitle"></td>
-						<td class="table-subTitle-num" id="pSum22"></td>
+						<td class="table-subTitle-num"><span id="pSum22"></span></td>
 					</tr>
 					<tr class="table-detail">
 						<td class="table-subSubTitle">기초제품재고액</td>
-						<td class="table-content" id="cVal221"></td>
+						<td class="table-content"><span id="cVal221"></span></td>
 						<td></td>
-						<td class="table-content" id="pVal221"></td>
+						<td class="table-content"><span id="pVal221"></span></td>
 						<td></td>
 					</tr>
 					<tr class="table-detail">
 						<td class="table-subSubTitle">당기제품제조원가</td>
-						<td class="table-content" id="cVal222"></td>
+						<td class="table-content"><span id="cVal222"></span></td>
 						<td></td>
-						<td class="table-content" id="pVal222"></td>
+						<td class="table-content"><span id="pVal221"></span></td>
 						<td></td>
 					</tr>
 					<tr class="table-detail">
@@ -364,8 +373,6 @@
 	</main>
 	<script>
 		$(function() {
-			$("#loading-table").hide();
-			
 			/* 표에서 하늘색 hover 주기 */
 			$("#contentTable td").mouseover(function() {
 				$(this).parent().css("background", "#DDEBF7");
@@ -462,8 +469,7 @@
 		
 		//(날짜를 통한) 검색 버튼 클릭시
 		function dateSearch() {
-			
-			$("#loading-table").show();
+			$("#loading-div").show();
 		    
 			$("#main-tbody").css("display", "");
 			
@@ -651,12 +657,13 @@
 						$("#row83100").fadeIn(200);
 					}
 					
-					$("#loading-table").hide();
+					$("#loading-div").hide();
 				},
 				error : function(status) {
 					console.log(status);
 				}
 			});
+			
 			
 			//form 전송이 되지 않도록 처리
 			return false;
@@ -716,12 +723,12 @@
 				var toDate = "";
 				
 				if(curPast == "p") {
-					$("#pastDate").text("전기 데이터 조회중");
+					$("#pastDate").text("전기 데이터 조회중").show();
 					
 					fromDate = (Number(year) - 1) + "-01";
 					toDate = (Number(year) - 1) + "-" + month;
 				} else {
-					$("#pastDate").text("");
+					$("#pastDate").hide();
 					
 					fromDate = year + "-01";
 					toDate = year + "-" + month;				
@@ -1012,7 +1019,7 @@
 		        	<h4 class="modal-title" style="color:white;">원장조회</h4>
 		        	<button type="button" class="close" data-dismiss="modal">&times;</button>
 		        </div>
-		        <div class="modal-body">
+		        <div id="modal-inner-head">
 			    	<table width="100%" style="margin-bottom:5px">
 			        	<tr>
 			        		<td>계정과목&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="modal-account-title" readonly>&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="modal-account-code" size="4" readonly>
@@ -1042,9 +1049,8 @@
 							
 							
 					</script>
-					<div>
-			        	<table id="list_detail" style=" width:100%; margin-left:auto; margin-right: auto;">
-			        		<thead>
+		        	<table style=" width:100%; margin-left:auto; margin-right: auto;">
+							<thead>
 				        		<tr>
 				        			<td class="modal-head" style="width:5%;">일자</td>
 				        			<td class="modal-head" style="width:6%;">번호</td>
@@ -1056,18 +1062,23 @@
 				        			<td class="modal-head" style="width:15%;">잔액</td>
 				        		</tr>
 				        	</thead>
+						</table>
+		        </div>
+		        <div class="modal-body">
+					<div>
+			        	<table id="list_detail" style=" width:100%; margin-left:auto; margin-right: auto;">
 				        	<tbody>
 				        	</tbody>
 				        	<tfoot>
 				        		<tr>
-				        			<td class="modal-head"></td>
-				        			<td class="modal-head"></td>
-				        			<td class="modal-head" style="text-align:left;">[월&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;계]</td>
-				        			<td class="modal-head"></td>
-				        			<td class="modal-head"></td>
-				        			<td class="modal-head" id="last-debit-month"></td>
-				        			<td class="modal-head" id="last-credit-month"></td>
-				        			<td class="modal-head"></td>
+				        			<td class="modal-head" style="width:5%;"></td>
+				        			<td class="modal-head" style="width:6%;"></td>
+				        			<td class="modal-head" style="width:20%; text-align:left;">[월&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;계]</td>
+				        			<td class="modal-head" style="width:6%;"></td>
+				        			<td class="modal-head" style="width:18%;"></td>
+				        			<td class="modal-head" id="last-debit-month" style="width:15%;"></td>
+				        			<td class="modal-head" id="last-credit-month" style="width:15%;"></td>
+				        			<td class="modal-head" style="width:15%;"></td>
 				        		</tr>
 				        		<tr>
 				        			<td class="modal-head"></td>
@@ -1083,7 +1094,7 @@
 			        	</table>
 			        </div>
 			        <div class="modal-footer">
-			          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			          <button type="button" class="btn btn-default" data-dismiss="modal" style="font-weight: bold; color: #1B5748;">Close</button>
 			        </div>
 				</div>        
 	        </div>

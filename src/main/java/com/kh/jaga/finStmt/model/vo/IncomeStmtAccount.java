@@ -1,10 +1,13 @@
 package com.kh.jaga.finStmt.model.vo;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class IncomeStmtAccount implements java.io.Serializable {
 	private String comCode;
 	private int accountCode;		//계정코드
+	private ArrayList<Integer> accountArr;		//계정코드 배열 
 	private String accountTitle;	//계정명
 	private String curPast;			//당기, 전기여부
 	private int year;				//조회 연도
@@ -19,13 +22,14 @@ public class IncomeStmtAccount implements java.io.Serializable {
 	private int price;				//금액
 	
 	public IncomeStmtAccount() {}
-
-	public IncomeStmtAccount(String comCode, int accountCode, String accountTitle, String curPast, int year, int month,
-			int date, Date slipDate, String dateSlipCode, String brief, String venderCode, String venderName,
-			String debitCredit, int price) {
+	
+	public IncomeStmtAccount(String comCode, int accountCode, ArrayList accountArr, String accountTitle, String curPast,
+			int year, int month, int date, Date slipDate, String dateSlipCode, String brief, String venderCode,
+			String venderName, String debitCredit, int price) {
 		super();
 		this.comCode = comCode;
 		this.accountCode = accountCode;
+		this.accountArr = accountArr;
 		this.accountTitle = accountTitle;
 		this.curPast = curPast;
 		this.year = year;
@@ -152,12 +156,23 @@ public class IncomeStmtAccount implements java.io.Serializable {
 		this.date = date;
 	}
 
-	@Override
-	public String toString() {
-		return "IncomeStmtAccount [comCode=" + comCode + ", accountCode=" + accountCode + ", accountTitle="
-				+ accountTitle + ", curPast=" + curPast + ", year=" + year + ", month=" + month + ", date=" + date
-				+ ", slipDate=" + slipDate + ", dateSlipCode=" + dateSlipCode + ", brief=" + brief + ", venderCode="
-				+ venderCode + ", venderName=" + venderName + ", debitCredit=" + debitCredit + ", price=" + price + "]";
+	public ArrayList<Integer> getAccountArr() {
+		return accountArr;
 	}
 
+	public void setAccountArr(ArrayList<Integer> accountArr) {
+		this.accountArr = accountArr;
+	}
+
+	@Override
+	public String toString() {
+		return "IncomeStmtAccount [comCode=" + comCode + ", accountCode=" + accountCode + ", accountArr=" + accountArr
+				+ ", accountTitle=" + accountTitle + ", curPast=" + curPast + ", year=" + year + ", month=" + month
+				+ ", date=" + date + ", slipDate=" + slipDate + ", dateSlipCode=" + dateSlipCode + ", brief=" + brief
+				+ ", venderCode=" + venderCode + ", venderName=" + venderName + ", debitCredit=" + debitCredit
+				+ ", price=" + price + "]";
+	}
+	
+	
+	
 }

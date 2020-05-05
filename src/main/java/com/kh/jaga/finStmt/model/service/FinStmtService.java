@@ -33,5 +33,5 @@ public interface FinStmtService {
 
 	int countClosedIncomeStmt(IncomeStmt is);
 
-	ArrayList<IncomeStmtAccount> selectSlipByDate(IncomeStmtAccount isa);
+	ArrayList selectSlipByDate(IncomeStmtAccount isa, String accountClass);
 }
