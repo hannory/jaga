@@ -1556,7 +1556,7 @@ box-sizing: border-box;
 <div id="employee-manage">직원관리</div>
 <div id="big-employee">일반근로자</div>
 <div id="row-employee"></div>
-<div id="big-one-imployee"> <a href="BPaymentList.bp"/>사업소득자</div>
+<div id="big-one-imployee"> <a href="businessEmp.vi">사업소득자</a></div>
 <!-- <div id="big-income-employee">사업소득자</div> -->
 <div id="border2"></div>
 <!-- <input type="search" id="search-surr"> -->

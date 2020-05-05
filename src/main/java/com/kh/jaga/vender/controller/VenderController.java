@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
@@ -82,13 +81,12 @@ public class VenderController {
 		  
 		  try {
 			  response.setContentType("application/json");
+			/* System.out.println("d은행은행"+list); */
 			new Gson().toJson(list,response.getWriter());
-			System.out.println("은행리스트는요"+list);
+			/* System.out.println("은행리스트는요"+list); */
 		} catch (JsonIOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		  

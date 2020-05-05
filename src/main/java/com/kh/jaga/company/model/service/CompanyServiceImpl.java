@@ -1,6 +1,7 @@
 package com.kh.jaga.company.model.service;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.kh.jaga.company.model.dao.CompanyDao;
 import com.kh.jaga.company.model.exception.LoginException;
 import com.kh.jaga.company.model.vo.Company;
+import com.kh.jaga.company.model.vo.TypeOfBiz;
 import com.kh.jaga.companyInnerId.model.vo.ComInIdVo;
 
 @Service
@@ -70,4 +72,13 @@ public class CompanyServiceImpl implements CompanyService {
 		
 		return loginEmp;
 	}
+
+	@Override
+	public List<TypeOfBiz> selectbizTypeList() {
+		List<TypeOfBiz> list =null;
+		list=cd.selectbizTypeList(sqlSession);
+		return list;
+	}
+	
+	
 } 

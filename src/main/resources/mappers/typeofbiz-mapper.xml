@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  
+  
+   <mapper namespace="TypeOfBiz">
+  
+  <resultMap type="TypeOfBiz" id="biztypeResultSet">
+  <id property="tobcPkCode" column="TOBC_PK_CODE"/>
+  <result property="typeOfBizCode" column="TYPE_OF_BIZ_CODE"/>
+  <result property="sellWayName" column="SELL_WAY_NAME"/>
+  <result property="sellTargetName" column="SELL_TARGET_NAME"/>
+  </resultMap>
+  
+  
+	<select id="selectbizType" resultMap="biztypeResultSet" parameterType="java.lang.String">
+	SELECT TYPE_OF_BIZ_CODE, SELL_TARGET_NAME
+	FROM TYPE_OF_BIZ_CODE
+	
+	</select>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </mapper>

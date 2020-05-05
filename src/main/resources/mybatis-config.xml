@@ -46,6 +46,13 @@
 	 	<typeAlias type="com.kh.jaga.accountBook.model.vo.GenderLedgerDTO" alias="GenderLedgerDTO"/>
 	 	<typeAlias type="com.kh.jaga.vat.model.vo.Vat" alias="Vat"/> 
 	 	<typeAlias type="com.kh.jaga.vat.model.vo.BizEstStmt" alias="BizEstStmt"/>
+	 	<typeAlias type="com.kh.jaga.company.model.vo.TypeOfBiz" alias="TypeOfBiz"/>
+ 	 	<typeAlias type="com.kh.jaga.company.model.vo.DashBoard" alias="DashBoard"/> 
+   		<typeAlias type="com.kh.jaga.employee.model.vo.incomeTax" alias="incomeTax"/>
+   		<typeAlias type="com.kh.jaga.vatDeem.model.vo.Deem" alias="Deem"/> 
+
+
+
 	</typeAliases>
 
 	<mappers>
@@ -70,6 +77,10 @@
 		<mapper resource="mappers/aggregate-mapper.xml"/> 
 		<mapper resource="mappers/accountBook-mapper.xml"/> 
 		<mapper resource="mappers/vat-mapper.xml"/>
+ 		<mapper resource="mappers/dashBoard-mapper.xml"/> 
+		<mapper resource="mappers/typeofbiz-mapper.xml"/>
+		<mapper resource="mappers/incomeTax-mapper.xml"/>
+ 		<mapper resource="mappers/vatDeem-mapper.xml"/> 
   	</mappers>
 
 </configuration>

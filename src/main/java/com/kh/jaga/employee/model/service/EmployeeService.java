@@ -5,6 +5,7 @@ import java.util.List;
 import com.kh.jaga.employee.model.vo.Attachment;
 import com.kh.jaga.employee.model.vo.EarnIncome;
 import com.kh.jaga.employee.model.vo.Employee;
+import com.kh.jaga.employee.model.vo.incomeTax;
 
 public interface EmployeeService {
 
@@ -20,7 +21,7 @@ public interface EmployeeService {
 
 	int insertEarnEmp(EarnIncome ei, String employeeCode);
 
-	String seletcIncomeTax(String taxableIncome);
+	incomeTax seletcIncomeTax(int taxableIncome2);
 
 	/*
 	 * int insertEarnEmp(EarnIncome ei, String employeeCode);

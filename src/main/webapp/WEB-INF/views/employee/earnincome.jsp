@@ -280,8 +280,8 @@ left:1600px;
 <div id="employee-manage">급여자료입력</div>
 <div id="big-employee">일반근로자</div>
 <div id="row-employee"></div>
-<div id="big-one-imployee">일용근로자</div>
-<div id="big-income-employee">사업소득자</div>
+<div id="big-one-imployee"><a href="BPaymentList.bp">사업소득자</a></div>
+<!-- <div id="big-income-employee">사업소득자</div> -->
 <div id="border2"></div>
 
 	<div id="searchdiv">
@@ -714,63 +714,111 @@ left:1600px;
 		$("#employmentInsurance").val(Math.round(sbmnmdp*0.08));
  		$("#totalDeduction").val(Math.round(sbmnmdp*0.08));
  		
+ 		var employementInsurance= $("#employmentInsurance").val(Math.round(sbmnmdp*0.08));
 
     })
     
-    $("#incomeTax").click(function(){
-    	var taxableIncome= Number($("#taxableIncome").val(sbnmp));
-    	
-    	$.ajax({
-    		url:"selectIncomeTax.emp",
-    		type:"post",
-    		data:{taxableIncome:taxableIncome},
-    		
-    		success:function(data){
-/*     			swal({
-    				title:data,
-    				text:"",
-    				icon:"warning"  */
-    				$("#incomeTax").val(taxableIncome);
-    			});
-    			var msg=data;
-    		},
-    		error:function(error){
-    			alert(error);
-    		}
-    	});
-    })
-/*         $(function(){
-    
-		var tp = Number($("#taxableIncome").val());
-		
-		if(tp>1060000 && tp<1065000){
-			$("incomeTax").val(1040);
-			else if(tp>1065000 &&tp<1070000){
-				$("incomeTax").val(1110);
-			}
-			
-		}
-        }); */
-        
-        
-        
-        /*국민연금 입력 - 공제총액 + */
-/*              $("#nationalPension").keyup(function(key){
-            	var a=Number($("#nationalPension").val());
-            	$("#totalDeduction").val(a);
-            }  */
-        /*건강보험 입력 - 공제총액 + */
-        
-        /*장기요양보험 입력 - 공제총액 + */
-        
-        /*고용보험 계산*/
-        
-        /*공제총액 계산 */
+
+         /*국민연금 입력*/
+/*          nationalPension */
+ 
+ 			$("#nationalPension").keyup(function(key){
+ 				
+ 			
+        	var n=0;
+    		var employementInsurance= Number($("#employmentInsurance").val());
+        	var n= Number($("#nationalPension").val());
         	
-        /*차인 지급액 계산 (지급총액-공제총액)*/
-        
-        
-        
+     		$("#totalDeduction").val(n+employementInsurance);
+        	
+        	});
+ 			
+            $("#healthInsurance").keyup(function(key){
+            	var h=0;
+            	var n=0;
+            	var n= Number($("#nationalPension").val());
+            	var employementInsurance= Number($("#employmentInsurance").val());
+            	var h=Number($("#healthInsurance").val());
+            	
+            	$("#totalDeduction").val(n+employementInsurance+h);
+            });
+            
+          
+            $("#longTermInsurance").keyup(function(key){
+            	var h=0;
+            	var n=0;
+            	var l=0;
+            	var n= Number($("#nationalPension").val());
+            	var employementInsurance= Number($("#employmentInsurance").val());
+            	var h=Number($("#healthInsurance").val());
+            	var l=Number($("#longTermInsurance").val());
+            	
+            	$("#totalDeduction").val(n+employementInsurance+h+l);
+            })
+			
+            
+            
+             $("#incomeTax").click(function(){
+             	var h=0;
+            	var n=0;
+            	var l=0;
+            	var n= Number($("#nationalPension").val());
+            	var employementInsurance= Number($("#employmentInsurance").val());
+            	var h=Number($("#healthInsurance").val());
+            	var l=Number($("#longTermInsurance").val());
+            	
+            	console.log("incomeTax 클릭");
+            	
+            	
+            	taxableIncome = ($("#taxableIncome").val());
+/*             	taxableIncome=taxableIncome2.substring(taxableIncome2.length()-3, taxableIncome2.length());
+ */
+            	
+            	$.ajax({
+            		url:"selectIncomeTax.emp",
+            		type:"post",
+            		data: {taxableIncome:taxableIncome
+            		},
+            			success : function(args){
+				
+							$("#incomeTax").val(args);
+						
+							var incomeTax =$("#incomeTax").val(args);
+							
+							var i=Number(incomeTax.val());
+            				
+							$("#totalDeduction").val(n+employementInsurance+h+l+i);
+            			},
+            			
+            		error : function(status) {
+					console.log(status);
+				}
+            })
+    			
+  
+            	}) 
+            	
+            	
+            	/*지방소득세*/
+            	$("#localIncomeTax").click(function(key){
+            		
+            		
+            		
+            		
+            	var	i= $("#incomeTax").val();
+					
+            	var lo= Number(i*0.1);
+            	
+            	$("#localIncomeTax").val(lo);
+            	
+            	/*차인지급액: 총지급액-공제총액*/
+				var totalPayment = Number($("#totalPayment").val());
+/* 				var differencePymt = Number($("#differencePymt").val()); */
+				var totalDeduction=Number($("#totalDeduction").val());
+            	$("#differencePymt").val(totalPayment-totalDeduction);
+            	})
+            	
+
     
     
 	

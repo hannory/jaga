@@ -3,8 +3,8 @@ package com.kh.jaga.company.controller;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Date;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,6 +26,7 @@ import com.kh.jaga.common.CommonsUtils;
 import com.kh.jaga.company.model.exception.LoginException;
 import com.kh.jaga.company.model.service.CompanyService;
 import com.kh.jaga.company.model.vo.Company;
+import com.kh.jaga.company.model.vo.TypeOfBiz;
 import com.kh.jaga.companyInnerId.model.vo.ComInIdVo;
 
 /**
@@ -41,7 +42,10 @@ public class CompanyController {
 
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
-
+	
+	 @Autowired
+	   private DashBoardService dbs;
+	
 	//로그인
 	@PostMapping("login.lo")
 	public String loginCheck(Company c,Model model, @RequestParam(required = false) String accountType, String empId, String companyPwd) {
@@ -126,11 +130,25 @@ public class CompanyController {
 		
 	}//method
 	
+	
 	@GetMapping("gomain.co")
-	public String gomain() {
-		return "main/main";
-	}
-
+	   public String gomain(HttpServletRequest request, Model model) {
+	      Company company = (Company)request.getSession().getAttribute("loginCompany");
+	      String comCode = company.getCompanyCode();
+	      
+	      System.out.println(comCode);
+	      
+	      System.out.println("뀪?");
+	      HashMap<String, Object> hm = dbs.selectDashBoard(comCode);
+	      
+	      model.addAttribute("profit", hm.get("profit"));
+	      model.addAttribute("creditS", hm.get("creditS"));
+	      model.addAttribute("creditB", hm.get("creditB"));
+	      model.addAttribute("chart1", hm.get("chart1"));
+	      
+	      return "main/main";
+	   }
+	
 	@GetMapping("companyJoinView.lo")
 	public String showMemberJoinView() {
 		return "company/companyJoin";
@@ -205,11 +223,17 @@ public class CompanyController {
 		return "redirect:index.jsp"; 
 	}
 	
-	/*
-	 * @RequestMapping("gaeupSearch.co") public ModelAndView
-	 * gaeupSearch(@RequestParam Date date1, ModelAndView mv) {
-	 * System.out.println("date1은요"+date1);
-	 * 
-	 * mv.setViewName("jsonView"); return mv; }
-	 */
+	@RequestMapping("biztypeSearch.lo") 
+	public ModelAndView biztypeSearch(ModelAndView mv, HttpServletRequest request) {
+		List<TypeOfBiz> list =null;
+		System.out.println("왔니");
+		list=cs.selectbizTypeList();
+		
+		System.out.println("업종코드 출력되니1"+list);
+		mv.addObject("data",list);
+		mv.setViewName("jsonView");
+		
+		System.out.println("업종코드 출력되니"+list);
+		return mv;
+	}
 }

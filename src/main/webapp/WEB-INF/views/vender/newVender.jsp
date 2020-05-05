@@ -10,11 +10,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<!-- jquery UI calendar-->
-<script
-   src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
-   integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
-   crossorigin="anonymous"></script>
    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -1201,7 +1196,7 @@ border-radius: 0px 5px 5px 0px; */
 		</div>
 	</main>
       <!-- Modal 은행코드 -->
-  <div class="modal fade" id="accountModal" role="dialog">
+  <div class="modal fade" id="bankModal" role="dialog">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
@@ -1326,23 +1321,27 @@ function initLayerPosition() {
 			+ 'px';
 	element_layer.style.top = (((window.innerHeight || document.documentElement.clientHeight) - height) / 2 - borderWidth)
 			+ 'px';
-}
+};
 
-var bankCo;//출금/입금계정과목
-var bankNN;
+</script>
+
+<script>
+
+var bankCode;//출금/입금계정과목
+var bankName;
 function ccc(value){
 	$(value).parent().parent().children().each(function(index){
 		console.log($(this).text());
-		bankCo += ","+$(this).text();
+		bankCode += ","+$(this).text();
 	})
-	var account = bankCo.split(",");
-	bankCo = bank[1];
-	bankNN = bank[2];
+	var bank = bankCode.split(",");
+	bankCode = bank[1];
+	bankName = bank[2];
 	
-	$("#bankCode").val(bankCo);
-	$("#bankName").val(bankNN);
+	$("#bankCode").val(bankCode);
+	$("#bankName").val(bankName);
 	
-	$("div#accountModal").modal("hide");
+	$("div#bankModal").modal("hide");
 }		
 
 
@@ -1350,11 +1349,12 @@ function ccc(value){
 
 
 
-/* 거래처모달 */
+
+/* 은행모달 */
 $("#searchBtn2").click(function(){
 	
 	$("#bankTable").dataTable({
-		destroy: true,
+/* 		destroy: true, */
 		 ajax:{
 				'url':'bankSearch.ve',
 				'type':'get'
@@ -1380,7 +1380,7 @@ $("#searchBtn2").click(function(){
 	});
 	
 	$(".modal-title").text("은행검색");
-	 $("div#accountModal").modal();
+	 $("div#bankModal").modal();
 	 
 	 
 });
