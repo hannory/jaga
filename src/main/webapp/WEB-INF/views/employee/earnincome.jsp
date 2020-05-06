@@ -742,7 +742,7 @@ left:1600px;
             	
             	$("#totalDeduction").val(n+employementInsurance+h);
             });
-            
+             
           
             $("#longTermInsurance").keyup(function(key){
             	var h=0;
