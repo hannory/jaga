@@ -32,6 +32,9 @@
 	.normal-label {
 		margin:0px;
 	}
+	/* #contentTable tr:hover {
+		color:red;
+	} */
 	.table-head {
 		border:1px solid #a6a6a6;
 		background:#e7e6e6;
@@ -62,6 +65,12 @@
 	}
 	.table-content {
 		text-align:right;
+	}
+	#contentTable tr:hover:not(.table-head-tr) {
+		/* color:orange;
+		border:1px solid red; */
+		background: #DDEBF7;
+		box-shadow: inset 0 -4px 0 #b4e6f8;
 	}
 	.modal-head {
 		border: 1px solid #a6a6a6;
@@ -152,7 +161,7 @@
 				</tr>
 			</table>
 			<table id="contentTable" width="1100px" style="text-align:center;">
-				<tr>
+				<tr class="table-head-tr">
 					<td class="table-head" width="28%" rowspan="2">과&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;목
 						<input type="hidden" id="login-openDay" value="${ sessionScope.loginCompany.gaeup }">
 						<input type="hidden" id="term" name="term">
@@ -160,7 +169,7 @@
 					<td class="table-head" colspan="2">제 <label class="normal-label" id="cur-term"></label>(당)기 2020.<label class="normal-label" id="cur-month"></label>.<label class="normal-label" id="cur-date"></label> 현재</td>
 					<td class="table-head" colspan="2">제 <label class="normal-label" id="past-term"></label>(전)기 2019.12.31 현재</td>
 				</tr>
-				<tr>
+				<tr class="table-head-tr">
 					<td class="table-head" colspan="2">금액</td>
 					<td class="table-head" colspan="2">금액</td>
 				<tr>
@@ -331,14 +340,14 @@
 					<td class="table-subTitle"></td>
 					<td class="table-subTitle-num"><span id="pSumAssests24"></span></td>
 				</tr>
-				<tr>
-					<td class="table-title" style="padding-left:0px;">자산총계</td>
+				<tr style="box-shadow: inset 0 -4px 0 #24574A;">
+					<td class="table-title" style="padding-left:0px; box-shadow: inset 0 -4px 0 #24574A;">자산총계</td>
 					<td class="table-title"></td>
 					<td class="table-title-num"><span id="cTotalAssests"></span><input type="hidden" id="totalAssests" name="totalAssests"></td>
 					<td class="table-title"></td>
 					<td class="table-title-num"><span id="pTotalAssests"></span></td>
 				</tr>
-				<tr>
+				<tr style="border-top:1px dotted #296355;">
 					<td class="table-title" style="padding-left:0px;">부채</td>
 					<td class="table-title"></td>
 					<td class="table-title"></td>
@@ -408,7 +417,7 @@
 					<td class="table-title"></td>
 					<td class="table-title-num"><span id="pTotalLiabilities"></span></td>
 				</tr>
-				<tr>
+				<tr style="border-top:1px dotted #296355;">
 					<td class="table-title" style="padding-left:0px;">자본</td>
 					<td class="table-title"></td>
 					<td class="table-title"></td>
@@ -418,58 +427,72 @@
 				<tr>
 					<td class="table-title">Ⅰ. 자본금</td>
 					<td class="table-title"></td>
+					<td class="table-title-num"><span id="cSumCapital10"></span><input type="hidden" id="sumCapital10" name="sumCapital10"></td>
 					<td class="table-title"></td>
-					<td class="table-title"></td>
-					<td class="table-title"></td>
+					<td class="table-title-num"><span id="pSumCapital10"></span></td>
+				</tr>
+				<tr class="table-detail">
+					<td class="table-subSubTitle">자본금</td>
+					<td class="table-content"><span id="cCapitalStock"></span><input type="hidden" id="capitalStock" name="capitalStock"></td>
+					<td></td>
+					<td class="table-content"><span id="pCapitalStock"></span></td>
+					<td></td>
 				</tr>
 				<tr>
 					<td class="table-title">Ⅱ. 자본잉여금</td>
 					<td class="table-title"></td>
+					<td class="table-title-num"><span id="cSumCapital20"></span><input type="hidden" id="sumCapital20" name="sumCapital20"></td>
 					<td class="table-title"></td>
-					<td class="table-title"></td>
-					<td class="table-title"></td>
+					<td class="table-title-num"><span id="pSumCapital20"></span></td>
 				</tr>
 				<tr>
 					<td class="table-title">Ⅲ. 자본조정</td>
 					<td class="table-title"></td>
+					<td class="table-title-num"><span id="cSumCapital30"></span><input type="hidden" id="sumCapital30" name="sumCapital30"></td>
 					<td class="table-title"></td>
-					<td class="table-title"></td>
-					<td class="table-title"></td>
+					<td class="table-title-num"><span id="pSumCapital30"></span></td>
 				</tr>
 				<tr>
 					<td class="table-title">Ⅳ. 기타포괄손익누계액</td>
 					<td class="table-title"></td>
+					<td class="table-title-num"><span id="cSumCapital40"></span><input type="hidden" id="sumCapital40" name="sumCapital40"></td>
 					<td class="table-title"></td>
-					<td class="table-title"></td>
-					<td class="table-title"></td>
+					<td class="table-title-num"><span id="pSumCapital40"></span></td>
 				</tr>
 				<tr>
 					<td class="table-title">Ⅴ. 이익잉여금</td>
 					<td class="table-title"></td>
+					<td class="table-title-num"><span id="cSumCapital50"></span><input type="hidden" id="sumCapital50" name="sumCapital50"></td>
 					<td class="table-title"></td>
-					<td class="table-title"></td>
-					<td class="table-title"></td>
+					<td class="table-title-num"><span id="pSumCapital50"></span></td>
 				</tr>
-				<tr>
+				<tr class="table-detail">
+					<td class="table-subSubTitle">미처분이익잉여금</td>
+					<td class="table-content"><span id="cRetainedEarnings"></span><input type="hidden" id="retainedEarnings" name="retainedEarnings"></td>
+					<td></td>
+					<td class="table-content"><span id="pRetainedEarnings"></span></td>
+					<td></td>
+				</tr>
+				<!-- <tr>
 					<td class="table-title" style="padding-left:0px;">(당기순이익)</td>
 					<td class="table-title"></td>
 					<td class="table-title"></td>
 					<td class="table-title"></td>
 					<td class="table-title"></td>
-				</tr>
+				</tr> -->
 				<tr>
 					<td class="table-title" style="padding-left:0px;">자본총계</td>
 					<td class="table-title"></td>
+					<td class="table-title-num"><span id="cTotalCapital"></span><input type="hidden" id="totalCapital" name="totalCapital"></td>
 					<td class="table-title"></td>
-					<td class="table-title"></td>
-					<td class="table-title"></td>
+					<td class="table-title-num"><span id="pTotalCapital"></span></td>
 				</tr>
-				<tr>
+				<tr style="border-top:1px dotted #296355;">
 					<td class="table-title" style="padding-left:0px;">부채와자본총계</td>
 					<td class="table-title"></td>
+					<td class="table-title-num"><span id="cTotalLiabCap"></span><input type="hidden" id="totalLiabCap" name="totalLiabCap"></td>
 					<td class="table-title"></td>
-					<td class="table-title"></td>
-					<td class="table-title"></td>
+					<td class="table-title-num"><span id="pTotalLiabCap"></span></td>
 				</tr>
 			</table>
 		</form>
@@ -497,13 +520,13 @@
 					.attr("style","margin-left:2px; vertical-align:middle; cursor: Pointer; width:20px; height:20px");
 			
 			//표에서 하늘색 hover 주기
-			$("#contentTable td").mouseover(function() {
+			/* $("#contentTable td").mouseover(function() {
 				$(this).parent().css("background", "#DDEBF7");
 			});
 			
 			$("#contentTable td").mouseout(function() {
 				$(this).parent().css("background", "white");
-			});		
+			});	 */	
 			
 			//현재 날자로 기본값 설정
 			var curDate = new Date();
@@ -548,174 +571,352 @@
 			
 			dateArray = ($("#datepicker").val()).split("-");
 			
+			//당기 이익잉여금 계산
 			$.ajax({
-				url : "selectFinPos.fs",
+				url : "selectIncomeStmt.fs",
 				type : "get",
 				data : {
 					year : dateArray[0],
-					month : dateArray[1],
-					date : dateArray[2]
+					month : dateArray[1]
 				},
 				success : function(data) {
-					$("#cur-month").text(dateArray[1]);
-					$("#cur-date").text(dateArray[2]);
+					//---------당기 이익잉여금---------		
+					var c14600 = data["c14600"];
+					var c40100 = data["c40100"];
+					var c40400 = data["c40400"];
+					var c81100 = data["c81100"];
+					var c83000 = data["c83000"];
+					var c83100 = data["c83100"];
+					var cVal222 = data["cVal222"];
 					
-					//-------------당기-------------
-					var cCash = data["cCash"];
-					var cShortTermInv = data["cShortTermInv"];
-					var cAccountRecievable = data["cAccountRecievable"];
-					var cNonTradeRecievable = data["cNonTradeRecievable"];
-					var cVatPayment = data["cVatPayment"];
-					var cMerchandises = data["cMerchandises"];
-					var cFinishedGoods = data["cFinishedGoods"];
-					var cRawMaterials = data["cRawMaterials"];
-					var cWorkInProcess = data["cWorkInProcess"];
-					var cLongInvSecurities = data["cLongInvSecurities"];
-					var cOfficeEquipment = data["cOfficeEquipment"];
-					var cAccountPayables = data["cAccountPayables"];
-					var cNonTradePayables = data["cNonTradePayables"];
-					var cWitholdings = data["cWitholdings"];
-					var cVatDeposit = data["cVatDeposit"];
-					var cLongBorrowings = data["cLongBorrowings"];
-					var cRetirementLiabilities = data["cRetirementLiabilities"];
-					
-					$("#cCash").text(comma(cCash));
-					$("#cShortTermInv").text(comma(cShortTermInv));
-					$("#cAccountRecievable").text(comma(cAccountRecievable));
-					$("#cNonTradeRecievable").text(comma(cNonTradeRecievable));
-					$("#cVatPayment").text(comma(cVatPayment));
-					$("#cMerchandises").text(comma(cMerchandises));
-					$("#cFinishedGoods").text(comma(cFinishedGoods));
-					$("#cRawMaterials").text(comma(cRawMaterials));
-					$("#cWorkInProcess").text(comma(cWorkInProcess));
-					$("#cLongInvSecurities").text(comma(cLongInvSecurities));
-					$("#cOfficeEquipment").text(comma(cOfficeEquipment));
-					$("#cAccountPayables").text(comma(cAccountPayables));
-					$("#cNonTradePayables").text(comma(cNonTradePayables));
-					$("#cWitholdings").text(comma(cWitholdings));
-					$("#cVatDeposit").text(comma(cVatDeposit));
-					$("#cLongBorrowings").text(comma(cLongBorrowings));
-					$("#cRetirementLiabilities").text(comma(cRetirementLiabilities));
+					$("#c14600").text(comma(c14600));
+					$("#c40100").text(comma(c40100));
+					$("#c40400").text(comma(c40400));
+					$("#c81100").text(comma(c81100));
+					$("#c83000").text(comma(c83000));
+					$("#c83100").text(comma(c83100));
+					$("#cVal222").text(comma(cVal222));
 					
 					//표 각 합계 계산
-					var cSumAssests11 = cCash + cShortTermInv + cAccountRecievable + cNonTradeRecievable + cVatPayment;
-					$("#cSumAssests11").text(comma(cSumAssests11));
+					var cSum10 = c40100 + c40400;
+					$("#cSum10").text(comma(cSum10));
 					
-					var cSumAssests12 = cMerchandises + cFinishedGoods + cRawMaterials + cWorkInProcess;
-					$("#cSumAssests12").text(comma(cSumAssests12));
+					var cVal211 = 0;
 					
-					var cSumAssests10 = cSumAssests11 + cSumAssests12;
-					$("#cSumAssests10").text(comma(cSumAssests10));
+					var cSum21 = cVal211 + c14600;
+					$("#cSum21").text(comma(cSum21));
 					
-					var cSumAssests21 = cLongInvSecurities;
-					$("#cSumAssests21").text(comma(cSumAssests21));
+					var cVal221 = 0;
+					var cVal223 = 0;
+
+					var cSum22 = cVal221 + cVal222 + cVal223;
+					$("#cSum22").text(comma(cSum22));
 					
-					var cSumAssests22 = cOfficeEquipment;
-					$("#cSumAssests22").text(comma(cSumAssests22));
+					var cSum20 = cSum21 + cSum22;
+					$("#cSum20").text(comma(cSum20));
 					
-					var cSumAssests23 = 0;
-					$("#cSumAssests23").text(comma(cSumAssests23));
+					var cSum30 = cSum10 - cSum20;
+					$("#cSum30").text(comma(cSum30));
 					
-					var cSumAssests24 = 0;
-					$("#cSumAssests24").text(comma(cSumAssests24));
+					var cSum40 = c81100 + c83000 + c83100;
+					$("#cSum40").text(comma(cSum40));
 					
-					var cSumAssests20 = cSumAssests21 + cSumAssests22 + cSumAssests23 + cSumAssests24;
-					$("#cSumAssests20").text(comma(cSumAssests20));
+					var cSum50 = cSum30 - cSum40;
+					$("#cSum50").text(comma(cSum50));
 					
-					var cTotalAssests = cSumAssests10 + cSumAssests20;
-					$("#cTotalAssests").text(comma(cTotalAssests));
+					var cSum60 = 0;
+					$("#cSum60").text(comma(cSum60));
 					
-					var cSumLiabilities10 = cAccountPayables + cNonTradePayables + cWitholdings + cVatDeposit;
-					$("#cSumLiabilities10").text(comma(cSumLiabilities10));
+					var cSum70 = 0;
+					$("#cSum70").text(comma(cSum70));
 					
-					var cSumLiabilities20 = cLongBorrowings + cRetirementLiabilities;
-					$("#cSumLiabilities20").text(comma(cSumLiabilities20));
+					var cSum80 = cSum50 + cSum60 - cSum70;
+					$("#cSum80").text(comma(cSum80));
 					
-					var cTotalLiabilities = cSumLiabilities10 + cSumLiabilities20;
-					$("#cTotalLiabilities").text(comma(cTotalLiabilities));
+					var cSum90 = 0;
+					$("#cSum90").text(comma(cSum90));
 					
-					//------------당기 끝------------					
-					//-------------전기-------------	
-					var pCash = data["pCash"];
-					var pShortTermInv = data["pShortTermInv"];
-					var pAccountRecievable = data["pAccountRecievable"];
-					var pNonTradeRecievable = data["pNonTradeRecievable"];
-					var pVatPayment = data["pVatPayment"];
-					var pMerchandises = data["pMerchandises"];
-					var pFinishedGoods = data["pFinishedGoods"];
-					var pRawMaterials = data["pRawMaterials"];
-					var pWorkInProcess = data["pWorkInProcess"];
-					var pLongInvSecurities = data["pLongInvSecurities"];
-					var pOfficeEquipment = data["pOfficeEquipment"];
-					var pAccountPayables = data["pAccountPayables"];
-					var pNonTradePayables = data["pNonTradePayables"];
-					var pWitholdings = data["pWitholdings"];
-					var pVatDeposit = data["pVatDeposit"];
-					var pLongBorrowings = data["pLongBorrowings"];
-					var pRetirementLiabilities = data["pRetirementLiabilities"];
+					var cRetainedEarnings = cSum80 - cSum90;
+					$("#cRetainedEarnings").text(comma(cRetainedEarnings));
+					//---------전기 이익잉여금---------	
+					var p14600 = data["p14600"];
+					var p40100 = data["p40100"];
+					var p40400 = data["p40400"];
+					var p81100 = data["p81100"];
+					var p83000 = data["p83000"];
+					var p83100 = data["p83100"];
 					
-					$("#pCash").text(comma(pCash));
-					$("#pShortTermInv").text(comma(pShortTermInv));
-					$("#pAccountRecievable").text(comma(pAccountRecievable));
-					$("#pNonTradeRecievable").text(comma(pNonTradeRecievable));
-					$("#pVatPayment").text(comma(pVatPayment));
-					$("#pMerchandises").text(comma(pMerchandises));
-					$("#pFinishedGoods").text(comma(pFinishedGoods));
-					$("#pRawMaterials").text(comma(pRawMaterials));
-					$("#pWorkInProcess").text(comma(pWorkInProcess));
-					$("#pLongInvSecurities").text(comma(pLongInvSecurities));
-					$("#pOfficeEquipment").text(comma(pOfficeEquipment));
-					$("#pAccountPayables").text(comma(pAccountPayables));
-					$("#pNonTradePayables").text(comma(pNonTradePayables));
-					$("#pWitholdings").text(comma(pWitholdings));
-					$("#pVatDeposit").text(comma(pVatDeposit));
-					$("#pLongBorrowings").text(comma(pLongBorrowings));
-					$("#pRetirementLiabilities").text(comma(pRetirementLiabilities));
+					$("#p14600").text(comma(p14600));
+					$("#p40100").text(comma(p40100));
+					$("#p40400").text(comma(p40400));
+					$("#p81100").text(comma(p81100));
+					$("#p83000").text(comma(p83000));
+					$("#p83100").text(comma(p83100));
 					
 					//표 각 합계 계산
-					var pSumAssests11 = pCash + pShortTermInv + pAccountRecievable + pNonTradeRecievable + pVatPayment;
-					$("#pSumAssests11").text(comma(pSumAssests11));
+					var pSum10 = p40100 + p40400;
+					$("#pSum10").text(comma(pSum10));
 					
-					var pSumAssests12 = pMerchandises + pFinishedGoods + pRawMaterials + pWorkInProcess;
-					$("#pSumAssests12").text(comma(pSumAssests12));
+					var pVal211 = 0;
+					var pVal213 = 0;
 					
-					var pSumAssests10 = pSumAssests11 + pSumAssests12;
-					$("#pSumAssests10").text(comma(pSumAssests10));
+					var pSum21 = pVal211 + p14600 + pVal213;
+					$("#pSum21").text(comma(pSum21));
 					
-					var pSumAssests21 = pLongInvSecurities;
-					$("#pSumAssests21").text(comma(pSumAssests21));
+					var pVal221 = 0;
+					var pVal222 = 0;
+					var pVal223 = 0;
+
+					var pSum22 = pVal221 + pVal222 + pVal223;
+					$("#pSum22").text(comma(pSum22));
 					
-					var pSumAssests22 = pOfficeEquipment;
-					$("#pSumAssests22").text(comma(pSumAssests22));
+					var pSum20 = pSum21 + pSum22;
+					$("#pSum20").text(comma(pSum20));
 					
-					var pSumAssests23 = 0;
-					$("#pSumAssests23").text(comma(pSumAssests23));
+					var pSum30 = pSum10 - pSum20;
+					$("#pSum30").text(comma(pSum30));
 					
-					var pSumAssests24 = 0;
-					$("#pSumAssests24").text(comma(pSumAssests24));
+					var pSum40 = p81100 + p83000 + p83100;
+					$("#pSum40").text(comma(pSum40));
 					
-					var pSumAssests20 = pSumAssests21 + pSumAssests22 + pSumAssests23 + pSumAssests24;
-					$("#pSumAssests20").text(comma(pSumAssests20));
+					var pSum50 = pSum30 - pSum40;
+					$("#pSum50").text(comma(pSum50));
 					
-					var pTotalAssests = pSumAssests10 + pSumAssests20;
-					$("#pTotalAssests").text(comma(pTotalAssests));
+					var pSum60 = 0;
+					$("#pSum60").text(comma(pSum60));
 					
-					var pSumLiabilities10 = pAccountPayables + pNonTradePayables + pWitholdings + pVatDeposit;
-					$("#pSumLiabilities10").text(comma(pSumLiabilities10));
+					var pSum70 = 0;
+					$("#pSum70").text(comma(pSum70));
 					
-					var pSumLiabilities20 = pLongBorrowings + pRetirementLiabilities;
-					$("#pSumLiabilities20").text(comma(pSumLiabilities20));
+					var pSum80 = pSum50 + pSum60 - pSum70;
+					$("#pSum80").text(comma(pSum80));
 					
-					var pTotalLiabilities = pSumLiabilities10 + pSumLiabilities20;
-					$("#pTotalLiabilities").text(comma(pTotalLiabilities));
+					var pSum90 = 0;
+					$("#pSum90").text(comma(pSum90));
 					
-					//------------전기 끝------------	
+					var pRetainedEarnings = pSum80 - pSum90;
+					$("#pRetainedEarnings").text(comma(pRetainedEarnings));
 					
-					//행 보여주기/숨기기
-					
-					$("#loading-div").hide();
+					//재무상태표 계산을 위한 ajax
+					$.ajax({
+						url : "selectFinPos.fs",
+						type : "get",
+						data : {
+							year : dateArray[0],
+							month : dateArray[1],
+							date : dateArray[2]
+						},
+						success : function(data) {
+							$("#cur-month").text(dateArray[1]);
+							$("#cur-date").text(dateArray[2]);
+							
+							//-------------당기-------------
+							var cCash = data["cCash"];
+							var cShortTermInv = data["cShortTermInv"];
+							var cAccountRecievable = data["cAccountRecievable"];
+							var cNonTradeRecievable = data["cNonTradeRecievable"];
+							var cVatPayment = data["cVatPayment"];
+							var cMerchandises = data["cMerchandises"];
+							var cFinishedGoods = data["cFinishedGoods"];
+							var cRawMaterials = data["cRawMaterials"];
+							var cWorkInProcess = data["cWorkInProcess"];
+							var cLongInvSecurities = data["cLongInvSecurities"];
+							var cOfficeEquipment = data["cOfficeEquipment"];
+							var cAccountPayables = data["cAccountPayables"];
+							var cNonTradePayables = data["cNonTradePayables"];
+							var cWitholdings = data["cWitholdings"];
+							var cVatDeposit = data["cVatDeposit"];
+							var cLongBorrowings = data["cLongBorrowings"];
+							var cRetirementLiabilities = data["cRetirementLiabilities"];
+							var cCapitalStock = data["cCapitalStock"];
+							
+							$("#cCash").text(comma(cCash));
+							$("#cShortTermInv").text(comma(cShortTermInv));
+							$("#cAccountRecievable").text(comma(cAccountRecievable));
+							$("#cNonTradeRecievable").text(comma(cNonTradeRecievable));
+							$("#cVatPayment").text(comma(cVatPayment));
+							$("#cMerchandises").text(comma(cMerchandises));
+							$("#cFinishedGoods").text(comma(cFinishedGoods));
+							$("#cRawMaterials").text(comma(cRawMaterials));
+							$("#cWorkInProcess").text(comma(cWorkInProcess));
+							$("#cLongInvSecurities").text(comma(cLongInvSecurities));
+							$("#cOfficeEquipment").text(comma(cOfficeEquipment));
+							$("#cAccountPayables").text(comma(cAccountPayables));
+							$("#cNonTradePayables").text(comma(cNonTradePayables));
+							$("#cWitholdings").text(comma(cWitholdings));
+							$("#cVatDeposit").text(comma(cVatDeposit));
+							$("#cLongBorrowings").text(comma(cLongBorrowings));
+							$("#cRetirementLiabilities").text(comma(cRetirementLiabilities));
+							$("#cCapitalStock").text(comma(cCapitalStock));
+							
+							//표 각 합계 계산
+							var cSumAssests11 = cCash + cShortTermInv + cAccountRecievable + cNonTradeRecievable + cVatPayment;
+							$("#cSumAssests11").text(comma(cSumAssests11));
+							
+							var cSumAssests12 = cMerchandises + cFinishedGoods + cRawMaterials + cWorkInProcess;
+							$("#cSumAssests12").text(comma(cSumAssests12));
+							
+							var cSumAssests10 = cSumAssests11 + cSumAssests12;
+							$("#cSumAssests10").text(comma(cSumAssests10));
+							
+							var cSumAssests21 = cLongInvSecurities;
+							$("#cSumAssests21").text(comma(cSumAssests21));
+							
+							var cSumAssests22 = cOfficeEquipment;
+							$("#cSumAssests22").text(comma(cSumAssests22));
+							
+							var cSumAssests23 = 0;
+							$("#cSumAssests23").text(comma(cSumAssests23));
+							
+							var cSumAssests24 = 0;
+							$("#cSumAssests24").text(comma(cSumAssests24));
+							
+							var cSumAssests20 = cSumAssests21 + cSumAssests22 + cSumAssests23 + cSumAssests24;
+							$("#cSumAssests20").text(comma(cSumAssests20));
+							
+							var cTotalAssests = cSumAssests10 + cSumAssests20;
+							$("#cTotalAssests").text(comma(cTotalAssests));
+							
+							var cSumLiabilities10 = cAccountPayables + cNonTradePayables + cWitholdings + cVatDeposit;
+							$("#cSumLiabilities10").text(comma(cSumLiabilities10));
+							
+							var cSumLiabilities20 = cLongBorrowings + cRetirementLiabilities;
+							$("#cSumLiabilities20").text(comma(cSumLiabilities20));
+							
+							var cTotalLiabilities = cSumLiabilities10 + cSumLiabilities20;
+							$("#cTotalLiabilities").text(comma(cTotalLiabilities));
+							
+							var cSumCapital10 = cCapitalStock;
+							$("#cSumCapital10").text(comma(cSumCapital10));
+							
+							var cSumCapital20 = 0;
+							$("#cSumCapital20").text(comma(cSumCapital20));
+							
+							var cSumCapital30 = 0;
+							$("#cSumCapital30").text(comma(cSumCapital30));
+							
+							var cSumCapital40 = 0;
+							$("#cSumCapital40").text(comma(cSumCapital40));
+							
+							var cSumCapital50 = cRetainedEarnings;
+							$("#cSumCapital50").text(comma(cSumCapital50));
+							
+							var cTotalCapital = cSumCapital10 + cSumCapital20 + cSumCapital30 + cSumCapital40 + cSumCapital50;
+							$("#cTotalCapital").text(comma(cTotalCapital));
+							
+							var cTotalLiabCap = cTotalLiabilities + cTotalCapital;
+							$("#cTotalLiabCap").text(comma(cTotalLiabCap));
+							//------------당기 끝------------					
+							//-------------전기-------------	
+							var pCash = data["pCash"];
+							var pShortTermInv = data["pShortTermInv"];
+							var pAccountRecievable = data["pAccountRecievable"];
+							var pNonTradeRecievable = data["pNonTradeRecievable"];
+							var pVatPayment = data["pVatPayment"];
+							var pMerchandises = data["pMerchandises"];
+							var pFinishedGoods = data["pFinishedGoods"];
+							var pRawMaterials = data["pRawMaterials"];
+							var pWorkInProcess = data["pWorkInProcess"];
+							var pLongInvSecurities = data["pLongInvSecurities"];
+							var pOfficeEquipment = data["pOfficeEquipment"];
+							var pAccountPayables = data["pAccountPayables"];
+							var pNonTradePayables = data["pNonTradePayables"];
+							var pWitholdings = data["pWitholdings"];
+							var pVatDeposit = data["pVatDeposit"];
+							var pLongBorrowings = data["pLongBorrowings"];
+							var pRetirementLiabilities = data["pRetirementLiabilities"];
+							var pCapitalStock = data["pCapitalStock"];
+							
+							$("#pCash").text(comma(pCash));
+							$("#pShortTermInv").text(comma(pShortTermInv));
+							$("#pAccountRecievable").text(comma(pAccountRecievable));
+							$("#pNonTradeRecievable").text(comma(pNonTradeRecievable));
+							$("#pVatPayment").text(comma(pVatPayment));
+							$("#pMerchandises").text(comma(pMerchandises));
+							$("#pFinishedGoods").text(comma(pFinishedGoods));
+							$("#pRawMaterials").text(comma(pRawMaterials));
+							$("#pWorkInProcess").text(comma(pWorkInProcess));
+							$("#pLongInvSecurities").text(comma(pLongInvSecurities));
+							$("#pOfficeEquipment").text(comma(pOfficeEquipment));
+							$("#pAccountPayables").text(comma(pAccountPayables));
+							$("#pNonTradePayables").text(comma(pNonTradePayables));
+							$("#pWitholdings").text(comma(pWitholdings));
+							$("#pVatDeposit").text(comma(pVatDeposit));
+							$("#pLongBorrowings").text(comma(pLongBorrowings));
+							$("#pRetirementLiabilities").text(comma(pRetirementLiabilities));
+							$("#pCapitalStock").text(comma(pCapitalStock));
+							
+							//표 각 합계 계산
+							var pSumAssests11 = pCash + pShortTermInv + pAccountRecievable + pNonTradeRecievable + pVatPayment;
+							$("#pSumAssests11").text(comma(pSumAssests11));
+							
+							var pSumAssests12 = pMerchandises + pFinishedGoods + pRawMaterials + pWorkInProcess;
+							$("#pSumAssests12").text(comma(pSumAssests12));
+							
+							var pSumAssests10 = pSumAssests11 + pSumAssests12;
+							$("#pSumAssests10").text(comma(pSumAssests10));
+							
+							var pSumAssests21 = pLongInvSecurities;
+							$("#pSumAssests21").text(comma(pSumAssests21));
+							
+							var pSumAssests22 = pOfficeEquipment;
+							$("#pSumAssests22").text(comma(pSumAssests22));
+							
+							var pSumAssests23 = 0;
+							$("#pSumAssests23").text(comma(pSumAssests23));
+							
+							var pSumAssests24 = 0;
+							$("#pSumAssests24").text(comma(pSumAssests24));
+							
+							var pSumAssests20 = pSumAssests21 + pSumAssests22 + pSumAssests23 + pSumAssests24;
+							$("#pSumAssests20").text(comma(pSumAssests20));
+							
+							var pTotalAssests = pSumAssests10 + pSumAssests20;
+							$("#pTotalAssests").text(comma(pTotalAssests));
+							
+							var pSumLiabilities10 = pAccountPayables + pNonTradePayables + pWitholdings + pVatDeposit;
+							$("#pSumLiabilities10").text(comma(pSumLiabilities10));
+							
+							var pSumLiabilities20 = pLongBorrowings + pRetirementLiabilities;
+							$("#pSumLiabilities20").text(comma(pSumLiabilities20));
+							
+							var pTotalLiabilities = pSumLiabilities10 + pSumLiabilities20;
+							$("#pTotalLiabilities").text(comma(pTotalLiabilities));
+							
+							var pSumCapital10 = pCapitalStock;
+							$("#pSumCapital10").text(comma(pSumCapital10));
+							
+							var pSumCapital20 = 0;
+							$("#pSumCapital20").text(comma(pSumCapital20));
+							
+							var pSumCapital30 = 0;
+							$("#pSumCapital30").text(comma(pSumCapital30));
+							
+							var pSumCapital40 = 0;
+							$("#pSumCapital40").text(comma(pSumCapital40));
+							
+							var pSumCapital50 = pRetainedEarnings;
+							$("#pSumCapital50").text(comma(pSumCapital50));
+							
+							var pTotalCapital = pSumCapital10 + pSumCapital20 + pSumCapital30 + pSumCapital40 + pSumCapital50;
+							$("#pTotalCapital").text(comma(pTotalCapital));
+							
+							var pTotalLiabCap = pTotalLiabilities + pTotalCapital;
+							$("#pTotalLiabCap").text(comma(pTotalLiabCap));
+							//------------전기 끝------------	
+							
+							
+							
+							
+							//행 보여주기/숨기기
+							
+							$("#loading-div").hide();
+						}
+					})
 				}
 			})
+			
+			
 			
 			return false;
 		}
