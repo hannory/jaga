@@ -1661,7 +1661,7 @@ td><button id="leaveReason-surr" style="color:white; font-size:6px;">퇴사사�
  </select>
 </td> -->
 </tr>
-
+ 
 <tr>
 <td><b id="rice">식대</b>
 <select id="rice-surr" name="meals">
