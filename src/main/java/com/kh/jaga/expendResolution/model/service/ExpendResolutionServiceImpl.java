@@ -22,6 +22,7 @@ import com.kh.jaga.expendResolution.model.vo.DepartmentVo;
 import com.kh.jaga.expendResolution.model.vo.ExpendResolutionDetailVo;
 import com.kh.jaga.slip.model.dao.ReceiptionDao;
 import com.kh.jaga.slip.model.dao.ReceiptionDaoImpl;
+import com.kh.jaga.slip.model.service.ReceiptionService;
 import com.kh.jaga.slip.model.vo.Journalize;
 import com.kh.jaga.slip.model.vo.Receiption;
 import com.kh.jaga.vender.model.vo.Vender;
@@ -33,10 +34,13 @@ public class ExpendResolutionServiceImpl implements ExpendResolutionService{
 	private SqlSessionTemplate sqlSession;
 	
 	@Autowired
-	private ExpendResolutionDaoImpl dao;
+	private ExpendResolutionDao dao;
 	
 	@Autowired
 	private ReceiptionDao receiptionDao;
+	
+	@Autowired
+	private ReceiptionService receiptionService;
 	
 	@Override
 	public int insertExpendResolution(ExpendResolutionDto dto) {
@@ -114,18 +118,25 @@ public class ExpendResolutionServiceImpl implements ExpendResolutionService{
 		//해당 지출결의서를 가져오자
 		ExpendResolutionDto resolutionDto = dao.selectExpendResolutionOne(sqlSession, expendResolutionNo);
 		
+		String expendDate = resolutionDto.getExpendDate();
+		
 		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 		System.out.println("인설트 후 해당 문서(지출결의서) 가져 온 결과 :");
 		System.out.println(resolutionDto);
 		
 		Receiption receiption = new Receiption();
 		
-		String comCode = receiption.getComCode();
-		String dateSlipCode = dao.selectDateSlipCode(sqlSession, comCode);
+		String comCode = resolutionDto.getComCode();
+		
+		String dateSlipCode = dao.selectDateSlipCode(sqlSession, resolutionDto);
+		System.out.println("조회해온 dateSlipCode 값 :::::" + dateSlipCode);
 		if(dateSlipCode == null) {
+			System.out.println("dateSlipCode 가 널 이라서 이프문 통과 ,, 10001 로 만듦");
 			dateSlipCode = "10001";
 		}else {
-			dateSlipCode = String.valueOf((Integer.parseInt(dateSlipCode) + 1));
+			System.out.println("dateSlipCode가 널이 아니라서 엘즈블럭 진입,, 기존숫자 +1 해줌");
+			dateSlipCode = String.valueOf((Integer.parseInt(dateSlipCode) + 10001));
+			System.out.println("+1 한 결과 ::: " + dateSlipCode);
 		}
 		
 		//slip 테이블
@@ -140,13 +151,13 @@ public class ExpendResolutionServiceImpl implements ExpendResolutionService{
 //		receiption.setItem(item);
 		
 		Journalize journalize1 = new Journalize();
-		journalize1.setAccountCode(resolutionDto.getAccountTitleCode());
+		journalize1.setAccountCode(resolutionDto.getAccountTitleCodeReal());
 //		journalize1.setAccountTitle(accountTitle);
 		journalize1.setDebitCredit("차변");
 //		journalize1.setJournalCode(journalCode);
 		journalize1.setPrice(new BigDecimal(resolutionDto.getExpendSummary()));
 //		journalize1.setSlipCode(slipCode);
-		journalize1.setVenderCode(resolutionDto.getDetailVenderCode());
+		journalize1.setVenderCode(resolutionDto.getDetailVenderCode01());
 //		journalize1.setVenderName(venderName);
 		
 		Journalize journalize2 = new Journalize();
@@ -156,7 +167,7 @@ public class ExpendResolutionServiceImpl implements ExpendResolutionService{
 //		journalize2.setJournalCode(journalCode);
 		journalize2.setPrice(new BigDecimal(resolutionDto.getExpendSummary()));
 //		journalize2.setSlipCode(slipCode);
-		journalize2.setVenderCode(resolutionDto.getDetailVenderCode());
+		journalize2.setVenderCode(resolutionDto.getDetailVenderCode01());
 //		journalize2.setVenderName(venderName);
 		
 		List<Journalize> jourList = new ArrayList<Journalize>();
@@ -164,7 +175,6 @@ public class ExpendResolutionServiceImpl implements ExpendResolutionService{
 		jourList.add(journalize2);
 		
 		
-		String expendDate = resolutionDto.getExpendDate();
 		int year = Integer.parseInt(expendDate.substring(2,4));
 		int month = Integer.parseInt(expendDate.substring(5,7));
 		int dayOfMonth = Integer.parseInt(expendDate.substring(8,10));
@@ -184,7 +194,9 @@ public class ExpendResolutionServiceImpl implements ExpendResolutionService{
 		if(result > 0) {
 			//일반전표 입력 로직 수행
 			System.out.println("일반전표 입력 서비스로직 수행하러 들어옴 ㅎ (이프문 통과)");
-			int insertReceiptionResult = receiptionDao.insertReceiption(sqlSession, receiption);
+//			int insertReceiptionResult = receiptionDao.insertReceiption(sqlSession, receiption);
+			int insertReceiptionResult = receiptionService.insertReceiption(receiption);
+			
 			System.out.println("insertReceptionResult ::::::::::\n" + insertReceiptionResult);
 		}
 		

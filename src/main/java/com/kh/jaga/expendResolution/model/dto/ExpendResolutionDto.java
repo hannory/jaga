@@ -47,6 +47,7 @@ public class ExpendResolutionDto implements java.io.Serializable{
 	private String comCode;				//회사코드
 	private String managerSign;			//담당자 싸인 파일명 
 	private String managerName;			//담당자 이름
+	private String accountTitleCodeReal;	//slip 입력을 위한 필드값
 	
 	//EXPEND_RESOLUTION_DETAIL 테이블		//[지출결의서 상세]
 	private String expendDetailNo = "시퀀스넣기";		//상세내역번호
@@ -84,12 +85,12 @@ public class ExpendResolutionDto implements java.io.Serializable{
 			String initiativeDate, String departmentCode, String managerNo, String managerPosition,
 			String expendPurpose, String expendDate, String accountTitleCode, String expendSummary, String createUser,
 			String createDate, String approvalStatus, String paymentTypeCode, String evidenceCode, String comCode,
-			String managerSign, String managerName, String expendDetailNo, String expendDetailDate, String brief,
-			String detailVenderCode, String price, String memo, String expendResolutionNo, String detailDate01,
-			String detailBrief01, String detailVenderCode01, String detailPrice01, String detailMemo01,
-			String detailDate02, String detailBrief02, String detailVenderCode02, String detailPrice02,
-			String detailMemo02, String detailDate03, String detailBrief03, String detailVenderCode03,
-			String detailPrice03, String detailMemo03) {
+			String managerSign, String managerName, String accountTitleCodeReal, String expendDetailNo,
+			String expendDetailDate, String brief, String detailVenderCode, String price, String memo,
+			String expendResolutionNo, String detailDate01, String detailBrief01, String detailVenderCode01,
+			String detailPrice01, String detailMemo01, String detailDate02, String detailBrief02,
+			String detailVenderCode02, String detailPrice02, String detailMemo02, String detailDate03,
+			String detailBrief03, String detailVenderCode03, String detailPrice03, String detailMemo03) {
 		super();
 		this.apprInfoCode = apprInfoCode;
 		this.apprEmpCode = apprEmpCode;
@@ -115,6 +116,7 @@ public class ExpendResolutionDto implements java.io.Serializable{
 		this.comCode = comCode;
 		this.managerSign = managerSign;
 		this.managerName = managerName;
+		this.accountTitleCodeReal = accountTitleCodeReal;
 		this.expendDetailNo = expendDetailNo;
 		this.expendDetailDate = expendDetailDate;
 		this.brief = brief;
@@ -331,6 +333,14 @@ public class ExpendResolutionDto implements java.io.Serializable{
 		this.managerName = managerName;
 	}
 
+	public String getAccountTitleCodeReal() {
+		return accountTitleCodeReal;
+	}
+
+	public void setAccountTitleCodeReal(String accountTitleCodeReal) {
+		this.accountTitleCodeReal = accountTitleCodeReal;
+	}
+
 	public String getExpendDetailNo() {
 		return expendDetailNo;
 	}
@@ -518,23 +528,20 @@ public class ExpendResolutionDto implements java.io.Serializable{
 				+ ", accountTitleCode=" + accountTitleCode + ", expendSummary=" + expendSummary + ", createUser="
 				+ createUser + ", createDate=" + createDate + ", approvalStatus=" + approvalStatus
 				+ ", paymentTypeCode=" + paymentTypeCode + ", evidenceCode=" + evidenceCode + ", comCode=" + comCode
-				+ ", managerSign=" + managerSign + ", managerName=" + managerName + ", expendDetailNo=" + expendDetailNo
-				+ ", expendDetailDate=" + expendDetailDate + ", brief=" + brief + ", detailVenderCode="
-				+ detailVenderCode + ", price=" + price + ", memo=" + memo + ", expendResolutionNo="
-				+ expendResolutionNo + ", detailDate01=" + detailDate01 + ", detailBrief01=" + detailBrief01
-				+ ", detailVenderCode01=" + detailVenderCode01 + ", detailPrice01=" + detailPrice01 + ", detailMemo01="
-				+ detailMemo01 + ", detailDate02=" + detailDate02 + ", detailBrief02=" + detailBrief02
-				+ ", detailVenderCode02=" + detailVenderCode02 + ", detailPrice02=" + detailPrice02 + ", detailMemo02="
-				+ detailMemo02 + ", detailDate03=" + detailDate03 + ", detailBrief03=" + detailBrief03
-				+ ", detailVenderCode03=" + detailVenderCode03 + ", detailPrice03=" + detailPrice03 + ", detailMemo03="
-				+ detailMemo03 + "]";
+				+ ", managerSign=" + managerSign + ", managerName=" + managerName + ", accountTitleCodeReal="
+				+ accountTitleCodeReal + ", expendDetailNo=" + expendDetailNo + ", expendDetailDate=" + expendDetailDate
+				+ ", brief=" + brief + ", detailVenderCode=" + detailVenderCode + ", price=" + price + ", memo=" + memo
+				+ ", expendResolutionNo=" + expendResolutionNo + ", detailDate01=" + detailDate01 + ", detailBrief01="
+				+ detailBrief01 + ", detailVenderCode01=" + detailVenderCode01 + ", detailPrice01=" + detailPrice01
+				+ ", detailMemo01=" + detailMemo01 + ", detailDate02=" + detailDate02 + ", detailBrief02="
+				+ detailBrief02 + ", detailVenderCode02=" + detailVenderCode02 + ", detailPrice02=" + detailPrice02
+				+ ", detailMemo02=" + detailMemo02 + ", detailDate03=" + detailDate03 + ", detailBrief03="
+				+ detailBrief03 + ", detailVenderCode03=" + detailVenderCode03 + ", detailPrice03=" + detailPrice03
+				+ ", detailMemo03=" + detailMemo03 + "]";
 	}
 	
 	
 
-
-	
-	
 	
 	
 }//class
