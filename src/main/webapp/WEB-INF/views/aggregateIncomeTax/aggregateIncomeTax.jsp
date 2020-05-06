@@ -364,8 +364,8 @@
 					<td onclick="milletDutyClick(1)" class="cursorPointer">1. 복식부기의무자</td>
 					<td onclick="milletDutyClick(2)" class="cursorPointer">2. 간편장부대상자</td>
 					<td onclick="milletDutyClick(3)" class="cursorPointer">3. 비사업자</td>
-					<td style="border-bottom:1px solid white;"></td>
-					<td style="border-left:1px solid white; border-right:1px solid white; border-bottom:1px solid white;"><button onclick="">소득금액명세추가</button></td>
+					<td style="border-bottom:1px solid white; border-right:1px solid white;"></td>
+					<!-- <td style="border-left:1px solid white; border-right:1px solid white; border-bottom:1px solid white;"><button onclick="">소득금액명세추가</button></td> -->
 				</tr>
 				<script>
 				function milletDutyClick(value){
@@ -590,7 +590,6 @@
 					function(){
 						
 						if($("#v101").val() == '40'){
-							alert("g");
 							
 							/* $("#v102").val('-');
 							$("#v102").prop('readonly',true); */
