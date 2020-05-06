@@ -163,4 +163,8 @@ public class ViewController {
     	return "common/alertPage";
     }
     
+    @GetMapping("excel.vi")
+    public String excelUpload() {
+    	return "slip/excelUpload";
+    }
 }

@@ -29,7 +29,7 @@ public interface ReceiptionService {
 
 	List<NormalReceiptionDTO> selectNormalDateList(HashMap<String, Object> hm);
 
-	List<Receiption> uploadExcel(MultipartFile excelFile);
+	List<Receiption2> uploadExcel(MultipartFile excelFile, String comCode);
 
 
 }

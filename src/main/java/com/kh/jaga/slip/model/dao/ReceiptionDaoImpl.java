@@ -86,5 +86,15 @@ public class ReceiptionDaoImpl implements ReceiptionDao {
 	public List<NormalReceiptionDTO> selectNormalDateList(SqlSessionTemplate sqlSession, HashMap<String, Object> hm) {
 		return sqlSession.selectList("Receiption.selectNormalDateList", hm);
 	}
+
+	@Override
+	public String selectDateSlipCode(SqlSessionTemplate sqlSession, Receiption2 r) {
+		return sqlSession.selectOne("Receiption.selectDSCode", r);
+	}
+
+	@Override
+	public String selectVenderName(SqlSessionTemplate sqlSession, String stringCellValue) {
+		return sqlSession.selectOne("Receiption.selectVenderName", stringCellValue);
+	}
 	
 }

@@ -96,7 +96,7 @@
 				</tr>
 			</table>
 		</ol>
-		<div class="card mb-4"  style="overflow: auto; height:400px">
+		<div class="card mb-4"  style="overflow: auto; height:500px">
 			<div class="card-body">
 					<table id="normalReTable" border="1">
 					<colgroup>

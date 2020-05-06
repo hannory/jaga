@@ -129,4 +129,10 @@
 		    AND S.SLIP_DATE BETWEEN #{date1} AND #{date2}
 		ORDER BY S.SLIP_DATE, S.DATE_SLIP_CODE
   	</select>
+  	
+  	<select id="selectVenderName" resultType="java.lang.String" parameterType="java.lang.String">
+  		SELECT VENDER_NAME
+  		FROM VENDER
+  		WHERE VENDER_CODE = #{stringCellValue}
+  	</select>
   </mapper>
