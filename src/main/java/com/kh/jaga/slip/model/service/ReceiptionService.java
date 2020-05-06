@@ -32,4 +32,5 @@ public interface ReceiptionService {
 	List<Receiption2> uploadExcel(MultipartFile excelFile, String comCode);
 
 
+
 }

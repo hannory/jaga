@@ -45,4 +45,10 @@
   SELECT EMPLOYEE_CODE, EMPLOYEE_NUM, EMPLOYEE_NAME
   FROM EMPLOYEE
   </select>
+  
+  <select id="selectEmpBuseo" resultType="java.lang.String" parameterType="java.lang.String">
+  	SELECT DEPARTMENT
+  	FROM EMPLOYEE
+  	WHERE EMPLOYEE_CODE = #{employeeCode}
+  </select>
   </mapper>

@@ -85,5 +85,10 @@ public class EmployeeServiceImpl implements EmployeeService {
 		return result;
 	}
 
+	@Override
+	public String selectEmpBuseo(String employeeCode) {
+		return ed.selectEmpBuseo(sqlSession, employeeCode);
+	}
+
 
 }

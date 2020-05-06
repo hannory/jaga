@@ -56,5 +56,10 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		return sqlSession.selectOne("incomeTax.selectIncomeTax",taxableIncome2);
 	}
 
+	@Override
+	public String selectEmpBuseo(SqlSessionTemplate sqlSession, String employeeCode) {
+		return sqlSession.selectOne("Employee.selectEmpBuseo", employeeCode);
+	}
+
 
 }
