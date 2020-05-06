@@ -48,7 +48,7 @@
 	position: auto;
 	width: 500px;
 	height: 50px;
-	left: 430px;
+	left: 420px;
 	top: 500px;
 	background: #1B5748;
 	border: 1px solid #000000;
@@ -56,10 +56,11 @@
 	border-radius: 15px;
 }
 
-.join_id_pwd{
-	left: 300px;
-	top: 950px;
-	
+.join_id_pwd:hover{
+	background:gray;
+	color:white;
+	opacity:80%;
+	cursor:pointer;
 }
 
 .jagalogo {
@@ -107,10 +108,13 @@
 		
 		<form action ="login.lo" method="post">
 		
-		<div style="width:500px; margin-left:-20px;">
-			<div style="display:inline-block; width:240px; text-align:left;"><input id="accountCom" type="radio" name="accountType" value="accountCom" checked><label for="accountCom">회사계정</label></div>
-			<div style="display:inline-block; width:240px; text-align:left;"><input id="accountEmp" type="radio" name="accountType" value="accountEmp"><label for="accountEmp">사내계정</label></div>
+		
+		<div style="width:500px; margin-left:-3px; text-align:center;">
+			<div id="divType01" onclick="type01click();" style="display:inline-block; border:1px solid #24574A; background:#24574A; color:white; border-top-left-radius:10px; border-top-right-radius:10px; width:240px; height:30px; line-height:30px; text-align:left;"><input id="accountCom" type="radio" name="accountType" value="accountCom" checked><label for="accountCom">회사계정</label></div>
+			<div id="divType02" onclick="type02click();" style="display:inline-block; border:1px solid #24574A; background:gray; color:white; border-top-left-radius:10px; border-top-right-radius:10px; width:240px; height:30px; line-height:30px; text-align:left;"><input id="accountEmp" type="radio" name="accountType" value="accountEmp"><label for="accountEmp">사내계정</label></div>
 		</div>
+		
+		<div class="wrap" style="border:3px solid #24574A; border-radius:10px; width:510px;">
 		
 			<table id="loginTable" style="text-align:center">
 				<tr>
@@ -130,24 +134,44 @@
 					<td class="blank"></td>
 					<td></td>
 				</tr>
-				
+				</div>
 				<tr>
 					<td colspan="3">
-						<button class="loginBtn" style="color:white; font-size:25px"> 로그인 </button>
+						<button class="loginBtn" style="color:white; font-size:25px; margin-left:-5px;"> 로그인 </button>
 					</td>
 					<td class="blank"></td>
 					<td class="blank"></td>
 				</tr>
 				
 			</table>
-					<div class="join_id_pwd"><a href="companyJoinView.lo"> 회원가입 </a></div> <br>
-					<a href="">아이디/비밀번호찾기</a><br>
+					<div class="join_id_pwd" style="width:500px; background:white; text-align:center;">
+					<div class="join_id_pwd" onclick="goJoin();" style="display:inline-block; width:245px; height:30px; line-height:30px; border:1px dashed #24574A; border-radius:5px;">회원가입</div>
+					<div class="join_id_pwd" onclick="goFind();" style="display:inline-block; width:245px; height:30px; line-height:30px; border:1px dashed #24574A; border-radius:5px;">아이디/비밀번호 찾기</div>
+					</div>
+					<br>
 		</form>
+		
+		</div><!-- div wrap end -->
+		
+		<script>
+			function goJoin(){
+				/* 회원가입 페이지로 이동하는 펑션 */
+				location.href="companyJoinView.lo";
+			}
+			
+			function goFind(){
+				/* 아이디 비번 찾기 페이지 이동하는 펑션 */
+				location.href="#";
+			}
+		</script>
+		
+		
+		
  		</c:if> 
  			<br>
 <!-- 			<button onclick="logout()">로그아웃</button>   -->
 			<br>
-	</div>
+	
 	
 	<script>
 		function logout(){
@@ -173,6 +197,27 @@
 			$("#inputAccountEmp").css("display","none");
 		});
 	});
+	
+	
+	
+	
+	function type01click(){
+		/* 회사 클릭 */
+		$("#accountCom").prop("checked",true);
+		$("#inputAccountEmp").css("display","none");
+		$("#divType02").css("background","gray");
+		$("#divType01").css("background","#24574A");
+	}
+	
+	function type02click(){
+		/* 사내 클릭 */
+		$("#accountEmp").prop("checked",true);
+		$("#inputAccountEmp").css("display","block");
+		$("#divType01").css("background","gray");
+		$("#divType02").css("background","#24574A");
+	}
+	
+	
 	
 	</script>
 	

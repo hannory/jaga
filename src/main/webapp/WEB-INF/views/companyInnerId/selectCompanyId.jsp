@@ -204,11 +204,11 @@
 					<c:url value="showViewComInnerIdList.comInId" var="pagePath">
 						<c:param name="currentPage" value="${ n }"></c:param>
 					</c:url>
-					<a href="${ pagePath }"><span><c:out value="${ n }"></c:out></span></a>
+					<button style="background:#24574A; width:35px; height:35px; border:3px solid #24574A; background:white; color:black;"><a href="${ pagePath }"><span><c:out value="${ n }"></c:out></span></a></button>
 				</c:if>
 				
 				<c:if test="${ pi.currentPage eq n }">
-					<b><span><c:out value="${ n }"></c:out></span></b>
+					<button style="background:#24574A; width:35px; height:35px; border:3px solid #24574A; background:white; color:black;"><b><span><c:out value="${ n }"></c:out></span></b></button>
 				</c:if>
 				
 				

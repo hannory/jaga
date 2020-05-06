@@ -96,4 +96,13 @@ public class ExpendResolutionDaoImpl implements ExpendResolutionDao{
 		return result;
 	}
 
+	@Override
+	public String selectDateSlipCode(SqlSessionTemplate sqlSession, ExpendResolutionDto resolutionDto) {
+		
+		String dateSlipCode = sqlSession.selectOne("ExpendResolution.selectDateSlipCode", resolutionDto);
+		
+		return dateSlipCode;
+	}
+
+	
 }
