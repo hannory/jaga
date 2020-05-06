@@ -25,7 +25,7 @@
 		/* display: none; */
 	}
 	#cancleBtn {
-		/* display: none; */
+		display: none;
 		border:1px solid red; 
 		color:red;
 	}
@@ -340,14 +340,14 @@
 					<td class="table-subTitle"></td>
 					<td class="table-subTitle-num"><span id="pSumAssests24"></span></td>
 				</tr>
-				<tr style="box-shadow: inset 0 -4px 0 #24574A;">
-					<td class="table-title" style="padding-left:0px; box-shadow: inset 0 -4px 0 #24574A;">자산총계</td>
-					<td class="table-title"></td>
-					<td class="table-title-num"><span id="cTotalAssests"></span><input type="hidden" id="totalAssests" name="totalAssests"></td>
-					<td class="table-title"></td>
-					<td class="table-title-num"><span id="pTotalAssests"></span></td>
+				<tr>
+					<td class="table-title" style="padding-left:0px; box-shadow: inset 0 -4px 0 #2abd98;">자산총계</td>
+					<td class="table-title" style="box-shadow: inset 0 -4px 0 #2abd98;"></td>
+					<td class="table-title-num" style="box-shadow: inset 0 -4px 0 #2abd98;"><span id="cTotalAssests"></span><input type="hidden" id="totalAssests" name="totalAssests"></td>
+					<td class="table-title" style="box-shadow: inset 0 -4px 0 #2abd98;"></td>
+					<td class="table-title-num" style="box-shadow: inset 0 -4px 0 #2abd98;"><span id="pTotalAssests"></span></td>
 				</tr>
-				<tr style="border-top:1px dotted #296355;">
+				<tr>
 					<td class="table-title" style="padding-left:0px;">부채</td>
 					<td class="table-title"></td>
 					<td class="table-title"></td>
@@ -411,13 +411,13 @@
 					<td></td>
 				</tr>
 				<tr>
-					<td class="table-title" style="padding-left:0px;">부채총계</td>
-					<td class="table-title"></td>
-					<td class="table-title-num"><span id="cTotalLiabilities"></span><input type="hidden" id="totalLiabilities" name="totalLiabilities"></td>
-					<td class="table-title"></td>
-					<td class="table-title-num"><span id="pTotalLiabilities"></span></td>
+					<td class="table-title" style="padding-left:0px; box-shadow: inset 0 -4px 0 #2abd98;">부채총계</td>
+					<td class="table-title" style="box-shadow: inset 0 -4px 0 #2abd98;"></td>
+					<td class="table-title-num" style="box-shadow: inset 0 -4px 0 #2abd98;"><span id="cTotalLiabilities"></span><input type="hidden" id="totalLiabilities" name="totalLiabilities"></td>
+					<td class="table-title" style="box-shadow: inset 0 -4px 0 #2abd98;"></td>
+					<td class="table-title-num" style="box-shadow: inset 0 -4px 0 #2abd98;"><span id="pTotalLiabilities"></span></td>
 				</tr>
-				<tr style="border-top:1px dotted #296355;">
+				<tr>
 					<td class="table-title" style="padding-left:0px;">자본</td>
 					<td class="table-title"></td>
 					<td class="table-title"></td>
@@ -468,9 +468,9 @@
 				</tr>
 				<tr class="table-detail">
 					<td class="table-subSubTitle">미처분이익잉여금</td>
-					<td class="table-content"><span id="cRetainedEarnings"></span><input type="hidden" id="retainedEarnings" name="retainedEarnings"></td>
+					<td class="retained-earnings" style="text-align: right;"><span id="cRetainedEarnings"></span><input type="hidden" id="retainedEarnings" name="retainedEarnings"></td>
 					<td></td>
-					<td class="table-content"><span id="pRetainedEarnings"></span></td>
+					<td class="retained-earnings" style="text-align: right;"><span id="pRetainedEarnings"></span></td>
 					<td></td>
 				</tr>
 				<!-- <tr>
@@ -481,18 +481,18 @@
 					<td class="table-title"></td>
 				</tr> -->
 				<tr>
-					<td class="table-title" style="padding-left:0px;">자본총계</td>
-					<td class="table-title"></td>
-					<td class="table-title-num"><span id="cTotalCapital"></span><input type="hidden" id="totalCapital" name="totalCapital"></td>
-					<td class="table-title"></td>
-					<td class="table-title-num"><span id="pTotalCapital"></span></td>
+					<td class="table-title" style="padding-left:0px; box-shadow: inset 0 -4px 0 #2abd98;">자본총계</td>
+					<td class="table-title" style="box-shadow: inset 0 -4px 0 #2abd98;"></td>
+					<td class="table-title-num" style="box-shadow: inset 0 -4px 0 #2abd98;"><span id="cTotalCapital"></span><input type="hidden" id="totalCapital" name="totalCapital"></td>
+					<td class="table-title" style="box-shadow: inset 0 -4px 0 #2abd98;"></td>
+					<td class="table-title-num" style="box-shadow: inset 0 -4px 0 #2abd98;"><span id="pTotalCapital"></span></td>
 				</tr>
-				<tr style="border-top:1px dotted #296355;">
-					<td class="table-title" style="padding-left:0px;">부채와자본총계</td>
-					<td class="table-title"></td>
-					<td class="table-title-num"><span id="cTotalLiabCap"></span><input type="hidden" id="totalLiabCap" name="totalLiabCap"></td>
-					<td class="table-title"></td>
-					<td class="table-title-num"><span id="pTotalLiabCap"></span></td>
+				<tr>
+					<td class="table-title" style="padding-left:0px; box-shadow: inset 0 -4px 0 #2abd98;">부채와자본총계</td>
+					<td class="table-title" style="box-shadow: inset 0 -4px 0 #2abd98;"></td>
+					<td class="table-title-num" style="box-shadow: inset 0 -4px 0 #2abd98;"><span id="cTotalLiabCap"></span><input type="hidden" id="totalLiabCap" name="totalLiabCap"></td>
+					<td class="table-title" style="box-shadow: inset 0 -4px 0 #2abd98;"></td>
+					<td class="table-title-num" style="box-shadow: inset 0 -4px 0 #2abd98;"><span id="pTotalLiabCap"></span></td>
 				</tr>
 			</table>
 		</form>
@@ -585,6 +585,7 @@
 					var c40100 = data["c40100"];
 					var c40400 = data["c40400"];
 					var c81100 = data["c81100"];
+					var c81300 = data["c81300"];
 					var c83000 = data["c83000"];
 					var c83100 = data["c83100"];
 					var cVal222 = data["cVal222"];
@@ -593,6 +594,7 @@
 					$("#c40100").text(comma(c40100));
 					$("#c40400").text(comma(c40400));
 					$("#c81100").text(comma(c81100));
+					$("#c81300").text(comma(c81300));
 					$("#c83000").text(comma(c83000));
 					$("#c83100").text(comma(c83100));
 					$("#cVal222").text(comma(cVal222));
@@ -618,7 +620,7 @@
 					var cSum30 = cSum10 - cSum20;
 					$("#cSum30").text(comma(cSum30));
 					
-					var cSum40 = c81100 + c83000 + c83100;
+					var cSum40 = c81100 + c83000 + c83100 + c81300;
 					$("#cSum40").text(comma(cSum40));
 					
 					var cSum50 = cSum30 - cSum40;
@@ -643,15 +645,19 @@
 					var p40100 = data["p40100"];
 					var p40400 = data["p40400"];
 					var p81100 = data["p81100"];
+					var p81300 = data["p81300"];
 					var p83000 = data["p83000"];
 					var p83100 = data["p83100"];
+					var pVal222 = data["pVal222"];
 					
 					$("#p14600").text(comma(p14600));
 					$("#p40100").text(comma(p40100));
 					$("#p40400").text(comma(p40400));
 					$("#p81100").text(comma(p81100));
+					$("#p81300").text(comma(p81300));
 					$("#p83000").text(comma(p83000));
 					$("#p83100").text(comma(p83100));
+					$("#pVal222").text(comma(pVal222));
 					
 					//표 각 합계 계산
 					var pSum10 = p40100 + p40400;
@@ -664,7 +670,6 @@
 					$("#pSum21").text(comma(pSum21));
 					
 					var pVal221 = 0;
-					var pVal222 = 0;
 					var pVal223 = 0;
 
 					var pSum22 = pVal221 + pVal222 + pVal223;
@@ -676,7 +681,7 @@
 					var pSum30 = pSum10 - pSum20;
 					$("#pSum30").text(comma(pSum30));
 					
-					var pSum40 = p81100 + p83000 + p83100;
+					var pSum40 = p81100 + p83000 + p83100 + p81300;
 					$("#pSum40").text(comma(pSum40));
 					
 					var pSum50 = pSum30 - pSum40;
@@ -935,6 +940,13 @@
 			
 			$(this).data('clicks', !clicks);
 		})
+		
+		$(document).on("dblclick", '.retained-earnings', function() {
+			Swal.fire({
+				icon: "warning",
+				text: "원장내역 조회사항이 아닙니다"
+			})
+		});
 		
 		//원장조회 모달 띄우기
 		$(document).on("dblclick", '.table-content', function() {

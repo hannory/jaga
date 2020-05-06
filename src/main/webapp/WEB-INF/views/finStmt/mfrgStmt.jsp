@@ -258,21 +258,21 @@
 						<td class="table-title"></td>
 						<td class="table-title-num"><span id="pSum30"></span></td>
 					</tr>
-					<tr class="table-detail">
+					<tr class="table-detail" id="row51100">
 						<td class="table-subSubTitle">복리후생비</td>
 						<td class="table-content"><span id="c51100"></span><input type="hidden" id="v51100" name="v51100"></td>
 						<td></td>
 						<td class="table-content"><span id="p51100"></span></td>
 						<td></td>
 					</tr>
-					<tr class="table-detail">
+					<tr class="table-detail" id="row51200">
 						<td class="table-subSubTitle">여비교통비</td>
+						<td class="table-content"><span id="c51200"></span><input type="hidden" id="v51200" name="v51200"></td>
 						<td></td>
-						<td></td>
-						<td></td>
+						<td class="table-content"><span id="p51200"></span></td>
 						<td></td>
 					</tr>
-					<tr class="table-detail">
+					<!-- <tr class="table-detail">
 						<td class="table-subSubTitle">접대비</td>
 						<td></td>
 						<td></td>
@@ -292,8 +292,8 @@
 						<td></td>
 						<td></td>
 						<td></td>
-					</tr>
-					<tr class="table-detail">
+					</tr> -->
+					<tr class="table-detail" id="row53000">
 						<td class="table-subSubTitle">소모품비</td>
 						<td class="table-content"><span id="c53000"></span><input type="hidden" id="v53000" name="v53000"></td>
 						<td></td>
@@ -340,14 +340,14 @@
 						<td class="table-title"></td>
 						<td class="table-title-num"><span id="cSum90"></span><input type="hidden" id="sum90" name="sum90"></td>
 						<td class="table-title"></td>
-						<td class="table-title-num"><span id="pSum90"></span></td>
+						<td class="table-title-num"><span id="pSum90"></span><input type="hidden" id="pValSum90" name="pValSum90"></td>
 					</tr>
 				</tbody>
 			</table>
 		</form>
 		<div style="height: 10vh;"></div>
 		<div class="card mb-4">
-			<div class="card-body">제조원가보고서는 각 원가 요소별로 그 발생액을 표시하고 당기의 총 제조비용에 기초하여 재공품 재고액을 공제, 당기 완성품의 제조원가를 계산한다.</div>
+			<div class="card-body">제조원가명세서는 각 원가 요소별로 그 발생액을 표시하고 당기의 총 제조비용에 기초하여 재공품 재고액을 공제, 당기 완성품의 제조원가를 계산한다.</div>
 		</div>
 	</div>
 	</main>
@@ -400,7 +400,7 @@
 			
 			//키 입력창에 값을 입력시 발생하는 이벤트
 			$("#inputNum").keyup(function() {
-				var cSum10 = Number(uncomma($("#c15300").text())) + Number(uncomma($("#inputNum").val()));
+				var cSum10 = Number(uncomma($("#c15300").text())) - Number(uncomma($("#inputNum").val()));
 				$("#cSum10").text(comma(cSum10));
 				
 				var cSum20 = 0;
@@ -504,20 +504,22 @@
 					//-------------당기-------------	
 					var c15300 = data["c15300"];
 					var c51100 = data["c51100"];
+					var c51200 = data["c51200"];
 					var c53000 = data["c53000"];
 					
 					$("#c15300").text(comma(c15300));
 					$("#c51100").text(comma(c51100));
+					$("#c51200").text(comma(c51200));
 					$("#c53000").text(comma(c53000));
 					
 					//표 각 합계 계산
-					var cSum10 = c15300 + Number(uncomma($("#inputNum").val()));
+					var cSum10 = c15300 - Number(uncomma($("#inputNum").val()));
 					$("#cSum10").text(comma(cSum10));
 					
 					var cSum20 = 0;
 					$("#cSum20").text(cSum20);
 					
-					var cSum30 = c51100 + c53000;
+					var cSum30 = c51100 + c51200 + c53000;
 					$("#cSum30").text(comma(cSum30));
 					
 					var cSum40 = cSum10 + cSum20 + cSum30;
@@ -542,10 +544,12 @@
 					//-------------전기-------------	
 					var p15300 = data["p15300"];
 					var p51100 = data["p51100"];
+					var p51200 = data["p51200"];
 					var p53000 = data["p53000"];
 					
 					$("#p15300").text(comma(p15300));
 					$("#p51100").text(comma(p51100));
+					$("#p51200").text(comma(p51200));
 					$("#p53000").text(comma(p53000));
 					
 					//표 각 합계 계산
@@ -555,7 +559,7 @@
 					var pSum20 = 0;
 					$("#pSum20").text(pSum20);
 					
-					var pSum30 = p51100 + p53000;
+					var pSum30 = p51100 + p51200 + p53000;
 					$("#pSum30").text(comma(pSum30));
 					
 					var pSum40 = pSum10 + pSum20 + pSum30;
@@ -576,6 +580,25 @@
 					var pSum90 = pSum60 - (pSum70 + pSum80);
 					$("#pSum90").text(comma(pSum90));
 					//------------전기 끝------------
+					
+					//행 보여주기/숨기기
+					if(c51100 == 0 && p51100 == 0) {
+						$("#row51100").fadeOut(200);
+					} else {
+						$("#row51100").fadeIn(200);
+					}
+					
+					if(c51200 == 0 && p51200 == 0) {
+						$("#row51200").fadeOut(200);
+					} else {
+						$("#row51200").fadeIn(200);
+					}
+					
+					if(c53000 == 0 && p53000 == 0) {
+						$("#row53000").fadeOut(200);
+					} else {
+						$("#row53000").fadeIn(200);
+					}
 					
 					$("#loading-div").hide();
 				},
@@ -826,6 +849,7 @@
 				$("#closing").val('N');
 				
 				$("#sum90").val(Number(uncomma($("#cSum90").text()))); 
+				$("#pValSum90").val(Number(uncomma($("#pSum90").text()))); 
 				
 				$("#contentForm").submit();
 				
@@ -855,6 +879,7 @@
 				$("#closing").val('Y');
 				
 				$("#sum90").val(Number(uncomma($("#cSum90").text()))); 
+				$("#pValSum90").val(Number(uncomma($("#pSum90").text()))); 
 				
 				$("#contentForm").submit();
 				

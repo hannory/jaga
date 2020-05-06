@@ -180,22 +180,25 @@ public class FinStmtController {
 	
 	//제조원가명세서에서 저장 또는 마감 버튼을 눌렀을 시
 	@RequestMapping("insertMfrgStmt.fs")
-	public String insertMfrgStmt(MfrgStmt ms, HttpServletRequest request) {
-		
+	public String insertMfrgStmt(MfrgStmt ms, String pValSum90, HttpServletRequest request) {
 		ms.setComCode(((Company) request.getSession().getAttribute("loginCompany")).getCompanyCode());
 		
-		//String closing = ms.getClosing();
+		//당기 값 입력
+		int cResult = fss.insertMfrgStmt(ms);			
 		
-		int result = fss.insertMfrgStmt(ms);			
+		System.out.println("pValSum90 : " + pValSum90);
 		
-		System.out.println("result Servie : " + result);
+		//전기 값 입력
+		ms.setYear(ms.getYear() - 1);
+		ms.setSum90(Integer.parseInt(pValSum90));
+		int pResult = fss.insertMfrgStmt(ms);
 		
-		if(result > 0) {
-			request.getSession().setAttribute("alertCode", "successMfrg");
+		if(cResult <= 0 || pResult <= 0) {
+			request.getSession().setAttribute("alertCode", "failMfrg");
 			
 			return "common/alertPage";
 		} else {
-			request.getSession().setAttribute("alertCode", "failMfrg");
+			request.getSession().setAttribute("alertCode", "successMfrg");
 			
 			return "common/alertPage";
 		}
@@ -204,33 +207,6 @@ public class FinStmtController {
 	@RequestMapping("searchMfrg.fs")
 	public void searchMfrg(MfrgStmt ms, HttpServletRequest request, HttpServletResponse response) {
 		ms.setComCode(((Company) request.getSession().getAttribute("loginCompany")).getCompanyCode());
-//		
-//		//COUNT를 여기서 할게 아니고 SERVICE에서
-//		int count = fss.countMfrgStmt(ms);
-//		
-//		if(count > 0) {
-//			MfrgStmt resultMs = fss.searchMfrg(ms);
-//			
-//			int countClosed = fss.countClosedMfrg(ms);
-//			String sCountClosed = Integer.toString(countClosed);
-//			
-//			JSONObject result = new JSONObject();
-//			result.put("val13", resultMs.getVal13());
-//			result.put("closing", resultMs.getClosing());
-//			result.put("countClosed", sCountClosed);
-//			
-//			
-//			try {
-//				response.setContentType("application/json");
-//				PrintWriter out = response.getWriter();
-//				out.print(result.toString());
-//				out.flush();
-//				out.close();
-//				
-//			} catch (IOException e) {
-//				e.printStackTrace();
-//			}
-//		}
 		
 		MfrgStmt resultMs = fss.searchMfrg(ms);
 		

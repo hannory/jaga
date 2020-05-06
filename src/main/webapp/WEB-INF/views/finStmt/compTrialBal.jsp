@@ -413,8 +413,7 @@
 		</table>
 		<div style="height: 10vh;"></div>
 		<div class="card mb-4">
-			<div class="card-body">When scrolling, the navigation stays at 
-				the top of the page. This is the end of the static navigation demo.</div>
+			<div class="card-body">합계잔액시산표란 일정 기간 동안 발생한 모든 계정과목의 합계와 잔액을 나타낸 표 형식의 문서를 말한다.</div>
 		</div>
 	</div>
 	
