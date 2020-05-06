@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -69,7 +69,7 @@ public class VenderController {
 	 
 	  }
 	  
-	  @GetMapping("bankSearch.ve")
+	  @PostMapping("bankSearch.ve")
 	  public void searchBank(HttpServletRequest request,HttpServletResponse response) {
 		  Company com=(Company)request.getSession().getAttribute("loginCompany");
 		  String comCode=com.getCompanyCode();
@@ -81,9 +81,9 @@ public class VenderController {
 		  
 		  try {
 			  response.setContentType("application/json");
-			/* System.out.println("d은행은행"+list); */
+			 System.out.println("컨트롤러은행은행"+list); 
 			new Gson().toJson(list,response.getWriter());
-			/* System.out.println("은행리스트는요"+list); */
+			 System.out.println("컨트롤러은행리스트는요2"+list); 
 		} catch (JsonIOException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

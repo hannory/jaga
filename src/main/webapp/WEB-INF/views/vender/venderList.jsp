@@ -14,8 +14,8 @@
     /*  거래처 리스트 전체 컨테이너 */
     .vender-list-main-contain {
         width:1380px;
-        height:1500px;
-        margin-left:70px;
+        height:1300px;
+        margin-left:30px;
     }
 
  
@@ -27,29 +27,29 @@
         margin-left:50px;
         margin-top:10px;
         float:left;
+/*         
+        box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25); */
+    }
 
-        box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
-    }S
 
 
-
-    /* 거래처리스트 흰색 테이블 (정렬용) */
+    /* 거래처 리스트 흰색 테이블 (정렬용) */
     .vender-list-main-table-2nd {
         text-align: center;
         table-layout: fixed;
-        width:1000px;
-        height:50px;
+        width:900px;
+        height:40px;
         cursor: pointer;
     }
 
 
-    /* 각 이벤트정보 테이블 상단 (검은색상 tr 라인) */
+    /* 각  테이블 상단 (검은색상 tr 라인) */
     .my-page-table-top {
         background:#296355;
         color:white; 
         height:40px;
         text-align: center;
-   		margin-left:10px;
+   		margin-left:20px;
     }
 
 
@@ -57,6 +57,7 @@
     .table tbody tr td {
       vertical-align:middle;
       font-size:16px;
+      text-align:center;
     }
 
     /* 거래처명 글씨 크기 */
@@ -92,6 +93,17 @@
 	text-align:center;
 	}
 
+#table2{
+position:auto;
+width:1200px;
+height:900px;
+left:100px;
+top:139px;
+float:left;
+margin-top:5px;
+background:white;
+
+}
 </style>
 <body>
 
@@ -108,19 +120,18 @@
 		 <div class="vender-list-main-contain">
 
         <div style="margin-top:50px; width:1000px; float:left;">
-<!--             <div style="margin-left:50px; font-size:25px;" class="thick" id="trlist">거래처 리스트</span>
- -->        </div>
+        </div>
         
         <div class="vender-list-main-table-margin" style="margin-top: 10px;"> 
-<!--            <form action="select.ve" method="post"> -->
+		<div id="table2" style="overflow-y:auto; overflow-x:hidden; -ms-overflow-style:none;">
             <table border="0" class="table table-hover vender-list-main-table-2nd" id="listArea2">
               <thead>
                 <tr class="my-page-table-top">
-                	<th>구분</th>
-                  <th colspan="2" style="width:300px; text-align:center;">거래처명</th>
-                  <th>대표자명</th>
-                  <th>연락처</th>
-                  <th>이체정보</th>
+                	<th style="width:200px;">구분</th>
+                  <th colspan="2" style="width:400px; text-align:center;">거래처명</th>
+                  <th style="width:200px;">대표자명</th>
+                  <th style="width:200px">연락처</th>
+                  <th style="width:200px;">이체정보</th>
                   <th></th>
                 </tr>
               </thead>
@@ -146,7 +157,8 @@
 				</c:if>
                 </tbody>
               </table>
-<!--               </form> -->
+              
+              </div>
         </div>
         
         <div id="space"></div>
@@ -174,7 +186,7 @@
 		}).mouseout(function(){
 			$(this).parent().css("background","white");
 		}).click(function(){
-			var venderCode =$(this).parent().children().eq(4).text();
+			var venderCode =$(this).parent().children().eq(5).text();
 			console.log(venderCode);
 			location.href="${contextPath}/venderSelectOne.vi?venderCode="+venderCode;
 		});

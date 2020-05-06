@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-        <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+      <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,11 +10,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<!-- jquery UI calendar-->
-<script
-   src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
-   integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
-   crossorigin="anonymous"></script>
    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -23,35 +19,6 @@
 </head>
 
 <style>
-/* Group 14 */
-/* 
-
-position: absolute;
-width: 69px;
-height: 22.33px;
-left: 446px;
-top: 547px;
-
- */
- 
-/* 거래처 등록정보 vender-info*/
-
-#vender-info{
-position: absolute;
-width: 173px;
-height: 30px;
-left: 305px;
-top: 81px;
-
-font-family: Roboto;
-font-style: normal;
-font-weight: bold;
-font-size: 18px;
-line-height: 21px;
-
-color: #000000;
-
-}
 
 /* 1. 사업자등록번호 biz-Num*/
 
@@ -60,7 +27,7 @@ position: absolute;
 width: 400px;
 height: 24px;
 left: 320px;
-top: 124px;
+top: 184px;
 
 font-family: Roboto;
 font-style: normal;
@@ -77,26 +44,26 @@ color: #4C4C4C;
 /*사업자등록번호 네모칸 biz-reg-num-surr*/
 
 #biz-reg-num-surr{
+
 position: absolute;
 width: 360px;
 height: 27px;
 left: 731px;
-top: 124px;
+top: 184px;
 
 background: #FFFFFF;
 border: 1px solid #C4C4C4;
 box-sizing: border-box;
 border-radius: 5px;
 }
-
 /* 거래처주소 2번째칸 vender-address2-surr */
 
 #vender-address2-surr{
 position: absolute;
-width: 392px;
+width: 352px;
 height: 27px;
-left: 594px;
-top: 235px;
+left: 630px;
+top: 362px;
 
 background: #FFFFFF;
 border: 1px solid #C4C4C4;
@@ -110,10 +77,10 @@ border-radius: 5px;
 position: absolute;
 width: 191px;
 height: 27px;
-left: 594px;
-top: 385px;
+left: 455px;
+top: 475px;
 
-background: #D9E3E3;
+/* background: #D9E3E3; */
 border: 1px solid #C4C4C4;
 box-sizing: border-box;
 border-radius: 5px;
@@ -127,7 +94,7 @@ position: absolute;
 width: 555px;
 height: 27px;
 left: 454px;
-top: 625px;
+top: 690px;
 
 background: #FFFFFF;
 border: 1px solid #C4C4C4;
@@ -135,19 +102,26 @@ box-sizing: border-box;
 border-radius: 5px;
 }
 
-/* 은행이름칸 bank-code-name-surr */
+/*  은행이름칸 bank-code-name-surr */
 
-#bank-code-name-surr{
+.bank-code-name-surr{
 position: absolute;
 width: 228px;
 height: 27px;
 left: 644px;
-top: 465px;
+top: 535px;
 
 background: #D9E3E3;
 border: 1px solid #C4C4C4;
 box-sizing: border-box;
 border-radius: 5px;
+}
+
+#searchBtn2{
+position:absolute;
+left:595px;
+top:535px;
+
 }
 
 /* 상세입력안함칸 null-okay-surr*/
@@ -157,7 +131,7 @@ position: absolute;
 width: 649px;
 height: 27px;
 left: 337px;
-top: 298px;
+top: 328px;
 
 background: #FFFFFF;
 border: 1px solid #C4C4C4;
@@ -172,7 +146,7 @@ position: absolute;
 width: 668px;
 height: 24px;
 left: 320px;
-top: 300px;
+top: 330px;
 
 font-family: Roboto;
 font-style: normal;
@@ -193,7 +167,7 @@ position: absolute;
 width: 104px;
 height: 24px;
 left: 319px;
-top: 160px;
+top: 245px;
 
 font-family: Roboto;
 font-style: normal;
@@ -215,7 +189,7 @@ position: absolute;
 width: 104px;
 height: 24px;
 left: 321px;
-top: 197px;
+top: 307px;
 
 font-family: Roboto;
 font-style: normal;
@@ -237,7 +211,7 @@ position: absolute;
 width: 104px;
 height: 24px;
 left: 321px;
-top: 237px;
+top: 362px;
 
 font-family: Roboto;
 font-style: normal;
@@ -260,7 +234,7 @@ position: absolute;
 width: 104px;
 height: 24px;
 left: 321px;
-top: 347px;
+top: 417px;
 
 font-family: Roboto;
 font-style: normal;
@@ -279,10 +253,10 @@ color: #4C4C4C;
 
 #department-incharge{
 position: absolute;
-width: 130px;
+width: 124px;
 height: 24px;
-left: 321px;
-top: 387px;
+left: 320px;
+top: 475px;
 
 font-family: Roboto;
 font-style: normal;
@@ -304,16 +278,16 @@ position: absolute;
 width: 104px;
 height: 24px;
 left: 321px;
-top: 467px;
+top: 550px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
 text-align: right;
-font-size: 16px;
 
 color: #4C4C4C;
 }
@@ -323,10 +297,10 @@ color: #4C4C4C;
 
 #com-manage-tel{
 position: absolute;
-width: 160px;
+width: 150px;
 height: 24px;
 left: 320px;
-top: 555px;
+top: 632px;
 
 font-family: Roboto;
 font-style: normal;
@@ -347,8 +321,8 @@ color: #4C4C4C;
 position: absolute;
 width: 104px;
 height: 24px;
-left: 320px;
-top: 627px;
+left: 321px;
+top: 690px;
 
 font-family: Roboto;
 font-style: normal;
@@ -369,8 +343,8 @@ color: #4C4C4C;
 position: absolute;
 width: 104px;
 height: 24px;
-left: 320px;
-top: 667px;
+left: 321px;
+top: 745px;
 
 font-family: Roboto;
 font-style: normal;
@@ -392,12 +366,12 @@ position: absolute;
 width: 104px;
 height: 24px;
 left: 455px;
-top: 197px;
+top: 307px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 15px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -414,12 +388,12 @@ position: absolute;
 width: 104px;
 height: 24px;
 left: 455px;
-top: 347px;
+top: 417px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 15px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -436,12 +410,12 @@ position: absolute;
 width: 104px;
 height: 24px;
 left: 455px;
-top: 467px;
+top: 535px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 15px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -458,12 +432,12 @@ position: absolute;
 width: 104px;
 height: 24px;
 left: 455px;
-top: 507px;
+top: 575px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 15px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -479,13 +453,13 @@ color: #4C4C4C;
 position: absolute;
 width: 104px;
 height: 24px;
-left:  720px;
-top: 507px;
+left:  765px;
+top: 575px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 15px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -501,13 +475,13 @@ color: #4C4C4C;
 position: absolute;
 width: 104px;
 height: 24px;
-left: 720px;
-top: 347px;
+left: 765px;
+top: 417px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 15px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -523,13 +497,13 @@ color: #4C4C4C;
 position: absolute;
 width: 104px;
 height: 24px;
-left: 720px;
-top: 197px;
+left: 740px;
+top: 307px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 15px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -545,8 +519,8 @@ color: #4C4C4C;
 position: absolute;
 width: 222px;
 height: 27px;
-left: 452px;
-top: 160px;
+left: 455px;
+top: 245px;
 
 background: #FFFFFF;
 border: 1px solid #C4C4C4;
@@ -560,8 +534,8 @@ border-radius: 5px;
 position: absolute;
 width: 180px;
 height: 27px;
-left: 495px;
-top: 194px;
+left: 525px;
+top: 307px;
 
 background: #FFFFFF;
 border: 1px solid #C4C4C4;
@@ -575,8 +549,8 @@ border-radius: 5px;
 position: absolute;
 width: 180px;
 height: 27px;
-left: 525px;
-top: 344px;
+left: 550px;
+top: 417px;
 
 background: #FFFFFF;
 border: 1px solid #C4C4C4;
@@ -584,14 +558,14 @@ box-sizing: border-box;
 border-radius: 5px;
 }
 
-/*팩스번호란 vender-fax-surr */
+/* 팩스번호란 vender-fax-surr */
 
 #vender-fax-surr{
 position: absolute;
 width: 201px;
 height: 27px;
-left: 805px;
-top: 344px;
+left: 860px;
+top: 417px;
 
 background: #FFFFFF;
 border: 1px solid #C4C4C4;
@@ -599,29 +573,15 @@ box-sizing: border-box;
 border-radius: 5px;
 }
 
-/* 주소상세란 vender-address3-surr*/
 
-#vender-address3-surr{
-position: absolute;
-width: 531px;
-height: 27px;
-left: 455px;
-top: 264px;
-
-background: #FFFFFF;
-border: 1px solid #C4C4C4;
-box-sizing: border-box;
-border-radius: 5px;
-}
-
-/*주소첫번째란 vender-address1-surr */
+/* 주소첫번째란 vender-address1-surr */
 
 #vender-address1-surr{
 position: absolute;
 width: 82px;
 height: 27px;
 left: 455px;
-top: 234px;
+top: 362px;
 
 background: #FFFFFF;
 border: 1px solid #C4C4C4;
@@ -629,15 +589,27 @@ box-sizing: border-box;
 border-radius: 5px;
 }
  
+ #addressbtn{
+position: absolute;
+width: 50px;
+height: 28px;
+left: 560px;
+top: 362px;
+background:#24574A;
+color:white;
+border-radius:5px;
+font-size:6px;
 
-/* 담당부서사원코드란 department-incharge1-surr */
+ }
+
+/*담당부서사원코드란 department-incharge1-surr */
 
 #department-incharge1-surr{
 position: absolute;
-width: 160px;
+width: 82px;
 height: 27px;
-left: 455px;
-top: 384px;
+left: 405px;
+top: 475px;
 
 background: #FFFFFF;
 border: 1px solid #C4C4C4;
@@ -646,14 +618,14 @@ border-radius: 5px;
 }
 
 
-/* 은행코드란 bank-code-surr */
+/*은행코드란 bank-code-surr */
 
-#bank-code-surr{
+.bank-code-surr{
 position: absolute;
 width: 82px;
 height: 27px;
 left: 505px;
-top: 464px;
+top: 535px;
 
 background: #FFFFFF;
 border: 1px solid #C4C4C4;
@@ -661,29 +633,27 @@ box-sizing: border-box;
 border-radius: 5px;
 }
 
-/*  업체담당자연락처 코드란 com-manager1-tel-surr*/
+/*업체담당자연락처 코드란 com-manager1-tel-surr*/
 
-/* #com-manager1-tel-surr{
+#com-manager1-tel-surr{
 position: absolute;
-width: 82px;
+width: 190px;
 height: 27px;
-left: 600px;
-top: 544px;
-
-background: #D9E3E3;
+left: 470px;
+top: 630px;
 border: 1px solid #C4C4C4;
 box-sizing: border-box;
 border-radius: 5px;
-} */
+}
 
-/* 예금주란 account-holder-surr */
+/*  예금주란 account-holder-surr */
 
 #account-holder-surr{
 position: absolute;
-width: 180px;
+width: 190px;
 height: 27px;
-left: 505px;
-top: 504px;
+left: 525px;
+top: 575px;
 
 background: #FFFFFF;
 border: 1px solid #C4C4C4;
@@ -692,14 +662,14 @@ border-radius: 5px;
 }
 
 
-/*계좌번호란 account-num-surr */
+/*  계좌번호란 account-num-surr */
 
 #account-num-surr{
 position: absolute;
 width: 201px;
 height: 27px;
-left: 785px;
-top: 504px;
+left: 860px;
+top: 575px;
 
 background: #FFFFFF;
 border: 1px solid #C4C4C4;
@@ -707,14 +677,14 @@ box-sizing: border-box;
 border-radius: 5px;
 }
 
-/*업체담당자연락처 상세란 com-manager-tel-surr */
+/* 업체담당자연락처 상세란 com-manager-tel-surr */
 
 #com-manager2-tel-surr{
 position: absolute;
 width: 201px;
 height: 27px;
-left: 750px;
-top: 544px;
+left: 660px;
+top: 604px;
 
 background: #D9E3E3;
 border: 1px solid #C4C4C4;
@@ -722,21 +692,20 @@ box-sizing: border-box;
 border-radius: 5px;
 }
 
-/*  종목란 sell-target-surr  */
+/* 종목란 sell-target-surr  */
 
 #sell-target-surr{
 position: absolute;
 width: 221px;
 height: 27px;
-left: 765px;
-top: 194px;
+left: 810px;
+top: 307px;
 
 background: #FFFFFF;
 border: 1px solid #C4C4C4;
 box-sizing: border-box;
 border-radius: 5px;
 }
-
 
 
 /* + 키 입력 시 신규 등록 가능 key-okay*/
@@ -746,12 +715,12 @@ position: absolute;
 width: 208px;
 height: 24px;
 left: 801px;
-top: 387px;
+top: 247px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -765,15 +734,15 @@ color: #4C4C4C;
 
 #zero-one{
 position: absolute;
-width: 53px;
+width: 73px;
 height: 24px;
-left: 491px;
-top: 667px;
+left: 501px;
+top: 745px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 12px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -783,24 +752,12 @@ color: #4C4C4C;
 
 /*확인란 okay */
 
-#okay1{
+#okay{
 position: absolute;
 width: 82px;
 height: 27px;
-left: 590px;
-top: 755px;
-
-background: #296355;
-border-radius: 5px;
-}
-
-
-#okay2{
-position: absolute;
-width: 82px;
-height: 27px;
-left: 670px;
-top: 755px;
+left: 644px;
+top: 815px;
 
 background: #296355;
 border-radius: 5px;
@@ -812,7 +769,7 @@ position: absolute;
 width: 75px;
 height: 22.33px;
 left: 455px;
-top: 547px;
+top: 607px;
 
 background: #D9E3E3;
 }
@@ -823,12 +780,12 @@ position: absolute;
 width: 69px;
 height: 15.69px;
 left: 446px;
-top: 550.62px;
+top: 610.62px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: normal;
-font-size: 13px;
+font-size: 16px;
 line-height: 15px;
 }
 
@@ -837,10 +794,10 @@ line-height: 15px;
 
 #account-income-num{
 position: absolute;
-width: 130px;
+width: 124px;
 height: 24px;
 left: 321px;
-top: 467px;
+top: 537px;
 
 font-family: Roboto;
 font-style: normal;
@@ -861,7 +818,7 @@ position: absolute;
 width: 27px;
 height: 27px;
 left: 455px;
-top: 664px;
+top: 745px;
 
 background: #FFFFFF;
 border: 1px solid #C4C4C4;
@@ -871,11 +828,12 @@ border-radius: 5px;
 
 /*거래처 명 : vender-name*/
 #vender-name{
+
 position: absolute;
-width: 70px;
+width: 80px;
 height: 24px;
-left: 321px;
-top: 90px;
+left: 320px;
+top: 120px;
 
 font-family: Roboto;
 font-style: normal;
@@ -896,8 +854,8 @@ color: #4C4C4C;
 position: absolute;
 width: 254px;
 height: 27px;
-left: 453px;
-top: 90px;
+left: 455px;
+top: 120px;
 
 background: #FFFFFF;
 border: 1px solid #C4C4C4;
@@ -910,13 +868,13 @@ border-radius: 5px;
 position: absolute;
 width: 95px;
 height: 24px;
-left: 1025px;
-top: 197px;
+left: 1065px;
+top: 307px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 15px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -928,24 +886,12 @@ color: #4C4C4C;
 #farmers-status-surr{
 
 position: absolute;
-width: 20px;
-height: 20px;
-left: 1082px;
-top: 200px;
+width: 25px;
+height: 25px;
+left: 1140px;
+top: 307px;
 
 background: #FFFFFF;
-border: 1px solid #C4C4C4;
-box-sizing: border-box;
-border-radius: 5px;
-}
-/*업체담당자연락처 코드란 com-manager1-tel-surr*/
-
-#com-manager1-tel-surr{
-position: absolute;
-width: 190px;
-height: 27px;
-left: 500px;
-top: 555px;
 border: 1px solid #C4C4C4;
 box-sizing: border-box;
 border-radius: 5px;
@@ -955,16 +901,15 @@ border-radius: 5px;
 
 #vendertype{
 position: absolute;
-width: 40px;
+width: 50px;
 height: 24px;
-left: 733px;
-top: 90px;
-
+left: 800px;
+top: 120px;
 
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 15px;
+font-size: 16px;
 line-height: 14px;
 display: flex;
 align-items: center;
@@ -981,8 +926,8 @@ color: #4C4C4C;
 position: absolute;
 width: 170px;
 height: 27px;
-left: 810px;
-top: 90px;
+left: 890px;
+top: 120px;
 
 background: #FFFFFF;
 border: 1px solid #C4C4C4;
@@ -991,42 +936,102 @@ border-radius: 5px;
 
 }
 
+ 
+/* The Modal (background) */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+    
+        /* Modal Content/Box */
+        .modal-content {
+            background-color: #fefefe;
+            margin: 0 auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 50%; /* Could be more or less, depending on screen size */                          
+        }
+        /* The Close Button */
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .modalTop{
+        	margin: 0;
+        	width:100%;
+        	height:50px;
+        	background:#6E00AB;
+        }
+        
+        .modal-header {
+        	background: #296355;
+        } 
+	
+	#resultReTable input {
+		text-align: center;
+	}
+	#sub{
+		background:#888888;
+		border: 1px solid #888888;
+		color: white;
+	}
+	
+	#update{
+		background:#888888;
+		border: 1px solid #888888;
+		color: white;
+	}
+	
+	#farm{
+		background:#888888;
+		border: 1px solid #888888;
+		color: white;
+	}
 
- #addressbtn{
-position: absolute;
-width: 50px;
-height: 28px;
-left: 540px;
-top: 235px;
-background:#24574A;
-color:white;
-border-radius:5px;
-font-size:6px;
 
- }
+
 </style>
 <body>
+	
 	<jsp:include page="../common/menubar.jsp" />
+	
 	<div id="main">
+				<div id="layer" style="display:none;position:fixed;overflow:hidden;z-index:1;-webkit-overflow-scrolling:touch;">
+				<img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnCloseLayer" style="cursor:pointer;position:absolute;right:-3px;top:-3px;z-index:1" onclick="closeDaumPostcode()" alt="닫기 버튼">
+			</div>
 	<div class="container-fluid">
 		<h2 class="mt-4">거래처 정보수정</h2>
-		<ol class="breadcrumb mb-4">
-		</ol>
-  		<div class="card mb-4">
-			<div class="card-body">
+<!-- 		<ol class="breadcrumb mb-4">
+		</ol> -->
+<!--   		<div class="card mb-4"> - -->
+	 	<div class="card-body"> 
 			<div id="main">
 		<div id="table-total"> 
 		 
-		 <form action="modifyVender.vi" method="post">
-<!-- <table> -->				
-	<c:if test="${!empty sessionScope.loginCompany}">
- 		<c:forEach var="v" items="${list}">
+<!-- <table> -->
+	<form id="joinForm" method="post" action="modifyVender.vi">
+	<c:if test="${!empty sessionScope.loginCompany }">
+		<c:forEach var ="v" items="${list}">
 		<tr>
-<!-- 			<td><b id="vender-info">거래처 등록정보</b></td>   -->
-			<td><input type="hidden"   style="display:none;" value="${v.venderCode}" name="venderCode"></td> 
-			<td><b id="vender-name">거래처명</b>
-			<input type="text" name="venderName" id="vender-name-surr" value="${v.venderName} "></td>
-			<td><b id="vendertype">구분</b><select id="vendertype-surr" name="venderType" >
+			<td><input type="hidden" style="display:none;" value="${v.venderCode}" name="venderCode"></td> 
+			<td><b id="vender-name">거래처명</b><input type="text" name="venderName" id="vender-name-surr" value="${v.venderName }"></td>
+			<td><b id ="vendertype">구분</b><select id="vendertype-surr" name="venderType">
 			<option value="${v.venderType}" selected disabled hidden>일반거래처</option>
 			<option value="1">일반거래처</option>
 			<option value="2">은행</option>
@@ -1036,8 +1041,9 @@ font-size:6px;
 		</tr>
 		
 		<tr>
-			<td><b id="biz-num"> 사업자등록번호 / 주민번호 / 계좌번호 / 카드번호</b>
-			<input type="text" name="bizRegNum" id="biz-reg-num-surr" value="${v.bizRegNum}"></td>
+			<td><b id="biz-num"> 사업자등록번호 / 주민번호 / 계좌번호 / 카드번호  </b>
+			<input type="text" name="bizRegNum" id="biz-reg-num-surr" value="${v.bizRegNum}" placeholder="사업자/주민 등록번호의 경우 -로 입력">
+			<!-- <button>사업자등록상태조회</button></td> -->
 		</tr>
 
 
@@ -1050,24 +1056,20 @@ font-size:6px;
 			<td>
 				<b id="sell"> 업종</b> <b id="sell-way">업태</b> <input type="text" name="sellWay" id="sell-way-surr" value="${v.sellWay}">
 				<b id="sell-target">종목</b> <input type="text" name="sellTarget" id="sell-target-surr" value="${v.sellTarget}">
-					<b id="farmers-status">농어민</b><input type="checkbox" value="1" id="farmers-status-surr" name="farmersStatus">
+				<b id="farmers-status">농어민</b><input type="checkbox" value="1" id="farmers-status-surr" name="farmersStatus">
 			</td>
 		</tr>
-		
+			
 		<tr>
 			<td><b id="address"> 주소</b>
-			<input type="text" name="postcode" id="vender-address1-surr" placeholder="우편번호">
+			<input type="text" name="postcode" placeholder="우편번호" id="vender-address1-surr">
 			<td><input type="button" onclick="sample2_execDaumPostcode()" id="addressbtn" value="검색"></td>
 			<td><input type="text" id="vender-address2-surr" name="venderAddress" placeholder="주소" value="${v.venderAddress}"></td>
-  <td class="secondLine"><input type="hidden" id="address2" name="address1" placeholder="상세주소"></td>
-		</tr>
-		
-		<tr>
-			<td><b id="null-okay">####상세 입력 안함####</b>
+		  <td class="secondLine"><input type="hidden" id="address2" name="address1" placeholder="상세주소"></td>
 		</tr>
 
 		<tr>
-			<td><b id="phone" > 연 락 처</b> 
+			<td><b id="phone"> 연 락 처</b> 
 			<b id="vender-tel">전화번호</b> <input type="tel" name="venderTel" id="vender-tell-surr" value="${v.venderTel}">
 			<b id="vender-fax">팩스번호</b> <input type="tel" name="venderFax" id="vender-fax-surr" value="${v.venderFax}">
 			</td>
@@ -1076,25 +1078,18 @@ font-size:6px;
 		
 		<tr>
 			<td><b id="department-incharge"> 담당(부서)사원</b>
-			`<input type="text" id="department-incharge1-surr" name="departmentIncharge" value="${v.departmentIncharge}">
-<!-- 			`<input type="text" id="department-incharge2-surr"> -->
+			<input type="text" name="departmentIncharge" id="department-incharge2-surr" value="${v.departmentIncharge}">
 			</td>
 		</tr>
 		
  		<tr>
 			<td><b id="account-income-num"> 입금 계좌 번호</b>
-				<b id=bank>은행</b><input type="text" id="bank-code-surr" value="${v.bankCode}" name="bankCode">
-			 <c:if test="${v.bankCode==1}"><input type="text" id="bank-code-name-surr" value="한국은행"></c:if> 
-			 <c:if test="${v.bankCode==2}"><input type="text" id="bank-code-name-surr" value="산업은행"></c:if> 
-			 <c:if test="${v.bankCode==3}"><input type="text" id="bank-code-name-surr" value="기업은행"></c:if> 
-			 <c:if test="${v.bankCode==4}"><input type="text" id="bank-code-name-surr" value="국민은행"></c:if> 
-			 <c:if test="${v.bankCode==5}"><input type="text" id="bank-code-name-surr" value="신한은행"></c:if> 
-			 <c:if test="${v.bankCode==6}"><input type="text" id="bank-code-name-surr" value="농협은행"></c:if> 
-			 <c:if test="${v.bankCode==7}"><input type="text" id="bank-code-name-surr" value="SC은행"></c:if> 
-			 <c:if test="${v.bankCode==8}"><input type="text" id="bank-code-name-surr" value="한국씨티은행"></c:if> 
-			 <c:if test="${v.bankCode==9}"><input type="text" id="bank-code-name-surr" value="우리은행"></c:if> 
+				<b id=bank>은행</b>
+				<input type="text" class="bank-code-surr" id="bankCode" name="bankCode" value="${v.bankCode}" >
+				<button type="button" id="searchBtn2"><img alt="" src="${contextPath}/resources/images/search.PNG" width="20px" height="20px">
+								</button>
 				
-				
+				<input type="text" class="bank-code-name-surr" id="bankName" name="bankName">
 			</td>
 			<td><b id="account-holder"> 예금주 </b><input type="text" name="accountHolder" id="account-holder-surr" value="${v.accountHolder}">
 				<b id="account-num">계좌번호</b><input type="text" name="accountNum" id="account-num-surr" value="${v.accountNum}">
@@ -1102,9 +1097,12 @@ font-size:6px;
 		</tr>
 		
 		<tr>
-		<td><b id="com-manage-tel">  업체담당자연락처 </b>
-				<input type="text" name="comManagerTel" id="com-manager1-tel-surr" placeholder="숫자만 입력"  value="${v.comManagerTel}" >
-			<td></td>
+			<td><b id="com-manage-tel"> 업체담당자연락처 </b>
+				<input type="text" name="comManagerTel" id="com-manager1-tel-surr" placeholder="숫자만 입력" value="${v.comManagerTel}" >
+
+			</td>
+		 <td><input type="hidden" value="${sessionScope.loginCompany.companyCode}" name="comCode"></td> 
+			
 		</tr>
 		<tr>
 			<td><b id="remarks">비    고</b>
@@ -1117,12 +1115,15 @@ font-size:6px;
 			<b id="zero-one">0:부 1:여</b></td>
 			<td></td>
 		</tr>
-		</c:forEach>
-		</c:if>
+		
 		<tr>
-			<td><button id="okay1" style="color:white" type="reset">수정취소</button></td>
-			<td><button id="okay2" style="color:white" type="submit">수정완료</button></td>
+			<td><button id="okay" type="reset" style="color:white">수정취소</button>
+			<button id="okay" type="submit" style="color:white">수정완료</button></td>
+			
 		</tr>
+		
+	</c:forEach>
+	</c:if>
 		</form>
 		<div style="height: 100vh;"></div>
 		<div class="card mb-4">
@@ -1130,9 +1131,36 @@ font-size:6px;
 				the top of the page. This is the end of the static navigation demo.</div>
 		</div>
 	</main>
-	<jsp:include page="../common/menubar2.jsp" />
-	
-	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+      <!-- Modal 은행코드 -->
+  <div class="modal fade" id="bankModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">은행검색</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <div class="modal-body">
+          	<table id="bankTable">
+          		<thead>
+	          		<tr>
+	          			<th>은행코드</th>
+	          			<th>은행명</th>
+	          		</tr>
+          		</thead>
+          		<tbody>
+
+          		</tbody>
+          	</table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 <script>
 
@@ -1226,10 +1254,66 @@ function initLayerPosition() {
 			+ 'px';
 	element_layer.style.top = (((window.innerHeight || document.documentElement.clientHeight) - height) / 2 - borderWidth)
 			+ 'px';
-}
+};
 
+</script>
+
+<script>
+
+var bankCode;//출금/입금계정과목
+var bankName;
+function ccc(value){
+	$(value).parent().parent().children().each(function(index){
+		console.log($(this).text());
+		bankCode += ","+$(this).text();
+	})
+	var bank = bankCode.split(",");
+	bankCode = bank[1];
+	bankName = bank[2];
 	
-<!-- 		
-</table> -->
+	$("#bankCode").val(bankCode);
+	$("#bankName").val(bankName);
+	
+	$("div#bankModal").modal("hide");
+}		
+
+
+
+
+/* 은행모달 */
+$("#searchBtn2").click(function(){
+	
+	$("#bankTable").dataTable({
+/* 		destroy: true, */
+		 ajax:{
+				'url':'bankSearch.ve',
+				'type':'get'
+			},
+		 
+		 columns: [
+			 {data : "bankCode",
+				 "render": function(data, type, row){
+		                if(type=='display'){
+		                    data = '<a href="#" onclick="ccc(this);">' + data + '</a>';
+		                }
+		                return data;} 
+			 },
+			 {data : "bankName",
+				 "render": function(data, type, row){
+		                if(type=='display'){
+		                    data = '<a href="#" onclick="ccc(this);">' + data + '</a>';
+		                }
+		                return data;}
+			 }
+		 ]
+	});
+	
+	$(".modal-title").text("은행검색");
+	 $("div#bankModal").modal();
+	 
+});
+
+</script>
+	<jsp:include page="../common/menubar2.jsp" />
 </body>
 </html>

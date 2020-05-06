@@ -19,35 +19,6 @@
 </head>
 
 <style>
-/* Group 14 */
-/* 
-
-position: absolute;
-width: 69px;
-height: 22.33px;
-left: 446px;
-top: 547px;
-
- */
-
-/* 거래처 등록정보 vender-info*/
-/*  
-#vender-info{
-position: absolute;
-width: 173px;
-height: 30px;
-left: 305px;
-top: 81px;
-
-font-family: Roboto;
-font-style: normal;
-font-weight: bold;
-font-size: 21px;
-line-height: 21px;
-
-color: #000000;
-
-} */
 
 /* 1. 사업자등록번호 biz-Num*/
 
@@ -92,7 +63,7 @@ position: absolute;
 width: 352px;
 height: 27px;
 left: 630px;
-top: 360px;
+top: 362px;
 
 background: #FFFFFF;
 border: 1px solid #C4C4C4;
@@ -107,7 +78,7 @@ position: absolute;
 width: 191px;
 height: 27px;
 left: 455px;
-top: 457px;
+top: 475px;
 
 /* background: #D9E3E3; */
 border: 1px solid #C4C4C4;
@@ -123,7 +94,7 @@ position: absolute;
 width: 555px;
 height: 27px;
 left: 454px;
-top: 677px;
+top: 690px;
 
 background: #FFFFFF;
 border: 1px solid #C4C4C4;
@@ -138,12 +109,19 @@ position: absolute;
 width: 228px;
 height: 27px;
 left: 644px;
-top: 530px;
+top: 535px;
 
 background: #D9E3E3;
 border: 1px solid #C4C4C4;
 box-sizing: border-box;
 border-radius: 5px;
+}
+
+#searchBtn2{
+position:absolute;
+left:595px;
+top:535px;
+
 }
 
 /* 상세입력안함칸 null-okay-surr*/
@@ -189,7 +167,7 @@ position: absolute;
 width: 104px;
 height: 24px;
 left: 319px;
-top: 250px;
+top: 245px;
 
 font-family: Roboto;
 font-style: normal;
@@ -233,7 +211,7 @@ position: absolute;
 width: 104px;
 height: 24px;
 left: 321px;
-top: 357px;
+top: 362px;
 
 font-family: Roboto;
 font-style: normal;
@@ -256,7 +234,7 @@ position: absolute;
 width: 104px;
 height: 24px;
 left: 321px;
-top: 407px;
+top: 417px;
 
 font-family: Roboto;
 font-style: normal;
@@ -278,7 +256,7 @@ position: absolute;
 width: 124px;
 height: 24px;
 left: 320px;
-top: 457px;
+top: 475px;
 
 font-family: Roboto;
 font-style: normal;
@@ -300,7 +278,7 @@ position: absolute;
 width: 104px;
 height: 24px;
 left: 321px;
-top: 530px;
+top: 550px;
 
 font-family: Roboto;
 font-style: normal;
@@ -322,7 +300,7 @@ position: absolute;
 width: 150px;
 height: 24px;
 left: 320px;
-top: 617px;
+top: 632px;
 
 font-family: Roboto;
 font-style: normal;
@@ -344,7 +322,7 @@ position: absolute;
 width: 104px;
 height: 24px;
 left: 321px;
-top: 677px;
+top: 690px;
 
 font-family: Roboto;
 font-style: normal;
@@ -366,7 +344,7 @@ position: absolute;
 width: 104px;
 height: 24px;
 left: 321px;
-top: 727px;
+top: 745px;
 
 font-family: Roboto;
 font-style: normal;
@@ -410,7 +388,7 @@ position: absolute;
 width: 104px;
 height: 24px;
 left: 455px;
-top: 407px;
+top: 417px;
 
 font-family: Roboto;
 font-style: normal;
@@ -432,7 +410,7 @@ position: absolute;
 width: 104px;
 height: 24px;
 left: 455px;
-top: 527px;
+top: 535px;
 
 font-family: Roboto;
 font-style: normal;
@@ -454,7 +432,7 @@ position: absolute;
 width: 104px;
 height: 24px;
 left: 455px;
-top: 567px;
+top: 575px;
 
 font-family: Roboto;
 font-style: normal;
@@ -475,8 +453,8 @@ color: #4C4C4C;
 position: absolute;
 width: 104px;
 height: 24px;
-left:  720px;
-top: 567px;
+left:  765px;
+top: 575px;
 
 font-family: Roboto;
 font-style: normal;
@@ -497,8 +475,8 @@ color: #4C4C4C;
 position: absolute;
 width: 104px;
 height: 24px;
-left: 750px;
-top: 407px;
+left: 765px;
+top: 417px;
 
 font-family: Roboto;
 font-style: normal;
@@ -519,7 +497,7 @@ color: #4C4C4C;
 position: absolute;
 width: 104px;
 height: 24px;
-left: 720px;
+left: 740px;
 top: 307px;
 
 font-family: Roboto;
@@ -541,8 +519,8 @@ color: #4C4C4C;
 position: absolute;
 width: 222px;
 height: 27px;
-left: 452px;
-top: 250px;
+left: 455px;
+top: 245px;
 
 background: #FFFFFF;
 border: 1px solid #C4C4C4;
@@ -571,8 +549,8 @@ border-radius: 5px;
 position: absolute;
 width: 180px;
 height: 27px;
-left: 535px;
-top: 407px;
+left: 550px;
+top: 417px;
 
 background: #FFFFFF;
 border: 1px solid #C4C4C4;
@@ -586,8 +564,8 @@ border-radius: 5px;
 position: absolute;
 width: 201px;
 height: 27px;
-left: 835px;
-top: 404px;
+left: 860px;
+top: 417px;
 
 background: #FFFFFF;
 border: 1px solid #C4C4C4;
@@ -595,20 +573,6 @@ box-sizing: border-box;
 border-radius: 5px;
 }
 
-/* 주소상세란 vender-address3-surr*/
-
-/* #vender-address3-surr{
-position: absolute;
-width: 531px;
-height: 27px;
-left: 455px;
-top: 387px;
-
-background: #FFFFFF;
-border: 1px solid #C4C4C4;
-box-sizing: border-box;
-border-radius: 5px;
-} */
 
 /* 주소첫번째란 vender-address1-surr */
 
@@ -617,7 +581,7 @@ position: absolute;
 width: 82px;
 height: 27px;
 left: 455px;
-top: 357px;
+top: 362px;
 
 background: #FFFFFF;
 border: 1px solid #C4C4C4;
@@ -630,7 +594,7 @@ position: absolute;
 width: 50px;
 height: 28px;
 left: 560px;
-top: 357px;
+top: 362px;
 background:#24574A;
 color:white;
 border-radius:5px;
@@ -645,7 +609,7 @@ position: absolute;
 width: 82px;
 height: 27px;
 left: 405px;
-top: 457px;
+top: 475px;
 
 background: #FFFFFF;
 border: 1px solid #C4C4C4;
@@ -661,7 +625,7 @@ position: absolute;
 width: 82px;
 height: 27px;
 left: 505px;
-top: 530px;
+top: 535px;
 
 background: #FFFFFF;
 border: 1px solid #C4C4C4;
@@ -675,8 +639,8 @@ border-radius: 5px;
 position: absolute;
 width: 190px;
 height: 27px;
-left: 500px;
-top: 610px;
+left: 470px;
+top: 630px;
 border: 1px solid #C4C4C4;
 box-sizing: border-box;
 border-radius: 5px;
@@ -686,10 +650,10 @@ border-radius: 5px;
 
 #account-holder-surr{
 position: absolute;
-width: 180px;
+width: 190px;
 height: 27px;
-left: 505px;
-top: 564px;
+left: 525px;
+top: 575px;
 
 background: #FFFFFF;
 border: 1px solid #C4C4C4;
@@ -704,8 +668,8 @@ border-radius: 5px;
 position: absolute;
 width: 201px;
 height: 27px;
-left: 785px;
-top: 564px;
+left: 860px;
+top: 575px;
 
 background: #FFFFFF;
 border: 1px solid #C4C4C4;
@@ -734,7 +698,7 @@ border-radius: 5px;
 position: absolute;
 width: 221px;
 height: 27px;
-left: 765px;
+left: 810px;
 top: 307px;
 
 background: #FFFFFF;
@@ -773,7 +737,7 @@ position: absolute;
 width: 73px;
 height: 24px;
 left: 501px;
-top: 727px;
+top: 745px;
 
 font-family: Roboto;
 font-style: normal;
@@ -833,7 +797,7 @@ position: absolute;
 width: 124px;
 height: 24px;
 left: 321px;
-top: 517px;
+top: 537px;
 
 font-family: Roboto;
 font-style: normal;
@@ -854,7 +818,7 @@ position: absolute;
 width: 27px;
 height: 27px;
 left: 455px;
-top: 724px;
+top: 745px;
 
 background: #FFFFFF;
 border: 1px solid #C4C4C4;
@@ -868,7 +832,7 @@ border-radius: 5px;
 position: absolute;
 width: 80px;
 height: 24px;
-left: 326px;
+left: 320px;
 top: 120px;
 
 font-family: Roboto;
@@ -890,7 +854,7 @@ color: #4C4C4C;
 position: absolute;
 width: 254px;
 height: 27px;
-left: 473px;
+left: 455px;
 top: 120px;
 
 background: #FFFFFF;
@@ -904,7 +868,7 @@ border-radius: 5px;
 position: absolute;
 width: 95px;
 height: 24px;
-left: 1025px;
+left: 1065px;
 top: 307px;
 
 font-family: Roboto;
@@ -924,7 +888,7 @@ color: #4C4C4C;
 position: absolute;
 width: 25px;
 height: 25px;
-left: 1082px;
+left: 1140px;
 top: 307px;
 
 background: #FFFFFF;
@@ -939,7 +903,7 @@ border-radius: 5px;
 position: absolute;
 width: 50px;
 height: 24px;
-left: 813px;
+left: 800px;
 top: 120px;
 
 font-family: Roboto;
@@ -972,19 +936,6 @@ border-radius: 5px;
 
 }
 
-/* Rectangle 257 */
-
-
-/* position: absolute;
-width: 27px;
-height: 27px;
-left: 959px;
-top: 82px;
-
-background: #E4E4E4;
-border: 1px solid #C4C4C4;
-box-sizing: border-box;
-border-radius: 0px 5px 5px 0px; */
  
 /* The Modal (background) */
         .modal {
@@ -1105,21 +1056,7 @@ border-radius: 0px 5px 5px 0px; */
 				<b id="farmers-status">농어민</b><input type="checkbox" value="1" id="farmers-status-surr" name="farmersStatus">
 			</td>
 		</tr>
-		
-		
-<!-- 		  <td class="firstLine"><b>회사/점포주소</b></td>
-               <td class="secondLine">
-               <input type="text" id="postcode" name="postcode" placeholder="우편번호">
-               <input type="text" id="address1" name="bizLocation" placeholder="주소">
-               </td>
-               
-               <td class="thirdLine">
-               <input type="button" onclick="sample2_execDaumPostcode()" id="location-btn" value="주소 검색">
-               </td>
-          </tr> -->
-		
-		
-		
+			
 		<tr>
 			<td><b id="address"> 주소</b>
 			<input type="text" name="postcode" placeholder="우편번호" id="vender-address1-surr">
@@ -1127,10 +1064,6 @@ border-radius: 0px 5px 5px 0px; */
 			<td><input type="text" id="vender-address2-surr" name="venderAddress" placeholder="주소"></td>
 		  <td class="secondLine"><input type="hidden" id="address2" name="address1" placeholder="상세주소"></td>
 		</tr>
-		
-<!-- 		<tr>
-			<td><b id="null-okay">####상세 입력 안함####</b>
-		</tr> -->
 
 		<tr>
 			<td><b id="phone"> 연 락 처</b> 
@@ -1142,14 +1075,14 @@ border-radius: 0px 5px 5px 0px; */
 		
 		<tr>
 			<td><b id="department-incharge"> 담당(부서)사원</b>
-<!-- 			`<input type="text" id="department-incharge1-surr"> -->
-			`<input type="text" name="departmentIncharge" id="department-incharge2-surr">
+<!-- 			<input type="text" id="department-incharge1-surr"> -->
+			<input type="text" name="departmentIncharge" id="department-incharge2-surr">
 			</td>
 		</tr>
 		
  		<tr>
 			<td><b id="account-income-num"> 입금 계좌 번호</b>
-				<b id=bank>은행</b>
+				<b id="bank">은행</b>
 				<input type="text" class="bank-code-surr" id="bankCode" name="bankCode">
 				<button type="button" id="searchBtn2"><img alt="" src="${contextPath}/resources/images/search.PNG" width="20px" height="20px">
 								</button>
@@ -1186,8 +1119,6 @@ border-radius: 0px 5px 5px 0px; */
 		</tr>
 
 
-
-
 		</form>
 		<div style="height: 100vh;"></div>
 		<div class="card mb-4">
@@ -1203,7 +1134,6 @@ border-radius: 0px 5px 5px 0px; */
           <h4 class="modal-title">은행검색</h4>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
-        
         
         <div class="modal-body">
           	<table id="bankTable">
@@ -1224,8 +1154,6 @@ border-radius: 0px 5px 5px 0px; */
       </div>
     </div>
   </div>
-
-<!-- </table> -->
 
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
@@ -1347,17 +1275,14 @@ function ccc(value){
 
 
 
-
-
-
 /* 은행모달 */
 $("#searchBtn2").click(function(){
 	
 	$("#bankTable").dataTable({
-/* 		destroy: true, */
+ 		destroy: true, 
 		 ajax:{
 				'url':'bankSearch.ve',
-				'type':'get'
+				'type':'POST'
 			},
 		 
 		 columns: [
@@ -1365,6 +1290,7 @@ $("#searchBtn2").click(function(){
 				 "render": function(data, type, row){
 		                if(type=='display'){
 		                    data = '<a href="#" onclick="ccc(this);">' + data + '</a>';
+		                console.log(data);
 		                }
 		                return data;} 
 			 },
@@ -1375,17 +1301,13 @@ $("#searchBtn2").click(function(){
 		                }
 		                return data;}
 			 }
-			 
 		 ]
 	});
 	
-	$(".modal-title").text("은행검색");
+	$(".modal-title").text("은행검색").css("color","white");
 	 $("div#bankModal").modal();
 	 
-	 
 });
-
-
 
 </script>
 	<jsp:include page="../common/menubar2.jsp" />
