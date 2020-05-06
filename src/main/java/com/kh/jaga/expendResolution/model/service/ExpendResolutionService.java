@@ -20,12 +20,14 @@ public interface ExpendResolutionService {
 
 	List<ComInIdVo> selectComInIdList(String comCome);
 
-	List<ExpendResolutionDto> selectExpendResolutionList();
+	List<ExpendResolutionDto> selectExpendResolutionList(String comCode);
 
 	ExpendResolutionDto selectExpendResolutionOne(String expendResolutionNo);
 
 	List<ExpendResolutionDetailVo> selectDetailList(String expendResolutionNo);
 
 	List<Vender> selectVenderList(String comCode);
+
+	int updateResolution(String expendResolutionNo);
 
 }

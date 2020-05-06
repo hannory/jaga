@@ -22,12 +22,14 @@ public interface ExpendResolutionDao {
 
 	List<ComInIdVo> selectComInIdListList(SqlSessionTemplate sqlSession, String comCome);
 
-	List<ExpendResolutionDto> selectExpendResolutionList(SqlSessionTemplate sqlSession);
+	List<ExpendResolutionDto> selectExpendResolutionList(SqlSessionTemplate sqlSession, String comCode);
 
 	ExpendResolutionDto selectExpendResolutionOne(SqlSessionTemplate sqlSession, String expendResolutionNo);
 
 	List<ExpendResolutionDetailVo> selectDetailList(SqlSessionTemplate sqlSession, String expendResolutionNo);
 
 	List<Vender> selectVenderList(SqlSessionTemplate sqlSession, String comCode);
+
+	int updateResolution(SqlSessionTemplate sqlSession, String expendResolutionNo);
 
 }

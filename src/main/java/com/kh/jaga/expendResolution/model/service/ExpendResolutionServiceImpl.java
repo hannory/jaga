@@ -14,16 +14,24 @@ import com.kh.jaga.expendResolution.model.dto.ExpendResolutionDto;
 import com.kh.jaga.expendResolution.model.vo.AccountTitleVo;
 import com.kh.jaga.expendResolution.model.vo.DepartmentVo;
 import com.kh.jaga.expendResolution.model.vo.ExpendResolutionDetailVo;
+import com.kh.jaga.slip.model.dao.ReceiptionDao;
+import com.kh.jaga.slip.model.dao.ReceiptionDaoImpl;
+import com.kh.jaga.slip.model.vo.Receiption;
 import com.kh.jaga.vender.model.vo.Vender;
 
 @Service
 public class ExpendResolutionServiceImpl implements ExpendResolutionService{
 
 	@Autowired
-	SqlSessionTemplate sqlSession;
+	private SqlSessionTemplate sqlSession;
 	
 	@Autowired
-	ExpendResolutionDao dao;
+	private ExpendResolutionDao dao;
+	
+	@Autowired
+	private Receiption receiption;
+	@Autowired
+	private ReceiptionDao rDao;
 	
 	@Override
 	public int insertExpendResolution(ExpendResolutionDto dto) {
@@ -61,9 +69,9 @@ public class ExpendResolutionServiceImpl implements ExpendResolutionService{
 	}
 
 	@Override
-	public List<ExpendResolutionDto> selectExpendResolutionList() {
+	public List<ExpendResolutionDto> selectExpendResolutionList(String comCode) {
 		
-		List<ExpendResolutionDto> dtoList = dao.selectExpendResolutionList(sqlSession);
+		List<ExpendResolutionDto> dtoList = dao.selectExpendResolutionList(sqlSession, comCode);
 		
 		return dtoList;
 	}
@@ -90,6 +98,44 @@ public class ExpendResolutionServiceImpl implements ExpendResolutionService{
 		List<Vender> list = dao.selectVenderList(sqlSession, comCode);
 		
 		return list;
+	}
+
+	@Override
+	public int updateResolution(String expendResolutionNo) {
+		
+		int result = dao.updateResolution(sqlSession, expendResolutionNo);
+		
+		ExpendResolutionDto resolutionDto = dao.selectExpendResolutionOne(sqlSession, expendResolutionNo);
+		
+		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+		System.out.println("인설트 후 해당 문서(지출결의서) 가져 온 결과 :");
+		System.out.println(resolutionDto);
+		
+		receiption.setBrief();
+		receiption.setComCode(comCode);
+		receiption.setDateSlipCode(dateSlipCode);
+		receiption.setDeemedStatus(deemedStatus);
+//		receiption.setDivision(division);
+//		receiption.setEvidence(evidence);
+//		receiption.setEvidenceCode(evidenceCode);
+//		receiption.setIssueStatus(issueStatus);
+//		receiption.setItem(item);
+		receiption.setJournalizeList(journalizeList);
+		receiption.setResolutionCode(resolutionCode);
+//		receiption.setSlipCode(slipCode);	//시퀀스
+		receiption.setSlipDate(slipDate);
+		receiption.setSlipDivision(slipDivision);
+//		receiption.setSupplyDeaga(supplyDeaga);
+		receiption.setSupplyValue(supplyValue);
+		receiption.setValueTax(valueTax);
+		
+		if(result > 0) {
+			//일반전표 입력 로직 수행
+			rDao.insertReceiption(sqlSession, receiption);
+			
+		}
+		
+		return result;
 	}
 	
 	

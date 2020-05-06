@@ -23,7 +23,8 @@
 		APPROVAL_STATUS,
 		PAYMENT_TYPE_CODE,
 		EVIDENCE_CODE,
-		COM_CODE
+		COM_CODE,
+		VENDER_CODE
   	)
   	VALUES(
   		SEQ_EXPEND_RESOLUTION.NEXTVAL,
@@ -41,7 +42,8 @@
 		'N',
 		#{paymentTypeCode},
 		#{evidenceCode},
-		#{comCode}
+		#{comCode},
+		#{detailVenderCode01}
   	)
   	INTO APPROVALER_INFO(
 		APPR_INFO_CODE,
@@ -146,6 +148,7 @@
   		DEPT_CODE,
   		DEPT_NAME
   	FROM DEPARTMENT
+  	ORDER BY 1
   </select>
   
   <!-- 
@@ -164,6 +167,7 @@
   		COM_CODE,
   		ACCOUNT_SYSTEM
   	FROM ACCOUNT_TITLE
+  	ORDER BY 1
   </select>
   
   <select id="selectComInIdList" parameterType="String" resultMap="ComInIdVoResultSet">
@@ -180,10 +184,11 @@
   	FROM COM_INNER_ID C
   	JOIN JOB_POSITION J ON (C.POSITION_CODE = J.POSITION_CODE)
   	WHERE COM_CODE = #{comCode}
+  	ORDER BY 1
   </select>
   
   <!-- 지출결의서 리스트 조회 -->
-  <select id="selectExpendResolutionList" resultType="com.kh.jaga.expendResolution.model.dto.ExpendResolutionDto">
+  <select id="selectExpendResolutionList" resultType="com.kh.jaga.expendResolution.model.dto.ExpendResolutionDto" parameterType="String">
   	SELECT
 		E.RESOLUTION_NO,
 		E.COM_RESOLUTION_CODE,
@@ -196,14 +201,18 @@
 		A.ACCOUNT_TITLE AS ACCOUNT_TITLE_CODE,
 		E.EXPEND_SUMMARY,
 		E.CREATE_USER,
-		E.CREATE_DATE,
+		TO_CHAR(E.CREATE_DATE,'YYYY-MM-DD') AS CREATE_DATE,
 		E.APPROVAL_STATUS,
 		E.PAYMENT_TYPE_CODE,
 		E.EVIDENCE_CODE,
-		E.COM_CODE
+		E.COM_CODE,
+		CID.NAME MANAGER_NAME
 	FROM EXPEND_RESOLUTION E
 	JOIN ACCOUNT_TITLE A
 	ON E.ACCOUNT_TITLE_CODE = A.ACCOUNT_CODE
+	JOIN COM_INNER_ID CID
+	ON E.MANAGER_NO = CID.COM_INNER_ID_NUM
+	WHERE E.COM_CODE = #{ comCode }
 	ORDER BY E.CREATE_DATE
   </select>
   
@@ -239,7 +248,6 @@
   
   <select id="selectDetailList" parameterType="String" resultType="com.kh.jaga.expendResolution.model.vo.ExpendResolutionDetailVo">
  	 SELECT
-		
 		D.EXPEND_DETAIL_NO AS EXPEND_DETAIL_NO,
         D.EXPEND_DATE AS DETAIL_DATE,
         D.BRIEF AS DETAIL_BRIEF,
@@ -281,6 +289,12 @@
 	FROM VENDER V
 	WHERE COM_CODE = #{ comCode }
   </select>
+  
+  <update id="updateResolution" parameterType="String">
+  		UPDATE EXPEND_RESOLUTION
+  		SET APPROVAL_STATUS =  'Y'
+  		WHERE RESOLUTION_NO = #{ expendResolutionNo }
+  </update>
   
   
   
