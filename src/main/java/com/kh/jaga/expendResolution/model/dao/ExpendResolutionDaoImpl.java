@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.jaga.companyInnerId.model.vo.ComInIdVo;
@@ -12,10 +13,12 @@ import com.kh.jaga.expendResolution.model.dto.ExpendResolutionDto;
 import com.kh.jaga.expendResolution.model.vo.AccountTitleVo;
 import com.kh.jaga.expendResolution.model.vo.DepartmentVo;
 import com.kh.jaga.expendResolution.model.vo.ExpendResolutionDetailVo;
+import com.kh.jaga.slip.model.vo.Receiption;
 import com.kh.jaga.vender.model.vo.Vender;
 
 @Repository
 public class ExpendResolutionDaoImpl implements ExpendResolutionDao{
+	
 
 	@Override
 	public int insertExpendResoltion(ExpendResolutionDto dto, SqlSessionTemplate sqlSession) {

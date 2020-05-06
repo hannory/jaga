@@ -37,9 +37,10 @@
 		color:white;
 	}
 	.cursorPointer:hover{
-		background:gray;
-		opacity:80%;
-		color:white;
+		background:white;
+		opacity:100%;
+		border:2px solid #24574A;
+		cursor:pointer;
 	}
 	
 	/* 모달 */
@@ -101,7 +102,7 @@
    <div id="divModal" class="modal-layer">
    	<div id="" class="white-layer" style="border:1px solid #24574A">
    		<div style="width:100%; height:10%; background:#24574A;">
-   			<h1 style="color:white; margin:0 auto; line-height:65px;">지출결의서 상세내역</h1>
+   			<h3 style="color:white; margin:0 auto; line-height:65px;">지출결의서 상세내역</h3>
    			<div style="float:right; width:50px; height:30px; line-height:30px; background:white; border-radius:5px; margin-top:-50px; margin-right:20px;" onclick="closeModal();"><strong>닫기</strong></b></div>
    		</div>
    		
