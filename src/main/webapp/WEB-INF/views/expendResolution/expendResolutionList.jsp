@@ -39,6 +39,7 @@
 	.cursorPointer:hover{
 		background:gray;
 		opacity:80%;
+		color:white;
 	}
 	
 	/* 모달 */
@@ -258,8 +259,9 @@
 			
 			<c:if test="${ !empty dtoList }">
 				<c:forEach var="target" items="${ dtoList }"> 
-					<tr>
-						<td>${ target.resolutionNo }</td>
+					<tr class="cursorPointer">
+						<td style="display:none;">${ target.resolutionNo }</td>
+						<td>${ target.expendSummary }</td>
 						<td>${ target.expendDate }</td>
 						<td>${ target.accountTitleCode }</td>
 						<td>${ target.expendPurpose }</td>

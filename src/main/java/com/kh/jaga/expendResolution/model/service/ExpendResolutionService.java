@@ -20,7 +20,7 @@ public interface ExpendResolutionService {
 
 	List<ComInIdVo> selectComInIdList(String comCome);
 
-	List<ExpendResolutionDto> selectExpendResolutionList();
+	List<ExpendResolutionDto> selectExpendResolutionList(String comCode);
 
 	ExpendResolutionDto selectExpendResolutionOne(String expendResolutionNo);
 
