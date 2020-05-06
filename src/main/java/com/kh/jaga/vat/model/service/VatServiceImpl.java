@@ -106,6 +106,24 @@ public class VatServiceImpl implements VatService{
 		return vd.insertVat(sqlSession, vatRe);
 	}
 
+	@Override
+	public int updateVat(Vat vat) {
+		// TODO Auto-generated method stub
+		return vd.updateVat(sqlSession,vat);
+	}
+
+	@Override
+	public String selectVatCode(Vat vatRe) {
+		// TODO Auto-generated method stub
+		return vd.selectVatCode(sqlSession,vatRe);
+	}
+
+	@Override
+	public int updateDeadCenVat(Vat vat) {
+		// TODO Auto-generated method stub
+		return vd.updateDeadCenVat(sqlSession,vat);
+	}
+
 	
 
 }
