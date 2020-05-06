@@ -789,14 +789,32 @@
 					<tr>
 						<td><input name="detailDate01" type="date"></td>
 						<td><input name="detailBrief01" type="text"></td>
-						<td><input name="detailVenderCode01" type="text"></td>
+						<!-- <td><input name="detailVenderCode01" type="text"></td> -->
+						<td>
+							<c:if test="${ venderList ne null }">
+								<select name="detailVenderCode01" style="width:100%;">	<!-- 원래 name detailVenderCode01 로 줘야하지만 dto에 맞추기 위해 이렇게 함 -->
+									<c:forEach items="${ venderList }" var="target">
+										<option value="${ target.venderCode }">${ target.venderName }</option>
+									</c:forEach>
+								</select>
+							</c:if>
+						</td>
 						<td><input name="detailPrice01" type="text" class="price"></td>
 						<td><input name="detailMemo01" type="text"></td>
 					</tr>
 					<tr>
 						<td><input name="detailDate02" type="date"></td>
 						<td><input name="detailBrief02" type="text"></td>
-						<td><input name="detailVenderCode02" type="text"></td>
+						<!-- <td><input name="detailVenderCode02" type="text"></td> -->
+						<td>
+							<c:if test="${ venderList ne null }">
+								<select name="detailVenderCode02" style="width:100%;">
+									<c:forEach items="${ venderList }" var="target">
+										<option value="${ target.venderCode }">${ target.venderName }</option>
+									</c:forEach>
+								</select>
+							</c:if>
+						</td>
 						<td><input name="detailPrice02" type="text" class="price"></td>
 						<td><input name="detailMemo02" type="text"></td>
 					</tr>
@@ -828,10 +846,10 @@
 					<tr>
 						<td class="color-green" style="width: 10%">결제구분</td>
 						<td style="width: 10%;"><input type="radio"
-							name="paymentTypeCode" value="cash" id="radioCash"><label
+							name="paymentTypeCode" value="현금" id="radioCash"><label
 							for="radioCash">현금</label></td>
 						<td style="width: 10%;"><input type="radio"
-							name="paymentTypeCode" value="card" id="radioCard"><label
+							name="paymentTypeCode" value="카드" id="radioCard"><label
 							for="radioCard">카드</label></td>
 						<td style="width: 10%; border-top: 1px solid white; border-right:white;"></td>
 						<!-- <td style="width: 10%;" class="color-green">합계</td>

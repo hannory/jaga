@@ -28,4 +28,6 @@ public interface ExpendResolutionService {
 
 	List<Vender> selectVenderList(String comCode);
 
+	int updateResolution(String expendResolutionNo);
+
 }

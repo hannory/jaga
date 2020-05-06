@@ -114,7 +114,7 @@
    				<tr>
    					<td>결재</td>
    					<td><img id="managerSign" style="width:100%; height:100px;"></td>
-   					<td>싸인</td>
+   					<td></td>
    				</tr>
    			</table>
    			
@@ -162,6 +162,8 @@
    	</div>
    </div>
    
+   
+   <div id="switchApprOk" onclick="apprOkConfirm();" style="display:none;"></div>
    <script>
    /* 승인버튼 눌렀을 때 */
    function apprOk(){
@@ -176,23 +178,73 @@
 		   if (result.value) {
 			   console.log(resolutionNo);
 			   //진짜 승인 눌렀을 때
-			   $.ajax(
-					   url: "expendApprOk.expendResolution",
-					   type: "post",
-					   data: zzzzzzzzzzzzzzzzzzz,
-					   success: function(data){
-						   console.log("success");
-						   console.log(data);
-					   },
-					   error: function(status){
-						   alert("error ...")
-						   alert(status)
-					   }
-					   
-			   );// ajax
-		   }
+			 	 $("#switchApprOk").click();
+			
+		   }//if
+		   
 		 })
-   }
+   }//function end
+   
+   function apprOkConfirm(){
+	  //ajax 로 expendResolutionNo 넘겨서 값 전달하기
+	  $.ajax({
+			url: "expendApprOk.expendResolution",
+			type: "post",
+			data : {"expendResolutionNo":resolutionNo},
+			success: function(data){
+				var data = JSON.parse(data);
+				if(true){
+					
+					/* Swal.fire({
+						  position: 'top-end',
+						  icon: 'success',
+						  title: '승인이 완료되었습니다.',
+						  showConfirmButton: true,
+						  timer: 2000
+						});
+						
+					alert("승인이 완료되었습니다."); */
+					
+					const Toast = Swal.mixin({
+						  toast: true,
+						  position: 'center',
+						  showConfirmButton: false,
+						  timer: 2000,
+						  timerProgressBar: true,
+						  onOpen: (toast) => {
+						    toast.addEventListener('mouseenter', Swal.stopTimer)
+						    toast.addEventListener('mouseleave', Swal.resumeTimer)
+						  }
+						})
+
+						Toast.fire({
+						  icon: 'success',
+						  title: '승인이 완료되었습니다.'
+						})
+					
+				}else{
+					alert("승인실패 \n정상적인 접근이 아닙니다.");
+				}
+				
+				setTimeout(function(){
+					location.href="showExpendResolutionList.expendResolution";
+				}, 2000);
+			},
+			error: function(status){
+				alert("ajax error");
+				alert(status);
+			}
+		});//ajax
+	  
+	  
+	  
+   }//function end
+   
+   
+   
+   
+   
+   
    
    /* 반려버튼 눌렀을 때 */
    function apprNo(){
@@ -249,11 +301,13 @@
 		<table border="1" style="width:80%; text-align:center;">
 		
 			<tr style="background:#24574A; color:white; height:20px;">
-				<td style="width:8%">문서번호</td>
-				<td style="width:38%">지출일</td>
+				<td style="width:8%">담당자</td>
+				<td style="width:15%">발의일</td>
+				<td style="width:15%">지출일</td>
 				<td style="width:13%">계정과목</td>
-				<td style="width:13%">지출목적</td>
-				<td style="width:18%">지출금액</td>
+				<td style="width:21%">지출목적</td>
+				<td style="width:8%">결제구분</td>
+				<td style="width:10%">지출금액</td>
 				<td style="width:10%">승인여부</td>
 			</tr>
 			
@@ -261,12 +315,21 @@
 				<c:forEach var="target" items="${ dtoList }"> 
 					<tr class="cursorPointer">
 						<td style="display:none;">${ target.resolutionNo }</td>
-						<td>${ target.expendSummary }</td>
+						<td>${ target.managerName }</td>
+						<td>${ target.createDate }</td>
 						<td>${ target.expendDate }</td>
 						<td>${ target.accountTitleCode }</td>
 						<td>${ target.expendPurpose }</td>
+						<td>${ target.paymentTypeCode }</td>
 						<td>${ target.expendSummary }</td>
-						<td>${ target.approvalStatus }</td>
+						
+						<c:if test="${ target.approvalStatus eq 'Y'}">
+							<td style="color:blue;">승인</td>
+						</c:if>
+						<c:if test="${ target.approvalStatus ne 'Y'}">
+							<td style="color:red;"> 미승인 </td>
+						</c:if>
+						
 					</tr>
 				</c:forEach>
 			</c:if>

@@ -30,4 +30,6 @@ public interface ExpendResolutionDao {
 
 	List<Vender> selectVenderList(SqlSessionTemplate sqlSession, String comCode);
 
+	int updateResolution(SqlSessionTemplate sqlSession, String expendResolutionNo);
+
 }

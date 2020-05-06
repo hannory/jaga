@@ -184,11 +184,19 @@ public class ExpendResolutionController {
 	
 	//지출결의서리스트 > 상세보기 > 진짜로 승인 ajax
 	@RequestMapping("expendApprOk.expendResolution")
-	public void expendApprOk(HttpServletResponse response, String data) {
-		System.out.println(data);
+	public void expendApprOk(HttpServletResponse response, String expendResolutionNo) {
+		System.out.println("ajax가 지출결의서 승인하는 메소드를 호출함...");
+		System.out.println("받아온 지출결의서 번호 : " + expendResolutionNo);
+		
+		int result = service.updateResolution(expendResolutionNo);
+		
+		System.out.println("업데이트 실행 결과 : " + result);
+		
+		String str = "zzzzzzzzzzzz";
+		Gson gson = new Gson();
 		
 		try {
-			response.getWriter().print("value~~~!!! \nfromcontroller");
+			response.getWriter().print(gson.toJson(str));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

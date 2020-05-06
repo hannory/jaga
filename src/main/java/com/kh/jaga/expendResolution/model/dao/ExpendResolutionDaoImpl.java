@@ -85,4 +85,12 @@ public class ExpendResolutionDaoImpl implements ExpendResolutionDao{
 		return list;
 	}
 
+	@Override
+	public int updateResolution(SqlSessionTemplate sqlSession, String expendResolutionNo) {
+		
+		int result = sqlSession.update("ExpendResolution.updateResolution", expendResolutionNo);
+		
+		return result;
+	}
+
 }

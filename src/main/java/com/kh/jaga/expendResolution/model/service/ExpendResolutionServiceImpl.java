@@ -91,6 +91,19 @@ public class ExpendResolutionServiceImpl implements ExpendResolutionService{
 		
 		return list;
 	}
+
+	@Override
+	public int updateResolution(String expendResolutionNo) {
+		
+		int result = dao.updateResolution(sqlSession, expendResolutionNo);
+		
+		if(result > 0) {
+			//일반전표 입력 로직 수행
+			
+		}
+		
+		return result;
+	}
 	
 	
 }
