@@ -69,9 +69,9 @@ public class VatDaoImpl implements VatDao{
 		map.put("endDate",eD);
 		List<Receiption> reResult=new ArrayList<Receiption>(); 
 		Receiption re1=sqlSession.selectOne("Vat.selectCcIssStmtRe",map);
-		System.out.println("Dao: selectCcIssStmtRe: re: 확인해보자 0"+re);
+		System.out.println("Dao: selectCcIssStmtRe: re: 확인해보자 0"+re1);
 		Receiption re0=sqlSession.selectOne("Vat.selectCcIssStmtRe0",map);
-		System.out.println("Dao: selectCcIssStmtRe: re: 확인해보자 "+re);
+		System.out.println("Dao: selectCcIssStmtRe: re: 확인해보자 "+re0);
 		reResult.add(re1);
 		reResult.add(re0);
 		System.out.println("Dao: selectCcIssStmtRe: re: 확인해보자 2"+re);
@@ -114,14 +114,13 @@ public class VatDaoImpl implements VatDao{
 		System.out.println("bizCode: "+bizCode);
 		System.out.println("bizType=null1:"+ com);
 		if(com==null) {
-			System.out.println("bizType=null2:"+ com);
-			com.setBizType("0");
-		}
-		System.out.println("bizType=null3:"+ com);
-		for(int i=0;i<bizCode.size(); i++) {
-			String biz=bizCode.get(i);
-			if(com.getBizType().equals(biz)) {
-				com.setBizType(biz);
+			//아무것도 안해도 됨
+		}else {
+			for(int i=0;i<bizCode.size(); i++) {
+				String biz=bizCode.get(i);
+				if(com.getBizType().equals(biz)) {
+					com.setBizType(biz);
+				}
 			}
 		}
 		return com;

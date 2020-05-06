@@ -79,7 +79,7 @@ public class VatController {
 			mv.setViewName("jsonView");
 			
 		}else{
-			//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1111
+			//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1111!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 			System.out.println("vat2에 값 없!!을때");
 			
 			Vat vatRe=new Vat();
@@ -107,6 +107,7 @@ public class VatController {
 				sotiDiv=vs.selectSumOfTaxInvDiv(sotiDiv);
 				//1: 과세
 				if(sotiDiv.getValOfSupply().subtract(sotiDiv.getTax().multiply(new BigDecimal("10"))).equals(new BigDecimal("0"))) {
+					
 					vatRe.setP1(sotiDiv.getValOfSupply());
 					vatRe.setP1T(sotiDiv.getTax());
 					vatRe.setP5(new BigDecimal("0"));
@@ -122,9 +123,23 @@ public class VatController {
 					System.out.println("soit 영세 있을때 : p1T: "+vatRe.getP5());
 					
 				}
+				
+				
+				
+				
 			}else {
 				//soti가 마감처리 안됐을때 전표에서 계산해와야함
 				deadCk.put("세금계산서", "N");
+				//p5 null처리
+				vatRe.setP5(new BigDecimal("0"));
+				// p1 null처리 
+				if(vatRe.getP1()==null) {
+					vatRe.setP1(new BigDecimal("0"));
+					
+				}
+				if(vatRe.getP1T()==null) {
+					vatRe.setP1T(new BigDecimal("0"));
+				}
 			}
 			
 			
@@ -163,109 +178,168 @@ public class VatController {
 				re.setSlipDate(stD);
 				//과세
 				List<Receiption> reList=vs.selectCcIssStmtRe(re,eD);
-				for(Receiption rec: reList) {
-					if(rec.getValueTax().equals(new BigDecimal("0"))) {
-						vatRe.setP6(rec.getSupplyValue());
-						System.out.println("vatRE p6: "+vatRe.getP6());
-					}else {
-						vatRe.setP3(rec.getSupplyValue());
-						vatRe.setP3T(rec.getValueTax());
+				if( reList.get(0) !=null) {
+					for(Receiption rec: reList) {
+						System.out.println("dfsd: "+rec.getValueTax());
+						if(rec.getValueTax().equals(new BigDecimal("0"))) {
+							vatRe.setP6(rec.getSupplyValue());
+						}else {
+							vatRe.setP3(rec.getSupplyValue());
+							vatRe.setP3T(rec.getValueTax());
+						}
+					
+					}	//for문 끝
+				}else{//if 문끝
+					//p6,p3 null처리
+					if(vatRe.getP6()==null) {
+						System.out.println("p6이 null일 때 ");
+						vatRe.setP6(new BigDecimal("0"));
 					}
-					
+					if(vatRe.getP3()==null) {
+						System.out.println("p3이 null일 때 ");
+						vatRe.setP3(new BigDecimal("0"));
+					}
+					if(vatRe.getP3T()==null) {
+						System.out.println("p3T이 null일 때 ");
+						vatRe.setP3T(new BigDecimal("0"));
+					}
+				}
 //			10:매입매출전표 매입_10번(세금계산서)
-					//마감은 위에 1,3번하면서 했으니 전표에서 값 가져오기
-					
-					Receiption reTaxPur=new Receiption();
-					reTaxPur.setComCode(comCode);
-					reTaxPur.setSlipDate(stD);
-					
-					reTaxPur=vs.selectSumOfTAxInvPur(reTaxPur,eD);
+				//마감은 위에 1,3번하면서 했으니 전표에서 값 가져오기
+				
+				Receiption reTaxPur=new Receiption();
+				reTaxPur.setComCode(comCode);
+				reTaxPur.setSlipDate(stD);
+				
+				reTaxPur=vs.selectSumOfTAxInvPur(reTaxPur,eD);
+				if(reTaxPur !=null) {
 					vatRe.setP10(reTaxPur.getSupplyValue());
 					vatRe.setP10T(reTaxPur.getValueTax());
+				}else {
 					System.out.println("Vat 중간점검: "+vatRe);
-					
-					
+					if(vatRe.getP10()==null) {
+						System.out.println("p10이 null일 때 ");
+						vatRe.setP10(new BigDecimal("0"));
+					}
+					if(vatRe.getP10T()==null) {
+						System.out.println("p10T이 null일 때 ");
+						vatRe.setP10T(new BigDecimal("0"));
+					}
+				}
 //			14: 매입매출전표 매입_50번,100번(카드/현금 과세)/의제매입도 14상세표에 나오고 값도 나옴
 //			41~49도 여기서 채워야함
-					CcSalesSlip css=new CcSalesSlip();
-					css.setComCode(comCode);
-					css.setYearOfAttr(yearInt);
-					css.setTermDiv(term);
-					
-					css=vs.selectCcSalesSlip(css);
-					if(css.getRcptstmtCode() !=null) {
-						deadCk.put("신용카드매출전표수령서(갑)(을)","Y");
-					}else {
-						deadCk.put("신용카드매출전표수령서(갑)(을)", "N");
-					}
-					
-					Receiption rePur14=new Receiption();
-					rePur14.setComCode(comCode);
-					rePur14.setSlipDate(stD);
-					
-					rePur14=vs.selectRe14(rePur14,eD);
-					Deem deem=new Deem();
-					deem.setComCode(comCode);
-					deem.setYearOfAttr(yearInt);
-					deem.setVatTerm(term);
-					
-					deem=vs.selectDeem(deem);
-					if(deem.getDeadline().equals("Y")) {
-						deadCk.put("의제매입신고서","Y");
-					}else {
-						deadCk.put("의제매입신고서","N");
-					}
-					
-					//deem의 상태를 받아올수 가 없음 group by로 묶어온거라 deem을 구분못함
-					
-					Receiption reDeem=new Receiption();
-					reDeem.setComCode(comCode);
-					reDeem.setSlipDate(stD);
-					
-					reDeem=vs.selectRe43(reDeem,eD);
-					if(reDeem.getSupplyValue()==null) {
-						vatRe.setP43(new BigDecimal("0"));
-						vatRe.setP43T(new BigDecimal("0"));
-					}else {
-						vatRe.setP43(reDeem.getSupplyValue());
-						vatRe.setP43T(new BigDecimal("0"));
-					}
-						
-								
-					//14를 41에 넣고 14에 41이랑 43 더해주기
-					//49도 넣어주기
+				CcSalesSlip css=new CcSalesSlip();
+				css.setComCode(comCode);
+				css.setYearOfAttr(yearInt);
+				css.setTermDiv(term);
+				
+				css=vs.selectCcSalesSlip(css);
+				if(css !=null) {
+					deadCk.put("신용카드매출전표수령서(갑)(을)","Y");
+				}else {
+					deadCk.put("신용카드매출전표수령서(갑)(을)", "N");
+				}
+				
+				Receiption rePur14=new Receiption();
+				rePur14.setComCode(comCode);
+				rePur14.setSlipDate(stD);
+				
+				rePur14=vs.selectRe14(rePur14,eD);
+				Deem deem=new Deem();
+				deem.setComCode(comCode);
+				deem.setYearOfAttr(yearInt);
+				deem.setVatTerm(term);
+				
+				deem=vs.selectDeem(deem);
+				if(deem == null) {
+					deadCk.put("의제매입신고서","N");
+				}else{
+					deadCk.put("의제매입신고서","Y");
+				}
+				
+				//deem의 상태를 받아올수 가 없음 group by로 묶어온거라 deem을 구분못함
+				
+				Receiption reDeem=new Receiption();
+				reDeem.setComCode(comCode);
+				reDeem.setSlipDate(stD);
+				
+				reDeem=vs.selectRe43(reDeem,eD);
+				if(reDeem==null) {
+					vatRe.setP43(new BigDecimal("0"));
+					vatRe.setP43T(new BigDecimal("0"));
+				}else {
+					vatRe.setP43(reDeem.getSupplyValue());
+					vatRe.setP43T(new BigDecimal("0"));
+				}
+				
+				
+				//14를 41에 넣고 14에 41이랑 43 더해주기
+				//49도 넣어주기
+				if(rePur14!=null) {
 					vatRe.setP41(rePur14.getSupplyValue());
 					vatRe.setP41T(rePur14.getValueTax());
 					vatRe.setP14(vatRe.getP41().add(vatRe.getP43()));
 					vatRe.setP14T(vatRe.getP41T().add(vatRe.getP43T()));
 					vatRe.setP49(vatRe.getP41().add(vatRe.getP43()));
 					vatRe.setP49T(vatRe.getP41T().add(vatRe.getP43T()));
+				}else {
 					
-					System.out.println("vatRe 225: "+vatRe);
+					//null처리
+					if(vatRe.getP41()==null) {
+						System.out.println("p1이 null일 때 ");
+						vatRe.setP41(new BigDecimal("0"));
+					}
+					if(vatRe.getP41T()==null) {
+						System.out.println("p1이 null일 때 ");
+						vatRe.setP41T(new BigDecimal("0"));
+					}
+					if(vatRe.getP14()==null) {
+						System.out.println("p1이 null일 때 ");
+						vatRe.setP14(new BigDecimal("0"));
+					}
+					if(vatRe.getP14T()==null) {
+						System.out.println("p1이 null일 때 ");
+						vatRe.setP14T(new BigDecimal("0"));
+					}
+					vatRe.setP14(vatRe.getP41().add(vatRe.getP43()));
+					vatRe.setP14T(vatRe.getP41T().add(vatRe.getP43T()));
+					vatRe.setP49(vatRe.getP41().add(vatRe.getP43()));
+					vatRe.setP49T(vatRe.getP41T().add(vatRe.getP43T()));
 					
+				}
+				
+				
+				
+				
+				System.out.println("vatRe 225: "+vatRe);
+				
 //			19:매입매출 매출(카드과세) _90번, (현금과세)_100번=⇒13/1000
 //			(19) 개인사업자로서 소매업자, 음식점업자, 숙박업자 등 부가가치세법시행령 제73조 제1항 및 제2항에 규정된 사업자가 신용카드매출 등 및 전자화폐에 의한 매출이 있는 경우에 기재하며, 
 //			금액란에는 신용카드매출전표 등 발행금액과 전자화폐 수취금액을, 세액란에는 동 금액의 13/1,000에 해당하는 금액(2012년까지 연간 700만원 한도, 2013년부터 연간 500만원 한도)을 기재합니다.
+				
+				//회사의 업종보러갔다옴
+				Company com=new Company();
+				com.setCompanyCode(comCode);
+				com=vs.selectComTypeOfBizCode(com);
+				//19번에 해당하는 사업자
+				if(com != null) {
+					Receiption re19=new Receiption();
+					re19.setComCode(comCode);
+					re19.setSlipDate(stD);
+					re19.setSlipDivision("매입매출");
+					re19.setDivision("매출");
 					
-					//회사의 업종보러갔다옴
-					Company com=new Company();
-					com.setCompanyCode(comCode);
-					com=vs.selectComTypeOfBizCode(com);
-					//19번에 해당하는 사업자
-					if(com.getBizType() != null) {
-						Receiption re19=new Receiption();
-						re19.setComCode(comCode);
-						re19.setSlipDate(stD);
-						re19.setSlipDivision("매입매출");
-						re19.setDivision("매출");
-						
-						re19=vs.selectRe19(re19, eD);
-						if(re19.getSupplyValue()!=null) {
-							vatRe.setP19(re19.getSupplyValue());
-						}
-						
+					re19=vs.selectRe19(re19, eD);
+					if(re19!=null) {
+						vatRe.setP19(re19.getSupplyValue());
+					}else{//null 처리
+						System.out.println("p19이 null일 때 ");
+						vatRe.setP19(new BigDecimal("0"));
 					}
-				}	
+					
+				}else {
+					System.out.println("공제 사업자에 해당안됨");
+				}
 				
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block
@@ -282,16 +356,21 @@ public class VatController {
 			
 			BigDecimal salesSum=new BigDecimal("0");	//공급가액 1,5,6,3 더하기
 			BigDecimal salesTaxSum=new BigDecimal("0"); //부가세 1,3더하기
-			
 			salesSum.add(vatRe.getP1()).add(vatRe.getP3()).add(vatRe.getP5()).add(vatRe.getP6());
-			System.out.println("vatRe 1,3,5,6,확인: "+vatRe);
-			System.out.println("235줄: "+salesSum);
 			
 			salesTaxSum=salesTaxSum.add(vatRe.getP1T()).add(vatRe.getP3T());
 			vatRe.setP9(vatRe.getP1().add(vatRe.getP3()).add(vatRe.getP5()).add(vatRe.getP6()));
 			vatRe.setP9T(salesTaxSum);
-
-			
+		
+			//null처리
+			if(vatRe.getP9()==null) {
+				System.out.println("p1이 null일 때 ");
+				vatRe.setP9(new BigDecimal("0"));
+			}
+			if(vatRe.getP9T()==null) {
+				System.out.println("p1이 null일 때 ");
+				vatRe.setP9T(new BigDecimal("0"));
+			}
 			
 			
 				
@@ -301,13 +380,29 @@ public class VatController {
 			
 			vatRe.setP15(vatRe.getP10().add(vatRe.getP14()));
 			vatRe.setP15T(vatRe.getP10T().add(vatRe.getP14T()));
-		
+			
+			//null처리
+			if(vatRe.getP15()==null) {
+				System.out.println("p1이 null일 때 ");
+				vatRe.setP15(new BigDecimal("0"));
+			}
+			if(vatRe.getP15T()==null) {
+				System.out.println("p1이 null일 때 ");
+				vatRe.setP15T(new BigDecimal("0"));
+			}
 			
 //			17: 15-16 ...16을 할 수 없음			
 			
 			vatRe.setP17(vatRe.getP15());
 			vatRe.setP17T(vatRe.getP15T());
-			
+			if(vatRe.getP17()==null) {
+				System.out.println("p17이 null일 때 ");
+				vatRe.setP17(new BigDecimal("0"));
+			}
+			if(vatRe.getP17T()==null) {
+				System.out.println("p17이 null일 때 ");
+				vatRe.setP17T(new BigDecimal("0"));
+			}
 			
 //			다: 가(매출 합계)-나(매입 합계)==>자바 스크립트에서 해야할듯
 			
@@ -321,9 +416,24 @@ public class VatController {
 			System.out.println("부가율 setter전: "+vatRe.getP9());
 			System.out.println("부가율 setter전: "+vatRe.getP9().subtract(vatRe.getP15()));
 			System.out.println("부가율 setter전 15: "+vatRe.getP15());
-			System.out.println("부가율 setter전: "+vatRe.getP9().multiply(new BigDecimal("100")));
-			System.out.println("부가율 setter전: "+vatRe.getP15().divide(vatRe.getP9().subtract(vatRe.getP15()),8,BigDecimal.ROUND_DOWN).multiply(new BigDecimal("10000")) );
-			BigDecimal rate=vatRe.getP15().divide(vatRe.getP9().subtract(vatRe.getP15()),8,BigDecimal.ROUND_DOWN).multiply(new BigDecimal("10000"));
+			System.out.println("부가율 setter전:16 "+vatRe.getP9().multiply(new BigDecimal("100")));
+			BigDecimal rate=new BigDecimal("0");
+			if(vatRe.getP15().equals(new BigDecimal("0"))) {
+				System.out.println("부가율 setter전: 17"+vatRe.getP9().subtract(vatRe.getP15()).multiply(new BigDecimal("10000")) );
+				rate=new BigDecimal("0");
+			}else {
+				rate=vatRe.getP15().divide(vatRe.getP9().subtract(vatRe.getP15()),8,BigDecimal.ROUND_DOWN).multiply(new BigDecimal("10000"));
+				
+			}
+			/*
+			 * System.out.println("부가율 setter전: 18"+vatRe.getP15().divide(vatRe.getP9().
+			 * subtract(vatRe.getP15()),8,BigDecimal.ROUND_DOWN) );
+			 * System.out.println("부가율 setter전: 18"+vatRe.getP15().divide(vatRe.getP9().
+			 * subtract(vatRe.getP15()),8,BigDecimal.ROUND_DOWN) );
+			 * System.out.println("부가율 setter전: 19"+vatRe.getP15().divide(vatRe.getP9().
+			 * subtract(vatRe.getP15()),8,BigDecimal.ROUND_DOWN).multiply(new
+			 * BigDecimal("10000")) );
+			 */
 			
 			vatRe.setValueRate(rate.setScale(2,BigDecimal.ROUND_DOWN));
 			System.out.println("부가율: "+vatRe.getValueRate());
@@ -354,12 +464,12 @@ public class VatController {
 	
 	
 	
-	@RequestMapping("deadLine.vat")
-	public String deadLine(Model model, Vat vat ,HttpServletRequest request) {
-		System.out.println("Controller: deadLine: "+vat);
-		//int result=vs.insertSdto(vat);
-		return "bugagachi/sumTableOfTaxInvoices";
-	}
+//	@RequestMapping("deadLine.vat")
+//	public String deadLine(Model model, Vat vat ,HttpServletRequest request) {
+//		System.out.println("Controller: deadLine: "+vat);
+//		//int result=vs.insertSdto(vat);
+//		return "bugagachi/vatReport";
+//	}
 	
 	
 
