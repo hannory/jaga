@@ -273,7 +273,7 @@
 						<td class="table-subSubTitle">당기제품제조원가</td>
 						<td class="table-content"><span id="cVal222"></span></td>
 						<td></td>
-						<td class="table-content"><span id="pVal221"></span></td>
+						<td class="table-content"><span id="pVal222"></span></td>
 						<td></td>
 					</tr>
 					<tr class="table-detail">
@@ -302,6 +302,13 @@
 						<td class="table-content"><span id="c81100"></span></td>
 						<td></td>
 						<td class="table-content"><span id="p81100"></span></td>
+						<td></td>
+					</tr>
+					<tr class="table-detail" id="row81100">
+						<td class="table-subSubTitle">접대비</td>
+						<td class="table-content"><span id="c81300"></span></td>
+						<td></td>
+						<td class="table-content"><span id="p81300"></span></td>
 						<td></td>
 					</tr>
 					<tr class="table-detail" id="row83000">
@@ -429,7 +436,7 @@
 				console.log("keyup 위한 테스트 uncomma : " + uncomma($("#cSum21").text()));
 				
 				
-				var cSum21 = uncomma($("#cVal211").text()) + uncomma($("#c14600").text()) + uncomma($("#inputNum").val());
+				var cSum21 = uncomma($("#cVal211").text()) + uncomma($("#c14600").text()) - uncomma($("#inputNum").val());
 				$("#cSum21").text(comma(cSum21));
 				
 				var cSum20 = cSum21 + uncomma($("#cSum22").text());
@@ -486,6 +493,9 @@
 					
 					if(data == "") {
 						console.log("data is empty");
+						
+						$("#saveBtn").show();
+						$("#closeBtn").show();
 					} else {
 						if(data.closing == "Y") {
 							$("#cancleBtn").show();
@@ -528,6 +538,7 @@
 					var c40100 = data["c40100"];
 					var c40400 = data["c40400"];
 					var c81100 = data["c81100"];
+					var c81300 = data["c81300"];
 					var c83000 = data["c83000"];
 					var c83100 = data["c83100"];
 					var cVal222 = data["cVal222"];
@@ -536,6 +547,7 @@
 					$("#c40100").text(comma(c40100));
 					$("#c40400").text(comma(c40400));
 					$("#c81100").text(comma(c81100));
+					$("#c81300").text(comma(c81300));
 					$("#c83000").text(comma(c83000));
 					$("#c83100").text(comma(c83100));
 					$("#cVal222").text(comma(cVal222));
@@ -552,7 +564,7 @@
 					var cVal221 = 0;
 					var cVal223 = 0;
 
-					var cSum22 = cVal221 + cVal222 + cVal223;
+					var cSum22 = cVal221 + cVal222 - cVal223;
 					$("#cSum22").text(comma(cSum22));
 					
 					var cSum20 = cSum21 + cSum22;
@@ -561,7 +573,7 @@
 					var cSum30 = cSum10 - cSum20;
 					$("#cSum30").text(comma(cSum30));
 					
-					var cSum40 = c81100 + c83000 + c83100;
+					var cSum40 = c81100 + c83000 + c83100 + c81300;
 					$("#cSum40").text(comma(cSum40));
 					
 					var cSum50 = cSum30 - cSum40;
@@ -587,15 +599,19 @@
 					var p40100 = data["p40100"];
 					var p40400 = data["p40400"];
 					var p81100 = data["p81100"];
+					var p81300 = data["p81300"];
 					var p83000 = data["p83000"];
 					var p83100 = data["p83100"];
+					var pVal222 = data["pVal222"];
 					
 					$("#p14600").text(comma(p14600));
 					$("#p40100").text(comma(p40100));
 					$("#p40400").text(comma(p40400));
 					$("#p81100").text(comma(p81100));
+					$("#p81300").text(comma(p81300));
 					$("#p83000").text(comma(p83000));
 					$("#p83100").text(comma(p83100));
+					$("#pVal222").text(comma(pVal222));
 					
 					//표 각 합계 계산
 					var pSum10 = p40100 + p40400;
@@ -608,10 +624,9 @@
 					$("#pSum21").text(comma(pSum21));
 					
 					var pVal221 = 0;
-					var pVal222 = 0;
 					var pVal223 = 0;
 
-					var pSum22 = pVal221 + pVal222 + pVal223;
+					var pSum22 = pVal221 + pVal222 - pVal223;
 					$("#pSum22").text(comma(pSum22));
 					
 					var pSum20 = pSum21 + pSum22;
@@ -620,7 +635,7 @@
 					var pSum30 = pSum10 - pSum20;
 					$("#pSum30").text(comma(pSum30));
 					
-					var pSum40 = p81100 + p83000 + p83100;
+					var pSum40 = p81100 + p83000 + p83100 + p81300;
 					$("#pSum40").text(comma(pSum40));
 					
 					var pSum50 = pSum30 - pSum40;

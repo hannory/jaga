@@ -108,7 +108,8 @@
 		WHERE COM_CODE = #{comCode}
 		AND YEAR = #{year}
 		AND MFRG_STMT_CODE = (SELECT MAX(MFRG_STMT_CODE)
-		                      FROM MFRG_STMT)
+		                      FROM MFRG_STMT
+		                      WHERE YEAR = #{year})
 	</update>
 	
 	<select id="searchMfrg" parameterType="MfrgStmt" resultType="MfrgStmt">
@@ -128,7 +129,8 @@
 		AND YEAR = #{year}
         AND MFRG_STMT_CODE = (SELECT MAX(MFRG_STMT_CODE)
                               FROM MFRG_STMT
-                              WHERE CLOSING = 'Y')
+                              WHERE CLOSING = 'Y'
+                              AND YEAR = #{year})
 	</select>
 	
 	<insert id="insertIncomeStmt" parameterType="IncomeStmt">
@@ -142,7 +144,8 @@
 		WHERE COM_CODE = #{comCode}
 		AND YEAR = #{year}
 		AND INCOME_STMT_CODE = (SELECT MAX(INCOME_STMT_CODE)
-						   		FROM INCOME_STMT)
+						   		FROM INCOME_STMT
+						   		WHERE YEAR = #{year})
 	</update>
 	
 	<select id="countIncomeStmt" parameterType="IncomeStmt" resultType="_int">

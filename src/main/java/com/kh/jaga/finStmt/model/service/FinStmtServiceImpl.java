@@ -45,6 +45,7 @@ public class FinStmtServiceImpl implements FinStmtService {
 		long cSum40100 = 0;		//상품매출
 		long cSum40400 = 0;		//제품매출
 		long cSum81100 = 0;		//복리후생비
+		long cSum81300 = 0;		//접대비
 		long cSum83000 = 0;		//소모품비
 		long cSum83100 = 0;		//수수료비용
 		
@@ -60,6 +61,8 @@ public class FinStmtServiceImpl implements FinStmtService {
 				cSum40400 += price;
 			} else if(accountCode == 81100) {
 				cSum81100 += price;
+			} else if(accountCode == 81300) {
+				cSum81300 += price;
 			} else if(accountCode == 83000) {
 				cSum83000 += price;
 			} else if(accountCode == 83100) {
@@ -77,6 +80,7 @@ public class FinStmtServiceImpl implements FinStmtService {
 		long pSum40100 = 0;		//상품매출
 		long pSum40400 = 0;		//제품매출
 		long pSum81100 = 0;		//복리후생비
+		long pSum81300 = 0;		//접대비
 		long pSum83000 = 0;		//소모품비
 		long pSum83100 = 0;		//수수료비용
 		
@@ -92,6 +96,8 @@ public class FinStmtServiceImpl implements FinStmtService {
 				pSum40400 += price;
 			} else if(accountCode == 81100) {
 				pSum81100 += price;
+			} else if(accountCode == 81300) {
+				pSum81300 += price;
 			} else if(accountCode == 83000) {
 				pSum83000 += price;
 			} else if(accountCode == 83100) {
@@ -99,11 +105,16 @@ public class FinStmtServiceImpl implements FinStmtService {
 			}
 		}
 		
+		
+		isa.setYear(isa.getYear() - 1);									
+		int pVal222 = fsd.selectMfrgSum90(sqlSession, isa);		//전기제품제조원가
+		
 		HashMap hmap = new HashMap();
 		hmap.put("c14600", cSum14600);
 		hmap.put("c40100", cSum40100);
 		hmap.put("c40400", cSum40400);
 		hmap.put("c81100", cSum81100);
+		hmap.put("c81300", cSum81300);
 		hmap.put("c83000", cSum83000);
 		hmap.put("c83100", cSum83100);
 		hmap.put("cVal222", cVal222);
@@ -112,8 +123,10 @@ public class FinStmtServiceImpl implements FinStmtService {
 		hmap.put("p40100", pSum40100);
 		hmap.put("p40400", pSum40400);
 		hmap.put("p81100", pSum81100);
+		hmap.put("p81300", pSum81300);
 		hmap.put("p83000", pSum83000);
 		hmap.put("p83100", pSum83100);
+		hmap.put("pVal222", pVal222);
 		
 		return hmap;
 	}
@@ -218,6 +231,7 @@ public class FinStmtServiceImpl implements FinStmtService {
 		
 		long cSum15300 = 0;		//원재료
 		long cSum51100 = 0;		//복리후생비
+		long cSum51200 = 0;		//여비교통비
 		long cSum53000 = 0;		//소모품비
 		
 		for(int i = 0; i < cList.size(); i++) {
@@ -228,6 +242,8 @@ public class FinStmtServiceImpl implements FinStmtService {
 				cSum15300 += price;
 			} else if(accountCode == 51100) {
 				cSum51100 += price;
+			} else if(accountCode == 51200) {
+				cSum51200 += price;
 			} else if(accountCode == 53000) {
 				cSum53000 += price;
 			}
@@ -238,6 +254,7 @@ public class FinStmtServiceImpl implements FinStmtService {
 		
 		long pSum15300 = 0;		//원재료
 		long pSum51100 = 0;		//복리후생비
+		long pSum51200 = 0;		//여비교통비
 		long pSum53000 = 0;		//소모품비
 		
 		for(int i = 0; i < pList.size(); i++) {
@@ -248,6 +265,8 @@ public class FinStmtServiceImpl implements FinStmtService {
 				pSum15300 += price;
 			} else if(accountCode == 51100) {
 				pSum51100 += price;
+			} else if(accountCode == 51200) {
+				pSum51200 += price;
 			} else if(accountCode == 53000) {
 				pSum53000 += price;
 			}
@@ -256,10 +275,12 @@ public class FinStmtServiceImpl implements FinStmtService {
 		HashMap hmap = new HashMap();
 		hmap.put("c15300", cSum15300);
 		hmap.put("c51100", cSum51100);
+		hmap.put("c51200", cSum51200);
 		hmap.put("c53000", cSum53000);
 		
 		hmap.put("p15300", pSum15300);
 		hmap.put("p51100", pSum51100);
+		hmap.put("p51200", pSum51200);
 		hmap.put("p53000", pSum53000);
 		
 		return hmap;
