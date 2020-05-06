@@ -177,4 +177,27 @@ public class VatDaoImpl implements VatDao{
 		return vat2;
 	}
 
+	@Override
+	public int updateVat(SqlSessionTemplate sqlSession, Vat vat) {
+		// TODO Auto-generated method stub
+		System.out.println("Dao: updateVat: "+vat);
+		int vat2=sqlSession.update("Vat.updateDeadLine",vat);
+		return vat2;
+	}
+
+	@Override
+	public String selectVatCode(SqlSessionTemplate sqlSession, Vat vatRe) {
+		// TODO Auto-generated method stub
+		String vatCode=sqlSession.selectOne("Vat.selectVatCode",vatRe);
+		System.out.println("Dao: selectVateCode: "+vatCode);
+		return vatCode;
+	}
+
+	@Override
+	public int updateDeadCenVat(SqlSessionTemplate sqlSession, Vat vat) {
+		// TODO Auto-generated method stub
+		int vat2=sqlSession.update("Vat.updateDeadCenVat",vat);
+		return vat2;
+	}
+
 }

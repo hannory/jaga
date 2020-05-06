@@ -44,5 +44,11 @@ public interface VatDao {
 
 	int insertVat(SqlSessionTemplate sqlSession, Vat vatRe);
 
+	int updateVat(SqlSessionTemplate sqlSession, Vat vat);
+
+	String selectVatCode(SqlSessionTemplate sqlSession, Vat vatRe);
+
+	int updateDeadCenVat(SqlSessionTemplate sqlSession, Vat vat);
+
 
 }

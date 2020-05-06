@@ -446,6 +446,9 @@ public class VatController {
 			vatRe.setReportType(report_type);
 			vatRe.setYearOfAttr(yearInt);
 			int vatInsert=vs.insertVat(vatRe);
+			//vatCode 받아오기
+			String vatCode=vs.selectVatCode(vatRe);
+			vatRe.setVatCode(vatCode);
 			System.out.println("insert 성공했냐? : "+vatInsert);
 			//!!!1!!!!!!!!!!!!!!!!!!deadCk도 insert해줘야함 안했음!!!!!!!!!!!!!!!!!!!!!!!!!!!
 			
@@ -464,13 +467,18 @@ public class VatController {
 	
 	
 	
-//	@RequestMapping("deadLine.vat")
-//	public String deadLine(Model model, Vat vat ,HttpServletRequest request) {
-//		System.out.println("Controller: deadLine: "+vat);
-//		//int result=vs.insertSdto(vat);
-//		return "bugagachi/vatReport";
-//	}
-	
+	@RequestMapping("deadLine.vat")
+	public String deadLine(Model model, Vat vat ,HttpServletRequest request) {
+		System.out.println("Controller: deadLine: "+vat);
+		int result=vs.updateVat(vat);
+		return "bugagachi/vatReport";
+	}
+	@RequestMapping("updatdDeadLineCen.vat")
+	public String deadlineCen(Model model, Vat vat ,HttpServletRequest request) {
+		System.out.println("Controller: deadLineCen: "+vat);
+		int result=vs.updateDeadCenVat(vat);
+		return "bugagachi/vatReport";
+	}
 	
 
 }

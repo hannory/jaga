@@ -199,7 +199,7 @@
 	</script>
 	<div class="container-fluid">
 			<h2 class="mt-4">부가가치세 신고서</h2>
-<!-- <form action="deadLine.vat" method="post"> -->
+<form action="deadLine.vat" onsubmit="return false;" method="post">
 	<ol class="breadcrumb mb-4">
 			<li><button id="deadlineBtns" onclick="PopModalTexList()">마감</button></li>
 			<li><button id="deadlineCen" onclick="cencelDeadline()">마감 취소</button></li>
@@ -234,13 +234,11 @@
 	<!-- 인풋모음!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1 -->
 	<c:set var="comCode" value="${ sessionScope.loginCompany.companyCode }"/>
    	<input type="hidden" value="${comCode}" name="comCode">
-   	
+   	<input type="hidden" name="vatCode" id="vatCode">
    	
    	<script type="text/javascript">
 
 	 function PopModalTexList(){
-   	  console.log("모달확인");
-   	  alert("왜 안뜨지?");
    	  $("#detailList_detail").modal();
      }
    	
@@ -249,6 +247,7 @@
 		<script type="text/javascript">
 		var deadCk;
 		function cencelDeadline(){
+			alert("왜안돼 ㅅㅂ");
 			$("form").attr("action", "updatdDeadLineCen.vat");
 		}
 		 function search_cis(){
@@ -276,9 +275,10 @@
 	 				console.log(vat);
 	 				deadCk=data.deadCk;
 	 				console.log(deadCk);
-	 				
+	 				console.log(vat.vatCode);
 	 				/* 부가율 넣어주기 */
 	 				$("#vatRate").val(vat.valueRate);
+	 				$("#vatCode").val(vat.vatCode);
 	 				
 	 				/* 다 를 여기서 계산해줘야함(가 9 -나 17) */
 	 				for(var i=1;i<=85;i++){
@@ -298,8 +298,28 @@
 	 				var da=vat.p9T-vat.p17T;
 	 				$("#da").text(comma(da));
 	 				
-	 				
-	 				
+	 				/* 모달안에 값넣기 */
+	 				var $List_detail=$("#List_detail");
+	 				$List_detail.append($tbody);
+	 				var $tbody=$("<tbody>")
+	 				console.log("deadCk: "+deadCk);
+	 				var indexModal=0;
+	 				for(var key in deadCk){
+	 					indexModal++;
+	 					console.log("key: "+key);
+	 					console.log("deadCk: "+deadCk[key]);
+	 					
+	 					var $tr=$("<tr>");
+	 					var $numTd=$("<td>").text(indexModal);
+	 					var $nameTd=$("<td>").text(key);
+	 					var $deadTd=$("<td>").text(deadCk[key]);
+	 					
+	 					$tr.append($numTd);
+	 					$tr.append($nameTd);
+	 					$tr.append($deadTd);
+	 					
+	 					$List_detail.append($tr);
+	 				}
 	 				
 	 				//마감여부에따라 버튼 보이기
 	 				 if(vat.deadline == 'Y'){
@@ -1064,7 +1084,7 @@
         	</table>
         </div>
         <div class="modal-footer">
-          <input type="submit" class="btn btn-default" value="마감">
+          <input type="button" onclick="submit();" class="btn btn-default" value="마감">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </div>

@@ -43,5 +43,11 @@ public interface VatService {
 
 	int insertVat(Vat vatRe);
 
+	int updateVat(Vat vat);
+
+	String selectVatCode(Vat vatRe);
+
+	int updateDeadCenVat(Vat vat);
+
 
 }
