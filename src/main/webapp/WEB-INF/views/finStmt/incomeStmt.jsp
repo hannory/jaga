@@ -215,9 +215,9 @@
 					</tr>
 					<tr class="table-detail">
 						<td class="table-subSubTitle">제품매출</td>
+						<td class="table-content"><span id="c40400"></span><input type="hidden" id="v40400" name="v40400"></td>
 						<td></td>
-						<td></td>
-						<td></td>
+						<td class="table-content"><span id="p40400"></span></td>
 						<td></td>
 					</tr>
 					<tr>
@@ -526,6 +526,7 @@
 					//-------------당기-------------					
 					var c14600 = data["c14600"];
 					var c40100 = data["c40100"];
+					var c40400 = data["c40400"];
 					var c81100 = data["c81100"];
 					var c83000 = data["c83000"];
 					var c83100 = data["c83100"];
@@ -533,13 +534,14 @@
 					
 					$("#c14600").text(comma(c14600));
 					$("#c40100").text(comma(c40100));
+					$("#c40400").text(comma(c40400));
 					$("#c81100").text(comma(c81100));
 					$("#c83000").text(comma(c83000));
 					$("#c83100").text(comma(c83100));
 					$("#cVal222").text(comma(cVal222));
 					
 					//표 각 합계 계산
-					var cSum10 = c40100 + 0;
+					var cSum10 = c40100 + c40400;
 					$("#cSum10").text(comma(cSum10));
 					
 					var cVal211 = 0;
@@ -583,18 +585,20 @@
 					//-------------전기-------------					
 					var p14600 = data["p14600"];
 					var p40100 = data["p40100"];
+					var p40400 = data["p40400"];
 					var p81100 = data["p81100"];
 					var p83000 = data["p83000"];
 					var p83100 = data["p83100"];
 					
 					$("#p14600").text(comma(p14600));
 					$("#p40100").text(comma(p40100));
+					$("#p40400").text(comma(p40400));
 					$("#p81100").text(comma(p81100));
 					$("#p83000").text(comma(p83000));
 					$("#p83100").text(comma(p83100));
 					
 					//표 각 합계 계산
-					var pSum10 = p40100 + 0;
+					var pSum10 = p40100 + p40400;
 					$("#pSum10").text(comma(pSum10));
 					
 					var pVal211 = 0;

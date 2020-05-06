@@ -211,9 +211,9 @@
 					</tr>
 					<tr class="table-detail">
 						<td class="table-subSubTitle">당기원재료매입액</td>
-						<td class="table-content" id="c15300"></td>
+						<td class="table-content"><span id="c15300"></span><input type="hidden" id="v15300" name="v15300"></td>
 						<td></td>
-						<td class="table-content" id="p15300"></td>
+						<td class="table-content"><span id="p15300"></span></td>
 						<td></td>
 					</tr>
 					<!-- <tr>
@@ -260,9 +260,9 @@
 					</tr>
 					<tr class="table-detail">
 						<td class="table-subSubTitle">복리후생비</td>
-						<td class="table-content" id="c51100"></td>
+						<td class="table-content"><span id="c51100"></span><input type="hidden" id="v51100" name="v51100"></td>
 						<td></td>
-						<td class="table-content" id="p51100"></td>
+						<td class="table-content"><span id="p51100"></span></td>
 						<td></td>
 					</tr>
 					<tr class="table-detail">
@@ -291,6 +291,13 @@
 						<td></td>
 						<td></td>
 						<td></td>
+						<td></td>
+					</tr>
+					<tr class="table-detail">
+						<td class="table-subSubTitle">소모품비</td>
+						<td class="table-content"><span id="c53000"></span><input type="hidden" id="v53000" name="v53000"></td>
+						<td></td>
+						<td class="table-content"><span id="p53000"></span></td>
 						<td></td>
 					</tr>
 					<tr>
@@ -457,8 +464,6 @@
 				success: function(data) {
 					
 					if(data == "") {
-						console.log("data is empty");
-						
 						$("#saveBtn").show();
 						$("#closeBtn").show();
 					} else {
@@ -499,9 +504,11 @@
 					//-------------당기-------------	
 					var c15300 = data["c15300"];
 					var c51100 = data["c51100"];
+					var c53000 = data["c53000"];
 					
 					$("#c15300").text(comma(c15300));
 					$("#c51100").text(comma(c51100));
+					$("#c53000").text(comma(c53000));
 					
 					//표 각 합계 계산
 					var cSum10 = c15300 + Number(uncomma($("#inputNum").val()));
@@ -510,7 +517,7 @@
 					var cSum20 = 0;
 					$("#cSum20").text(cSum20);
 					
-					var cSum30 = c51100;
+					var cSum30 = c51100 + c53000;
 					$("#cSum30").text(comma(cSum30));
 					
 					var cSum40 = cSum10 + cSum20 + cSum30;
@@ -535,9 +542,11 @@
 					//-------------전기-------------	
 					var p15300 = data["p15300"];
 					var p51100 = data["p51100"];
+					var p53000 = data["p53000"];
 					
 					$("#p15300").text(comma(p15300));
 					$("#p51100").text(comma(p51100));
+					$("#p53000").text(comma(p53000));
 					
 					//표 각 합계 계산
 					var pSum10 = p15300;
@@ -546,7 +555,7 @@
 					var pSum20 = 0;
 					$("#pSum20").text(pSum20);
 					
-					var pSum30 = p51100;
+					var pSum30 = p51100 + p53000;
 					$("#pSum30").text(comma(pSum30));
 					
 					var pSum40 = pSum10 + pSum20 + pSum30;
@@ -609,8 +618,8 @@
 				
 				var year = $("#year").val();
 				var month = $("#month").val();
-				var accountCode = $(this).attr('id').substring(1,6);
-				var curPast = $(this).attr('id').substring(0,1);
+				var accountCode = $(this).children('span').attr('id').substring(1,6);
+				var curPast = $(this).children('span').attr('id').substring(0,1);
 				
 				$("#modal-account-code").val(accountCode);
 				
@@ -943,14 +952,14 @@
 				        	</tbody>
 				        	<tfoot>
 				        		<tr>
-				        			<td class="modal-head"></td>
-				        			<td class="modal-head"></td>
-				        			<td class="modal-head" style="text-align:left;">[월&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;계]</td>
-				        			<td class="modal-head"></td>
-				        			<td class="modal-head"></td>
-				        			<td class="modal-head" id="last-debit-month"></td>
-				        			<td class="modal-head" id="last-credit-month"></td>
-				        			<td class="modal-head"></td>
+				        			<td class="modal-head" style="width:5%;"></td>
+				        			<td class="modal-head" style="width:6%;"></td>
+				        			<td class="modal-head" style="width:20%; text-align:left;">[월&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;계]</td>
+				        			<td class="modal-head" style="width:6%;"></td>
+				        			<td class="modal-head" style="width:18%;"></td>
+				        			<td class="modal-head" id="last-debit-month" style="width:15%;"></td>
+				        			<td class="modal-head" id="last-credit-month" style="width:15%;"></td>
+				        			<td class="modal-head" style="width:15%;"></td>
 				        		</tr>
 				        		<tr>
 				        			<td class="modal-head"></td>

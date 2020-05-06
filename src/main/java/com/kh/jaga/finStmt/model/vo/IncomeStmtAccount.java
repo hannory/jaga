@@ -19,13 +19,13 @@ public class IncomeStmtAccount implements java.io.Serializable {
 	private String venderCode;		//거래처 코드
 	private String venderName;		//거래처명
 	private String debitCredit;		//차대구분
-	private int price;				//금액
+	private long price;				//금액
 	
 	public IncomeStmtAccount() {}
 	
 	public IncomeStmtAccount(String comCode, int accountCode, ArrayList accountArr, String accountTitle, String curPast,
 			int year, int month, int date, Date slipDate, String dateSlipCode, String brief, String venderCode,
-			String venderName, String debitCredit, int price) {
+			String venderName, String debitCredit, long price) {
 		super();
 		this.comCode = comCode;
 		this.accountCode = accountCode;
@@ -68,11 +68,11 @@ public class IncomeStmtAccount implements java.io.Serializable {
 		this.debitCredit = debitCredit;
 	}
 
-	public int getPrice() {
+	public long getPrice() {
 		return price;
 	}
 
-	public void setPrice(int price) {
+	public void setPrice(long price) {
 		this.price = price;
 	}
 
