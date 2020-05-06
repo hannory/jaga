@@ -26,5 +26,7 @@ public interface EmployeeDao {
 
 	incomeTax selectIncomeTax(SqlSessionTemplate sqlSession, int taxableIncome2);
 
+	String selectEmpBuseo(SqlSessionTemplate sqlSession, String employeeCode);
+
 
 }
