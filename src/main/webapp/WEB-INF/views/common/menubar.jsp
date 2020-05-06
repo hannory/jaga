@@ -164,7 +164,6 @@ $(window).load(function(){
 											<a class="nav-link" href="vender.vi">거래처등록</a>
 	                                        <a class="nav-link" href="accountTitle.at">계정과목 및<br> 적요등록</a>
 	                                        <a class="nav-link" href="500.html">부서등록</a>
-	                                        <a class="nav-link" href="500.html">부서등록</a>
                                         </nav>
                                     </div>
                                     
@@ -271,9 +270,7 @@ $(window).load(function(){
                             <div class="collapse" id="collapseD" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
                                 <a class="nav-link" href="showViewCeateCompanyId.vi">계정생성</a>
-                                <a class="nav-link" href="showViewCeateCompanyId.vi">계정생성</a>
-                                <a class="nav-link" href="showViewCeateCompanyId.vi">계정생성</a>
-                                <a class="nav-link" href="showViewCeateCompanyId.vi">계정생성</a>
+                                <a class="nav-link" href="showViewCeateCompanyId.vi">환경설정</a>
                                 </nav>
                             </div>
                    

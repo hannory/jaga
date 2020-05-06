@@ -296,6 +296,20 @@
   		WHERE RESOLUTION_NO = #{ expendResolutionNo }
   </update>
   
+  <select id="selectDateSlipCode" parameterType="String" resultType="String">
+  	
+  	SELECT DATE_SLIP_CODE
+    FROM
+    (
+    SELECT SLIP_DATE, DATE_SLIP_CODE, ROWNUM RNUM
+    FROM SLIP S
+    WHERE S.SLIP_DATE = (SELECT TO_CHAR(SYSDATE, 'YY/MM/DD') FROM DUAL)
+    ORDER BY DATE_SLIP_CODE
+    )
+    WHERE RNUM = 1
+
+  </select>
+  
   
   
   

@@ -109,8 +109,13 @@ public class ExpendResolutionController {
 		String comCode = ((Company) request.getSession().getAttribute("loginCompany")).getCompanyCode();
 		
 		
+		System.out.println("리스트 조회 직전,,,");
 		//리스트 조회해오기
 		List<ExpendResolutionDto> dtoList = service.selectExpendResolutionList(comCode); 
+		
+		System.out.println("리스트 조회 직후 ,, 리스트 값 :::");
+		System.out.println(dtoList);
+		System.out.println("========까지 dtoList======");
 		
 //		System.out.println("조회결과 :::::::");
 //		System.out.println(dtoList);

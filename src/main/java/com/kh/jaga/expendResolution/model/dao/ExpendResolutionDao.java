@@ -32,4 +32,6 @@ public interface ExpendResolutionDao {
 
 	int updateResolution(SqlSessionTemplate sqlSession, String expendResolutionNo);
 
+	String selectDateSlipCode(SqlSessionTemplate sqlSession, String comCode);
+
 }

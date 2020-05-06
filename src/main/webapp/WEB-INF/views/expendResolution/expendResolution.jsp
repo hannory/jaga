@@ -846,10 +846,10 @@
 					<tr>
 						<td class="color-green" style="width: 10%">결제구분</td>
 						<td style="width: 10%;"><input type="radio"
-							name="paymentTypeCode" value="현금" id="radioCash"><label
+							name="paymentTypeCode" value="10100" id="radioCash"><label
 							for="radioCash">현금</label></td>
 						<td style="width: 10%;"><input type="radio"
-							name="paymentTypeCode" value="카드" id="radioCard"><label
+							name="paymentTypeCode" value="25300" id="radioCard"><label
 							for="radioCard">카드</label></td>
 						<td style="width: 10%; border-top: 1px solid white; border-right:white;"></td>
 						<!-- <td style="width: 10%;" class="color-green">합계</td>
