@@ -199,7 +199,7 @@
 	</script>
 	<div class="container-fluid">
 			<h2 class="mt-4">부가가치세 신고서</h2>
-<form action="deadLine.vat" method="post">
+<!-- <form action="deadLine.vat" method="post"> -->
 	<ol class="breadcrumb mb-4">
 			<li><button id="deadlineBtns" onclick="PopModalTexList()">마감</button></li>
 			<li><button id="deadlineCen" onclick="cencelDeadline()">마감 취소</button></li>
@@ -236,7 +236,15 @@
    	<input type="hidden" value="${comCode}" name="comCode">
    	
    	
+   	<script type="text/javascript">
+
+	 function PopModalTexList(){
+   	  console.log("모달확인");
+   	  alert("왜 안뜨지?");
+   	  $("#detailList_detail").modal();
+     }
    	
+   	</script>
    	
 		<script type="text/javascript">
 		var deadCk;
@@ -250,7 +258,7 @@
 	    	var search_ye= $("#search_ye").val();
 	 		var search_mon1= $("#search_mon1").val();
 	 		var search_mon2= $("#search_mon2").val();
-	 		var comCode=${comCode};
+	 		var comCode='${comCode}';
 	 		console.log(report_type);
 	 		console.log(search_ye);
 	 		console.log(search_mon1);
@@ -307,10 +315,6 @@
 	 		});
 	 	}
 		
-		 function PopModalTexList(){
-	    	  console.log("모달확인");
-	    	  $("div#detailList_detail").modal();
-	      }
 		</script>
 			<script type="text/javascript">/* subTable 보이게하기  */
 				function showsubTable1(){
