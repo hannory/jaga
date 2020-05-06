@@ -35,4 +35,8 @@ public interface ReceiptionDao {
 
 	List<NormalReceiptionDTO> selectNormalDateList(SqlSessionTemplate sqlSession, HashMap<String, Object> hm);
 
+	String selectDateSlipCode(SqlSessionTemplate sqlSession, Receiption2 r);
+
+	String selectVenderName(SqlSessionTemplate sqlSession, String stringCellValue);
+
 }

@@ -1,7 +1,6 @@
 package com.kh.jaga.slip.controller;
 
 import java.math.BigDecimal;
-import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,8 +19,8 @@ import com.kh.jaga.slip.model.exception.receiptionException;
 import com.kh.jaga.slip.model.service.ReceiptionService;
 import com.kh.jaga.slip.model.vo.AccountTitle;
 import com.kh.jaga.slip.model.vo.Receiption;
+import com.kh.jaga.slip.model.vo.Receiption2;
 import com.kh.jaga.slip.model.vo.Vender;
-import com.kh.jaga.taxInvoice.model.vo.TaxInvoice;
 
 /**
  * @author HY S
@@ -121,9 +120,16 @@ public class receiptionController {
 	
 	
 	@RequestMapping("excelUpload.rp")
-	public String excelUpload(@RequestParam MultipartFile excelFile) {
-		List<Receiption> exList = rs.uploadExcel(excelFile);
+	public ModelAndView excelUpload(@RequestParam MultipartFile excelFile, HttpServletRequest request, ModelAndView mv) {
+		Company com = (Company)request.getSession().getAttribute("loginCompany");
+		String comCode = com.getCompanyCode();
 		
-		return "slip/receiptionForm";
+		List<Receiption2> exList = rs.uploadExcel(excelFile, comCode);
+		
+		System.out.println(exList);
+		
+		
+		
+		return mv;
 	}
 }
