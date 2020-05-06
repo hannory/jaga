@@ -662,19 +662,19 @@ left:1600px;
 		$("#taxableIncome").val(sbnm);
 		$("#totalPayment").val(sbmnmd);
 		
-		if(d>200000){
+		if(d>=200000){
 			$("#nontaxableIncome").val(200000);
 		}
-		if(m>100000&&d>200000){
+		if(m>=100000&&d>=200000){
 			$("#nontaxableIncome").val(300000);
 		}
-		if(m>0&&m<100000&&d>0&&d<200000){
+		if(m>=0&&m<=100000&&d>=0&&d<=200000){
 			$("#nontaxableIncome").val(m+d);
 		}
-		if(m<100000&&d>200000){
+		if(m<=100000&&d>=200000){
 			$("#nontaxableIncome").val(m+200000);
 		}
-		if(m>100000&&d<200000){
+		if(m>=100000&&d<=200000){
 			$("#nontaxableIncome").val(d+100000);
 		}
 		})	
@@ -770,7 +770,7 @@ left:1600px;
             	console.log("incomeTax 클릭");
             	
             	
-            	taxableIncome = ($("#taxableIncome").val());
+            	taxableIncome = ($("#taxableIncome").val()*0.001);
 /*             	taxableIncome=taxableIncome2.substring(taxableIncome2.length()-3, taxableIncome2.length());
  */
             	
@@ -815,6 +815,8 @@ left:1600px;
 				var totalPayment = Number($("#totalPayment").val());
 /* 				var differencePymt = Number($("#differencePymt").val()); */
 				var totalDeduction=Number($("#totalDeduction").val());
+				$("#totalDeduction").val(totalDeduction+lo);
+				
             	$("#differencePymt").val(totalPayment-totalDeduction);
             	})
             	

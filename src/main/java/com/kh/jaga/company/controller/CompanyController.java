@@ -32,8 +32,8 @@ import com.kh.jaga.companyInnerId.model.vo.ComInIdVo;
 
 /**
  * @author 주석을 달아주세용
- * @comment 유지연님.. 언제 이걸 발견하는지 기다리겠습니다 ..
- * @createDate 1994. 09. 23.
+ * @comment 유지연님.. 언제 이걸 발견하는지 기다리겠습니다 ..데헷
+ * @createDate 1994. 09. 23. 
  */
 @Controller
 @SessionAttributes({"loginCompany","loginEmp"})
@@ -75,6 +75,7 @@ public class CompanyController {
 				try {
 					Company loginCompany = cs.loginCompany(c);
 					model.addAttribute("loginCompany",loginCompany);
+					
 				} catch (LoginException e) {
 					System.out.println("사내계정 로그인 성공,, but 회사계정 로그인 익셉션");
 					e.printStackTrace();
@@ -97,15 +98,7 @@ public class CompanyController {
 				
 			}
 			
-			
-			
-			
-			
-			
-			
-			
-			
-			
+
 		}else {
 			//회사계정 로그인
 			Company loginCompany = null;

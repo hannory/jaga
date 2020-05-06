@@ -6,30 +6,20 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<!-- jquery UI calendar-->
-<script
-   src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
-   integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
-   crossorigin="anonymous"></script>
-   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
-          <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-        <script src="${ contextPath }/resources/js/scripts.js"></script>
-        <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
-        <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
-        <script src="${ contextPath }/resources/demo/datatables-demo.js"></script>
-  <script
-   src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
-   integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
-   crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+<script src="${ contextPath }/resources/js/scripts.js"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
+<script src="${ contextPath }/resources/demo/datatables-demo.js"></script>
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
+        
 <title>자가 경리</title>
 <style>
 
@@ -41,53 +31,43 @@
 		margin-right:auto;
 	}
 
-	#line{
-		width:900px;
-		height:1360px;
-		background:white;
-		color:black;
-		margin-left:auto;
-		margin-right:auto;
-		border:1px;	
-	}
-
 	.innerLine{
-		width:800px;
+		width:900px;
 		height:1px;
 		background-color:black;
 	}
 
 	.tableJoin{
- 		width:800px;
+ 		width:900px;
  		height:600px;
 	}
 
 	.firstLine{
-		width:125px;
+		width:200px;
 		height:50px;
-		font-size:15px;
+		font-size:16px;
 	}
 
 	.secondLine{
-		width: 300px;
+		width: 400px;
 		height:50px;
 		font-size:20px;
 	}
 	
 	.thirdLine{
-		width: 125px;
+		width: 150px;
 		height:50px;
-		font-size:15px;
+		font-size:16px;
 	}
 	
 	.subLine{
-		height:25px;
+		height:30px;
 	}
 
 
 	#userId{
 		width:370px;
-		height:25px;
+		height:30px;
 		background: #FFFFFF;
 		border: 1px solid #C4C4C4;
 		box-sizing: border-box;
@@ -96,7 +76,7 @@
 	
 	#userPwd{
 		width:370px;
-		height:25px;
+		height:30px;
 		background: #FFFFFF;
 		border: 1px solid #C4C4C4;
 		box-sizing: border-box;
@@ -105,7 +85,7 @@
 	
 	#userPwd2{
 		width:370px;
-	    height:25px;
+	    height:30px;
 	    background: #FFFFFF;
 		border: 1px solid #C4C4C4;
 		box-sizing: border-box;
@@ -114,7 +94,25 @@
 	
 	#phone{
 		width:370px;
-	    height:25px;
+	    height:30px;
+	    background: #FFFFFF;
+		border: 1px solid #C4C4C4;
+		box-sizing: border-box;
+		border-radius: 5px;
+	}
+	
+	#typeOfBizCode{
+		width:100px;
+	    height:30px;
+	    background: #FFFFFF;
+		border: 1px solid #C4C4C4;
+		box-sizing: border-box;
+		border-radius: 5px;
+	}
+	
+	#sellTargetName{
+		width:200px;
+	    height:30px;
 	    background: #FFFFFF;
 		border: 1px solid #C4C4C4;
 		box-sizing: border-box;
@@ -123,7 +121,7 @@
 	
 	#userName{
 		width:370px;
-		height:25px;		
+		height:30px;		
 		background: #FFFFFF;
 		border: 1px solid #C4C4C4;
 		box-sizing: border-box;
@@ -133,7 +131,7 @@
 
 	#email1{
 		width:370px;
-		height:25px;
+		height:30px;
 		background: #FFFFFF;
 		border: 1px solid #C4C4C4;
 		box-sizing: border-box;
@@ -142,7 +140,7 @@
 	
 	#email2{
 		width:150px;
-		height:25px;
+		height:30px;
 		background: #FFFFFF;
 		border: 1px solid #C4C4C4;
 		box-sizing: border-box;
@@ -151,7 +149,7 @@
 	
 	#gongsi{
 		width:370px;
-		height:25px;
+		height:30px;
 		background: #FFFFFF;
 		border: 1px solid #C4C4C4;
 		box-sizing: border-box;
@@ -160,7 +158,7 @@
 		
 	#inputBizNum{
 		width:370px;
-		height:25px;
+		height:30px;
 		background: #FFFFFF;
 		border: 1px solid #C4C4C4;
 		box-sizing: border-box;
@@ -169,7 +167,7 @@
 	
 	#inputCorpNum{
 		width:370px;
-		height:25px;
+		height:30px;
 		background: #FFFFFF;
 		border: 1px solid #C4C4C4;
 		box-sizing: border-box;
@@ -178,7 +176,7 @@
 	
 	#inputCorpName{
 		width:370px;
-		height:25px;
+		height:30px;
 		background: #FFFFFF;
 		border: 1px solid #C4C4C4;
 		box-sizing: border-box;
@@ -187,7 +185,7 @@
 	
 	#inputCeoName{
 		width:370px;
-		height:25px;
+		height:30px;
 		background: #FFFFFF;
 		border: 1px solid #C4C4C4;
 		box-sizing: border-box;
@@ -196,7 +194,7 @@
 	
 	#postcode{
 		width:90px;
-		height:25px;
+		height:30px;
 		background: #FFFFFF;
 		border: 1px solid #C4C4C4;
 		box-sizing: border-box;
@@ -205,7 +203,7 @@
 	
 	#address1{
 		width:370px;
-		height:25px;
+		height:30px;
 		background: #FFFFFF;
 		border: 1px solid #C4C4C4;
 		box-sizing: border-box;
@@ -214,7 +212,7 @@
 	
 	#address2{
 		width:370px;
-		height:25px;
+		height:30px;
 		background: #FFFFFF;
 		border: 1px solid #C4C4C4;
 		box-sizing: border-box;
@@ -223,7 +221,7 @@
 	
 	#empName{ 
 		width:370px;
-		height:25px;
+		height:30px;
 		background: #FFFFFF;
 		border: 1px solid #C4C4C4;
 		box-sizing: border-box;
@@ -232,7 +230,7 @@
 	
 	#personalNum{
 		width:370px;
-		height:25px;
+		height:30px;
 		background: #FFFFFF;
 		border: 1px solid #C4C4C4;
 		box-sizing: border-box;
@@ -299,7 +297,7 @@
 	
 	
 	#location-btn{
-		width:120px;
+		width:110px;
 		background-color:#1B5748;
 		border-color:black;
 		border:0;
@@ -314,14 +312,15 @@
 		cursor: pointer;
 	}
 
-#datepicker{
+	#datepicker{
 		width:150px;
 		height:25px;
 		background: #FFFFFF;
 		border: 1px solid #C4C4C4;
 		box-sizing: border-box;
 		border-radius: 5px;
-}
+	}
+
 
 
 /* The Modal (background) */
@@ -342,7 +341,7 @@
         .modal-content {
             background-color: #fefefe;
             margin: 0 auto; /* 15% from the top and centered */
-            padding: 20px;
+            padding: 25px;
             border: 1px solid #888;
             width: 50%; /* Could be more or less, depending on screen size */                          
         }
@@ -373,10 +372,32 @@
 	#resultReTable input {
 		text-align: center;
 	}
+	#sub{
+		background:#888888;
+		border: 1px solid #888888;
+		color: white;
+	}
+	
+	#update{
+		background:#888888;
+		border: 1px solid #888888;
+		color: white;
+	}
+	
+	#farm{
+		background:#888888;
+		border: 1px solid #888888;
+		color: white;
+	}
+	
+	#searchBtn2{
+	width:34px;
+	height:36px;
+	}
 </style>
 </head>
+
 <body>
-<%--  	<jsp:include page="../common/menubar.jsp" />   --%>
 
 <c:set var="contextPath"
       value="${ pageContext.servletContext.contextPath }"
@@ -388,23 +409,19 @@
 				<img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnCloseLayer" style="cursor:pointer;position:absolute;right:-3px;top:-3px;z-index:1" onclick="closeDaumPostcode()" alt="닫기 버튼">
 			</div>
 
-
-	
 	<div class="main">
 	
 	<div id="imglogo" align="center">
 	<img src="${contextPath}/resources/images/logo_vertical.PNG" width="350px">
-<!-- 		<h2 class="mt-4">회원가입</h2> -->
+
 	</div>
 
-<!-- 	<div id="line"> -->
-<!-- 
-		<div class="innerLine"></div> -->
 		<br>
 		
 		<form id="joinForm" method="post" action="insert.lo" encType="multipart/form-data">
 		<div align="center">
 		<table class="tableJoin" align="center">
+		
 		<tr>
 			<td class="subLine">
 			<td></td>
@@ -421,8 +438,8 @@
 		
 		<tr>
 			<td class="subLine">
-			<td></td>
 			<td><span style="color:red; font-size:15px;" id="userIdCheck"></span></td>
+			<td></td>
 			<td></td>
 		</tr>
 		
@@ -433,6 +450,7 @@
 			</td>
 			<td class="thirdLine"></td>	
 		</tr>
+		
 		
 		<tr class="subline">
 			<td></td>
@@ -454,11 +472,10 @@
 		
 		<tr>
             <td class="firstLine"><b>이메일</b></td>
-            
             <td class="secondLine">
            	<input type="text" maxlength="13" name="email" id="email1" placeholder="직접입력가능">
-           	</td>
-            	
+         	</td>
+
           	<td> 
           	<select name="email2" id="email2">
           	<option value="" select disalbed hidden>선택</option>
@@ -469,11 +486,18 @@
             </select>
             </td>
         </tr>
+       
+       <tr>
+			<td class="subLine">
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
         
         <script>
+        
         $("#email2").click(function(){
         	var email=$("#email1").val();
-        	
         	
         	var email2 =$("#email2").val();
         	$("#email1").val(email+email2);
@@ -483,60 +507,66 @@
         <tr>
         	<td class="firstLine"><b>전화번호</b></td>
         	<td class="secondLine">
-        	<input type="tel" maxlength="30" name="phone" id="phone">
+        	<input type="tel" maxlength="30" name="phone" id="phone" placeholder="-입력">
         	</td>
         	<td class="thirdLine"></td>
         </tr>
         
+        <tr>
+			<td class="subLine">
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+        
 		<tr class="licenseTriger">
-		
-            <td class="firstLine"><b>사업자 등록증 <br> (필수)</b></td>
-               		
-<!--             <td class="secondLine">
-             <div id="licenseImgArea">
-             <img id="fake-fileUp" name="upload" width="150" height="200">
-             </div>
-            </td> -->
-               		
+            <td class="firstLine"><b>사업자 등록증 (필수)</b></td>
             <td class="thirdLine">
-             
               <input type="file" id="input-fileUp" name="photo" onchange="loadImg(this, 2);">
             </td> 
         </tr>
         
-        <tr class="hidesub">
-				<td></td>
-				<td></td>
-				<td></td>
+		<tr>
+			<td class="subLine">
+			<td></td>
+			<td></td>
+			<td></td>
 		</tr>
             	
          <tr class="licenseTriger">
                <td class="firstLine"><b>사업자 등록번호</b></td>
                <td class="secondLine">
-               <input type="text" id="inputBizNum" maxlength="13" name="bizNum" placeholder="사업자 등록번호를 입력해주세요">
+               <input type="text" id="inputBizNum" maxlength="13" name="bizNum" placeholder="사업자 등록번호를 입력해주세요 -포함입력">
                </td>
                <td class="thirdLine"><label id="nnResult"></label></td>
          </tr>
          
-                  <tr class="licenseTriger">
+        <tr>
+			<td class="subLine">
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		
+		<script>
+		if($("#input-fileUp").val()==null){
+			alert("사업자등록증을 업로드해주세요")
+		}
+		</script>
+         
+         <tr class="licenseTriger">
                <td class="firstLine"><b>개업년월일</b></td>
                <td class="secondLine">
                <input type="text" id="datepicker" maxlength="13" name="gaeup" placeholder="">
-<!--                 <button onclick="dateSearch();">검색</button>  -->
                </td>
                <td class="thirdLine"><label id="nnResult"></label></td>
          </tr>
          
-         <tr class="hidesub">
-				<td></td>
-				<td></td>
-				<td></td>
-		</tr>
-            	
-        <tr class="hidesub">
-				<td></td>
-				<td></td>
-				<td></td>
+		<tr>
+			<td class="subLine">
+			<td></td>
+			<td></td>
+			<td></td>
 		</tr>
 			
         <tr class="licenseTriger">
@@ -544,11 +574,12 @@
                <td class="secondLine"><input type="text" id="inputCorpName" name="bizName" placeholder="회사명(상호)을 입력해주세요"></td>
                <td class="thirdLine"></td>
         </tr>
-            
-        <tr class="hidesub">
-				<td></td>
-				<td></td>
-				<td></td>
+        
+		<tr>
+			<td class="subLine">
+			<td></td>
+			<td></td>
+			<td></td>
 		</tr>
 			
          <tr class="licenseTriger">
@@ -557,30 +588,29 @@
                <td class="thirdLine"></td>
         </tr>
             
-         <tr class="hidesub">
-				<td></td>
-				<td></td>
-				<td></td>
+            
+		<tr>
+			<td class="subLine">
+			<td></td>
+			<td></td>
+			<td></td>
 		</tr>
-			
-		 <tr class="hidesub">
-				<td></td>
-				<td></td>
-				<td></td>
-		</tr>
-			
+<!-- 			
 		 <tr>
             <td class="firstLine"><b>주민등록번호</b></td>
             <td class="secondLine">
            	<input type="text" maxlength="30" name="personalNum" id="personalNum"></td>
             <td class="thirdLine"></td>
          </tr>
-        
-                  <tr class="licenseTriger"></tr>
-                  <tr class="licenseTriger"></tr>
-                  <tr class="licenseTriger"></tr>                          
-          <tr class="licenseTriger">
-          
+
+         <tr>
+			<td class="subLine">
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr> -->
+		
+		<tr>
                <td class="firstLine"><b>회사/점포주소</b></td>
                <td class="secondLine">
                <input type="text" id="postcode" name="postcode" placeholder="우편번호">
@@ -599,26 +629,20 @@
            </tr>
             
             
-            <tr class="hidesub">
-				<td></td>
-				<td></td>
-				<td></td>
-			</tr>
-		
  		    <tr>
                 <td ><b>업종코드</b></td>
-               <td><input type="text" id="typeOfBizCode" name="bizType" placeholder="업종코드">
-                  <button type="button" class="thirdLine" id="searchBtn2"> <img alt="" src="${contextPath}/resources/images/search.PNG" width="20px" height="20px"></button>
+              	 <td><input type="text" id="typeOfBizCode" name="bizType" placeholder="업종코드"> &nbsp;
+                 <button type="button" id="searchBtn2"> <img alt="" src="${contextPath}/resources/images/search.PNG" width="24px" height="24px"></button> &nbsp;
 				 <input type="text" id="sellTargetName" name="sellTargetName" placeholder="업종명"></td>
            </tr>	
 			
-			
-		   <tr class="hidesub">
-				<td></td>
-				<td></td>
-				<td></td>
-			</tr>
-
+		<tr>
+			<td class="subLine"> 
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		
 		</table>
 		</div>
 		<div style="margin-left:500px; margin-top:80px">
@@ -634,7 +658,7 @@
     <div class="modal fade" id="typeofbizModal" role="dialog">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
-        <div class="modal-header" style="background:#296355; color:white">
+        <div class="modal-header">
           <h4 class="modal-title">업종검색</h4>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
@@ -659,9 +683,6 @@
   </div>
 
 
-
-
-	
 	<script>
 	/*아이디 비밀번호 비밀번호 확인 이메일 전화번호 사업자 등록증 사업자등록번호 개업년월일 회사명(상호) 대표자명 주민등록번호 회사주소 업종코드 
 /* 	"6~12자 영문 소문자, 숫자 입력" */
@@ -709,9 +730,7 @@
 	});
 	
 	
-	
 	//비밀번호 제한 
- 	
 	
 				$("#userPwd").keyup(function(){
 					var msg = '';
@@ -734,8 +753,6 @@
 						$("#userPwdCheck").css("color", "green");
 					}
 					$("#userPwdCheck").text(msg);
-		
-					
 				});
 				
 	 //비밀번호 일치하는지 
@@ -757,10 +774,7 @@
 	});
 
 	
-		//달력 
-		
-		
-		
+	//달력 
 	$.datepicker.setDefaults({
 		showOn:"both",
 		buttonImageOnly:true,
@@ -774,27 +788,9 @@
 		.attr("style","margin-left:10px; vertical-align:middle; cursor:Pointer; width:22px; height:20px");
 	});
 	
-/* 	function dataSearch(){
-		var date1 = $("#datepicker").val();
-
-		$.ajax({
-			url:"gaeupSearch.co",
-			type:"get",
-			data:{
-				date1:date1,
-			},
-			success:function(data){
-				
-			}
-		})
-	}; */
-
 	</script>
 	
 	
-	
-	
-		
  	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	
 	<script>
@@ -913,7 +909,6 @@
 	}		
 
 	
-	
 	/* 거래처모달 */
 			$("#searchBtn2").click(function(){
 				
@@ -937,18 +932,15 @@
 								                    data = '<a href="#" onclick="ccc(this);">' + data + '</a>';
 								                }
 								                return data;} }
-						 
 					 ]
 				}); 
 				
 				$(".modal-title").text("업종검색");
 				 $("div#typeofbizModal").modal();
 				 
-				 
 			});
 			
-			
-
 	</script>
+	
 </body>
 </html>
