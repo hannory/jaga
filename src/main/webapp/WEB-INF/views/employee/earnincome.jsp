@@ -309,15 +309,15 @@ left:1600px;
 	
 	 <script>
 	$(function(){
-		$("#listArea2 td").mouseenter(function(){
-			$(this).parent().css({"background":"#F0F0F0","cursor":"pointer"});
-		}).mouseout(function(){
-			$(this).parent().css("background","white");
-		}).click(function(){
+		$("#listArea2 td")./* mouseenter(function(){ */
+		/* 	$(this).parent().css({"background":"#F0F0F0","cursor":"pointer"}); */
+/* 		}).mouseout(function(){
+			$(this).parent().css("background","white"); */
+	/* 	}). */click(function(){
+			$(this).parent().css("background","green");
 			var employeeCode2 =$(this).parent().children().eq(2).text();
 			console.log(employeeCode2);
 			$("#abc").val(employeeCode2);
-			$(this).parent().css({background:"#EDEDEE"});
 /* 			location.href="${contextPath}/employeeinsert.emp?employeeCode="+employeeCode; */
         });
 	});
