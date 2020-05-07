@@ -13,4 +13,6 @@ public interface AggregateDao {
 
 	List<BizCodeVo> selectBizCodeList(SqlSessionTemplate sqlSession);
 
+	int updateAddedTaxStmt(SqlSessionTemplate sqlSession, AddedTaxStmtDto dto);
+
 }

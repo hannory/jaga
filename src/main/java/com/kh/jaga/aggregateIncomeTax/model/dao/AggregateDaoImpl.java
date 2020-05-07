@@ -27,4 +27,12 @@ public class AggregateDaoImpl implements AggregateDao{
 		return list;
 	}
 
+	@Override
+	public int updateAddedTaxStmt(SqlSessionTemplate sqlSession, AddedTaxStmtDto dto) {
+		
+		int result = sqlSession.update("Aggregate.updateAddedTaxStmt", dto);
+		
+		return result;
+	}
+
 }

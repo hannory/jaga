@@ -20,16 +20,23 @@ public class AggregateServiceImpl implements AggregateService{
 
 	@Override
 	public int insertAddedTaxStmt(AddedTaxStmtDto dto) {
-
-		int result = dao.insertAddedTaxStmt(sqlSession, dto);
 		
-		return result;
+		int updateResult = dao.updateAddedTaxStmt(sqlSession, dto);
+		System.out.println("updateResult ::: " + updateResult);
+		int insertResult = 99;
+		if(updateResult == 0) {
+			System.out.println("if 문 진입,, ");
+			insertResult = dao.insertAddedTaxStmt(sqlSession, dto);
+			System.out.println("insertResult ::: " + insertResult);
+			return insertResult;
+		}
+		return updateResult;
 	}
 
 	@Override
 	public List<BizCodeVo> selectBizCodeList() {
 		
-		List<BizCodeVo> list = dao.selectBizCodeList(sqlSession); 
+		List<BizCodeVo> list = dao.selectBizCodeList(sqlSession);
 		
 		return list;
 	}
