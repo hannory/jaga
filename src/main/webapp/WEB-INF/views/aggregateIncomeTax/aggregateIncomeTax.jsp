@@ -275,11 +275,9 @@
 		
 		<script>
 			function selectStmt(){
-				alert("asd");
+				alert("asdㅋㅋㅋ");
 			}
 		</script>
-		
-		
 		<!-- //귀속년도 -->
 		
 		<div style="height:50px;"></div><!-- 간격 띄우기 위한 용도 -->
@@ -608,19 +606,19 @@
 							/* $("#v108").val('X');
 							$("#v108").prop('readonly',true); */
 							
-							$("#v109").val('X');
-							$("#v109").prop('readonly',true);
+							/* $("#v109").val('X');
+							$("#v109").prop('readonly',true); */
 							
 							/* $("#v110").val('-');
 							$("#v110").prop('readonly',true); */
 							
-							/* $("#v111").val('-');
-							$("#v111").prop('readonly',true); */
+							$("#v111").val('X');
+							$("#v111").prop('readonly',true);
 							
 							/* $("#v112").val('-');
 							$("#v112").prop('readonly',true); */
 							
-							$("#v113").val('X');
+							$("#v113").val('부');
 							$("#v113").prop('readonly',true);
 							
 							/* $("#v114").val('-');

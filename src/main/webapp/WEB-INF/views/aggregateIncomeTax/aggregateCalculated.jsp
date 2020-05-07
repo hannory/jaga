@@ -52,6 +52,18 @@
 		cursor: pointer;
 	}
 	
+	#table01 td:nth-child(1),
+	#table01 tr:nth-child(1),
+	#bgGray
+	{
+		background:lightgray;
+	}
+	
+	#table02{
+		background:lightgray;
+		width:593px;
+	}
+	
 	
 </style>
 </head>
@@ -88,6 +100,7 @@
 			<div class="div-top4menu" onclick="goIncomeDeductStmt();"><h5>소득공제명세서</h5></div>
 			<div class="div-top4menu" onclick="goAddedTaxStmt();"><h5>가산세명세서</h5></div>
 			<div class="div-top4menu" style="border-bottom: 3px solid #24574A"><h5>종합소득세액계산서</h5></div>
+			<div class="cursorPointer" style="display:inline-block; background:#24574A; border-radius:5px; width:50px; height:30px; text-align:center; line-height:30px;color:white;">저장</div>
 		</div>
 		<!-- //class="div-top4menu" -->
 		
@@ -127,8 +140,8 @@
 		
 		
 		<!-- 초록색 탭메뉴 만들기 -->
-		<div id="tabMenu01" class="tapMenu" onclick="tap01click()">인적공제</div>
-		<div id="tabMenu02" class="tapMenu" onclick="tap02click()" style="opacity:50%;">소득세법상 소득공제</div>
+		<div id="tabMenu01" class="tapMenu" onclick="tap01click()">세액계산</div>
+		<div id="tabMenu02" class="tapMenu" onclick="tap02click()" style="opacity:50%;">기납부 세액 명세서</div>
 		<!-- //초록색 탭메뉴 만들기 끝-->
 		
 		<script type="text/javascript">
@@ -196,7 +209,7 @@
 				<td colspan="2">21. 과세표준(19-20)</td>
 				<td><input type="text" name="" id=""></td>
 				<td><input type="text" name="" id=""></td>
-				<td><input type="text" name="" id=""></td>
+				<td><input type="text" name="" id=""></td>`
 			</tr>
 			
 			<tr>
@@ -271,7 +284,7 @@
 			
 			<tr>
 				<td rowspan="2">32. 납부특례세액</td>
-				<td>차감</td>
+				<td id="bgGray">차감</td>
 				<td><input type="text" name="" id=""></td>
 				<td><input type="text" name="" id=""></td>
 				<td><input type="text" name="" id=""></td>

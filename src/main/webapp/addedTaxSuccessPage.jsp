@@ -11,25 +11,17 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>successPage</h1>
-	<h2><%= request.getAttribute("message") %></h2>
 	
-	<hr>
-	<a href="showAggregateCalculated.aggregate"> go </a>
-	
-			
-			
 	<script>
 	window.onload = function(){
 		
 		Swal.fire({
-			  title: '가산세 명세서 입력 완료',
+			  title: '가산세 명세서 입력 완료 !',
 			  text: '',
 			  icon: 'info',
 			  confirmButtonText: '확인'
 		}).then((result) => {
 			if(result.value){
-				alert('<%= request.getAttribute("message") %>');
 				location.href="showAggregateCalculated.aggregate";
 			}
 		})

@@ -76,8 +76,9 @@
 		<!-- 귀속년도 -->
 		<div style="float:right;">
 			<label>귀속년도 : </label>
-			<input id="attrYearDisplay" type="text" style="border-bottom:1px solid black;">
+			<input id="attrYear" type="number" style="width:60px; border-bottom:1px solid black;">
 			<label>년</label>
+			<button onclick="selectStmt();" style="display:inline-block; background:#24574A; color:white; border-radius:5px;">조회</button>
 		</div>
 		
 		<script>
@@ -96,7 +97,6 @@
 			<div class="div-top4menu" onclick="goIncomeDeductStmt();"><h5>소득공제명세서</h5></div>
 			<div class="div-top4menu" style="border-bottom: 3px solid #24574A"><h5>가산세명세서</h5></div>
 			<div class="div-top4menu" onclick="goAggregateCalculated();"><h5>종합소득세액계산서</h5></div>
-			
 			<button onclick="submitFunc();" style="width:50px; height:30px; background:#24574A; border:none; color:white; border-radius:5px;">저장</button>
 		</div>
 		<!-- //class="div-top4menu" -->
@@ -881,7 +881,7 @@
 				for(var i = 0; i < left.length; i++ ){
 					leftSum += Number(left[i].value);
 				}
-				$("#in1602").val(leftSum);
+				$("#in1602").val(leftSum - Number($("#in1203").val()) - Number($("#in1102").val()) );
 				
 				//오른쪽
 				rightSum = 0;

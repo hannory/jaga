@@ -139,8 +139,9 @@
 		<!-- 귀속년도 -->
 		<div style="float:right;">
 			<label>귀속년도 : </label>
-			<input type="text" style="border-bottom:1px solid black;">
+			<input id="attrYear" type="number" style="width:60px; border-bottom:1px solid black;">
 			<label>년</label>
+			<button onclick="selectStmt();" style="display:inline-block; background:#24574A; color:white; border-radius:5px;">조회</button>
 		</div>
 		<!-- //귀속년도 -->
 		
@@ -153,6 +154,7 @@
 			<div class="div-top4menu" style="border-bottom: 3px solid #24574A"><h5>소득공제명세서</h5></div>
 			<div class="div-top4menu" onclick="goAddedTaxStmt();"><h5>가산세명세서</h5></div>
 			<div class="div-top4menu" onclick="goAggregateCalculated();"><h5>종합소득세액계산서</h5></div>
+			<div class="cursorPointer" style="display:inline-block; background:#24574A; border-radius:5px; width:50px; height:30px; text-align:center; line-height:30px;color:white;">저장</div>
 		</div>
 		<!-- //class="div-top4menu" -->
 		
