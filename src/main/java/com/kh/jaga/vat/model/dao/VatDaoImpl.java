@@ -72,8 +72,11 @@ public class VatDaoImpl implements VatDao{
 		System.out.println("Dao: selectCcIssStmtRe: re: 확인해보자 0"+re1);
 		Receiption re0=sqlSession.selectOne("Vat.selectCcIssStmtRe0",map);
 		System.out.println("Dao: selectCcIssStmtRe: re: 확인해보자 "+re0);
+		if(re1 !=null) {
 		reResult.add(re1);
+		}else if(re0 !=null) {
 		reResult.add(re0);
+		}
 		System.out.println("Dao: selectCcIssStmtRe: re: 확인해보자 2"+re);
 		System.out.println("Dao: selectCcIssStmtRe: re1: "+re1);
 		return reResult;

@@ -13,6 +13,7 @@
   AND DEADLINE='Y' 
   AND REPORT_TYPE=#{reportType}
   AND REPORT_TERM=#{reportTerm}
+  AND YEAR_OF_ATTR=#{yearOfAttr}
   
   </select>
   <select id="selectSumOfTaxInv" parameterType="SumOfTaxInv" resultType="SumOfTaxInv">

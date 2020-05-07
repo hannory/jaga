@@ -69,7 +69,7 @@ public class VatController {
 		Vat vat2= new Vat();
 		vat2=vs.selectVat(vat);
 		
-		
+		System.out.println("VAt2!!!!!!!!!!!!!!!!!!!!!!!!11: "+vat2);
 		//마감된 항목들 확인할 hashMap
 		Map<String, String> deadCk= new HashMap<String,String>();
 		
@@ -178,18 +178,25 @@ public class VatController {
 				re.setSlipDate(stD);
 				//과세
 				List<Receiption> reList=vs.selectCcIssStmtRe(re,eD);
-				if( reList.get(0) !=null) {
+				System.out.println("reLis: "+reList);
+				System.out.println("reList.size: "+reList.size());
+				
+				if( reList.size()>0) {
 					for(Receiption rec: reList) {
-						System.out.println("dfsd: "+rec.getValueTax());
+						System.out.println("rec: "+ rec);
 						if(rec.getValueTax().equals(new BigDecimal("0"))) {
+							System.out.println("어디가문제요13");
 							vatRe.setP6(rec.getSupplyValue());
+							System.out.println("어디가문제요1");
 						}else {
+							System.out.println("어디가문제요2");
 							vatRe.setP3(rec.getSupplyValue());
 							vatRe.setP3T(rec.getValueTax());
+							System.out.println("어디가문제요2ㄴㅇ");
 						}
 					
 					}	//for문 끝
-				}else{//if 문끝
+				}//if 문끝
 					//p6,p3 null처리
 					if(vatRe.getP6()==null) {
 						System.out.println("p6이 null일 때 ");
@@ -203,7 +210,7 @@ public class VatController {
 						System.out.println("p3T이 null일 때 ");
 						vatRe.setP3T(new BigDecimal("0"));
 					}
-				}
+				
 //			10:매입매출전표 매입_10번(세금계산서)
 				//마감은 위에 1,3번하면서 했으니 전표에서 값 가져오기
 				
@@ -416,13 +423,14 @@ public class VatController {
 			System.out.println("부가율 setter전: "+vatRe.getP9());
 			System.out.println("부가율 setter전: "+vatRe.getP9().subtract(vatRe.getP15()));
 			System.out.println("부가율 setter전 15: "+vatRe.getP15());
-			System.out.println("부가율 setter전:16 "+vatRe.getP9().multiply(new BigDecimal("100")));
+			BigDecimal sub=vatRe.getP9().subtract(vatRe.getP15());
+			System.out.println("부가율 setter전:16 "+sub.divide(vatRe.getP9(),8,BigDecimal.ROUND_DOWN));
 			BigDecimal rate=new BigDecimal("0");
 			if(vatRe.getP15().equals(new BigDecimal("0"))) {
-				System.out.println("부가율 setter전: 17"+vatRe.getP9().subtract(vatRe.getP15()).multiply(new BigDecimal("10000")) );
+				System.out.println("부가율 setter전: 17: "+vatRe.getP9().subtract(vatRe.getP15()).multiply(new BigDecimal("100")) );
 				rate=new BigDecimal("0");
 			}else {
-				rate=vatRe.getP15().divide(vatRe.getP9().subtract(vatRe.getP15()),8,BigDecimal.ROUND_DOWN).multiply(new BigDecimal("10000"));
+				rate=sub.divide(vatRe.getP9(),8,BigDecimal.ROUND_DOWN).multiply(new BigDecimal("100"));
 				
 			}
 			/*
@@ -430,10 +438,9 @@ public class VatController {
 			 * subtract(vatRe.getP15()),8,BigDecimal.ROUND_DOWN) );
 			 * System.out.println("부가율 setter전: 18"+vatRe.getP15().divide(vatRe.getP9().
 			 * subtract(vatRe.getP15()),8,BigDecimal.ROUND_DOWN) );
-			 * System.out.println("부가율 setter전: 19"+vatRe.getP15().divide(vatRe.getP9().
-			 * subtract(vatRe.getP15()),8,BigDecimal.ROUND_DOWN).multiply(new
-			 * BigDecimal("10000")) );
 			 */
+			 // System.out.println("부가율 setter전: 19: "+vatRe.getP15().divide(vatRe.getP9().subtract(vatRe.getP15()),8,BigDecimal.ROUND_DOWN) );
+			 
 			
 			vatRe.setValueRate(rate.setScale(2,BigDecimal.ROUND_DOWN));
 			System.out.println("부가율: "+vatRe.getValueRate());
