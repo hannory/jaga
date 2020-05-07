@@ -23,6 +23,7 @@ import com.kh.jaga.vat.model.service.VatService;
 import com.kh.jaga.vat.model.vo.Vat;
 import com.kh.jaga.vatCcIssStmt.model.vo.CcIssStmt;
 import com.kh.jaga.vatDeem.model.vo.Deem;
+import com.kh.jaga.vatSumTaxInv.model.service.SumOfTaxInvService;
 import com.kh.jaga.vatSumTaxInv.model.vo.SumOfTaxInv;
 import com.kh.jaga.vatSumTaxInv.model.vo.SumOfTaxInvDiv;
 import com.kh.jaga.vatSumTaxInv.model.vo.SumOfTaxInvDto;
@@ -37,6 +38,8 @@ public class VatController {
 	
 	@Autowired
 	private VatService vs;
+	@Autowired
+	private SumOfTaxInvService ss;
 	
 	@RequestMapping("vatReport.vat")
 	public ModelAndView vatSearch(@RequestParam String search_ye ,
@@ -100,7 +103,7 @@ public class VatController {
 			if(soti != null) {
 				//마감된 여부 체크
 				
-				deadCk.put("세금계산서", "Y");
+				deadCk.put("세금계산서 합계표", "Y");
 				
 				SumOfTaxInvDiv sotiDiv=new SumOfTaxInvDiv();
 				sotiDiv.setTaxinvCode(soti.getTaxinvCode());
@@ -129,7 +132,7 @@ public class VatController {
 				
 			}else {
 				//soti가 마감처리 안됐을때 전표에서 계산해와야함
-				deadCk.put("세금계산서", "N");
+				deadCk.put("세금계산서 합계표", "N");
 				//p5 null처리
 				vatRe.setP5(new BigDecimal("0"));
 				// p1 null처리 
@@ -178,21 +181,15 @@ public class VatController {
 				re.setSlipDate(stD);
 				//과세
 				List<Receiption> reList=vs.selectCcIssStmtRe(re,eD);
-				System.out.println("reLis: "+reList);
-				System.out.println("reList.size: "+reList.size());
 				
 				if( reList.size()>0) {
 					for(Receiption rec: reList) {
 						System.out.println("rec: "+ rec);
 						if(rec.getValueTax().equals(new BigDecimal("0"))) {
-							System.out.println("어디가문제요13");
 							vatRe.setP6(rec.getSupplyValue());
-							System.out.println("어디가문제요1");
 						}else {
-							System.out.println("어디가문제요2");
 							vatRe.setP3(rec.getSupplyValue());
 							vatRe.setP3T(rec.getValueTax());
-							System.out.println("어디가문제요2ㄴㅇ");
 						}
 					
 					}	//for문 끝
@@ -259,9 +256,9 @@ public class VatController {
 				
 				deem=vs.selectDeem(deem);
 				if(deem == null) {
-					deadCk.put("의제매입신고서","N");
+					deadCk.put("의제매입세액공제신고서","N");
 				}else{
-					deadCk.put("의제매입신고서","Y");
+					deadCk.put("의제매입세액공제신고서","Y");
 				}
 				
 				//deem의 상태를 받아올수 가 없음 group by로 묶어온거라 deem을 구분못함
@@ -416,6 +413,23 @@ public class VatController {
 			//vatRe.setP15T(vatRe.getP9T().subtract(vatRe.getP17T()));
 			
 			
+			
+			
+//			계산서 합계표 마감되있는지 확인
+			
+			SumOfTaxInvDto bill=new SumOfTaxInvDto();
+			bill.setComCode(comCode);
+			bill.setYearOfAttr(yearInt);
+			bill.setReportTerm(term);
+			bill.setTabletaxDiv("계산서");
+			bill=ss.selectSotiDto(bill);
+			System.out.println("계산서 bill: "+bill);
+			
+			if(bill == null) {
+				deadCk.put("계산서 합계표","N");
+			}else{
+				deadCk.put("계산서 합계표","Y");
+			}
 			
 			
 //			부가율: (9-15)/9*100%
