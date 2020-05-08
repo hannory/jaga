@@ -118,6 +118,22 @@ public class SumOfTaxInvDaoImpl implements SumOfTaxInvDao {
 		}
 		return re;
 	}
+	@Override
+	public List<SumTaxInvDetail> selectReceitionSales(SqlSessionTemplate sqlSession, Receiption receiptionPur, Date eD) {
+		// TODO 전표계산하게 값 가져오기
+		
+		System.out.println("Dao: selectReceition: receiption: "+ receiptionPur);
+		HashMap<String, Object> map=new HashMap<String, Object>();
+		map.put("Receiption",receiptionPur);
+		map.put("endDate",eD);
+		List<SumTaxInvDetail> re=new ArrayList<SumTaxInvDetail>();
+		if(receiptionPur.getEvidenceCode().equals("20")) {
+			re=sqlSession.selectList("BillTotal.selectReceiptionSales", map);
+		}else {
+			re=sqlSession.selectList("SumOfTaxInv.selectReceiptionSales", map);
+		}
+		return re;
+	}
 
 	@Override
 	public int insertSoti(SqlSessionTemplate sqlSession, SumOfTaxInv soti) {

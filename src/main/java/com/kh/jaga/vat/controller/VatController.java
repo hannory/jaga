@@ -86,67 +86,6 @@ public class VatController {
 			System.out.println("vat2에 값 없!!을때");
 			
 			Vat vatRe=new Vat();
-			//마감 처리된 4개 항목을 조회해와야함(세금계산서 합계표 /계산서 합계표/신용카드 수령명세서/ 신용카드 발행명세서)
-//			세금계산서 합계표의 영세5와 과세1이다.
-//			2는 우리가 할 수없음
-//			4는 할수없음
-//			5는 세금계산서합계표 페이제에서  공급가액-(세액*10)⇒영세
-			
-			SumOfTaxInv soti=new SumOfTaxInv();
-			soti.setComCode(comCode);
-			soti.setReportTerm(term);
-			soti.setYearOfAttr(yearInt);
-			soti.setReportType(report_type);
-			
-			soti=vs.selectSumOfTaxInv(soti);
-			//soti가 null이 아닐때 div 23번 값을 가지고 와서 1,랑 5번 채우기
-			if(soti != null) {
-				//마감된 여부 체크
-				
-				deadCk.put("세금계산서 합계표", "Y");
-				
-				SumOfTaxInvDiv sotiDiv=new SumOfTaxInvDiv();
-				sotiDiv.setTaxinvCode(soti.getTaxinvCode());
-				sotiDiv=vs.selectSumOfTaxInvDiv(sotiDiv);
-				//1: 과세
-				if(sotiDiv.getValOfSupply().subtract(sotiDiv.getTax().multiply(new BigDecimal("10"))).equals(new BigDecimal("0"))) {
-					
-					vatRe.setP1(sotiDiv.getValOfSupply());
-					vatRe.setP1T(sotiDiv.getTax());
-					vatRe.setP5(new BigDecimal("0"));
-					System.out.println("soit 영세 없을때 : p1: "+vatRe.getP1());
-					System.out.println("soit 영세 없을때 : p1T: "+vatRe.getP1T());
-				}else {
-				//5: 영세 구분하기
-				    vatRe.setP1(sotiDiv.getValOfSupply().subtract(sotiDiv.getTax().multiply(new BigDecimal("10"))));
-				    vatRe.setP1T(sotiDiv.getTax());
-				    vatRe.setP5(sotiDiv.getTax().multiply(new BigDecimal("10")));
-				    System.out.println("soit 영세 있을때 : p1: "+vatRe.getP1());
-					System.out.println("soit 영세 있을때 : p1T: "+vatRe.getP1T());
-					System.out.println("soit 영세 있을때 : p1T: "+vatRe.getP5());
-					
-				}
-				
-				
-				
-				
-			}else {
-				//soti가 마감처리 안됐을때 전표에서 계산해와야함
-				deadCk.put("세금계산서 합계표", "N");
-				//p5 null처리
-				vatRe.setP5(new BigDecimal("0"));
-				// p1 null처리 
-				if(vatRe.getP1()==null) {
-					vatRe.setP1(new BigDecimal("0"));
-					
-				}
-				if(vatRe.getP1T()==null) {
-					vatRe.setP1T(new BigDecimal("0"));
-				}
-			}
-			
-			
-			
 			
 //			3: 신용카드매출전표발행금액집계표(영세 제외하고)(3+6이 신용카드매출전표발행금액집계표)
 //			6은 신용카드매출전표 발행금액집계표(영세)
@@ -179,6 +118,107 @@ public class VatController {
 				stD= new Date(sd.getTime());
 				eD= new Date(ed.getTime());
 				re.setSlipDate(stD);
+				
+				
+//				세금계산서 마감 안됐을 때 전표 계산해오기			
+				
+				//마감 처리된 4개 항목을 조회해와야함(세금계산서 합계표 /계산서 합계표/신용카드 수령명세서/ 신용카드 발행명세서)
+//				세금계산서 합계표의 영세5와 과세1이다.
+//				2는 우리가 할 수없음
+//				4는 할수없음
+//				5는 세금계산서합계표 페이제에서  공급가액-(세액*10)⇒영세
+				
+				SumOfTaxInv soti=new SumOfTaxInv();
+				soti.setComCode(comCode);
+				soti.setReportTerm(term);
+				soti.setYearOfAttr(yearInt);
+				soti.setReportType(report_type);
+				
+				soti=vs.selectSumOfTaxInv(soti);
+				//soti가 null이 아닐때 div 23번 값을 가지고 와서 1,랑 5번 채우기
+				if(soti != null) {
+					//마감된 여부 체크
+					
+					deadCk.put("세금계산서 합계표", "Y");
+					
+					SumOfTaxInvDiv sotiDiv=new SumOfTaxInvDiv();
+					sotiDiv.setTaxinvCode(soti.getTaxinvCode());
+					sotiDiv=vs.selectSumOfTaxInvDiv(sotiDiv);
+					//1: 과세
+					if(sotiDiv.getValOfSupply().subtract(sotiDiv.getTax().multiply(new BigDecimal("10"))).equals(new BigDecimal("0"))) {
+						
+						vatRe.setP1(sotiDiv.getValOfSupply());
+						vatRe.setP1T(sotiDiv.getTax());
+						vatRe.setP5(new BigDecimal("0"));
+						System.out.println("soit 영세 없을때 : p1: "+vatRe.getP1());
+						System.out.println("soit 영세 없을때 : p1T: "+vatRe.getP1T());
+					}else {
+					//5: 영세 구분하기
+					    vatRe.setP1(sotiDiv.getValOfSupply().subtract(sotiDiv.getTax().multiply(new BigDecimal("10"))));
+					    vatRe.setP1T(sotiDiv.getTax());
+					    vatRe.setP5(sotiDiv.getTax().multiply(new BigDecimal("10")));
+					    System.out.println("soit 영세 있을때 : p1: "+vatRe.getP1());
+						System.out.println("soit 영세 있을때 : p1T: "+vatRe.getP1T());
+						System.out.println("soit 영세 있을때 : p1T: "+vatRe.getP5());
+						
+					}	
+					
+				}else if(soti==null) {
+				
+					//soti가 마감처리 안됐을때 전표에서 계산해와야함
+					deadCk.put("세금계산서 합계표", "N");
+					System.out.println("세금계산서deadCk.put(\"세금계산서 합계표\", \"N\") sumRe null이 아닐 떄 마감안됐을때!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!11");
+					Receiption sumRe=new Receiption();
+					sumRe.setComCode(comCode);
+					sumRe.setDivision("매출");
+					sumRe.setEvidenceCode("10");
+					sumRe.setSlipDate(stD);
+					
+					sumRe=vs.selectRe1(sumRe, eD);
+					
+					if(sumRe !=null) {
+						System.out.println("세금계산서 sumRe null이 아닐 떄 마감안됐을때!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!11");
+						//1: 과세
+						if(sumRe.getSupplyValue().equals(sumRe.getValueTax().multiply(new BigDecimal("10")))) {
+							System.out.println("세금계산서 마감안됐을때 과세!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!11");
+							vatRe.setP1(sumRe.getSupplyValue());
+							vatRe.setP1T(sumRe.getValueTax());
+							vatRe.setP5(new BigDecimal("0"));
+							System.out.println("soit 영세 없을때 : p1: "+vatRe.getP1());
+							System.out.println("soit 영세 없을때 : p1T: "+vatRe.getP1T());
+						}else {
+						//5: 영세 구분하기
+							System.out.println("세금계산서 마감안됐을때 영세!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!11");
+							BigDecimal p5=sumRe.getSupplyValue().subtract(sumRe.getValueTax().multiply(new BigDecimal("10")));
+						    vatRe.setP1(sumRe.getValueTax().multiply(new BigDecimal("10")));
+						    vatRe.setP1T(sumRe.getValueTax());
+						    vatRe.setP5(sumRe.getSupplyValue().subtract(sumRe.getValueTax().multiply(new BigDecimal("10"))));
+						    System.out.println("soit 영세 있을때 : p1: "+vatRe.getP1());
+							System.out.println("soit 영세 있을때 : p1T: "+vatRe.getP1T());
+							System.out.println("soit 영세 있을때 : p1T: "+vatRe.getP5());
+							
+						}
+						
+						
+					}else if(sumRe ==null) {
+						//p5 null처리
+						vatRe.setP5(new BigDecimal("0"));
+						System.out.println("세믁계산서 마감안됬을때!!!!!!");
+						// p1 null처리 
+						if(vatRe.getP1()==null) {
+							vatRe.setP1(new BigDecimal("0"));
+							
+						}
+						if(vatRe.getP1T()==null) {
+							vatRe.setP1T(new BigDecimal("0"));
+						}
+					}
+				}
+				
+				
+				
+				
+				
 				//과세
 				List<Receiption> reList=vs.selectCcIssStmtRe(re,eD);
 				

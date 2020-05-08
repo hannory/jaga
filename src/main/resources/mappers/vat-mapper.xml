@@ -157,7 +157,20 @@ AND DEADLINE='Y'
   
   
   </select>
+  <select id="selectRe1" parameterType="java.util.HashMap" resultType="Receiption">
+   SELECT SUM(S.SUPPLY_VALUE) AS SUPPLY_VALUE, SUM(S.VALUE_TAX) AS VALUE_TAX
+	FROM SLIP S
+	JOIN JOURNALIZE J ON(S.SLIP_CODE=J.SLIP_CODE)
+	WHERE S.SLIP_DIVISION ='매입매출' 
+    AND S.DIVISION ='매출' 
+  	AND S.COM_CODE= #{Receiption.comCode}
+	AND S.EVIDENCE_CODE='10'
+  	AND S.SLIP_DATE BETWEEN #{Receiption.slipDate} AND #{endDate}
+    AND J.DEBIT_CREDIT='차변'
+	GROUP BY S.EVIDENCE_CODE
   
+  
+  </select>
   <select id="selectCcSalesSlip" parameterType="CcSalesSlip" resultType="CcSalesSlip">
   SELECT RCPTSTMT_CODE
 ,YEAR_OF_ATTR

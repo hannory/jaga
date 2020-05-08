@@ -49,5 +49,7 @@ public interface VatService {
 
 	int updateDeadCenVat(Vat vat);
 
+	Receiption selectRe1(Receiption sumRe, Date eD);
+
 
 }

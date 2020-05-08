@@ -64,6 +64,14 @@ public class SumOfTaxInvServiceImpl implements SumOfTaxInvService{
 		System.out.println("Service: selectReceition: receiption: "+receiptionPur);
 		return sd.selectReceition(sqlSession, receiptionPur, eD);
 	}
+	
+	@Override
+	public List<SumTaxInvDetail> selectReceiptionSales(Receiption receiptionPur, Date eD) {
+		//  TODO receiption 가져오기
+		
+		System.out.println("Service: selectReceition: receiption: "+receiptionPur);
+		return sd.selectReceitionSales(sqlSession, receiptionPur, eD);
+	}
 
 	@Override
 	public int insertSoti(SumOfTaxInv soti) {

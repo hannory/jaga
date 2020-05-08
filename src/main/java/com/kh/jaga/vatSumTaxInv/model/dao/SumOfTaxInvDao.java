@@ -27,6 +27,8 @@ public interface SumOfTaxInvDao {
 
 	List<SumTaxInvDetail> selectReceition(SqlSessionTemplate sqlSession, Receiption receiptionPur, Date eD);
 
+	List<SumTaxInvDetail> selectReceitionSales(SqlSessionTemplate sqlSession, Receiption receiptionPur, Date eD);
+	
 	int insertSoti(SqlSessionTemplate sqlSession, SumOfTaxInv soti);
 
 	String selectSotiCurrval(SqlSessionTemplate sqlSession) throws Exception;

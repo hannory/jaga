@@ -25,6 +25,8 @@ public interface SumOfTaxInvService {
 	List<SumTaxInvDetail> selectSotiDetailPur(SumOfTaxInvDto sDto2);
 
 	List<SumTaxInvDetail> selectReceiption(Receiption receiptionPur, Date eD);
+	
+	List<SumTaxInvDetail> selectReceiptionSales(Receiption receiptionPur, Date eD);
 
 	int insertSoti(SumOfTaxInv soti);
 

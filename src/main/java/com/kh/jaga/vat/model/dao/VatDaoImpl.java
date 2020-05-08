@@ -203,4 +203,15 @@ public class VatDaoImpl implements VatDao{
 		return vat2;
 	}
 
+	@Override
+	public Receiption selectRe1(SqlSessionTemplate sqlSession, Receiption sumRe, Date eD) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> map=new HashMap<String, Object>();
+		map.put("Receiption",sumRe);
+		map.put("endDate",eD);
+		
+		Receiption reP1=sqlSession.selectOne("Vat.selectRe1",map);
+		return reP1;
+	}
+
 }

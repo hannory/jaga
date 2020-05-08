@@ -169,47 +169,33 @@
 	<div class="container-fluid">
 			<h2 class="mt-4">의제매입세액공제 신고서</h2>
 	<ol class="breadcrumb mb-4">
-			<li><button id="deadlineBtn">마감</button></li>
-			<li>1기예정</li>
-            <li>조회기간:
-            	<input type="text" name="search_ye1" class="cc_year">
-            	<select class="cc_month" name="search_mon1">
+			<li><button id="deadlineBtn" type="submit">마감</button></li>
+			<li><button id="deadlineCen" onclick="cencelDeadline()">마감 취소</button></li>
+			<li><input type="text" readonly  id="termDiv" name="termDiv"></li>
+             <li>조회기간:
+            	<input type="text" id="search_ye" class="cc_year" name="yearOfAttr" maxlength="4">
+            	<select class="cc_month" id="search_mon1">
             		<option value="">월</option>
-            		<option value="1">1</option>
-            		<option value="1">2</option>
-            		<option value="1">3</option>
-            		<option value="1">4</option>
-            		<option value="1">5</option>
-            		<option value="1">6</option>
-            		<option value="1">7</option>
-            		<option value="1">8</option>
-            		<option value="1">9</option>
-            		<option value="1">10</option>
-            		<option value="1">11</option>
-            		<option value="1">12</option>
+            		<option value="01">1</option>
+            		<option value="07">7</option>
             	</select> 
-            	~ 
-            	<input type="text" name="search_ye2" class="cc_year">
-            	<select class="cc_month" name="search_mon1">
+            	~
+            	<select class="cc_month" id="search_mon2">
             		<option value="">월</option>
-            		<option value="1">1</option>
-            		<option value="1">2</option>
-            		<option value="1">3</option>
-            		<option value="1">4</option>
-            		<option value="1">5</option>
-            		<option value="1">6</option>
-            		<option value="1">7</option>
-            		<option value="1">8</option>
-            		<option value="1">9</option>
-            		<option value="1">10</option>
-            		<option value="1">11</option>
-            		<option value="1">12</option>
+            		<option value="06">6</option>
+            		<option value="12">12</option>
             	</select> 
             </li>
-            <li><input type="button" name="search" value="조회"></li>
+			<li><input type="button" onclick="search_cis()" value="조회"></li>
             <li><input type="button" name="report" value="신고서미리보기"></li>
 			
 		</ol>
+		
+		<!-- 인풋모음 -->
+		<c:set var="comCode" value="${ sessionScope.loginCompany.companyCode }"/>
+		<input type="hidden" name="comCode" value="${comCode}" id="comCode">
+		<input type="hidden" name="deemCode" id="deemCode">
+		
 		
 				<!-- 로딩? -->
    <div id="loading">
@@ -409,6 +395,34 @@
 		    	$("#tax2").show();
 		    	$("#tax1").hide();
 		    }
+			function search_cis(){
+		 		 $("#loading").show();
+		 		var search_ye= $("#search_ye").val();
+		 		var search_mon1= $("#search_mon1").val();
+		 		var search_mon2= $("#search_mon2").val();
+		 		var comCode='${comCode}';
+		 		console.log(search_ye);
+		 		console.log(search_mon1);
+		 		console.log(search_mon2);
+		 		console.log(comCode);
+		 		
+		 		$.ajax({
+		 			url:"ccIssStmt.cis",
+		 			type:"post",
+		 			data:{search_ye:search_ye, search_mon1:search_mon1, search_mon2:search_mon2, comCode:comCode},
+		 			success: function(data){
+		 				console.log(data);
+		 				 $("#loading").hide();
+		 				
+	                  
+		 				
+		 			},
+		 			error:function(error){
+		 				console.log(error);
+		 			}
+		 		});
+		 	}
+		 
 			
 			</script>
   		<div><!-- 면세농산물등/ 제조업 면세농산물등 -->
