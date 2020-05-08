@@ -310,7 +310,29 @@
   
   
   
-  
+  <select id="selectData40">
+  	
+  	SELECT
+  		*
+  	FROM
+  	(
+  	SELECT
+  		INCOME_STMT_CODE,
+  		YEAR,
+  		SUM10,
+  		SUM20,
+  		SUM40,
+  		ROWNUM AS RNUM
+  	FROM
+  		INCOME_STMT
+  	WHERE
+  		COM_CODE = #{ comCode }
+  		AND
+  		YEAR = #{attrYear}
+  	ORDER BY INCOME_STMT_CODE DESC
+  	)
+  	WHERE RNUM = 1
+  </select>
   
   
   </mapper>

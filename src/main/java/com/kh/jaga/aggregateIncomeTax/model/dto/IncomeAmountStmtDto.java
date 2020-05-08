@@ -2,6 +2,8 @@ package com.kh.jaga.aggregateIncomeTax.model.dto;
 
 public class IncomeAmountStmtDto {
 	
+	private String type;		//신고유형
+	private String duty;		//기장의무
 	private String v01;
 	private String v02;
 	private String v03;
@@ -37,13 +39,15 @@ public class IncomeAmountStmtDto {
 	
 	public IncomeAmountStmtDto() {}
 
-	public IncomeAmountStmtDto(String v01, String v02, String v03, String v04, String v05, String v06, String v07,
-			String v08, String v09, String v10, String v11, String v12, String v13, String dOCUMENT_NO,
-			String yEAR_OF_ATTR, String iNCOME_TYPE_CODE, String tOTAL_INCOME, String nECESSARY_EXPENSE,
-			String iNCOME_ETC, String tAX_FOR_INCOME, String cARRY_FORWARD, String cOMMON_BIZ,
+	public IncomeAmountStmtDto(String type, String duty, String v01, String v02, String v03, String v04, String v05,
+			String v06, String v07, String v08, String v09, String v10, String v11, String v12, String v13,
+			String dOCUMENT_NO, String yEAR_OF_ATTR, String iNCOME_TYPE_CODE, String tOTAL_INCOME,
+			String nECESSARY_EXPENSE, String iNCOME_ETC, String tAX_FOR_INCOME, String cARRY_FORWARD, String cOMMON_BIZ,
 			String iNCOME_FOR_MIN_TAX, String sTART_DATE, String eND_DATE, String lOCATION, String dOMESTIC,
 			String mODIFY_DATE, String bOOK_KEEPING_CODE, String rEPORT_CODE, String cOM_CODE) {
 		super();
+		this.type = type;
+		this.duty = duty;
 		this.v01 = v01;
 		this.v02 = v02;
 		this.v03 = v03;
@@ -75,6 +79,22 @@ public class IncomeAmountStmtDto {
 		BOOK_KEEPING_CODE = bOOK_KEEPING_CODE;
 		REPORT_CODE = rEPORT_CODE;
 		COM_CODE = cOM_CODE;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public String getDuty() {
+		return duty;
+	}
+
+	public void setDuty(String duty) {
+		this.duty = duty;
 	}
 
 	public String getV01() {
@@ -327,15 +347,16 @@ public class IncomeAmountStmtDto {
 
 	@Override
 	public String toString() {
-		return "IncomeAmountStmtDto [v01=" + v01 + ", v02=" + v02 + ", v03=" + v03 + ", v04=" + v04 + ", v05=" + v05
-				+ ", v06=" + v06 + ", v07=" + v07 + ", v08=" + v08 + ", v09=" + v09 + ", v10=" + v10 + ", v11=" + v11
-				+ ", v12=" + v12 + ", v13=" + v13 + ", DOCUMENT_NO=" + DOCUMENT_NO + ", YEAR_OF_ATTR=" + YEAR_OF_ATTR
-				+ ", INCOME_TYPE_CODE=" + INCOME_TYPE_CODE + ", TOTAL_INCOME=" + TOTAL_INCOME + ", NECESSARY_EXPENSE="
-				+ NECESSARY_EXPENSE + ", INCOME_ETC=" + INCOME_ETC + ", TAX_FOR_INCOME=" + TAX_FOR_INCOME
-				+ ", CARRY_FORWARD=" + CARRY_FORWARD + ", COMMON_BIZ=" + COMMON_BIZ + ", INCOME_FOR_MIN_TAX="
-				+ INCOME_FOR_MIN_TAX + ", START_DATE=" + START_DATE + ", END_DATE=" + END_DATE + ", LOCATION="
-				+ LOCATION + ", DOMESTIC=" + DOMESTIC + ", MODIFY_DATE=" + MODIFY_DATE + ", BOOK_KEEPING_CODE="
-				+ BOOK_KEEPING_CODE + ", REPORT_CODE=" + REPORT_CODE + ", COM_CODE=" + COM_CODE + "]";
+		return "IncomeAmountStmtDto [type=" + type + ", duty=" + duty + ", v01=" + v01 + ", v02=" + v02 + ", v03=" + v03
+				+ ", v04=" + v04 + ", v05=" + v05 + ", v06=" + v06 + ", v07=" + v07 + ", v08=" + v08 + ", v09=" + v09
+				+ ", v10=" + v10 + ", v11=" + v11 + ", v12=" + v12 + ", v13=" + v13 + ", DOCUMENT_NO=" + DOCUMENT_NO
+				+ ", YEAR_OF_ATTR=" + YEAR_OF_ATTR + ", INCOME_TYPE_CODE=" + INCOME_TYPE_CODE + ", TOTAL_INCOME="
+				+ TOTAL_INCOME + ", NECESSARY_EXPENSE=" + NECESSARY_EXPENSE + ", INCOME_ETC=" + INCOME_ETC
+				+ ", TAX_FOR_INCOME=" + TAX_FOR_INCOME + ", CARRY_FORWARD=" + CARRY_FORWARD + ", COMMON_BIZ="
+				+ COMMON_BIZ + ", INCOME_FOR_MIN_TAX=" + INCOME_FOR_MIN_TAX + ", START_DATE=" + START_DATE
+				+ ", END_DATE=" + END_DATE + ", LOCATION=" + LOCATION + ", DOMESTIC=" + DOMESTIC + ", MODIFY_DATE="
+				+ MODIFY_DATE + ", BOOK_KEEPING_CODE=" + BOOK_KEEPING_CODE + ", REPORT_CODE=" + REPORT_CODE
+				+ ", COM_CODE=" + COM_CODE + "]";
 	}
 	
 	

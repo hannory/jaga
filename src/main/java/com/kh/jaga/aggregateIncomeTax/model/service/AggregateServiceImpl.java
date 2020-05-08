@@ -1,6 +1,7 @@
 package com.kh.jaga.aggregateIncomeTax.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.kh.jaga.aggregateIncomeTax.model.dao.AggregateDao;
 import com.kh.jaga.aggregateIncomeTax.model.dto.AddedTaxStmtDto;
 import com.kh.jaga.aggregateIncomeTax.model.vo.BizCodeVo;
+import com.kh.jaga.finStmt.model.vo.IncomeStmt;
 
 @Service
 public class AggregateServiceImpl implements AggregateService{
@@ -39,6 +41,14 @@ public class AggregateServiceImpl implements AggregateService{
 		List<BizCodeVo> list = dao.selectBizCodeList(sqlSession);
 		
 		return list;
+	}
+
+	@Override
+	public IncomeStmt getData40(Map<String, String> info) {
+		
+		IncomeStmt is = dao.selectData40(sqlSession, info);
+		
+		return is;
 	}
 	
 }

@@ -1,11 +1,13 @@
 package com.kh.jaga.aggregateIncomeTax.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 
 import com.kh.jaga.aggregateIncomeTax.model.dto.AddedTaxStmtDto;
 import com.kh.jaga.aggregateIncomeTax.model.vo.BizCodeVo;
+import com.kh.jaga.finStmt.model.vo.IncomeStmt;
 
 public interface AggregateDao {
 
@@ -14,5 +16,7 @@ public interface AggregateDao {
 	List<BizCodeVo> selectBizCodeList(SqlSessionTemplate sqlSession);
 
 	int updateAddedTaxStmt(SqlSessionTemplate sqlSession, AddedTaxStmtDto dto);
+
+	IncomeStmt selectData40(SqlSessionTemplate sqlSession, Map<String, String> info);
 
 }

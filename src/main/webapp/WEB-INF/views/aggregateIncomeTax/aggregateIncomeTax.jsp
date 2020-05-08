@@ -263,19 +263,35 @@
 	
 		<h2 class="mt-4">종합소득세</h2>
 		
+	
 		
+		
+		<form id="tagForm" action="zzzplzInputAddrzzzzz" method="post" onsubmit="return checksubmit();">
+		
+		<script>
+		submitFlag = 0;
+		function checksubmit(){
+			alert("submit 진입");
+			if(submitFlag == 0){
+				return false;
+			}else{
+				return true;
+			}
+		}
+		</script>
 		
 		<!-- 귀속년도 -->
 		<div style="float:right;">
 			<label>귀속년도 : </label>
 			<input id="attrYear" type="number" style="width:60px; border-bottom:1px solid black;">
 			<label>년</label>
-			<button onclick="selectStmt();" style="display:inline-block; background:#24574A; color:white; border-radius:5px;">조회</button>
+			<div onclick="selectStmt();" class="cursorPointer" style="padding:5px; display:inline-block; background:#24574A; color:white; border-radius:5px;">조회</div>
 		</div>
 		
 		<script>
 			function selectStmt(){
-				alert("asdㅋㅋㅋ");
+				alert("조회버튼클릭");
+				
 			}
 		</script>
 		<!-- //귀속년도 -->
@@ -287,9 +303,16 @@
 			<div class="div-top4menu" onclick="goIncomeDeductStmt();"><h5>소득공제명세서</h5></div>
 			<div class="div-top4menu" onclick="goAddedTaxStmt();"><h5>가산세명세서</h5></div>
 			<div class="div-top4menu" onclick="goAggregateCalculated();"><h5>종합소득세액계산서</h5></div>
-			<div class="cursorPointer" style="display:inline-block; background:#24574A; border-radius:5px; width:50px; height:30px; text-align:center; line-height:30px;color:white;">저장</div>
+			<div onclick="doSubmit();" class="cursorPointer" style="display:inline-block; background:#24574A; border-radius:5px; width:50px; height:30px; text-align:center; line-height:30px;color:white;">저장</div>
 		</div>
 		<!-- //class="div-top4menu" -->
+		
+		<script>
+		function doSubmit(){
+			alert("doSubmit func called...");
+			$("#tagForm").submit();
+		}
+		</script>
 		
 		
 		<script type="text/javascript">
@@ -338,7 +361,7 @@
 			<table border="1" class="table-top" style="text-align:center;">
 				<tr>
 					<td style="width:6%;"><span>신고<br>유형</span></td>
-					<td style="width:5%;"><input type="text" id="inputReportType" name=""></td>
+					<td style="width:5%;"><input type="text" id="inputReportType" name="type" value="1"></td>
 					<td onclick="reportTypeClick(1)"style="width:18%;" class="cursorPointer">1. 자기조정</td>
 					<td onclick="reportTypeClick(2)" class="cursorPointer">2. 간편장부</td>
 					<td onclick="reportTypeClick(3)" class="cursorPointer">3. 추계 - 기준</td>
@@ -354,7 +377,7 @@
 				
 				<tr>
 					<td><span>기장<br>의무</span></td>
-					<td><input type="text" id="inputMilletDuty" name=""></td>
+					<td><input type="text" id="inputMilletDuty" name="duty" value="1"></td>
 					<td onclick="milletDutyClick(1)" class="cursorPointer">1. 복식부기의무자</td>
 					<td onclick="milletDutyClick(2)" class="cursorPointer">2. 간편장부대상자</td>
 					<td onclick="milletDutyClick(3)" class="cursorPointer">3. 비사업자</td>
@@ -370,7 +393,7 @@
 		</div>
 		<!-- 상단 테이블 감싸는 div 끝 -->
 		
-		<!-- <form action="zzzplzInputAddrzzzzz" method="post"> -->
+		
 		<!-- 본문 테이블 감싸는 div -->
 		<div class="div-tableCenter" style="margin-top:30px; margin-bottom:30px;">
 		<table class="table-center">
@@ -485,7 +508,7 @@
 		</table>
 		</div>
 		<!-- //본문 테이블 감싸는 div 끝-->
-		<!-- </form> -->
+		</form>
 		
 		
 		
@@ -584,6 +607,22 @@
 					function(){
 						
 						if($("#v101").val() == '40'){
+							
+							$.ajax({
+								url: "getData40.aggregate",
+								type: "post",
+								data: {"attrYear":$("#attrYear").val(),
+										"comCode":'${ loginCompany.companyCode }'
+										},
+								success: function(data){
+									alert("success!!!\n" + data);
+								},
+								error: function(status){
+									alert("error!!!\n" + status);
+								}
+								
+							});
+							
 							
 							/* $("#v102").val('-');
 							$("#v102").prop('readonly',true); */
@@ -802,7 +841,6 @@
 		<div class="card mb-4">
 			<div class="card-body" id="divHelp">
 				도움말입니다. 읽어주세요*^^*
-				<h1>${ test }ㅋㅋㅋ</h1>
 			</div>
 		</div>
 		<!-- ///footer -->
