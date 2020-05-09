@@ -310,7 +310,7 @@
   
   
   
-  <select id="selectData40">
+  <select id="selectData40" parameterType="java.util.Map" resultType="com.kh.jaga.aggregateIncomeTax.model.dto.AmountDataDto">
   	
   	SELECT
   		*
@@ -333,6 +333,48 @@
   	)
   	WHERE RNUM = 1
   </select>
+  
+  <insert id="insertIncomeAmount" parameterType="com.kh.jaga.aggregateIncomeTax.model.dto.IncomeAmountStmtDto">
+  
+  	INSERT INTO INCOME_AMOUNT_STATEMENT
+  	(
+	  	DOCUMENT_NO,
+		YEAR_OF_ATTR,
+		INCOME_TYPE_CODE,
+		TOTAL_INCOME,
+		NECESSARY_EXPENSE,
+		INCOME_ETC,
+		TAX_FOR_INCOME,
+		CARRY_FORWARD,
+		COMMON_BIZ,
+		INCOME_FOR_MIN_TAX,
+		LOCATION,
+		DOMESTIC,
+		MODIFY_DATE,
+		BOOK_KEEPING_CODE,
+		REPORT_CODE,
+		COM_CODE
+  	)
+  	VALUES(
+	  	SEQ_INCOME_AMOUNT_STATEMENT.NEXTVAL,
+		#{yearOfAttr},
+		#{v101},
+		#{v108},
+		#{v109},
+		#{v110},
+		#{v111},
+		#{v112},
+		#{v113},
+		#{incomeForMinTax},
+		#{location},
+		#{domestic},
+		SYSDATE,
+		#{duty},
+		#{type},
+		#{comCode}
+  	)
+  
+  </insert>
   
   
   </mapper>

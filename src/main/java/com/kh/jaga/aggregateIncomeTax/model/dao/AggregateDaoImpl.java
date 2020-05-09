@@ -7,6 +7,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.jaga.aggregateIncomeTax.model.dto.AddedTaxStmtDto;
+import com.kh.jaga.aggregateIncomeTax.model.dto.AmountDataDto;
+import com.kh.jaga.aggregateIncomeTax.model.dto.IncomeAmountStmtDto;
 import com.kh.jaga.aggregateIncomeTax.model.vo.BizCodeVo;
 import com.kh.jaga.finStmt.model.vo.IncomeStmt;
 
@@ -38,11 +40,19 @@ public class AggregateDaoImpl implements AggregateDao{
 	}
 
 	@Override
-	public IncomeStmt selectData40(SqlSessionTemplate sqlSession, Map<String, String> info) {
+	public AmountDataDto selectData40(SqlSessionTemplate sqlSession, Map<String, String> info) {
 		
-		IncomeStmt is = sqlSession.selectOne("Aggregate.selectData40", info);
+		AmountDataDto is = sqlSession.selectOne("Aggregate.selectData40", info);
 		
 		return is;
+	}
+
+	@Override
+	public int insertIncomeAmount(SqlSessionTemplate sqlSession, IncomeAmountStmtDto dto) {
+		
+		int result = sqlSession.insert("Aggregate.insertIncomeAmount",dto);
+		
+		return result;
 	}
 
 }

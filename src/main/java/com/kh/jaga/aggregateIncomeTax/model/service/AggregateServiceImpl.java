@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import com.kh.jaga.aggregateIncomeTax.model.dao.AggregateDao;
 import com.kh.jaga.aggregateIncomeTax.model.dto.AddedTaxStmtDto;
+import com.kh.jaga.aggregateIncomeTax.model.dto.AmountDataDto;
+import com.kh.jaga.aggregateIncomeTax.model.dto.IncomeAmountStmtDto;
 import com.kh.jaga.aggregateIncomeTax.model.vo.BizCodeVo;
 import com.kh.jaga.finStmt.model.vo.IncomeStmt;
 
@@ -44,11 +46,19 @@ public class AggregateServiceImpl implements AggregateService{
 	}
 
 	@Override
-	public IncomeStmt getData40(Map<String, String> info) {
+	public AmountDataDto getData40(Map<String, String> info) {
 		
-		IncomeStmt is = dao.selectData40(sqlSession, info);
+		AmountDataDto is = dao.selectData40(sqlSession, info);
 		
 		return is;
+	}
+
+	@Override
+	public int insertIncomeAmount(IncomeAmountStmtDto dto) {
+		
+		int result = dao.insertIncomeAmount(sqlSession, dto);
+		
+		return result;
 	}
 	
 }

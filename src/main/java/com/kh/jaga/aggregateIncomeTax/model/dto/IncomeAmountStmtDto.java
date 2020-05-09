@@ -4,81 +4,111 @@ public class IncomeAmountStmtDto {
 	
 	private String type;		//신고유형
 	private String duty;		//기장의무
-	private String v01;
-	private String v02;
-	private String v03;
-	private String v04;
-	private String v05;
-	private String v06;
-	private String v07;
-	private String v08;
-	private String v09;
-	private String v10;
-	private String v11;
-	private String v12;
-	private String v13;
 	
-	private String DOCUMENT_NO;
-	private String YEAR_OF_ATTR;
-	private String INCOME_TYPE_CODE;
-	private String TOTAL_INCOME;
-	private String NECESSARY_EXPENSE;
-	private String INCOME_ETC;
-	private String TAX_FOR_INCOME;
-	private String CARRY_FORWARD;
-	private String COMMON_BIZ;
-	private String INCOME_FOR_MIN_TAX;
-	private String START_DATE;
-	private String END_DATE;
-	private String LOCATION;
-	private String DOMESTIC;
-	private String MODIFY_DATE;
-	private String BOOK_KEEPING_CODE;
-	private String REPORT_CODE;
-	private String COM_CODE;
+	private String v101;		//소득구분코드
+	private String v102;		//
+	private String v103;		//상호 또는 법인명
+	private String v104;		//사업자 등록번호
+	private String v105;		//주민등록번호
+	private String v106;		//
+	private String v107;		//주업종코드
+	private String v108;		//총수입금액
+	private String v109;		//필요경비
+	private String v110;		//소득금액
+	private String v111;		//원천징수액 소득세
+	private String v112;		//이월결손금 공제 여부
+	private String v113;		//공동사업장 여부
+	
+	private String v201;		//
+	private String v202;		//
+	private String v203;		//
+	private String v204;		//
+	private String v205;		//
+	private String v206;		//
+	private String v207;		//
+	private String v208;		//
+	private String v209;		//
+	private String v210;		//
+	private String v211;		//
+	private String v212;		//
+	private String v213;		//
+	
+	private String documentNo;
+	private String yearOfAttr;	//귀속년도
+	private String incomeTypeCode;
+	private String totalIncome;
+	private String necessaryExpense;
+	private String incomeEtc;
+	private String taxForIncome;
+	private String carryForward;
+	private String commonBiz;
+	private String incomeForMinTax;
+	private String startDate;
+	private String endDate;
+	private String location;
+	private String domestic;
+	private String modifyDate;
+	private String bookKeepingCode;
+	private String reportCode;
+	private String comCode;
 	
 	public IncomeAmountStmtDto() {}
 
-	public IncomeAmountStmtDto(String type, String duty, String v01, String v02, String v03, String v04, String v05,
-			String v06, String v07, String v08, String v09, String v10, String v11, String v12, String v13,
-			String dOCUMENT_NO, String yEAR_OF_ATTR, String iNCOME_TYPE_CODE, String tOTAL_INCOME,
-			String nECESSARY_EXPENSE, String iNCOME_ETC, String tAX_FOR_INCOME, String cARRY_FORWARD, String cOMMON_BIZ,
-			String iNCOME_FOR_MIN_TAX, String sTART_DATE, String eND_DATE, String lOCATION, String dOMESTIC,
-			String mODIFY_DATE, String bOOK_KEEPING_CODE, String rEPORT_CODE, String cOM_CODE) {
+	public IncomeAmountStmtDto(String type, String duty, String v101, String v102, String v103, String v104,
+			String v105, String v106, String v107, String v108, String v109, String v110, String v111, String v112,
+			String v113, String v201, String v202, String v203, String v204, String v205, String v206, String v207,
+			String v208, String v209, String v210, String v211, String v212, String v213, String documentNo,
+			String yearOfAttr, String incomeTypeCode, String totalIncome, String necessaryExpense, String incomeEtc,
+			String taxForIncome, String carryForward, String commonBiz, String incomeForMinTax, String startDate,
+			String endDate, String location, String domestic, String modifyDate, String bookKeepingCode,
+			String reportCode, String comCode) {
 		super();
 		this.type = type;
 		this.duty = duty;
-		this.v01 = v01;
-		this.v02 = v02;
-		this.v03 = v03;
-		this.v04 = v04;
-		this.v05 = v05;
-		this.v06 = v06;
-		this.v07 = v07;
-		this.v08 = v08;
-		this.v09 = v09;
-		this.v10 = v10;
-		this.v11 = v11;
-		this.v12 = v12;
-		this.v13 = v13;
-		DOCUMENT_NO = dOCUMENT_NO;
-		YEAR_OF_ATTR = yEAR_OF_ATTR;
-		INCOME_TYPE_CODE = iNCOME_TYPE_CODE;
-		TOTAL_INCOME = tOTAL_INCOME;
-		NECESSARY_EXPENSE = nECESSARY_EXPENSE;
-		INCOME_ETC = iNCOME_ETC;
-		TAX_FOR_INCOME = tAX_FOR_INCOME;
-		CARRY_FORWARD = cARRY_FORWARD;
-		COMMON_BIZ = cOMMON_BIZ;
-		INCOME_FOR_MIN_TAX = iNCOME_FOR_MIN_TAX;
-		START_DATE = sTART_DATE;
-		END_DATE = eND_DATE;
-		LOCATION = lOCATION;
-		DOMESTIC = dOMESTIC;
-		MODIFY_DATE = mODIFY_DATE;
-		BOOK_KEEPING_CODE = bOOK_KEEPING_CODE;
-		REPORT_CODE = rEPORT_CODE;
-		COM_CODE = cOM_CODE;
+		this.v101 = v101;
+		this.v102 = v102;
+		this.v103 = v103;
+		this.v104 = v104;
+		this.v105 = v105;
+		this.v106 = v106;
+		this.v107 = v107;
+		this.v108 = v108;
+		this.v109 = v109;
+		this.v110 = v110;
+		this.v111 = v111;
+		this.v112 = v112;
+		this.v113 = v113;
+		this.v201 = v201;
+		this.v202 = v202;
+		this.v203 = v203;
+		this.v204 = v204;
+		this.v205 = v205;
+		this.v206 = v206;
+		this.v207 = v207;
+		this.v208 = v208;
+		this.v209 = v209;
+		this.v210 = v210;
+		this.v211 = v211;
+		this.v212 = v212;
+		this.v213 = v213;
+		this.documentNo = documentNo;
+		this.yearOfAttr = yearOfAttr;
+		this.incomeTypeCode = incomeTypeCode;
+		this.totalIncome = totalIncome;
+		this.necessaryExpense = necessaryExpense;
+		this.incomeEtc = incomeEtc;
+		this.taxForIncome = taxForIncome;
+		this.carryForward = carryForward;
+		this.commonBiz = commonBiz;
+		this.incomeForMinTax = incomeForMinTax;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.location = location;
+		this.domestic = domestic;
+		this.modifyDate = modifyDate;
+		this.bookKeepingCode = bookKeepingCode;
+		this.reportCode = reportCode;
+		this.comCode = comCode;
 	}
 
 	public String getType() {
@@ -97,268 +127,378 @@ public class IncomeAmountStmtDto {
 		this.duty = duty;
 	}
 
-	public String getV01() {
-		return v01;
+	public String getV101() {
+		return v101;
 	}
 
-	public void setV01(String v01) {
-		this.v01 = v01;
+	public void setV101(String v101) {
+		this.v101 = v101;
 	}
 
-	public String getV02() {
-		return v02;
+	public String getV102() {
+		return v102;
 	}
 
-	public void setV02(String v02) {
-		this.v02 = v02;
+	public void setV102(String v102) {
+		this.v102 = v102;
 	}
 
-	public String getV03() {
-		return v03;
+	public String getV103() {
+		return v103;
 	}
 
-	public void setV03(String v03) {
-		this.v03 = v03;
+	public void setV103(String v103) {
+		this.v103 = v103;
 	}
 
-	public String getV04() {
-		return v04;
+	public String getV104() {
+		return v104;
 	}
 
-	public void setV04(String v04) {
-		this.v04 = v04;
+	public void setV104(String v104) {
+		this.v104 = v104;
 	}
 
-	public String getV05() {
-		return v05;
+	public String getV105() {
+		return v105;
 	}
 
-	public void setV05(String v05) {
-		this.v05 = v05;
+	public void setV105(String v105) {
+		this.v105 = v105;
 	}
 
-	public String getV06() {
-		return v06;
+	public String getV106() {
+		return v106;
 	}
 
-	public void setV06(String v06) {
-		this.v06 = v06;
+	public void setV106(String v106) {
+		this.v106 = v106;
 	}
 
-	public String getV07() {
-		return v07;
+	public String getV107() {
+		return v107;
 	}
 
-	public void setV07(String v07) {
-		this.v07 = v07;
+	public void setV107(String v107) {
+		this.v107 = v107;
 	}
 
-	public String getV08() {
-		return v08;
+	public String getV108() {
+		return v108;
 	}
 
-	public void setV08(String v08) {
-		this.v08 = v08;
+	public void setV108(String v108) {
+		this.v108 = v108;
 	}
 
-	public String getV09() {
-		return v09;
+	public String getV109() {
+		return v109;
 	}
 
-	public void setV09(String v09) {
-		this.v09 = v09;
+	public void setV109(String v109) {
+		this.v109 = v109;
 	}
 
-	public String getV10() {
-		return v10;
+	public String getV110() {
+		return v110;
 	}
 
-	public void setV10(String v10) {
-		this.v10 = v10;
+	public void setV110(String v110) {
+		this.v110 = v110;
 	}
 
-	public String getV11() {
-		return v11;
+	public String getV111() {
+		return v111;
 	}
 
-	public void setV11(String v11) {
-		this.v11 = v11;
+	public void setV111(String v111) {
+		this.v111 = v111;
 	}
 
-	public String getV12() {
-		return v12;
+	public String getV112() {
+		return v112;
 	}
 
-	public void setV12(String v12) {
-		this.v12 = v12;
+	public void setV112(String v112) {
+		this.v112 = v112;
 	}
 
-	public String getV13() {
-		return v13;
+	public String getV113() {
+		return v113;
 	}
 
-	public void setV13(String v13) {
-		this.v13 = v13;
+	public void setV113(String v113) {
+		this.v113 = v113;
 	}
 
-	public String getDOCUMENT_NO() {
-		return DOCUMENT_NO;
+	public String getV201() {
+		return v201;
 	}
 
-	public void setDOCUMENT_NO(String dOCUMENT_NO) {
-		DOCUMENT_NO = dOCUMENT_NO;
+	public void setV201(String v201) {
+		this.v201 = v201;
 	}
 
-	public String getYEAR_OF_ATTR() {
-		return YEAR_OF_ATTR;
+	public String getV202() {
+		return v202;
 	}
 
-	public void setYEAR_OF_ATTR(String yEAR_OF_ATTR) {
-		YEAR_OF_ATTR = yEAR_OF_ATTR;
+	public void setV202(String v202) {
+		this.v202 = v202;
 	}
 
-	public String getINCOME_TYPE_CODE() {
-		return INCOME_TYPE_CODE;
+	public String getV203() {
+		return v203;
 	}
 
-	public void setINCOME_TYPE_CODE(String iNCOME_TYPE_CODE) {
-		INCOME_TYPE_CODE = iNCOME_TYPE_CODE;
+	public void setV203(String v203) {
+		this.v203 = v203;
 	}
 
-	public String getTOTAL_INCOME() {
-		return TOTAL_INCOME;
+	public String getV204() {
+		return v204;
 	}
 
-	public void setTOTAL_INCOME(String tOTAL_INCOME) {
-		TOTAL_INCOME = tOTAL_INCOME;
+	public void setV204(String v204) {
+		this.v204 = v204;
 	}
 
-	public String getNECESSARY_EXPENSE() {
-		return NECESSARY_EXPENSE;
+	public String getV205() {
+		return v205;
 	}
 
-	public void setNECESSARY_EXPENSE(String nECESSARY_EXPENSE) {
-		NECESSARY_EXPENSE = nECESSARY_EXPENSE;
+	public void setV205(String v205) {
+		this.v205 = v205;
 	}
 
-	public String getINCOME_ETC() {
-		return INCOME_ETC;
+	public String getV206() {
+		return v206;
 	}
 
-	public void setINCOME_ETC(String iNCOME_ETC) {
-		INCOME_ETC = iNCOME_ETC;
+	public void setV206(String v206) {
+		this.v206 = v206;
 	}
 
-	public String getTAX_FOR_INCOME() {
-		return TAX_FOR_INCOME;
+	public String getV207() {
+		return v207;
 	}
 
-	public void setTAX_FOR_INCOME(String tAX_FOR_INCOME) {
-		TAX_FOR_INCOME = tAX_FOR_INCOME;
+	public void setV207(String v207) {
+		this.v207 = v207;
 	}
 
-	public String getCARRY_FORWARD() {
-		return CARRY_FORWARD;
+	public String getV208() {
+		return v208;
 	}
 
-	public void setCARRY_FORWARD(String cARRY_FORWARD) {
-		CARRY_FORWARD = cARRY_FORWARD;
+	public void setV208(String v208) {
+		this.v208 = v208;
 	}
 
-	public String getCOMMON_BIZ() {
-		return COMMON_BIZ;
+	public String getV209() {
+		return v209;
 	}
 
-	public void setCOMMON_BIZ(String cOMMON_BIZ) {
-		COMMON_BIZ = cOMMON_BIZ;
+	public void setV209(String v209) {
+		this.v209 = v209;
 	}
 
-	public String getINCOME_FOR_MIN_TAX() {
-		return INCOME_FOR_MIN_TAX;
+	public String getV210() {
+		return v210;
 	}
 
-	public void setINCOME_FOR_MIN_TAX(String iNCOME_FOR_MIN_TAX) {
-		INCOME_FOR_MIN_TAX = iNCOME_FOR_MIN_TAX;
+	public void setV210(String v210) {
+		this.v210 = v210;
 	}
 
-	public String getSTART_DATE() {
-		return START_DATE;
+	public String getV211() {
+		return v211;
 	}
 
-	public void setSTART_DATE(String sTART_DATE) {
-		START_DATE = sTART_DATE;
+	public void setV211(String v211) {
+		this.v211 = v211;
 	}
 
-	public String getEND_DATE() {
-		return END_DATE;
+	public String getV212() {
+		return v212;
 	}
 
-	public void setEND_DATE(String eND_DATE) {
-		END_DATE = eND_DATE;
+	public void setV212(String v212) {
+		this.v212 = v212;
 	}
 
-	public String getLOCATION() {
-		return LOCATION;
+	public String getV213() {
+		return v213;
 	}
 
-	public void setLOCATION(String lOCATION) {
-		LOCATION = lOCATION;
+	public void setV213(String v213) {
+		this.v213 = v213;
 	}
 
-	public String getDOMESTIC() {
-		return DOMESTIC;
+	public String getDocumentNo() {
+		return documentNo;
 	}
 
-	public void setDOMESTIC(String dOMESTIC) {
-		DOMESTIC = dOMESTIC;
+	public void setDocumentNo(String documentNo) {
+		this.documentNo = documentNo;
 	}
 
-	public String getMODIFY_DATE() {
-		return MODIFY_DATE;
+	public String getYearOfAttr() {
+		return yearOfAttr;
 	}
 
-	public void setMODIFY_DATE(String mODIFY_DATE) {
-		MODIFY_DATE = mODIFY_DATE;
+	public void setYearOfAttr(String yearOfAttr) {
+		this.yearOfAttr = yearOfAttr;
 	}
 
-	public String getBOOK_KEEPING_CODE() {
-		return BOOK_KEEPING_CODE;
+	public String getIncomeTypeCode() {
+		return incomeTypeCode;
 	}
 
-	public void setBOOK_KEEPING_CODE(String bOOK_KEEPING_CODE) {
-		BOOK_KEEPING_CODE = bOOK_KEEPING_CODE;
+	public void setIncomeTypeCode(String incomeTypeCode) {
+		this.incomeTypeCode = incomeTypeCode;
 	}
 
-	public String getREPORT_CODE() {
-		return REPORT_CODE;
+	public String getTotalIncome() {
+		return totalIncome;
 	}
 
-	public void setREPORT_CODE(String rEPORT_CODE) {
-		REPORT_CODE = rEPORT_CODE;
+	public void setTotalIncome(String totalIncome) {
+		this.totalIncome = totalIncome;
 	}
 
-	public String getCOM_CODE() {
-		return COM_CODE;
+	public String getNecessaryExpense() {
+		return necessaryExpense;
 	}
 
-	public void setCOM_CODE(String cOM_CODE) {
-		COM_CODE = cOM_CODE;
+	public void setNecessaryExpense(String necessaryExpense) {
+		this.necessaryExpense = necessaryExpense;
+	}
+
+	public String getIncomeEtc() {
+		return incomeEtc;
+	}
+
+	public void setIncomeEtc(String incomeEtc) {
+		this.incomeEtc = incomeEtc;
+	}
+
+	public String getTaxForIncome() {
+		return taxForIncome;
+	}
+
+	public void setTaxForIncome(String taxForIncome) {
+		this.taxForIncome = taxForIncome;
+	}
+
+	public String getCarryForward() {
+		return carryForward;
+	}
+
+	public void setCarryForward(String carryForward) {
+		this.carryForward = carryForward;
+	}
+
+	public String getCommonBiz() {
+		return commonBiz;
+	}
+
+	public void setCommonBiz(String commonBiz) {
+		this.commonBiz = commonBiz;
+	}
+
+	public String getIncomeForMinTax() {
+		return incomeForMinTax;
+	}
+
+	public void setIncomeForMinTax(String incomeForMinTax) {
+		this.incomeForMinTax = incomeForMinTax;
+	}
+
+	public String getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
+	}
+
+	public String getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
+	}
+
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
+
+	public String getDomestic() {
+		return domestic;
+	}
+
+	public void setDomestic(String domestic) {
+		this.domestic = domestic;
+	}
+
+	public String getModifyDate() {
+		return modifyDate;
+	}
+
+	public void setModifyDate(String modifyDate) {
+		this.modifyDate = modifyDate;
+	}
+
+	public String getBookKeepingCode() {
+		return bookKeepingCode;
+	}
+
+	public void setBookKeepingCode(String bookKeepingCode) {
+		this.bookKeepingCode = bookKeepingCode;
+	}
+
+	public String getReportCode() {
+		return reportCode;
+	}
+
+	public void setReportCode(String reportCode) {
+		this.reportCode = reportCode;
+	}
+
+	public String getComCode() {
+		return comCode;
+	}
+
+	public void setComCode(String comCode) {
+		this.comCode = comCode;
 	}
 
 	@Override
 	public String toString() {
-		return "IncomeAmountStmtDto [type=" + type + ", duty=" + duty + ", v01=" + v01 + ", v02=" + v02 + ", v03=" + v03
-				+ ", v04=" + v04 + ", v05=" + v05 + ", v06=" + v06 + ", v07=" + v07 + ", v08=" + v08 + ", v09=" + v09
-				+ ", v10=" + v10 + ", v11=" + v11 + ", v12=" + v12 + ", v13=" + v13 + ", DOCUMENT_NO=" + DOCUMENT_NO
-				+ ", YEAR_OF_ATTR=" + YEAR_OF_ATTR + ", INCOME_TYPE_CODE=" + INCOME_TYPE_CODE + ", TOTAL_INCOME="
-				+ TOTAL_INCOME + ", NECESSARY_EXPENSE=" + NECESSARY_EXPENSE + ", INCOME_ETC=" + INCOME_ETC
-				+ ", TAX_FOR_INCOME=" + TAX_FOR_INCOME + ", CARRY_FORWARD=" + CARRY_FORWARD + ", COMMON_BIZ="
-				+ COMMON_BIZ + ", INCOME_FOR_MIN_TAX=" + INCOME_FOR_MIN_TAX + ", START_DATE=" + START_DATE
-				+ ", END_DATE=" + END_DATE + ", LOCATION=" + LOCATION + ", DOMESTIC=" + DOMESTIC + ", MODIFY_DATE="
-				+ MODIFY_DATE + ", BOOK_KEEPING_CODE=" + BOOK_KEEPING_CODE + ", REPORT_CODE=" + REPORT_CODE
-				+ ", COM_CODE=" + COM_CODE + "]";
+		return "IncomeAmountStmtDto [type=" + type + ", duty=" + duty + ", v101=" + v101 + ", v102=" + v102 + ", v103="
+				+ v103 + ", v104=" + v104 + ", v105=" + v105 + ", v106=" + v106 + ", v107=" + v107 + ", v108=" + v108
+				+ ", v109=" + v109 + ", v110=" + v110 + ", v111=" + v111 + ", v112=" + v112 + ", v113=" + v113
+				+ ", v201=" + v201 + ", v202=" + v202 + ", v203=" + v203 + ", v204=" + v204 + ", v205=" + v205
+				+ ", v206=" + v206 + ", v207=" + v207 + ", v208=" + v208 + ", v209=" + v209 + ", v210=" + v210
+				+ ", v211=" + v211 + ", v212=" + v212 + ", v213=" + v213 + ", documentNo=" + documentNo
+				+ ", yearOfAttr=" + yearOfAttr + ", incomeTypeCode=" + incomeTypeCode + ", totalIncome=" + totalIncome
+				+ ", necessaryExpense=" + necessaryExpense + ", incomeEtc=" + incomeEtc + ", taxForIncome="
+				+ taxForIncome + ", carryForward=" + carryForward + ", commonBiz=" + commonBiz + ", incomeForMinTax="
+				+ incomeForMinTax + ", startDate=" + startDate + ", endDate=" + endDate + ", location=" + location
+				+ ", domestic=" + domestic + ", modifyDate=" + modifyDate + ", bookKeepingCode=" + bookKeepingCode
+				+ ", reportCode=" + reportCode + ", comCode=" + comCode + "]";
 	}
 	
+	
+	
+	
+
 	
 
 	

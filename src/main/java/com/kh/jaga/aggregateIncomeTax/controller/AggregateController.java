@@ -2,7 +2,6 @@ package com.kh.jaga.aggregateIncomeTax.controller;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,13 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
 import com.kh.jaga.aggregateIncomeTax.model.dto.AddedTaxStmtDto;
+import com.kh.jaga.aggregateIncomeTax.model.dto.AmountDataDto;
+import com.kh.jaga.aggregateIncomeTax.model.dto.IncomeAmountStmtDto;
 import com.kh.jaga.aggregateIncomeTax.model.service.AggregateService;
-import com.kh.jaga.aggregateIncomeTax.model.vo.BizCodeVo;
-import com.kh.jaga.finStmt.model.vo.IncomeStmt;
-
-import net.sf.json.JSONArray;
 
 /**
  * @author SWY
@@ -37,7 +33,7 @@ public class AggregateController {
 	
 	@RequestMapping("showAggregateIncomeTax.aggregate")
 	public String showAggregateIncomeTax(Model model) {
-		/* 소득금액명세서 */
+		/* 소득금액명세서 처음 화면 보여주기 */
 		
 		//뷰에서 처리해주기때문에 안불러와도 될듯
 //		//업종코드 불러오기
@@ -51,7 +47,7 @@ public class AggregateController {
 //		JSONArray bizCodeArray = JSONArray.fromObject(bizCodeList);
 //		model.addAttribute("bizCodeArray", bizCodeArray);
 		
-		return "aggregateIncomeTax";
+		return "aggregateIncomeTax/aggregateIncomeTax";
 	}
 	
 	
@@ -60,24 +56,36 @@ public class AggregateController {
 	
 	
 	
-	//소득금액명세서 입력하기
-	@RequestMapping("")
-	public String insertAggregateIncomeStmt() {
+	
+	//소득금액명세서 입력하기 , (인설트)
+	@RequestMapping("insertIncomeAmount.aggregate")
+	public String insertIncomeAmount(IncomeAmountStmtDto dto, HttpServletRequest request) {
 		
+		System.out.println("소득금액 저장을 눌러서 이 메소드가 호출됨");
+		System.out.println("뷰에서 넘어온 데이터 : " +  dto);
 		
+		int result = service.insertIncomeAmount(dto);
 		
-		return "zzz";
+		if(result > 0) {
+			System.out.println("소득금액 저장 성공...(result) :" + result);
+			request.getSession().setAttribute("alertCode", "insertIncomeAmountOk");
+		}else {
+			System.out.println("소득금액 저장 실패...");
+			request.getSession().setAttribute("alertCode", "fail");
+		}
+		
+		return "common/alertPage";
 	}
 
 	
 	
-	//ajax . 코드 40 입력 시 데이터 가져옴
+	//소득금액명세서 ajax . 코드 40 입력 시 데이터 가져옴
 	@RequestMapping("getData40.aggregate")
 	public void getData40(HttpServletResponse response, 
 			@RequestParam(required = false) String attrYear, 
 			String comCode) {
-		
-		if(attrYear == null) {
+		System.out.println("attrYear : " + attrYear);
+		if(attrYear == "") {
 			attrYear = "2019";
 		}
 		
@@ -85,18 +93,19 @@ public class AggregateController {
 		System.out.println("attrYear : " + attrYear);
 		System.out.println("comCode : " + comCode);
 		
+		//마이바티스용 객체 하나 만듦
 		Map<String, String> info = new HashMap<String, String>();
 		info.put("attrYear", attrYear);
 		info.put("comCode", comCode);
 		
-		IncomeStmt inStmt = service.getData40(info);
+		AmountDataDto amountData = service.getData40(info);
 		System.out.println("디비에서 가져온 데이터 ::: ");
-		System.out.println(info);
+		System.out.println(amountData);
 		
 		
 		
 		try {
-			response.getWriter().print(new Gson().toJson(inStmt));
+			response.getWriter().print(new Gson().toJson(amountData));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -124,7 +133,7 @@ public class AggregateController {
 	public String showIncomeDeductStmt() {
 		/* 소득공제명세서 */
 		
-		return "incomeDeductStmt";
+		return "aggregateIncomeTax/incomeDeductStmt";
 	}
 	
 	
@@ -150,7 +159,7 @@ public class AggregateController {
 	@RequestMapping("showAddedTaxStmt.aggregate")
 	public String showAddedTaxStmt() {
 		/* 가산세명세서 */
-		return "addedTaxStmt";
+		return "aggregateIncomeTax/addedTaxStmt";
 	}
 	
 	
@@ -197,7 +206,7 @@ public class AggregateController {
 	@RequestMapping("showAggregateCalculated.aggregate")
 	public String showAggregateCalculated() {
 		/* 종합소득세액계산서 */
-		return "aggregateCalculated";
+		return "aggregateIncomeTax/aggregateCalculated";
 	}
 	
 	

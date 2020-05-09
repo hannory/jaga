@@ -266,13 +266,21 @@
 	
 		
 		
-		<form id="tagForm" action="zzzplzInputAddrzzzzz" method="post" onsubmit="return checksubmit();">
+		<form id="tagForm" action="insertIncomeAmount.aggregate" method="post" onsubmit="return checksubmit();">
 		
 		<script>
 		submitFlag = 0;
 		function checksubmit(){
-			alert("submit 진입");
 			if(submitFlag == 0){
+				 Swal.fire({
+					   title: '귀속년도를 입력해주세요',
+					   icon: 'info',
+					   showCancelButton: false,
+					   confirmButtonColor: '#24574A',
+					   cancelButtonColor: '#d33',
+					   confirmButtonText: '확인'
+					 })
+					   
 				return false;
 			}else{
 				return true;
@@ -283,7 +291,7 @@
 		<!-- 귀속년도 -->
 		<div style="float:right;">
 			<label>귀속년도 : </label>
-			<input id="attrYear" type="number" style="width:60px; border-bottom:1px solid black;">
+			<input id="attrYear" name="yearOfAttr" type="number" style="width:60px; border-bottom:1px solid black;">
 			<label>년</label>
 			<div onclick="selectStmt();" class="cursorPointer" style="padding:5px; display:inline-block; background:#24574A; color:white; border-radius:5px;">조회</div>
 		</div>
@@ -309,7 +317,13 @@
 		
 		<script>
 		function doSubmit(){
-			alert("doSubmit func called...");
+			
+			if( Number($("#attrYear").val()) > 1900){
+				submitFlag = 1;
+			}else{
+				console.log("else 블럭 진입..서브밋 안될거임");
+			}
+			
 			$("#tagForm").submit();
 		}
 		</script>
@@ -615,7 +629,21 @@
 										"comCode":'${ loginCompany.companyCode }'
 										},
 								success: function(data){
-									alert("success!!!\n" + data);
+									
+									console.log(data);
+									var data01 = JSON.parse(data);
+									
+									$("#v108").val(data01.sum10);
+									$("#v109").val(data01.sum20);
+									$("#v110").val(Number(data01.sum10) - Number(data01.sum20));
+									
+									/* data01.sum10
+									data01.sum20
+									data01.sum40 */
+									
+									
+									
+									
 								},
 								error: function(status){
 									alert("error!!!\n" + status);
@@ -783,6 +811,11 @@
 							
 							$("#v218").val('X');
 							$("#v218").prop('readonly',true);
+							
+							$("#v203").prop("placeholder","이름을 입력하세요");
+							
+							
+							
 						}
 					}
 			
@@ -831,7 +864,7 @@
 		
 		$("#v101").focus(function(){
 			$("#divHelp").html(
-			"11:비영업대금이익 &nbsp;21:배당가산하는배당&nbsp;30:부동산소득&nbsp;40:사업소득&nbsp;51:근로소득&nbsp;60:기타소득&nbsp;66:연금소득&nbsp;67:종교인소득"		
+			"<소득구분코드> <br> 11:비영업대금이익 &nbsp;21:배당가산하는배당&nbsp;30:부동산소득&nbsp;40:사업소득&nbsp;51:근로소득&nbsp;60:기타소득&nbsp;66:연금소득&nbsp;67:종교인소득"		
 			);
 		});
 		</script>
