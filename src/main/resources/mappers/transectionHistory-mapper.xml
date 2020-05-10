@@ -59,13 +59,7 @@
 		JOIN EVIDENCE E ON(E.EVIDENCE_CODE = S.EVIDENCE_CODE)
 		WHERE S.COM_CODE = #{comCode}
 		    AND SUBSTR(TO_CHAR(S.SLIP_DATE,'YYYYMMDD'), 1, 4) = 2020
-		    AND (J.SLIP_CODE, J.PRICE) IN (SELECT SLIP_CODE, MIN(PRICE)
-		                                    FROM (SELECT SLIP_CODE, PRICE, JOURNAL_CODE
-		                                    FROM JOURNALIZE
-		                                    WHERE (SLIP_CODE, PRICE) NOT IN (SELECT SLIP_CODE, MIN(PRICE)
-		                                                                     FROM JOURNALIZE
-		                                                                     GROUP BY SLIP_CODE))
-		                                    GROUP BY SLIP_CODE)
+		   
 		    AND S.SLIP_DIVISION = '매입매출'
 		ORDER BY S.SLIP_DATE DESC
  	</select>

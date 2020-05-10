@@ -152,6 +152,7 @@
    	<servlet-name>businessPayment</servlet-name>
    	<url-pattern>*.bp</url-pattern>
    </servlet-mapping>
+   
    <servlet>
       <servlet-name>taxInvoice</servlet-name>
       <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -163,6 +164,20 @@
    <servlet-mapping>
       <servlet-name>taxInvoice</servlet-name>
       <url-pattern>*.ti</url-pattern>
+   </servlet-mapping>
+	
+   
+   <servlet>
+      <servlet-name>retirement</servlet-name>
+      <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+      <init-param>
+         <param-name>contextConfigLocation</param-name>
+         <param-value>/WEB-INF/config/retirement-servlet.xml</param-value>
+      </init-param>
+   </servlet>
+   <servlet-mapping>
+      <servlet-name>retirement</servlet-name>
+      <url-pattern>*.rt</url-pattern>
    </servlet-mapping>
 	
 	

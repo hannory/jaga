@@ -124,6 +124,7 @@ public class ReceiptionServiceImpl implements ReceiptionService{
 			for(int i = 1; i< sheet.getLastRowNum()+1; i++) {
 				Receiption2 r = new Receiption2();
 				Journalize j = new Journalize();
+				
 				Journalize j2 = new Journalize();
 				List<Journalize> listJ = new ArrayList<Journalize>();
 				

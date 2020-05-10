@@ -235,7 +235,7 @@ $(window).load(function(){
                                         
                                     <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-parent="#sidenavAccordionPages">
                                         <nav class="sb-sidenav-menu-nested nav">
-	                                        <a class="nav-link" href="retirement.vi">퇴직금계산</a>
+	                                        <a class="nav-link" href="retirement.rt">퇴직금계산</a>
 	                                        <a class="nav-link" href="retirementReceipt.vi">퇴직소득원천징수영수증</a>
                                         </nav>
                                     </div>
