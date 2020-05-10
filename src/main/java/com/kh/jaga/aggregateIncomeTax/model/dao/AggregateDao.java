@@ -11,6 +11,7 @@ import com.kh.jaga.aggregateIncomeTax.model.dto.AggregateCalculatedDto;
 import com.kh.jaga.aggregateIncomeTax.model.dto.AmountDataDto;
 import com.kh.jaga.aggregateIncomeTax.model.dto.DeductStmtDto;
 import com.kh.jaga.aggregateIncomeTax.model.dto.IncomeAmountStmtDto;
+import com.kh.jaga.aggregateIncomeTax.model.dto.PaidTaxStmtDto;
 import com.kh.jaga.aggregateIncomeTax.model.vo.BizCodeVo;
 import com.kh.jaga.finStmt.model.vo.IncomeStmt;
 
@@ -31,5 +32,7 @@ public interface AggregateDao {
 	AggregateCalculatedDto selectExistingData(SqlSessionTemplate sqlSession, HashMap<String, String> map);
 
 	int insertDeductOk(SqlSessionTemplate sqlSession, DeductStmtDto dto);
+
+	int insertPrePaid(SqlSessionTemplate sqlSession, PaidTaxStmtDto dto);
 
 }

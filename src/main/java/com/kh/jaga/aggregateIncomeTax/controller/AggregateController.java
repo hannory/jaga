@@ -20,6 +20,7 @@ import com.kh.jaga.aggregateIncomeTax.model.dto.AggregateCalculatedDto;
 import com.kh.jaga.aggregateIncomeTax.model.dto.AmountDataDto;
 import com.kh.jaga.aggregateIncomeTax.model.dto.DeductStmtDto;
 import com.kh.jaga.aggregateIncomeTax.model.dto.IncomeAmountStmtDto;
+import com.kh.jaga.aggregateIncomeTax.model.dto.PaidTaxStmtDto;
 import com.kh.jaga.aggregateIncomeTax.model.service.AggregateService;
 
 /**
@@ -277,6 +278,7 @@ public class AggregateController {
 	
 	
 	
+	//기존 데이터 불러오기 (종소세 계산서)
 	@RequestMapping("selectExistingData.aggregate")
 	public void selectExistingData(HttpServletResponse response,
 			String yearOfAttr,
@@ -292,15 +294,42 @@ public class AggregateController {
 		System.out.println("조회된 dto :::");
 		System.out.println(dto);
 		
-		
-		
-		
 		try {
 			response.getWriter().print("valueFromJAVA");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
+	}//method
+	
+	
+	
+	
+	
+	
+	@RequestMapping("savePrePaid.aggregate")
+	public void savePrePaid(HttpServletResponse response, PaidTaxStmtDto dto ) {
+		
+		System.out.println("ajax가 savePrePaid 호출함...");
+		
+		int result = service.insertPrePaid(dto);
+		
+		System.out.println("인서트 결과 result : " + result);
+		if(result > 0) {
+			System.out.println("입력 성공");
+		}else {
+			System.out.println("입력 실패");
+		}
+		
+		
+		
+		try {
+			response.getWriter().print("testValueFromJava");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+	}//method
+	
 	
 	
 	

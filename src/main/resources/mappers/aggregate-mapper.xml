@@ -478,6 +478,48 @@
   </select>
   
   
+  <insert id="insertPrePaid" parameterType="com.kh.jaga.aggregateIncomeTax.model.dto.PaidTaxStmtDto">
+  
+  	INSERT INTO PAID_TAX_STATEMENT(
+	  	DOCUMENT_NO,
+		YEAR_OF_ATTR,
+		PAID_TAX,
+		PAYMENT_OF_EXPECTED_RETURN,
+		TAX_OF_EXPECTED_RETURN,
+		OCCASINAL_TAX,
+		INTEREST_INCOME,
+		DIVIDEND_INCOME,
+		BIZ_INCOME,
+		WORK_INCOME,
+		ANNUITY_INCOME,
+		ETC_INCOME,
+		TOTLA_PAID_INCOME,
+		COM_CODE
+  	)
+  	VALUES(
+	  	SEQ_PAID_TAX_STATEMENT,
+		#{yearOfAttr},
+		null,
+		null,
+		null,
+		null,
+		null,
+		null,
+		null,
+		null,
+		null,
+		null,
+		#{totalPaidIncome},
+		#{comCode}
+  	)
+  	
+  	
+  	
+  
+  	
+  </insert>
+  
+  
   
   
   

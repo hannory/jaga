@@ -203,6 +203,21 @@
 		/* 기납부세액 저장하기 */
 		function savePrePaid(){
 			alert("기납부세액 저장 클릭");
+			
+			$.ajax({
+				url: "savePrePaid.aggregate",
+				type: "post",
+				data: {
+					"key":"value"
+				},
+				success: function(data){
+					alert("success:::" + data);
+				},
+				error: function(status){
+					alert("error:::"+status);
+				}
+				
+			});
 		}
 		
 		
@@ -415,69 +430,69 @@
 			
 			<tr>
 				<td colspan="2">1. 중간 예납 세액</td>
-				<td><input type="text" name="" id=""></td>
-				<td><input type="text" name="" id=""></td>
+				<td><input type="text" name="v101" id="v101"></td>
+				<td><input type="text" name="v201" id="v201"></td>
 			</tr>
 			
 			<tr>
 				<td colspan="2">2. 토지등매매차익예정신고납부</td>
-				<td><input type="text" name="" id=""></td>
-				<td><input type="text" name="" id=""></td>
+				<td><input type="text" name="v102" id="v102"></td>
+				<td><input type="text" name="v202" id="v202"></td>
 			</tr>
 			
 			<tr>
 				<td colspan="2">3. 토지등매매차익예정고지세액</td>
-				<td><input type="text" name="" id=""></td>
-				<td><input type="text" name="" id=""></td>
+				<td><input type="text" name="v103" id="v103"></td>
+				<td><input type="text" name="v203" id="v203"></td>
 			</tr>
 			
 			<tr>
 				<td colspan="2">4. 수시부과세액</td>
-				<td><input type="text" name="" id=""></td>
-				<td><input type="text" name="" id=""></td>
+				<td><input type="text" name="v104" id="v104"></td>
+				<td><input type="text" name="v204" id="v204"></td>
 			</tr>
 			
 			<tr>
 				<td rowspan="6" style="text-align:center">원천징수세액 <br>및<br> 납세조합 징수세액</td>
 				<td>5. 이자소득</td>
-				<td><input type="text" name="" id=""></td>
-				<td><input type="text" name="" id=""></td>
+				<td><input type="text" name="v105" id="v105"></td>
+				<td><input type="text" name="v205" id="v205"></td>
 			</tr>
 			
 			<tr>
 				<td>6. 배당소득</td>
-				<td><input type="text" name="" id=""></td>
-				<td><input type="text" name="" id=""></td>
+				<td><input type="text" name="v106" id="v106"></td>
+				<td><input type="text" name="v206" id="v206"></td>
 			</tr>
 			
 			<tr>
 				<td>7. 사업소득</td>
-				<td><input type="text" name="" id=""></td>
-				<td><input type="text" name="" id=""></td>
+				<td><input type="text" name="v107" id="v107"></td>
+				<td><input type="text" name="v207" id="v207"></td>
 			</tr>
 			
 			<tr>
 				<td>8. 근로소득</td>
-				<td><input type="text" name="" id=""></td>
-				<td><input type="text" name="" id=""></td>
+				<td><input type="text" name="v108" id="v108"></td>
+				<td><input type="text" name="v208" id="v208"></td>
 			</tr>
 			
 			<tr>
 				<td>9. 연금소득</td>
-				<td><input type="text" name="" id=""></td>
-				<td><input type="text" name="" id=""></td>
+				<td><input type="text" name="v109" id="v109"></td>
+				<td><input type="text" name="v209" id="v209"></td>
 			</tr>
 			
 			<tr>
 				<td>10. 기타소득</td>
-				<td><input type="text" name="" id=""></td>
-				<td><input type="text" name="" id=""></td>
+				<td><input type="text" name="v110" id="v110"></td>
+				<td><input type="text" name="v210" id="v210"></td>
 			</tr>
 			
 			<tr>
 				<td colspan="2">11. 기납부세액합계</td>
-				<td><input type="text" name="" id=""></td>
-				<td><input type="text" name="" id=""></td>
+				<td><input type="text" name="totalPaidIncome" id="totalPaidIncome"></td>
+				<td><input type="text" name="totalPaidIncome2" id="totalPaidIncome2"></td>
 			</tr>
 			
 		</table>
