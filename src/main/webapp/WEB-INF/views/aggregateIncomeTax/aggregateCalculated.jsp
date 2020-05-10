@@ -65,6 +65,14 @@
 	}
 	
 	
+	.cursorPointer:hover{
+		background:gray;
+		color:white;
+		opacity:50%;
+		cursor:pointer;
+	}
+	
+	
 </style>
 </head>
 <body>
@@ -88,10 +96,17 @@
 		<!-- 귀속년도 -->
 		<div style="float:right;">
 			<label>귀속년도 : </label>
-			<input type="text" style="border-bottom:1px solid black;">
+			<input id="attrYear" name="yearOfAttr" type="number" style="width:60px; border-bottom:1px solid black;">
 			<label>년</label>
+			<div onclick="selectStmt();" class="cursorPointer" style="padding:5px; display:inline-block; background:#24574A; color:white; border-radius:5px;">조회</div>
 		</div>
 		<!-- //귀속년도 -->
+		<script>
+		function selectStmt(){
+			alert("selectStmt click zz");
+		}
+		</script>
+		
 		
 		<div style="height:50px;"></div><!-- 간격 띄우기 위한 용도 -->
 		

@@ -336,7 +336,8 @@
   
   <insert id="insertIncomeAmount" parameterType="com.kh.jaga.aggregateIncomeTax.model.dto.IncomeAmountStmtDto">
   
-  	INSERT INTO INCOME_AMOUNT_STATEMENT
+  	INSERT ALL
+  	INTO INCOME_AMOUNT_STATEMENT
   	(
 	  	DOCUMENT_NO,
 		YEAR_OF_ATTR,
@@ -365,6 +366,45 @@
 		#{v111},
 		#{v112},
 		#{v113},
+		#{incomeForMinTax},
+		#{location},
+		#{domestic},
+		SYSDATE,
+		#{duty},
+		#{type},
+		#{comCode}
+  	)	
+  	INTO INCOME_AMOUNT_STATEMENT
+  	(
+	  	DOCUMENT_NO,
+		YEAR_OF_ATTR,
+		INCOME_TYPE_CODE,
+		TOTAL_INCOME,
+		NECESSARY_EXPENSE,
+		INCOME_ETC,
+		TAX_FOR_INCOME,
+		CARRY_FORWARD,
+		COMMON_BIZ,
+		INCOME_FOR_MIN_TAX,
+		LOCATION,
+		DOMESTIC,
+		MODIFY_DATE,
+		BOOK_KEEPING_CODE,
+		REPORT_CODE,
+		COM_CODE
+  	)
+  	VALUES(
+	  	(SELECT 
+		GET_SEQ_INCOME_AMOUNT_STMT()
+		FROM DUAL),
+		#{yearOfAttr},
+		#{v201},
+		#{v208},
+		#{v209},
+		#{v210},
+		#{v211},
+		#{v212},
+		#{v213},
 		#{incomeForMinTax},
 		#{location},
 		#{domestic},
