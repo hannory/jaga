@@ -18,6 +18,7 @@ import com.google.gson.Gson;
 import com.kh.jaga.aggregateIncomeTax.model.dto.AddedTaxStmtDto;
 import com.kh.jaga.aggregateIncomeTax.model.dto.AggregateCalculatedDto;
 import com.kh.jaga.aggregateIncomeTax.model.dto.AmountDataDto;
+import com.kh.jaga.aggregateIncomeTax.model.dto.DeductStmtDto;
 import com.kh.jaga.aggregateIncomeTax.model.dto.IncomeAmountStmtDto;
 import com.kh.jaga.aggregateIncomeTax.model.service.AggregateService;
 
@@ -140,6 +141,19 @@ public class AggregateController {
 		/* 소득공제명세서 */
 		
 		return "aggregateIncomeTax/incomeDeductStmt";
+	}
+	
+	
+	
+	
+	@RequestMapping("insertDeduct.aggregate")
+	public String insertDeduct(DeductStmtDto dto) {
+		System.out.println("소득공제 명세서 저장 메소드 호출됨...");
+		
+		System.out.println("뷰에서 전달받은 값");
+		System.out.println(dto);
+		
+		return "aggregateIncomeTax/aggregateCalculated";
 	}
 	
 	
