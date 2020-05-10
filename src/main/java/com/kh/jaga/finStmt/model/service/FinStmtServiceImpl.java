@@ -8,12 +8,17 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.jaga.finStmt.model.dao.FinStmtDao;
 import com.kh.jaga.finStmt.model.dao.FinStmtDaoImpl;
+import com.kh.jaga.finStmt.model.vo.FinStmtAccount;
 import com.kh.jaga.finStmt.model.vo.IncomeStmt;
-import com.kh.jaga.finStmt.model.vo.IncomeStmtAccount;
+import com.kh.jaga.finStmt.model.vo.FinStmtAccount;
 import com.kh.jaga.finStmt.model.vo.MfrgStmt;
 
 @Service
@@ -22,36 +27,54 @@ public class FinStmtServiceImpl implements FinStmtService {
 	private FinStmtDao fsd;
 	@Autowired
 	private SqlSessionTemplate sqlSession;
+	@Autowired
+	private DataSourceTransactionManager transactionManager;
 	
 	@Override
 	public int insertIncomeStmt(IncomeStmt is) {
 		
-		int selectResult = fsd.countSavedIncomeStmt(sqlSession, is);
+		//전기 입력
+		int selectLastResult = fsd.countSavedIncomeStmt(sqlSession, is);
 		
-		if(selectResult > 0) {
+		if(selectLastResult > 0) {
+			
+			fsd.updateLastIncomeStmt(sqlSession, is);
+		} else {
+
+			fsd.insertLastIncomeStmt(sqlSession, is);
+		}
+		
+		//당기 입력
+		int selectCurrentResult = fsd.countSavedIncomeStmt(sqlSession, is);
+
+		if(selectCurrentResult > 0) {
+			
 			return fsd.updateIncomeStmt(sqlSession, is);
 		} else {
+			
 			return fsd.insertIncomeStmt(sqlSession, is);
 		}
 		
 	}
 
 	@Override
-	public HashMap selectIncomeStmt(IncomeStmtAccount isa) {
+	public HashMap selectIncomeStmt(FinStmtAccount fsa) {
 		//당기
-		List cList = fsd.selectCurFinStmt(sqlSession, isa);
+		List cList = fsd.selectCurFinStmt(sqlSession, fsa);
 		
 		long cSum14600 = 0;		//당기상품매입액
 		long cSum40100 = 0;		//상품매출
 		long cSum40400 = 0;		//제품매출
+		long cSum80200 = 0;		//급여
+		long cSum80300 = 0;		//상여금
 		long cSum81100 = 0;		//복리후생비
 		long cSum81300 = 0;		//접대비
 		long cSum83000 = 0;		//소모품비
 		long cSum83100 = 0;		//수수료비용
 		
 		for(int i = 0; i < cList.size(); i++) {
-			int accountCode = ((IncomeStmtAccount) cList.get(i)).getAccountCode();
-			long price = ((IncomeStmtAccount) cList.get(i)).getPrice();
+			int accountCode = ((FinStmtAccount) cList.get(i)).getAccountCode();
+			long price = ((FinStmtAccount) cList.get(i)).getPrice();
 			
 			if(accountCode == 14600) {
 				cSum14600 += price;
@@ -59,6 +82,10 @@ public class FinStmtServiceImpl implements FinStmtService {
 				cSum40100 += price;
 			} else if(accountCode == 40400) {
 				cSum40400 += price;
+			} else if(accountCode == 80200) {
+				cSum80200 += price;
+			} else if(accountCode == 80300) {
+				cSum80300 += price;
 			} else if(accountCode == 81100) {
 				cSum81100 += price;
 			} else if(accountCode == 81300) {
@@ -70,23 +97,25 @@ public class FinStmtServiceImpl implements FinStmtService {
 			}
 		}
 		
-		int cVal222 = fsd.selectMfrgSum90(sqlSession, isa);		//당기제품제조원가
+		int cVal222 = fsd.selectMfrgSum90(sqlSession, fsa);		//당기제품제조원가
 		
 		
 		//전기
-		List pList = fsd.selectPastFinStmt(sqlSession, isa);
+		List pList = fsd.selectPastFinStmt(sqlSession, fsa);
 		
 		long pSum14600 = 0;		//당기상품매입액
 		long pSum40100 = 0;		//상품매출
 		long pSum40400 = 0;		//제품매출
+		long pSum80200 = 0;		//급여
+		long pSum80300 = 0;		//상여금
 		long pSum81100 = 0;		//복리후생비
 		long pSum81300 = 0;		//접대비
 		long pSum83000 = 0;		//소모품비
 		long pSum83100 = 0;		//수수료비용
 		
 		for(int i = 0; i < pList.size(); i++) {
-			int accountCode = ((IncomeStmtAccount) pList.get(i)).getAccountCode();
-			long price = ((IncomeStmtAccount) pList.get(i)).getPrice();
+			int accountCode = ((FinStmtAccount) pList.get(i)).getAccountCode();
+			long price = ((FinStmtAccount) pList.get(i)).getPrice();
 			
 			if(accountCode == 14600) {
 				pSum14600 += price;
@@ -94,6 +123,10 @@ public class FinStmtServiceImpl implements FinStmtService {
 				pSum40100 += price;
 			} else if(accountCode == 40400) {
 				pSum40400 += price;
+			} else if(accountCode == 80200) {
+				pSum80200 += price;
+			} else if(accountCode == 80300) {
+				pSum80300 += price;
 			} else if(accountCode == 81100) {
 				pSum81100 += price;
 			} else if(accountCode == 81300) {
@@ -106,13 +139,15 @@ public class FinStmtServiceImpl implements FinStmtService {
 		}
 		
 		
-		isa.setYear(isa.getYear() - 1);									
-		int pVal222 = fsd.selectMfrgSum90(sqlSession, isa);		//전기제품제조원가
+		fsa.setYear(fsa.getYear() - 1);									
+		int pVal222 = fsd.selectMfrgSum90(sqlSession, fsa);		//전기제품제조원가
 		
 		HashMap hmap = new HashMap();
 		hmap.put("c14600", cSum14600);
 		hmap.put("c40100", cSum40100);
 		hmap.put("c40400", cSum40400);
+		hmap.put("c80200", cSum80200);
+		hmap.put("c80300", cSum80300);
 		hmap.put("c81100", cSum81100);
 		hmap.put("c81300", cSum81300);
 		hmap.put("c83000", cSum83000);
@@ -122,6 +157,8 @@ public class FinStmtServiceImpl implements FinStmtService {
 		hmap.put("p14600", pSum14600);
 		hmap.put("p40100", pSum40100);
 		hmap.put("p40400", pSum40400);
+		hmap.put("p80200", pSum80200);
+		hmap.put("p80300", pSum80300);
 		hmap.put("p81100", pSum81100);
 		hmap.put("p81300", pSum81300);
 		hmap.put("p83000", pSum83000);
@@ -132,32 +169,55 @@ public class FinStmtServiceImpl implements FinStmtService {
 	}
 
 	@Override
-	public ArrayList<IncomeStmtAccount> selectSlip(IncomeStmtAccount isa) {
+	public ArrayList<FinStmtAccount> selectSlip(FinStmtAccount fsa) {
 
 		ArrayList list;
 		
-		if(isa.getCurPast().equals("c")) {
+		if(fsa.getCurPast().equals("c")) {
 			//당기일 경우
-			list = fsd.selectSlip(sqlSession, isa);
+			list = fsd.selectSlip(sqlSession, fsa);
 		} else {
 			//전기일 경우
-			int curYear = isa.getYear();
-			isa.setYear(curYear - 1);
-			isa.setMonth(12);
-			isa.setDate(31);
-			list = fsd.selectSlip(sqlSession, isa);
+			int curYear = fsa.getYear();
+			fsa.setYear(curYear - 1);
+			fsa.setMonth(12);
+			fsa.setDate(31);
+			list = fsd.selectSlip(sqlSession, fsa);
 		}
+		
+		return list;
+	}
+	
+	//합계잔액시산표일 경우 원장조회
+	@Override
+	public ArrayList<FinStmtAccount> selectSlipByDate(FinStmtAccount fsa) {
+
+		ArrayList<Integer> accountArr = new ArrayList<Integer>();
+		
+		if(fsa.getAccountCode() != 10100) {
+			accountArr.add(fsa.getAccountCode());
+		//현금과현금성자산
+		} else {
+			accountArr.add(10100);
+			accountArr.add(10200);
+			accountArr.add(10300);
+			accountArr.add(10400);
+		}
+		
+		fsa.setAccountArr(accountArr);
+		
+		ArrayList list = fsd.selectSlipByDateWithArr(sqlSession, fsa);
 		
 		return list;
 	}
 	
 	//재무상태표일 경우 원장조회
 	@Override
-	public ArrayList selectSlipByDate(IncomeStmtAccount isa, String accountClass) {
+	public ArrayList selectSlipByDateWithArr(FinStmtAccount fsa, String accountClass) {
 
 		ArrayList<Integer> accountArr = new ArrayList<Integer>();
 		
-		//재무상태표
+		//재무상태표 ------------------자산
 		if(accountClass.equals("Cash")) {
 			accountArr.add(10100);
 			accountArr.add(10200);
@@ -187,6 +247,7 @@ public class FinStmtServiceImpl implements FinStmtService {
 			accountArr.add(17800);
 		} else if(accountClass.equals("OfficeEquipment")) {
 			accountArr.add(21200);
+		//재무상태표 ------------------부채와 자본
 		} else if(accountClass.equals("AccountPayables")) {
 			accountArr.add(25100);
 			accountArr.add(25200);
@@ -205,41 +266,47 @@ public class FinStmtServiceImpl implements FinStmtService {
 			accountArr.add(33100);
 		} 
 		
-		isa.setAccountArr(accountArr);
+		fsa.setAccountArr(accountArr);
 		
 		ArrayList list;
 		
-		if(isa.getCurPast().equals("c")) {
+		if(fsa.getCurPast().equals("c")) {
 			//당기일 경우
-			list = fsd.selectSlipByDate(sqlSession, isa);
+			list = fsd.selectSlipByDateWithArr(sqlSession, fsa);
 		} else {
 			//전기일 경우
-			int curYear = isa.getYear();
-			isa.setYear(curYear - 1);
-			isa.setMonth(12);
-			isa.setDate(31);
-			list = fsd.selectSlipByDate(sqlSession, isa);
+			int curYear = fsa.getYear();
+			fsa.setYear(curYear - 1);
+			fsa.setMonth(12);
+			fsa.setDate(31);
+			list = fsd.selectSlipByDateWithArr(sqlSession, fsa);
 		}
 		
 		return list;
 	}
 
 	@Override
-	public HashMap selectMfrgStmt(IncomeStmtAccount isa) {
+	public HashMap selectMfrgStmt(FinStmtAccount fsa) {
 		//당기
-		List cList = fsd.selectCurFinStmt(sqlSession, isa);
+		List cList = fsd.selectCurFinStmt(sqlSession, fsa);
 		
 		long cSum15300 = 0;		//원재료
+		long cSum50400 = 0;		//임금
+		long cSum50500 = 0;		//상여금
 		long cSum51100 = 0;		//복리후생비
 		long cSum51200 = 0;		//여비교통비
 		long cSum53000 = 0;		//소모품비
 		
 		for(int i = 0; i < cList.size(); i++) {
-			int accountCode = ((IncomeStmtAccount) cList.get(i)).getAccountCode();
-			long price = ((IncomeStmtAccount) cList.get(i)).getPrice();
+			int accountCode = ((FinStmtAccount) cList.get(i)).getAccountCode();
+			long price = ((FinStmtAccount) cList.get(i)).getPrice();
 			
 			if(accountCode == 15300) {
 				cSum15300 += price;
+			} else if(accountCode == 50400) {
+				cSum50400 += price;
+			} else if(accountCode == 50500) {
+				cSum50500 += price;
 			} else if(accountCode == 51100) {
 				cSum51100 += price;
 			} else if(accountCode == 51200) {
@@ -250,19 +317,25 @@ public class FinStmtServiceImpl implements FinStmtService {
 		}
 		
 		//전기
-		List pList = fsd.selectPastFinStmt(sqlSession, isa);
+		List pList = fsd.selectPastFinStmt(sqlSession, fsa);
 		
 		long pSum15300 = 0;		//원재료
+		long pSum50400 = 0;		//급여
+		long pSum50500 = 0;		//상여금
 		long pSum51100 = 0;		//복리후생비
 		long pSum51200 = 0;		//여비교통비
 		long pSum53000 = 0;		//소모품비
 		
 		for(int i = 0; i < pList.size(); i++) {
-			int accountCode = ((IncomeStmtAccount) pList.get(i)).getAccountCode();
-			long price = ((IncomeStmtAccount) pList.get(i)).getPrice();
+			int accountCode = ((FinStmtAccount) pList.get(i)).getAccountCode();
+			long price = ((FinStmtAccount) pList.get(i)).getPrice();
 			
 			if(accountCode == 15300) {
 				pSum15300 += price;
+			} else if(accountCode == 50400) {
+				pSum50400 += price;
+			} else if(accountCode == 50500) {
+				pSum50500 += price;
 			} else if(accountCode == 51100) {
 				pSum51100 += price;
 			} else if(accountCode == 51200) {
@@ -274,11 +347,15 @@ public class FinStmtServiceImpl implements FinStmtService {
 		
 		HashMap hmap = new HashMap();
 		hmap.put("c15300", cSum15300);
+		hmap.put("c50400", cSum50400);
+		hmap.put("c50500", cSum50500);
 		hmap.put("c51100", cSum51100);
 		hmap.put("c51200", cSum51200);
 		hmap.put("c53000", cSum53000);
 		
 		hmap.put("p15300", pSum15300);
+		hmap.put("p50400", pSum50400);
+		hmap.put("p50500", pSum50500);
 		hmap.put("p51100", pSum51100);
 		hmap.put("p51200", pSum51200);
 		hmap.put("p53000", pSum53000);
@@ -324,33 +401,33 @@ public class FinStmtServiceImpl implements FinStmtService {
 	}
 
 	@Override
-	public HashMap selectFinPos(IncomeStmtAccount isa) {
+	public HashMap selectFinPos(FinStmtAccount fsa) {
 		//당기
-		List<IncomeStmtAccount> cList = fsd.selectCurFinStmtByDate(sqlSession, isa);
+		List<FinStmtAccount> cList = fsd.selectCurFinStmtByDate(sqlSession, fsa);
 		
-		long cCash = 0;					//현금및현금성자산
-		long cShortTermInv = 0;			//단기투자자산
+		long cCash = 0;						//현금및현금성자산
+		long cShortTermInv = 0;				//단기투자자산
 		long cAccountRecievable = 0;		//매출채권
-		long cNonTradeRecievable = 0;	//미수금
-		long cVatPayment = 0;			//부가세대급금
-		long cMerchandises = 0;			//상품
+		long cNonTradeRecievable = 0;		//미수금
+		long cVatPayment = 0;				//부가세대급금
+		long cMerchandises = 0;				//상품
 		long cFinishedGoods = 0;			//제품
-		long cRawMaterials = 0;			//원재료
+		long cRawMaterials = 0;				//원재료
 		long cWorkInProcess = 0;			//재공품
 		long cLongInvSecurities = 0;		//장기투자증권
-		long cOfficeEquipment = 0;		//비품
-		long cAccountPayables = 0;		//매입채무
-		long cNonTradePayables = 0;		//미지급금
-		long cWitholdings = 0;			//예수금
-		long cVatDeposit = 0;			//부가세예수금
-		long cLongBorrowings = 0;		//장기차입금
+		long cOfficeEquipment = 0;			//비품
+		long cAccountPayables = 0;			//매입채무
+		long cNonTradePayables = 0;			//미지급금
+		long cWitholdings = 0;				//예수금
+		long cVatDeposit = 0;				//부가세예수금
+		long cLongBorrowings = 0	;		//장기차입금
 		long cRetirementLiabilities = 0;	//퇴직급여충당부채
-		long cCapitalStock = 0;			//자본금
+		long cCapitalStock = 0;				//자본금
 		
 		for(int i = 0; i < cList.size(); i++) {
-			int accountCode = ((IncomeStmtAccount) cList.get(i)).getAccountCode();
-			String debitCredit = ((IncomeStmtAccount) cList.get(i)).getDebitCredit();
-			long price = ((IncomeStmtAccount) cList.get(i)).getPrice();
+			int accountCode = ((FinStmtAccount) cList.get(i)).getAccountCode();
+			String debitCredit = ((FinStmtAccount) cList.get(i)).getDebitCredit();
+			long price = ((FinStmtAccount) cList.get(i)).getPrice();
 			
 			//------------- 자산 --------------
 			//현금및현금성자산 = 현금 + 당좌예금 + 보통예금 + 기타제예금
@@ -481,13 +558,12 @@ public class FinStmtServiceImpl implements FinStmtService {
 					cCapitalStock -= price;
 				}
 				
-				System.out.println("CHECK : 33100 = " + cCapitalStock) ;
 			}
 			
 		}
 		
 		//전기
-		List pList = fsd.selectPastFinStmtByDate(sqlSession, isa);
+		List pList = fsd.selectPastFinStmtByDate(sqlSession, fsa);
 		
 		long pCash = 0;					//현금및현금성자산
 		long pShortTermInv = 0;			//단기투자자산
@@ -509,9 +585,9 @@ public class FinStmtServiceImpl implements FinStmtService {
 		long pCapitalStock = 0;			//자본금
 
 		for(int i = 0; i < pList.size(); i++) {
-			int accountCode = ((IncomeStmtAccount) pList.get(i)).getAccountCode();
-			String debitCredit = ((IncomeStmtAccount) pList.get(i)).getDebitCredit();
-			long price = ((IncomeStmtAccount) pList.get(i)).getPrice();
+			int accountCode = ((FinStmtAccount) pList.get(i)).getAccountCode();
+			String debitCredit = ((FinStmtAccount) pList.get(i)).getDebitCredit();
+			long price = ((FinStmtAccount) pList.get(i)).getPrice();
 			
 			//-------------자산--------------
 			//현금및현금성자산 == 현금 + 당좌예금 + 보통예금 + 기타제예금
@@ -717,8 +793,304 @@ public class FinStmtServiceImpl implements FinStmtService {
 		return fsd.countClosedIncometStmt(sqlSession, is);
 	}
 
-	
-	
+	@Override
+	public HashMap selectCompTrialBal(FinStmtAccount fsa) {
+		
+		List<FinStmtAccount> list = fsd.selectCurFinStmtByDate(sqlSession, fsa);
+		
+		long debit10100 = 0;					//현금및현금성자산
+		long credit10100 = 0;				
+		long debit10800 = 0;		//매출채권
+		long credit10800 = 0;				
+		long debit13500 = 0;				//부가세대급금
+		long credit13500 = 0;				
+		long debit14600 = 0;				//상품
+		long credit14600 = 0;				
+		long debit15000 = 0;				//제품
+		long credit15000 = 0;				
+		long debit15300 = 0;				//원재료
+		long credit15300 = 0;				
+		long debit16900 = 0;				//재공품
+		long credit16900 = 0;				
+		long debit25100 = 0;				//매입채권
+		long credit25100 = 0;				
+		long debit25300 = 0;				//미지급금
+		long credit25300 = 0;				
+		long debit25400 = 0;				//예수금
+		long credit25400 = 0;				
+		long debit25500 = 0;				//부가세예수금
+		long credit25500 = 0;				
+		long debit33100 = 0;				//자본금
+		long credit33100 = 0;				
+		long debit40100 = 0;				//상품매출
+		long credit40100 = 0;				
+		long debit40400 = 0;				//제품매출
+		long credit40400 = 0;
+		//제조원가
+		long debit50400 = 0;				//임금
+		long credit50400 = 0;				
+		long debit50500 = 0;				//상여금
+		long credit50500 = 0;				
+		long debit50800 = 0;				//퇴직급여
+		long credit50800 = 0;				
+		long debit51100 = 0;				//복리후생비
+		long credit51100 = 0;				
+		long debit51200 = 0;				//여비교통비
+		long credit51200 = 0;				
+		long debit53000 = 0;				//소모품비
+		long credit53000 = 0;				
+		//판매비와관리비
+		long debit80200 = 0;				//급여
+		long credit80200 = 0;				
+		long debit81100 = 0;				//복리후생비
+		long credit81100 = 0;				
+		long debit81300 = 0;				//접대비
+		long credit81300 = 0;				
+		long debit83000 = 0;				//소모품비
+		long credit83000 = 0;				
+		long debit83100 = 0;				//수수료비용
+		long credit83100 = 0;				
+		
+		for(int i = 0; i < list.size(); i++) {
+			int accountCode = ((FinStmtAccount) list.get(i)).getAccountCode();
+			String debitCredit = ((FinStmtAccount) list.get(i)).getDebitCredit();
+			long price = ((FinStmtAccount) list.get(i)).getPrice();
+			
+			//현금및현금성자산
+			if(accountCode == 10100 || accountCode == 10200 || accountCode == 10300 || accountCode == 10400) {
+				if(debitCredit.equals("차변")) {
+					debit10100 += price;
+				} else {
+					credit10100 += price;
+				}
+			//매출채권
+			} else if(accountCode == 10800) {
+				if(debitCredit.equals("차변")) {
+					debit10800 += price;
+				} else {
+					credit10800 += price;
+				}
+			//부가세대급금
+			} else if(accountCode == 13500) {
+				if(debitCredit.equals("차변")) {
+					debit13500 += price;
+				} else {
+					credit13500 += price;
+				}
+			//상품
+			} else if(accountCode == 14600) {
+				if(debitCredit.equals("차변")) {
+					debit14600 += price;
+				} else {
+					credit14600 += price;
+				}
+			//제품
+			} else if(accountCode == 15000) {
+				if(debitCredit.equals("차변")) {
+					debit15000 += price;
+				} else {
+					credit15000 += price;
+				}
+			//원재료
+			} else if(accountCode == 15300) {
+				if(debitCredit.equals("차변")) {
+					debit15300 += price;
+				} else {
+					credit15300 += price;
+				}
+			//재공품
+			} else if(accountCode == 16900) {
+				if(debitCredit.equals("차변")) {
+					debit16900 += price;
+				} else {
+					credit16900 += price;
+				}
+			//외상매입금
+			} else if(accountCode == 25100) {
+				if(debitCredit.equals("차변")) {
+					debit25100 += price;
+				} else {
+					credit25100 += price;
+				}
+			//미지급금
+			} else if(accountCode == 25300) {
+				if(debitCredit.equals("차변")) {
+					debit25300 += price;
+				} else {
+					credit25300 += price;
+				}
+			//예수금
+			} else if(accountCode == 25400) {
+				if(debitCredit.equals("차변")) {
+					debit25400 += price;
+				} else {
+					credit25400 += price;
+				}
+			//부가세예수금
+			} else if(accountCode == 25500) {
+				if(debitCredit.equals("차변")) {
+					debit25500 += price;
+				} else {
+					credit25500 += price;
+				}
+			//자본금
+			} else if(accountCode == 33100) {
+				if(debitCredit.equals("차변")) {
+					debit33100 += price;
+				} else {
+					credit33100 += price;
+				}
+			//상품매출
+			} else if(accountCode == 40100) {
+				if(debitCredit.equals("차변")) {
+					debit40100 += price;
+				} else {
+					credit40100 += price;
+				}
+			//제품매출
+			} else if(accountCode == 40400) {
+				if(debitCredit.equals("차변")) {
+					debit40400 += price;
+				} else {
+					credit40400 += price;
+				}
+			//임금
+			} else if(accountCode == 50400) {
+				if(debitCredit.equals("차변")) {
+					debit50400 += price;
+				} else {
+					credit50400 += price;
+				}
+			//상여금
+			} else if(accountCode == 50500) {
+				if(debitCredit.equals("차변")) {
+					debit50500 += price;
+				} else {
+					credit50500 += price;
+				}
+			//퇴직급여
+			} else if(accountCode == 50800) {
+				if(debitCredit.equals("차변")) {
+					debit50800 += price;
+				} else {
+					credit50800 += price;
+				}
+			//복리후생비
+			} else if(accountCode == 51100) {
+				if(debitCredit.equals("차변")) {
+					debit51100 += price;
+				} else {
+					credit51100 += price;
+				}
+			//여비교통비
+			} else if(accountCode == 51200) {
+				if(debitCredit.equals("차변")) {
+					debit51200 += price;
+				} else {
+					credit51200 += price;
+				}
+			//소모품비
+			} else if(accountCode == 53000) {
+				if(debitCredit.equals("차변")) {
+					debit53000 += price;
+				} else {
+					credit53000 += price;
+				}
+			//급여
+			} else if(accountCode == 80200) {
+				if(debitCredit.equals("차변")) {
+					debit80200 += price;
+				} else {
+					credit80200 += price;
+				}
+			//복리후생비
+			} else if(accountCode == 81100) {
+				if(debitCredit.equals("차변")) {
+					debit81100 += price;
+				} else {
+					credit81100 += price;
+				}
+			//접대비
+			} else if(accountCode == 81300) {
+				if(debitCredit.equals("차변")) {
+					debit81300 += price;
+				} else {
+					credit81300 += price;
+				}
+			//소모품비
+			} else if(accountCode == 83000) {
+				if(debitCredit.equals("차변")) {
+					debit83000 += price;
+				} else {
+					credit83000 += price;
+				}
+			//수수료비용
+			} else if(accountCode == 83100) {
+				if(debitCredit.equals("차변")) {
+					debit83100 += price;
+				} else {
+					credit83100 += price;
+				}
+			}
+			
+		}
+
+		HashMap<String, Long> hmap = new HashMap<String, Long>();
+		hmap.put("debit10100", debit10100);
+		hmap.put("credit10100", credit10100);
+		hmap.put("debit10800", debit10800);
+		hmap.put("credit10800", credit10800);
+		hmap.put("debit13500", debit13500);
+		hmap.put("credit13500", credit13500);
+		hmap.put("debit14600", debit14600);
+		hmap.put("credit14600", credit14600);
+		hmap.put("debit15000", debit15000);
+		hmap.put("credit15000", credit15000);
+		hmap.put("debit15300", debit15300);
+		hmap.put("credit15300", credit15300);
+		hmap.put("debit16900", debit16900);
+		hmap.put("credit16900", credit16900);
+		hmap.put("debit25100", debit25100);
+		hmap.put("credit25100", credit25100);
+		hmap.put("debit25300", debit25300);
+		hmap.put("credit25300", credit25300);
+		hmap.put("debit25400", debit25400);
+		hmap.put("credit25400", credit25400);
+		hmap.put("debit25500", debit25500);
+		hmap.put("credit25500", credit25500);
+		hmap.put("debit33100", debit33100);
+		hmap.put("credit33100", credit33100);
+		hmap.put("debit40100", debit40100);
+		hmap.put("credit40100", credit40100);
+		hmap.put("debit40400", debit40400);
+		hmap.put("credit40400", credit40400);
+		hmap.put("debit50400", debit50400);
+		hmap.put("credit50400", credit50400);
+		hmap.put("debit50500", debit50500);
+		hmap.put("credit50500", credit50500);
+		hmap.put("debit50800", debit50800);
+		hmap.put("credit50800", credit50800);
+		hmap.put("debit51100", debit51100);
+		hmap.put("credit51100", credit51100);
+		hmap.put("debit51200", debit51200);
+		hmap.put("credit51200", credit51200);
+		hmap.put("debit53000", debit53000);
+		hmap.put("credit50300", credit53000);
+		//판매비와관리비
+		hmap.put("debit80200", debit80200);
+		hmap.put("credit80200", credit80200);
+		hmap.put("debit81100", debit81100);
+		hmap.put("credit81100", credit81100);
+		hmap.put("debit81300", debit81300);
+		hmap.put("credit81300", credit81300);
+		hmap.put("debit83000", debit83000);
+		hmap.put("credit83000", credit83000);
+		hmap.put("debit83100", debit83100);
+		hmap.put("credit83100", credit83100);
+				
+		return hmap;
+	}
+
 
 }
 

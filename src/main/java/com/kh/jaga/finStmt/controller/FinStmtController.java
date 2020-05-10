@@ -21,8 +21,9 @@ import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
 import com.kh.jaga.company.model.vo.Company;
 import com.kh.jaga.finStmt.model.service.FinStmtService;
+import com.kh.jaga.finStmt.model.vo.FinStmtAccount;
 import com.kh.jaga.finStmt.model.vo.IncomeStmt;
-import com.kh.jaga.finStmt.model.vo.IncomeStmtAccount;
+import com.kh.jaga.finStmt.model.vo.FinStmtAccount;
 import com.kh.jaga.finStmt.model.vo.MfrgStmt;
 
 import net.sf.json.JSONObject;
@@ -36,6 +37,8 @@ import net.sf.json.JSONObject;
 public class FinStmtController {
 	@Autowired
 	private FinStmtService fss;
+	@Autowired
+	private FinStmtAccount fsa;
 	
 	@GetMapping("compTrialBal.fs")
     public String showCompTrialBal() {
@@ -95,13 +98,13 @@ public class FinStmtController {
 	}
 	
 	@RequestMapping("selectIncomeStmt.fs")
-	public void selectIncomeStmt(IncomeStmtAccount isa, HttpServletRequest request,HttpServletResponse response) {
-		System.out.println("year : " + isa.getYear());
-		System.out.println("month : " + isa.getMonth());
+	public void selectIncomeStmt(FinStmtAccount fsa, HttpServletRequest request,HttpServletResponse response) {
+		System.out.println("year : " + fsa.getYear());
+		System.out.println("month : " + fsa.getMonth());
 		
-		isa.setComCode(((Company) request.getSession().getAttribute("loginCompany")).getCompanyCode());
+		fsa.setComCode(((Company) request.getSession().getAttribute("loginCompany")).getCompanyCode());
 		
-		HashMap hmap = fss.selectIncomeStmt(isa);
+		HashMap hmap = fss.selectIncomeStmt(fsa);
 		
 		//JSON 사용
 //		JSONObject jmap = new JSONObject();
@@ -129,10 +132,10 @@ public class FinStmtController {
 	}
 	
 	@RequestMapping("selectSlip.fs")
-	public void selectSlip(IncomeStmtAccount isa, HttpServletRequest request, HttpServletResponse response) {
-		isa.setComCode(((Company) request.getSession().getAttribute("loginCompany")).getCompanyCode());
+	public void selectSlip(FinStmtAccount fsa, HttpServletRequest request, HttpServletResponse response) {
+		fsa.setComCode(((Company) request.getSession().getAttribute("loginCompany")).getCompanyCode());
 		
-		ArrayList<IncomeStmtAccount> list = fss.selectSlip(isa);
+		ArrayList<FinStmtAccount> list = fss.selectSlip(fsa);
 		
 		response.setContentType("application/json");
 		
@@ -145,11 +148,28 @@ public class FinStmtController {
 		}
 	}
 	
-	@RequestMapping("selectSlipByDate.fs")
-	public void selectSlipByDate(IncomeStmtAccount isa, String accountClass, HttpServletRequest request, HttpServletResponse response) {
-		isa.setComCode(((Company) request.getSession().getAttribute("loginCompany")).getCompanyCode());
+	@RequestMapping("selectSlipByDateWithArr.fs")
+	public void selectSlipByDateWithArr(FinStmtAccount fsa, String accountClass, HttpServletRequest request, HttpServletResponse response) {
+		fsa.setComCode(((Company) request.getSession().getAttribute("loginCompany")).getCompanyCode());
 		
-		ArrayList<IncomeStmtAccount> list = fss.selectSlipByDate(isa, accountClass);
+		ArrayList<FinStmtAccount> list = fss.selectSlipByDateWithArr(fsa, accountClass);
+		
+		response.setContentType("application/json");
+		
+		try {
+			new Gson().toJson(list, response.getWriter());
+		} catch (JsonIOException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@RequestMapping("selectSlipByDate.fs")
+	public void selectSlipByDate(FinStmtAccount fsa, HttpServletRequest request, HttpServletResponse response) {
+		fsa.setComCode(((Company) request.getSession().getAttribute("loginCompany")).getCompanyCode());
+		
+		ArrayList<FinStmtAccount> list = fss.selectSlipByDate(fsa);
 		
 		response.setContentType("application/json");
 		
@@ -163,10 +183,10 @@ public class FinStmtController {
 	}
 	
 	@RequestMapping("selectMfrgStmt.fs")
-	public void selectMfrgCostStmt(IncomeStmtAccount isa, HttpServletRequest request, HttpServletResponse response) {
-		isa.setComCode(((Company) request.getSession().getAttribute("loginCompany")).getCompanyCode());
+	public void selectMfrgCostStmt(FinStmtAccount fsa, HttpServletRequest request, HttpServletResponse response) {
+		fsa.setComCode(((Company) request.getSession().getAttribute("loginCompany")).getCompanyCode());
 		
-		HashMap hmap = fss.selectMfrgStmt(isa);
+		HashMap hmap = fss.selectMfrgStmt(fsa);
 		
 		try {
 			response.setContentType("application/json");
@@ -250,10 +270,10 @@ public class FinStmtController {
 	}
 	
 	@RequestMapping("selectFinPos.fs")
-	public void selectFinPos(IncomeStmtAccount isa, HttpServletRequest request, HttpServletResponse response) {
-		isa.setComCode(((Company) request.getSession().getAttribute("loginCompany")).getCompanyCode());
+	public void selectFinPos(FinStmtAccount fsa, HttpServletRequest request, HttpServletResponse response) {
+		fsa.setComCode(((Company) request.getSession().getAttribute("loginCompany")).getCompanyCode());
 		
-		HashMap hmap = fss.selectFinPos(isa);
+		HashMap hmap = fss.selectFinPos(fsa);
 		
 		try {
 			response.setContentType("application/json");
@@ -307,6 +327,23 @@ public class FinStmtController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+	}
+	
+	@RequestMapping("selectCompTrialBal.fs")
+	public void selectCompTrialBal(FinStmtAccount fsa, HttpServletRequest request, HttpServletResponse response) {
+		fsa.setComCode(((Company)request.getSession().getAttribute("loginCompany")).getCompanyCode());
+		
+		HashMap hmap = fss.selectCompTrialBal(fsa);
+		
+		try {
+			response.setContentType("application/json");
+			new Gson().toJson(hmap, response.getWriter());
+		} catch (JsonIOException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}		
 		
 	}
 }

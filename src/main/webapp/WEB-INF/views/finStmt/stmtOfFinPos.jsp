@@ -67,10 +67,11 @@
 		text-align:right;
 	}
 	#contentTable tr:hover:not(.table-head-tr) {
-		/* color:orange;
-		border:1px solid red; */
 		background: #DDEBF7;
 		box-shadow: inset 0 -4px 0 #b4e6f8;
+	}
+	#contentTable tbody {
+		display: none;
 	}
 	.modal-head {
 		border: 1px solid #a6a6a6;
@@ -136,7 +137,7 @@
 		</table>
 		<form id="contentForm" action="insertMfrgStmt.fs" method="post">
 			<ol class="breadcrumb mb-4">
-				<table id="searchReTable">
+				<table id="searchTable">
 					<tr>
 						<td style="width:150px;">조회기간 : </td>
 						<td>
@@ -161,339 +162,343 @@
 				</tr>
 			</table>
 			<table id="contentTable" width="1100px" style="text-align:center;">
-				<tr class="table-head-tr">
-					<td class="table-head" width="28%" rowspan="2">과&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;목
-						<input type="hidden" id="login-openDay" value="${ sessionScope.loginCompany.gaeup }">
-						<input type="hidden" id="term" name="term">
-					</td>
-					<td class="table-head" colspan="2">제 <label class="normal-label" id="cur-term"></label>(당)기 2020.<label class="normal-label" id="cur-month"></label>.<label class="normal-label" id="cur-date"></label> 현재</td>
-					<td class="table-head" colspan="2">제 <label class="normal-label" id="past-term"></label>(전)기 2019.12.31 현재</td>
-				</tr>
-				<tr class="table-head-tr">
-					<td class="table-head" colspan="2">금액</td>
-					<td class="table-head" colspan="2">금액</td>
-				<tr>
-					<td class="table-title" style="padding-left:0px;">자산</td>
-					<td class="table-title" width="18%"></td>
-					<td class="table-title" width="18%"></td>
-					<td class="table-title" width="18%"></td>
-					<td class="table-title" width="18%"></td>
-				</tr>
-				<tr>
-					<td class="table-title">Ⅰ. 유동자산</td>
-					<td class="table-title"></td>
-					<td class="table-title-num"><span id="cSumAssests10"></span><input type="hidden" id="sum10" name="sum10"></td>
-					<td class="table-title"></td>
-					<td class="table-title-num"><span id="pSumAssests10"></span></td>
-				</tr>
-				<tr class="table-detail">
-					<td class="table-subTitle">① 당좌자산</td>
-					<td class="table-subTitle"></td>
-					<td class="table-subTitle-num"><span id="cSumAssests11"></span><input type="hidden" id="sum11" name="sum11"></td>
-					<td class="table-subTitle"></td>
-					<td class="table-subTitle-num"><span id="pSumAssests11"></span></td>
-				</tr>
-				<tr class="table-detail">
-					<td class="table-subSubTitle">현금및현금성자산</td>
-					<td class="table-content"><span id="cCash"></span><input type="hidden" id="cash" name="cash"></td>
-					<td></td>
-					<td class="table-content"><span id="pCash"></span></td>
-					<td></td>
-				</tr>
-				<tr class="table-detail">
-					<td class="table-subSubTitle">단기투자자산</td>
-					<td class="table-content"><span id="cShortTermInv"></span><input type="hidden" id="shortTermInv" name="shortTermInv"></td>
-					<td></td>
-					<td class="table-content"><span id="pShortTermInv"></span></td>
-					<td></td>
-				</tr>
-				<tr class="table-detail">
-					<td class="table-subSubTitle">매출채권</td>
-					<td class="table-content"><span id="cAccountRecievable"></span><input type="hidden" id="accountRecievable" name="accountRecievable"></td>
-					<td></td>
-					<td class="table-content"><span id="pAccountRecievable"></span></td>
-					<td></td>
-				</tr>
-				<tr class="table-detail">
-					<td class="table-subSubTitle">미수금</td>
-					<td class="table-content"><span id="cNonTradeRecievable"></span><input type="hidden" id="nonTradeRecievable" name="nonTradeRecievable"></td>
-					<td></td>
-					<td class="table-content"><span id="pNonTradeRecievable"></span></td>
-					<td></td>
-				</tr>
-				<tr class="table-detail">
-					<td class="table-subSubTitle">부가세대급금</td>
-					<td class="table-content"><span id="cVatPayment"></span><input type="hidden" id="vatPayment" name="vatPayment"></td>
-					<td></td>
-					<td class="table-content"><span id="pVatPayment"></span></td>
-					<td></td>
-				</tr>
-				<tr class="table-detail">
-					<td class="table-subTitle">② 재고자산</td>
-					<td class="table-subTitle"></td>
-					<td class="table-subTitle-num"><span id="cSumAssests12"></span><input type="hidden" id="sum12" name="sum12"></td>
-					<td class="table-subTitle"></td>
-					<td class="table-subTitle-num"><span id="pSumAssests12"></span></td>
-				</tr>
-				<tr class="table-detail">
-					<td class="table-subSubTitle">상품</td>
-					<td class="table-content"><span id="cMerchandises"></span><input type="hidden" id="merchandises" name="merchandises"></td>
-					<td></td>
-					<td class="table-content"><span id="pMerchandises"></span></td>
-					<td></td>
-				</tr>
-				<tr class="table-detail">
-					<td class="table-subSubTitle">제품</td>
-					<td class="table-content"><span id="cFinishedGoods"></span><input type="hidden" id="finishedGoods" name="finishedGoods"></td>
-					<td></td>
-					<td class="table-content"><span id="pFinishedGoods"></span></td>
-					<td></td>
-				</tr>
-				<tr class="table-detail">
-					<td class="table-subSubTitle">원재료</td>
-					<td class="table-content"><span id="cRawMaterials"></span><input type="hidden" id="rawMaterials" name="rawMaterials"></td>
-					<td></td>
-					<td class="table-content"><span id="pRawMaterials"></span></td>
-					<td></td>
-				</tr>
-				<tr class="table-detail">
-					<td class="table-subSubTitle">재공품</td>
-					<td class="table-content"><span id="cWorkInProcess"></span><input type="hidden" id="workInProcess" name="workInProcess"></td>
-					<td></td>
-					<td class="table-content"><span id="pWorkInProcess"></span></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td class="table-title">Ⅱ. 비유동자산</td>
-					<td class="table-title"></td>
-					<td class="table-title-num"><span id="cSumAssests20"></span><input type="hidden" id="sum20" name="sum20"></td>
-					<td class="table-title"></td>
-					<td class="table-title-num"><span id="pSumAssests20"></span></td>
-				</tr>
-				<tr class="table-detail">
-					<td class="table-subTitle">① 투자자산</td>
-					<td class="table-subTitle"></td>
-					<td class="table-subTitle-num"><span id="cSumAssests21"></span><input type="hidden" id="sum21" name="sum21"></td>
-					<td class="table-subTitle"></td>
-					<td class="table-subTitle-num"><span id="pSumAssests21"></span></td>
-				</tr>
-				<tr class="table-detail">
-					<td class="table-subSubTitle">장기투자증권</td>
-					<td class="table-content"><span id="cLongInvSecurities"></span><input type="hidden" id="longInvSecurities" name="longInvSecurities"></td>
-					<td></td>
-					<td class="table-content"><span id="pLongInvSecurities"></span></td>
-					<td></td>
-				</tr>
-				<tr class="table-detail">
-					<td class="table-subTitle">② 유형자산</td>
-					<td class="table-subTitle"></td>
-					<td class="table-subTitle-num"><span id="cSumAssests22"></span><input type="hidden" id="sum22" name="sum22"></td>
-					<td class="table-subTitle"></td>
-					<td class="table-subTitle-num"><span id="pSumAssests22"></span></td>
-				</tr>
-				<!-- <tr class="table-detail">
-					<td class="table-subSubTitle">기계장치</td>
-					<td class="table-content"><span id="cMachinery"></span><input type="hidden" id="machinery" name="machinery"></td>
-					<td></td>
-					<td class="table-content"><span id="pMachinery"></span></td>
-					<td></td>
-				</tr>
-				<tr class="table-detail">
-					<td class="table-subSubTitle">감가상각누계액</td>
-					<td class="table-content"><span id="cAdOfMachinery"></span><input type="hidden" id="adOfMachinery" name="adOfMachinery"></td>
-					<td></td>
-					<td class="table-content"><span id="pAdOfMachinery"></span></td>
-					<td></td>
-				</tr>
-				<tr class="table-detail">
-					<td class="table-subSubTitle">차량운반구</td>
-					<td class="table-content"><span id="cVehicles"></span><input type="hidden" id="vehicles" name="vehicles"></td>
-					<td></td>
-					<td class="table-content"><span id="pVehicles"></span></td>
-					<td></td>
-				</tr>
-				<tr class="table-detail">
-					<td class="table-subSubTitle">감가상각누계액</td>
-					<td class="table-content"><span id="cAdOfVehicles"></span><input type="hidden" id="adOfVehicles" name="adOfVehicles"></td>
-					<td></td>
-					<td class="table-content"><span id="pAdOfVehicles"></span></td>
-					<td></td>
-				</tr> -->
-				<tr class="table-detail">
-					<td class="table-subSubTitle">비품</td>
-					<td class="table-content"><span id="cOfficeEquipment"></span><input type="hidden" id="officeEquipment" name="officeEquipment"></td>
-					<td></td>
-					<td class="table-content"><span id="pOfficeEquipment"></span></td>
-					<td></td>
-				</tr>
-				<tr class="table-detail">
-					<td class="table-subTitle">③ 무형자산</td>
-					<td class="table-subTitle"></td>
-					<td class="table-subTitle-num"><span id="cSumAssests23"></span><input type="hidden" id="sum23" name="sum23"></td>
-					<td class="table-subTitle"></td>
-					<td class="table-subTitle-num"><span id="pSumAssests23"></span></td>
-				</tr>
-				<tr class="table-detail">
-					<td class="table-subTitle">④ 기타비유동자산</td>
-					<td class="table-subTitle"></td>
-					<td class="table-subTitle-num"><span id="cSumAssests24"></span><input type="hidden" id="sum24" name="sum24"></td>
-					<td class="table-subTitle"></td>
-					<td class="table-subTitle-num"><span id="pSumAssests24"></span></td>
-				</tr>
-				<tr>
-					<td class="table-title" style="padding-left:0px; box-shadow: inset 0 -4px 0 #2abd98;">자산총계</td>
-					<td class="table-title" style="box-shadow: inset 0 -4px 0 #2abd98;"></td>
-					<td class="table-title-num" style="box-shadow: inset 0 -4px 0 #2abd98;"><span id="cTotalAssests"></span><input type="hidden" id="totalAssests" name="totalAssests"></td>
-					<td class="table-title" style="box-shadow: inset 0 -4px 0 #2abd98;"></td>
-					<td class="table-title-num" style="box-shadow: inset 0 -4px 0 #2abd98;"><span id="pTotalAssests"></span></td>
-				</tr>
-				<tr>
-					<td class="table-title" style="padding-left:0px;">부채</td>
-					<td class="table-title"></td>
-					<td class="table-title"></td>
-					<td class="table-title"></td>
-					<td class="table-title"></td>
-				</tr>
-				<tr>
-					<td class="table-title">Ⅰ. 유동부채</td>
-					<td class="table-title"></td>
-					<td class="table-title-num"><span id="cSumLiabilities10"></span><input type="hidden" id="sumLiabilities10" name="sumLiabilities10"></td>
-					<td class="table-title"></td>
-					<td class="table-title-num"><span id="pSumLiabilities10"></span></td>
-				</tr>
-				<tr class="table-detail">
-					<td class="table-subSubTitle">매입채무</td>
-					<td class="table-content"><span id="cAccountPayables"></span><input type="hidden" id="accountPayables" name="accountPayables"></td>
-					<td></td>
-					<td class="table-content"><span id="pAccountPayables"></span></td>
-					<td></td>
-				</tr>
-				<tr class="table-detail">
-					<td class="table-subSubTitle">미지급금</td>
-					<td class="table-content"><span id="cNonTradePayables"></span><input type="hidden" id="nonTradePayables" name="nonTradePayables"></td>
-					<td></td>
-					<td class="table-content"><span id="pNonTradePayables"></span></td>
-					<td></td>
-				</tr>
-				<tr class="table-detail">
-					<td class="table-subSubTitle">예수금</td>
-					<td class="table-content"><span id="cWitholdings"></span><input type="hidden" id="witholdings" name="witholdings"></td>
-					<td></td>
-					<td class="table-content"><span id="pWitholdings"></span></td>
-					<td></td>
-				</tr>
-				<tr class="table-detail">
-					<td class="table-subSubTitle">부가세예수금</td>
-					<td class="table-content"><span id="cVatDeposit"></span><input type="hidden" id="vatDeposit" name="vatDeposit"></td>
-					<td></td>
-					<td class="table-content"><span id="pVatDeposit"></span></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td class="table-title">Ⅱ. 비유동부채</td>
-					<td class="table-title"></td>
-					<td class="table-title-num"><span id="cSumLiabilities20"></span><input type="hidden" id="sumLiabilities20" name="sumLiabilities20"></td>
-					<td class="table-title"></td>
-					<td class="table-title-num"><span id="pSumLiabilities20"></span></td>
-				</tr>
-				<tr class="table-detail">
-					<td class="table-subSubTitle">장기차입금</td>
-					<td class="table-content"><span id="cLongBorrowings"></span><input type="hidden" id="longBorrowings" name="longBorrowings"></td>
-					<td></td>
-					<td class="table-content"><span id="pLongBorrowings"></span></td>
-					<td></td>
-				</tr>
-				<tr class="table-detail">
-					<td class="table-subSubTitle">퇴직급여충당부채</td>
-					<td class="table-content"><span id="cRetirementLiabilities"></span><input type="hidden" id="retirementLiabilities" name="retirementLiabilities"></td>
-					<td></td>
-					<td class="table-content"><span id="pRetirementLiabilities"></span></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td class="table-title" style="padding-left:0px; box-shadow: inset 0 -4px 0 #2abd98;">부채총계</td>
-					<td class="table-title" style="box-shadow: inset 0 -4px 0 #2abd98;"></td>
-					<td class="table-title-num" style="box-shadow: inset 0 -4px 0 #2abd98;"><span id="cTotalLiabilities"></span><input type="hidden" id="totalLiabilities" name="totalLiabilities"></td>
-					<td class="table-title" style="box-shadow: inset 0 -4px 0 #2abd98;"></td>
-					<td class="table-title-num" style="box-shadow: inset 0 -4px 0 #2abd98;"><span id="pTotalLiabilities"></span></td>
-				</tr>
-				<tr>
-					<td class="table-title" style="padding-left:0px;">자본</td>
-					<td class="table-title"></td>
-					<td class="table-title"></td>
-					<td class="table-title"></td>
-					<td class="table-title"></td>
-				</tr>
-				<tr>
-					<td class="table-title">Ⅰ. 자본금</td>
-					<td class="table-title"></td>
-					<td class="table-title-num"><span id="cSumCapital10"></span><input type="hidden" id="sumCapital10" name="sumCapital10"></td>
-					<td class="table-title"></td>
-					<td class="table-title-num"><span id="pSumCapital10"></span></td>
-				</tr>
-				<tr class="table-detail">
-					<td class="table-subSubTitle">자본금</td>
-					<td class="table-content"><span id="cCapitalStock"></span><input type="hidden" id="capitalStock" name="capitalStock"></td>
-					<td></td>
-					<td class="table-content"><span id="pCapitalStock"></span></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td class="table-title">Ⅱ. 자본잉여금</td>
-					<td class="table-title"></td>
-					<td class="table-title-num"><span id="cSumCapital20"></span><input type="hidden" id="sumCapital20" name="sumCapital20"></td>
-					<td class="table-title"></td>
-					<td class="table-title-num"><span id="pSumCapital20"></span></td>
-				</tr>
-				<tr>
-					<td class="table-title">Ⅲ. 자본조정</td>
-					<td class="table-title"></td>
-					<td class="table-title-num"><span id="cSumCapital30"></span><input type="hidden" id="sumCapital30" name="sumCapital30"></td>
-					<td class="table-title"></td>
-					<td class="table-title-num"><span id="pSumCapital30"></span></td>
-				</tr>
-				<tr>
-					<td class="table-title">Ⅳ. 기타포괄손익누계액</td>
-					<td class="table-title"></td>
-					<td class="table-title-num"><span id="cSumCapital40"></span><input type="hidden" id="sumCapital40" name="sumCapital40"></td>
-					<td class="table-title"></td>
-					<td class="table-title-num"><span id="pSumCapital40"></span></td>
-				</tr>
-				<tr>
-					<td class="table-title">Ⅴ. 이익잉여금</td>
-					<td class="table-title"></td>
-					<td class="table-title-num"><span id="cSumCapital50"></span><input type="hidden" id="sumCapital50" name="sumCapital50"></td>
-					<td class="table-title"></td>
-					<td class="table-title-num"><span id="pSumCapital50"></span></td>
-				</tr>
-				<tr class="table-detail">
-					<td class="table-subSubTitle">미처분이익잉여금</td>
-					<td class="retained-earnings" style="text-align: right;"><span id="cRetainedEarnings"></span><input type="hidden" id="retainedEarnings" name="retainedEarnings"></td>
-					<td></td>
-					<td class="retained-earnings" style="text-align: right;"><span id="pRetainedEarnings"></span></td>
-					<td></td>
-				</tr>
-				<!-- <tr>
-					<td class="table-title" style="padding-left:0px;">(당기순이익)</td>
-					<td class="table-title"></td>
-					<td class="table-title"></td>
-					<td class="table-title"></td>
-					<td class="table-title"></td>
-				</tr> -->
-				<tr>
-					<td class="table-title" style="padding-left:0px; box-shadow: inset 0 -4px 0 #2abd98;">자본총계</td>
-					<td class="table-title" style="box-shadow: inset 0 -4px 0 #2abd98;"></td>
-					<td class="table-title-num" style="box-shadow: inset 0 -4px 0 #2abd98;"><span id="cTotalCapital"></span><input type="hidden" id="totalCapital" name="totalCapital"></td>
-					<td class="table-title" style="box-shadow: inset 0 -4px 0 #2abd98;"></td>
-					<td class="table-title-num" style="box-shadow: inset 0 -4px 0 #2abd98;"><span id="pTotalCapital"></span></td>
-				</tr>
-				<tr>
-					<td class="table-title" style="padding-left:0px; box-shadow: inset 0 -4px 0 #2abd98;">부채와자본총계</td>
-					<td class="table-title" style="box-shadow: inset 0 -4px 0 #2abd98;"></td>
-					<td class="table-title-num" style="box-shadow: inset 0 -4px 0 #2abd98;"><span id="cTotalLiabCap"></span><input type="hidden" id="totalLiabCap" name="totalLiabCap"></td>
-					<td class="table-title" style="box-shadow: inset 0 -4px 0 #2abd98;"></td>
-					<td class="table-title-num" style="box-shadow: inset 0 -4px 0 #2abd98;"><span id="pTotalLiabCap"></span></td>
-				</tr>
+				<thead>
+					<tr class="table-head-tr">
+						<td class="table-head" width="28%" rowspan="2">과&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;목
+							<input type="hidden" id="login-openDay" value="${ sessionScope.loginCompany.gaeup }">
+							<input type="hidden" id="term" name="term">
+						</td>
+						<td class="table-head" colspan="2">제 <label class="normal-label" id="cur-term"></label>(당)기 2020.<label class="normal-label" id="cur-month"></label>.<label class="normal-label" id="cur-date"></label> 현재</td>
+						<td class="table-head" colspan="2">제 <label class="normal-label" id="past-term"></label>(전)기 2019.12.31 현재</td>
+					</tr>
+					<tr class="table-head-tr">
+						<td class="table-head" colspan="2">금액</td>
+						<td class="table-head" colspan="2">금액</td>
+				</thead>
+				<tbody>
+					<tr>
+						<td class="table-title" style="padding-left:0px;">자산</td>
+						<td class="table-title" width="18%"></td>
+						<td class="table-title" width="18%"></td>
+						<td class="table-title" width="18%"></td>
+						<td class="table-title" width="18%"></td>
+					</tr>
+					<tr>
+						<td class="table-title">Ⅰ. 유동자산</td>
+						<td class="table-title"></td>
+						<td class="table-title-num"><span id="cSumAssests10"></span><input type="hidden" id="sum10" name="sum10"></td>
+						<td class="table-title"></td>
+						<td class="table-title-num"><span id="pSumAssests10"></span></td>
+					</tr>
+					<tr class="table-detail">
+						<td class="table-subTitle">① 당좌자산</td>
+						<td class="table-subTitle"></td>
+						<td class="table-subTitle-num"><span id="cSumAssests11"></span><input type="hidden" id="sum11" name="sum11"></td>
+						<td class="table-subTitle"></td>
+						<td class="table-subTitle-num"><span id="pSumAssests11"></span></td>
+					</tr>
+					<tr class="table-detail">
+						<td class="table-subSubTitle">현금및현금성자산</td>
+						<td class="table-content"><span id="cCash"></span><input type="hidden" id="cash" name="cash"></td>
+						<td></td>
+						<td class="table-content"><span id="pCash"></span></td>
+						<td></td>
+					</tr>
+					<tr class="table-detail">
+						<td class="table-subSubTitle">단기투자자산</td>
+						<td class="table-content"><span id="cShortTermInv"></span><input type="hidden" id="shortTermInv" name="shortTermInv"></td>
+						<td></td>
+						<td class="table-content"><span id="pShortTermInv"></span></td>
+						<td></td>
+					</tr>
+					<tr class="table-detail">
+						<td class="table-subSubTitle">매출채권</td>
+						<td class="table-content"><span id="cAccountRecievable"></span><input type="hidden" id="accountRecievable" name="accountRecievable"></td>
+						<td></td>
+						<td class="table-content"><span id="pAccountRecievable"></span></td>
+						<td></td>
+					</tr>
+					<tr class="table-detail">
+						<td class="table-subSubTitle">미수금</td>
+						<td class="table-content"><span id="cNonTradeRecievable"></span><input type="hidden" id="nonTradeRecievable" name="nonTradeRecievable"></td>
+						<td></td>
+						<td class="table-content"><span id="pNonTradeRecievable"></span></td>
+						<td></td>
+					</tr>
+					<tr class="table-detail">
+						<td class="table-subSubTitle">부가세대급금</td>
+						<td class="table-content"><span id="cVatPayment"></span><input type="hidden" id="vatPayment" name="vatPayment"></td>
+						<td></td>
+						<td class="table-content"><span id="pVatPayment"></span></td>
+						<td></td>
+					</tr>
+					<tr class="table-detail">
+						<td class="table-subTitle">② 재고자산</td>
+						<td class="table-subTitle"></td>
+						<td class="table-subTitle-num"><span id="cSumAssests12"></span><input type="hidden" id="sum12" name="sum12"></td>
+						<td class="table-subTitle"></td>
+						<td class="table-subTitle-num"><span id="pSumAssests12"></span></td>
+					</tr>
+					<tr class="table-detail">
+						<td class="table-subSubTitle">상품</td>
+						<td class="table-content"><span id="cMerchandises"></span><input type="hidden" id="merchandises" name="merchandises"></td>
+						<td></td>
+						<td class="table-content"><span id="pMerchandises"></span></td>
+						<td></td>
+					</tr>
+					<tr class="table-detail">
+						<td class="table-subSubTitle">제품</td>
+						<td class="table-content"><span id="cFinishedGoods"></span><input type="hidden" id="finishedGoods" name="finishedGoods"></td>
+						<td></td>
+						<td class="table-content"><span id="pFinishedGoods"></span></td>
+						<td></td>
+					</tr>
+					<tr class="table-detail">
+						<td class="table-subSubTitle">원재료</td>
+						<td class="table-content"><span id="cRawMaterials"></span><input type="hidden" id="rawMaterials" name="rawMaterials"></td>
+						<td></td>
+						<td class="table-content"><span id="pRawMaterials"></span></td>
+						<td></td>
+					</tr>
+					<tr class="table-detail">
+						<td class="table-subSubTitle">재공품</td>
+						<td class="table-content"><span id="cWorkInProcess"></span><input type="hidden" id="workInProcess" name="workInProcess"></td>
+						<td></td>
+						<td class="table-content"><span id="pWorkInProcess"></span></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td class="table-title">Ⅱ. 비유동자산</td>
+						<td class="table-title"></td>
+						<td class="table-title-num"><span id="cSumAssests20"></span><input type="hidden" id="sum20" name="sum20"></td>
+						<td class="table-title"></td>
+						<td class="table-title-num"><span id="pSumAssests20"></span></td>
+					</tr>
+					<tr class="table-detail">
+						<td class="table-subTitle">① 투자자산</td>
+						<td class="table-subTitle"></td>
+						<td class="table-subTitle-num"><span id="cSumAssests21"></span><input type="hidden" id="sum21" name="sum21"></td>
+						<td class="table-subTitle"></td>
+						<td class="table-subTitle-num"><span id="pSumAssests21"></span></td>
+					</tr>
+					<tr class="table-detail">
+						<td class="table-subSubTitle">장기투자증권</td>
+						<td class="table-content"><span id="cLongInvSecurities"></span><input type="hidden" id="longInvSecurities" name="longInvSecurities"></td>
+						<td></td>
+						<td class="table-content"><span id="pLongInvSecurities"></span></td>
+						<td></td>
+					</tr>
+					<tr class="table-detail">
+						<td class="table-subTitle">② 유형자산</td>
+						<td class="table-subTitle"></td>
+						<td class="table-subTitle-num"><span id="cSumAssests22"></span><input type="hidden" id="sum22" name="sum22"></td>
+						<td class="table-subTitle"></td>
+						<td class="table-subTitle-num"><span id="pSumAssests22"></span></td>
+					</tr>
+					<!-- <tr class="table-detail">
+						<td class="table-subSubTitle">기계장치</td>
+						<td class="table-content"><span id="cMachinery"></span><input type="hidden" id="machinery" name="machinery"></td>
+						<td></td>
+						<td class="table-content"><span id="pMachinery"></span></td>
+						<td></td>
+					</tr>
+					<tr class="table-detail">
+						<td class="table-subSubTitle">감가상각누계액</td>
+						<td class="table-content"><span id="cAdOfMachinery"></span><input type="hidden" id="adOfMachinery" name="adOfMachinery"></td>
+						<td></td>
+						<td class="table-content"><span id="pAdOfMachinery"></span></td>
+						<td></td>
+					</tr>
+					<tr class="table-detail">
+						<td class="table-subSubTitle">차량운반구</td>
+						<td class="table-content"><span id="cVehicles"></span><input type="hidden" id="vehicles" name="vehicles"></td>
+						<td></td>
+						<td class="table-content"><span id="pVehicles"></span></td>
+						<td></td>
+					</tr>
+					<tr class="table-detail">
+						<td class="table-subSubTitle">감가상각누계액</td>
+						<td class="table-content"><span id="cAdOfVehicles"></span><input type="hidden" id="adOfVehicles" name="adOfVehicles"></td>
+						<td></td>
+						<td class="table-content"><span id="pAdOfVehicles"></span></td>
+						<td></td>
+					</tr> -->
+					<tr class="table-detail">
+						<td class="table-subSubTitle">비품</td>
+						<td class="table-content"><span id="cOfficeEquipment"></span><input type="hidden" id="officeEquipment" name="officeEquipment"></td>
+						<td></td>
+						<td class="table-content"><span id="pOfficeEquipment"></span></td>
+						<td></td>
+					</tr>
+					<tr class="table-detail">
+						<td class="table-subTitle">③ 무형자산</td>
+						<td class="table-subTitle"></td>
+						<td class="table-subTitle-num"><span id="cSumAssests23"></span><input type="hidden" id="sum23" name="sum23"></td>
+						<td class="table-subTitle"></td>
+						<td class="table-subTitle-num"><span id="pSumAssests23"></span></td>
+					</tr>
+					<tr class="table-detail">
+						<td class="table-subTitle">④ 기타비유동자산</td>
+						<td class="table-subTitle"></td>
+						<td class="table-subTitle-num"><span id="cSumAssests24"></span><input type="hidden" id="sum24" name="sum24"></td>
+						<td class="table-subTitle"></td>
+						<td class="table-subTitle-num"><span id="pSumAssests24"></span></td>
+					</tr>
+					<tr>
+						<td class="table-title" style="padding-left:0px; box-shadow: inset 0 -4px 0 #2abd98;">자산총계</td>
+						<td class="table-title" style="box-shadow: inset 0 -4px 0 #2abd98;"></td>
+						<td class="table-title-num" style="box-shadow: inset 0 -4px 0 #2abd98;"><span id="cTotalAssests"></span><input type="hidden" id="totalAssests" name="totalAssests"></td>
+						<td class="table-title" style="box-shadow: inset 0 -4px 0 #2abd98;"></td>
+						<td class="table-title-num" style="box-shadow: inset 0 -4px 0 #2abd98;"><span id="pTotalAssests"></span></td>
+					</tr>
+					<tr>
+						<td class="table-title" style="padding-left:0px;">부채</td>
+						<td class="table-title"></td>
+						<td class="table-title"></td>
+						<td class="table-title"></td>
+						<td class="table-title"></td>
+					</tr>
+					<tr>
+						<td class="table-title">Ⅰ. 유동부채</td>
+						<td class="table-title"></td>
+						<td class="table-title-num"><span id="cSumLiabilities10"></span><input type="hidden" id="sumLiabilities10" name="sumLiabilities10"></td>
+						<td class="table-title"></td>
+						<td class="table-title-num"><span id="pSumLiabilities10"></span></td>
+					</tr>
+					<tr class="table-detail">
+						<td class="table-subSubTitle">매입채무</td>
+						<td class="table-content"><span id="cAccountPayables"></span><input type="hidden" id="accountPayables" name="accountPayables"></td>
+						<td></td>
+						<td class="table-content"><span id="pAccountPayables"></span></td>
+						<td></td>
+					</tr>
+					<tr class="table-detail">
+						<td class="table-subSubTitle">미지급금</td>
+						<td class="table-content"><span id="cNonTradePayables"></span><input type="hidden" id="nonTradePayables" name="nonTradePayables"></td>
+						<td></td>
+						<td class="table-content"><span id="pNonTradePayables"></span></td>
+						<td></td>
+					</tr>
+					<tr class="table-detail">
+						<td class="table-subSubTitle">예수금</td>
+						<td class="table-content"><span id="cWitholdings"></span><input type="hidden" id="witholdings" name="witholdings"></td>
+						<td></td>
+						<td class="table-content"><span id="pWitholdings"></span></td>
+						<td></td>
+					</tr>
+					<tr class="table-detail">
+						<td class="table-subSubTitle">부가세예수금</td>
+						<td class="table-content"><span id="cVatDeposit"></span><input type="hidden" id="vatDeposit" name="vatDeposit"></td>
+						<td></td>
+						<td class="table-content"><span id="pVatDeposit"></span></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td class="table-title">Ⅱ. 비유동부채</td>
+						<td class="table-title"></td>
+						<td class="table-title-num"><span id="cSumLiabilities20"></span><input type="hidden" id="sumLiabilities20" name="sumLiabilities20"></td>
+						<td class="table-title"></td>
+						<td class="table-title-num"><span id="pSumLiabilities20"></span></td>
+					</tr>
+					<tr class="table-detail">
+						<td class="table-subSubTitle">장기차입금</td>
+						<td class="table-content"><span id="cLongBorrowings"></span><input type="hidden" id="longBorrowings" name="longBorrowings"></td>
+						<td></td>
+						<td class="table-content"><span id="pLongBorrowings"></span></td>
+						<td></td>
+					</tr>
+					<tr class="table-detail">
+						<td class="table-subSubTitle">퇴직급여충당부채</td>
+						<td class="table-content"><span id="cRetirementLiabilities"></span><input type="hidden" id="retirementLiabilities" name="retirementLiabilities"></td>
+						<td></td>
+						<td class="table-content"><span id="pRetirementLiabilities"></span></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td class="table-title" style="padding-left:0px; box-shadow: inset 0 -4px 0 #2abd98;">부채총계</td>
+						<td class="table-title" style="box-shadow: inset 0 -4px 0 #2abd98;"></td>
+						<td class="table-title-num" style="box-shadow: inset 0 -4px 0 #2abd98;"><span id="cTotalLiabilities"></span><input type="hidden" id="totalLiabilities" name="totalLiabilities"></td>
+						<td class="table-title" style="box-shadow: inset 0 -4px 0 #2abd98;"></td>
+						<td class="table-title-num" style="box-shadow: inset 0 -4px 0 #2abd98;"><span id="pTotalLiabilities"></span></td>
+					</tr>
+					<tr>
+						<td class="table-title" style="padding-left:0px;">자본</td>
+						<td class="table-title"></td>
+						<td class="table-title"></td>
+						<td class="table-title"></td>
+						<td class="table-title"></td>
+					</tr>
+					<tr>
+						<td class="table-title">Ⅰ. 자본금</td>
+						<td class="table-title"></td>
+						<td class="table-title-num"><span id="cSumCapital10"></span><input type="hidden" id="sumCapital10" name="sumCapital10"></td>
+						<td class="table-title"></td>
+						<td class="table-title-num"><span id="pSumCapital10"></span></td>
+					</tr>
+					<tr class="table-detail">
+						<td class="table-subSubTitle">자본금</td>
+						<td class="table-content"><span id="cCapitalStock"></span><input type="hidden" id="capitalStock" name="capitalStock"></td>
+						<td></td>
+						<td class="table-content"><span id="pCapitalStock"></span></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td class="table-title">Ⅱ. 자본잉여금</td>
+						<td class="table-title"></td>
+						<td class="table-title-num"><span id="cSumCapital20"></span><input type="hidden" id="sumCapital20" name="sumCapital20"></td>
+						<td class="table-title"></td>
+						<td class="table-title-num"><span id="pSumCapital20"></span></td>
+					</tr>
+					<tr>
+						<td class="table-title">Ⅲ. 자본조정</td>
+						<td class="table-title"></td>
+						<td class="table-title-num"><span id="cSumCapital30"></span><input type="hidden" id="sumCapital30" name="sumCapital30"></td>
+						<td class="table-title"></td>
+						<td class="table-title-num"><span id="pSumCapital30"></span></td>
+					</tr>
+					<tr>
+						<td class="table-title">Ⅳ. 기타포괄손익누계액</td>
+						<td class="table-title"></td>
+						<td class="table-title-num"><span id="cSumCapital40"></span><input type="hidden" id="sumCapital40" name="sumCapital40"></td>
+						<td class="table-title"></td>
+						<td class="table-title-num"><span id="pSumCapital40"></span></td>
+					</tr>
+					<tr>
+						<td class="table-title">Ⅴ. 이익잉여금</td>
+						<td class="table-title"></td>
+						<td class="table-title-num"><span id="cSumCapital50"></span><input type="hidden" id="sumCapital50" name="sumCapital50"></td>
+						<td class="table-title"></td>
+						<td class="table-title-num"><span id="pSumCapital50"></span></td>
+					</tr>
+					<tr class="table-detail">
+						<td class="table-subSubTitle">미처분이익잉여금</td>
+						<td class="retained-earnings" style="text-align: right;"><span id="cRetainedEarnings"></span><input type="hidden" id="retainedEarnings" name="retainedEarnings"></td>
+						<td></td>
+						<td class="retained-earnings" style="text-align: right;"><span id="pRetainedEarnings"></span></td>
+						<td></td>
+					</tr>
+					<!-- <tr>
+						<td class="table-title" style="padding-left:0px;">(당기순이익)</td>
+						<td class="table-title"></td>
+						<td class="table-title"></td>
+						<td class="table-title"></td>
+						<td class="table-title"></td>
+					</tr> -->
+					<tr>
+						<td class="table-title" style="padding-left:0px; box-shadow: inset 0 -4px 0 #2abd98;">자본총계</td>
+						<td class="table-title" style="box-shadow: inset 0 -4px 0 #2abd98;"></td>
+						<td class="table-title-num" style="box-shadow: inset 0 -4px 0 #2abd98;"><span id="cTotalCapital"></span><input type="hidden" id="totalCapital" name="totalCapital"></td>
+						<td class="table-title" style="box-shadow: inset 0 -4px 0 #2abd98;"></td>
+						<td class="table-title-num" style="box-shadow: inset 0 -4px 0 #2abd98;"><span id="pTotalCapital"></span></td>
+					</tr>
+					<tr>
+						<td class="table-title" style="padding-left:0px; box-shadow: inset 0 -4px 0 #2abd98;">부채와자본총계</td>
+						<td class="table-title" style="box-shadow: inset 0 -4px 0 #2abd98;"></td>
+						<td class="table-title-num" style="box-shadow: inset 0 -4px 0 #2abd98;"><span id="cTotalLiabCap"></span><input type="hidden" id="totalLiabCap" name="totalLiabCap"></td>
+						<td class="table-title" style="box-shadow: inset 0 -4px 0 #2abd98;"></td>
+						<td class="table-title-num" style="box-shadow: inset 0 -4px 0 #2abd98;"><span id="pTotalLiabCap"></span></td>
+					</tr>
+				</tbody>
 			</table>
 		</form>
 		<div style="height: 10vh;"></div>
@@ -518,15 +523,6 @@
 			//달력버튼
 			$("img.ui-datepicker-trigger")
 					.attr("style","margin-left:2px; vertical-align:middle; cursor: Pointer; width:20px; height:20px");
-			
-			//표에서 하늘색 hover 주기
-			/* $("#contentTable td").mouseover(function() {
-				$(this).parent().css("background", "#DDEBF7");
-			});
-			
-			$("#contentTable td").mouseout(function() {
-				$(this).parent().css("background", "white");
-			});	 */	
 			
 			//현재 날자로 기본값 설정
 			var curDate = new Date();
@@ -568,6 +564,8 @@
 		//(날짜를 통한) 검색 버튼 클릭 시
 		function dateSearch() {
 			$("#loading-div").show();
+			
+			$("#contentTable tbody").css("display", "table-row-group");
 			
 			dateArray = ($("#datepicker").val()).split("-");
 			
@@ -915,7 +913,11 @@
 							
 							//행 보여주기/숨기기
 							
+							//로딩 이미지 숨기기
 							$("#loading-div").hide();
+						},
+						error : function(status) {
+							console.log(status);
 						}
 					})
 				}
@@ -988,7 +990,7 @@
 				$("#datepicker4").val(toDate);
 				
 				$.ajax({
-					url : "selectSlipByDate.fs",
+					url : "selectSlipByDateWithArr.fs",
 					type : "get",
 					data : {
 						year : year,
@@ -1044,14 +1046,6 @@
 								var $mtd6 = $("<td>").attr("class", "modal-head").text(comma(monthDebitBal)).css("text-align", "right");
 								var $mtd7 = $("<td>").attr("class", "modal-head").text(comma(monthCreditBal)).css("text-align", "right");
 								
-								/* if(value.debitCredit == "차변") {
-									var $mtd6 = $("<td>").attr("class", "modal-head").text(comma(monthBalance)).css("text-align", "right");
-									var $mtd7 = $("<td>").attr("class", "modal-head");
-								} else {
-									var $mtd6 = $("<td>").attr("class", "modal-head");
-									var $mtd7 = $("<td>").attr("class", "modal-head").text(comma(monthBalance)).css("text-align", "right");
-								} */
-								
 								var $mtd8 = $("<td>").attr("class", "modal-head");
 								
 								$mtr.append($mtd1);
@@ -1074,14 +1068,6 @@
 								
 								var $atd6 = $("<td>").attr("class", "modal-head").text(comma(accDebitBal)).css("text-align", "right");
 								var $atd7 = $("<td>").attr("class", "modal-head").text(comma(accCreditBal)).css("text-align", "right");
-								
-								/* if(value.debitCredit == '차변') {
-									var $atd6 = $("<td>").attr("class", "modal-head").text(comma(balance)).css("text-align", "right");
-									var $atd7 = $("<td>").attr("class", "modal-head");
-								} else {
-									var $atd6 = $("<td>").attr("class", "modal-head");
-									var $atd7 = $("<td>").attr("class", "modal-head").text(comma(balance)).css("text-align", "right");
-								} */
 								
 								var $atd8 = $("<td>").attr("class", "modal-head");
 								
@@ -1130,8 +1116,17 @@
 								accCreditBal += value.price;
 							}
 							
-							//누계 출력
-							var $balanceTd = $("<td>").text(comma(balance)).css("text-align", "right");
+							if(value.accountCode == '25100' || value.accountCode == '25200' || value.accountCode == 25300 || value.accountCode == 25400
+									|| value.accountCode == 25500 || value.accountCode == 29300 || value.accountCode == 29500 || value.accountCode == 29600
+									|| value.accountCode == 33100) {
+								balance = accCreditBal - accDebitBal;
+								console.log("if문 진입");
+							}
+							
+							console.log("value.accountCode : " + value.accountCode);
+							console.log("balance : " + balance);
+							
+							var $balanceTd = $("<td>").text(comma(balance)).css("text-align", "right");			//잔액 출력
 							
 							$tr.append($dateTd);
 							$tr.append($dateSlipCodeTd);
@@ -1149,18 +1144,6 @@
 						$("#last-debit-acc").text(comma(accDebitBal)).css("text-align", "right");
 						$("#last-credit-month").text(comma(monthCreditBal)).css("text-align", "right");
 						$("#last-credit-acc").text(comma(accCreditBal)).css("text-align", "right");
-						
-						/* if(data[0].debitCredit == "차변") {
-							$("#last-debit-month").text(comma(monthBalance)).css("text-align", "right");
-							$("#last-debit-acc").text(comma(balance)).css("text-align", "right");
-							$("#last-credit-month").text("");
-							$("#last-credit-acc").text("");
-						} else {							
-							$("#last-debit-month").text("");
-							$("#last-debit-acc").text("");
-							$("#last-credit-month").text(comma(monthBalance)).css("text-align", "right");
-							$("#last-credit-acc").text(comma(balance)).css("text-align", "right");
-						} */
 						
 					},
 					error : function(status) {
@@ -1225,18 +1208,6 @@
 					</div>
 					<div class="modal-body">
 			        	<table id="list-detail" style=" width:100%; margin-left:auto; margin-right: auto;">
-			        		<!-- <thead>
-				        		<tr>
-				        			<td class="modal-head" style="width:5%;">일자</td>
-				        			<td class="modal-head" style="width:6%;">번호</td>
-				        			<td class="modal-head" style="width:20%;">적요</td>
-				        			<td class="modal-head" style="width:6%;">코드</td>
-				        			<td class="modal-head" style="width:18%;">거래처명</td>
-				        			<td class="modal-head" style="width:15%;">차변</td>
-				        			<td class="modal-head" style="width:15%;">대변</td>
-				        			<td class="modal-head" style="width:15%;">잔액</td>
-				        		</tr>
-				        	</thead> -->
 				        	<tbody>
 				        	</tbody>
 				        	<tfoot>

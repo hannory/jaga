@@ -7,18 +7,18 @@ import java.util.List;
 import org.mybatis.spring.SqlSessionTemplate;
 
 import com.kh.jaga.finStmt.model.vo.IncomeStmt;
-import com.kh.jaga.finStmt.model.vo.IncomeStmtAccount;
+import com.kh.jaga.finStmt.model.vo.FinStmtAccount;
 import com.kh.jaga.finStmt.model.vo.MfrgStmt;
 
 public interface FinStmtDao {
 
 	int insertIncomeStmt(SqlSessionTemplate sqlSession, IncomeStmt i);
 
-	ArrayList selectSlip(SqlSessionTemplate sqlSession, IncomeStmtAccount isa);
+	ArrayList selectSlip(SqlSessionTemplate sqlSession, FinStmtAccount fsa);
 
-	List selectCurFinStmt(SqlSessionTemplate sqlSession, IncomeStmtAccount isa);
+	List selectCurFinStmt(SqlSessionTemplate sqlSession, FinStmtAccount fsa);
 
-	List selectPastFinStmt(SqlSessionTemplate sqlSession, IncomeStmtAccount isa);
+	List selectPastFinStmt(SqlSessionTemplate sqlSession, FinStmtAccount fsa);
 
 	int insertMfrgStmt(SqlSessionTemplate sqlSession, MfrgStmt ms);
 
@@ -28,7 +28,7 @@ public interface FinStmtDao {
 
 	MfrgStmt searchMfrg(SqlSessionTemplate sqlSession, MfrgStmt ms);
 
-	int selectMfrgSum90(SqlSessionTemplate sqlSession, IncomeStmtAccount isa);
+	int selectMfrgSum90(SqlSessionTemplate sqlSession, FinStmtAccount fsa);
 
 	int countSavedMfrgStmt(SqlSessionTemplate sqlSession, MfrgStmt ms);
 
@@ -44,10 +44,16 @@ public interface FinStmtDao {
 
 	int countClosedIncometStmt(SqlSessionTemplate sqlSession, IncomeStmt is);
 
-	List<IncomeStmtAccount> selectCurFinStmtByDate(SqlSessionTemplate sqlSession, IncomeStmtAccount isa);
+	List<FinStmtAccount> selectCurFinStmtByDate(SqlSessionTemplate sqlSession, FinStmtAccount fsa);
 
-	List selectPastFinStmtByDate(SqlSessionTemplate sqlSession, IncomeStmtAccount isa);
+	List selectPastFinStmtByDate(SqlSessionTemplate sqlSession, FinStmtAccount fsa);
 
-	ArrayList<IncomeStmtAccount> selectSlipByDate(SqlSessionTemplate sqlSession, IncomeStmtAccount isa);
+	ArrayList<FinStmtAccount> selectSlipByDateWithArr(SqlSessionTemplate sqlSession, FinStmtAccount fsa);
+
+	int updateLastIncomeStmt(SqlSessionTemplate sqlSession, IncomeStmt is);
+
+	int insertLastIncomeStmt(SqlSessionTemplate sqlSession, IncomeStmt is);
+
+	ArrayList selectSlipByDate(SqlSessionTemplate sqlSession, FinStmtAccount fsa);
 
 }

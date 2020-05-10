@@ -4,14 +4,14 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="FinStmt">
 
-<!-- 	<resultMap type="IncomeStmtAccount" id="IncomeStmtResultSet">
+<!-- 	<resultMap type="FinStmtAccount" id="IncomeStmtResultSet">
 		<result property="price" column="PRICE"/>
 		<result property="accountCode" column="ACCOUNT_CODE"/>
 	</resultMap> -->
 	
 
 	<!-- (거래처 미입력 등) 분개가 제대로 안되어 NULL 값이 나오는 경우가 있어 RIGHT JOIN -->
-	<select id="selectCurFinStmt" parameterType="IncomeStmtAccount" resultType="IncomeStmtAccount">
+	<select id="selectCurFinStmt" parameterType="FinStmtAccount" resultType="FinStmtAccount">
 		SELECT J.PRICE, J.ACCOUNT_CODE, J.DEBIT_CREDIT
 		FROM SLIP S
 		RIGHT JOIN JOURNALIZE J ON(S.SLIP_CODE = J.SLIP_CODE)
@@ -20,7 +20,7 @@
 		AND COM_CODE = #{comCode}
 	</select>
 	
-	<select id="selectCurFinStmtByDate" parameterType="IncomeStmtAccount" resultType="IncomeStmtAccount">
+	<select id="selectCurFinStmtByDate" parameterType="FinStmtAccount" resultType="FinStmtAccount">
 		SELECT J.PRICE, J.ACCOUNT_CODE, J.DEBIT_CREDIT
 		FROM SLIP S
 		RIGHT JOIN JOURNALIZE J ON(S.SLIP_CODE = J.SLIP_CODE)
@@ -29,7 +29,7 @@
 		AND COM_CODE = #{comCode}
 	</select>
 	
-	<select id="selectPastFinStmt" parameterType="IncomeStmtAccount" resultType="IncomeStmtAccount">
+	<select id="selectPastFinStmt" parameterType="FinStmtAccount" resultType="FinStmtAccount">
 		SELECT J.PRICE, J.ACCOUNT_CODE, J.DEBIT_CREDIT
 		FROM SLIP S
 		RIGHT JOIN JOURNALIZE J ON(S.SLIP_CODE = J.SLIP_CODE)
@@ -37,7 +37,7 @@
 		AND COM_CODE = #{comCode}
 	</select>
 	
-	<select id="selectPastFinStmtByDate" parameterType="IncomeStmtAccount" resultType="IncomeStmtAccount">
+	<select id="selectPastFinStmtByDate" parameterType="FinStmtAccount" resultType="FinStmtAccount">
 		SELECT J.PRICE, J.ACCOUNT_CODE, J.DEBIT_CREDIT
 		FROM SLIP S
 		RIGHT JOIN JOURNALIZE J ON(S.SLIP_CODE = J.SLIP_CODE)
@@ -45,7 +45,7 @@
 		AND COM_CODE = #{comCode}
 	</select>
 
-	<select id="selectSlip" parameterType="IncomeStmtAccount" resultType="IncomeStmtAccount">
+	<select id="selectSlip" parameterType="FinStmtAccount" resultType="FinStmtAccount">
 		SELECT S.SLIP_DATE, S.DATE_SLIP_CODE, S.BRIEF, J.VENDER_CODE, V.VENDER_NAME, J.DEBIT_CREDIT, J.PRICE, A.ACCOUNT_TITLE 
 		FROM SLIP S
 		RIGHT JOIN JOURNALIZE J ON(S.SLIP_CODE = J.SLIP_CODE)
@@ -55,11 +55,11 @@
 		AND TO_NUMBER(TO_CHAR(S.SLIP_DATE, 'MM')) <![CDATA[<=]]> #{month}
 		AND S.COM_CODE = #{comCode}
 		AND J.ACCOUNT_CODE = #{accountCode}
-		ORDER BY S.SLIP_DATE
+		ORDER BY S.SLIP_DATE, S.DATE_SLIP_CODE
 	</select>
 	
-	<select id="selectSlipByDate" parameterType="IncomeStmtAccount" resultType="IncomeStmtAccount">
-		SELECT S.SLIP_DATE, S.DATE_SLIP_CODE, S.BRIEF, J.VENDER_CODE, V.VENDER_NAME, J.DEBIT_CREDIT, J.PRICE, A.ACCOUNT_TITLE 
+	<select id="selectSlipByDateWithArr" parameterType="FinStmtAccount" resultType="FinStmtAccount">
+		SELECT S.SLIP_DATE, S.DATE_SLIP_CODE, S.BRIEF, J.VENDER_CODE, V.VENDER_NAME, J.DEBIT_CREDIT, J.PRICE, A.ACCOUNT_TITLE, A.ACCOUNT_CODE
 		FROM SLIP S
 		RIGHT JOIN JOURNALIZE J ON(S.SLIP_CODE = J.SLIP_CODE)
 		LEFT JOIN VENDER V ON(J.VENDER_CODE = V.VENDER_CODE)
@@ -71,7 +71,7 @@
 		<foreach item="item" collection="accountArr" open="(" separator="," close=")">
 			#{item}
 		</foreach>
-		ORDER BY S.SLIP_DATE
+		ORDER BY S.SLIP_DATE, S.DATE_SLIP_CODE
 	</select>
 	
 	<insert id="insertMfrgStmt" parameterType="MfrgStmt">
@@ -122,7 +122,7 @@
 		WHERE ROWNUM = 1
 	</select>
 
-	<select id="selectMfrgSum90" parameterType="IncomeStmtAccount" resultType="_int">
+	<select id="selectMfrgSum90" parameterType="FinStmtAccount" resultType="_int">
 		SELECT SUM90
 		FROM MFRG_STMT
 		WHERE COM_CODE = #{comCode}
@@ -134,18 +134,36 @@
 	</select>
 	
 	<insert id="insertIncomeStmt" parameterType="IncomeStmt">
-		INSERT INTO INCOME_STMT(INCOME_STMT_CODE, COM_CODE, YEAR, TERM, CLOSING, SUM10, V40100, VAL213, SUM30, SUM40, SUM50, SUM100) 
-		VALUES(SEQ_INCOME_STMT_CODE.NEXTVAL, #{comCode}, #{year}, #{term}, #{closing}, #{sum10}, #{v40100}, #{val213}, #{sum30}, #{sum40}, #{sum50}, #{sum100})
+		INSERT INTO INCOME_STMT(INCOME_STMT_CODE, COM_CODE, YEAR, TERM, CLOSING, SUM10, V40100, SUM20, VAL213, VAL223, SUM30, SUM40, SUM50, SUM100) 
+		VALUES(SEQ_INCOME_STMT_CODE.NEXTVAL, #{comCode}, #{year}, #{term}, #{closing}, #{sum10}, #{v40100}, #{sum20}, #{val213}, #{val223}, #{sum30}, #{sum40}, #{sum50}, #{sum100})
+	</insert>
+	
+	<insert id="insertLastIncomeStmt" parameterType="IncomeStmt">
+		INSERT INTO INCOME_STMT(INCOME_STMT_CODE, COM_CODE, YEAR, TERM, CLOSING, SUM10, SUM20, VAL213, VAL223, SUM30, SUM40, SUM50, SUM60, SUM70, SUM80, SUM90, SUM100)
+		VALUES(SEQ_INCOME_STMT_CODE.NEXTVAL, #{comCode}, #{year} - 1, #{term}, #{closing}, #{lastSum10}, #{lastSum20}, #{lastVal213}, #{lastVal223}, #{lastSum30}, #{lastSum40}, #{lastSum50},
+			   #{lastSum60}, #{lastSum70}, #{lastSum80}, #{lastSum90}, #{lastSum100})
 	</insert>
 	
 	<update id="updateIncomeStmt" parameterType="IncomeStmt">
 		UPDATE INCOME_STMT
-		SET CLOSING = #{closing}, SUM10 = #{sum10}, V40100 = #{v40100}, VAL213 = #{val213}, SUM30 = #{sum30}, SUM40 = #{sum40}, SUM50 = #{sum50}, SUM100 = #{sum100}
+		SET CLOSING = #{closing}, SUM10 = #{sum10}, V40100 = #{v40100}, SUM20 = #{sum20}, VAL213 = #{val213}, VAL223 = #{val223}, SUM30 = #{sum30}, SUM40 = #{sum40}, SUM50 = #{sum50}, SUM100 = #{sum100}
 		WHERE COM_CODE = #{comCode}
 		AND YEAR = #{year}
 		AND INCOME_STMT_CODE = (SELECT MAX(INCOME_STMT_CODE)
 						   		FROM INCOME_STMT
 						   		WHERE YEAR = #{year})
+	</update>
+
+	<update id="updateLastIncomeStmt" parameterType="IncomeStmt">
+		UPDATE INCOME_STMT
+		SET CLOSING = #{closing}, SUM10 = #{lastSum10}, SUM20 = #{lastSum20}, VAL213 = #{lastVal213}, VAL223 = #{lastVal223}, SUM30 = #{lastSum30}, SUM40 = #{lastSum50}, SUM50 = #{lastSum50},
+		    SUM60 = #{lastSum60}, SUM70 = #{lastSum70}, SUM80 = #{lastSum80}, SUM90 = #{lastSum90}, SUM100 = #{lastSum100}
+		WHERE COM_CODE = #{comCode} 
+		AND YEAR = #{year} - 1
+		AND INCOME_STMT_CODE = (SELECT MAX(INCOME_STMT_CODE)
+						   		FROM INCOME_STMT
+						   		WHERE YEAR = #{year} - 1)
+		
 	</update>
 	
 	<select id="countIncomeStmt" parameterType="IncomeStmt" resultType="_int">

@@ -58,6 +58,10 @@
 	.table-content {
 		text-align:right;
 	}
+	#contentTable tr:hover:not(.table-head-tr) {
+		background: #DDEBF7;
+		box-shadow: inset 0 -4px 0 #b4e6f8;
+	}
 	#foldBtn {
 		background:#24574A;
 		border-radius:4px;
@@ -143,7 +147,7 @@
 		</table>
 		<form id="contentForm" action="insertIncomeStmt.fs" method="post">		
 			<ol class="breadcrumb mb-4">
-				<table id="searchReTable">
+				<table id="searchTable">
 					<tr>
 						<td style="width:150px;">조회기간 : </td>
 						<td>
@@ -204,7 +208,7 @@
 						<td class="table-title" width="18%"></td>
 						<td class="table-title-num" width="18%"><span id="cSum10"></span><input type="hidden" id="sum10" name="sum10"></td>
 						<td class="table-title" width="18%"></td>
-						<td class="table-title-num" id="pSum10" width="18%"></td>
+						<td class="table-title-num" width="18%"><span id="pSum10"></span><input type="hidden" id="lastSum10" name="lastSum10"></td>
 					</tr>
 					<tr class="table-detail">
 						<td class="table-subSubTitle">상품매출</td>
@@ -225,7 +229,7 @@
 						<td class="table-title"></td>
 						<td class="table-title-num"><span id="cSum20"></span><input type="hidden" id="sum20" name="sum20"></td>
 						<td class="table-title"></td>
-						<td class="table-title-num"><span id="pSum20"></span></td>
+						<td class="table-title-num"><span id="pSum20"></span><input type="hidden" id="lastSum20" name="lastSum20"></td>
 					</tr>
 					<tr class="table-detail">
 						<td class="table-subTitle">상품매출원가</td>
@@ -236,7 +240,7 @@
 					</tr>
 					<tr class="table-detail">
 						<td class="table-subSubTitle">기초상품재고액</td>
-						<td class="table-content"><span id="cVal211"></span><input type="hidden" id="val211" name="val211"></td>
+						<td class="table-content"><span id="cVal211"></span></td>
 						<td></td>
 						<td class="table-content"><span id="pVal211"></span></td>
 						<td></td>
@@ -252,7 +256,7 @@
 						<td class="table-subSubTitle">기말상품재고액</td>
 						<td><input type="text" id="inputNum" name="val213" onkeyup="inputNumberFormat(this);" style="width:195px;"></td>
 						<td></td>
-						<td class="table-content"><span id="pVal213"></span></td>
+						<td class="table-content"><span id="pVal213"></span><input type="hidden" id="lastVal213" name="lastVal213"></td>
 						<td></td>
 					</tr>
 					<tr class="table-detail">
@@ -271,16 +275,16 @@
 					</tr>
 					<tr class="table-detail">
 						<td class="table-subSubTitle">당기제품제조원가</td>
-						<td class="table-content"><span id="cVal222"></span></td>
+						<td class="mfrg-costs" style="text-align: right;"><span id="cVal222"></span></td>
 						<td></td>
-						<td class="table-content"><span id="pVal222"></span></td>
+						<td class="mfrg-costs" style="text-align: right;"><span id="pVal222"></span></td>
 						<td></td>
 					</tr>
 					<tr class="table-detail">
 						<td class="table-subSubTitle">기말제품재고액</td>
-						<td class="table-content" id="cVal223"></td>
+						<td class="table-content" id="cVal223"><input type="hidden" id="val223" name="val223"></td>
 						<td></td>
-						<td class="table-content" id="pVal223"></td>
+						<td class="table-content" id="pVal223"><input type="hidden" id="lastVal223" name="lastVal223"></td>
 						<td></td>
 					</tr>
 					<tr>
@@ -288,14 +292,28 @@
 						<td class="table-title"></td>
 						<td class="table-title-num"><span id="cSum30"></span><input type="hidden" id="sum30" name="sum30"></td>
 						<td class="table-title"></td>
-						<td class="table-title-num" id="pSum30"></td>
+						<td class="table-title-num"><span id="pSum30"></span><input type="hidden" id="lastSum30" name="lastSum30"></td>
 					</tr>
 					<tr>
 						<td class="table-title">Ⅳ. 판매비와관리비</td>
 						<td class="table-title"></td>
 						<td class="table-title-num"><span id="cSum40"></span><input type="hidden" id="sum40" name="sum40"></td>
 						<td class="table-title"></td>
-						<td class="table-title-num" id="pSum40"></td>
+						<td class="table-title-num"><span id="pSum40"></span><input type="hidden" id="lastSum40" name="lastSum40"></td>
+					</tr>
+					<tr class="table-detail" id="row80200">
+						<td class="table-subSubTitle">급여</td>
+						<td class="table-content"><span id="c80200"></span></td>
+						<td></td>
+						<td class="table-content"><span id="p80200"></span></td>
+						<td></td>
+					</tr>
+					<tr class="table-detail" id="row80300">
+						<td class="table-subSubTitle">상여금</td>
+						<td class="table-content"><span id="c80300"></span></td>
+						<td></td>
+						<td class="table-content"><span id="p80300"></span></td>
+						<td></td>
 					</tr>
 					<tr class="table-detail" id="row81100">
 						<td class="table-subSubTitle">복리후생비</td>
@@ -330,42 +348,42 @@
 						<td class="table-title"></td>
 						<td class="table-title-num"><span id="cSum50"></span><input type="hidden" id="sum50" name="sum50"></td>
 						<td class="table-title"></td>
-						<td class="table-title-num" id="pSum50"></td>
+						<td class="table-title-num"><span id="pSum50"></span><input type="hidden" id="lastSum50" name="lastSum50"></td>
 					</tr>
 					<tr>
 						<td class="table-title">Ⅵ. 영업외수익</td>
 						<td class="table-title"></td>
 						<td class="table-title-num" id="cSum60"></td>
 						<td class="table-title"></td>
-						<td class="table-title-num" id="pSum60"></td>
+						<td class="table-title-num"><span id="pSum60"></span><input type="hidden" id="lastSum60" name="lastSum60"></td>
 					</tr>
 					<tr>
 						<td class="table-title">Ⅶ. 영업외비용</td>
 						<td class="table-title"></td>
 						<td class="table-title-num" id="cSum70"></td>
 						<td class="table-title"></td>
-						<td class="table-title-num" id="pSum70"></td>
+						<td class="table-title-num"><span id="pSum70"></span><input type="hidden" id="lastSum70" name="lastSum70"></td>
 					</tr>
 					<tr>
 						<td class="table-title">Ⅷ. 소득세차감전이익</td>
 						<td class="table-title"></td>
 						<td class="table-title-num" id="cSum80"></td>
 						<td class="table-title"></td>
-						<td class="table-title-num" id="pSum80"></td>
+						<td class="table-title-num"><span id="pSum80"></span><input type="hidden" id="lastSum80" name="lastSum80"></td>
 					</tr>
 					<tr>
 						<td class="table-title">Ⅸ. 소득세등</td>
 						<td class="table-title"></td>
 						<td class="table-title-num" id="cSum90"></td>
 						<td class="table-title"></td>
-						<td class="table-title-num" id="pSum90"></td>
+						<td class="table-title-num"><span id="pSum90"></span><input type="hidden" id="lastSum90" name="lastSum90"></td>
 					</tr>
 					<tr>
 						<td class="table-title">Ⅹ. 당기순이익</td>
 						<td class="table-title"></td>
 						<td class="table-title-num"><span id="cSum100"></span><input type="hidden" id="sum100" name="sum100"></td>
 						<td class="table-title"></td>
-						<td class="table-title-num" id="pSum100"></td>
+						<td class="table-title-num"><span id="pSum100"></span><input type="hidden" id="lastSum100" name="lastSum100"></td>
 					</tr>
 				</tbody>
 			</table>
@@ -381,13 +399,13 @@
 	<script>
 		$(function() {
 			/* 표에서 하늘색 hover 주기 */
-			$("#contentTable td").mouseover(function() {
+			/* $("#contentTable td").mouseover(function() {
 				$(this).parent().css("background", "#DDEBF7");
 			});
 			
 			$("#contentTable td").mouseout(function() {
 				$(this).parent().css("background", "white");
-			});
+			}); */
 			
 			// 현재 날짜로 기본값 설정 : 조회기간 영역
 			var curDate = new Date();
@@ -478,7 +496,7 @@
 		function dateSearch() {
 			$("#loading-div").show();
 		    
-			$("#main-tbody").css("display", "");
+			$("#main-tbody").css("display", "table-row-group");
 			
 			var year = $("#year").val();
 			var month = $("#month").val();
@@ -537,6 +555,8 @@
 					var c14600 = data["c14600"];
 					var c40100 = data["c40100"];
 					var c40400 = data["c40400"];
+					var c80200 = data["c80200"];
+					var c80300 = data["c80300"];
 					var c81100 = data["c81100"];
 					var c81300 = data["c81300"];
 					var c83000 = data["c83000"];
@@ -546,6 +566,8 @@
 					$("#c14600").text(comma(c14600));
 					$("#c40100").text(comma(c40100));
 					$("#c40400").text(comma(c40400));
+					$("#c80200").text(comma(c80200));
+					$("#c80300").text(comma(c80300));
 					$("#c81100").text(comma(c81100));
 					$("#c81300").text(comma(c81300));
 					$("#c83000").text(comma(c83000));
@@ -573,7 +595,7 @@
 					var cSum30 = cSum10 - cSum20;
 					$("#cSum30").text(comma(cSum30));
 					
-					var cSum40 = c81100 + c83000 + c83100 + c81300;
+					var cSum40 = c80200 + c80300 + c81100 + c83000 + c83100 + c81300;
 					$("#cSum40").text(comma(cSum40));
 					
 					var cSum50 = cSum30 - cSum40;
@@ -598,6 +620,8 @@
 					var p14600 = data["p14600"];
 					var p40100 = data["p40100"];
 					var p40400 = data["p40400"];
+					var p80200 = data["p80200"];
+					var p80300 = data["p80300"];
 					var p81100 = data["p81100"];
 					var p81300 = data["p81300"];
 					var p83000 = data["p83000"];
@@ -607,6 +631,8 @@
 					$("#p14600").text(comma(p14600));
 					$("#p40100").text(comma(p40100));
 					$("#p40400").text(comma(p40400));
+					$("#p80200").text(comma(p80200));
+					$("#p80300").text(comma(p80300));
 					$("#p81100").text(comma(p81100));
 					$("#p81300").text(comma(p81300));
 					$("#p83000").text(comma(p83000));
@@ -635,7 +661,7 @@
 					var pSum30 = pSum10 - pSum20;
 					$("#pSum30").text(comma(pSum30));
 					
-					var pSum40 = p81100 + p83000 + p83100 + p81300;
+					var pSum40 = p80200 + p80300 + p81100 + p83000 + p83100 + p81300;
 					$("#pSum40").text(comma(pSum40));
 					
 					var pSum50 = pSum30 - pSum40;
@@ -692,8 +718,6 @@
 		$(document).on("click", '#foldBtn', function() {
 			var clicks = $(this).data('clicks');
 			
-			console.log("접기 버튼 클릭");
-			
 			if(clicks) {
 				$("#foldImg").attr({'src':'${ contextPath }/resources/images/fold.PNG'});
 				$(".table-detail").fadeIn(200);
@@ -704,6 +728,14 @@
 			
 			$(this).data('clicks', !clicks);
 		});
+		
+		
+		$(document).on("dblclick", '.mfrg-costs', function() {
+			Swal.fire({
+				icon: "warning",
+				text: "원장내역 조회사항이 아닙니다"
+			})
+		})
 		
 		//원장조회 모달 띄우기
 		$(document).on("dblclick", '.table-content', function() {
@@ -951,13 +983,28 @@
 				})
 				
 			} else {
-				$("#inputNum").val(Number(uncomma($("#inputNum").val())));
 				$("#sum10").val(Number(uncomma($("#cSum10").text())));
 				$("#v40100").val(Number(uncomma($("#c40100").text())));
+				$("#sum20").val(Number(uncomma($("#cSum20").text())));
+				$("#inputNum").val(Number(uncomma($("#inputNum").val())));
+				$("#val223").val(Number(uncomma($("#cVal223").text())));
 				$("#sum30").val(Number(uncomma($("#cSum30").text())));
 				$("#sum40").val(Number(uncomma($("#cSum40").text())));
 				$("#sum50").val(Number(uncomma($("#cSum50").text())));
 				$("#sum100").val(Number(uncomma($("#cSum100").text())));
+				
+				$("#lastSum10").val(Number(uncomma($("#pSum10").text())))
+				$("#lastSum20").val(Number(uncomma($("#pSum20").text())))
+				$("#lastVal213").val(Number(uncomma($("#pVal213").text())))
+				$("#lastVal223").val(Number(uncomma($("#pVal223").text())))
+				$("#lastSum30").val(Number(uncomma($("#pSum30").text())))
+				$("#lastSum40").val(Number(uncomma($("#pSum40").text())))
+				$("#lastSum50").val(Number(uncomma($("#pSum50").text())))
+				$("#lastSum60").val(Number(uncomma($("#pSum60").text())))
+				$("#lastSum70").val(Number(uncomma($("#pSum70").text())))
+				$("#lastSum80").val(Number(uncomma($("#pSum80").text())))
+				$("#lastSum90").val(Number(uncomma($("#pSum90").text())))
+				$("#lastSum100").val(Number(uncomma($("#pSum100").text())))
 				
 				$("#closing").val('N');
 				
@@ -985,13 +1032,28 @@
 				})
 				
 			} else {
-				$("#inputNum").val(Number(uncomma($("#inputNum").val())));
 				$("#sum10").val(Number(uncomma($("#cSum10").text())));
 				$("#v40100").val(Number(uncomma($("#c40100").text())));
+				$("#sum20").val(Number(uncomma($("#cSum20").text())));
+				$("#inputNum").val(Number(uncomma($("#inputNum").val())));
+				$("#val223").val(Number(uncomma($("#cVal223").text())));
 				$("#sum30").val(Number(uncomma($("#cSum30").text())));
 				$("#sum40").val(Number(uncomma($("#cSum40").text())));
 				$("#sum50").val(Number(uncomma($("#cSum50").text())));
 				$("#sum100").val(Number(uncomma($("#cSum100").text())));
+				
+				$("#lastSum10").val(Number(uncomma($("#pSum10").text())))
+				$("#lastSum20").val(Number(uncomma($("#pSum20").text())))
+				$("#lastVal213").val(Number(uncomma($("#pVal213").text())))
+				$("#lastVal223").val(Number(uncomma($("#pVal223").text())))
+				$("#lastSum30").val(Number(uncomma($("#pSum30").text())))
+				$("#lastSum40").val(Number(uncomma($("#pSum40").text())))
+				$("#lastSum50").val(Number(uncomma($("#pSum50").text())))
+				$("#lastSum60").val(Number(uncomma($("#pSum60").text())))
+				$("#lastSum70").val(Number(uncomma($("#pSum70").text())))
+				$("#lastSum80").val(Number(uncomma($("#pSum80").text())))
+				$("#lastSum90").val(Number(uncomma($("#pSum90").text())))
+				$("#lastSum100").val(Number(uncomma($("#pSum100").text())))
 				
 				$("#closing").val('Y');
 				
