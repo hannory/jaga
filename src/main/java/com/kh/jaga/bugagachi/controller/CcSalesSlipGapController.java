@@ -142,18 +142,18 @@ public class CcSalesSlipGapController {
 
 					}
 
-					if(cashCount>0) {
+					//if(cashCount>0) {
 						cd.setEventDiv("현금영수증");
 
-					}
+					//}
 					cd.setDealCount(cashCount);
 					cd.setValOfSupply(cashValOfSupply);
 					cd.setTax(cashTax);
 					cgDetailList.add(cd);
 
-					if(cardCount>0) {
+					//if(cardCount>0) {
 						cd2.setEventDiv("그 밖의 신용카드");
-					}
+					//}
 					cd2.setDealCount(cardCount);
 					cd2.setValOfSupply(cardValOfSupply);
 					cd2.setTax(cardTax);
@@ -176,6 +176,7 @@ public class CcSalesSlipGapController {
 							String pk=csser.selectCssgPk2(cssg);
 							//DetailList 인설트 시켜주기
 							System.out.println("Controller: pk: "+pk);
+							System.out.println("cgDetailList: "+cgDetailList);
 							int insertCssd=csser.insertCssgDetail(cgDetailList,pk);
 							System.out.println("Controller: isnertCssd: "+insertCssd);
 

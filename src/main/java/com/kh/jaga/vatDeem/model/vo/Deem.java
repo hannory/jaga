@@ -1,13 +1,15 @@
 package com.kh.jaga.vatDeem.model.vo;
 
-public class Deem {
+import java.io.Serializable;
 
-	private String deemedCode;
-	private int yearOfAttr;
-	private String vatTerm;
-	private String deemedDiv;
-	private String deadline;
-	private String comCode;
+public class Deem implements Serializable{
+
+	private String deemedCode;		//의제매입 코드
+	private int yearOfAttr;			//귀속년월
+	private String vatTerm;			//부가가치세 기수( 1기확정, 2기확정)
+	private String deemedDiv;		//의제매입세액 구분(매입시기 집중, 제조업면세 농산물)
+	private String deadline;		//마감여부
+	private String comCode;			//회사코드
 	
 	public Deem() {}
 

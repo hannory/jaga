@@ -50,5 +50,7 @@ public interface VatDao {
 
 	int updateDeadCenVat(SqlSessionTemplate sqlSession, Vat vat);
 
+	Receiption selectRe1(SqlSessionTemplate sqlSession, Receiption sumRe, Date eD);
+
 
 }

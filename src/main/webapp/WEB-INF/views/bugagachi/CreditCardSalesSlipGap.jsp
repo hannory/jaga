@@ -301,23 +301,23 @@
 	 				for(var key in cgDetailList){
 	 					if(cgDetailList[key].eventDiv =="현금영수증"){
 	 						$("input[name=eventDiv]").attr("name","cssDetail["+key+"].eventDiv").val("현금영수222증");
-		 					$("input[name=dealCount]").attr("name","cssDetail["+key+"].dealCount").val(cgDetailList[key].dealCount);
+		 					$("input[name=dealCount]").attr("name","cssDetail["+key+"].dealCount").val(comma(cgDetailList[key].dealCount));
 		 					var temp = $("input");
 		 					console.log(temp);
 		 					console.log("현영: "+cgDetailList[key].dealCount)
-		 					$("input[name=valOfSupply]").attr("name","cssDetail["+key+"].valOfSupply").val(cgDetailList[key].valOfSupply);
+		 					$("input[name=valOfSupply]").attr("name","cssDetail["+key+"].valOfSupply").val(comma(cgDetailList[key].valOfSupply));
 		 					console.log("현영: "+cgDetailList[key].valOfSupply)
-		 					$("input[name=tax]").attr("name","cssDetail["+key+"].tax").val(cgDetailList[key].tax); 
+		 					$("input[name=tax]").attr("name","cssDetail["+key+"].tax").val(comma(cgDetailList[key].tax)); 
 	 						
 	 					}
 	 					if(cgDetailList[key].eventDiv =="그 밖의 신용카드"){
 	 					
 	 						$("input[name=eventDiv]").attr("name","cssDetail["+key+"].eventDiv").val("그 밖의 신용카드");
-	 						$("input[name=dealCount]").attr("name","cssDetail["+key+"].dealCount").val(cgDetailList[key].dealCount);
+	 						$("input[name=dealCount]").attr("name","cssDetail["+key+"].dealCount").val(comma(cgDetailList[key].dealCount));
 	 						console.log("그 밖"+cgDetailList[key].dealCount)
-	 						$("input[name=valOfSupply]").attr("name","cssDetail["+key+"].valOfSupply").val(cgDetailList[key].valOfSupply);
+	 						$("input[name=valOfSupply]").attr("name","cssDetail["+key+"].valOfSupply").val(comma(cgDetailList[key].valOfSupply));
 	 						console.log("그 밖"+cgDetailList[key].valOfSupply)
-	 						$("input[name=tax]").attr("name","cssDetail["+key+"].tax").val(cgDetailList[key].tax);
+	 						$("input[name=tax]").attr("name","cssDetail["+key+"].tax").val(comma(cgDetailList[key].tax));
 		 					
 	 					}
 	 					
@@ -327,10 +327,10 @@
 	 				
 	 				
 						//현금영수증 합계
-	 					$("#cashDeal").text(cashDeal);
-	 					$("#cashVos").text(cashVos);
-	 					$("#valOfSupply").val(cashVos)
-	 					$("#cashTax").text(cashTax);
+	 					$("#cashDeal").text(comma(cashDeal));
+	 					$("#cashVos").text(comma(cashVos));
+	 					$("#valOfSupply").val(comma(cashVos));
+	 					$("#cashTax").text(comma(cashTax));
 	 						console.log("1");
 	 					
 	 					
@@ -338,17 +338,17 @@
 	 					
 	 					
 	 					//화물 운전자
-	 					$("#driverDeal").text(driverDeal);
-	 					$("#driverVos").text(driverVos);
-	 					$("#driverTax").text(driverTax);
+	 					$("#driverDeal").text(comma(driverDeal));
+	 					$("#driverVos").text(comma(driverVos));
+	 					$("#driverTax").text(comma(driverTax));
 	 					//사업용신용카드
-	 					$("#bCardDeal").text(bCardDeal);
-	 					$("#bCardVos").text(bCardVos);
-	 					$("#bCardTax").text(bCardTax);
+	 					$("#bCardDeal").text(comma(bCardDeal));
+	 					$("#bCardVos").text(comma(bCardVos));
+	 					$("#bCardTax").text(comma(bCardTax));
 	 					//그밖의신용카드
-	 					$("#oCardDeal").text(oCardDeal);
-	 					$("#oCardVos").text(oCardVos);
-	 					$("#oCardTax").text(oCardTax);
+	 					$("#oCardDeal").text(comma(oCardDeal));
+	 					$("#oCardVos").text(comma(oCardVos));
+	 					$("#oCardTax").text(comma(oCardTax));
 	 			
 	 					
 	 					
@@ -364,9 +364,9 @@
 	 					var sumDeal=cashDeal+driverDeal+bCardDeal+oCardDeal;
 	 					var sumVos=cashVos+driverVos+bCardVos+oCardVos;
 	 					var sumTax=cashTax+driverTax+bCardTax+oCardTax;
-						$("#sumDeal").text(sumDeal);
-						$("#sumVos").text(sumVos);
-						$("#sumTax").text(sumTax);
+						$("#sumDeal").text(comma(sumDeal));
+						$("#sumVos").text(comma(sumVos));
+						$("#sumTax").text(comma(sumTax));
 	 				
 		
 						
@@ -392,9 +392,9 @@
 						var $prodNameTd = $("<td>").text(cssgHisList[key].proNum);
 						var $prodNumTd = $("<td>").text(cssgHisList[key].producer);
 						var $cardmemNumTd = $("<td>").text(cssgHisList[key].cardmemNum);
-						var $numOfTxnTd = $("<td class='numberArea'>").text(cssgHisList[key].numOfTxn);
-						var $valOfSupplyTd = $("<td class='numberArea'>").text(cssgHisList[key].valOfSupply);
-						var $taxTd = $("<td class='numberArea'>").text(cssgHisList[key].tax);
+						var $numOfTxnTd = $("<td class='numberArea'>").text(comma(cssgHisList[key].numOfTxn));
+						var $valOfSupplyTd = $("<td class='numberArea'>").text(comma(cssgHisList[key].valOfSupply));
+						var $taxTd = $("<td class='numberArea'>").text(comma(cssgHisList[key].tax));
 						
 						
 						$("#slipCode").val(cssgHisList[key].slipCode);
@@ -403,9 +403,9 @@
 						$("#producer").val(cssgHisList[key].producer);
 						$("#proNum").val(cssgHisList[key].proNum);
 						$("#cardmemNum").val(cssgHisList[key].cardmemNum);
-						$("#numOfTxn").val(cssgHisList[key].numOfTxn);
-						$("#valOfSupply").val(cssgHisList[key].valOfSupply);
-						$("#tax").val(cssgHisList[key].tax);
+						$("#numOfTxn").val(comma(cssgHisList[key].numOfTxn));
+						$("#valOfSupply").val(comma(cssgHisList[key].valOfSupply));
+						$("#tax").val(comma(cssgHisList[key].tax));
 						
 						$tr.append($noTd);
 						$tr.append($dateTd);
@@ -423,8 +423,8 @@
 					var $endTr=$("<tr class='Tex_bill_th' style='font-weight: 600;'>");
 					var $endTd1=$("<td colspan='6'>").text("합계");
 					var $endTd2=$("<td class='numberArea'>").text(dealCtn);
-					var $endTd3=$("<td class='numberArea'>").text(vos);
-					var $endTd4=$("<td class='numberArea'>").text(vat);
+					var $endTd3=$("<td class='numberArea'>").text(comma(vos));
+					var $endTd4=$("<td class='numberArea'>").text(comma(vat));
 					$endTr.append($endTd1);
 					$endTr.append($endTd2);
 					$endTr.append($endTd3);

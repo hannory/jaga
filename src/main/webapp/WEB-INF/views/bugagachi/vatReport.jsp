@@ -199,7 +199,7 @@
 	</script>
 	<div class="container-fluid">
 			<h2 class="mt-4">부가가치세 신고서</h2>
-<form action="deadLine.vat" onsubmit="return false;" method="post">
+<form id="form1" action="deadLine.vat" onsubmit="return deadLine();" method="post">
 	<ol class="breadcrumb mb-4">
 			<li><button id="deadlineBtns" onclick="PopModalTexList()">마감</button></li>
 			<li><button id="deadlineCen" onclick="cencelDeadline()">마감 취소</button></li>
@@ -233,23 +233,47 @@
 		
 	<!-- 인풋모음!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1 -->
 	<c:set var="comCode" value="${ sessionScope.loginCompany.companyCode }"/>
-   	<input type="hidden" value="${comCode}" name="comCode">
+   	<input type="hidden" value="${comCode}" name="comCode" id="comCode">
    	<input type="hidden" name="vatCode" id="vatCode">
    	
    	<script type="text/javascript">
-
+   	/* submit할때 값 리턴해서 넘길지 말지 정함 */
+   	swit=0;
+	/* 마감눌렀을 때 모달 */
 	 function PopModalTexList(){
    	  $("#detailList_detail").modal();
      }
-   	
+	/* 마감취소 */
+	function cencelDeadline(){
+		console.log(vatCode+" ? "+comCode);	
+		console.log($("#form1"));
+		swit=1;
+		$("#form1").prop("action", "updatdDeadLineCen.vat");
+		console.log($("#form1"));
+		alert("왜안돼 ㅅㅂ");
+		var vatCode=$("#vatCode").val();
+		var comCode=$("#comCode").val();
+	}
+   	function deadSubmit(){
+   		swit=1;
+   		console.log("마감하기: "+swit);
+   		$("#form1").submit();
+   	}
+   	function deadLine(){
+   		
+   		if(swit==0){
+   			console.log("swit: 0이다. "+swit);
+   			return false;
+   		}else{
+   			console.log("swit: 1이다. "+swit);
+   			return true;
+   		}
+   	}
    	</script>
    	
 		<script type="text/javascript">
 		var deadCk;
-		function cencelDeadline(){
-			alert("왜안돼 ㅅㅂ");
-			$("form").attr("action", "updatdDeadLineCen.vat");
-		}
+	
 		 function search_cis(){
 	    	 $("#loading").show();
 	    	 
@@ -1084,7 +1108,7 @@
         	</table>
         </div>
         <div class="modal-footer">
-          <input type="button" onclick="submit();" class="btn btn-default" value="마감">
+          <input type="button" onclick="deadSubmit();" class="btn btn-default" value="마감">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </div>

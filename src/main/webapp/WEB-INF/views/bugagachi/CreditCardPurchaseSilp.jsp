@@ -249,19 +249,19 @@
 	 				 $("#loading").hide();
                   
 	 				var cis=data.cis; 
-	 				$("#tAc").text(cis.cardTax);
-	 				$("#tAcash").text(cis.cashTax);
-	 				$("#tAd").text(cis.digitalTax);
-	 				$("#fAc").text(cis.cardTaxFree);
-	 				$("#fAcash").text(cis.cashTaxFree);
-	 				$("#fAd").text(cis.digitalTaxFree);
-	 				$("#serAc").text(cis.cardSvc);
-	 				$("#serAcash").text(cis.cashSvc);
-	 				$("#serAd").text(cis.digitalSvc);
+	 				$("#tAc").text(comma(cis.cardTax));
+	 				$("#tAcash").text(comma(cis.cashTax));
+	 				$("#tAd").text(comma(cis.digitalTax));
+	 				$("#fAc").text(comma(cis.cardTaxFree));
+	 				$("#fAcash").text(comma(cis.cashTaxFree));
+	 				$("#fAd").text(comma(cis.digitalTaxFree));
+	 				$("#serAc").text(comma(cis.cardSvc));
+	 				$("#serAcash").text(comma(cis.cashSvc));
+	 				$("#serAd").text(comma(cis.digitalSvc));
 	 				console.log(cis.termDiv);
-	 				$("#termDiv").val(cis.termDiv);
-	 				$("#dTax").text(cis.taxinvIss)
-	 				$("#ndTax").text(cis.invIss)
+	 				$("#termDiv").val(comma(cis.termDiv));
+	 				$("#dTax").text(comma(cis.taxinvIss));
+	 				$("#ndTax").text(comma(cis.invIss));
 
 	 				//input type 에 값넣어주기
 					$("#taxinvIss").val(cis.taxinvIss);
@@ -278,23 +278,23 @@
 				    
 	 				//합계부분
 					var cardSum=cis.cardTax+cis.cardTaxFree+cis.cardSvc;/* 카드합계 */
-					$("#cAs").text(cardSum);
+					$("#cAs").text(comma(cardSum));
 					var cashSum=cis.cashTax+cis.cashTaxFree+cis.cashSvc;/* 현금영수증합계 */
-					$("#cashAs").text(cashSum);
+					$("#cashAs").text(comma(cashSum));
 					var dSum=cis.digitalTax+cis.digitalTaxFree+cis.digitalSvc;/* 전자지급수단 합계 */
-					$("#dAs").text(dSum);
+					$("#dAs").text(comma(dSum));
 					var taxSum=cis.cashTax+cis.cardTax+cis.digitalTax;
-					$("#tAs").text(taxSum);
+					$("#tAs").text(comma(taxSum));
 					var freeSum=cis.cardTaxFree+cis.cashTaxFree+cis.digitalTaxFree;
-					$("#fAs").text(freeSum);
+					$("#fAs").text(comma(freeSum));
 					var serSum=cis.cardSvc+cis.cashSvc+cis.digitalSvc;
-					$("#serAs").text(serSum);
+					$("#serAs").text(comma(serSum));
 					var sumSum=taxSum+freeSum+serSum;
-					$("#sAs").text(sumSum);
+					$("#sAs").text(comma(sumSum));
 	 				
 					//3.교부내역
-					$("#dTax").text(cis.taxinvIss);
-					$("#ndTax").text(cis.invIss);
+					$("#dTax").text(comma(cis.taxinvIss));
+					$("#ndTax").text(comma(cis.invIss));
 					
 					//버튼 바꿔주기
 						//$("#deadlineCen").hide();

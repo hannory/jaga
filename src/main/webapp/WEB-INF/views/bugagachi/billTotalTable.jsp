@@ -264,32 +264,32 @@
                         /* 11일 이전 세금계산서 사업자번호*/
                        	console.log("구분: "+sDtoDivSales[key].divisionCode)
 	 					if(sDtoDivSales[key].divisionCode=="11"){
-	 						$("#bAvc").text(sDtoDivSales[key].acctCodeCt);
-	 						$("#bAdc").text(sDtoDivSales[key].dealCount);
-	 						$("#bAvol").text(sDtoDivSales[key].valOfSupply);
+	 						$("#bAvc").text(comma(sDtoDivSales[key].acctCodeCt));
+	 						$("#bAdc").text(comma(sDtoDivSales[key].dealCount));
+	 						$("#bAvol").text(comma(sDtoDivSales[key].valOfSupply));
 	 					}else if(sDtoDivSales[key].divisionCode=="12"){/* 11일 이전 세금계산서 주민번호*/
-	 						$("#pAvc").text(sDtoDivSales[key].acctCodeCt);
-	 						$("#pAdc").text(sDtoDivSales[key].dealCount);
-	 						$("#pAvol").text(sDtoDivSales[key].valOfSupply);
+	 						$("#pAvc").text(comma(sDtoDivSales[key].acctCodeCt));
+	 						$("#pAdc").text(comma(sDtoDivSales[key].dealCount));
+	 						$("#pAvol").text(comma(sDtoDivSales[key].valOfSupply));
 	 					}else if(sDtoDivSales[key].divisionCode=="13"){/* 11일 이전 세금계산서 소계*/
-	 						$("#ssAvc").text(sDtoDivSales[key].acctCodeCt);
-	 						$("#ssAdc").text(sDtoDivSales[key].dealCount);
-	 						$("#ssAvol").text(sDtoDivSales[key].valOfSupply);
+	 						$("#ssAvc").text(comma(sDtoDivSales[key].acctCodeCt));
+	 						$("#ssAdc").text(comma(sDtoDivSales[key].dealCount));
+	 						$("#ssAvol").text(comma(sDtoDivSales[key].valOfSupply));
 	 						ssAvc=sDtoDivSales[key].acctCodeCt;
 	 						ssAdc=sDtoDivSales[key].dealCount;
 	 						ssAvol=sDtoDivSales[key].valOfSupply;
 	 					}else if(sDtoDivSales[key].divisionCode=="21"){/* 12일 이후 세금계산서 사업자번호*/
-	 						$("#ObAvc").text(sDtoDivSales[key].acctCodeCt);
-	 						$("#ObAdc").text(sDtoDivSales[key].dealCount);
-	 						$("#ObAvol").text(sDtoDivSales[key].valOfSupply);
+	 						$("#ObAvc").text(comma(sDtoDivSales[key].acctCodeCt));
+	 						$("#ObAdc").text(comma(sDtoDivSales[key].dealCount));
+	 						$("#ObAvol").text(comma(sDtoDivSales[key].valOfSupply));
 	 					}else if(sDtoDivSales[key].divisionCode=="22"){/* 12일 이후 세금계산서 주민번호*/
-	 						$("#OpAvc").text(sDtoDivSales[key].acctCodeCt);
-	 						$("#OpAdc").text(sDtoDivSales[key].dealCount);
-	 						$("#OpAvol").text(sDtoDivSales[key].valOfSupply);
+	 						$("#OpAvc").text(comma(sDtoDivSales[key].acctCodeCt));
+	 						$("#OpAdc").text(comma(sDtoDivSales[key].dealCount));
+	 						$("#OpAvol").text(comma(sDtoDivSales[key].valOfSupply));
 	 					}else if(sDtoDivSales[key].divisionCode=="23"){/* 12일 이후 세금계산서 소계*/
-	 						$("#OssAvc").text(sDtoDivSales[key].acctCodeCt);
-	 						$("#OssAdc").text(sDtoDivSales[key].dealCount);
-	 						$("#OssAvol").text(sDtoDivSales[key].valOfSupply);
+	 						$("#OssAvc").text(comma(sDtoDivSales[key].acctCodeCt));
+	 						$("#OssAdc").text(comma(sDtoDivSales[key].dealCount));
+	 						$("#OssAvol").text(comma(sDtoDivSales[key].valOfSupply));
 	 						OssAvc=sDtoDivSales[key].acctCodeCt;
 	 						OssAdc=sDtoDivSales[key].dealCount;
 	 						OssAvol=sDtoDivSales[key].valOfSupply;
@@ -298,9 +298,9 @@
 	 				 tSAvc=ssAvc+OssAvc;
 		 			 tSAdc=ssAdc+OssAdc;
 		 			 tSAvol=ssAvol+OssAvol;
-		 		     $("#sAvc").text(tSAvc);
-		 		     $("#sAdc").text(tSAdc);
-		 		     $("#sAvol").text(tSAvol);
+		 		     $("#sAvc").text(comma(tSAvc));
+		 		     $("#sAdc").text(comma(tSAdc));
+		 		     $("#sAvol").text(comma(tSAvol));
 		 		    /* 구분영역 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!111 */
 		 		    
 		 		    /* 상세리스트 영역 */
@@ -318,7 +318,7 @@
 						var $bizRegNumTd = $("<td>").text(sDtoDetailSales[key].bizRegNum);
 						var $venderNameTd = $("<td>").text(sDtoDetailSales[key].venderName);
 						var $dealCountTd = $("<td class='numberArea'>").text(sDtoDetailSales[key].dealCount);
-						var $valOfSupplyTd = $("<td class='numberArea'>").text(sDtoDetailSales[key].valOfSupply);
+						var $valOfSupplyTd = $("<td class='numberArea'>").text(comma(sDtoDetailSales[key].valOfSupply));
 						var $bossNameTd = $("<td>").text(sDtoDetailSales[key].bossName);
 						var $sellWayTd = $("<td>").text(sDtoDetailSales[key].sellWay);
 						var $sellTargetTd = $("<td>").text(sDtoDetailSales[key].sellTarget);
@@ -352,7 +352,7 @@
 						var $bizRegNumTd = $("<td>").text(sDtoDetailSales[key].bizRegNum);
 						var $venderNameTd = $("<td>").text(sDtoDetailSales[key].venderName);
 						var $dealCountTd = $("<td class='numberArea'>").text(sDtoDetailSales[key].dealCount);
-						var $valOfSupplyTd = $("<td class='numberArea'>").text(sDtoDetailSales[key].valOfSupply);
+						var $valOfSupplyTd = $("<td class='numberArea'>").text(comma(sDtoDetailSales[key].valOfSupply));
 						var $bossNameTd = $("<td>").text(sDtoDetailSales[key].bossName);
 						var $sellWayTd = $("<td>").text(sDtoDetailSales[key].sellWay);
 						var $sellTargetTd = $("<td>").text(sDtoDetailSales[key].sellTarget);
@@ -386,11 +386,11 @@
 		 		  
 		 		 
 		 		 //12일
-		 		   $("#dealCount1").text(dealCount);
-		 		   $("#volCount1").text(volCount);
+		 		   $("#dealCount1").text(comma(dealCount));
+		 		   $("#volCount1").text(comma(volCount));
 		 		   //전체
 		 		   $("#dealCount2").text(dealCount3);
-		 		   $("#volCount2").text(volCount3);
+		 		   $("#volCount2").text(comma(volCount3));
 		 		    
 	 			
 	 				
@@ -422,18 +422,18 @@
  				for(var key in sDtoDivPur){
                     /* 11일 이전 세금계산서 사업자번호*/
  					if(sDtoDivPur[key].divisionCode=="11"){
- 						$("#pbAvc").text(sDtoDivPur[key].acctCodeCt);
- 						$("#pbAdc").text(sDtoDivPur[key].dealCount);
- 						$("#pbAvol").text(sDtoDivPur[key].valOfSupply);
+ 						$("#pbAvc").text(comma(sDtoDivPur[key].acctCodeCt));
+ 						$("#pbAdc").text(comma(sDtoDivPur[key].dealCount));
+ 						$("#pbAvol").text(comma(sDtoDivPur[key].valOfSupply));
  						pOssAvc=sDtoDivPur[key].acctCodeCt;
  						pOssAdc=sDtoDivPur[key].dealCount;
  						pOssAvol=sDtoDivPur[key].valOfSupply;
  						pOssAtax=sDtoDivPur[key].tax;
  					
  					}else if(sDtoDivPur[key].divisionCode=="21"){/* 12일 이후 세금계산서 사업자번호*/
- 						$("#pObAvc").text(sDtoDivPur[key].acctCodeCt);
- 						$("#pObAdc").text(sDtoDivPur[key].dealCount);
- 						$("#pObAvol").text(sDtoDivPur[key].valOfSupply);
+ 						$("#pObAvc").text(comma(sDtoDivPur[key].acctCodeCt));
+ 						$("#pObAdc").text(comma(sDtoDivPur[key].dealCount));
+ 						$("#pObAvol").text(comma(sDtoDivPur[key].valOfSupply));
  						pOssAvc=sDtoDivPur[key].acctCodeCt;
  						pOssAdc=sDtoDivPur[key].dealCount;
  						pOssAvol=sDtoDivPur[key].valOfSupply;
@@ -443,9 +443,9 @@
  				 ptSAvc=pssAvc+pOssAvc;
 	 			 ptSAdc=pssAdc+pOssAdc;
 	 			 ptSAvol=pssAvol+pOssAvol;
-	 		     $("#psAvc").text(ptSAvc);
-	 		     $("#psAdc").text(ptSAdc);
-	 		     $("#psAvol").text(ptSAvol);
+	 		     $("#psAvc").text(comma(ptSAvc));
+	 		     $("#psAdc").text(comma(ptSAdc));
+	 		     $("#psAvol").text(comma(ptSAvol));
 	 			/* 매입 구분표 부분 끝!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1 */
 	 			
 	 			
@@ -459,11 +459,11 @@
 	 		    for(var key in sDtoDetailPur ){
 	 		    	indexPur11++;
 	 		    	var $tr= $("<tr onclick='PopModalTexList()'>");
-	 		    	var $noTd = $(" <td id='Text_billNo'>").text(index3);
+	 		    	var $noTd = $(" <td id='Text_billNo'>").text(indexPur11);
 					var $bizRegNumTd = $("<td>").text(sDtoDetailPur[key].bizRegNum);
 					var $venderNameTd = $("<td>").text(sDtoDetailPur[key].venderName);
 					var $dealCountTd = $("<td class='numberArea'>").text(sDtoDetailPur[key].dealCount);
-					var $valOfSupplyTd = $("<td class='numberArea'>").text(sDtoDetailPur[key].valOfSupply);
+					var $valOfSupplyTd = $("<td class='numberArea'>").text(comma(sDtoDetailPur[key].valOfSupply));
 					var $bossNameTd = $("<td>").text(sDtoDetailPur[key].bossName);
 					var $sellWayTd = $("<td>").text(sDtoDetailPur[key].sellWay);
 					var $sellTargetTd = $("<td>").text(sDtoDetailPur[key].sellTarget);
@@ -490,8 +490,7 @@
 		 		   
 		 		   
 		 		   $("#dealCountPur1").text(dealCountPur11);
-		 		   $("#volCountPur1").text(volCountPur11);
-		 		   $("#taxCountPur1").text(taxCountPur11);
+		 		   $("#volCountPur1").text(comma(volCountPur11));
 	 			
 		 		   /* 전체데이터 테이블 */
 		 		  var dealCountPur3=0;
@@ -501,13 +500,13 @@
 	 		    for(var key in sDtoDetailPur ){
 	 		    	indexPur3++;
 	 		    	var $tr= $("<tr onclick='PopModalTexList()'>");
-	 		    	var $noTd = $(" <td id='Text_billNo'>").text(index3);
+	 		    	var $noTd = $(" <td id='Text_billNo'>").text(indexPur3);
 					var $bizRegNumTd = $("<td>").text(sDtoDetailPur[key].bizRegNum);
 					console.log("사업자번호: "+sDtoDetailPur[key].bizRegNum);
 					var $venderNameTd = $("<td>").text(sDtoDetailPur[key].venderName);
 					var $dealCountTd = $("<td class='numberArea'>").text(sDtoDetailPur[key].dealCount);
 					console.log("거래건수: "+sDtoDetailPur[key].dealCount)
-					var $valOfSupplyTd = $("<td class='numberArea'>").text(sDtoDetailPur[key].valOfSupply);
+					var $valOfSupplyTd = $("<td class='numberArea'>").text(comma(sDtoDetailPur[key].valOfSupply));
 					var $bossNameTd = $("<td>").text(sDtoDetailPur[key].bossName);
 					var $sellWayTd = $("<td>").text(sDtoDetailPur[key].sellWay);
 					var $sellTargetTd = $("<td>").text(sDtoDetailPur[key].sellTarget);
@@ -533,7 +532,7 @@
 		 		   $Tex_bill_detailListPur3.append("<tr id='Tex_bill_th' style=;font-weight: 600;'><td id='Text_billNo' style='height: 50px;'> </td><td colspan='2'> 합   계 </td><td class='numberArea' id='dealCountPur3'> </td><td class='numberArea' id='volCountPur3'> </td><td> </td><td> </td><td> </td></tr>");
 	 			
 		 		   $("#dealCountPur3").text(dealCountPur3);
-		 		   $("#volCountPur3").text(volCountPur3);
+		 		   $("#volCountPur3").text(comma(volCountPur3));
 		 		   $("#taxCountPur3").text(taxCountPur3);
 	 			
 	 			console.log("마감: "+sDto.deadline);

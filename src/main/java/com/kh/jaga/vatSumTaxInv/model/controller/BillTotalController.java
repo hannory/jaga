@@ -167,7 +167,7 @@ public class BillTotalController {
 					de.setPurSales("매입");
 				}
 				//매출리스트 값 가지러 가기
-				List<SumTaxInvDetail> reSales=ss.selectReceiption(receiptionSales,eD);
+				List<SumTaxInvDetail> reSales=ss.selectReceiptionSales(receiptionSales,eD);
 				//매출리스트에 soitCurrval 넣어주기
 				System.out.println("Controller: BillTotalSearch: reSales: "+reSales);
 				for(SumTaxInvDetail de:reSales) {

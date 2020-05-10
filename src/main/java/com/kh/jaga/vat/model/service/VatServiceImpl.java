@@ -124,6 +124,12 @@ public class VatServiceImpl implements VatService{
 		return vd.updateDeadCenVat(sqlSession,vat);
 	}
 
+	@Override
+	public Receiption selectRe1(Receiption sumRe, Date eD) {
+		// TODO Auto-generated method stub
+		return vd.selectRe1(sqlSession, sumRe, eD);
+	}
+
 	
 
 }
