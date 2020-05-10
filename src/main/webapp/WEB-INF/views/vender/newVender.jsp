@@ -94,7 +94,7 @@ position: absolute;
 width: 555px;
 height: 27px;
 left: 454px;
-top: 690px;
+top: 688px;
 
 background: #FFFFFF;
 border: 1px solid #C4C4C4;
@@ -109,7 +109,7 @@ position: absolute;
 width: 228px;
 height: 27px;
 left: 644px;
-top: 535px;
+top: 532px;
 
 background: #D9E3E3;
 border: 1px solid #C4C4C4;
@@ -120,7 +120,7 @@ border-radius: 5px;
 #searchBtn2{
 position:absolute;
 left:595px;
-top:535px;
+top:532px;
 
 }
 
@@ -300,7 +300,7 @@ position: absolute;
 width: 150px;
 height: 24px;
 left: 320px;
-top: 632px;
+top: 625px;
 
 font-family: Roboto;
 font-style: normal;
@@ -322,7 +322,7 @@ position: absolute;
 width: 104px;
 height: 24px;
 left: 321px;
-top: 690px;
+top: 688px;
 
 font-family: Roboto;
 font-style: normal;
@@ -410,7 +410,7 @@ position: absolute;
 width: 104px;
 height: 24px;
 left: 455px;
-top: 535px;
+top: 532px;
 
 font-family: Roboto;
 font-style: normal;
@@ -432,7 +432,7 @@ position: absolute;
 width: 104px;
 height: 24px;
 left: 455px;
-top: 575px;
+top: 572px;
 
 font-family: Roboto;
 font-style: normal;
@@ -454,7 +454,7 @@ position: absolute;
 width: 104px;
 height: 24px;
 left:  765px;
-top: 575px;
+top: 572px;
 
 font-family: Roboto;
 font-style: normal;
@@ -625,7 +625,7 @@ position: absolute;
 width: 82px;
 height: 27px;
 left: 505px;
-top: 535px;
+top: 532px;
 
 background: #FFFFFF;
 border: 1px solid #C4C4C4;
@@ -640,7 +640,7 @@ position: absolute;
 width: 190px;
 height: 27px;
 left: 470px;
-top: 630px;
+top: 625px;
 border: 1px solid #C4C4C4;
 box-sizing: border-box;
 border-radius: 5px;
@@ -653,7 +653,7 @@ position: absolute;
 width: 190px;
 height: 27px;
 left: 525px;
-top: 575px;
+top: 572px;
 
 background: #FFFFFF;
 border: 1px solid #C4C4C4;
@@ -669,7 +669,7 @@ position: absolute;
 width: 201px;
 height: 27px;
 left: 860px;
-top: 575px;
+top: 572px;
 
 background: #FFFFFF;
 border: 1px solid #C4C4C4;
@@ -797,7 +797,7 @@ position: absolute;
 width: 124px;
 height: 24px;
 left: 321px;
-top: 537px;
+top: 532px;
 
 font-family: Roboto;
 font-style: normal;
@@ -1081,6 +1081,7 @@ border-radius: 5px;
 		</tr>
 		
  		<tr>
+ 		<div id="totalaccount">
 			<td><b id="account-income-num"> 입금 계좌 번호</b>
 				<b id="bank">은행</b>
 				<input type="text" class="bank-code-surr" id="bankCode" name="bankCode">
@@ -1089,17 +1090,39 @@ border-radius: 5px;
 
 				<input type="text" class="bank-code-name-surr" id="bankName" name="bankName">
 			</td>
+			
 			<td><b id="account-holder"> 예금주 </b><input type="text" name="accountHolder" id="account-holder-surr">
 				<b id="account-num">계좌번호</b><input type="text" name="accountNum" id="account-num-surr">
 			</td>
+		</div>
 		</tr>
+		
+			<script>
+			
+			$("#vendertype-surr").change(function(){ 
+		
+			if($("#vendertype-surr").val()=="2"){
+				$("#totalaccount").attr('style', 'display:none;'); 
+			}
+			
+			if($("#vendertype-surr").val()=="1"){
+				$("#totalaccount").attr('style','display');
+			}
+			
+			if($("#vendertype-surr").val()=="3"){
+				$("#totalaccount").attr('style','display:none;');
+			} 
+
+			}); 
+			
+			</script>
 		
 		<tr>
 			<td><b id="com-manage-tel"> 업체담당자연락처 </b>
 				<input type="text" name="comManagerTel" id="com-manager1-tel-surr" placeholder="숫자만 입력">
 
 			</td>
-		 <td><input type="hidden" value="${sessionScope.loginCompany.companyCode}" name="comCode"></td> 
+		 <td><input type="hidden" value="${sessionScope.loginCompany.companyCode}" name="comCode" id="comCode"></td> 
 			
 		</tr>
 		<tr>
@@ -1143,9 +1166,6 @@ border-radius: 5px;
 	          			<th>은행명</th>
 	          		</tr>
           		</thead>
-          		<tbody>
-
-          		</tbody>
           	</table>
         </div>
         <div class="modal-footer">
@@ -1279,18 +1299,18 @@ function ccc(value){
 $("#searchBtn2").click(function(){
 	
 	$("#bankTable").dataTable({
- 		destroy: true, 
+ 	/* 	destroy: true,  */
 		 ajax:{
 				'url':'bankSearch.ve',
-				'type':'POST'
+				'type':'get'
 			},
 		 
 		 columns: [
+
 			 {data : "bankCode",
 				 "render": function(data, type, row){
 		                if(type=='display'){
 		                    data = '<a href="#" onclick="ccc(this);">' + data + '</a>';
-		                console.log(data);
 		                }
 		                return data;} 
 			 },
@@ -1299,6 +1319,7 @@ $("#searchBtn2").click(function(){
 		                if(type=='display'){
 		                    data = '<a href="#" onclick="ccc(this);">' + data + '</a>';
 		                }
+		                console.log(data);
 		                return data;}
 			 }
 		 ]
@@ -1310,6 +1331,8 @@ $("#searchBtn2").click(function(){
 });
 
 </script>
+</div>
+
 	<jsp:include page="../common/menubar2.jsp" />
 </body>
 </html>

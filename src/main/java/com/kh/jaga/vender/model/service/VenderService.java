@@ -8,13 +8,13 @@ public interface VenderService {
 
 	int insertVender(Vender v);
 
-	List<Vender> selectVender();
+	List<Vender> selectVender(String comCode);
 
 	List<Vender> selectOne(String venderCode);
 
 	int modifyOne(Vender v);
 
-	List<Vender> selectBankList(String comCode);
+	List<Vender> selectBankList();
 
 
 }

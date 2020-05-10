@@ -9,14 +9,16 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
 import com.kh.jaga.company.model.vo.Company;
+import com.kh.jaga.company.model.vo.TypeOfBiz;
 import com.kh.jaga.vender.model.service.VenderService;
 import com.kh.jaga.vender.model.vo.Vender;
 
@@ -38,9 +40,14 @@ public class VenderController {
 	}
 	
 	@RequestMapping("venderList.vi")
-	public String selectVender(HttpServletRequest request) {
-		System.out.println("리스트다");
-		List<Vender> list=vs.selectVender();
+	public String selectVender(HttpServletRequest request,HttpServletResponse response) {
+
+	      
+		Company company = (Company)request.getSession().getAttribute("loginCompany");
+	     String comCode = company.getCompanyCode();
+	      
+		List<Vender> list=vs.selectVender(comCode);
+		
 		request.setAttribute("list", list);
 		return "vender/venderList";
 	}
@@ -69,28 +76,47 @@ public class VenderController {
 	 
 	  }
 	  
-	  @PostMapping("bankSearch.ve")
-	  public void searchBank(HttpServletRequest request,HttpServletResponse response) {
-		  Company com=(Company)request.getSession().getAttribute("loginCompany");
-		  String comCode=com.getCompanyCode();
+	  @GetMapping("bankSearch.ve")
+/*	  public ModelAndView searchBank(ModelAndView mv, HttpServletRequest request) {
+
+			
+			List<Vender> list =null;
+			  
+			  list=vs.selectBankList();
+			
+			System.out.println("업종코드 출력되니1"+list);
+			mv.addObject("data",list);
+			mv.setViewName("jsonView");
+			
+			System.out.println("업종코드 출력되니"+list);
+			return mv;
+	  }*/
+
+	  public void searchBank(HttpServletRequest request,HttpServletResponse response, Model m) {
+		/*
+		 * Company com=(Company)request.getSession().getAttribute("loginCompany");
+		 * String comCode=com.getCompanyCode();
+		 */
 		  
 		  List<Vender> list =null;
 		  
-		  list=vs.selectBankList(comCode);
+		  list=vs.selectBankList();
+		  
+		  m.addAttribute("list", list);
 		  
 		  
 		  try {
 			  response.setContentType("application/json");
 			 System.out.println("컨트롤러은행은행"+list); 
-			new Gson().toJson(list,response.getWriter());
+			String jList = new Gson().toJson(list);
 			 System.out.println("컨트롤러은행리스트는요2"+list); 
+
 		} catch (JsonIOException e) {
 			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		} 
+		  
 		  
 }
-}
 
+}
 

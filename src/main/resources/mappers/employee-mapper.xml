@@ -32,7 +32,7 @@
   
   <insert id="insertEmployee" parameterType="Employee">
   INSERT INTO EMPLOYEE(EMPLOYEE_CODE,COM_CODE,EMPLOYEE_NUM,EMPLOYEE_NAME,SECURITY_NUMBER,SALARY,EMAIL,BANK_CODE,ACCOUNT_NUMBER,ACCOUNT_HOLDER,DEPARTMENT,POSITION_CODE,ENROLL_DATE,LEAVE_DATE,LEAVE_REASON,MEALS,DRIVING_SUBSIDIES,CHILDCARE_ALLOWANCE,ACQUISITION_STATUS,DEPRIVATION_STATUS,BIG4POSITION_CODE,GOYONGSANJAE)
-  VALUES (EMPLOYEE_SEQ.NEXTVAL,#{comCode},#{employeeNum},#{employeeName},#{securityNum},#{salary},#{email},#{bankCode},#{accountNum},#{accountHolder},#{department},#{positionCode},#{enrollDate},#{leaveDate},#{leaveReason},#{meals},#{drivingSubsidies},#{childcareAllowance},#{acquisitionStatus},#{deprivationStatus},#{big4PositionCode},#{goyongSanjae})
+  VALUES (EMPLOYEE_SEQ.NEXTVAL,#{comCode},EMPLOYEEN_SEQ.NEXTVAL,#{employeeName},#{securityNum},#{salary},#{email},#{bankCode},#{accountNum},#{accountHolder},#{department},#{positionCode},#{enrollDate},#{leaveDate},#{leaveReason},#{meals},#{drivingSubsidies},#{childcareAllowance},#{acquisitionStatus},#{deprivationStatus},#{big4PositionCode},#{goyongSanjae})
   
   </insert>
   

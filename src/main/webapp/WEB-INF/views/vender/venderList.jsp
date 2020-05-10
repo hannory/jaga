@@ -152,9 +152,11 @@ background:white;
                	 							<c:if test="${empty v.accountNum }">미등록</c:if>
                   </td> 
                 <td><input type="hidden"  style="display:none;" name="venderCode" value="${v.venderCode}" ><div style="display:none;">${v.venderCode}</div></td> 
+              	 	 <td><input type="hidden" value="${sessionScope.loginCompany.companyCode}" name="comCode" id="comCode"></td> 
               	 </tr>
               	 </c:forEach>
 				</c:if>
+
                 </tbody>
               </table>
               

@@ -1,11 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
       <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
 </head>
 
 <style>
@@ -231,7 +234,7 @@ left:340px;
 top:300px;
 }
 
-#search{
+#searchempBox{
 left: 370px;
 top:300px;
 border-radius:5px;
@@ -269,6 +272,13 @@ top:230px;
 left:1600px;
 }
 
+.empTempRow:hover {
+	/* 모달(담당부서) */
+	background: gray;
+	opacity: 30%;
+	color: white;
+	}
+
 </style>
 <body>
 	<jsp:include page="../common/menubar.jsp" />
@@ -286,19 +296,19 @@ left:1600px;
 
 	<div id="searchdiv">
 
-<input type="text" id="search"> <button type="button" id="searchBtn"><img alt="" src="${contextPath}/resources/images/search.PNG" width="20px" height="20px">
-								</button>
+<input type="text" id="searchempBox"> <div id="searchBtn" onclick="searchemp()"><img alt="" src="${contextPath}/resources/images/search.PNG" width="20px" height="20px">
+								</div>
 </div>
  	<span id="emplist">
 	 <table id="listArea2">
-	<tr>
-	<th style="border:0px; background:#296355; color:white; text-align:center" >사번</th><th style="border:0px; background:#296355; color:white; text-align:center" >사원명</th>
+	<tr id="trempHead">
+	<th style="border:0px; background:#296355; width:100px; color:white; text-align:center" >사번</th><th style="border:0px; width:130px;background:#296355; color:white; text-align:center" >사원명</th>
 	</tr>
 	 <c:if test="${ !empty sessionScope.loginCompany }">   
  		<c:forEach var="emp2" items="${list}">
-		 <tr> <td style="border:0px;text-align:center"><c:out value="${emp2.employeeNum}"/></td> 
+		 <tr class="empDefaultRow" onclick="selectemp(this);" > <td style="border:0px;text-align:center" style="width:50px;"><c:out value="${emp2.employeeNum}"/></td> 
 			 <td style="border:0px; text-align:center"><c:out value="${emp2.employeeName}"/></td> 
-			 <td style="border:0px; text-align:center; color:white;"><c:out value="${emp2.employeeCode}"/></td> 
+			 <td type="hidden" style="border:0px; text-align:center; color:white;"><c:out value="${emp2.employeeCode}"/></td> 
 		</tr> 
 		</c:forEach> 
  		</c:if> 
@@ -314,14 +324,99 @@ left:1600px;
 /* 		}).mouseout(function(){
 			$(this).parent().css("background","white"); */
 	/* 	}). */click(function(){
-			$(this).parent().css("background","green");
+			$("#listArea2 td").parent().css("background", "white");
+			$(this).parent().css("background","#CAD6D3");
 			var employeeCode2 =$(this).parent().children().eq(2).text();
-			console.log(employeeCode2);
+/* 			console.log(employeeCode2); */
 			$("#abc").val(employeeCode2);
 /* 			location.href="${contextPath}/employeeinsert.emp?employeeCode="+employeeCode; */
         });
 	});
-    </script>
+	
+	function selectemp(target) {
+		var selectedempCode = target.children[0].innerHTML; 
+		var selectedempName = target.children[1].innerHTML;
+		$("#searchempBox").val(selectedempName);
+		$("#inputemp").val(selectedempCode); 
+		console.log("1번"+selectedempCode);
+		console.log("2번"+selectedempName);
+/* 		closeModal(); */
+	}
+	$('#searchempBox').keyup(function(e){
+		var searchValue=e.target.value;
+		var $empDefaultRow=$(".empDefaultRow");
+		
+		var listempTemp= new Array(); 
+		
+		<c:forEach var="a" items="${list}">
+			var temp= listempTemp.push("${a}");
+			
+		</c:forEach>
+		
+		console.log("결과"+temp);
+		
+	 	var listemp=listempTemp[0]; 
+		console.log("서치밸류"+searchValue)
+ 		console.log("영번째 인덱스"+listemp)
+		
+		if(searchValue.length!=0){
+
+			$empDefaultRow.detach();
+			
+ 			for (var i = 0; i < listemp.length; i++) { 
+				if (listemp[i].employeeName.includes(searchValue) 
+						|| listemp[i].employeeCode.includes(searchValue)) {
+					var tempempName = listemp[i].employeeName;
+					var tempempCode = listemp[i].employeeCode;
+					console.log("템프이엠피네임@@@"+tempempName);
+					console.log("템프이엠피코드@@@"+tempempCode);
+					 $(".empTempRow").detach(); 
+					
+					$("#trempHead")
+							.after(
+									"<tr class='empTempRow' onclick='selectemp(this)'><td>"
+									+ tempempName
+									+ "</td><td>"
+									+ tempempCode
+									+ "</td></tr>");
+				}
+ 			} 
+			
+		} else {
+			for (var i = listemp.length - 1; i >= 0; i--) {
+				$empDefaultRow.detach();
+				$("#trempHead")
+						.after(
+								"<tr class='empTempRow' onclick='selectemp(this)'><td>"
+								+ listemp[i].employeeName
+								+ "</td><td>"
+								+ listemp[i].employeeCode
+								+ "</td></tr>");
+			}
+		}
+	});
+
+	
+	</script>
+	
+	<script>
+	function searchemp() {
+		alert("근로자검색 검색 버튼 ");
+	}
+
+/* 	$(function() {
+		$("#inputDept").focus(function(e) {
+			//일단 수동으로 입력 가능하게 ...
+			/* e.target.blur();
+			showModalDept(); */
+
+/* 		});
+	}); */
+	
+	
+	
+	</script>
+    
 
 	<form action="insertEarnEmp.emp" method="post" id="form1">
 	<span id="payList">
@@ -809,7 +904,7 @@ left:1600px;
 					
             	var lo= Number(i*0.1);
             	
-            	$("#localIncomeTax").val(lo);
+            	$("#localIncomeTax").val(Math.round(lo/10)*10);
             	
             	/*차인지급액: 총지급액-공제총액*/
 				var totalPayment = Number($("#totalPayment").val());
