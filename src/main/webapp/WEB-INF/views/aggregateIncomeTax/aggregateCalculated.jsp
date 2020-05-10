@@ -181,6 +181,22 @@
 		/* 세액계산에 현재 값 불러오기 */
 		function selectExistingData(){
 			alert("세액계산 불러오기 클릭");
+			
+			$.ajax({
+				url: "selectExistingData.aggregate",
+				type: "post",
+				data: {
+					"yearOfAttr":"2019",
+					"comCode": '${ loginCompany.companyCode }'
+					
+				},
+				success: function(data){
+					alert("success:::" + data);
+				},
+				error: function(status){
+					alert("error ::: " + status);
+				}
+			});
 		}
 		
 		

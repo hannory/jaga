@@ -1,5 +1,6 @@
 package com.kh.jaga.aggregateIncomeTax.model.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -66,6 +67,14 @@ public class AggregateServiceImpl implements AggregateService{
 	public AggregateCalculatedDto selectAggregateCalculated(Map<String, String> map) {
 		
 		AggregateCalculatedDto dto = dao.selectAggregateCalculated(sqlSession, map);
+		
+		return dto;
+	}
+
+	@Override
+	public AggregateCalculatedDto selectExistingData(HashMap<String, String> map) {
+		
+		AggregateCalculatedDto dto = dao.selectExistingData(sqlSession, map);
 		
 		return dto;
 	}

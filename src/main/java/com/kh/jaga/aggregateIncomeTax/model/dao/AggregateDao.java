@@ -1,5 +1,6 @@
 package com.kh.jaga.aggregateIncomeTax.model.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -25,5 +26,7 @@ public interface AggregateDao {
 	int insertIncomeAmount(SqlSessionTemplate sqlSession, IncomeAmountStmtDto dto);
 
 	AggregateCalculatedDto selectAggregateCalculated(SqlSessionTemplate sqlSession, Map<String, String> map);
+
+	AggregateCalculatedDto selectExistingData(SqlSessionTemplate sqlSession, HashMap<String, String> map);
 
 }

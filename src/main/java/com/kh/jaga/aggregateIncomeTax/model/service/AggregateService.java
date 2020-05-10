@@ -1,5 +1,6 @@
 package com.kh.jaga.aggregateIncomeTax.model.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -21,6 +22,8 @@ public interface AggregateService {
 	int insertIncomeAmount(IncomeAmountStmtDto dto);
 
 	AggregateCalculatedDto selectAggregateCalculated(Map<String, String> map);
+
+	AggregateCalculatedDto selectExistingData(HashMap<String, String> map);
 
 
 }

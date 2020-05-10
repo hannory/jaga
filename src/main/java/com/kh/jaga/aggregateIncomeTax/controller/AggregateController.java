@@ -253,6 +253,33 @@ public class AggregateController {
 			e.printStackTrace();
 		}
 		
+	}//method
+	
+	
+	
+	@RequestMapping("selectExistingData.aggregate")
+	public void selectExistingData(HttpServletResponse response,
+			String yearOfAttr,
+			String comCode){
+		
+		System.out.println("ajax가 호출한 selectExistingData 메소드");
+		
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("comCode", comCode);
+		map.put("yearOfAttr",yearOfAttr);
+		
+		AggregateCalculatedDto dto = service.selectExistingData(map);
+		System.out.println("조회된 dto :::");
+		System.out.println(dto);
+		
+		
+		
+		
+		try {
+			response.getWriter().print("valueFromJAVA");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	
