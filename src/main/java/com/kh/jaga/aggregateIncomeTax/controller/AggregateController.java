@@ -218,7 +218,7 @@ public class AggregateController {
 	
 	
 	
-	//종소세 년도 조호 시 ajax로 들어옴
+	//종소세 년도 조회 시 ajax로 들어옴
 	@RequestMapping("selectAggregateCalculated.aggregate")
 	public void selectAggregateCalculated(
 			HttpServletResponse response,

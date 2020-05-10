@@ -109,8 +109,8 @@
 				url: "selectAggregateCalculated.aggregate",
 				type: "post",
 				data: {
-						"key":"value",
-						"key2":"value2"
+						"yearOfAttr": $("#attrYear").val(),
+						"comCode":'${ loginCompany.companyCode}'
 						},
 				success: function(data){
 					alert("success :::" + data);
@@ -173,27 +173,51 @@
 		<!-- 초록색 탭메뉴 만들기 -->
 		<div id="tabMenu01" class="tapMenu" onclick="tap01click()">세액계산</div>
 		<div id="tabMenu02" class="tapMenu" onclick="tap02click()" style="opacity:50%;">기납부 세액 명세서</div>
+		<div id="selectExistingData" onclick="selectExistingData();" class="cursorPointer tapMenu" style="height:30px; line-height:30px; border-radius:7px; margin-left:420px; background:white; color:black; border:2px solid #24574A;"><strong>불러오기</strong></div>
+		<div id="savePrePaid" onclick="savePrePaid();" class="cursorPointer tapMenu" style="height:30px; line-height:30px; border-radius:7px; margin-left:280px; background:white; color:black; display:none; border:2px solid #24574A;"><strong>입력하기</strong></div>
 		<!-- //초록색 탭메뉴 만들기 끝-->
+		
+		<script>
+		/* 세액계산에 현재 값 불러오기 */
+		function selectExistingData(){
+			alert("세액계산 불러오기 클릭");
+		}
+		
+		
+		/* 기납부세액 저장하기 */
+		function savePrePaid(){
+			alert("기납부세액 저장 클릭");
+		}
+		
+		
+		</script>
 		
 		<script type="text/javascript">
 			
 		function tap01click(){
-			/* 소득세법상 소득공제 보여주기 */
+			/* 세액계산 보여주기 */
 			$("#table02").css("display","none");
-			$("#table01").css("display","block");
+			$("#table01").css("display","inline-block");
 			
 			$("#tabMenu02").css("opacity","50%");
 			$("#tabMenu01").css("opacity","100%");
 			
+			$("#savePrePaid").css("display","none");
+			$("#selectExistingData").css("display","inline-block");
+			
+			
 		}
 		
 		function tap02click(){
-			/* 인적공제 보여주기 */
+			/* 기납부명세서 보여주기 */
 			$("#table01").css("display","none");
 			$("#table02").css("display","block");	
 			
 			$("#tabMenu01").css("opacity","50%");
 			$("#tabMenu02").css("opacity","100");
+
+			$("#selectExistingData").css("display","none");
+			$("#savePrePaid").css("display","inline-block");
 			
 		}
 			
@@ -240,7 +264,7 @@
 				<td colspan="2">21. 과세표준(19-20)</td>
 				<td><input type="text" name="" id=""></td>
 				<td><input type="text" name="" id=""></td>
-				<td><input type="text" name="" id=""></td>`
+				<td><input type="text" name="" id=""></td>
 			</tr>
 			
 			<tr>
