@@ -10,6 +10,10 @@
 	input{
 		border:none;
 	}
+	
+	.inputNumber{
+		text-align:right;
+	}
 
 
 
@@ -180,44 +184,143 @@
 		<script>
 		/* 세액계산에 현재 값 불러오기 */
 		function selectExistingData(){
-			alert("세액계산 불러오기 클릭");
+			if($("#attrYear").val() == ""){
+				Swal.fire({
+					   title: '귀속년도를 입력하세요',
+					   icon: 'info',
+					   showCancelButton: false,
+					   confirmButtonColor: '#24574A',
+					   cancelButtonColor: '#d33',
+					   confirmButtonText: '확인'
+					 });
+			}else{
+
+				$.ajax({
+					url: "selectExistingData.aggregate",
+					type: "post",
+					data: {
+						"yearOfAttr":$("#attrYear").val(),
+						"comCode": '${ loginCompany.companyCode }'
+						
+					},
+					success: function(data){
+						//성공했으니, 계산세 빈칸들 채우기
+						var dto = JSON.parse(data);
+						console.log(dto);
+						
+						//1번부터 17번까지 차례로 채우자
+						
+						$("#v101").val(dto.v101);
+						
+						$("#v102").val(dto.v102); 
+						
+						var d103 = Number(dto.v101) - Number(dto.v102);
+						$("#v103").val(d103);
+						
+						if(d103 <= 12000000){
+							$("#v104").val("6% (-)");
+							$("#v105").val( Math.floor((d103 * 6 / 100 - 0)/10) * 10 );
+						}else if(d103 <= 46000000){
+							$("#v104").val("15% (1,080,000)");
+							$("#v105").val( Math.floor((d103 * 15 / 100 - 1080000)/10) * 10 );
+						}else if(d103 <= 88000000){
+							$("#v104").val("24% (5,220,000)");
+							$("#v105").val( Math.floor((d103 * 24 / 100 - 5220000)/10) * 10 );
+						}else if(d103 <= 150000000){
+							$("#v104").val("35% (14,900,000)");
+							$("#v105").val( Math.floor((d103 * 35 / 100 - 14900000)/10) * 10 );
+						}else if(d103 <= 300000000){
+							$("#v104").val("38% (19,400,000)");
+							$("#v105").val( Math.floor((d103 * 38 / 100 - 19400000)/10) * 10 );
+						}else if(d103 <= 500000000){
+							$("#v104").val("40% (25,400,000)");
+							$("#v105").val( Math.floor((d103 * 40 / 100 - 25400000)/10) * 10 );
+						}else{
+							$("#v104").val("42% (35,400,000)");
+							$("#v105").val( Math.floor((d103 * 42 / 100 - 35400000)/10) * 10 );
+						}
+						
+						
+						$("#v106").val(0);
+						
+						$("#v107").val(dto.v107);
+						
+						$("#v108").val(Number($("#v105").val()) - Number($("#v106").val()) - Number($("#v107").val()));
+						
+						$("#v109").val(dto.v109);
+						
+						$("#v110").val(0);
+						
+						$("#v111").val(Number($("#v108").val()) + Number($("#v109").val()) + Number($("#v110").val()));
+						
+						$("#v112").val(dto.v112);
+						
+						$("#v113").val( Number($("#v111").val()) - Number($("#v112").val()) );
+						
+						$("#v114").val(0);
+						
+						$("#v115").val(0);
+						
+						$("#v116").val(0);
+						
+						$("#v117").val( ( Number($("#v111").val()) - Number($("#v112").val()) ).toLocaleString() );
+						
+						console.log("=====");
+						
+						
+					},
+					error: function(status){
+						alert("error ::: " + status);
+					}
+				});
+			}//else end
 			
-			$.ajax({
-				url: "selectExistingData.aggregate",
-				type: "post",
-				data: {
-					"yearOfAttr":"2019",
-					"comCode": '${ loginCompany.companyCode }'
-					
-				},
-				success: function(data){
-					alert("success:::" + data);
-				},
-				error: function(status){
-					alert("error ::: " + status);
-				}
-			});
 		}
 		
 		
 		/* 기납부세액 저장하기 */
 		function savePrePaid(){
-			alert("기납부세액 저장 클릭");
+			if($("#attrYear").val() == ""){
+				Swal.fire({
+					   title: '귀속년도를 입력하세요',
+					   icon: 'info',
+					   showCancelButton: false,
+					   confirmButtonColor: '#24574A',
+					   cancelButtonColor: '#d33',
+					   confirmButtonText: '확인'
+					 });
+			}else{
+				$.ajax({
+					url: "savePrePaid.aggregate",
+					type: "post",
+					data: {
+						"yearOfAttr": $("#attrYear").val(),
+						"comCode":'${ loginCompany.companyCode}',
+						"totalPaidIncome":$("#totalPaidIncome").val()
+					},
+					success: function(data){
+						if(data == "ok"){
+							 Swal.fire({
+								   title: '기납부 세액 저장 완료 !',
+								   icon: 'info',
+								   showCancelButton: false,
+								   confirmButtonColor: '#24574A',
+								   cancelButtonColor: '#d33',
+								   confirmButtonText: '확인'
+								 });
+						}else{
+							alert("기납부 세액 저장 실패");
+						}
+						
+					},
+					error: function(status){
+						alert("기납부 세액 저장  error:::"+status);
+					}
+					
+				});
+			}//else 
 			
-			$.ajax({
-				url: "savePrePaid.aggregate",
-				type: "post",
-				data: {
-					"key":"value"
-				},
-				success: function(data){
-					alert("success:::" + data);
-				},
-				error: function(status){
-					alert("error:::"+status);
-				}
-				
-			});
+		
 		}
 		
 		
@@ -268,7 +371,9 @@
 		
 		
 		
-		<!-- 인적공제 테이블 -->
+		
+		
+		<!--세액계산 테이블 -->
 		<table id="table01" border="1" style="margin-bottom:30px;">
 			<tr style="text-align:center;">
 				<td colspan="2">구분</td>
@@ -279,125 +384,125 @@
 			
 			<tr>
 				<td colspan="2">19. 종합소득금액</td>
-				<td><input type="text" name="" id=""></td>
-				<td><input type="text" name="" id=""></td>
-				<td><input type="text" name="" id=""></td>
+				<td><input type="text" class="inputNumber" name="" id="v101"></td>
+				<td><input type="text" class="inputNumber" name="" id="v201"></td>
+				<td><input type="text" class="inputNumber" name="" id="v301"></td>
 			</tr>
 			
 			<tr>
 				<td colspan="2">20. 소득공제계</td>
-				<td><input type="text" name="" id=""></td>
-				<td><input type="text" name="" id=""></td>
-				<td><input type="text" name="" id=""></td>
+				<td><input type="text" class="inputNumber" name="" id="v102"></td>
+				<td><input type="text" class="inputNumber" name="" id="v102"></td>
+				<td><input type="text" class="inputNumber" name="" id="v102"></td>
 			</tr>
 			
 			<tr>
 				<td colspan="2">21. 과세표준(19-20)</td>
-				<td><input type="text" name="" id=""></td>
-				<td><input type="text" name="" id=""></td>
-				<td><input type="text" name="" id=""></td>
+				<td><input type="text" class="inputNumber" name="" id="v103"></td>
+				<td><input type="text" class="inputNumber" name="" id=""></td>
+				<td><input type="text" class="inputNumber" name="" id=""></td>
 			</tr>
 			
 			<tr>
-				<td colspan="2">22. 세율</td>
-				<td><input type="text" name="" id=""></td>
-				<td><input type="text" name="" id=""></td>
-				<td><input type="text" name="" id=""></td>
+				<td colspan="2">22. 세율(누진공제)</td>
+				<td><input type="text" class="inputNumber" name="" id="v104"></td>
+				<td><input type="text" class="inputNumber" name="" id=""></td>
+				<td><input type="text" class="inputNumber" name="" id=""></td>
 			</tr>
 			
 			<tr>
 				<td colspan="2">23. 산출세액</td>
-				<td><input type="text" name="" id=""></td>
-				<td><input type="text" name="" id=""></td>
-				<td><input type="text" name="" id=""></td>
+				<td><input type="text" class="inputNumber" name="" id="v105"></td>
+				<td><input type="text" class="inputNumber" name="" id=""></td>
+				<td><input type="text" class="inputNumber" name="" id=""></td>
 			</tr>
 			
 			<tr>
 				<td colspan="2">24. 세액감면</td>
-				<td><input type="text" name="" id=""></td>
-				<td><input type="text" name="" id=""></td>
-				<td><input type="text" name="" id=""></td>
+				<td><input type="text" class="inputNumber" name="" id="v106"></td>
+				<td><input type="text" class="inputNumber" name="" id=""></td>
+				<td><input type="text" class="inputNumber" name="" id=""></td>
 			</tr>
 			
 			<tr>
 				<td colspan="2">25. 세액공제</td>
-				<td><input type="text" name="" id=""></td>
-				<td><input type="text" name="" id=""></td>
-				<td><input type="text" name="" id=""></td>
+				<td><input type="text" class="inputNumber" name="" id="v107"></td>
+				<td><input type="text" class="inputNumber" name="" id=""></td>
+				<td><input type="text" class="inputNumber" name="" id=""></td>
 			</tr>
 			
 			<tr>
 				<td colspan="2">26. 결정세액(23-24-25)</td>
-				<td><input type="text" name="" id=""></td>
-				<td><input type="text" name="" id=""></td>
-				<td><input type="text" name="" id=""></td>
+				<td><input type="text" class="inputNumber" name="" id="v108"></td>
+				<td><input type="text" class="inputNumber" name="" id=""></td>
+				<td><input type="text" class="inputNumber" name="" id=""></td>
 			</tr>
 			
 			<tr>
 				<td colspan="2">27. 가산세</td>
-				<td><input type="text" name="" id=""></td>
-				<td><input type="text" name="" id=""></td>
-				<td><input type="text" name="" id=""></td>
+				<td><input type="text" class="inputNumber" name="" id="v109"></td>
+				<td><input type="text" class="inputNumber" name="" id=""></td>
+				<td><input type="text" class="inputNumber" name="" id=""></td>
 			</tr>
 			
 			<tr>
 				<td colspan="2">28. 추가납부세액</td>
-				<td><input type="text" name="" id=""></td>
-				<td><input type="text" name="" id=""></td>
-				<td><input type="text" name="" id=""></td>
+				<td><input type="text" class="inputNumber" name="" id="v110"></td>
+				<td><input type="text" class="inputNumber" name="" id=""></td>
+				<td><input type="text" class="inputNumber" name="" id=""></td>
 			</tr>
 			
 			<tr>
 				<td colspan="2">29. 합계(26+27+28)</td>
-				<td><input type="text" name="" id=""></td>
-				<td><input type="text" name="" id=""></td>
-				<td><input type="text" name="" id=""></td>
+				<td><input type="text" class="inputNumber" name="" id="v111"></td>
+				<td><input type="text" class="inputNumber" name="" id=""></td>
+				<td><input type="text" class="inputNumber" name="" id=""></td>
 			</tr>
 			
 			<tr>
 				<td colspan="2">30. 기납부세액</td>
-				<td><input type="text" name="" id=""></td>
-				<td><input type="text" name="" id=""></td>
-				<td><input type="text" name="" id=""></td>
+				<td><input type="text" class="inputNumber" name="" id="v112"></td>
+				<td><input type="text" class="inputNumber" name="" id=""></td>
+				<td><input type="text" class="inputNumber" name="" id=""></td>
 			</tr>
 			
 			<tr>
 				<td colspan="2">31. 납부(환급)할 총 세액</td>
-				<td><input type="text" name="" id=""></td>
-				<td><input type="text" name="" id=""></td>
-				<td><input type="text" name="" id=""></td>
+				<td><input type="text" class="inputNumber" name="" id="v113"></td>
+				<td><input type="text" class="inputNumber" name="" id=""></td>
+				<td><input type="text" class="inputNumber" name="" id=""></td>
 			</tr>
 			
 			<tr>
 				<td rowspan="2">32. 납부특례세액</td>
 				<td id="bgGray">차감</td>
-				<td><input type="text" name="" id=""></td>
-				<td><input type="text" name="" id=""></td>
-				<td><input type="text" name="" id=""></td>
+				<td><input type="text" class="inputNumber" name="" id="v114"></td>
+				<td><input type="text" class="inputNumber" name="" id=""></td>
+				<td><input type="text" class="inputNumber" name="" id=""></td>
 			</tr>
 			
 			<tr>
 				<td>가산</td>
-				<td><input type="text" name="" id=""></td>
-				<td><input type="text" name="" id=""></td>
-				<td><input type="text" name="" id=""></td>
+				<td><input type="text" class="inputNumber" name="" id="v115"></td>
+				<td><input type="text" class="inputNumber" name="" id=""></td>
+				<td><input type="text" class="inputNumber" name="" id=""></td>
 			</tr>
 			
 			<tr>
 				<td colspan="2">34. 분할납세액(2개월 내)</td>
-				<td><input type="text" name="" id=""></td>
-				<td><input type="text" name="" id=""></td>
-				<td><input type="text" name="" id=""></td>
+				<td><input type="text" class="inputNumber" name="" id="v116"></td>
+				<td><input type="text" class="inputNumber" name="" id=""></td>
+				<td><input type="text" class="inputNumber" name="" id=""></td>
 			</tr>
 			
 			<tr>
 				<td colspan="2">35. 기한 이내 납부할 세액</td>
-				<td><input type="text" name="" id=""></td>
-				<td><input type="text" name="" id=""></td>
-				<td><input type="text" name="" id=""></td>
+				<td><input type="text" class="inputNumber" name="" id="v117"></td>
+				<td><input type="text" class="inputNumber" name="" id=""></td>
+				<td><input type="text" class="inputNumber" name="" id=""></td>
 			</tr>
 		</table>
-		<!-- //인적공제 테이블 끝-->
+		<!-- //세액계산 테이블 끝-->
 		
 		
 		
@@ -419,7 +524,7 @@
 		
 		
 		
-		<!-- 소득세법상 소득공제 테이블 -->
+		<!-- 기납부 세액 명세서 테이블 -->
 		<table border="1" id="table02" style="display:none;">
 		
 			<tr style="text-align:center;">
@@ -430,62 +535,62 @@
 			
 			<tr>
 				<td colspan="2">1. 중간 예납 세액</td>
-				<td><input type="text" name="v101" id="v101"></td>
+				<td><input type="text" name="v101" id="v101" class="t2left"></td>
 				<td><input type="text" name="v201" id="v201"></td>
 			</tr>
 			
 			<tr>
 				<td colspan="2">2. 토지등매매차익예정신고납부</td>
-				<td><input type="text" name="v102" id="v102"></td>
+				<td><input type="text" name="v102" id="v102" class="t2left"></td>
 				<td><input type="text" name="v202" id="v202"></td>
 			</tr>
 			
 			<tr>
 				<td colspan="2">3. 토지등매매차익예정고지세액</td>
-				<td><input type="text" name="v103" id="v103"></td>
+				<td><input type="text" name="v103" id="v103" class="t2left"></td>
 				<td><input type="text" name="v203" id="v203"></td>
 			</tr>
 			
 			<tr>
 				<td colspan="2">4. 수시부과세액</td>
-				<td><input type="text" name="v104" id="v104"></td>
+				<td><input type="text" name="v104" id="v104" class="t2left"></td>
 				<td><input type="text" name="v204" id="v204"></td>
 			</tr>
 			
 			<tr>
 				<td rowspan="6" style="text-align:center">원천징수세액 <br>및<br> 납세조합 징수세액</td>
 				<td>5. 이자소득</td>
-				<td><input type="text" name="v105" id="v105"></td>
+				<td><input type="text" name="v105" id="v105" class="t2left"></td>
 				<td><input type="text" name="v205" id="v205"></td>
 			</tr>
 			
 			<tr>
 				<td>6. 배당소득</td>
-				<td><input type="text" name="v106" id="v106"></td>
+				<td><input type="text" name="v106" id="v106" class="t2left"></td>
 				<td><input type="text" name="v206" id="v206"></td>
 			</tr>
 			
 			<tr>
 				<td>7. 사업소득</td>
-				<td><input type="text" name="v107" id="v107"></td>
+				<td><input type="text" name="v107" id="v107" class="t2left"></td>
 				<td><input type="text" name="v207" id="v207"></td>
 			</tr>
 			
 			<tr>
 				<td>8. 근로소득</td>
-				<td><input type="text" name="v108" id="v108"></td>
+				<td><input type="text" name="v108" id="v108" class="t2left"></td>
 				<td><input type="text" name="v208" id="v208"></td>
 			</tr>
 			
 			<tr>
 				<td>9. 연금소득</td>
-				<td><input type="text" name="v109" id="v109"></td>
+				<td><input type="text" name="v109" id="v109" class="t2left"></td>
 				<td><input type="text" name="v209" id="v209"></td>
 			</tr>
 			
 			<tr>
 				<td>10. 기타소득</td>
-				<td><input type="text" name="v110" id="v110"></td>
+				<td><input type="text" name="v110" id="v110" class="t2left"></td>
 				<td><input type="text" name="v210" id="v210"></td>
 			</tr>
 			
@@ -496,10 +601,33 @@
 			</tr>
 			
 		</table>
-		<!-- //소득세법상 소득공제 테이블 끝-->
+		<!-- //기납부 세액 명세서 테이블 끝-->
 		
 		
-		
+		<script>
+		/* 테이블02 blur될 때 계산 처리 */
+		$("#table02 input").blur(function(){
+			
+			var totalPaidIncomeValue = 0;
+			
+			console.log(  $(".t2left")  );
+			
+			
+			for(var i = 0; i < $(".t2left").length; i++){
+				console.log(  Number($(".t2left").eq(i).val())  );
+				totalPaidIncomeValue += Number($(".t2left").eq(i).val()); 
+				
+			}
+			
+			
+			
+			$("#totalPaidIncome").val(totalPaidIncomeValue);
+			
+			
+			
+			
+		});
+		</script>
 		
 		
 		
