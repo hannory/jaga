@@ -49,6 +49,7 @@
 	<select id="selectVenderList" resultMap="venderResultSet">
 	SELECT VENDER_NAME,BOSS_NAME,ACCOUNT_NUM,STATUS,VENDER_TEL,VENDER_CODE,VENDER_TYPE
 	FROM VENDER
+ 	WHERE COM_CODE=#{comCode} 
 	</select>
 
   	<select id="selectOne" resultMap="venderResultSet">

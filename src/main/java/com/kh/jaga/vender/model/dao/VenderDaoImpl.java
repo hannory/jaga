@@ -16,8 +16,8 @@ public class VenderDaoImpl implements VenderDao{
 	}
 
 	@Override
-	public List<Vender> selectVender(SqlSessionTemplate sqlSession) {
-		List<Vender> list = sqlSession.selectList("Vender.selectVenderList");
+	public List<Vender> selectVender(String comCode,SqlSessionTemplate sqlSession) {
+		List<Vender> list = sqlSession.selectList("Vender.selectVenderList",comCode);
 		System.out.println(list+"dao리스트다.");
 		return list;
 	}
@@ -36,8 +36,8 @@ public class VenderDaoImpl implements VenderDao{
 	}
 
 	@Override
-	public List<Vender> selectBankList(SqlSessionTemplate sqlSession, String comCode) {
-		List<Vender> list = sqlSession.selectList("Vender.selectBankList",comCode);
+	public List<Vender> selectBankList(SqlSessionTemplate sqlSession) {
+		List<Vender> list = sqlSession.selectList("Vender.selectBankList");
 		System.out.println("DAO은행코드는요"+list);
 		return list;
 	}

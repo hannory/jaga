@@ -1556,7 +1556,7 @@ box-sizing: border-box;
 <div id="employee-manage">직원관리</div>
 <div id="big-employee">일반근로자</div>
 <div id="row-employee"></div>
-<div id="big-one-imployee"> <a href="businessEmp.vi">사업소득자</a></div>
+<div id="big-one-imployee"> <a href="BPaymentList.bp">사업소득자</a></div>
 <!-- <div id="big-income-employee">사업소득자</div> -->
 <div id="border2"></div>
 <!-- <input type="search" id="search-surr"> -->
@@ -1567,12 +1567,19 @@ box-sizing: border-box;
 <input type="text" id="search"> <button type="button" id="searchBtn"><img alt="" src="${contextPath}/resources/images/search.PNG" width="20px" height="20px">
 								</button>
 </div>
+ <script>
+/*  $("#search").keyup(
+	function(e){
+		
+	}		 
+ ) */
+ </script>
  <div id="listdiv"> 
  <table border=1  style='border-left:0;border-right:0;border-bottom:0;border-top:0'>
 <%-- 		<td><input type="hidden" value="${sessionScope.loginCompany.companyCode}"  name="comCode"></td>  --%>
 		<tr> 
-			<td style="border:0px; background:#296355; color:white; text-align:center" >   직원번호    </td>
-			<td style="border:0px; background:#296355; color:white; text-align:center">   직원이름    </td>
+			<td style="border:0px; background:#296355; color:white; text-align:center; width:100px"; >   사번    </td>
+			<td style="border:0px; background:#296355; color:white; text-align:center; width:130px";>   사원명    </td>
 		</tr>
  
  		  <c:if test="${ !empty sessionScope.loginCompany }">   
@@ -1588,6 +1595,7 @@ box-sizing: border-box;
 		</c:forEach> 
 	
  		</c:if> 
+ 		
 		 
 </table> 
 </div>
@@ -1613,8 +1621,8 @@ box-sizing: border-box;
 <input type="text" id="name-surr" name="employeeName"> 
 <b id="security-num">주민등록번호</b>
 <input type="text" id="security-num-surr" name="securityNum" placeholder="암호화예정">
-<b id="employeeNum" >직원 번호 </b>
-<input type="text" id="employeeNum-surr" name="employeeNum">
+<!-- <b id="employeeNum" >직원 번호 </b>
+<input type="text" id="employeeNum-surr" name="employeeNum"> -->
 </td>
 </tr>
 
@@ -1869,8 +1877,6 @@ td><button id="leaveReason-surr" style="color:white; font-size:6px;">퇴사사�
 </script>
 </div>
 </div>
-
-
 <div style="height: 100vh;"></div>
 		<div class="card mb-4">
 			<div class="card-body">When scrolling, the navigation stays at

@@ -25,8 +25,8 @@ public class VenderServiceImpl implements VenderService {
 	}
 
 	@Override
-	public List<Vender> selectVender() {
-		List<Vender> list = vd.selectVender(sqlSession);
+	public List<Vender> selectVender(String comCode) {
+		List<Vender> list = vd.selectVender(comCode,sqlSession);
 		
 		return list;
 	}
@@ -44,11 +44,11 @@ public class VenderServiceImpl implements VenderService {
 	}
 
 	@Override
-	public List<Vender> selectBankList(String comCode) {
+	public List<Vender> selectBankList() {
 
 		List<Vender> list =null;
 		
-		list = vd.selectBankList(sqlSession,comCode);
+		list = vd.selectBankList(sqlSession);
 		
 		/*
 		 * if(list ==null) {
