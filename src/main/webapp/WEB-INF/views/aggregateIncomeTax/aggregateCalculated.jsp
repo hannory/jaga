@@ -104,6 +104,22 @@
 		<script>
 		function selectStmt(){
 			alert("selectStmt click zz");
+			
+			$.ajax({
+				url: "selectAggregateCalculated.aggregate",
+				type: "post",
+				data: {
+						"key":"value",
+						"key2":"value2"
+						},
+				success: function(data){
+					alert("success :::" + data);
+				},
+				error: function(status){
+					alert("error ::: " + status)
+				}
+			});
+			
 		}
 		</script>
 		

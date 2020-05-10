@@ -416,5 +416,41 @@
   
   </insert>
   
+  <select id="selectAggregateCalculated" parameterMap="java.util.Map" resultType="com.kh.jaga.aggregateIncomeTax.model.dto.aggregateCalculatedDto">
+  
+  	SELECT 
+  		DOCUMENT_NO,
+		YEAR_OF_ATTR,
+		AGGREGATE_INCOME_AMOUNT,
+		TOTAL_INCOME_DEDUCT,
+		TAX_STANDARD,
+		TAX_RATE,
+		CALCULATED_TAX_AMOUNT,
+		TAX_DEDUCT_AMOUNT,
+		TAX_DEDUCT,
+		DECIDED_TAX,
+		ADDITIONAL_TAX,
+		ADDED_TAX,
+		PAID_TAX,
+		TAX_RESULT,
+		SPECIAL_DEDUCT_TAX,
+		SPECIAL_ADDED_TAX,
+		TAX_FOR_SEPERATE,
+		TAX_FOR_NOW,
+		COM_CODE
+	FROM AGGREGATE_INCOME_TAX
+	WHERE COM_CODE = #{comCode}
+	AND YEAR_OF_ATTR = #{yearOfAttr}
+		
+  
+  </select>
+  
+  
+  
+  
+  
+  
+  
+  
   
   </mapper>

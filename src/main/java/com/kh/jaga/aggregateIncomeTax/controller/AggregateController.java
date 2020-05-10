@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.google.gson.Gson;
 import com.kh.jaga.aggregateIncomeTax.model.dto.AddedTaxStmtDto;
+import com.kh.jaga.aggregateIncomeTax.model.dto.AggregateCalculatedDto;
 import com.kh.jaga.aggregateIncomeTax.model.dto.AmountDataDto;
 import com.kh.jaga.aggregateIncomeTax.model.dto.IncomeAmountStmtDto;
 import com.kh.jaga.aggregateIncomeTax.model.service.AggregateService;
@@ -129,6 +130,11 @@ public class AggregateController {
 	
 	
 	
+	
+	
+	
+	
+	
 	@RequestMapping("showIncomeDeductStmt.aggregate")
 	public String showIncomeDeductStmt() {
 		/* 소득공제명세서 */
@@ -202,13 +208,52 @@ public class AggregateController {
 	
 	
 	
-	
+	//종합소득세 계산서 조회
 	@RequestMapping("showAggregateCalculated.aggregate")
 	public String showAggregateCalculated() {
 		/* 종합소득세액계산서 */
 		return "aggregateIncomeTax/aggregateCalculated";
 	}
 	
+	
+	
+	
+	//종소세 년도 조호 시 ajax로 들어옴
+	@RequestMapping("selectAggregateCalculated.aggregate")
+	public void selectAggregateCalculated(
+			HttpServletResponse response,
+			String yearOfAttr,
+			String comCode,
+			String key, 
+			String key2 ) {
+
+		//해당 년도로 조회해와서 뷰에 값 넘겨주기
+		System.out.println("attrYear : " + yearOfAttr);
+		System.out.println("comCode : " + comCode);
+		
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("yearOfAttr",yearOfAttr);
+		map.put("comCode", comCode);
+		
+		AggregateCalculatedDto dto = service.selectAggregateCalculated(map);
+		System.out.println("디비에서 가져온 dto 결과 : " + dto);
+		
+		
+		if(dto == null) {
+			System.out.println("조회된거없음");
+		}else {
+			System.out.println("조회한 종소세 문서 ::: ");
+			System.out.println(dto);
+		}
+		
+		
+		try {
+			response.getWriter().print(new Gson().toJson(dto));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
 	
 	
 	

@@ -6,6 +6,7 @@ import java.util.Map;
 import org.mybatis.spring.SqlSessionTemplate;
 
 import com.kh.jaga.aggregateIncomeTax.model.dto.AddedTaxStmtDto;
+import com.kh.jaga.aggregateIncomeTax.model.dto.AggregateCalculatedDto;
 import com.kh.jaga.aggregateIncomeTax.model.dto.AmountDataDto;
 import com.kh.jaga.aggregateIncomeTax.model.dto.IncomeAmountStmtDto;
 import com.kh.jaga.aggregateIncomeTax.model.vo.BizCodeVo;
@@ -22,5 +23,7 @@ public interface AggregateDao {
 	AmountDataDto selectData40(SqlSessionTemplate sqlSession, Map<String, String> info);
 
 	int insertIncomeAmount(SqlSessionTemplate sqlSession, IncomeAmountStmtDto dto);
+
+	AggregateCalculatedDto selectAggregateCalculated(SqlSessionTemplate sqlSession, Map<String, String> map);
 
 }
