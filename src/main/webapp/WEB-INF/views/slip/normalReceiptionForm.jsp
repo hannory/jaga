@@ -136,7 +136,7 @@
 							<td><input type="text" class="accName" name="accName" value="${ r.accountTitle }" style="width:100%;"></td>
 							<td><input type="text" class="venderCode" name="venderCode" value="${ r.venderCode }" style="width:100%;"></td>
 							<td><input type="text" class="venName" name="venName" value="${ r.venderName }" style="width:100%;"></td>
-							<td><input type="text" class="brief" name="brief" style="width:100%;"></td>
+							<td><input type="text" class="brief" name="brief" style="width:100%;" value="${ r.brief }"></td>
 							
 							<c:if test="${ r.debitCredit eq '차변'}">
 							<td>

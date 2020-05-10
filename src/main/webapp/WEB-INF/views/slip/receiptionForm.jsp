@@ -627,6 +627,7 @@
 						if(vTax == false){
 						var $tr = $("<tr>");
 						
+						
 						var accCo = $("<input type='hidden' name='accountCode'>").val(13500);
 						var venCo = $("<input type='hidden' name='venderCode'>").val(venderCode);
 						var debitCredit = $("<input type='hidden' name='debitCredit'>").val('차변');

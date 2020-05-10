@@ -31,7 +31,9 @@
 	    <typeAlias type="com.kh.jaga.employee.model.vo.BusinessEmp" alias="BusinessEmp"/> 
 	    <typeAlias type="com.kh.jaga.employee.model.vo.BusinessEmp2" alias="BusinessEmp2"/> 
 	    <typeAlias type="com.kh.jaga.payment.model.vo.BusinessPayment" alias="BusinessPayment"/> 
-	    <typeAlias type="com.kh.jaga.finStmt.model.vo.IncomeStmtAccount" alias="IncomeStmtAccount"/> 
+	    <typeAlias type="com.kh.jaga.payment.model.vo.RetirementDTO" alias="RetirementDTO"/> 
+	    <typeAlias type="com.kh.jaga.payment.model.vo.RetirementDTO2" alias="RetirementDTO2"/> 
+	    <typeAlias type="com.kh.jaga.finStmt.model.vo.FinStmtAccount" alias="FinStmtAccount"/>  
 	    <typeAlias type="com.kh.jaga.bugagachi.model.vo.CcSalesSlip" alias="CcSalesSlip"/>
 	    <typeAlias type="com.kh.jaga.vatSumTaxInv.model.vo.SumOfTaxInv" alias="SumOfTaxInv"/>
 	    <typeAlias type="com.kh.jaga.vatSumTaxInv.model.vo.SumTaxInvDetail" alias="SumTaxInvDetail"/>
@@ -50,7 +52,9 @@
  	 	<typeAlias type="com.kh.jaga.company.model.vo.DashBoard" alias="DashBoard"/> 
    		<typeAlias type="com.kh.jaga.employee.model.vo.incomeTax" alias="incomeTax"/>
    		<typeAlias type="com.kh.jaga.vatDeem.model.vo.Deem" alias="Deem"/> 
-
+		<typeAlias type="com.kh.jaga.vatDeem.model.vo.DeemPro" alias="DeemPro"/>
+		<typeAlias type="com.kh.jaga.vatDeem.model.vo.DeemOther" alias="DeemOther"/>
+		<typeAlias type="com.kh.jaga.vatDeem.model.vo.DeemSlip" alias="DeemSlip"/>
 
 
 	</typeAliases>
@@ -81,6 +85,7 @@
 		<mapper resource="mappers/typeofbiz-mapper.xml"/>
 		<mapper resource="mappers/incomeTax-mapper.xml"/>
  		<mapper resource="mappers/vatDeem-mapper.xml"/> 
+ 		<mapper resource="mappers/retirement-mapper.xml"/> 
   	</mappers>
 
 </configuration>
