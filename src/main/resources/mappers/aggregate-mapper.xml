@@ -416,7 +416,7 @@
   
   </insert>
   
-  <select id="selectAggregateCalculated" parameterMap="java.util.Map" resultType="com.kh.jaga.aggregateIncomeTax.model.dto.aggregateCalculatedDto">
+  <select id="selectAggregateCalculated" parameterType="java.util.Map" resultType="com.kh.jaga.aggregateIncomeTax.model.dto.AggregateCalculatedDto">
   
   	SELECT 
   		DOCUMENT_NO,
