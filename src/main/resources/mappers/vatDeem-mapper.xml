@@ -5,4 +5,79 @@
   
   <mapper namespace="Deem">
 
+	<select id="selectDeem" parameterType="Deem" resultType="Deem">
+SELECT DEEMED_CODE
+    ,VAT_TERM
+    ,DEEMED_DIV
+    ,YEAR_OF_ATTR
+    ,DEADLINE
+    ,COM_CODE
+FROM DEEMED_INPUT_TAX
+WHERE COM_CODE=#{comCode} 
+AND YEAR_OF_ATTR=#{yearOfAttr}
+AND DEADLINE='Y'
+AND VAT_TERM=#{vatTerm}
+	
+	</select>
+	<select id="selectDeemProList" parameterType="DeemPro" resultType="DeemPro">
+SELECT FARM_FISH_PUR_CODE
+       ,NUMOF_TXN
+       ,PROD_NAME
+       ,COUNT_FF
+       ,PURCHASE_PRICE
+       ,DEEMED_CODE
+       ,VENDER_CODE
+       ,BIZ_REG_NUM
+       ,VENDER_NAME
+FROM FARM_FISH_PUR
+WHERE DEEMED_CODE=#{deemedCode}
+	</select>
+	
+	<select id="selectDeemOther" parameterType="DeemOther" resultType="DeemOther">
+	SELECT DIV_CODE
+      ,ASMT_SUM
+      ,ASMT_SCHEDULED
+      ,ASMT_CONF
+      ,TARGET_RATE
+      ,TARGET_AMT
+      ,CURR_PUR_AMT
+      ,DED_AMT
+      ,DEDTAX_RATE
+      ,DEDTAX_AMT
+      ,DEDTAX_SUM
+      ,DEDTAX_SCHEDULED
+      ,DEDTAX_MONTH
+      ,DED_TAXRATE
+      ,DEEMED_CODE
+      ,ASMT1
+      ,ASMT2
+      ,DEEMED_TYPE
+      ,DEDTAX_TOTSUM
+      ,DEDTAX1
+      ,DEDTAX2_SUM
+      ,DEDTAX2_SCHEDULED
+      ,DEDTAX2_MONTH
+      ,DED_TAX
+      ,YEAR1_AMT_SUM
+      ,YEAR1_AMT1
+      ,YEAR1_AMT2
+FROM DF_AGRI_PROD
+WHERE DEEMED_CODE=#{deemedCode}
+	</select>
+	
+	<select id="selectDeemSlip" parameterType="DeemSlip" resultType="DeemSlip">
+	SELECT DEEMED_CODE
+      ,DEEM_SLIP_CODE
+      ,VENDER_CODE
+      ,SLIP_CODE
+      ,VENDER_NAME
+      ,BIZ_REG_NUM
+      ,EVIDENCE_CODE
+      ,PRO_COUNT
+      ,COUNT1
+      ,PURCHASE_PRICE
+      ,DEEM_TAX_PRICE
+FROM DEEM_SLIP
+WHERE DEEMED_CODE=#{deemedCode}
+	</select>
   </mapper>

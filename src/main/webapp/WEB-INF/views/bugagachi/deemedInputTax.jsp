@@ -158,6 +158,18 @@
 		    left: 50%; 
 		    z-index: 100; 
 		}
+		#deadlineCen{
+			display: none;
+			border:1px solid red; 
+			color:red;
+		}
+		#termDiv{
+   			width:80px; 
+   			height: 30px;
+   		}
+		.men_ga td{
+			border:1px solid #C9CACE;
+		}
     </style>
 </head>
 <body>
@@ -218,37 +230,20 @@
         공급자 정보표 시작
             <td colspan="3" style="vertical-align: top;"> -->
             	<div style="height:825px; width: 28%; float:left; border:1px solid #D2D2D6;">
-	               	 <table align="center" class="totalSum" style="width: 99%;">
+	               	 <table id="deemProList" align="center" class="totalSum" style="width: 99%;">
+	               	 <thead>
 	                    <tr style="background-color: #24574A; color: white;  font-weight: 700;">
 	                        <td>공급자</td>
 	                        <td>사업자(주민)등록번호</td>
 	                    </tr>
-	                  	<tr>
-	                  		<td></td>
-	                  		<td></td>
-	                  	</tr>
-	                  	<tr>
-	                  		<td></td>
-	                  		<td></td>
-	                  	</tr>
-	                  	<tr>
-	                  		<td></td>
-	                  		<td></td>
-	                  	</tr>
-	                  	<tr>
-	                  		<td></td>
-	                  		<td></td>
-	                  	</tr>
-	                  	<tr>
-	                  		<td></td>
-	                  		<td></td>
-	                  	</tr>
-	                  	
-	                  	<tr>
-	                  		<td></td>
-	                  		<td></td>
-	                  	</tr>
-	                    
+	               
+	                 </thead>
+	               	<tfoot>
+	               		<tr>
+	               			<td></td>
+	               			<td></td>
+	               		</tr>
+	               	</tfoot>   	
 	                </table>
 				</div><!-- table01 ---------------------->
             <!-- 공급자 정보표 끝-->
@@ -275,43 +270,44 @@
 	            				
 	            				<tr>
 	            					<td colspan="2" class="green">합  계</td>
-	            					<td class="green_value"></td>
-	            					<td class="green_value"></td>
-	            					<td class="green_value"></td>
+	            					<td class="green_value" id="proCountSum"></td>
+	            					<td class="green_value" id="countSum"></td>
+	            					<td class="green_value" id="priceCountSum"></td>
 	            					<td class="green_value">8/108</td>
-	            					<td class="green_value"></td>	
+	            					<td class="green_value" id="deemTaxCountSum"></td>	
 	            				</tr>
 	            				<tr>
 	            					<td rowspan="2" class="green">사업자로부터의 <br>매입분</td>
 	            					<td class="green">계산서</td>
-	            					<td class="green_value"></td>
-	            					<td class="green_value"></td>
-	            					<td class="green_value"></td>
+	            					<td class="green_value" id="proCountBill"></td>
+	            					<td class="green_value" id="countBill"></td>
+	            					<td class="green_value" id="priceCountBill"></td>
 	            					<td class="green_value">8/108</td>
-	            					<td class="green_value"></td>	
+	            					<td class="green_value" id="deemTaxCountBill"></td>	
 	            				</tr>
 	            				<tr>
 	            					<td class="green">신용카드</td>
-	            					<td class="green_value"></td>
-	            					<td class="green_value"></td>
-	            					<td class="green_value"></td>
+	            					<td class="green_value" id="proCountCard"></td>
+	            					<td class="green_value" id="countCard"></td>
+	            					<td class="green_value" id="priceCountCard"></td>
 	            					<td class="green_value">8/108</td>
-	            					<td class="green_value"></td>	
+	            					<td class="green_value" id="deemTaxCountCard"></td>	
 	            				</tr>
 	            				<tr>
 	            					<td colspan="2" class="green">농어민으로부터의 매입분</td>
-	            					<td class="green_value"></td>
-	            					<td class="green_value"></td>
-	            					<td class="green_value"></td>
+	            					<td class="green_value" id="fProCount"></td>
+	            					<td class="green_value" id="fCount"></td>
+	            					<td class="green_value" id="fPriceCount"></td>
 	            					<td class="green_value">8/108</td>
-	            					<td class="green_value"></td>	
+	            					<td class="green_value" id="fDeemTaxCount"></td>	
 	            				</tr>
 	            			
 	            			</table>
   				</div><!-- 의제매입 합계표div 끝 -->
   				
   				<div id="total_deemed_div2">
-  					<table border="1" align="center" class="totalSum" style="width: 99%">
+  					<table id="farm" border="1" align="center" class="totalSum" style="width: 99%">
+	            					<thead>
 	            					<tr class="Tex_bill_th" style="font-weight: 800;">
 	            						<td class="Tex_bill_td" rowspan="3"></td>
 	            						<td colspan="6">농 어민 등으로부터의 매입분에 대한 명세</td>
@@ -327,6 +323,8 @@
 	            						<td>성 명</td>
 	            						<td>사업자 번호</td>
 	            					</tr>
+	            					</thead>
+	            					<tfoot>
 	            					<tr>
 	            						<td class="Tex_bill_td"></td>
 	            						<td></td>
@@ -336,32 +334,17 @@
 	            						<td></td>
 	            						<td></td>
 	            					</tr>
-	            					<tr>
-	            						<td class="Tex_bill_td"></td>
-	            						<td></td>
-	            						<td></td>
-	            						<td></td>
-	            						<td></td>
-	            						<td></td>
-	            						<td></td>
-	            					</tr>
-	            					<tr>
-	            						<td class="Tex_bill_td"></td>
-	            						<td></td>
-	            						<td></td>
-	            						<td></td>
-	            						<td></td>
-	            						<td></td>
-	            						<td></td>
-	            					</tr>
+	            					
+	            					
 	            					<tr class="Tex_bill_th">
 	            						<td class="Tex_bill_td"></td>
 	            						<td colspan="2">합 계</td>
-	            						<td></td>
-	            						<td></td>
-	            						<td></td>
-	            						<td></td>
+	            						<td id="ffDealCount"></td>
+	            						<td id="ffProName"></td>
+	            						<td id="ffCount"></td>
+	            						<td id="ffPrice"></td>
 	            					</tr>
+	            					</tfoot>
 	            				
 	            				</table>
   				
@@ -407,14 +390,90 @@
 		 		console.log(comCode);
 		 		
 		 		$.ajax({
-		 			url:"ccIssStmt.cis",
+		 			url:"deemedSearch.vd",
 		 			type:"post",
 		 			data:{search_ye:search_ye, search_mon1:search_mon1, search_mon2:search_mon2, comCode:comCode},
 		 			success: function(data){
 		 				console.log(data);
 		 				 $("#loading").hide();
+		 				var deem=data.deem;
+		 				var deemPro=data.deemPro;
+		 				var deemOther=data.deemOther;
+		 				var deemSlip=data.deemSlip;
+		 				console.log(deem);
+		 				console.log(deemPro[0].venderName);
+		 				console.log(deemOther);
+		 				console.log(deemSlip);
+	          
 		 				
+	                  /* 공급자 리스트  &if 농어민이면 농어민 거래내역+구분표에서 농어민 거래 건수*/
+	                  //공급자 리스트들의 매입처수, 건수,매입가액,의제매입세액 계산해줘야함
+	                  var $deemProList=$("#deemProList");
+	                  var $farm=$("#farm");
+	                  var $tbody=$("<tbody>");
+	                  $farm.append($tbody);
+	                  $deemProList.append($tbody);
+	                  var fProCount=0;		//농어민 매입처수
+	                  var fCount=0;			//농어민 건수
+	                  var fPriceCount=0; 	//농어민 매입가액
+	                  var fDeemTaxCount=0;	//농어민 의제매입세액
+	                  var ffProCount=0;		//농어민 거래내역표의 상품수량
+	                  var index=0;			//농어민 거래내역표의 인덱스번호
+	                  for(var key in deemPro){
+	                	  var $tr=$("<tr>");
+	                	  var $venderNameTd=$("<td>").text(deemPro[key].venderName);
+	                	  var $bizRegNumTd=$("<td>").text(deemPro[key].bizRegNum);
+	                	  
+	                	  //구분표에서 농어민 합계 계산
+	                	  if(deemPro[key].bizRegNum.length==14){
+	                		  index++;
+	                		var $trF=$("<tr>");  
+	                		var $venderNameFTd=$("<td>").text(deemPro[key].venderName);
+		                	var $bizRegNumFTd=$("<td>").text(deemPro[key].bizRegNum);
+	                	  	var $countFTd=$("<td>").text(comma(deemPro[key].numofTxn));
+	                	  	var $proNameTd=$("<td>").text(deemPro[key].prodName);
+	                	  	var $countFfTd=$("<td>").text(comma(deemPro[key].countFf));
+	                	  	var $purchasePriceTd=$("<td>").text(comma(deemPro[key].purchasePrice));
+	                	  	var $indexTd=$("<td class='Tex_bill_td'>").text(index);
+	                		$trF.append($indexTd);
+	                		$trF.append($venderNameFTd);
+	                		$trF.append($bizRegNumFTd);
+	                		$trF.append($countFTd);
+	                		$trF.append($proNameTd);
+	                		$trF.append($countFfTd);
+	                		$trF.append($purchasePriceTd);
+	                		$farm.append($trF);
+	                		
+	                		fProCount++;//매입처수계산
+	                	  	fCount=fCount+deemPro[key].numofTxn;
+	                	  	fPriceCount=fPriceCount+deemPro[key].purchasePrice;
+	                	  	ffProCount=ffProCount+deemPro[key].countFf;
+	                	  	
+	                	  }
+	                	  
+	                	  $tr.append($venderNameTd);
+	                	  $tr.append($bizRegNumTd);
+	                	  
+	                	  $deemProList.append($tr);
+	                  }
+	                  fDeemTaxCount=Math.floor(fPriceCount*(8/108));
 	                  
+	                  console.log("농어민 매입처수: "+fProCount);
+	                  console.log("농어민 건수: "+fCount);
+	                  console.log("농어민 매입가액: "+fPriceCount);
+	                  console.log("농어민 공제액: "+fDeemTaxCount);
+	                  /* 구분표 농어민 칸 채우기 */
+					  $("#fProCount").text(comma(fProCount));	        
+					  $("#fCount").text(comma(fCount));	                 
+					  $("#fPriceCount").text(comma(fPriceCount));	                 
+					  $("#fDeemTaxCount").text(comma(fDeemTaxCount));
+					  /* 농어민 거래내역 표에 칸채우기 */
+		 			  $("#ffDealCount").text(comma(fCount));
+		 			  $("#ffCount").text(comma(ffProCount));
+		 			  $("#ffPrice").text(comma(fPriceCount));	
+		 				
+		 				
+		 				
 		 				
 		 			},
 		 			error:function(error){
@@ -437,7 +496,7 @@
 		                	<div class="middleMenu" style="margin-top: 20px;">
 		                    <h5>가.과세기간 과세표준 및 공제가능한 금액등</h5>
 		                	</div>
-		  					<table border="1" style=" text-align:center; width: 100%; margin-top: 20px; margin-bottom: 40px; margin-left: auto; margin-right: auto;">
+		  					<table  class ="men_ga" style="text-align:center; width: 100%; margin-top: 20px; margin-bottom: 40px; margin-left: auto; margin-right: auto;">
 		  						<tr class="Tex_bill_th" style="font-weight: 800;">
 		  							<td colspan="3">과세 표준</td>
 		  							<td colspan="2">대상액 한도계산</td>
@@ -455,8 +514,8 @@
 		  						<tr>
 		  							<td class="green_value"></td>
 		  							<td></td>
-		  							<td>asdfasd</td>
 		  							<td></td>
+		  							<td>40/100</td>
 		  							<td class="green_value"></td>
 		  							<td></td>
 		  							<td class="green_value"></td>
@@ -467,7 +526,7 @@
 		  					<div class="middleMenu" style="margin-top: 20px;">
 		                    <h5>나.과세기간 공제할 세액</h5>
 		                	</div>
-		                	<table border="1" style="text-align:center; width: 100%; margin-left: auto; margin-right:auto; margin-top: 20px; margin-bottom: 10px;">
+		                	<table  class ="men_ga" style="text-align:center; width: 100%; margin-left: auto; margin-right:auto; margin-top: 20px; margin-bottom: 10px;">
 		  						<tr class="Tex_bill_th" style="font-weight: 800;">
 		  							<td colspan="2">과세 표준</td>
 		  							<td colspan="3">대상액 한도계산</td>
@@ -483,8 +542,8 @@
 		  						</tr>
 		  						<tr>
 		  							<td></td>
-		  							<td></td>
-		  							<td class="green_value">asdfasd</td>
+		  							<td style="height: 30px;"></td>
+		  							<td class="green_value"></td>
 		  							<td></td>
 		  							<td></td>
 		  							<td class="green_value"></td>
@@ -497,7 +556,7 @@
 		  					<div class="middleMenu" style="margin-top: 20px;">
 		                    <h5>가.1역년 과세표준 및 제 2기 과세기간 공제 가능한 금액등</h5>
 		                	</div>
-		  					<table border="1" style=" text-align:center; width: 100%; margin-top: 20px; margin-bottom: 40px; margin-left: auto; margin-right: auto;">
+		  					<table  class ="men_ga" style=" text-align:center; width: 100%; margin-top: 20px; margin-bottom: 40px; margin-left: auto; margin-right: auto;">
 		  						<tr class="Tex_bill_th" style="font-weight: 800;">
 		  							<td colspan="3">과세 표준</td>
 		  							<td colspan="2">대상액 한도계산</td>
@@ -505,7 +564,7 @@
 		  							<td rowspan="2">공제대상금액<br>[MIN{A,B}]</td>	
 		  						</tr>
 		  						<tr class="green">
-		  							<td>B.합계</td>
+		  							<td >B.합계</td>
 		  							<td>제1기</td>
 		  							<td>제2기</td>
 		  							<td>한도율</td>
@@ -519,8 +578,8 @@
 		  							<td class="green_value"></td>
 		  							<td></td>
 		  							<td></td>
-		  							<td></td>
-		  							<td class="green_value">asdfasd</td>
+		  							<td style="height: 30px;"></td>
+		  							<td class="green_value"></td>
 		  							<td class="green_value"></td>
 		  							<td></td>
 		  							<td></td>
@@ -532,7 +591,7 @@
 		  					<div class="middleMenu" style="margin-top: 20px;">
 		                    <h5>나.과세기간 공제할 세액</h5>
 		                	</div>
-		                	<table border="1" style="text-align:center; width: 100%; margin-left: auto; margin-right:auto; margin-top: 20px; margin-bottom: 10px;">
+		                	<table  class ="men_ga" style="text-align:center; width: 100%; margin-left: auto; margin-right:auto; margin-top: 20px; margin-bottom: 10px;">
 		  						<tr class="Tex_bill_th" style="font-weight: 800;">
 		  							<td colspan="2">공제대상세액</td>
 		  							<td colspan="5">이미 공제받은 금액</td>
@@ -553,10 +612,10 @@
 		  						</tr>
 		  						<tr>
 		  							<td></td>
-		  							<td> asdf</td>
+		  							<td style="height: 30px;"></td>
 		  							<td class="green_value"></td>
 		  							<td></td>
-		  							<td class="green_value">asdf</td>
+		  							<td class="green_value"></td>
 		  							<td></td>
 		  							<td></td>
 		  							<td class="green_value"></td>
