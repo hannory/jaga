@@ -6,26 +6,27 @@ public class AggregateCalculatedDto {
 	private String comCode;
 	private String yearOfAttr;
 	
-	private String v101;
-	private String v102;
-	private String v103;
-	private String v104;
-	private String v105;
-	private String v106;
-	private String v107;
-	private String v108;
-	private String v109;
-	private String v110;
-	private String v111;
-	private String v112;
-	private String v113;
-	private String v114;
-	private String v115;
-	private String v116;
-	private String v117;
-	private String v118;
-	private String v119;
-	private String v120;
+	private String v101;		//종합소득금액
+	private String v102;		//소득공제계
+	private String v103;		//과세표준(종합소득금액 - 소득공제계)
+	private String v104;		//세율
+	private String v105;		//산출세액
+	private String v106;		//세액감면
+	private String v107;		//세액공제
+	private String v108;		//결정세액(산출세액 - 세액감면 - 세액공제)
+	private String v109;		//가산세
+	private String v110;		//추가납부세액
+	private String v111;		//합계(결정세액 + 가산세 + 추가납부세액)
+	private String v112;		//기납부세액
+	private String v113;		//납부할 총 세액 (합계 - 기납부세액)
+	private String v114;		//납부특례세액 차감
+	private String v115;		//납부특례세액 가산
+	private String v116;		//분할납세액 2개월 내
+	private String v117;		//기한 이내 납부할 세액
+	
+	private String v118;		//안쓰는
+	private String v119;		//칼럼
+	private String v120;		//입니다.
 	
 	private String v201;
 	private String v202;

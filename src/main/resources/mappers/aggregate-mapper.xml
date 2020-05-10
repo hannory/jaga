@@ -413,6 +413,7 @@
 		#{type},
 		#{comCode}
   	)
+  	SELECT SYSDATE FROM DUAL
   
   </insert>
   
@@ -447,6 +448,13 @@
   
   
   
+  <!-- 종합소득 계산서 값 가져오는 쿼리문 -->
+  <select id="selectExistingData" parameterType="java.util.Map" resultType="com.kh.jaga.aggregateIncomeTax.model.dto.AggregateCalculatedDto">
+  
+  	SELECT SYSDATE
+  	FROM DUAL
+  	
+  </select>
   
   
   

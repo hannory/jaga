@@ -268,6 +268,8 @@
 		
 		<form id="tagForm" action="insertIncomeAmount.aggregate" method="post" onsubmit="return checksubmit();">
 		
+		<input type="hidden" name="comCode" value="${ loginCompany.companyCode  }">
+		
 		<script>
 		submitFlag = 0;
 		function checksubmit(){
