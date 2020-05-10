@@ -31,6 +31,9 @@
 		cursor: pointer;
 	}
 	
+	table input{
+		width:100%;
+	}
 	
 	
 	.tapMenu{
@@ -136,11 +139,14 @@
 	
 		<h2 class="mt-4">종합소득세</h2>
 		
+		<form id="formTag" action="insertDeduct.aggregate" method="post" onsubmit="return checkSubmit();">
+		
 		<!-- 귀속년도 -->
 		<div style="float:right;">
 			<label>귀속년도 : </label>
-			<input type="text" style="border-bottom:1px solid black;">
+			<input id="attrYear" name="yearOfAttr" value="" type="number" style="width:60px; border-bottom:1px solid black;">
 			<label>년</label>
+			<button onclick="selectStmt();" style="display:inline-block; background:#24574A; color:white; border-radius:5px;">조회</button>
 		</div>
 		<!-- //귀속년도 -->
 		
@@ -153,8 +159,18 @@
 			<div class="div-top4menu" style="border-bottom: 3px solid #24574A"><h5>소득공제명세서</h5></div>
 			<div class="div-top4menu" onclick="goAddedTaxStmt();"><h5>가산세명세서</h5></div>
 			<div class="div-top4menu" onclick="goAggregateCalculated();"><h5>종합소득세액계산서</h5></div>
+			<div class="cursorPointer" onclick="saveDeduct();" style="display:inline-block; background:#24574A; border-radius:5px; width:50px; height:30px; text-align:center; line-height:30px;color:white;">저장</div>
 		</div>
 		<!-- //class="div-top4menu" -->
+		
+		<script>
+		/* 소득공제명세서 저장(탭 3개 다 ,, 이페이지 전체 저장함) */
+		function saveDeduct(){
+			$("#formTag").submit();
+		}
+		
+		
+		</script>
 		
 		
 		<script type="text/javascript">
@@ -212,6 +228,10 @@
 				$("#tabMenu01").css("opacity","100%");
 				$("#tabMenu02").css("opacity","50%");
 				$("#tabMenu03").css("opacity","50%");
+				
+				/* 아래 테이블 보이게하기 */
+				/* $(".table-bottom").css("display","inline-block"); */
+				$(".div-table-bot").css("display","block");
 			}
 			
 			function tap02click(){
@@ -223,6 +243,11 @@
 				$("#tabMenu01").css("opacity","50%");
 				$("#tabMenu02").css("opacity","100%");
 				$("#tabMenu03").css("opacity","50%");
+				
+				/* 아래 테이블 지우기 */
+				/* $(".table-bottom").css("display","none"); */
+				$(".div-table-bot").css("display","none");
+				
 			}
 			
 			function tap03click(){
@@ -234,10 +259,36 @@
 				$("#tabMenu01").css("opacity","50%");
 				$("#tabMenu02").css("opacity","50%");
 				$("#tabMenu03").css("opacity","100%");
+				
+				/* 아래 테이블 지우기 */
+				/* $(".table-bottom").css("display","none"); */
+				$(".div-table-bot").css("display","none");
 			}
 		</script>
 		
 		
+		<!-- <form id="formTag" action="insertDeduct.aggregate" method="post" onsubmit="return checkSubmit();"> -->
+		
+		
+		<input type="hidden" name="comCode" value="${ loginCompany.companyCode }">
+		
+		
+		
+		
+		
+		<script>
+		submitFlag = 0;
+		function checkSubmit(){
+			if($("#attrYear").val() == ""){
+				alert("귀속년도 입력해주세요");
+				return false;
+			}else{
+				return true;
+			}
+			
+		}//method
+		
+		</script>
 		
 		
 		<!-- 상단 테이블01 만들기 -->
@@ -247,8 +298,8 @@
 				<td>관계코드</td>
 				<td>성명</td>
 				<td>내외국인</td>
-				<td>주민(외국인)번호</td>
-				<td>나이</td>
+				<!-- <td>주민(외국인)번호</td> -->
+				<td>나이(만)</td>
 				<td>기본공제</td>
 				<td>세대주구분</td>
 				<td>부녀자</td>
@@ -259,11 +310,17 @@
 				<td>출산입양</td>
 			</tr>
 			<tr>
-				<td><span>7</span></td>
+				<td><span>1</span></td>
 				<td><input type="text" id="relationCode01" name="relationCode01" class="relationCode"></td>
 				<td><input type="text" id="personName01" name="personName01" class="personName"></td>
-				<td><input type="text" id="foreigner01" name="foreigner01" class="foreigner"></td>
-				<td><input type="text" id="personId01" name="personId01" class="personId"></td>
+				<!-- <td><input type="text" id="foreigner01" name="foreigner01" class="foreigner"></td> -->
+				<td>
+				<select name="foreigner01" >
+					<option value="1">1.내국인</option>
+					<option value="2">2.외국인</option>
+				</select>
+				</td>
+				<!-- <td><input type="text" id="personId01" name="personId01" class="personId"></td> -->
 				<td><input type="text" id="age01" name="age01" class="age"></td>
 				<td><input type="text" id="basicDeduct01" name="basicDeduct01" class="basicDeduct"></td>
 				<td><input type="text" id="head01" name="head01" class="head"></td>
@@ -274,76 +331,57 @@
 				<td><input type="text" id="kids01" name="kids01" class="kids"></td>
 				<td><input type="text" id="adopt01" name="adopt01" class="adopt"></td>
 			</tr>
-			<tr>
-				<td>1</td>
-				<td>0.본인</td>
-				<td>심원용</td>
-				<td>1.내국인</td>
-				<td>940923-1234567</td>
-				<td>20</td>
-				<td>1.본인</td>
-				<td>1.세대주</td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
+			<tr id="tr102" style="display:none;">
+				<td><span>2</span></td>
+				<td><input type="text" id="relationCode02" name="relationCode02" class="relationCode"></td>
+				<td><input type="text" id="personName02" name="personName02" class="personName"></td>
+				<!-- <td><input type="text" id="foreigner02" name="foreigner02" class="foreigner"></td> -->
+				<td>
+				<select name="foreigner02" >
+					<option value="1">1.내국인</option>
+					<option value="2">2.외국인</option>
+				</select>
+				</td>
+				<!-- <td><input type="text" id="personId02" name="personId02" class="personId"></td> -->
+				<td><input type="text" id="age02" name="age02" class="age"></td>
+				<td><input type="text" id="basicDeduct02" name="basicDeduct02" class="basicDeduct"></td>
+				<td><input type="text" id="head02" name="head02" class="head"></td>
+				<td><input type="text" id="woman02" name="woman02" class="woman"></td>
+				<td><input type="text" id="oneParent02" name="oneParent02" class="oneParent"></td>
+				<td><input type="text" id="old02" name="old02" class="old"></td>
+				<td><input type="text" id="disabillity02" name="disabillity02" class="disabillity"></td>
+				<td><input type="text" id="kids02" name="kids02" class="kids"></td>
+				<td><input type="text" id="adopt02" name="adopt02" class="adopt"></td>
 			</tr>
-			<tr>
-				<td>1</td>
-				<td>0.본인</td>
-				<td>심원용</td>
-				<td>1.내국인</td>
-				<td>940923-1234567</td>
-				<td>20</td>
-				<td>1.본인</td>
-				<td>1.세대주</td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
+			<tr id="tr103" style="display:none;">
+				<td><span>3</span></td>
+				<td><input type="text" id="relationCode03" name="relationCode03" class="relationCode"></td>
+				<td><input type="text" id="personName03" name="personName03" class="personName"></td>
+				<!-- <td><input type="text" id="foreigner03" name="foreigner03" class="foreigner"></td> -->
+				<td>
+				<select name="foreigner03" >
+					<option value="1">1.내국인</option>
+					<option value="2">2.외국인</option>
+				</select>
+				</td>
+				<!-- <td><input type="text" id="personId03" name="personId03" class="personId"></td> -->
+				<td><input type="text" id="age03" name="age03" class="age"></td>
+				<td><input type="text" id="basicDeduct03" name="basicDeduct03" class="basicDeduct"></td>
+				<td><input type="text" id="head03" name="head03" class="head"></td>
+				<td><input type="text" id="woman03" name="woman03" class="woman"></td>
+				<td><input type="text" id="oneParent03" name="oneParent03" class="oneParent"></td>
+				<td><input type="text" id="old03" name="old03" class="old"></td>
+				<td><input type="text" id="disabillity03" name="disabillity03" class="disabillity"></td>
+				<td><input type="text" id="kids03" name="kids03" class="kids"></td>
+				<td><input type="text" id="adopt03" name="adopt03" class="adopt"></td>
 			</tr>
-			<tr>
-				<td>1</td>
-				<td>0.본인</td>
-				<td>심원용</td>
-				<td>1.내국인</td>
-				<td>940923-1234567</td>
-				<td>20</td>
-				<td>1.본인</td>
-				<td>1.세대주</td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-			</tr>
-			<tr>
-				<td>1</td>
-				<td>0.본인</td>
-				<td>심원용</td>
-				<td>1.내국인</td>
-				<td>940923-1234567</td>
-				<td>20</td>
-				<td>1.본인</td>
-				<td>1.세대주</td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-			</tr>
+		
 			
 			<tr>
-				<td>1</td>
+				<td></td>
 				<td colspan="5">합계[명]</td>
-				<td>1</td>
-				<td>1</td>
+				<td></td>
+				<td></td>
 				<td></td>
 				<td></td>
 				<td></td>
@@ -353,6 +391,64 @@
 			</tr>
 		</table>
 		<!-- 상단 테이블01 만들기 -->
+		
+		<script>
+		/* 관계코드 포커스 하면 도움말 바꾸기 */
+		$(".relationCode").focus(function(){
+			$("#helpBox").html(
+						"<strong>0</strong>:소득자본인  <strong>1</strong>:소득자의 직계존속  <strong>2</strong>:배우자의 직계존속 <strong>3</strong>:배우자 <strong>4</strong>:직계비속 중 자녀.입양자" + "<br>" 
+					+ 	"<strong>5</strong>:직계비속 중 자녀.입양자외(직계비속과 그 배우자가 모두 장애인의 경우 그 배우자 포함)" +"<br>"
+					+	"<strong>6</strong>:형제자매 <strong>7</strong>:수급자 <strong>8</strong>:위탁아동(관계코드 4~6은 소득자와 배우자의 각각의 관계를 포함합니다.)"
+					);
+		});
+		
+		
+		/* 관계코드에서 blur하면 다음 행 보이기 */
+		$(".relationCode").eq(0).blur(function(){
+			$("#tr102").css("display","");
+		});
+		
+		/* 관계코드에서 blur하면 다음 행 보이기 */
+		$(".relationCode").eq(1).blur(function(){
+			$("#tr103").css("display","");
+		});
+		
+		
+		/* 관계코드 입력시 */
+		$(".relationCode").eq(0).blur(function(){
+			if($("#relationCode01").val() == 0){
+				/* 본인 이므로 인적공제 내용 채우기 */
+				$("#btd11").val("1");
+				$("#btd12").val("1,500,000");
+				
+				$("#btd81").val("1");
+				$("#btd82").val("1,500,000");
+				
+				$("#basicDeduct01").val("본인");
+				
+				
+			}
+		});
+		
+		
+		
+		$(".relationCode").eq(1).blur(function(){
+			if($("#relationCode02").val() == 3){
+				/* 배우자 이므로 인적공제 내용 채우기 */
+				$("#btd21").val("1");
+				$("#btd22").val("1,500,000");
+				
+				$("#btd81").val("2");
+				$("#btd82").val("3,000,000");
+				
+				$("#basicDeduct02").val("배우자");
+				
+			}
+		});
+		
+		
+		
+		</script>
 		
 		
 		
@@ -365,7 +461,7 @@
 			</tr>
 			<tr>
 				<td colspan="3">(9)국민연금</td>
-				<td><input type="text" id="" name=""></td>
+				<td><input type="text" id="b01" name=""></td>
 			</tr>
 			<tr>
 				<td colspan="3">(10)공무원.군인.사립교직원.별정우체국연금</td>
@@ -378,7 +474,7 @@
 			<tr>
 				<td rowspan="5">특별공제</td>
 				<td colspan="2">(12)보험료공제</td>
-				<td><input type="text" id="" name=""></td>
+				<td><input type="text" id="b04" name=""></td>
 			</tr>
 			<tr>
 				<td colspan="2">(13)주택자금공제</td>
@@ -391,25 +487,70 @@
 			<tr>
 				<td rowspan="2">(15)특별공제합계</td>
 				<td>근로소득이 있는 자 (12~14)</td>
-				<td><input type="text" id="" name=""></td>
+				<td><input type="text" id="b07" name=""></td>
 			</tr>
 			<tr>
 				<td>근로소득이 없는 자 (14)</td>
-				<td><input type="text" id="" name=""></td>
+				<td><input type="text" id="b08" name=""></td>
 			</tr>
 			<tr>
 				<td colspan="3">(22)소득공제합계(8~11+15+21)</td>
-				<td><input type="text" id="" name=""></td>
+				<td><input type="text" id="b09" name="totalDeduct"></td>
 			</tr>
 			<tr>
 				<td colspan="3">(23)소득공제 종합한도 초과액</td>
-				<td><input type="text" id="" name=""></td>
+				<td><input type="text" id="b10" name=""></td>
 			</tr>
-			
 			
 			
 		</table>
 		<!-- //상단 테이블02 만들기 끝 -->
+		
+		<script>
+		/* 테이블2번에서  값 입력시 프론트 처리*/
+		$("#b01").blur(function(){
+			console.log("============");
+			
+			var b01 = $("#b01").val(); 
+			var b04 = $("#b04").val();
+			var btd82 = $("#btd82").val().replace(",","").replace(",","").replace(",","").replace(",","").replace(",","").replace(",","");
+			var sum = 0;
+			
+			sum = Number(b01) + Number(b04) + Number(btd82);
+			console.log(sum);
+			
+			$("#b09").val(sum);
+			console.log("============");
+			
+			$("#b10").val(0);
+			
+		});
+		
+		$("#b04").blur(function(){
+			console.log("============");
+			
+			$("#b07").val($("#b04").val());
+			
+			var b01 = $("#b01").val(); 
+			var b04 = $("#b04").val(); 
+			var btd82 = $("#btd82").val().replace(",","").replace(",","").replace(",","").replace(",","").replace(",","").replace(",","");
+			var sum = 0;
+			
+			sum = Number(b01) + Number(b04) + Number(btd82);
+			console.log(sum);
+			
+			$("#b09").val(sum);
+			console.log("============");
+			
+			$("#b10").val(0);
+		});
+		
+		
+		
+		
+		
+		
+		</script>
 		
 		
 		
@@ -423,9 +564,9 @@
 				<td>20.사업자번호</td>
 			</tr>
 			<tr>
-				<td>124</td>
-				<td>고용유지 중소기업자 소득공제</td>
-				<td>500000</td>
+				<td></td>
+				<td></td>
+				<td></td>
 				<td></td>
 			</tr>
 			<tr>
@@ -488,7 +629,7 @@
 		
 		
 		<!-- 하단 테이블 만들기 -->
-		
+		<div id="div-table-bot">
 		<table class="table-bottom" border="1">
 			<tr>
 				<td colspan="5">인적공제</td>
@@ -496,19 +637,19 @@
 			<tr>
 				<td colspan="3">구분</td>
 				<td>인원</td>
-				<td>공제</td>
+				<td>공제액(원)</td>
 			</tr>
 			<tr>
 				<td rowspan="7">인적공제</td>
 				<td rowspan="3">기본공제</td>
-				<td>( 1 ) 본인 </td>
-				<td>1</td>
-				<td>1,500,000</td>
+				<td>(1)본인 </td>
+				<td><input type="text" id="btd11"></td>
+				<td><input type="text" id="btd12"></td>
 			</tr>
 			<tr>
 				<td>(2)배우자</td>
-				<td></td>
-				<td></td>
+				<td><input type="text" id="btd21"></td>
+				<td><input type="text" id="btd22"></td>
 			</tr>
 			<tr>
 				<td>(3)부양가족</td>
@@ -538,11 +679,11 @@
 			</tr>
 			<tr>
 				<td colspan="3">(8) 인적공제계(1~7의 합계)</td>
-				<td>1</td>
-				<td>1,500,000</td>
+				<td><input type="text" id="btd81"></td>
+				<td><input type="text" id="btd82"></td>
 			</tr>
 		</table>
-		
+		</div>
 		<!-- //하단 테이블 만들기 끝-->
 		
 		
@@ -553,7 +694,7 @@
 	
 	
 	
-	
+	</form>
 	
 	
 	
@@ -578,9 +719,8 @@
 	
 		<!-- footer -->
 		<div class="card mb-4">
-			<div class="card-body">
+			<div id="helpBox" class="card-body">
 				도움말입니다. 읽어주세요*^^*
-				<h1>${ test }ㅋㅋㅋ</h1>
 			</div>
 		</div>
 		<!-- ///footer -->

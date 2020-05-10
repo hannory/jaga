@@ -263,27 +263,47 @@
 	
 		<h2 class="mt-4">종합소득세</h2>
 		
+	
 		
+		
+		<form id="tagForm" action="insertIncomeAmount.aggregate" method="post" onsubmit="return checksubmit();">
+		
+		<input type="hidden" name="comCode" value="${ loginCompany.companyCode  }">
+		
+		<script>
+		submitFlag = 0;
+		function checksubmit(){
+			if(submitFlag == 0){
+				 Swal.fire({
+					   title: '귀속년도를 입력해주세요',
+					   icon: 'info',
+					   showCancelButton: false,
+					   confirmButtonColor: '#24574A',
+					   cancelButtonColor: '#d33',
+					   confirmButtonText: '확인'
+					 })
+					   
+				return false;
+			}else{
+				return true;
+			}
+		}
+		</script>
 		
 		<!-- 귀속년도 -->
 		<div style="float:right;">
 			<label>귀속년도 : </label>
-			<input id="attrYear" type="text" style="border-bottom:1px solid black;">
+			<input id="attrYear" name="yearOfAttr" type="number" style="width:60px; border-bottom:1px solid black;">
 			<label>년</label>
+			<div onclick="selectStmt();" class="cursorPointer" style="padding:5px; display:inline-block; background:#24574A; color:white; border-radius:5px;">조회</div>
 		</div>
 		
 		<script>
-		/* 귀속년도 받아온 값으로 바꿔줌 */
-		$(function(){
-			/* if(${ dto.attrYear eq null }){
-				alert("null true");
-				console.log(dto.attrYear);
-			} */
-			$("#attrYear").val("2020");
-		});
-			
+			function selectStmt(){
+				alert("조회버튼클릭");
+				
+			}
 		</script>
-		
 		<!-- //귀속년도 -->
 		
 		<div style="height:50px;"></div><!-- 간격 띄우기 위한 용도 -->
@@ -293,9 +313,22 @@
 			<div class="div-top4menu" onclick="goIncomeDeductStmt();"><h5>소득공제명세서</h5></div>
 			<div class="div-top4menu" onclick="goAddedTaxStmt();"><h5>가산세명세서</h5></div>
 			<div class="div-top4menu" onclick="goAggregateCalculated();"><h5>종합소득세액계산서</h5></div>
-			<div class="cursorPointer" style="display:inline-block; background:#24574A; border-radius:5px; width:50px; height:30px; text-align:center; line-height:30px;color:white;">저장</div>
+			<div onclick="doSubmit();" class="cursorPointer" style="display:inline-block; background:#24574A; border-radius:5px; width:50px; height:30px; text-align:center; line-height:30px;color:white;">저장</div>
 		</div>
 		<!-- //class="div-top4menu" -->
+		
+		<script>
+		function doSubmit(){
+			
+			if( Number($("#attrYear").val()) > 1900){
+				submitFlag = 1;
+			}else{
+				console.log("else 블럭 진입..서브밋 안될거임");
+			}
+			
+			$("#tagForm").submit();
+		}
+		</script>
 		
 		
 		<script type="text/javascript">
@@ -344,7 +377,7 @@
 			<table border="1" class="table-top" style="text-align:center;">
 				<tr>
 					<td style="width:6%;"><span>신고<br>유형</span></td>
-					<td style="width:5%;"><input type="text" id="inputReportType" name=""></td>
+					<td style="width:5%;"><input type="text" id="inputReportType" name="type" value="1"></td>
 					<td onclick="reportTypeClick(1)"style="width:18%;" class="cursorPointer">1. 자기조정</td>
 					<td onclick="reportTypeClick(2)" class="cursorPointer">2. 간편장부</td>
 					<td onclick="reportTypeClick(3)" class="cursorPointer">3. 추계 - 기준</td>
@@ -360,7 +393,7 @@
 				
 				<tr>
 					<td><span>기장<br>의무</span></td>
-					<td><input type="text" id="inputMilletDuty" name=""></td>
+					<td><input type="text" id="inputMilletDuty" name="duty" value="1"></td>
 					<td onclick="milletDutyClick(1)" class="cursorPointer">1. 복식부기의무자</td>
 					<td onclick="milletDutyClick(2)" class="cursorPointer">2. 간편장부대상자</td>
 					<td onclick="milletDutyClick(3)" class="cursorPointer">3. 비사업자</td>
@@ -376,7 +409,7 @@
 		</div>
 		<!-- 상단 테이블 감싸는 div 끝 -->
 		
-		<!-- <form action="zzzplzInputAddrzzzzz" method="post"> -->
+		
 		<!-- 본문 테이블 감싸는 div -->
 		<div class="div-tableCenter" style="margin-top:30px; margin-bottom:30px;">
 		<table class="table-center">
@@ -386,12 +419,12 @@
 				<td class="td02" style="display:none; margin-left:8px;"><input type="text" id="v201" name="v201"></td>
 				<td class="td03" style="display:none; margin-left:10px;"><input type="text" id="v301" name="v301"></td>
 			</tr>
-			<tr>
+			<!-- <tr>
 				<td>신고 유형 코드</td>
 				<td><input type="text" id="v102" name="v102"></td>
 				<td class="td02" style="display:none; margin-left:8px;"><input type="text" id="v202" name="v202"></td>
 				<td class="td03" style="display:none; margin-left:10px;"><input type="text" id="" name="" class="td03"></td>
-			</tr>
+			</tr> -->
 			<tr>
 				<td>상호 또는 법인명</td>
 				<td><input type="text" id="v103" name="v103"></td>
@@ -410,12 +443,12 @@
 				<td class="td02" style="display:none; margin-left:8px;"><input type="text" id="v205" name="v205"></td>
 				<td class="td03" style="display:none; margin-left:10px;"><input type="text" id="" name="" class="td03"></td>
 			</tr>
-			<tr>
+			<!-- <tr>
 				<td>기장의무</td>
 				<td><input type="text" id="v106" name="v106"></td>
 				<td class="td02" style="display:none; margin-left:8px;"><input type="text" id="v206" name="v206"></td>
 				<td class="td03" style="display:none; margin-left:10px;"><input type="text" id="" name="" class="td03"></td>
-			</tr>
+			</tr> -->
 			<tr>
 				<td>주업종코드</td>
 				<td><input type="hidden" id="v107" name="v107"><input type="text" id="v107dp"></td><!-- 보여주는거랑 들어가는거랑 값 다름 -->
@@ -458,25 +491,25 @@
 				<td class="td02" style="display:none; margin-left:8px;"><input type="text" id="v213" name="v213"></td>
 				<td class="td03" style="display:none; margin-left:10px;"><input type="text" id="" name="" class="td03"></td>
 			</tr>
-			<tr>
+			<!-- <tr>
 				<td>최저한세적용대상 소득</td>
 				<td><input type="text" id="v114" name="v114"></td>
 				<td class="td02" style="display:none; margin-left:8px;"><input type="text" id="v214" name="v214"></td>
 				<td class="td03" style="display:none; margin-left:10px;"><input type="text" id="" name="" class="td03"></td>
-			</tr>
-			<tr>
+			</tr> -->
+			<!-- <tr>
 				<td>과세기간 시작일</td>
-				<td><input type="text" id="v115" name="v115"></td>
+				<td><input type="date" id="v115" name="v115"></td>
 				<td class="td02" style="display:none; margin-left:8px;"><input type="text" id="v215" name="v215"></td>
 				<td class="td03" style="display:none; margin-left:10px;"><input type="text" id="" name="" class="td03"></td>
 			</tr>
 			<tr>
 				<td>과세기간 종료일</td>
-				<td><input type="text" id="v116" name="v116"></td>
+				<td><input type="date" id="v116" name="v116"></td>
 				<td class="td02" style="display:none; margin-left:8px;"><input type="text" id="v216" name="v216"></td>
 				<td class="td03" style="display:none; margin-left:10px;"><input type="text" id="" name="" class="td03"></td>
-			</tr>
-			<tr>
+			</tr> -->
+			<!-- <tr>
 				<td>소재지</td>
 				<td><input type="text" id="v117" name="v117"></td>
 				<td class="td02" style="display:none; margin-left:8px;"><input type="text" id="v217" name="v217"></td>
@@ -487,11 +520,11 @@
 				<td><input type="text" id="v118" name="v118"></td>
 				<td class="td02" style="display:none; margin-left:8px;"><input type="text" id="v218" name="v218"></td>
 				<td class="td03" style="display:none; margin-left:10px;"><input type="text" id="" name="" class="td03"></td>
-			</tr>
+			</tr> -->
 		</table>
 		</div>
 		<!-- //본문 테이블 감싸는 div 끝-->
-		<!-- </form> -->
+		</form>
 		
 		
 		
@@ -591,6 +624,36 @@
 						
 						if($("#v101").val() == '40'){
 							
+							$.ajax({
+								url: "getData40.aggregate",
+								type: "post",
+								data: {"attrYear":$("#attrYear").val(),
+										"comCode":'${ loginCompany.companyCode }'
+										},
+								success: function(data){
+									
+									console.log(data);
+									var data01 = JSON.parse(data);
+									
+									$("#v108").val(data01.sum10);
+									$("#v109").val(data01.sum20);
+									$("#v110").val(Number(data01.sum10) - Number(data01.sum20));
+									
+									/* data01.sum10
+									data01.sum20
+									data01.sum40 */
+									
+									
+									
+									
+								},
+								error: function(status){
+									alert("error!!!\n" + status);
+								}
+								
+							});
+							
+							
 							/* $("#v102").val('-');
 							$("#v102").prop('readonly',true); */
 							
@@ -600,31 +663,31 @@
 							/* $("#v104").val('-');
 							$("#v104").prop('readonly',true); */
 							
-							$("#v105").val('-');
+							$("#v105").val('X');
 							$("#v105").prop('readonly',true);
 							
-							$("#v106").val('-');
+							$("#v106").val('X');
 							$("#v106").prop('readonly',true);
 							
-							$("#v107").val('-');
+							$("#v107").val('X');
 							$("#v107").prop('readonly',true);
 							
-							$("#v108").val('-');
-							$("#v108").prop('readonly',true);
+							/* $("#v108").val('X');
+							$("#v108").prop('readonly',true); */
 							
-							$("#v109").val('-');
-							$("#v109").prop('readonly',true);
+							/* $("#v109").val('X');
+							$("#v109").prop('readonly',true); */
 							
 							/* $("#v110").val('-');
 							$("#v110").prop('readonly',true); */
 							
-							/* $("#v111").val('-');
-							$("#v111").prop('readonly',true); */
+							$("#v111").val('X');
+							$("#v111").prop('readonly',true);
 							
 							/* $("#v112").val('-');
 							$("#v112").prop('readonly',true); */
 							
-							$("#v113").val('-');
+							$("#v113").val('부');
 							$("#v113").prop('readonly',true);
 							
 							/* $("#v114").val('-');
@@ -636,11 +699,21 @@
 							/* $("#v116").val('-');
 							$("#v116").prop('readonly',true); */
 							
-							$("#v117").val('-');
+							$("#v117").val('X');
 							$("#v117").prop('readonly',true);
 							
-							$("#v118").val('-');
+							$("#v118").val('X');
 							$("#v118").prop('readonly',true);
+							
+							/* 40번이므로 맞는 값 넣어주기 */
+							$("#v103").val('${ loginCompany.bizName }');
+							$("#v104").val('${ loginCompany.bizNum }');
+							$("#v107").val('${ loginCompany.bizType }');
+							$("#v107dp").val('${ loginCompany.bizType }');
+							$("#v112").val("부");
+							
+							
+							
 							
 						}
 						
@@ -690,56 +763,61 @@
 					function(){
 						if($("#v201").val() == '51'){
 							//근로소득(51) 일 경우
-							$("#v202").val('-');
+							$("#v202").val('X');
 							$("#v202").prop('readonly',true);
 
 							/* $("#v203").val('-');
 							$("#v203").prop('readonly',true); */
 							
-							$("#v204").val('-');
+							$("#v204").val('X');
 							$("#v204").prop('readonly',true);
 						
 							/* $("#v205").val('-');
 							$("#v205").prop('readonly',true); */
 							
-							$("#v206").val('-');
+							$("#v206").val('X');
 							$("#v206").prop('readonly',true);
 							
-							$("#v207").val('-');
+							$("#v207").val('X');
 							$("#v207").prop('readonly',true);
 							
 							/* $("#v208").val('-');
 							$("#v208").prop('readonly',true); */
 							
-							$("#v209").val('-');
+							$("#v209").val('X');
 							$("#v209").prop('readonly',true);
 							
-							$("#v210").val('-');
+							$("#v210").val('X');
 							$("#v212").prop('readonly',true);
 							
 							/* $("#v211").val('-');
 							$("#v211").prop('readonly',true); */
 							
-							$("#v212").val('-');
+							$("#v212").val('X');
 							$("#v212").prop('readonly',true);
 							
-							$("#v213").val('-');
+							$("#v213").val('X');
 							$("#v213").prop('readonly',true);
 							
-							$("#v214").val('-');
+							$("#v214").val('X');
 							$("#v214").prop('readonly',true);
 							
-							$("#v215").val('-');
+							$("#v215").val('X');
 							$("#v215").prop('readonly',true);
 							
-							$("#v216").val('-');
+							$("#v216").val('X');
 							$("#v216").prop('readonly',true);
 							
-							$("#v217").val('-');
+							$("#v217").val('X');
 							$("#v217").prop('readonly',true);
 							
-							$("#v218").val('-');
+							$("#v218").val('X');
 							$("#v218").prop('readonly',true);
+							
+							$("#v203").prop("placeholder","이름을 입력하세요");
+							
+							
+							
 						}
 					}
 			
@@ -781,11 +859,23 @@
 		
 		
 		
+		<script>
+		/* 도움말 부분 설정 */
+		
+		
+		
+		$("#v101").focus(function(){
+			$("#divHelp").html(
+			"<소득구분코드> <br> 11:비영업대금이익 &nbsp;21:배당가산하는배당&nbsp;30:부동산소득&nbsp;40:사업소득&nbsp;51:근로소득&nbsp;60:기타소득&nbsp;66:연금소득&nbsp;67:종교인소득"		
+			);
+		});
+		</script>
+		
+		
 		<!-- footer -->
 		<div class="card mb-4">
-			<div class="card-body">
+			<div class="card-body" id="divHelp">
 				도움말입니다. 읽어주세요*^^*
-				<h1>${ test }ㅋㅋㅋ</h1>
 			</div>
 		</div>
 		<!-- ///footer -->

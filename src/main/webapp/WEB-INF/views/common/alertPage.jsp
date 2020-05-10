@@ -65,6 +65,22 @@
 					location.href = "showViewComInnerIdList.comInId"
 				})
 				break;
+			case "insertIncomeAmountOk" :
+				Swal.fire({
+					icon: "success",
+					text: "소득금액 명세서 입력 완료 !"
+				}).then((result) => {
+					location.href = "showAggregateCalculated.aggregate"
+				})
+				break;
+			case "fail" :
+				Swal.fire({
+					icon: "warning",
+					text: "실패...ㅠ",
+				}).then((result) => {
+					location.href = "redirect:index.jsp"
+				})
+				break;
 			case "insertExpendResolutionOk" :
 				Swal.fire({
 					icon: "success",

@@ -52,6 +52,26 @@
 		cursor: pointer;
 	}
 	
+	#table01 td:nth-child(1),
+	#table01 tr:nth-child(1),
+	#bgGray
+	{
+		background:lightgray;
+	}
+	
+	#table02{
+		background:lightgray;
+		width:593px;
+	}
+	
+	
+	.cursorPointer:hover{
+		background:gray;
+		color:white;
+		opacity:50%;
+		cursor:pointer;
+	}
+	
 	
 </style>
 </head>
@@ -76,10 +96,33 @@
 		<!-- 귀속년도 -->
 		<div style="float:right;">
 			<label>귀속년도 : </label>
-			<input type="text" style="border-bottom:1px solid black;">
+			<input id="attrYear" name="yearOfAttr" type="number" style="width:60px; border-bottom:1px solid black;">
 			<label>년</label>
+			<div onclick="selectStmt();" class="cursorPointer" style="padding:5px; display:inline-block; background:#24574A; color:white; border-radius:5px;">조회</div>
 		</div>
 		<!-- //귀속년도 -->
+		<script>
+		function selectStmt(){
+			alert("selectStmt click zz");
+			
+			$.ajax({
+				url: "selectAggregateCalculated.aggregate",
+				type: "post",
+				data: {
+						"yearOfAttr": $("#attrYear").val(),
+						"comCode":'${ loginCompany.companyCode}'
+						},
+				success: function(data){
+					alert("success :::" + data);
+				},
+				error: function(status){
+					alert("error ::: " + status)
+				}
+			});
+			
+		}
+		</script>
+		
 		
 		<div style="height:50px;"></div><!-- 간격 띄우기 위한 용도 -->
 		
@@ -88,6 +131,7 @@
 			<div class="div-top4menu" onclick="goIncomeDeductStmt();"><h5>소득공제명세서</h5></div>
 			<div class="div-top4menu" onclick="goAddedTaxStmt();"><h5>가산세명세서</h5></div>
 			<div class="div-top4menu" style="border-bottom: 3px solid #24574A"><h5>종합소득세액계산서</h5></div>
+			<div class="cursorPointer" style="display:inline-block; background:#24574A; border-radius:5px; width:50px; height:30px; text-align:center; line-height:30px;color:white;">저장</div>
 		</div>
 		<!-- //class="div-top4menu" -->
 		
@@ -127,29 +171,69 @@
 		
 		
 		<!-- 초록색 탭메뉴 만들기 -->
-		<div id="tabMenu01" class="tapMenu" onclick="tap01click()">인적공제</div>
-		<div id="tabMenu02" class="tapMenu" onclick="tap02click()" style="opacity:50%;">소득세법상 소득공제</div>
+		<div id="tabMenu01" class="tapMenu" onclick="tap01click()">세액계산</div>
+		<div id="tabMenu02" class="tapMenu" onclick="tap02click()" style="opacity:50%;">기납부 세액 명세서</div>
+		<div id="selectExistingData" onclick="selectExistingData();" class="cursorPointer tapMenu" style="height:30px; line-height:30px; border-radius:7px; margin-left:420px; background:white; color:black; border:2px solid #24574A;"><strong>불러오기</strong></div>
+		<div id="savePrePaid" onclick="savePrePaid();" class="cursorPointer tapMenu" style="height:30px; line-height:30px; border-radius:7px; margin-left:280px; background:white; color:black; display:none; border:2px solid #24574A;"><strong>입력하기</strong></div>
 		<!-- //초록색 탭메뉴 만들기 끝-->
+		
+		<script>
+		/* 세액계산에 현재 값 불러오기 */
+		function selectExistingData(){
+			alert("세액계산 불러오기 클릭");
+			
+			$.ajax({
+				url: "selectExistingData.aggregate",
+				type: "post",
+				data: {
+					"yearOfAttr":"2019",
+					"comCode": '${ loginCompany.companyCode }'
+					
+				},
+				success: function(data){
+					alert("success:::" + data);
+				},
+				error: function(status){
+					alert("error ::: " + status);
+				}
+			});
+		}
+		
+		
+		/* 기납부세액 저장하기 */
+		function savePrePaid(){
+			alert("기납부세액 저장 클릭");
+		}
+		
+		
+		</script>
 		
 		<script type="text/javascript">
 			
 		function tap01click(){
-			/* 소득세법상 소득공제 보여주기 */
+			/* 세액계산 보여주기 */
 			$("#table02").css("display","none");
-			$("#table01").css("display","block");
+			$("#table01").css("display","inline-block");
 			
 			$("#tabMenu02").css("opacity","50%");
 			$("#tabMenu01").css("opacity","100%");
 			
+			$("#savePrePaid").css("display","none");
+			$("#selectExistingData").css("display","inline-block");
+			
+			
 		}
 		
 		function tap02click(){
-			/* 인적공제 보여주기 */
+			/* 기납부명세서 보여주기 */
 			$("#table01").css("display","none");
 			$("#table02").css("display","block");	
 			
 			$("#tabMenu01").css("opacity","50%");
 			$("#tabMenu02").css("opacity","100");
+
+			$("#selectExistingData").css("display","none");
+			$("#savePrePaid").css("display","inline-block");
 			
 		}
 			
@@ -271,7 +355,7 @@
 			
 			<tr>
 				<td rowspan="2">32. 납부특례세액</td>
-				<td>차감</td>
+				<td id="bgGray">차감</td>
 				<td><input type="text" name="" id=""></td>
 				<td><input type="text" name="" id=""></td>
 				<td><input type="text" name="" id=""></td>

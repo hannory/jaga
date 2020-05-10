@@ -211,6 +211,274 @@
   
   
   
+  <update id="updateAddedTaxStmt" parameterType="AddedTaxStmtDto">
+  	UPDATE ADDED_TAX_STMT
+		SET 
+			IN101 = #{in101}, 
+			IN102 = #{in102}, 
+			IN103 = #{in103}, 
+			IN104 = #{in104}, 
+			IN201 = #{in201}, 
+			IN202 = #{in202}, 
+			IN203 = #{in203}, 
+			IN301 = #{in301}, 
+			IN302 = #{in302}, 
+			IN401 = #{in401}, 
+			IN402 = #{in402}, 
+			IN403 = #{in403}, 
+			IN404 = #{in404}, 
+			IN405 = #{in405}, 
+			IN406 = #{in406}, 
+			IN407 = #{in407}, 
+			IN408 = #{in408}, 
+			IN409 = #{in409}, 
+			IN410 = #{in410}, 
+			IN411 = #{in411}, 
+			IN412 = #{in412}, 
+			IN501 = #{in501}, 
+			IN502 = #{in502}, 
+			IN601 = #{in601}, 
+			IN602 = #{in602}, 
+			IN701 = #{in701}, 
+			IN702 = #{in702}, 
+			IN801 = #{in801}, 
+			IN802 = #{in802}, 
+			IN901 = #{in901}, 
+			IN1001 = #{in1001}, 
+			IN1002 = #{in1002}, 
+			IN1101 = #{in1101}, 
+			IN1102 = #{in1102}, 
+			IN1103 = #{in1103}, 
+			IN1201 = #{in1201}, 
+			IN1202 = #{in1202}, 
+			IN1203 = #{in1203}, 
+			IN1204 = #{in1204}, 
+			IN1205 = #{in1205}, 
+			IN1301 = #{in1301}, 
+			IN1302 = #{in1302}, 
+			IN1501 = #{in1501}, 
+			IN1601 = #{in1601}, 
+			SUM_LEFT = #{sumLeft}, 
+			V101 = #{v101}, 
+			V102 = #{v102}, 
+			V103 = #{v103}, 
+			V104 = #{v104}, 
+			V201 = #{v201}, 
+			V202 = #{v202}, 
+			V203 = #{v203}, 
+			V301 = #{v301}, 
+			V302 = #{v302}, 
+			V401 = #{v401}, 
+			V402 = #{v402}, 
+			V403 = #{v403}, 
+			V404 = #{v404}, 
+			V405 = #{v405}, 
+			V406 = #{v406}, 
+			V407 = #{v407}, 
+			V408 = #{v408}, 
+			V409 = #{v409}, 
+			V410 = #{v410}, 
+			V411 = #{v411}, 
+			V412 = #{v412}, 
+			V501 = #{v501}, 
+			V502 = #{v502}, 
+			V601 = #{v601}, 
+			V602 = #{v602}, 
+			V701 = #{v701}, 
+			V702 = #{v702}, 
+			V801 = #{v801}, 
+			V802 = #{v802}, 
+			V901 = #{v901}, 
+			V1001 = #{v1001}, 
+			V1002 = #{v1002}, 
+			V1101 = #{v1101}, 
+			V1102 = #{v1102}, 
+			V1103 = #{v1103}, 
+			V1201 = #{v1201}, 
+			V1202 = #{v1202}, 
+			V1203 = #{v1203}, 
+			V1204 = #{v1204}, 
+			V1205 = #{v1205}, 
+			V1301 = #{v1301}, 
+			V1302 = #{v1302}, 
+			V1501 = #{v1501}, 
+			V1601 = #{v1601}, 
+			SUM_RIGHT = #{sumRight}
+		WHERE COM_CODE = #{comCode}
+		AND     ATTR_YEAR = #{attrYear}
+  </update>
+  
+  
+  
+  <select id="selectData40" parameterType="java.util.Map" resultType="com.kh.jaga.aggregateIncomeTax.model.dto.AmountDataDto">
+  	
+  	SELECT
+  		*
+  	FROM
+  	(
+  	SELECT
+  		INCOME_STMT_CODE,
+  		YEAR,
+  		SUM10,
+  		SUM20,
+  		SUM40,
+  		ROWNUM AS RNUM
+  	FROM
+  		INCOME_STMT
+  	WHERE
+  		COM_CODE = #{ comCode }
+  		AND
+  		YEAR = #{attrYear}
+  	ORDER BY INCOME_STMT_CODE DESC
+  	)
+  	WHERE RNUM = 1
+  </select>
+  
+  <insert id="insertIncomeAmount" parameterType="com.kh.jaga.aggregateIncomeTax.model.dto.IncomeAmountStmtDto">
+  
+  	INSERT ALL
+  	INTO INCOME_AMOUNT_STATEMENT
+  	(
+	  	DOCUMENT_NO,
+		YEAR_OF_ATTR,
+		INCOME_TYPE_CODE,
+		TOTAL_INCOME,
+		NECESSARY_EXPENSE,
+		INCOME_ETC,
+		TAX_FOR_INCOME,
+		CARRY_FORWARD,
+		COMMON_BIZ,
+		INCOME_FOR_MIN_TAX,
+		LOCATION,
+		DOMESTIC,
+		MODIFY_DATE,
+		BOOK_KEEPING_CODE,
+		REPORT_CODE,
+		COM_CODE
+  	)
+  	VALUES(
+	  	SEQ_INCOME_AMOUNT_STATEMENT.NEXTVAL,
+		#{yearOfAttr},
+		#{v101},
+		#{v108},
+		#{v109},
+		#{v110},
+		#{v111},
+		#{v112},
+		#{v113},
+		#{incomeForMinTax},
+		#{location},
+		#{domestic},
+		SYSDATE,
+		#{duty},
+		#{type},
+		#{comCode}
+  	)	
+  	INTO INCOME_AMOUNT_STATEMENT
+  	(
+	  	DOCUMENT_NO,
+		YEAR_OF_ATTR,
+		INCOME_TYPE_CODE,
+		TOTAL_INCOME,
+		NECESSARY_EXPENSE,
+		INCOME_ETC,
+		TAX_FOR_INCOME,
+		CARRY_FORWARD,
+		COMMON_BIZ,
+		INCOME_FOR_MIN_TAX,
+		LOCATION,
+		DOMESTIC,
+		MODIFY_DATE,
+		BOOK_KEEPING_CODE,
+		REPORT_CODE,
+		COM_CODE
+  	)
+  	VALUES(
+	  	(SELECT 
+		GET_SEQ_INCOME_AMOUNT_STMT()
+		FROM DUAL),
+		#{yearOfAttr},
+		#{v201},
+		#{v208},
+		#{v209},
+		#{v210},
+		#{v211},
+		#{v212},
+		#{v213},
+		#{incomeForMinTax},
+		#{location},
+		#{domestic},
+		SYSDATE,
+		#{duty},
+		#{type},
+		#{comCode}
+  	)
+  	SELECT SYSDATE FROM DUAL
+  
+  </insert>
+  
+  <select id="selectAggregateCalculated" parameterType="java.util.Map" resultType="com.kh.jaga.aggregateIncomeTax.model.dto.AggregateCalculatedDto">
+  
+  	SELECT 
+  		DOCUMENT_NO,
+		YEAR_OF_ATTR,
+		AGGREGATE_INCOME_AMOUNT,
+		TOTAL_INCOME_DEDUCT,
+		TAX_STANDARD,
+		TAX_RATE,
+		CALCULATED_TAX_AMOUNT,
+		TAX_DEDUCT_AMOUNT,
+		TAX_DEDUCT,
+		DECIDED_TAX,
+		ADDITIONAL_TAX,
+		ADDED_TAX,
+		PAID_TAX,
+		TAX_RESULT,
+		SPECIAL_DEDUCT_TAX,
+		SPECIAL_ADDED_TAX,
+		TAX_FOR_SEPERATE,
+		TAX_FOR_NOW,
+		COM_CODE
+	FROM AGGREGATE_INCOME_TAX
+	WHERE COM_CODE = #{comCode}
+	AND YEAR_OF_ATTR = #{yearOfAttr}
+		
+  </select>
+  
+  
+  <select id="insertDeduct" resultType="com.kh.jaga.aggregateIncomeTax.model.dto.DeductStmtDto" parameterType="com.kh.jaga.aggregateIncomeTax.model.dto.DeductStmtDto">
+  	INSERT INTO DEDUCT_STMT(
+  		STMT_NO,
+  		COM_CODE,
+  		CREATE_DATE,
+  		TOTAL_DEDUCT
+  	)
+  	VALUES(
+  		SEQ_DEDUCT_STMT.NEXTVAL,
+  		#{comCode},
+  		SYSDATE,
+  		#{totalDeduct}
+  	)
+  </select>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <!-- 종합소득 계산서 값 가져오는 쿼리문 -->
+  <select id="selectExistingData" parameterType="java.util.Map" resultType="com.kh.jaga.aggregateIncomeTax.model.dto.AggregateCalculatedDto">
+  
+  	SELECT SYSDATE
+  	FROM DUAL
+  	
+  </select>
+  
+  
+  
   
   
   
