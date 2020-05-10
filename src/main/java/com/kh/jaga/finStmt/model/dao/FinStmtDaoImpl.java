@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import com.kh.jaga.finStmt.model.vo.IncomeStmt;
-import com.kh.jaga.finStmt.model.vo.IncomeStmtAccount;
+import com.kh.jaga.finStmt.model.vo.FinStmtAccount;
 import com.kh.jaga.finStmt.model.vo.MfrgStmt;
 
 @Repository
@@ -24,41 +24,47 @@ public class FinStmtDaoImpl implements FinStmtDao {
 	}
 
 	@Override
-	public ArrayList selectSlip(SqlSessionTemplate sqlSession, IncomeStmtAccount isa) {
+	public ArrayList selectSlip(SqlSessionTemplate sqlSession, FinStmtAccount fsa) {
 		
-		ArrayList list = (ArrayList) sqlSession.selectList("FinStmt.selectSlip", isa);
+		ArrayList list = (ArrayList) sqlSession.selectList("FinStmt.selectSlip", fsa);
 		
 		return list;
 	}
 	
 	@Override
-	public ArrayList<IncomeStmtAccount> selectSlipByDate(SqlSessionTemplate sqlSession, IncomeStmtAccount isa) {
-		
-		return (ArrayList) sqlSession.selectList("FinStmt.selectSlipByDate", isa);
-	}
+	public ArrayList selectSlipByDate(SqlSessionTemplate sqlSession, FinStmtAccount fsa) {
 
-	@Override
-	public List selectCurFinStmt(SqlSessionTemplate sqlSession, IncomeStmtAccount isa) {
-
-		return sqlSession.selectList("FinStmt.selectCurFinStmt", isa);	
-	}
-
-	@Override
-	public List<IncomeStmtAccount> selectCurFinStmtByDate(SqlSessionTemplate sqlSession, IncomeStmtAccount isa) {
-		
-		return sqlSession.selectList("FinStmt.selectCurFinStmtByDate", isa);
-	}
-
-	@Override
-	public List selectPastFinStmt(SqlSessionTemplate sqlSession, IncomeStmtAccount isa) {
-
-		return sqlSession.selectList("FinStmt.selectPastFinStmt", isa);
+		return (ArrayList) sqlSession.selectList("FinStmt.selectSlipByDate", fsa);
 	}
 	
 	@Override
-	public List selectPastFinStmtByDate(SqlSessionTemplate sqlSession, IncomeStmtAccount isa) {
+	public ArrayList<FinStmtAccount> selectSlipByDateWithArr(SqlSessionTemplate sqlSession, FinStmtAccount fsa) {
+		
+		return (ArrayList) sqlSession.selectList("FinStmt.selectSlipByDateWithArr", fsa);
+	}
+
+	@Override
+	public List selectCurFinStmt(SqlSessionTemplate sqlSession, FinStmtAccount fsa) {
+
+		return sqlSession.selectList("FinStmt.selectCurFinStmt", fsa);	
+	}
+
+	@Override
+	public List<FinStmtAccount> selectCurFinStmtByDate(SqlSessionTemplate sqlSession, FinStmtAccount fsa) {
+		
+		return sqlSession.selectList("FinStmt.selectCurFinStmtByDate", fsa);
+	}
+
+	@Override
+	public List selectPastFinStmt(SqlSessionTemplate sqlSession, FinStmtAccount fsa) {
+
+		return sqlSession.selectList("FinStmt.selectPastFinStmt", fsa);
+	}
+	
+	@Override
+	public List selectPastFinStmtByDate(SqlSessionTemplate sqlSession, FinStmtAccount fsa) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList("FinStmt.selectPastFinStmtByDate", isa);
+		return sqlSession.selectList("FinStmt.selectPastFinStmtByDate", fsa);
 	}
 
 	@Override
@@ -95,10 +101,10 @@ public class FinStmtDaoImpl implements FinStmtDao {
 	}
 
 	@Override
-	public int selectMfrgSum90(SqlSessionTemplate sqlSession, IncomeStmtAccount isa) {
+	public int selectMfrgSum90(SqlSessionTemplate sqlSession, FinStmtAccount fsa) {
 
-		if(sqlSession.selectOne("FinStmt.selectMfrgSum90", isa) != null) {
-			return sqlSession.selectOne("FinStmt.selectMfrgSum90", isa);
+		if(sqlSession.selectOne("FinStmt.selectMfrgSum90", fsa) != null) {
+			return sqlSession.selectOne("FinStmt.selectMfrgSum90", fsa);
 		} else {
 			return 0;
 		}
@@ -141,10 +147,17 @@ public class FinStmtDaoImpl implements FinStmtDao {
 		return sqlSession.selectOne("FinStmt.countClosedIncomeStmt", is);
 	}
 
-	
+	@Override
+	public int updateLastIncomeStmt(SqlSessionTemplate sqlSession, IncomeStmt is) {
 
-	
+		return sqlSession.update("FinStmt.updateLastIncomeStmt", is);
+	}
 
+	@Override
+	public int insertLastIncomeStmt(SqlSessionTemplate sqlSession, IncomeStmt is) {
+
+		return sqlSession.update("FinStmt.insertLastIncomeStmt", is);
+	}
 
 
 }

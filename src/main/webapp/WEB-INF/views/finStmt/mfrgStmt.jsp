@@ -9,6 +9,10 @@
 		font-size:21px;
 		margin-right:60px;
 	}
+	#contentTable tr:hover:not(.table-head-tr) {
+		background: #DDEBF7;
+		box-shadow: inset 0 -4px 0 #b4e6f8;
+	}
 	#foldBtn {
 		background:#24574A;
 		border-radius:4px;
@@ -139,7 +143,7 @@
 		</table>
 		<form id="contentForm" action="insertMfrgStmt.fs" method="post">
 			<ol class="breadcrumb mb-4">
-				<table id="searchReTable">
+				<table id="searchTable">
 					<tr>
 						<td style="width:150px;">조회기간 : </td>
 						<td>
@@ -239,16 +243,16 @@
 					</tr>
 					<tr class="table-detail">
 						<td class="table-subSubTitle">임금</td>
+						<td class="table-content"><span id="c50400"><input type="hidden" id="v50400" name="v50400"></span></td>
 						<td></td>
-						<td></td>
-						<td></td>
+						<td class="table-content"><span id="p50400"></span></td>
 						<td></td>
 					</tr>
 					<tr class="table-detail">
 						<td class="table-subSubTitle">상여금</td>
+						<td class="table-content"><span id="c50500"><input type="hidden" id="v50500" name="v50500"></span></td>
 						<td></td>
-						<td></td>
-						<td></td>
+						<td class="table-content"><span id="p50500"></span></td>
 						<td></td>
 					</tr>
 					<tr>
@@ -356,13 +360,13 @@
 			//$("#main-tbody").hide();
 			
 			/* 표에서 하늘색 hover 주기 */
-			$("#contentTable td").mouseover(function() {
+			/* $("#contentTable td").mouseover(function() {
 				$(this).parent().css("background", "#DDEBF7");
 			});
 			
 			$("#contentTable td").mouseout(function() {
 				$(this).parent().css("background", "white");
-			});			
+			});		 */	
 		
 			/* 현재 날짜로 기본값 설정 */
 			var curDate = new Date();
@@ -403,10 +407,10 @@
 				var cSum10 = Number(uncomma($("#c15300").text())) - Number(uncomma($("#inputNum").val()));
 				$("#cSum10").text(comma(cSum10));
 				
-				var cSum20 = 0;
-				$("#cSum20").text(cSum20);
+				var cSum20 = Number(uncomma($("#cSum20").text()));
+				$("#cSum20").text(comma(cSum20));
 				
-				var cSum30 = Number(uncomma($("#c51100").text()));
+				var cSum30 = Number(uncomma($("#cSum30").text()));
 				$("#cSum30").text(comma(cSum30));
 				
 				var cSum40 = cSum10 + cSum20 + cSum30;
@@ -503,11 +507,15 @@
 					
 					//-------------당기-------------	
 					var c15300 = data["c15300"];
+					var c50400 = data["c50400"];
+					var c50500 = data["c50500"];
 					var c51100 = data["c51100"];
 					var c51200 = data["c51200"];
 					var c53000 = data["c53000"];
 					
 					$("#c15300").text(comma(c15300));
+					$("#c50400").text(comma(c50400));
+					$("#c50500").text(comma(c50500));
 					$("#c51100").text(comma(c51100));
 					$("#c51200").text(comma(c51200));
 					$("#c53000").text(comma(c53000));
@@ -516,8 +524,8 @@
 					var cSum10 = c15300 - Number(uncomma($("#inputNum").val()));
 					$("#cSum10").text(comma(cSum10));
 					
-					var cSum20 = 0;
-					$("#cSum20").text(cSum20);
+					var cSum20 = c50400 + c50500;
+					$("#cSum20").text(comma(cSum20));
 					
 					var cSum30 = c51100 + c51200 + c53000;
 					$("#cSum30").text(comma(cSum30));
@@ -543,11 +551,15 @@
 					//------------당기 끝------------					
 					//-------------전기-------------	
 					var p15300 = data["p15300"];
+					var p50400 = data["p50400"];
+					var p50500 = data["p50500"];
 					var p51100 = data["p51100"];
 					var p51200 = data["p51200"];
 					var p53000 = data["p53000"];
 					
 					$("#p15300").text(comma(p15300));
+					$("#p50400").text(comma(p50400));
+					$("#p50500").text(comma(p50500));
 					$("#p51100").text(comma(p51100));
 					$("#p51200").text(comma(p51200));
 					$("#p53000").text(comma(p53000));
@@ -556,8 +568,8 @@
 					var pSum10 = p15300;
 					$("#pSum10").text(comma(pSum10));
 					
-					var pSum20 = 0;
-					$("#pSum20").text(pSum20);
+					var pSum20 = p50400 + p50500;
+					$("#pSum20").text(comma(pSum20));
 					
 					var pSum30 = p51100 + p51200 + p53000;
 					$("#pSum30").text(comma(pSum30));
@@ -771,8 +783,8 @@
 								monthCheck += gap;
 							}
 							
-							//전표별 값 입력
-							var $tr = $("<tr>");
+							//분개별 값 입력
+							var $tr = $("<tr>").attr("class", "journal");
 							var $dateTd = $("<td>").text((("0") + month).slice(-2) + "-" + date).css("text-align", "center");
 							var $dateSlipCodeTd = $("<td>").text(value.dateSlipCode).css("text-align", "center");
 							var $briefTd = $("<td>").text(value.brief);
@@ -826,6 +838,30 @@
 				})
 			}
 		})
+		
+		//원장 모델에서 특정 분개 더블 클릭 시 처리
+		$(document).on("dblclick", '.journal', function() {
+			
+			var journalDate = $(this).children('td:first-child').text();
+			
+			$.ajax({
+				url : "selectJournal.fs",
+				type : "get",
+				data : {
+					year : year,
+					curPast : curPast,
+					month : month,
+					date : date,
+					dateSlipCode : dateSlipCode
+				},
+				success : function(data) {
+					
+				},
+				error(status) {
+					console.log(status);
+				}
+			})
+		});
 		
 		//저장버튼 클릭시
 		function saveMfrgStmt() {

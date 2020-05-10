@@ -3,19 +3,20 @@ package com.kh.jaga.finStmt.model.service;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.kh.jaga.finStmt.model.vo.FinStmtAccount;
 import com.kh.jaga.finStmt.model.vo.IncomeStmt;
-import com.kh.jaga.finStmt.model.vo.IncomeStmtAccount;
+import com.kh.jaga.finStmt.model.vo.FinStmtAccount;
 import com.kh.jaga.finStmt.model.vo.MfrgStmt;
 
 public interface FinStmtService {
 
 	int insertIncomeStmt(IncomeStmt i);
 
-	HashMap selectIncomeStmt(IncomeStmtAccount isa);
+	HashMap selectIncomeStmt(FinStmtAccount fsa);
 
-	ArrayList<IncomeStmtAccount> selectSlip(IncomeStmtAccount isa);
+	ArrayList<FinStmtAccount> selectSlip(FinStmtAccount fsa);
 
-	HashMap selectMfrgStmt(IncomeStmtAccount isa);
+	HashMap selectMfrgStmt(FinStmtAccount fsa);
 
 	int insertMfrgStmt(MfrgStmt ms);
 
@@ -23,7 +24,7 @@ public interface FinStmtService {
 
 	int countMfrgStmt(MfrgStmt ms);
 
-	HashMap selectFinPos(IncomeStmtAccount isa);
+	HashMap selectFinPos(FinStmtAccount fsa);
 
 	int countClosedMfrg(MfrgStmt ms);
 
@@ -33,5 +34,9 @@ public interface FinStmtService {
 
 	int countClosedIncomeStmt(IncomeStmt is);
 
-	ArrayList selectSlipByDate(IncomeStmtAccount isa, String accountClass);
+	ArrayList selectSlipByDateWithArr(FinStmtAccount fsa, String accountClass);
+
+	HashMap selectCompTrialBal(FinStmtAccount fsa);
+
+	ArrayList<FinStmtAccount> selectSlipByDate(FinStmtAccount fsa);
 }
