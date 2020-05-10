@@ -7,6 +7,7 @@ import java.util.Map;
 import com.kh.jaga.aggregateIncomeTax.model.dto.AddedTaxStmtDto;
 import com.kh.jaga.aggregateIncomeTax.model.dto.AggregateCalculatedDto;
 import com.kh.jaga.aggregateIncomeTax.model.dto.AmountDataDto;
+import com.kh.jaga.aggregateIncomeTax.model.dto.DeductStmtDto;
 import com.kh.jaga.aggregateIncomeTax.model.dto.IncomeAmountStmtDto;
 import com.kh.jaga.aggregateIncomeTax.model.vo.BizCodeVo;
 import com.kh.jaga.finStmt.model.vo.IncomeStmt;
@@ -24,6 +25,8 @@ public interface AggregateService {
 	AggregateCalculatedDto selectAggregateCalculated(Map<String, String> map);
 
 	AggregateCalculatedDto selectExistingData(HashMap<String, String> map);
+
+	int insertDeduct(DeductStmtDto dto);
 
 
 }

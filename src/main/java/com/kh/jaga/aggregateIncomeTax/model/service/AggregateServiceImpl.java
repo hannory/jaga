@@ -12,6 +12,7 @@ import com.kh.jaga.aggregateIncomeTax.model.dao.AggregateDao;
 import com.kh.jaga.aggregateIncomeTax.model.dto.AddedTaxStmtDto;
 import com.kh.jaga.aggregateIncomeTax.model.dto.AggregateCalculatedDto;
 import com.kh.jaga.aggregateIncomeTax.model.dto.AmountDataDto;
+import com.kh.jaga.aggregateIncomeTax.model.dto.DeductStmtDto;
 import com.kh.jaga.aggregateIncomeTax.model.dto.IncomeAmountStmtDto;
 import com.kh.jaga.aggregateIncomeTax.model.vo.BizCodeVo;
 import com.kh.jaga.finStmt.model.vo.IncomeStmt;
@@ -77,6 +78,14 @@ public class AggregateServiceImpl implements AggregateService{
 		AggregateCalculatedDto dto = dao.selectExistingData(sqlSession, map);
 		
 		return dto;
+	}
+
+	@Override
+	public int insertDeduct(DeductStmtDto dto) {
+		
+		int result = dao.insertDeductOk(sqlSession, dto);
+		
+		return result;
 	}
 	
 }

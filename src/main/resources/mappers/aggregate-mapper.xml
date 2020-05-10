@@ -443,8 +443,29 @@
 	WHERE COM_CODE = #{comCode}
 	AND YEAR_OF_ATTR = #{yearOfAttr}
 		
-  
   </select>
+  
+  
+  <select id="insertDeduct" resultType="com.kh.jaga.aggregateIncomeTax.model.dto.DeductStmtDto" parameterType="com.kh.jaga.aggregateIncomeTax.model.dto.DeductStmtDto">
+  	INSERT INTO DEDUCT_STMT(
+  		STMT_NO,
+  		COM_CODE,
+  		CREATE_DATE,
+  		TOTAL_DEDUCT
+  	)
+  	VALUES(
+  		SEQ_DEDUCT_STMT.NEXTVAL,
+  		#{comCode},
+  		SYSDATE,
+  		#{totalDeduct}
+  	)
+  </select>
+  
+  
+  
+  
+  
+  
   
   
   

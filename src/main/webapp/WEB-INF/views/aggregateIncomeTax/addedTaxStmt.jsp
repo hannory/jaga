@@ -76,7 +76,7 @@
 		<!-- 귀속년도 -->
 		<div style="float:right;">
 			<label>귀속년도 : </label>
-			<input id="attrYear" type="number" style="width:60px; border-bottom:1px solid black;">
+			<input id="attrYearDisplay" type="number" style="width:60px; border-bottom:1px solid black;">
 			<label>년</label>
 			<button onclick="selectStmt();" style="display:inline-block; background:#24574A; color:white; border-radius:5px;">조회</button>
 		</div>

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.jaga.aggregateIncomeTax.model.dto.AddedTaxStmtDto;
 import com.kh.jaga.aggregateIncomeTax.model.dto.AggregateCalculatedDto;
 import com.kh.jaga.aggregateIncomeTax.model.dto.AmountDataDto;
+import com.kh.jaga.aggregateIncomeTax.model.dto.DeductStmtDto;
 import com.kh.jaga.aggregateIncomeTax.model.dto.IncomeAmountStmtDto;
 import com.kh.jaga.aggregateIncomeTax.model.vo.BizCodeVo;
 import com.kh.jaga.finStmt.model.vo.IncomeStmt;
@@ -68,6 +69,12 @@ public class AggregateDaoImpl implements AggregateDao{
 	@Override
 	public AggregateCalculatedDto selectExistingData(SqlSessionTemplate sqlSession, HashMap<String, String> map) {
 		return sqlSession.selectOne("Aggregate.selectExistingData",map);
+	}
+
+	@Override
+	public int insertDeductOk(SqlSessionTemplate sqlSession, DeductStmtDto dto) {
+		
+		return sqlSession.insert("Aggregate.insertDeduct", dto);
 	}
 
 }

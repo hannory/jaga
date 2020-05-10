@@ -145,13 +145,19 @@ public class AggregateController {
 	
 	
 	
-	
+	//소득공제명세서 입력
 	@RequestMapping("insertDeduct.aggregate")
-	public String insertDeduct(DeductStmtDto dto) {
-		System.out.println("소득공제 명세서 저장 메소드 호출됨...");
+	public String insertDeduct(DeductStmtDto dto, HttpServletRequest request) {
 		
-		System.out.println("뷰에서 전달받은 값");
-		System.out.println(dto);
+		int result = service.insertDeduct(dto);
+		System.out.println("insert result : " + result);
+		if(result > 0) {
+			System.out.println("insertDeduct 성공");
+			request.getSession().setAttribute("alertCode", "insertDeductOk");
+		}else {
+			System.out.println("insertDeduct 실패");
+			request.getSession().setAttribute("alertCode", "fail");
+		}
 		
 		return "aggregateIncomeTax/aggregateCalculated";
 	}
