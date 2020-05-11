@@ -63,8 +63,8 @@
 				<caption>이번달 리포트</caption>
 				<tr>
 					<th>매출-매입</th>
-					<th>매출</th>
-					<th>매입</th>
+					<th style="color:orangered;">매출</th>
+					<th style="color:blue;">매입</th>
 				</tr>
 				<tr>
 					<td><fmt:formatNumber value="${ profit.profit }" type="currency" currencySymbol=""/>원</td>
@@ -130,11 +130,11 @@
 		
 		<div class="card mb-4" id="chartArea" style="margin-top: 50px;">
 			<div class="card-body">
-				<canvas id="myChart" width="700" height="700"></canvas>
+				<canvas id="myChart" width="400" height="400"></canvas>
 			</div>
 		</div>
 		
-		<div id="calendar" style="height:950px; width:950px; display: inline-block; margin-left: 100px;">
+		<div id="calendar" style="height:560px; width:560px; display: inline-block; margin-left: 80px;">
 		
 		</div>
 		

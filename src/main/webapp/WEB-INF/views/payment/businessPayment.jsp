@@ -170,7 +170,7 @@
 										<tr>
 											<th>소득구분</th>
 											<td>
-												<input type="text" id="typeOfBizCode" name="typeOfBizCode" style="width:20%;">
+												<input type="text" id="typeOfBizCode" name="typeOfBizCode" style="width:40%;">
 												<button type="button" id="searchBtn3">
 													<img alt="" src="${contextPath}/resources/images/search.PNG" width="20px" height="20px">
 												</button>
