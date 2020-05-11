@@ -154,7 +154,7 @@
 	}
 	
 	#cateSelectTable{
-		width: 15%;
+		width: 20%;
 		heigh: 100px;
 		font-size: 20px;
 		text-align: center;
@@ -231,7 +231,7 @@
 						</tr>
 						<tr>
 							<th>소득구분</th>
-							<td>
+							<td colspan="3">
 								<input type="text" id="typeOfBizCode" name="typeOfBizCode" style="width:20%;">
 								<button type="button" id="searchBtn3">
 									<img alt="" src="${contextPath}/resources/images/search.PNG" width="20px" height="20px">
@@ -239,16 +239,14 @@
 								<input type="text" name="sellTargetName" id="sellTargetName">
 								<input type="hidden" name="incomeClass" id="incomeClass">
 							</td>
-							<th>이메일</th>
-							<td><input type="email" name="email" id="email"></td>
 						</tr>
 						<tr>
 							<th>입사일</th>
 							<td>
 								<input type="text" id="datepicker" name="enrollDate">
 							</td>
-							<th></th>
-							<td></td>
+							<th>이메일</th>
+							<td><input type="email" name="email" id="email"></td>
 						</tr>
 					</table>
 					
