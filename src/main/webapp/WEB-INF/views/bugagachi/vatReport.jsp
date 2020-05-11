@@ -346,6 +346,7 @@
 	 				console.log(vat.p9T-vat.p17T);
 	 				var da=vat.p9T-vat.p17T;
 	 				$("#da").text(comma(da));
+	 				$("#p27T").text(comma(da));
 	 				
 	 				/* 모달안에 값넣기 */
 	 				var $List_detail=$("#List_detail");

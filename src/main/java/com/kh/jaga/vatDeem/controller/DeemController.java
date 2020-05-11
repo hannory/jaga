@@ -128,7 +128,6 @@ public class DeemController {
 				for(DeemSlip ds:dsList) {
 					ds.setDeemedCode(deemedCode);
 					ds.setDeemTaxPrice(ds.getPurchasePrice().multiply(gon));
-					System.out.println("ds: "+ds);
 				}
 				
 				//deemSlip insert 해주기
@@ -147,8 +146,6 @@ public class DeemController {
 					dp.setProdName(dss.getItem());
 					dp.setBizRegNum(dss.getBizRegNum());
 					deemSum=deemSum.add(dss.getPurchasePrice());
-					System.out.println("deemSum 사업: "+deemSum);
-					System.out.println("dp: "+dp);
 					dpList.add(dp);
 					}
 				}
@@ -169,18 +166,13 @@ public class DeemController {
 						dp.setVenderCode(dPro.getVenderCode());
 						dp.setVenderName(dPro.getVenderName());
 						deemSum=deemSum.add(dPro.getPurchasePrice());
-						System.out.println("deemSum 개인: "+deemSum);
 						dpList.add(dp);
-						System.out.println("dsList1: "+dsList);
 					}
 					
 				}
-				System.out.println("deemSum: "+deemSum);
 				
-				System.out.println("dsList3: "+dsList);
 				//deemPro insert 해주기
 				int insertDeemPro=ds.insertDeemPro(dpList);
-				System.out.println("insertDeemPro: "+insertDeemPro);
 				
 				
 				
@@ -190,37 +182,23 @@ public class DeemController {
 				BigDecimal asmt=ds.selectAsmt(re,eD);
 				deo.setDeemedCode(deemedCode);
 				deo.setAsmtConf(asmt);
-				System.out.println("deo1 : "+deo);
 				deo.setAsmtSum(deo.getAsmtConf().add(deo.getAsmtScheduled()));
-				System.out.println("deo2 : "+deo);
 				deo.setTargetRate(new BigDecimal("0.4"));
-				System.out.println("deo3 : "+deo);
 				deo.setTargetAmt((deo.getAsmtSum().multiply(deo.getTargetRate())).setScale(0,BigDecimal.ROUND_DOWN));
-				System.out.println("deo4 : "+deo);
-				System.out.println("Controller: 한도액 계산: "+deo.getTargetAmt());
 				deo.setCurrPurAmt(deemSum);
-				System.out.println("deo5 : "+deo);
-				System.out.println("deo.getCurrPurAmt().compareTo(deo.getTargetAmt())"+deo.getCurrPurAmt().compareTo(deo.getTargetAmt()));
 				if(deo.getCurrPurAmt().compareTo(deo.getTargetAmt())==-1) {
 					deo.setDedAmt(deo.getCurrPurAmt());
 				}else {
 					deo.setDedAmt(deo.getTargetAmt());
 				}
-				System.out.println("확인해보자1: deo: "+deo);
 				BigDecimal son=new BigDecimal("4");
-				System.out.println("확인해보자2: deo: "+deo);
 				BigDecimal mom=new BigDecimal("104");
-				System.out.println("확인해보자3: deo: "+deo);
 				deo.setDedtaxRate(son.divide(mom,4,BigDecimal.ROUND_DOWN));
-				System.out.println("확인해보자4: deo: "+deo);
 				deo.setDedtaxAmt((deo.getDedAmt().multiply(deo.getDedtaxRate())).setScale(0,BigDecimal.ROUND_DOWN));
-				System.out.println("확인해보자5: deo: "+deo);
 				deo.setDedTaxrate1(deo.getDedtaxAmt().subtract(deo.getDedtaxSum()));
-				System.out.println("확인해보자6: deo: "+deo);
 				
 				//insertDeemOther
 				int insertDeemOther=ds.insertDeemOther(deo);
-				System.out.println("insertDeemOther: "+insertDeemOther);
 				
 				mv.addObject("deem",deem2);
 				mv.addObject("deemPro",dpList);
