@@ -135,9 +135,53 @@
 			<div class="div-top4menu" onclick="goIncomeDeductStmt();"><h5>소득공제명세서</h5></div>
 			<div class="div-top4menu" onclick="goAddedTaxStmt();"><h5>가산세명세서</h5></div>
 			<div class="div-top4menu" style="border-bottom: 3px solid #24574A"><h5>종합소득세액계산서</h5></div>
-			<div class="cursorPointer" style="display:inline-block; background:#24574A; border-radius:5px; width:50px; height:30px; text-align:center; line-height:30px;color:white;">저장</div>
+			<div class="cursorPointer" onclick="insertStmt();" style="display:inline-block; background:#24574A; border-radius:5px; width:50px; height:30px; text-align:center; line-height:30px;color:white;">저장</div>
 		</div>
 		<!-- //class="div-top4menu" -->
+		
+		<script>
+		function insertStmt(){
+			
+			
+			
+			
+			
+			
+			
+			
+			if($("#attrYear").val() == ""){
+				Swal.fire({
+					   title: '귀속년도를 입력하세요',
+					   icon: 'info',
+					   showCancelButton: false,
+					   confirmButtonColor: '#24574A',
+					   cancelButtonColor: '#d33',
+					   confirmButtonText: '확인'
+					 });
+			}else{
+				Swal.fire({
+					  title: '저장하시겠습니까?',
+					  text: "기존 데이터가 있을 시 덮어씌우게됩니다.",
+					  icon: 'warning',
+					  showCancelButton: true,
+					  confirmButtonColor: '#24574A',
+					  cancelButtonColor: '#d33',
+					  cancelButtonText : '취소',
+					  confirmButtonText: '저장'
+					}).then((result) => {
+					  if (result.value) {
+					    Swal.fire(
+					      '저장 완료',
+					      '',
+					      'success'
+					    )
+					  }
+					})
+			}
+			
+			
+		}
+		</script>
 		
 		
 		<script type="text/javascript">
@@ -210,52 +254,64 @@
 						
 						//1번부터 17번까지 차례로 채우자
 						
-						$("#v101").val(dto.v101);
+						$("#v101").val(Number(dto.v101).toLocaleString());
 						
-						$("#v102").val(dto.v102); 
+						$("#v102").val(Number(dto.v102).toLocaleString()); 
 						
 						var d103 = Number(dto.v101) - Number(dto.v102);
-						$("#v103").val(d103);
+						$("#v103").val(d103.toLocaleString());
 						
+						
+						var v105n = 0;
 						if(d103 <= 12000000){
 							$("#v104").val("6% (-)");
-							$("#v105").val( Math.floor((d103 * 6 / 100 - 0)/10) * 10 );
+							v105n = Math.floor((d103 * 6 / 100 - 0) / 10) * 10 ; 
+							$("#v105").val( v105n.toLocaleString() );
 						}else if(d103 <= 46000000){
 							$("#v104").val("15% (1,080,000)");
-							$("#v105").val( Math.floor((d103 * 15 / 100 - 1080000)/10) * 10 );
+							v105n = Math.floor((d103 * 15 / 100 - 1080000)/10) * 10 ;
+							$("#v105").val( v105n.toLocaleString() );
 						}else if(d103 <= 88000000){
 							$("#v104").val("24% (5,220,000)");
-							$("#v105").val( Math.floor((d103 * 24 / 100 - 5220000)/10) * 10 );
+							v105n = Math.floor((d103 * 24 / 100 - 5220000)/10) * 10 ;
+							$("#v105").val( v105n.toLocaleString() );
 						}else if(d103 <= 150000000){
 							$("#v104").val("35% (14,900,000)");
-							$("#v105").val( Math.floor((d103 * 35 / 100 - 14900000)/10) * 10 );
+							v105n = Math.floor((d103 * 35 / 100 - 14900000)/10) * 10 ;
+							$("#v105").val( v105n.toLocaleString() );
 						}else if(d103 <= 300000000){
 							$("#v104").val("38% (19,400,000)");
-							$("#v105").val( Math.floor((d103 * 38 / 100 - 19400000)/10) * 10 );
+							v105n = Math.floor((d103 * 38 / 100 - 19400000)/10) * 10 ;
+							$("#v105").val( v105n.toLocaleString() );
 						}else if(d103 <= 500000000){
 							$("#v104").val("40% (25,400,000)");
-							$("#v105").val( Math.floor((d103 * 40 / 100 - 25400000)/10) * 10 );
+							v105n = Math.floor((d103 * 40 / 100 - 25400000)/10) * 10 ;
+							$("#v105").val( v105n.toLocaleString() );
 						}else{
 							$("#v104").val("42% (35,400,000)");
-							$("#v105").val( Math.floor((d103 * 42 / 100 - 35400000)/10) * 10 );
+							v105n = Math.floor((d103 * 42 / 100 - 35400000)/10) * 10 ;
+							$("#v105").val( v105n.toLocaleString() );
 						}
 						
 						
 						$("#v106").val(0);
 						
-						$("#v107").val(dto.v107);
+						$("#v107").val(Number(dto.v107).toLocaleString());
 						
-						$("#v108").val(Number($("#v105").val()) - Number($("#v106").val()) - Number($("#v107").val()));
+						var v108n = v105n - Number($("#v106").val()) - Number(dto.v107);
+						$("#v108").val(v108n.toLocaleString());
 						
-						$("#v109").val(dto.v109);
+						var v109n = Number(dto.v109) ;
+						$("#v109").val(v109n.toLocaleString());
 						
 						$("#v110").val(0);
 						
-						$("#v111").val(Number($("#v108").val()) + Number($("#v109").val()) + Number($("#v110").val()));
+						var v111n = v108n + v109n + 0;
+						$("#v111").val((v108n + v109n + 0).toLocaleString());
 						
-						$("#v112").val(dto.v112);
+						$("#v112").val(Number(dto.v112).toLocaleString());
 						
-						$("#v113").val( Number($("#v111").val()) - Number($("#v112").val()) );
+						$("#v113").val( (v111n - Number(dto.v112)).toLocaleString() );
 						
 						$("#v114").val(0);
 						
@@ -263,7 +319,7 @@
 						
 						$("#v116").val(0);
 						
-						$("#v117").val( ( Number($("#v111").val()) - Number($("#v112").val()) ).toLocaleString() );
+						$("#v117").val( ( v111n - Number(dto.v112) ).toLocaleString() );
 						
 						console.log("=====");
 						

@@ -10,6 +10,14 @@
 	input{
 		border:none;
 	}
+	
+	.inputNumber{
+		text-align:right;
+	}
+	
+	#tableTop02 input{
+		text-align:right;
+	}
 
 
 	.div-top4menuWrapper{
@@ -644,12 +652,12 @@
 				<td rowspan="3">기본공제</td>
 				<td>(1)본인 </td>
 				<td><input type="text" id="btd11"></td>
-				<td><input type="text" id="btd12"></td>
+				<td><input class="inputNumber" type="text" id="btd12"></td>
 			</tr>
 			<tr>
 				<td>(2)배우자</td>
 				<td><input type="text" id="btd21"></td>
-				<td><input type="text" id="btd22"></td>
+				<td><input class="inputNumber" type="text" id="btd22"></td>
 			</tr>
 			<tr>
 				<td>(3)부양가족</td>
@@ -680,7 +688,7 @@
 			<tr>
 				<td colspan="3">(8) 인적공제계(1~7의 합계)</td>
 				<td><input type="text" id="btd81"></td>
-				<td><input type="text" id="btd82"></td>
+				<td><input class="inputNumber" type="text" id="btd82"></td>
 			</tr>
 		</table>
 		</div>
@@ -720,7 +728,8 @@
 		<!-- footer -->
 		<div class="card mb-4">
 			<div id="helpBox" class="card-body">
-				도움말입니다. 읽어주세요*^^*
+				소득금액 중 공제받을 항목들을 입력<br>
+				공제금액은 과세표준 금액을 낮춤
 			</div>
 		</div>
 		<!-- ///footer -->

@@ -12,6 +12,12 @@
 		border: none;
 		text-align:center;
 	}
+	
+	/* 
+	.inputNumber{
+		text-align:right;
+	} 
+	*/
 
 
 	.div-top4menuWrapper{
@@ -457,27 +463,27 @@
 			</tr>
 			<tr>
 				<td>총수입금액</td>
-				<td><input type="text" id="v108" name="v108"></td>
-				<td class="td02" style="display:none; margin-left:8px;"><input type="text" id="v208" name="v208"></td>
-				<td class="td03" style="display:none; margin-left:10px;"><input type="text" id="" name="" class="td03"></td>
+				<td><input class="inputNumber" "type="text" id="v108" name="v108"></td>
+				<td class="td02 inputNumber" style="display:none; margin-left:8px;"><input type="text" id="v208" name="v208"></td>
+				<td class="td03 inputNumber" style="display:none; margin-left:10px;"><input type="text" id="" name="" class="td03"></td>
 			</tr>
 			<tr>
 				<td>필요경비</td>
-				<td><input type="text" id="v109" name="v109"></td>
-				<td class="td02" style="display:none; margin-left:8px;"><input type="text" id="v209" name="v209"></td>
-				<td class="td03" style="display:none; margin-left:10px;"><input type="text" id="" name="" class="td03"></td>
+				<td><input class="inputNumber" type="text" id="v109" name="v109"></td>
+				<td class="td02 inputNumber" style="display:none; margin-left:8px;"><input type="text" id="v209" name="v209"></td>
+				<td class="td03 inputNumber" style="display:none; margin-left:10px;"><input type="text" id="" name="" class="td03"></td>
 			</tr>
 			<tr>
 				<td>소득금액</td>
-				<td><input type="text" id="v110" name="v110"></td>
-				<td class="td02" style="display:none; margin-left:8px;"><input type="text" id="v210" name="v210"></td>
-				<td class="td03" style="display:none; margin-left:10px;"><input type="text" id="" name="" class="td03"></td>
+				<td><input class="inputNumber" type="text" id="v110" name="v110"></td>
+				<td class="td02 inputNumber" style="display:none; margin-left:8px;"><input type="text" id="v210" name="v210"></td>
+				<td class="td03 inputNumber" style="display:none; margin-left:10px;"><input type="text" id="" name="" class="td03"></td>
 			</tr>
 			<tr>
 				<td>원천징수액 - 소득세</td>
-				<td><input type="text" id="v111" name="v111"></td>
-				<td class="td02" style="display:none; margin-left:8px;"><input type="text" id="v211" name="v211"></td>
-				<td class="td03" style="display:none; margin-left:10px;"><input type="text" id="" name="" class="td03"></td>
+				<td><input class="inputNumber" type="text" id="v111" name="v111"></td>
+				<td class="td02 inputNumber" style="display:none; margin-left:8px;"><input type="text" id="v211" name="v211"></td>
+				<td class="td03 inputNumber" style="display:none; margin-left:10px;"><input type="text" id="" name="" class="td03"></td>
 			</tr>
 			<tr>
 				<td>이월결손금 공제 여부</td>
@@ -875,7 +881,7 @@
 		<!-- footer -->
 		<div class="card mb-4">
 			<div class="card-body" id="divHelp">
-				도움말입니다. 읽어주세요*^^*
+				귀속년도에 해당하는 소득금액을 구분별로 입력
 			</div>
 		</div>
 		<!-- ///footer -->

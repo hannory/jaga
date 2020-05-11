@@ -479,15 +479,15 @@
     SELECT TOTAL_INCOME
     FROM
         (
-        SELECT TOTAL_INCOME, DOCUMENT_NO, ROWNUM RNUM
+        SELECT TOTAL_INCOME, ZZZ, ROWNUM RNUM
         FROM
             (
-            SELECT TOTAL_INCOME, DOCUMENT_NO
+            SELECT TOTAL_INCOME, TO_NUMBER(DOCUMENT_NO) AS ZZZ
             FROM INCOME_AMOUNT_STATEMENT
             WHERE COM_CODE = #{comCode}
             AND     YEAR_OF_ATTR = #{yearOfAttr}
             AND     INCOME_TYPE_CODE = '40'
-            ORDER BY DOCUMENT_NO DESC
+            ORDER BY ZZZ DESC
             )
         )
     WHERE RNUM = 1
@@ -497,15 +497,15 @@
     SELECT TOTAL_INCOME
     FROM
         (
-        SELECT TOTAL_INCOME, DOCUMENT_NO, ROWNUM RNUM
+        SELECT TOTAL_INCOME, ZZZ, ROWNUM RNUM
         FROM
             (
-            SELECT TOTAL_INCOME, DOCUMENT_NO
+            SELECT TOTAL_INCOME, TO_NUMBER(DOCUMENT_NO) AS ZZZ
             FROM INCOME_AMOUNT_STATEMENT
             WHERE COM_CODE = #{comCode}
             AND     YEAR_OF_ATTR = #{yearOfAttr}
             AND     INCOME_TYPE_CODE = '51'
-            ORDER BY DOCUMENT_NO DESC
+            ORDER BY ZZZ DESC
             )
         )
     WHERE RNUM = 1
@@ -515,14 +515,14 @@
     SELECT  TOTAL_DEDUCT
     FROM
     (
-        SELECT TOTAL_DEDUCT, STMT_NO, COM_CODE, ROWNUM RNUM
+        SELECT TOTAL_DEDUCT, ZZZ, COM_CODE, ROWNUM RNUM
         FROM
             (
-                SELECT TOTAL_DEDUCT, STMT_NO, COM_CODE
+                SELECT TOTAL_DEDUCT, TO_NUMBER(STMT_NO) AS ZZZ, COM_CODE
                 FROM DEDUCT_STMT
                 WHERE COM_CODE = #{comCode}
                 AND     YEAR_OF_ATTR = #{yearOfAttr}
-                ORDER BY STMT_NO DESC
+                ORDER BY ZZZ DESC
             )
         
     )
@@ -534,15 +534,15 @@
         SELECT TOTAL_INCOME
         FROM
             (
-            SELECT TOTAL_INCOME, DOCUMENT_NO, ROWNUM RNUM
+            SELECT TOTAL_INCOME, ZZZ, ROWNUM RNUM
             FROM
                 (
-                SELECT TOTAL_INCOME, DOCUMENT_NO
+                SELECT TOTAL_INCOME, TO_NUMBER(DOCUMENT_NO) AS ZZZ
                 FROM INCOME_AMOUNT_STATEMENT
                 WHERE COM_CODE = #{comCode}
                 AND     YEAR_OF_ATTR = #{yearOfAttr}
                 AND     INCOME_TYPE_CODE = '40'
-                ORDER BY DOCUMENT_NO DESC
+                ORDER BY ZZZ DESC
                 )
             )
         WHERE RNUM = 1
@@ -552,15 +552,15 @@
         SELECT TOTAL_INCOME
         FROM
             (
-            SELECT TOTAL_INCOME, DOCUMENT_NO, ROWNUM RNUM
+            SELECT TOTAL_INCOME, ZZZ, ROWNUM RNUM
             FROM
                 (
-                SELECT TOTAL_INCOME, DOCUMENT_NO
+                SELECT TOTAL_INCOME, TO_NUMBER(DOCUMENT_NO) AS ZZZ
                 FROM INCOME_AMOUNT_STATEMENT
                 WHERE COM_CODE = #{comCode}
                 AND     YEAR_OF_ATTR = #{yearOfAttr}
                 AND     INCOME_TYPE_CODE = '51'
-                ORDER BY DOCUMENT_NO DESC
+                ORDER BY ZZZ DESC
                 )
             )
         WHERE RNUM = 1
@@ -570,14 +570,14 @@
         SELECT  TOTAL_DEDUCT
         FROM
         (
-            SELECT TOTAL_DEDUCT, STMT_NO, COM_CODE, ROWNUM RNUM
+            SELECT TOTAL_DEDUCT, ZZZ, COM_CODE, ROWNUM RNUM
             FROM
                 (
-                    SELECT TOTAL_DEDUCT, STMT_NO, COM_CODE
+                    SELECT TOTAL_DEDUCT, TO_NUMBER(STMT_NO) AS ZZZ, COM_CODE
                     FROM DEDUCT_STMT
                     WHERE COM_CODE = #{comCode}
                     AND     YEAR_OF_ATTR = #{yearOfAttr}
-                    ORDER BY STMT_NO DESC
+                    ORDER BY ZZZ DESC
                 )
             
         )
@@ -593,14 +593,14 @@
     SELECT TOTAL_DEDUCT
     FROM
     (
-        SELECT STMT_NO, COM_CODE, TOTAL_DEDUCT, YEAR_OF_ATTR, CREATE_DATE, ROWNUM RNUM
+        SELECT ZZZ, COM_CODE, TOTAL_DEDUCT, YEAR_OF_ATTR, CREATE_DATE, ROWNUM RNUM
         FROM
         (
-            SELECT STMT_NO, COM_CODE, TOTAL_DEDUCT, YEAR_OF_ATTR, CREATE_DATE
+            SELECT TO_NUMBER(STMT_NO) AS ZZZ, COM_CODE, TOTAL_DEDUCT, YEAR_OF_ATTR, CREATE_DATE
             FROM DEDUCT_STMT
             WHERE YEAR_OF_ATTR = #{yearOfAttr}
             AND     COM_CODE = #{comCode}
-            ORDER BY STMT_NO DESC
+            ORDER BY ZZZ DESC
         )
     )
     WHERE RNUM = 1
@@ -610,14 +610,14 @@
     SELECT SUM_RIGHT
     FROM 
     (
-        SELECT STMT_NO, SUM_RIGHT, ROWNUM RNUM
+        SELECT ZZZ, SUM_RIGHT, ROWNUM RNUM
         FROM
         (
-            SELECT STMT_NO, SUM_RIGHT
+            SELECT TO_NUMBER(STMT_NO) AS ZZZ, SUM_RIGHT
             FROM ADDED_TAX_STMT
             WHERE COM_CODE = #{comCode}
             AND     ATTR_YEAR = #{yearOfAttr}
-            ORDER BY STMT_NO DESC
+            ORDER BY ZZZ DESC
         )
     )
     WHERE RNUM = 1
@@ -630,18 +630,15 @@
        SELECT TOTAL_PAID_INCOME, ROWNUM RNUM
        FROM
        (
-            SELECT DOCUMENT_NO, COM_CODE, YEAR_OF_ATTR, TOTLA_PAID_INCOME AS TOTAL_PAID_INCOME
+            SELECT TO_NUMBER(DOCUMENT_NO) AS ZZZ, COM_CODE, YEAR_OF_ATTR, TOTLA_PAID_INCOME AS TOTAL_PAID_INCOME
             FROM PAID_TAX_STATEMENT
             WHERE COM_CODE = #{comCode}
             AND     YEAR_OF_ATTR = #{yearOfAttr}
-            ORDER BY DOCUMENT_NO DESC
+            ORDER BY ZZZ DESC
        )
    )
    WHERE RNUM = 1
 ) AS V112
-
-
-
 
 FROM DUAL
   	
