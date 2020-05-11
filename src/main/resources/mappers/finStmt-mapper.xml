@@ -201,8 +201,8 @@
 	</select>
 	
 	<select id="searchIncomeStmt" parameterType="IncomeStmt" resultType="IncomeStmt">
-		SELECT ROWNUM, INCOME_STMT_CODE, VAL213, CLOSING
-		FROM (SELECT INCOME_STMT_CODE, VAL213, CLOSING
+		SELECT ROWNUM, INCOME_STMT_CODE, VAL213, VAL223, CLOSING
+		FROM (SELECT INCOME_STMT_CODE, VAL213, VAL223, CLOSING
               FROM INCOME_STMT
               WHERE COM_CODE = #{comCode}
               AND YEAR = #{year}

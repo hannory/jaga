@@ -84,14 +84,14 @@
 		color: white;
 		border-width: 0px;
 	}
-	#inputNum {
+	.inputNum {
 		text-align:right;
 	}
-	#inputNum:focus {
+	.inputNum:focus {
 		background:#b3cfe4;
 	}
-	#inputNum::-webkit-inner-spin-button,
-	#inputNum::-webkit-outer-spin-button {
+	.inputNum::-webkit-inner-spin-button,
+	.inputNum::-webkit-outer-spin-button {
 		-webkit-appearance:none;
 	}
 	.modal-head {
@@ -204,7 +204,7 @@
 			<table style="width:100%; max-width:1100px;">
 				<tr>
 					<td>
-						<span style="margin-bottom:10px; color:red;"><img src="${ contextPath }/resources/images/pencil.PNG">기말상품재고액을 입력하세요</span>
+						<span style="margin-bottom:10px; color:red;"><img src="${ contextPath }/resources/images/pencil.PNG">기말상품재고액과 기말제품재고액을 입력하세요</span>
 						&nbsp;&nbsp;&nbsp;&nbsp;		
 						<button type="button" class="green-btn" id="saveBtn" onclick="saveIncomeStmt();">저장</button>
 						&nbsp;&nbsp;
@@ -285,7 +285,7 @@
 					</tr>
 					<tr class="table-detail">
 						<td class="table-subSubTitle">기말상품재고액</td>
-						<td><input type="text" id="inputNum" name="val213" onkeyup="inputNumberFormat(this);" style="width:195px;"></td>
+						<td><input type="text" class="inputNum" id="cVal213" name="val213" onkeyup="inputNumberFormat(this);" style="width:195px;"></td>
 						<td></td>
 						<td class="table-content"><span id="pVal213"></span><input type="hidden" id="lastVal213" name="lastVal213"></td>
 						<td></td>
@@ -313,7 +313,7 @@
 					</tr>
 					<tr class="table-detail">
 						<td class="table-subSubTitle">기말제품재고액</td>
-						<td class="table-content" id="cVal223"><input type="hidden" id="val223" name="val223"></td>
+						<td><input type="text" class="inputNum" id="cVal223" name="val223" onkeyup="inputNumberFormat(this);" style="width:195px;"></td>
 						<td></td>
 						<td class="table-content" id="pVal223"><input type="hidden" id="lastVal223" name="lastVal223"></td>
 						<td></td>
@@ -481,14 +481,17 @@
 			$("#past-term").text(pastTerm);
 			
 			/* 키 입력창에 값을 입력시 발생하는 이벤트 */
-			$("#inputNum").keyup(function() {
+			$(".inputNum").keyup(function() {
 				console.log("keyup 위한 테스트 uncomma : " + uncomma($("#cSum21").text()));
 				
 				
-				var cSum21 = uncomma($("#cVal211").text()) + uncomma($("#c14600").text()) - uncomma($("#inputNum").val());
+				var cSum21 = uncomma($("#cVal211").text()) + uncomma($("#c14600").text()) - uncomma($("#cVal213").val());
 				$("#cSum21").text(comma(cSum21));
 				
-				var cSum20 = cSum21 + uncomma($("#cSum22").text());
+				var cSum22 = uncomma($("#cVal221").text()) + uncomma($("#cVal222").text()) - uncomma($("#cVal223").val());		
+				$("#cSum22").text(comma(cSum22));
+				
+				var cSum20 = cSum21 + cSum22;
 				$("#cSum20").text(comma(cSum20));
 				
 				var cSum30 = uncomma($("#cSum10").text()) - cSum20;
@@ -531,6 +534,7 @@
 			
 			var year = $("#year").val();
 			var month = $("#month").val();
+			var inputNums = "empty";
 			
 			$.ajax({
 				url : "searchIncomeStmt.fs",
@@ -545,11 +549,12 @@
 						
 						$("#saveBtn").show();
 						$("#closeBtn").show();
+						
 					} else {
 						if(data.closing == "Y") {
 							$("#cancleBtn").show();
 							$("#requestMsg").text("마감이 완료되었습니다");
-							$("#inputNum").attr("readonly", "readonly");
+							$(".inputNum").attr("readonly", "readonly");
 						} else {
 							$("#saveBtn").show();
 							$("#closeBtn").show();
@@ -559,10 +564,17 @@
 								$("#closingMsg").show();
 							}
 						}
-					
-						var val213 = data.val213;
 						
-						$("#inputNum").val(comma(val213));
+						inputNums = "exist";
+					
+						cVal213 = data.val213;
+						cVal223 = data.val223;
+						
+						console.log("cVal213 위 : " + cVal213);
+						console.log("cVal223 위 : " + cVal223);
+						
+						$("#cVal213").val(comma(cVal213));
+						$("#cVal223").val(comma(cVal223));
 					}
 					
 					
@@ -582,71 +594,6 @@
 				success : function(data) {
 					$("#cur-month").text(month);
 					
-					//-------------당기-------------					
-					var c14600 = data["c14600"];
-					var c40100 = data["c40100"];
-					var c40400 = data["c40400"];
-					var c80200 = data["c80200"];
-					var c80300 = data["c80300"];
-					var c81100 = data["c81100"];
-					var c81300 = data["c81300"];
-					var c83000 = data["c83000"];
-					var c83100 = data["c83100"];
-					var cVal222 = data["cVal222"];
-					
-					$("#c14600").text(comma(c14600));
-					$("#c40100").text(comma(c40100));
-					$("#c40400").text(comma(c40400));
-					$("#c80200").text(comma(c80200));
-					$("#c80300").text(comma(c80300));
-					$("#c81100").text(comma(c81100));
-					$("#c81300").text(comma(c81300));
-					$("#c83000").text(comma(c83000));
-					$("#c83100").text(comma(c83100));
-					$("#cVal222").text(comma(cVal222));
-					
-					//표 각 합계 계산
-					var cSum10 = c40100 + c40400;
-					$("#cSum10").text(comma(cSum10));
-					
-					var cVal211 = 0;
-					
-					var cSum21 = cVal211 + c14600;
-					$("#cSum21").text(comma(cSum21));
-					
-					var cVal221 = 0;
-					var cVal223 = 0;
-
-					var cSum22 = cVal221 + cVal222 - cVal223;
-					$("#cSum22").text(comma(cSum22));
-					
-					var cSum20 = cSum21 + cSum22;
-					$("#cSum20").text(comma(cSum20));
-					
-					var cSum30 = cSum10 - cSum20;
-					$("#cSum30").text(comma(cSum30));
-					
-					var cSum40 = c80200 + c80300 + c81100 + c83000 + c83100 + c81300;
-					$("#cSum40").text(comma(cSum40));
-					
-					var cSum50 = cSum30 - cSum40;
-					$("#cSum50").text(comma(cSum50));
-					
-					var cSum60 = 0;
-					$("#cSum60").text(comma(cSum60));
-					
-					var cSum70 = 0;
-					$("#cSum70").text(comma(cSum70));
-					
-					var cSum80 = cSum50 + cSum60 - cSum70;
-					$("#cSum80").text(comma(cSum80));
-					
-					var cSum90 = 0;
-					$("#cSum90").text(comma(cSum90));
-					
-					var cSum100 = cSum80 - cSum90;
-					$("#cSum100").text(comma(cSum100));
-					//------------당기 끝------------					
 					//-------------전기-------------					
 					var p14600 = data["p14600"];
 					var p40100 = data["p40100"];
@@ -674,14 +621,18 @@
 					var pSum10 = p40100 + p40400;
 					$("#pSum10").text(comma(pSum10));
 					
-					var pVal211 = 0;
-					var pVal213 = 0;
+					var pVal211 = 400000;
+					var pVal213 = 360000;
+					$("#pVal211").text(comma(pVal211));
+					$("#pVal213").text(comma(pVal213));
 					
 					var pSum21 = pVal211 + p14600 - pVal213;
 					$("#pSum21").text(comma(pSum21));
 					
-					var pVal221 = 0;
-					var pVal223 = 0;
+					var pVal221 = 4000000;
+					var pVal223 = 2400000;
+					$("#pVal221").text(comma(pVal221));
+					$("#pVal223").text(comma(pVal223));
 
 					var pSum22 = pVal221 + pVal222 - pVal223;
 					$("#pSum22").text(comma(pSum22));
@@ -713,6 +664,86 @@
 					var pSum100 = pSum80 - pSum90;
 					$("#pSum100").text(comma(pSum100));
 					//------------전기 끝------------	
+					//-------------당기-------------					
+					var c14600 = data["c14600"];
+					var c40100 = data["c40100"];
+					var c40400 = data["c40400"];
+					var c80200 = data["c80200"];
+					var c80300 = data["c80300"];
+					var c81100 = data["c81100"];
+					var c81300 = data["c81300"];
+					var c83000 = data["c83000"];
+					var c83100 = data["c83100"];
+					var cVal222 = data["cVal222"];
+					
+					$("#c14600").text(comma(c14600));
+					$("#c40100").text(comma(c40100));
+					$("#c40400").text(comma(c40400));
+					$("#c80200").text(comma(c80200));
+					$("#c80300").text(comma(c80300));
+					$("#c81100").text(comma(c81100));
+					$("#c81300").text(comma(c81300));
+					$("#c83000").text(comma(c83000));
+					$("#c83100").text(comma(c83100));
+					$("#cVal222").text(comma(cVal222));
+					
+					console.log("cVal213 : " + cVal213);
+					console.log("cVal223 : " + cVal223);
+					
+					//표 각 합계 계산
+					var cSum10 = c40100 + c40400;
+					$("#cSum10").text(comma(cSum10));
+					
+					var cVal211 = pVal213;
+					$("#cVal211").text(comma(cVal211));
+					
+					var cVal221 = pVal223;
+					$("#cVal221").text(comma(cVal221));
+					
+					if(inputNums == 'empty') {
+						console.log("empty 조건절 진입")
+						
+						var cSum21 = cVal211 + c14600;
+						$("#cSum21").text(comma(cSum21));
+						
+						var cSum22 = cVal221 + cVal222;
+						$("#cSum22").text(comma(cSum22));
+					} else {
+						var cSum21 = cVal211 + c14600 - cVal213;
+						$("#cSum21").text(comma(cSum21));
+						
+						var cSum22 = cVal221 + cVal222 - cVal223;
+						$("#cSum22").text(comma(cSum22));
+					}
+					
+					var cSum20 = cSum21 + cSum22;
+					$("#cSum20").text(comma(cSum20));
+					
+					var cSum30 = cSum10 - cSum20;
+					$("#cSum30").text(comma(cSum30));
+					
+					var cSum40 = c80200 + c80300 + c81100 + c83000 + c83100 + c81300;
+					$("#cSum40").text(comma(cSum40));
+					
+					var cSum50 = cSum30 - cSum40;
+					$("#cSum50").text(comma(cSum50));
+					
+					var cSum60 = 0;
+					$("#cSum60").text(comma(cSum60));
+					
+					var cSum70 = 0;
+					$("#cSum70").text(comma(cSum70));
+					
+					var cSum80 = cSum50 + cSum60 - cSum70;
+					$("#cSum80").text(comma(cSum80));
+					
+					var cSum90 = 0;
+					$("#cSum90").text(comma(cSum90));
+					
+					var cSum100 = cSum80 - cSum90;
+					$("#cSum100").text(comma(cSum100));
+					//------------당기 끝------------					
+					
 					
 					//행 보여주기/숨기기
 					if(c81100 == 0 && p81100 == 0) {
@@ -1093,19 +1124,19 @@
 					text: "먼저 조회기간 검색을 해주세요!"
 				})
 				
-			} else if($("#inputNum").val() == "") {
+			} else if($("#cVal213").val() == "" || $("#cVal223").val() == "") {
 				
 				Swal.fire({
 					icon: "warning",
-					text: "기말상품재고액을 입력해주세요!"
+					text: "기말상품재고액과 기말제품재고액을 입력해주세요!"
 				})
 				
 			} else {
 				$("#sum10").val(Number(uncomma($("#cSum10").text())));
 				$("#v40100").val(Number(uncomma($("#c40100").text())));
 				$("#sum20").val(Number(uncomma($("#cSum20").text())));
-				$("#inputNum").val(Number(uncomma($("#inputNum").val())));
-				$("#val223").val(Number(uncomma($("#cVal223").text())));
+				$("#cVal213").val(Number(uncomma($("#cVal213").val())));
+				$("#cVal223").val(Number(uncomma($("#cVal223").val())));
 				$("#sum30").val(Number(uncomma($("#cSum30").text())));
 				$("#sum40").val(Number(uncomma($("#cSum40").text())));
 				$("#sum50").val(Number(uncomma($("#cSum50").text())));
@@ -1142,19 +1173,19 @@
 					text: "먼저 조회기간 검색을 해주세요!"
 				})
 				
-			} else if($("#inputNum").val() == "") {
+			} else if($("#cVal213").val() == "" || $("#cVal223").val() == "") {
 				
 				Swal.fire({
 					icon: "warning",
-					text: "기말상품재고액을 입력해주세요!"
+					text: "기말상품재고액과 기말제품재고액을 입력해주세요!"
 				})
 				
 			} else {
 				$("#sum10").val(Number(uncomma($("#cSum10").text())));
 				$("#v40100").val(Number(uncomma($("#c40100").text())));
 				$("#sum20").val(Number(uncomma($("#cSum20").text())));
-				$("#inputNum").val(Number(uncomma($("#inputNum").val())));
-				$("#val223").val(Number(uncomma($("#cVal223").text())));
+				$("#cVal213").val(Number(uncomma($("#cVal213").val())));
+				$("#cVal223").val(Number(uncomma($("#cVal223").val())));
 				$("#sum30").val(Number(uncomma($("#cSum30").text())));
 				$("#sum40").val(Number(uncomma($("#cSum40").text())));
 				$("#sum50").val(Number(uncomma($("#cSum50").text())));
@@ -1185,8 +1216,9 @@
 			$("#saveBtn").show();
 			$("#closeBtn").show();
 			$("#cancleBtn").hide();
-			$("#requestMsg").text("기말상품재고액을 입력하세요");
-			$("#inputNum").removeAttr("readonly");
+			$("#requestMsg").text("기말상품재고액과 기말제품재고액을 입력하세요");
+			$("#cVal213").removeAttr("readonly");
+			$("#cVal223").removeAttr("readonly");
 			
 			var year = $("#year").val();
 			

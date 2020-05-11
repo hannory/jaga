@@ -842,6 +842,8 @@ public class FinStmtServiceImpl implements FinStmtService {
 		//판매비와관리비
 		long debit80200 = 0;				//급여
 		long credit80200 = 0;				
+		long debit80300 = 0;				//상여금
+		long credit80300 = 0;				
 		long debit81100 = 0;				//복리후생비
 		long credit81100 = 0;				
 		long debit81300 = 0;				//접대비
@@ -1003,6 +1005,13 @@ public class FinStmtServiceImpl implements FinStmtService {
 				} else {
 					credit80200 += price;
 				}
+				//상여금
+			} else if(accountCode == 80300) {
+				if(debitCredit.equals("차변")) {
+					debit80300 += price;
+				} else {
+					credit80300 += price;
+				}
 			//복리후생비
 			} else if(accountCode == 81100) {
 				if(debitCredit.equals("차변")) {
@@ -1079,6 +1088,8 @@ public class FinStmtServiceImpl implements FinStmtService {
 		//판매비와관리비
 		hmap.put("debit80200", debit80200);
 		hmap.put("credit80200", credit80200);
+		hmap.put("debit80300", debit80300);
+		hmap.put("credit80300", credit80300);
 		hmap.put("debit81100", debit81100);
 		hmap.put("credit81100", credit81100);
 		hmap.put("debit81300", debit81300);

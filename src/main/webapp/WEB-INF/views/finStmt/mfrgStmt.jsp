@@ -243,9 +243,9 @@
 					</tr>
 					<tr class="table-detail">
 						<td class="table-subSubTitle">기초원재료재고액</td>
-						<td id="cVal11"></td>
+						<td class="num" id="cVal11"></td>
 						<td></td>
-						<td id="pVal11"></td>
+						<td class="num" id="pVal11"></td>
 						<td></td>
 					</tr>
 					<tr class="table-detail">
@@ -266,7 +266,7 @@
 						<td class="table-subSubTitle">기말원재료재고액</td>
 						<td><input type="text" id="inputNum" name="val13" onkeyup="inputNumberFormat(this)" style="width:195px;"></td>
 						<td></td>
-						<td></td>
+						<td class="num"><span id="pVal13"></span></td>
 						<td></td>
 					</tr>
 					<tr>
@@ -439,7 +439,7 @@
 			
 			//키 입력창에 값을 입력시 발생하는 이벤트
 			$("#inputNum").keyup(function() {
-				var cSum10 = Number(uncomma($("#c15300").text())) - Number(uncomma($("#inputNum").val()));
+				var cSum10 = Number(uncomma($("#cVal11").text())) + Number(uncomma($("#c15300").text())) - Number(uncomma($("#inputNum").val()));
 				$("#cSum10").text(comma(cSum10));
 				
 				var cSum20 = Number(uncomma($("#cSum20").text()));
@@ -540,6 +540,55 @@
 				success : function(data) {
 					$("#cur-month").text(month);
 					
+					//-------------전기-------------	
+					var p15300 = data["p15300"];
+					var p50400 = data["p50400"];
+					var p50500 = data["p50500"];
+					var p51100 = data["p51100"];
+					var p51200 = data["p51200"];
+					var p53000 = data["p53000"];
+					
+					var pVal11 = 4500000;
+					var pVal13 = 5000000;
+					
+					$("#p15300").text(comma(p15300));
+					$("#p50400").text(comma(p50400));
+					$("#p50500").text(comma(p50500));
+					$("#p51100").text(comma(p51100));
+					$("#p51200").text(comma(p51200));
+					$("#p53000").text(comma(p53000));
+					
+					$("#pVal11").text(comma(pVal11));
+					$("#pVal13").text(comma(pVal13));
+					
+					//표 각 합계 계산
+					var pSum10 = pVal11 + p15300 - pVal13;
+					$("#pSum10").text(comma(pSum10));
+					
+					var pSum20 = p50400 + p50500;
+					$("#pSum20").text(comma(pSum20));
+					
+					var pSum30 = p51100 + p51200 + p53000;
+					$("#pSum30").text(comma(pSum30));
+					
+					var pSum40 = pSum10 + pSum20 + pSum30;
+					$("#pSum40").text(comma(pSum40));
+					
+					var pSum50 = 0;
+					$("#pSum50").text(comma(pSum50));
+					
+					var pSum60 = pSum40 + pSum50;
+					$("#pSum60").text(comma(pSum60));
+					
+					var pSum70 = 0;
+					$("#pSum70").text(comma(pSum70));
+					
+					var pSum80 = 0;
+					$("#pSum80").text(comma(pSum80));
+					
+					var pSum90 = pSum60 - (pSum70 + pSum80);
+					$("#pSum90").text(comma(pSum90));
+					//------------전기 끝------------
 					//-------------당기-------------	
 					var c15300 = data["c15300"];
 					var c50400 = data["c50400"];
@@ -548,6 +597,8 @@
 					var c51200 = data["c51200"];
 					var c53000 = data["c53000"];
 					
+					var cVal11 = pVal13; 
+					
 					$("#c15300").text(comma(c15300));
 					$("#c50400").text(comma(c50400));
 					$("#c50500").text(comma(c50500));
@@ -555,8 +606,10 @@
 					$("#c51200").text(comma(c51200));
 					$("#c53000").text(comma(c53000));
 					
+					$("#cVal11").text(comma(cVal11));
+					
 					//표 각 합계 계산
-					var cSum10 = c15300 - Number(uncomma($("#inputNum").val()));
+					var cSum10 = cVal11 + c15300 - Number(uncomma($("#inputNum").val()));
 					$("#cSum10").text(comma(cSum10));
 					
 					var cSum20 = c50400 + c50500;
@@ -584,49 +637,7 @@
 					$("#cSum90").text(comma(cSum90));
 					
 					//------------당기 끝------------					
-					//-------------전기-------------	
-					var p15300 = data["p15300"];
-					var p50400 = data["p50400"];
-					var p50500 = data["p50500"];
-					var p51100 = data["p51100"];
-					var p51200 = data["p51200"];
-					var p53000 = data["p53000"];
 					
-					$("#p15300").text(comma(p15300));
-					$("#p50400").text(comma(p50400));
-					$("#p50500").text(comma(p50500));
-					$("#p51100").text(comma(p51100));
-					$("#p51200").text(comma(p51200));
-					$("#p53000").text(comma(p53000));
-					
-					//표 각 합계 계산
-					var pSum10 = p15300;
-					$("#pSum10").text(comma(pSum10));
-					
-					var pSum20 = p50400 + p50500;
-					$("#pSum20").text(comma(pSum20));
-					
-					var pSum30 = p51100 + p51200 + p53000;
-					$("#pSum30").text(comma(pSum30));
-					
-					var pSum40 = pSum10 + pSum20 + pSum30;
-					$("#pSum40").text(comma(pSum40));
-					
-					var pSum50 = 0;
-					$("#pSum50").text(comma(pSum50));
-					
-					var pSum60 = pSum40 + pSum50;
-					$("#pSum60").text(comma(pSum60));
-					
-					var pSum70 = 0;
-					$("#pSum70").text(comma(pSum70));
-					
-					var pSum80 = 0;
-					$("#pSum80").text(comma(pSum80));
-					
-					var pSum90 = pSum60 - (pSum70 + pSum80);
-					$("#pSum90").text(comma(pSum90));
-					//------------전기 끝------------
 					
 					//행 보여주기/숨기기
 					if(c51100 == 0 && p51100 == 0) {

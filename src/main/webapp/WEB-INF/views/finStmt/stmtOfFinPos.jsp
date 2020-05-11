@@ -601,7 +601,40 @@
 			
 			dateArray = ($("#datepicker").val()).split("-");
 			
+			
 			//당기 이익잉여금 계산
+			/* var inputNums = "empty";
+			
+			$.ajax({
+				url : "searchIncomeStmt.fs",
+				type : "get",
+				data : {
+					year : year
+				},
+				success : function(data) {
+					
+					if(data == "") {
+						console.log("data is empty");
+						
+					} else {
+						
+						inputNums = "exist";
+					
+						cVal213 = data.val213;
+						cVal223 = data.val223;
+						
+						console.log("cVal213 위 : " + cVal213);
+						console.log("cVal223 위 : " + cVal223);
+						
+						$("#cVal213").val(comma(cVal213));
+						$("#cVal223").val(comma(cVal223));
+					}
+				},
+				error : function(status) {
+					console.log(status);
+				}
+			}) */
+			
 			$.ajax({
 				url : "selectIncomeStmt.fs",
 				type : "get",
@@ -610,70 +643,7 @@
 					month : dateArray[1]
 				},
 				success : function(data) {
-					//---------당기 이익잉여금---------		
-					var c14600 = data["c14600"];
-					var c40100 = data["c40100"];
-					var c40400 = data["c40400"];
-					var c80200 = data["c80200"];
-					var c80300 = data["c80300"];
-					var c81100 = data["c81100"];
-					var c81300 = data["c81300"];
-					var c83000 = data["c83000"];
-					var c83100 = data["c83100"];
-					var cVal222 = data["cVal222"];
 					
-					$("#c14600").text(comma(c14600));
-					$("#c40100").text(comma(c40100));
-					$("#c40400").text(comma(c40400));
-					$("#c80200").text(comma(c80200));
-					$("#c80300").text(comma(c80300));
-					$("#c81100").text(comma(c81100));
-					$("#c81300").text(comma(c81300));
-					$("#c83000").text(comma(c83000));
-					$("#c83100").text(comma(c83100));
-					$("#cVal222").text(comma(cVal222));
-					
-					//표 각 합계 계산
-					var cSum10 = c40100 + c40400;
-					$("#cSum10").text(comma(cSum10));
-					
-					var cVal211 = 0;
-					
-					var cSum21 = cVal211 + c14600;
-					$("#cSum21").text(comma(cSum21));
-					
-					var cVal221 = 0;
-					var cVal223 = 0;
-
-					var cSum22 = cVal221 + cVal222 - cVal223;
-					$("#cSum22").text(comma(cSum22));
-					
-					var cSum20 = cSum21 + cSum22;
-					$("#cSum20").text(comma(cSum20));
-					
-					var cSum30 = cSum10 - cSum20;
-					$("#cSum30").text(comma(cSum30));
-					
-					var cSum40 = c80200 + c80300 + c81100 + c83000 + c83100 + c81300;
-					$("#cSum40").text(comma(cSum40));
-					
-					var cSum50 = cSum30 - cSum40;
-					$("#cSum50").text(comma(cSum50));
-					
-					var cSum60 = 0;
-					$("#cSum60").text(comma(cSum60));
-					
-					var cSum70 = 0;
-					$("#cSum70").text(comma(cSum70));
-					
-					var cSum80 = cSum50 + cSum60 - cSum70;
-					$("#cSum80").text(comma(cSum80));
-					
-					var cSum90 = 0;
-					$("#cSum90").text(comma(cSum90));
-					
-					var cRetainedEarnings = cSum80 - cSum90;
-					$("#cRetainedEarnings").text(comma(cRetainedEarnings));
 					//---------전기 이익잉여금---------	
 					var p14600 = data["p14600"];
 					var p40100 = data["p40100"];
@@ -701,14 +671,18 @@
 					var pSum10 = p40100 + p40400;
 					$("#pSum10").text(comma(pSum10));
 					
-					var pVal211 = 0;
-					var pVal213 = 0;
+					var pVal211 = 400000;
+					var pVal213 = 360000;
+					$("#pVal211").text(comma(pVal211));
+					$("#pVal213").text(comma(pVal213));
 					
 					var pSum21 = pVal211 + p14600 - pVal213;
 					$("#pSum21").text(comma(pSum21));
 					
-					var pVal221 = 0;
-					var pVal223 = 0;
+					var pVal221 = 4000000;
+					var pVal223 = 2400000;
+					$("#pVal221").text(comma(pVal221));
+					$("#pVal223").text(comma(pVal223));
 
 					var pSum22 = pVal221 + pVal222 - pVal223;
 					$("#pSum22").text(comma(pSum22));
@@ -739,6 +713,89 @@
 					
 					var pRetainedEarnings = pSum80 - pSum90;
 					$("#pRetainedEarnings").text(comma(pRetainedEarnings));
+					//---------당기 이익잉여금---------		
+					var c14600 = data["c14600"];
+					var c40100 = data["c40100"];
+					var c40400 = data["c40400"];
+					var c80200 = data["c80200"];
+					var c80300 = data["c80300"];
+					var c81100 = data["c81100"];
+					var c81300 = data["c81300"];
+					var c83000 = data["c83000"];
+					var c83100 = data["c83100"];
+					var cVal222 = data["cVal222"];
+					
+					$("#c14600").text(comma(c14600));
+					$("#c40100").text(comma(c40100));
+					$("#c40400").text(comma(c40400));
+					$("#c80200").text(comma(c80200));
+					$("#c80300").text(comma(c80300));
+					$("#c81100").text(comma(c81100));
+					$("#c81300").text(comma(c81300));
+					$("#c83000").text(comma(c83000));
+					$("#c83100").text(comma(c83100));
+					$("#cVal222").text(comma(cVal222));
+					
+					
+					//표 각 합계 계산
+					var cSum10 = c40100 + c40400;
+					$("#cSum10").text(comma(cSum10));
+					
+					var cVal211 = pVal213;
+					$("#cVal211").text(comma(cVal211));
+					
+					var cVal221 = pVal223;
+					$("#cVal221").text(comma(cVal221));
+					
+					/* if(inputNums == 'empty') {
+						console.log("empty 조건절 진입")
+						
+						var cSum21 = cVal211 + c14600;
+						$("#cSum21").text(comma(cSum21));
+						
+						var cSum22 = cVal221 + cVal222;
+						$("#cSum22").text(comma(cSum22));
+					} else {
+						var cSum21 = cVal211 + c14600 - cVal213;
+						$("#cSum21").text(comma(cSum21));
+						
+						var cSum22 = cVal221 + cVal222 - cVal223;
+						$("#cSum22").text(comma(cSum22));
+					} */
+					
+					var cSum21 = cVal211 + c14600;
+					$("#cSum21").text(comma(cSum21));
+					
+					var cSum22 = cVal221 + cVal222;
+					$("#cSum22").text(comma(cSum22));
+					
+					var cSum20 = cSum21 + cSum22;
+					$("#cSum20").text(comma(cSum20));
+					
+					var cSum30 = cSum10 - cSum20;
+					$("#cSum30").text(comma(cSum30));
+					
+					var cSum40 = c80200 + c80300 + c81100 + c83000 + c83100 + c81300;
+					$("#cSum40").text(comma(cSum40));
+					
+					var cSum50 = cSum30 - cSum40;
+					$("#cSum50").text(comma(cSum50));
+					
+					var cSum60 = 0;
+					$("#cSum60").text(comma(cSum60));
+					
+					var cSum70 = 0;
+					$("#cSum70").text(comma(cSum70));
+					
+					var cSum80 = cSum50 + cSum60 - cSum70;
+					$("#cSum80").text(comma(cSum80));
+					
+					var cSum90 = 0;
+					$("#cSum90").text(comma(cSum90));
+					
+					var cRetainedEarnings = cSum80 - cSum90;
+					$("#cRetainedEarnings").text(comma(cRetainedEarnings));
+					
 					
 					//재무상태표 계산을 위한 ajax
 					$.ajax({

@@ -560,6 +560,13 @@
 						<td class="table-content num"><span id="credit-80200"></span></td>
 						<td class="table-content num"><span id="bal-credit-80200"></span></td>
 					</tr>
+					<tr class="table-detail" id="v80300">
+						<td class="table-content num"><span id="bal-debit-80300"></span></td>
+						<td class="table-content num"><span id="debit-80300"></span></td>
+						<td align="center"><div class="table-justify3"><div>상</div><div>여</div><div>금</div></div></td>
+						<td class="table-content num"><span id="credit-80300"></span></td>
+						<td class="table-content num"><span id="bal-credit-80300"></span></td>
+					</tr>
 					<tr class="table-detail" id="v81100">
 						<td class="table-content num"><span id="bal-debit-81100"></span></td>
 						<td class="table-content num"><span id="debit-81100"></span></td>
@@ -861,6 +868,8 @@
 					//판매비와관리비
 					var debit80200 = data["debit80200"];
 					var balDebit80200 = debit80200;
+					var debit80300 = data["debit80300"];
+					var balDebit80300 = debit80300;
 					var debit81100 = data["debit81100"];
 					var balDebit81100 = debit81100;
 					var debit81300 = data["debit81300"];
@@ -927,6 +936,8 @@
 					//판매비와관리비
 					$("#debit-80200").text(comma(debit80200));
 					$("#bal-debit-80200").text(comma(balDebit80200));
+					$("#debit-80300").text(comma(debit80300));
+					$("#bal-debit-80300").text(comma(balDebit80300));
 					$("#debit-81100").text(comma(debit81100));
 					$("#bal-debit-81100").text(comma(balDebit81100));
 					$("#debit-81300").text(comma(debit81300));
@@ -982,8 +993,8 @@
 					var creditSum80 = creditSum81 + creditSum82;
 					var balCreditSum80 = balCreditSum81 + balCreditSum82;
 	
-					var debitSum90 = debit80200 + debit81100 + debit81300 + debit83000 + debit83100;
-					var balDebitSum90 = balDebit80200 + balDebit81100 + balDebit81300 + balDebit83000 + balDebit83100;
+					var debitSum90 = debit80200 + debit80300 + debit81100 + debit81300 + debit83000 + debit83100;
+					var balDebitSum90 = balDebit80200 + balDebit80300 + balDebit81100 + balDebit81300 + balDebit83000 + balDebit83100;
 					var creditSum90 = 0;
 					var balCreditSum90 = 0;
 					

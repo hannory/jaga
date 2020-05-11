@@ -297,6 +297,7 @@ public class FinStmtController {
 			
 			JSONObject result = new JSONObject();
 			result.put("val213", resultIs.getVal213());
+			result.put("val223", resultIs.getVal223());
 			result.put("closing", resultIs.getClosing());
 			result.put("countClosed", sCountClosed);
 			
