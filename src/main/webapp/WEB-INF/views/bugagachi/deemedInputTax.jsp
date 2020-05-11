@@ -179,6 +179,7 @@
 		scope="application" />
 	<main>
 	<div class="container-fluid">
+	<form action="deadLine.vd" method="post">
 			<h2 class="mt-4">의제매입세액공제 신고서</h2>
 	<ol class="breadcrumb mb-4">
 			<li><button id="deadlineBtn" type="submit">마감</button></li>
@@ -206,7 +207,7 @@
 		<!-- 인풋모음 -->
 		<c:set var="comCode" value="${ sessionScope.loginCompany.companyCode }"/>
 		<input type="hidden" name="comCode" value="${comCode}" id="comCode">
-		<input type="hidden" name="deemCode" id="deemCode">
+		<input type="hidden" name="deemedCode" id="deemedCode">
 		
 		
 				<!-- 로딩? -->
@@ -370,6 +371,10 @@
 				str = String(str);
 				return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, "$1,");
 			}
+			/* 마감취소 */
+			function cencelDeadline(){
+				$("form").attr("action", "updatdDeadLineCen.vd");
+			}
 			function showTax1(){
 		    	$("#tax2").hide();
 		    	$("#tax1").show();
@@ -404,8 +409,8 @@
 		 				console.log(deemPro[0].venderName);
 		 				console.log(deemOther);
 		 				console.log(deemSlip);
-	          
-		 				
+	          			$("#termDiv").val(deem.vatTerm);
+		 				$("#deemedCode").val(deem.deemedCode);
 	                  /* 공급자 리스트  &if 농어민이면 농어민 거래내역+구분표에서 농어민 거래 건수*/
 	                  //공급자 리스트들의 매입처수, 건수,매입가액,의제매입세액 계산해줘야함
 	                  var $deemProList=$("#deemProList");
@@ -472,8 +477,74 @@
 		 			  $("#ffCount").text(comma(ffProCount));
 		 			  $("#ffPrice").text(comma(fPriceCount));	
 		 				
+						/* 구분표에서 deemslip값 계산해서 넣어주기 */
+						
+						var proCountBill=0;		//신용카드 매입처수 계산서
+						var countBill=0; 		//건수 계산서
+						var priceCountBill=0;	//매입가액 계산서
+						var deemTaxCountBill=0;	//의제매입세액 계산서
+						var proCountCard=0;		//신용카드매입처수
+						var countCard=0;		//건수 카드
+						var priceCountCard=0;	//매입가액 카드
+						var deemTaxCountCard=0;	//의제매입세액 카드
+						for(var key in deemSlip){
+							
+							if(deemSlip[key].evidenceCode=='20'){//계산서
+								proCountBill++;//매임처수
+								countBill=countBill+deemSlip[key].count1;//건수
+								priceCountBill=priceCountBill+deemSlip[key].purchasePrice;
+								
+							}else if(deemSlip[key].evidenceCode=='60'){//신용카드
+								proCountCard++;
+								countCard=countCard+deemSlip[key].count1;
+								priceCountCard=priceCountCard+deemSlip[key].purchasePrice;
+							}
+							
+						}
+						deemTaxCountBill=Math.floor(priceCountBill*(8/108));
+						deemTaxCountCard=Math.floor(priceCountCard*(8/108));
+						/* 구분표에 계산서랑 신용카드 값넣기 */
+						$("#proCountBill").text(comma(proCountBill));
+						$("#countBill").text(comma(countBill));
+						$("#priceCountBill").text(comma(priceCountBill));
+						$("#deemTaxCountBill").text(comma(deemTaxCountBill));
+						$("#proCountCard").text(comma(proCountCard));
+						$("#countCard").text(comma(countCard));
+						$("#priceCountCard").text(comma(priceCountCard));
+						$("#deemTaxCountCard").text(comma(deemTaxCountCard));
+						
+		 				/* 구분표 합꼐 */
+		 				var proCountSum=fProCount+proCountBill+proCountCard;
+		 				var countSum=fCount+countBill+countCard;
+		 				var priceCountSum=fPriceCount+priceCountBill+priceCountCard;
+		 				var deemTaxCountSum=fDeemTaxCount+deemTaxCountBill+deemTaxCountCard;
+		 				$("#proCountSum").text(comma(proCountSum));
+		 				$("#countSum").text(comma(countSum));
+		 				$("#priceCountSum").text(comma(priceCountSum));
+		 				$("#deemTaxCountSum").text(comma(deemTaxCountSum));
+		 				
+		 				/* 면세농산물등 표에 값넣기 */
+		 				$("#asmtSum").text(comma(deemOther.asmtSum));
+		 				$("#asmtScheduled").text(comma(deemOther.asmtScheduled));
+		 				$("#asmtConf").text(comma(deemOther.asmtConf));
+		 				$("#targetAmt").text(comma(deemOther.targetAmt));
+		 				$("#currPurAmt").text(comma(deemOther.currPurAmt));
+		 				$("#dedAmt").text(comma(deemOther.dedAmt));
+		 				$("#dedtaxRate").text(deemOther.dedtaxRate);
+		 				$("#dedtaxAmt").text(comma(deemOther.dedtaxAmt));
+		 				$("#dedtaxSum").text(comma(deemOther.dedtaxSum));
+		 				$("#dedtaxScheduled").text(comma(deemOther.dedtaxScheduled));
+		 				$("#dedtaxMonth").text(comma(deemOther.dedtaxMonth));
+		 				$("#dedTax").text(comma(deemOther.dedTaxrate1));
 		 				
 		 				
+		 				
+		 				/* 마감됐을때 버튼 띄우기 */
+		 				 if(deem.deadline == 'Y'){
+								console.log("마감된 애임")
+								$("#deadlineCen").show();
+								$("#deadlineBtn").hide();
+							} 
 		 				
 		 			},
 		 			error:function(error){
@@ -500,7 +571,7 @@
 		  						<tr class="Tex_bill_th" style="font-weight: 800;">
 		  							<td colspan="3">과세 표준</td>
 		  							<td colspan="2">대상액 한도계산</td>
-		  							<td rowspan="2">B. 단기매입액</td>
+		  							<td rowspan="2">B. 당기매입액</td>
 		  							<td rowspan="2">공제대상금액<br>[MIN{A,B}]</td>	
 		  						</tr>
 		  						<tr class="green">
@@ -512,13 +583,13 @@
 		  							
 		  						</tr>
 		  						<tr>
-		  							<td class="green_value"></td>
-		  							<td></td>
-		  							<td></td>
+		  							<td class="green_value" id="asmtSum"></td>
+		  							<td  id="asmtScheduled"></td>
+		  							<td id="asmtConf"></td>
 		  							<td>40/100</td>
-		  							<td class="green_value"></td>
-		  							<td></td>
-		  							<td class="green_value"></td>
+		  							<td class="green_value" id="targetAmt"></td>
+		  							<td id="currPurAmt"></td>
+		  							<td class="green_value" id="dedAmt"></td>
 		  						</tr>
 		  					
 		  					</table>
@@ -541,12 +612,12 @@
 		  							
 		  						</tr>
 		  						<tr>
-		  							<td></td>
-		  							<td style="height: 30px;"></td>
-		  							<td class="green_value"></td>
-		  							<td></td>
-		  							<td></td>
-		  							<td class="green_value"></td>
+		  							<td id="dedtaxRate"></td>
+		  							<td id="dedtaxAmt" style="height: 30px;"></td>
+		  							<td id="dedtaxSum" class="green_value"></td>
+		  							<td id="dedtaxScheduled"></td>
+		  							<td id="dedtaxMonth"></td>
+		  							<td id="dedTax" class="green_value"></td>
 		  						</tr>
 		  					
 		  					</table>
@@ -637,7 +708,7 @@
 
 		<div style="height: 100vh;"></div>
 		
- 
+ </form>
 	
 	</main>
 	<jsp:include page="../common/menubar2.jsp" />

@@ -8,29 +8,30 @@ public class DeemOther implements Serializable{
 	private String divCode;						//other pk
 	private String deemedCode;					//의제매입 코드
 	private String deemedType;               	 //추가해야함, 제조업인지 면세인지
-	private BigDecimal asmtSum;					//과세표준 합계
-	private BigDecimal asmt1;					//과세표준 제 1기
-	private BigDecimal asmt2;					//과세표준 제 2기
-	private BigDecimal asmtScheduled;			//과제표준예정분
-	private BigDecimal asmtConf;				//과세표준 확정분
-	private BigDecimal targetRate;				//대상액한도계산 한도율
-	private BigDecimal targetAmt;				//대상액한도계산 한도액
-	private BigDecimal currPurAmt;				//당기매입액
-	private BigDecimal dedAmt;					//공제대상금액
-	private BigDecimal dedtaxRate;				//공제대상세액 공제율
-	private BigDecimal dedtaxAmt;				//공제대상세액 공제대상금액
-	private BigDecimal dedtaxSum;				//이미공제받은세액 합계
-	private BigDecimal dedtaxScheduled;			//이미공제받은 예정신고분
-	private BigDecimal dedtaxMonth;				//이미공제받은세액 월별조기분
-	private BigDecimal dedtaxTotsum;			//이미공제받은세액 총합계
-	private BigDecimal dedtax1;					//이미공제받은세액 제 1기
-	private BigDecimal dedtax2Sum;				//이미공제받은세액 제2기 합계
-	private BigDecimal dedtax2Scheduled;		//이미공제받은세액 제 2기 예정신고분
-	private BigDecimal dedtax2Month;			//이미공제받은세액 제 2기 월별조기분
-	private BigDecimal dedTax;					//공제(납부)할 세액
-	private BigDecimal year1AmtSum;				//1역년매입액 합계
-	private BigDecimal year1Amt1;				//1역년매입액 제1기
-	private BigDecimal year1Amt2;				//1역년매입액 제2기
+	private BigDecimal asmtSum=BigDecimal.ZERO;					//과세표준 합계		
+	private BigDecimal asmt1=BigDecimal.ZERO;					//과세표준 제 1기
+	private BigDecimal asmt2=BigDecimal.ZERO;					//과세표준 제 2기
+	private BigDecimal asmtScheduled=BigDecimal.ZERO;			//과제표준예정분
+	private BigDecimal asmtConf=BigDecimal.ZERO;				//과세표준 확정분
+	private BigDecimal targetRate=BigDecimal.ZERO;				//대상액한도계산 한도율
+	private BigDecimal targetAmt=BigDecimal.ZERO;				//대상액한도계산 한도액
+	private BigDecimal currPurAmt=BigDecimal.ZERO;				//당기매입액
+	private BigDecimal dedAmt=BigDecimal.ZERO;					//공제대상금액
+	private BigDecimal dedtaxRate=BigDecimal.ZERO;			//공제대상세액 공제율
+	private BigDecimal dedtaxAmt=BigDecimal.ZERO;				//공제대상세액 공제대상금액
+	private BigDecimal dedtaxSum=BigDecimal.ZERO;				//이미공제받은세액 합계
+	private BigDecimal dedtaxScheduled=BigDecimal.ZERO;			//이미공제받은 예정신고분
+	private BigDecimal dedtaxMonth=BigDecimal.ZERO;				//이미공제받은세액 월별조기분
+	private BigDecimal dedtaxTotsum=BigDecimal.ZERO;			//이미공제받은세액 총합계
+	private BigDecimal dedtax1=BigDecimal.ZERO;					//이미공제받은세액 제 1기
+	private BigDecimal dedtax2Sum=BigDecimal.ZERO;				//이미공제받은세액 제2기 합계
+	private BigDecimal dedtax2Scheduled=BigDecimal.ZERO;		//이미공제받은세액 제 2기 예정신고분
+	private BigDecimal dedtax2Month=BigDecimal.ZERO;			//이미공제받은세액 제 2기 월별조기분
+	private BigDecimal dedTaxrate1=BigDecimal.ZERO;					//공제(납부)할 세액
+	private BigDecimal dedTaxLe=BigDecimal.ZERO;					//공제(납부)할 세액
+	private BigDecimal year1AmtSum=BigDecimal.ZERO;				//1역년매입액 합계
+	private BigDecimal year1Amt1=BigDecimal.ZERO;				//1역년매입액 제1기
+	private BigDecimal year1Amt2=BigDecimal.ZERO;				//1역년매입액 제2기
 
 	
 	
@@ -43,7 +44,8 @@ public class DeemOther implements Serializable{
 			BigDecimal targetAmt, BigDecimal currPurAmt, BigDecimal dedAmt, BigDecimal dedtaxRate, BigDecimal dedtaxAmt,
 			BigDecimal dedtaxSum, BigDecimal dedtaxScheduled, BigDecimal dedtaxMonth, BigDecimal dedtaxTotsum,
 			BigDecimal dedtax1, BigDecimal dedtax2Sum, BigDecimal dedtax2Scheduled, BigDecimal dedtax2Month,
-			BigDecimal dedTax, BigDecimal year1AmtSum, BigDecimal year1Amt1, BigDecimal year1Amt2) {
+			BigDecimal dedTaxrate1, BigDecimal dedTaxLe, BigDecimal year1AmtSum, BigDecimal year1Amt1,
+			BigDecimal year1Amt2) {
 		super();
 		this.divCode = divCode;
 		this.deemedCode = deemedCode;
@@ -67,7 +69,8 @@ public class DeemOther implements Serializable{
 		this.dedtax2Sum = dedtax2Sum;
 		this.dedtax2Scheduled = dedtax2Scheduled;
 		this.dedtax2Month = dedtax2Month;
-		this.dedTax = dedTax;
+		this.dedTaxrate1 = dedTaxrate1;
+		this.dedTaxLe = dedTaxLe;
 		this.year1AmtSum = year1AmtSum;
 		this.year1Amt1 = year1Amt1;
 		this.year1Amt2 = year1Amt2;
@@ -339,14 +342,26 @@ public class DeemOther implements Serializable{
 
 
 
-	public BigDecimal getDedTax() {
-		return dedTax;
+	public BigDecimal getDedTaxrate1() {
+		return dedTaxrate1;
 	}
 
 
 
-	public void setDedTax(BigDecimal dedTax) {
-		this.dedTax = dedTax;
+	public void setDedTaxrate1(BigDecimal dedTaxrate1) {
+		this.dedTaxrate1 = dedTaxrate1;
+	}
+
+
+
+	public BigDecimal getDedTaxLe() {
+		return dedTaxLe;
+	}
+
+
+
+	public void setDedTaxLe(BigDecimal dedTaxLe) {
+		this.dedTaxLe = dedTaxLe;
 	}
 
 
@@ -395,13 +410,15 @@ public class DeemOther implements Serializable{
 				+ currPurAmt + ", dedAmt=" + dedAmt + ", dedtaxRate=" + dedtaxRate + ", dedtaxAmt=" + dedtaxAmt
 				+ ", dedtaxSum=" + dedtaxSum + ", dedtaxScheduled=" + dedtaxScheduled + ", dedtaxMonth=" + dedtaxMonth
 				+ ", dedtaxTotsum=" + dedtaxTotsum + ", dedtax1=" + dedtax1 + ", dedtax2Sum=" + dedtax2Sum
-				+ ", dedtax2Scheduled=" + dedtax2Scheduled + ", dedtax2Month=" + dedtax2Month + ", dedTax=" + dedTax
-				+ ", year1AmtSum=" + year1AmtSum + ", year1Amt1=" + year1Amt1 + ", year1Amt2=" + year1Amt2 + "]";
+				+ ", dedtax2Scheduled=" + dedtax2Scheduled + ", dedtax2Month=" + dedtax2Month + ", dedTaxrate1="
+				+ dedTaxrate1 + ", dedTaxLe=" + dedTaxLe + ", year1AmtSum=" + year1AmtSum + ", year1Amt1=" + year1Amt1
+				+ ", year1Amt2=" + year1Amt2 + "]";
 	}
 
 
 
-	
+
+
 
 
 

@@ -372,9 +372,9 @@ AND TERM_DIV=#{termDiv}
  <select id="selectVatCode" resultType="string">
   SELECT SEQ_VAT.CURRVAL FROM DUAL
  </select>
-  <select id="updateDeadCenVat" parameterType="Vat">
+  <update id="updateDeadCenVat" parameterType="Vat">
   UPDATE VAT SET DEADLINE='N' WHERE VAT_CODE=#{vatCode} AND DEADLINE='Y'
-  </select>
+  </update>
   
   
   
