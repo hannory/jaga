@@ -1147,6 +1147,7 @@ border-radius: 5px;
 		<div style="height: 100vh;"></div>
 
 	</main>
+	
       <!-- Modal 은행코드 -->
   <div class="modal fade" id="bankModal" role="dialog">
     <div class="modal-dialog modal-lg">
@@ -1175,6 +1176,7 @@ border-radius: 5px;
       </div>
     </div>
   </div>
+</div>
 
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
@@ -1279,7 +1281,7 @@ var bankName;
 function ccc(value){
 	$(value).parent().parent().children().each(function(index){
 		console.log($(this).text());
-		bankCode += ","+$(this).text();
+		bankCode+= ","+$(this).text();
 	})
 	var bank = bankCode.split(",");
 	bankCode = bank[1];
@@ -1323,7 +1325,6 @@ $("#searchBtn2").click(function(){
 	
 	$(".modal-title").text("은행검색").css("color","white");
 	 $("div#bankModal").modal();
-	 
 });
 
 </script>

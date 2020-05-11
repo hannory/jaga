@@ -91,7 +91,8 @@ public String insertEmployee(Model model, Employee e, HttpServletRequest request
 		es.insertEmployee(e);
 		es.insertAttachment(at);
 		es.insertAttachment2(at2);
-		return "redirect:index.jsp";
+		return "redirect:selectEmpList.emp";
+		
 	} catch (Exception e1) {
 		new File(filePath+"\\"+changeName+ext).delete();
 		new File(filePath+"\\"+changeName2+ext2).delete();
@@ -219,7 +220,7 @@ public String insertEarnEmp(@RequestParam String employeeCode,Model model, EarnI
      
      int result = rs.insertReceiption(r);
    
-   return "redirect:index.jsp";
+   return "redirect:selectEmpList2.emp";
 }
  
  @RequestMapping("selectIncomeTax.emp")

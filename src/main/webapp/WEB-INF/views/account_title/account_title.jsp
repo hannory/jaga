@@ -19,7 +19,7 @@ top: 139px;
 background: pink;
 margin-left:70px;
 /* float:left; */
-
+ 
 }
 
 #table1{
@@ -410,7 +410,7 @@ background:white;
 position: absolute;
 width: 70px;
 /* height: 15px; */
-left: 1090px;
+left: 1070px;
 top: 203px;
 
 font-family: Roboto;
@@ -430,7 +430,7 @@ line-height: 16px;
 position: absolute;
 width: 106px;
 height: 27px;
-left: 1169px;
+left: 1149px;
 top: 200px;
 
 background: #FFFFFF;
@@ -442,7 +442,7 @@ border-radius: 5px;
 
 #enroll{
 position: absolute;
-left: 1290px;
+left: 1270px;
 top: 200px;
 
 background: #FFFFFF;

@@ -1617,7 +1617,7 @@ box-sizing: border-box;
 <b id="name"> 이름</b>
 <input type="text" id="name-surr" name="employeeName"> 
 <b id="security-num">주민등록번호</b>
-<input type="text" id="security-num-surr" name="securityNum" placeholder="암호화예정">
+<input type="text" id="security-num-surr" name="securityNum">
 <!-- <b id="employeeNum" >직원 번호 </b>
 <input type="text" id="employeeNum-surr" name="employeeNum"> -->
 </td>
@@ -1722,7 +1722,7 @@ td><button id="leaveReason-surr" style="color:white; font-size:6px;">퇴사사�
 <td>
 <b id="acquisition-status">취득신고 여부</b>
 <input type="text" id="a-status-surr" name="acquisitionStatus">
-<b id="zero-one-1">Y:부 N:여</b>
+<b id="zero-one-1">Y:여 N:부</b>
 </td>
 </tr>
 
@@ -1730,7 +1730,7 @@ td><button id="leaveReason-surr" style="color:white; font-size:6px;">퇴사사�
 <td>
 <b id="deprivation-status">상실신고 여부</b>
 <input type="text" id="de-status-surr" name="deprivationStatus">
-<b id="zero-one-2">Y:부 N:여</b>
+<b id="zero-one-2">Y:여 N:부</b>
 </td>
 </tr>
 
@@ -1875,10 +1875,7 @@ td><button id="leaveReason-surr" style="color:white; font-size:6px;">퇴사사�
 </div>
 </div>
 <div style="height: 100vh;"></div>
-		<div class="card mb-4">
-			<div class="card-body">When scrolling, the navigation stays at
-				the top of the page. This is the end of the static navigation demo.</div>
-		</div>
+
 	</main>
 	<jsp:include page="../common/menubar2.jsp" />
 	</div>

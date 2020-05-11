@@ -790,30 +790,31 @@ color: white;
 				/*taxableIncome=taxableIncome2.substring(taxableIncome2.length()-3, taxableIncome2.length());*/
  
             	
-            	$.ajax({
+            $.ajax({
             		url:"selectIncomeTax.emp",
             		type:"post",
             		data: {taxableIncome:taxableIncome
             		},
-            			success : function(args){
+            		
+            		success : function(args){
 				
-							$("#incomeTax").val(args);
+					$("#incomeTax").val(args);
 						
-							var incomeTax =$("#incomeTax").val(args);
+					var incomeTax =$("#incomeTax").val(args);
 							
-							var i=Number(incomeTax.val());
+					var i=Number(incomeTax.val());
             				
-							$("#totalDeduction").val(n+employementInsurance+h+l+i);
-            			},
+					$("#totalDeduction").val(n+employementInsurance+h+l+i);
+            			
+            		},
 
-            			error : function(status) {
-					console.log(status);
+            		error : function(status) {
 				}
-            })
+        	    })
             	}) 
             	
             	
-            	/*지방소득세*/
+            	/*지방소득세계산*/
             	$("#localIncomeTax").click(function(key){
             	var	i= $("#incomeTax").val();
             	var lo= Number(i*0.1);

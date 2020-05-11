@@ -57,8 +57,8 @@ public class CompanyController {
 		System.out.println(companyPwd);
 		System.out.println("===============================");
 		
+		//사내계정 로그인
 		if(accountType.equals("accountEmp")) {
-			//사내계정 로그인
 			
 			HashMap<String, String> empData = new HashMap<String, String>();
 			empData.put("id", empId);					//사내계정 아이디
@@ -68,7 +68,8 @@ public class CompanyController {
 			ComInIdVo loginEmp = cs.loginEmp(empData);
 			
 			if(passwordEncoder.matches(companyPwd, loginEmp.getPwd())) {
-				//로그인 성공
+		
+		//로그인 성공
 				model.addAttribute("loginEmp", loginEmp);
 				
 				try {
@@ -159,7 +160,7 @@ public class CompanyController {
 			
 
 			cs.insertCompany(c);
-
+			
 			return "redirect:index.jsp";
 
 		}catch (Exception e) {
