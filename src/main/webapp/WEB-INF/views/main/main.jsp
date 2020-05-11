@@ -10,6 +10,10 @@
 <title>자가 경리</title>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+	<link href="${ contextPath }/resources/css/core/main.css" rel="stylesheet" />
+	<link href="${ contextPath }/resources/css/daygrid/main.css" rel="stylesheet" />
+	<script src="${ contextPath }/resources/js/core/main.js"/></script>
+	<script src="${ contextPath }/resources/js/daygrid/main.js"/></script>
 <style>
 	main table {
 		width:100%;
@@ -124,16 +128,19 @@
 			</div>
 		</div>
 		
-		<div class="card mb-4" id="chartArea">
+		<div class="card mb-4" id="chartArea" style="margin-top: 50px;">
 			<div class="card-body">
-				<canvas id="myChart" width="400" height="400"></canvas>
+				<canvas id="myChart" width="700" height="700"></canvas>
 			</div>
 		</div>
 		
-		<div style="height: 100vh;"></div>
+		<div id="calendar" style="height:950px; width:950px; display: inline-block; margin-left: 100px;">
+		
+		</div>
+		
+		<div style="height: 10vh;"></div>
 		<div class="card mb-4">
-			<div class="card-body">When scrolling, the navigation stays at
-				the top of the page. This is the end of the static navigation demo.</div>
+			<div class="card-body">자가경리를 이용해 주셔서 감사합니다.</div>
 		</div>
 	</div>
 	</main>
@@ -228,6 +235,18 @@
 	        }
 	    }
 	});
+	
+	document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+          plugins: [ 'dayGrid' ],
+          
+        });
+
+        calendar.render();
+      });
+
 	</script>
 	
 	<jsp:include page="../common/menubar2.jsp" />

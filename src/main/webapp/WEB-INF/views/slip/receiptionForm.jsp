@@ -123,7 +123,9 @@
     </div>
 	<main>
 	<div class="container-fluid">
-		<h2 class="mt-4">매입매출전표입력</h2><button onclick="location.href='excel.vi'">엑셀하러갑시다</button>
+		<h2 class="mt-4">매입매출전표입력</h2>
+		
+		<!-- <button onclick="location.href='excel.vi'">엑셀하러갑시다</button> -->
 		
 			<form action="insertReceiption.rp" method="post">
 		<div class="card mb-4">

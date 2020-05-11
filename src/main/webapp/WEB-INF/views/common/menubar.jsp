@@ -88,16 +88,28 @@ $(window).load(function(){
 	$("#loading").hide();
 });
 
+function help(){
+	Swal.fire({
+		  title: '고객센터 : 010-7674-5277',
+		  showClass: {
+		    popup: 'animate__animated animate__fadeInDown'
+		  },
+		  hideClass: {
+		    popup: 'animate__animated animate__fadeOutUp'
+		  }
+		})
+}
+
 </script>
 </head>
 <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <a class="navbar-brand" href="gomain.co"><img src="${ contextPath }/resources/images/logo_vertical.PNG" width="90%"></a><button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button
             >
-            <button id="helpBtn" style="color:#296355; font-weight: bold;"><img src="${ contextPath }/resources/images/help.PNG" width="30px"> 도움!</button>
+            <button id="helpBtn" style="color:#296355; font-weight: bold;" onclick="help();"><img src="${ contextPath }/resources/images/help.PNG" width="30px"> 도움!</button>
             <button id="printWinBtn" style="color:#296355; font-weight: bold;"><img src="${ contextPath }/resources/images/print.PNG" width="30px"> 인쇄</button>
             <!-- Navbar Search-->
-            <button id="helpPersonBtn" style="color:#296355; font-weight: bold;"><img src="${ contextPath }/resources/images/cs.PNG" width="30px"> 고객센터</button>
+            <button id="helpPersonBtn" style="color:#296355; font-weight: bold;" onclick="help();"><img src="${ contextPath }/resources/images/cs.PNG" width="30px"> 고객센터</button>
             <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
                 <div class="input-group">
                 	 	<c:if test="${!empty sessionScope.loginCompany }">
@@ -147,8 +159,8 @@ $(window).load(function(){
 	                                       <a class="nav-link" href="normalList.nr">일반전표입력</a>
 	                                        <a class="nav-link" href="receiption.vi">매입매출전표입력</a>
 	                                        <a class="nav-link" href="taxInvoiceListAll.ti">세금계산서발행</a>
-	                                        <a class="nav-link" href="transListAll.th">매입매출전표조회</a>
-	                                        <a class="nav-link" href="businessEmpList.be">사업소득자임시</a>
+	                                        <!-- <a class="nav-link" href="transListAll.th">매입매출전표조회</a> -->
+	                                        <!-- <a class="nav-link" href="businessEmpList.be">사업소득자임시</a> -->
                                         </nav>
                                     </div>
                                     
@@ -173,7 +185,7 @@ $(window).load(function(){
                                         
                                     <div class="collapse" id="pagesCollapseA" aria-labelledby="headingOne" data-parent="#sidenavAccordionPages">
                                         <nav class="sb-sidenav-menu-nested nav">
-	                                        <a class="nav-link" href="purchase.vi">매입매출장</a>
+	                                        <a class="nav-link" href="transListAll.th">매입매출장</a>
 	                                        <a class="nav-link" href="generalLedger.ab">총계정원장</a>
 	                                        <a class="nav-link" href="500.html">계정별원장</a>
 	                                        <a class="nav-link" href="500.html">거래처원장</a>
@@ -222,12 +234,12 @@ $(window).load(function(){
                             
                             <div class="collapse" id="collapseB" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="selectEmpList.emp">일반근로자<br>직원관리</a>
+                                <a class="nav-link" href="selectEmpList.emp">직원관리</a>
                                 <a class="nav-link" href="selectEmpList2.emp">일반근로자<br>급여자료입력</a>
-                                <a class="nav-link" href="layout-sidenav-light.html">급여대장</a>
                                 <a class="nav-link" href="BPaymentList.bp">사업소득자<br>자료입력</a>
-                                <a class="nav-link" href="layout-sidenav-light.html">일용직<br>급여자료입력</a>
-                                <a class="nav-link" href="layout-sidenav-light.html">일용직<br>급여명세서</a>
+                                <a class="nav-link" href="layout-sidenav-light.html">급여대장</a>
+                               <!--  <a class="nav-link" href="layout-sidenav-light.html">일용직<br>급여자료입력</a>
+                                <a class="nav-link" href="layout-sidenav-light.html">일용직<br>급여명세서</a> -->
                                 
                                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
                                     퇴직소득관리
@@ -236,7 +248,7 @@ $(window).load(function(){
                                     <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-parent="#sidenavAccordionPages">
                                         <nav class="sb-sidenav-menu-nested nav">
 	                                        <a class="nav-link" href="retirement.rt">퇴직금계산</a>
-	                                        <a class="nav-link" href="retirementReceipt.vi">퇴직소득원천징수영수증</a>
+	                                        <a class="nav-link" href="retirementReceipt.rt">퇴직소득원천징수영수증</a>
                                         </nav>
                                     </div>
                                     

@@ -41,6 +41,7 @@ public class RetirementController {
 	public ModelAndView detailRetirement(ModelAndView mv, String empCode) {
 		RetirementDTO r = rs.selectRetireInfo(empCode);
 		
+		BigDecimal ttAAY = new BigDecimal(r.getTtAllAllYear());
 		/* 평균임금 계산 */
 		BigDecimal three = new BigDecimal("3");
 		BigDecimal sumAllSalary = r.getSumAllSalary();
@@ -89,22 +90,22 @@ public class RetirementController {
 		BigDecimal forDdc7 = new BigDecimal("1200000");
 		BigDecimal ttY = new BigDecimal(r.getTtBAllAllYear() + "");
 		BigDecimal ttYm = null;
-		if(r.getTtBAllAllYear() <= 5) {
+		if(r.getTtAllAllYear() <= 5) {
 			
-			longevityDdcBf = forDdc1.multiply(ttY);
-		}else if(r.getTtBAllAllYear() <= 10) {
+			longevityDdcBf = forDdc1.multiply(ttAAY);
+		}else if(r.getTtAllAllYear() <= 10) {
 			ttYm = new BigDecimal("5");
-			BigDecimal ttY2 = ttY.subtract(ttYm);
+			BigDecimal ttY2 = ttAAY.subtract(ttYm);
 			
 			longevityDdcBf = forDdc3.multiply(ttY2).add(forDdc2);
-		}else if(r.getTtBAllAllYear() <= 20) {
+		}else if(r.getTtAllAllYear() <= 20) {
 			ttYm = new BigDecimal("10");
-			BigDecimal ttY2 = ttY.subtract(ttYm);
+			BigDecimal ttY2 = ttAAY.subtract(ttYm);
 			
 			longevityDdcBf = forDdc5.multiply(ttY2).add(forDdc4);
 		}else {
 			ttYm = new BigDecimal("20");
-			BigDecimal ttY2 = ttY.subtract(ttYm);
+			BigDecimal ttY2 = ttAAY.subtract(ttYm);
 			
 			longevityDdcBf = forDdc7.multiply(ttY2).add(forDdc6);
 		}
@@ -122,20 +123,20 @@ public class RetirementController {
 		BigDecimal ttYmA = null;
 		if(r.getTtAYear()<= 5) {
 			
-			longevityDdcAf = forDdc1.multiply(ttYA);
+			longevityDdcAf = forDdc1.multiply(ttAAY);
 		}else if(r.getTtAYear() <= 10) {
 			ttYmA = new BigDecimal("5");
-			BigDecimal ttY2 = ttYA.subtract(ttYmA);
+			BigDecimal ttY2 = ttAAY.subtract(ttYmA);
 			
 			longevityDdcAf = forDdc3.multiply(ttY2).add(forDdc2);
 		}else if(r.getTtAYear() <= 20) {
 			ttYmA = new BigDecimal("10");
-			BigDecimal ttY2 = ttYA.subtract(ttYmA);
+			BigDecimal ttY2 = ttAAY.subtract(ttYmA);
 			
 			longevityDdcAf = forDdc5.multiply(ttY2).add(forDdc4);
 		}else {
 			ttYmA = new BigDecimal("20");
-			BigDecimal ttY2 = ttYA.subtract(ttYmA);
+			BigDecimal ttY2 = ttAAY.subtract(ttYmA);
 			
 			longevityDdcAf = forDdc7.multiply(ttY2).add(forDdc6);
 		}
@@ -145,13 +146,15 @@ public class RetirementController {
 		/* 개정 환산급여 */
 		BigDecimal forExchangePymtAf = anticipateRtm.subtract(longevityDdcAf);
 		BigDecimal tw = new BigDecimal("12");
-		BigDecimal exchangePymtAf = forExchangePymtAf.divide(ttYA, 0, BigDecimal.ROUND_DOWN).multiply(tw);
+		BigDecimal exchangePymtAf1 = forExchangePymtAf.divide(ttAAY, 1).multiply(tw);
+		BigDecimal exchangePymtAf = exchangePymtAf1.setScale(0, BigDecimal.ROUND_DOWN);
 		
 		rt.setExchangePymtAf(exchangePymtAf);
 		
 		
 		/* 개정 환산급여별공제 */
 		BigDecimal exchPymtDdcAf = null;
+		BigDecimal exchPymtDdcAf1 = null;
 		BigDecimal num1 = new BigDecimal("8000000"); /* 8백만원 */
 		BigDecimal num2 = new BigDecimal("70000000");/* 7천만원 */
 		BigDecimal num3 = new BigDecimal("100000000");/* 1억원 */
@@ -166,13 +169,17 @@ public class RetirementController {
 		if(exchangePymtAf.compareTo(num1) == -1 || exchangePymtAf.compareTo(num1) == 0) {
 			exchPymtDdcAf = exchangePymtAf;
 		}else if(exchangePymtAf.compareTo(num2) == -1 || exchangePymtAf.compareTo(num2) == 0 ) {
-			exchPymtDdcAf = exchangePymtAf.subtract(num1).divide(hundred, 0, BigDecimal.ROUND_DOWN).multiply(num8).add(num1);
+			exchPymtDdcAf1 = exchangePymtAf.subtract(num1).divide(hundred).multiply(num8).add(num1);
+			exchPymtDdcAf = exchPymtDdcAf1.setScale(0, BigDecimal.ROUND_DOWN);
 		}else if(exchangePymtAf.compareTo(num3) == -1 || exchangePymtAf.compareTo(num3) == 0 ) {
-			exchPymtDdcAf = exchangePymtAf.subtract(num2).divide(hundred, 0, BigDecimal.ROUND_DOWN).multiply(num9).add(num5);
+			exchPymtDdcAf1 = exchangePymtAf.subtract(num2).divide(hundred).multiply(num9).add(num5);
+			exchPymtDdcAf = exchPymtDdcAf1.setScale(0, BigDecimal.ROUND_DOWN);
 		}else if(exchangePymtAf.compareTo(num4) == -1 || exchangePymtAf.compareTo(num4) == 0 ) {
-			exchPymtDdcAf = exchangePymtAf.subtract(num3).divide(hundred, 0, BigDecimal.ROUND_DOWN).multiply(num10).add(num6);
+			exchPymtDdcAf1 = exchangePymtAf.subtract(num3).divide(hundred).multiply(num10).add(num6);
+			exchPymtDdcAf = exchPymtDdcAf1.setScale(0, BigDecimal.ROUND_DOWN);
 		}else {
-			exchPymtDdcAf = exchangePymtAf.subtract(num4).divide(hundred, 0, BigDecimal.ROUND_DOWN).multiply(num11).add(num7);
+			exchPymtDdcAf1 = exchangePymtAf.subtract(num4).divide(hundred).multiply(num11).add(num7);
+			exchPymtDdcAf = exchPymtDdcAf1.setScale(0, BigDecimal.ROUND_DOWN);
 		}
 		
 		rt.setExchPymtDdcAf(exchPymtDdcAf);
@@ -189,11 +196,11 @@ public class RetirementController {
 		RetirementTaxAf rta4 = new RetirementTaxAf();
 		RetirementTaxAf rta5 = new RetirementTaxAf();
 		RetirementTaxAf rta6 = new RetirementTaxAf();
-		BigDecimal ttAAY = new BigDecimal(r.getTtAllAllYear());
 		
 		/* 2013 이전 */
 		/* 과세표준안분 */
-		BigDecimal bf10 = rtmStdTaxBf.divide(ttAAY, 0, BigDecimal.ROUND_HALF_UP).multiply(ttY);
+		BigDecimal bf101 = rtmStdTaxBf.divide(ttAAY, 1).multiply(ttY);
+		BigDecimal bf10 = bf101.setScale(0, BigDecimal.ROUND_HALF_UP);
 		rta1.setBeforeLongevity(bf10);
 		rta1.setCalculCode("10");
 		
@@ -208,6 +215,7 @@ public class RetirementController {
 		
 		/* 연평균산출세액 */
 		BigDecimal bf50 = null;
+		BigDecimal bf51 = null;
 		BigDecimal num41 = new BigDecimal("12000000"); /* 천이백만원 */
 		BigDecimal num42 = new BigDecimal("46000000"); /* 사천육백만원 */
 		BigDecimal num43 = new BigDecimal("88000000"); /* 8800만원 */
@@ -223,19 +231,20 @@ public class RetirementController {
 		BigDecimal num404 = new BigDecimal("19400000");
 		
 		if(bf20.compareTo(num41) == -1 || bf20.compareTo(num41) == 0) {
-			bf50 = bf20.divide(hundred, 0, BigDecimal.ROUND_DOWN).multiply(num45);
+			bf51 = bf20.divide(hundred, 1).multiply(num45);
+			bf50 = bf51.setScale(0, BigDecimal.ROUND_DOWN);
 		}else if(bf20.compareTo(num42) == -1 || bf20.compareTo(num42) == 0) {
-			bf50 = bf20.divide(hundred, 0, BigDecimal.ROUND_DOWN).multiply(num46).subtract(num401);
-			
+			bf51 = bf20.divide(hundred, 1).multiply(num46).subtract(num401);
+			bf50 = bf51.setScale(0, BigDecimal.ROUND_DOWN);
 		}else if(bf20.compareTo(num43) == -1 || bf20.compareTo(num43) == 0) {
-			bf50 = bf20.divide(hundred, 0, BigDecimal.ROUND_DOWN).multiply(num47).subtract(num402);
-			
+			bf51 = bf20.divide(hundred, 1).multiply(num47).subtract(num402);
+			bf50 = bf51.setScale(0, BigDecimal.ROUND_DOWN);
 		}else if(bf20.compareTo(num44) == -1 || bf20.compareTo(num44) == 0) {
-			bf50 = bf20.divide(hundred, 0, BigDecimal.ROUND_DOWN).multiply(num48).subtract(num403);
-			
+			bf51 = bf20.divide(hundred, 1).multiply(num48).subtract(num403);
+			bf50 = bf51.setScale(0, BigDecimal.ROUND_DOWN);
 		}else {
-			bf50 = bf20.divide(hundred, 0, BigDecimal.ROUND_DOWN).multiply(num49).subtract(num404);
-			
+			bf51 = bf20.divide(hundred, 1).multiply(num49).subtract(num404);
+			bf50 = bf51.setScale(0, BigDecimal.ROUND_DOWN);
 		}
 		
 		rta5.setBeforeLongevity(bf50);
@@ -249,11 +258,13 @@ public class RetirementController {
 		
 		/* 2013 이후 */
 		/* 과세표준안분 */
-		BigDecimal af10 = rtmStdTaxBf.divide(ttAAY, 0, BigDecimal.ROUND_HALF_UP).multiply(ttYA);
+		BigDecimal af11 = rtmStdTaxBf.divide(ttAAY, 1).multiply(ttYA);
+		BigDecimal af10 = af11.setScale(0, BigDecimal.ROUND_HALF_UP);
 		rta1.setAfterLongevity(af10);
 		
 		/* 연평균과세표준 */
-		BigDecimal af20 = af10.divide(ttYA, 0, BigDecimal.ROUND_DOWN);
+		BigDecimal af21 = af10.divide(ttYA, 1);
+		BigDecimal af20 = af21.setScale(0, BigDecimal.ROUND_DOWN);
 		rta2.setAfterLongevity(af20);
 		
 		/* 환산과세표준 */
@@ -264,20 +275,22 @@ public class RetirementController {
 		
 		/* 환산산출세액 */
 		BigDecimal af40 = null;
-		if(af20.compareTo(num41) == -1 || af20.compareTo(num41) == 0) {
-			af40 = af20.divide(hundred, 0, BigDecimal.ROUND_DOWN).multiply(num45);
-		}else if(af20.compareTo(num42) == -1 || af20.compareTo(num42) == 0) {
-			af40 = af20.divide(hundred, 0, BigDecimal.ROUND_DOWN).multiply(num46).subtract(num401);
-			
-		}else if(af20.compareTo(num43) == -1 || af20.compareTo(num43) == 0) {
-			af40 = af20.divide(hundred, 0, BigDecimal.ROUND_DOWN).multiply(num47).subtract(num402);
-			
-		}else if(af20.compareTo(num44) == -1 || af20.compareTo(num44) == 0) {
-			af40 = af20.divide(hundred, 0, BigDecimal.ROUND_DOWN).multiply(num48).subtract(num403);
-			
+		BigDecimal af41 = null;
+		if(af30.compareTo(num41) == -1 || af30.compareTo(num41) == 0) {
+			af41 = af30.divide(hundred, 1).multiply(num45);
+			af40 = af41.setScale(0, BigDecimal.ROUND_DOWN);
+		}else if(af30.compareTo(num42) == -1 || af30.compareTo(num42) == 0) {
+			af41 = af30.divide(hundred, 1).multiply(num46).subtract(num401);
+			af40 = af41.setScale(0, BigDecimal.ROUND_DOWN);
+		}else if(af30.compareTo(num43) == -1 || af30.compareTo(num43) == 0) {
+			af41 = af30.divide(hundred, 1).multiply(num47).subtract(num402);
+			af40 = af41.setScale(0, BigDecimal.ROUND_DOWN);
+		}else if(af30.compareTo(num44) == -1 || af30.compareTo(num44) == 0) {
+			af41 = af30.divide(hundred, 1).multiply(num48).subtract(num403);
+			af40 = af41.setScale(0, BigDecimal.ROUND_DOWN);
 		}else {
-			af40 = af20.divide(hundred, 0, BigDecimal.ROUND_DOWN).multiply(num49).subtract(num404);
-			
+			af41 = af30.divide(hundred, 1).multiply(num49).subtract(num404);
+			af40 = af41.setScale(0, BigDecimal.ROUND_DOWN);
 		}
 		rta4.setAfterLongevity(af40);
 		rta4.setCalculCode("40");
@@ -313,7 +326,7 @@ public class RetirementController {
 		rta5.setCalculSum(sum50);
 		
 		/* 산출세액 */
-		BigDecimal sum60 = bf60.add(af50);
+		BigDecimal sum60 = bf60.add(af60);
 		rta6.setCalculSum(sum60);
 		
 		List<RetirementTaxAf> reTaxList = new ArrayList<RetirementTaxAf>();
@@ -329,16 +342,22 @@ public class RetirementController {
 		
 		/* 개정 환산산출세액 */
 		BigDecimal exchCalculTaxAf = null;
+		BigDecimal exchCalculTaxAf1 = null;
 		if(retireStdTaxAf.compareTo(num41) == -1 || retireStdTaxAf.compareTo(num41) == 0) {
-			exchCalculTaxAf = retireStdTaxAf.divide(hundred, 0, BigDecimal.ROUND_DOWN).multiply(num45);
+			exchCalculTaxAf1 = retireStdTaxAf.divide(hundred, 1).multiply(num45);
+			exchCalculTaxAf = exchCalculTaxAf1.setScale(0, BigDecimal.ROUND_DOWN);
 		}else if(retireStdTaxAf.compareTo(num42) == -1 || retireStdTaxAf.compareTo(num42) == 0) {
-			exchCalculTaxAf = retireStdTaxAf.divide(hundred, 0, BigDecimal.ROUND_DOWN).multiply(num46).subtract(num401);
+			exchCalculTaxAf1 = retireStdTaxAf.divide(hundred, 1).multiply(num46).subtract(num401);
+			exchCalculTaxAf = exchCalculTaxAf1.setScale(0, BigDecimal.ROUND_DOWN);
 		}else if(retireStdTaxAf.compareTo(num43) == -1 || retireStdTaxAf.compareTo(num43) == 0) {
-			exchCalculTaxAf = retireStdTaxAf.divide(hundred, 0, BigDecimal.ROUND_DOWN).multiply(num47).subtract(num402);
+			exchCalculTaxAf1 = retireStdTaxAf.divide(hundred, 1).multiply(num47).subtract(num402);
+			exchCalculTaxAf = exchCalculTaxAf1.setScale(0, BigDecimal.ROUND_DOWN);
 		}else if(retireStdTaxAf.compareTo(num44) == -1 || retireStdTaxAf.compareTo(num44) == 0) {
-			exchCalculTaxAf = retireStdTaxAf.divide(hundred, 0, BigDecimal.ROUND_DOWN).multiply(num48).subtract(num403);
+			exchCalculTaxAf1 = retireStdTaxAf.divide(hundred, 1).multiply(num48).subtract(num403);
+			exchCalculTaxAf = exchCalculTaxAf1.setScale(0, BigDecimal.ROUND_DOWN);
 		}else {
-			exchCalculTaxAf = retireStdTaxAf.divide(hundred, 0, BigDecimal.ROUND_DOWN).multiply(num49).subtract(num404);
+			exchCalculTaxAf1 = retireStdTaxAf.divide(hundred, 1).multiply(num49).subtract(num404);
+			exchCalculTaxAf = exchCalculTaxAf1.setScale(0, BigDecimal.ROUND_DOWN);
 		}
 		
 		rt.setExchCalculTaxAf(exchCalculTaxAf);
@@ -354,8 +373,10 @@ public class RetirementController {
 		if(rtmYear == 2016) {
 			BigDecimal be = new BigDecimal("80");
 			BigDecimal af = new BigDecimal("20");
-			BigDecimal beT = sum60.divide(hundred, 0, BigDecimal.ROUND_DOWN).multiply(be);
-			BigDecimal afT = calculTaxAf.divide(hundred, 0, BigDecimal.ROUND_DOWN).multiply(af);
+			BigDecimal beT1 = sum60.divide(hundred, 1).multiply(be);
+			BigDecimal beT = beT1.setScale(0, BigDecimal.ROUND_DOWN);
+			BigDecimal afT1 = calculTaxAf.divide(hundred, 1).multiply(af);
+			BigDecimal afT = afT1.setScale(0, BigDecimal.ROUND_DOWN);
 			
 			rtmCalculTax = beT.add(afT);
 			
@@ -363,30 +384,37 @@ public class RetirementController {
 			BigDecimal be = new BigDecimal("60");
 			BigDecimal af = new BigDecimal("40");
 			
-			BigDecimal beT = sum60.divide(hundred, 0, BigDecimal.ROUND_DOWN).multiply(be);
-			BigDecimal afT = calculTaxAf.divide(hundred, 0, BigDecimal.ROUND_DOWN).multiply(af);
+			BigDecimal beT1 = sum60.divide(hundred, 1).multiply(be);
+			BigDecimal beT = beT1.setScale(0, BigDecimal.ROUND_DOWN);
+			BigDecimal afT1 = calculTaxAf.divide(hundred, 1).multiply(af);
+			BigDecimal afT = afT1.setScale(0, BigDecimal.ROUND_DOWN);
 			
 			rtmCalculTax = beT.add(afT);
 		}else if(rtmYear == 2018) {
 			BigDecimal be = new BigDecimal("40");
 			BigDecimal af = new BigDecimal("60");
 			
-			BigDecimal beT = sum60.divide(hundred, 0, BigDecimal.ROUND_DOWN).multiply(be);
-			BigDecimal afT = calculTaxAf.divide(hundred, 0, BigDecimal.ROUND_DOWN).multiply(af);
+			BigDecimal beT1 = sum60.divide(hundred, 1).multiply(be);
+			BigDecimal beT = beT1.setScale(0, BigDecimal.ROUND_DOWN);
+			BigDecimal afT1 = calculTaxAf.divide(hundred, 1).multiply(af);
+			BigDecimal afT = afT1.setScale(0, BigDecimal.ROUND_DOWN);
 			
 			rtmCalculTax = beT.add(afT);
 		}else if(rtmYear == 2019) {
 			BigDecimal be = new BigDecimal("20");
 			BigDecimal af = new BigDecimal("80");
 			
-			BigDecimal beT = sum60.divide(hundred, 0, BigDecimal.ROUND_DOWN).multiply(be);
-			BigDecimal afT = calculTaxAf.divide(hundred, 0, BigDecimal.ROUND_DOWN).multiply(af);
+			BigDecimal beT1 = sum60.divide(hundred, 1).multiply(be);
+			BigDecimal beT = beT1.setScale(0, BigDecimal.ROUND_DOWN);
+			BigDecimal afT1 = calculTaxAf.divide(hundred, 1).multiply(af);
+			BigDecimal afT = afT1.setScale(0, BigDecimal.ROUND_DOWN);
 			
 			rtmCalculTax = beT.add(afT);
 		}else if(rtmYear == 2020) {
 			BigDecimal af = new BigDecimal("100");
 			
-			BigDecimal afT = calculTaxAf.divide(hundred, 0, BigDecimal.ROUND_DOWN).multiply(af);
+			BigDecimal afT1 = calculTaxAf.divide(hundred, 1).multiply(af);
+			BigDecimal afT = afT1.setScale(0, BigDecimal.ROUND_DOWN);
 			
 			rtmCalculTax = afT;
 		}
@@ -416,6 +444,9 @@ public class RetirementController {
 		mv.addObject("retirement", rt);
 		mv.setViewName("jsonView");
 		
+		System.out.println("444 : " + rta4);
+		System.out.println("555 : " + rta5);
+		
 		return mv;
 	}
 	
@@ -443,9 +474,20 @@ public class RetirementController {
 	
 	@RequestMapping("insertRetirement.rt")
 	public String insertRetirement(Retirement r) {
-		System.out.println(r);
+		int result = rs.insertRetirement(r);
 		
-		return "payment/retirement";
+		return "redirect:retirement.rt";
+	}
+	
+	@RequestMapping("retirementReceipt.rt")
+	public String selectRetireEmp(Model model, HttpServletRequest request) {
+		Company company = (Company)request.getSession().getAttribute("loginCompany");
+		String comCode = company.getCompanyCode();
+		
+		List<Employee> list = rs.selectRetireEmp(comCode);
+		
+		model.addAttribute("empList", list);
+		return "payment/retirementReceipt";
 	}
 
 }

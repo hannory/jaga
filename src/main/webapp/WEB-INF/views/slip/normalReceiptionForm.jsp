@@ -59,8 +59,12 @@
 	}
 	
 	#searchReTable {
-		width: 40%;
+		width: 100%;
+		
+	}
+	#searchReTable td:last-child{
 		text-align: left;
+		
 	}
 	
 	
@@ -90,6 +94,9 @@
 		<h2 class="mt-4">일반전표입력</h2>
 		<ol class="breadcrumb mb-4">
 			<table id="searchReTable">
+			<colgroup>
+				<col width="10%">
+			</colgroup>
 				<tr>
 					<td>전표일자 : </td>
 					<td><input type="text" id="datepicker">~<input type="text" id="datepicker1"></td>
