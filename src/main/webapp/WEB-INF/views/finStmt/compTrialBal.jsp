@@ -451,14 +451,21 @@
 					<tr>
 						<td class="table-title"></td>
 						<td class="table-title"></td>
-						<td class="table-title" align="center"><div class="table-justify1"><div>6. 이</div><div>익</div><div>잉</div><div>여</div><div>금 <label class="hidden-right">.6</label></div></div></td>
+						<td class="table-title" align="center"><div class="table-justify1"><div>6. 자</div><div>본</div><div>잉</div><div>여</div><div>금 <label class="hidden-right">.6</label></div></div></td>
 						<td class="table-title"></td>
 						<td class="table-title"></td>
 					</tr>
 					<tr>
 						<td class="table-title"></td>
 						<td class="table-title"></td>
-						<td class="table-title" align="center"><div class="table-justify1"><div>7. 매</div><div>출 <label class="hidden-right">.7</label></div></div></td>
+						<td class="table-title" align="center"><div class="table-justify1"><div>7. 이</div><div>익</div><div>잉</div><div>여</div><div>금 <label class="hidden-right">.6</label></div></div></td>
+						<td class="table-title"></td>
+						<td class="table-title"></td>
+					</tr>
+					<tr>
+						<td class="table-title"></td>
+						<td class="table-title"></td>
+						<td class="table-title" align="center"><div class="table-justify1"><div>8. 매</div><div>출 <label class="hidden-right">.7</label></div></div></td>
 						<td class="table-title num"><span id="credit-sum70"></span></td>
 						<td class="table-title num"><span id="bal-credit-sum70"></span></td>
 					</tr>
@@ -479,7 +486,7 @@
 					<tr>
 						<td class="table-title num"><span id="bal-debit-sum80"></span></td>
 						<td class="table-title num"><span id="debit-sum80"></span></td>
-						<td class="table-title" align="center"><div class="table-justify1"><div>8. 제</div><div>조</div><div>원</div><div>가 <label class="hidden-right">.3</label></div></div></td>
+						<td class="table-title" align="center"><div class="table-justify1"><div>9. 제</div><div>조</div><div>원</div><div>가 <label class="hidden-right">.3</label></div></div></td>
 						<td class="table-title"></td>
 						<td class="table-title"></td>
 					</tr>
@@ -542,7 +549,7 @@
 					<tr>
 						<td class="table-title num"><span id="bal-debit-sum90"></span></td>
 						<td class="table-title num"><span id="debit-sum90"></span></td>
-						<td class="table-title" align="center"><div class="table-justify1"><div>9. 판</div><div>매</div><div>비</div><div>및</div><div>일</div><div>반</div><div>관</div><div>리</div><div>비 <label class="hidden-right">.6</label></div></div></td>
+						<td class="table-title" align="center"><div class="table-justify4"><div>10. 판</div><div>매</div><div>비</div><div>및</div><div>일</div><div>반</div><div>관</div><div>리</div><div>비 <label class="hidden-right">.10</label></div></div></td>
 						<td class="table-title"></td>
 						<td class="table-title"></td>
 					</tr>
@@ -584,14 +591,14 @@
 					<tr>
 						<td class="table-title"></td>
 						<td class="table-title"></td>
-						<td class="table-title" align="center"><div class="table-justify4"><div>10. 영</div><div>업</div><div>외</div><div>수</div><div>익 <label class="hidden-right">.10</label></div></div></td>
+						<td class="table-title" align="center"><div class="table-justify4"><div>11. 영</div><div>업</div><div>외</div><div>수</div><div>익 <label class="hidden-right">.11</label></div></div></td>
 						<td class="table-title"></td>
 						<td class="table-title"></td>
 					</tr>
 					<tr>
 						<td class="table-title"></td>
 						<td class="table-title"></td>
-						<td class="table-title" align="center"><div class="table-justify4"><div>11. 영</div><div>업</div><div>외</div><div>비</div><div>용 <label class="hidden-right">.11</label></div></div></td>
+						<td class="table-title" align="center"><div class="table-justify4"><div>12. 영</div><div>업</div><div>외</div><div>비</div><div>용 <label class="hidden-right">.12</label></div></div></td>
 						<td class="table-title"></td>
 						<td class="table-title"></td>
 					</tr>
@@ -732,15 +739,6 @@
 			$("img.ui-datepicker-trigger")
 					.attr("style","margin-left:2px; vertical-align:middle; cursor: Pointer; width:20px; height:20px");
 			
-			/* 표에서 하늘색 hover 주기 */
-			/* $("#contentTable td").mouseover(function() {
-				$(this).parent().css("background", "#DDEBF7");
-			});
-			
-			$("#contentTable td").mouseout(function() {
-				$(this).parent().css("background", "white");
-			});	 */	
-			
 			//현재 날짜를 기본값 설정
 			var curDate = new Date();
 			
@@ -779,7 +777,7 @@
 			} else {
 				$("#foldImg").attr({'src':'${ contextPath }/resources/images/unfold.PNG'});
 				$(".table-detail").fadeOut(200);
-				$("#main-table").css('height', '286px');
+				$("#main-table").css('height', '280px');
 			}
 			
 			$(this).data('clicks', !clicks);
@@ -989,10 +987,10 @@
 					var creditSum90 = 0;
 					var balCreditSum90 = 0;
 					
-					var debitTotal = debitSum10 + debitSum30 + debitSum50 + debitSum70 + debitSum80;
-					var creditTotal = creditSum10 + creditSum30 + creditSum50 + creditSum70 + debitSum80;
-					var balDebitTotal = balDebitSum10 + balDebitSum30 + balDebitSum50 + balDebitSum70 + balDebitSum80;
-					var balCreditTotal = balCreditSum10 + balCreditSum30 + balCreditSum50 + balCreditSum70 + balDebitSum80;
+					var debitTotal = debitSum10 + debitSum30 + debitSum50 + debitSum70 + debitSum80 + debitSum90;
+					var creditTotal = creditSum10 + creditSum30 + creditSum50 + creditSum70 + creditSum80 + creditSum90;
+					var balDebitTotal = balDebitSum10 + balDebitSum30 + balDebitSum50 + balDebitSum70 + balDebitSum80 + balDebitSum90;
+					var balCreditTotal = balCreditSum10 + balCreditSum30 + balCreditSum50 + balCreditSum70 + balDebitSum80 + balDebitSum90;
 					
 					$("#debit-sum10").text(comma(debitSum10));
 					$("#credit-sum10").text(comma(creditSum10));
@@ -1067,7 +1065,7 @@
 				var date = dateArray[2];
 				var accountCode = $(this).parent().attr('id').substring(1,6);
 				
-				//$("#modal-account-code").val(accountCode);
+				
 				
 				var fromDate = "";
 				var toDate = "";
@@ -1090,6 +1088,7 @@
 					success : function(data) {
 						console.log("data[0] FinPos" + data[0]);
 						$("#modal-account-title").val(data[0].accountTitle);
+						$("#modal-account-code").val(data[0].accountCode);
 						
 						$tableBody = $("#list-detail tbody");
 						//테이블을 갱신하기 위해 비워줌

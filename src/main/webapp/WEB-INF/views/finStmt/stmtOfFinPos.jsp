@@ -614,6 +614,8 @@
 					var c14600 = data["c14600"];
 					var c40100 = data["c40100"];
 					var c40400 = data["c40400"];
+					var c80200 = data["c80200"];
+					var c80300 = data["c80300"];
 					var c81100 = data["c81100"];
 					var c81300 = data["c81300"];
 					var c83000 = data["c83000"];
@@ -623,6 +625,8 @@
 					$("#c14600").text(comma(c14600));
 					$("#c40100").text(comma(c40100));
 					$("#c40400").text(comma(c40400));
+					$("#c80200").text(comma(c80200));
+					$("#c80300").text(comma(c80300));
 					$("#c81100").text(comma(c81100));
 					$("#c81300").text(comma(c81300));
 					$("#c83000").text(comma(c83000));
@@ -641,7 +645,7 @@
 					var cVal221 = 0;
 					var cVal223 = 0;
 
-					var cSum22 = cVal221 + cVal222 + cVal223;
+					var cSum22 = cVal221 + cVal222 - cVal223;
 					$("#cSum22").text(comma(cSum22));
 					
 					var cSum20 = cSum21 + cSum22;
@@ -650,7 +654,7 @@
 					var cSum30 = cSum10 - cSum20;
 					$("#cSum30").text(comma(cSum30));
 					
-					var cSum40 = c81100 + c83000 + c83100 + c81300;
+					var cSum40 = c80200 + c80300 + c81100 + c83000 + c83100 + c81300;
 					$("#cSum40").text(comma(cSum40));
 					
 					var cSum50 = cSum30 - cSum40;
@@ -674,6 +678,8 @@
 					var p14600 = data["p14600"];
 					var p40100 = data["p40100"];
 					var p40400 = data["p40400"];
+					var p80200 = data["p80200"];
+					var p80300 = data["p80300"];
 					var p81100 = data["p81100"];
 					var p81300 = data["p81300"];
 					var p83000 = data["p83000"];
@@ -683,6 +689,8 @@
 					$("#p14600").text(comma(p14600));
 					$("#p40100").text(comma(p40100));
 					$("#p40400").text(comma(p40400));
+					$("#p80200").text(comma(p80200));
+					$("#p80300").text(comma(p80300));
 					$("#p81100").text(comma(p81100));
 					$("#p81300").text(comma(p81300));
 					$("#p83000").text(comma(p83000));
@@ -696,13 +704,13 @@
 					var pVal211 = 0;
 					var pVal213 = 0;
 					
-					var pSum21 = pVal211 + p14600 + pVal213;
+					var pSum21 = pVal211 + p14600 - pVal213;
 					$("#pSum21").text(comma(pSum21));
 					
 					var pVal221 = 0;
 					var pVal223 = 0;
 
-					var pSum22 = pVal221 + pVal222 + pVal223;
+					var pSum22 = pVal221 + pVal222 - pVal223;
 					$("#pSum22").text(comma(pSum22));
 					
 					var pSum20 = pSum21 + pSum22;
@@ -711,7 +719,7 @@
 					var pSum30 = pSum10 - pSum20;
 					$("#pSum30").text(comma(pSum30));
 					
-					var pSum40 = p81100 + p83000 + p83100 + p81300;
+					var pSum40 = p80200 + p80300 + p81100 + p83000 + p83100 + p81300;
 					$("#pSum40").text(comma(pSum40));
 					
 					var pSum50 = pSum30 - pSum40;
@@ -1001,7 +1009,7 @@
 				var accountClass = $(this).children('span').attr('id').substring(1);
 				var curPast = $(this).children('span').attr('id').substring(0,1);
 				
-				//$("#modal-account-code").val(accountCode);
+				
 				
 				var fromDate = "";
 				var toDate = "";
@@ -1034,6 +1042,7 @@
 					success : function(data) {
 						console.log("data[0] FinPos" + data[0]);
 						$("#modal-account-title").val(data[0].accountTitle);
+						$("#modal-account-code").val(data[0].accountCode);
 						
 						$tableBody = $("#list-detail tbody");
 						//테이블을 갱신하기 위해 비워줌

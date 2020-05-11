@@ -677,7 +677,7 @@
 					var pVal211 = 0;
 					var pVal213 = 0;
 					
-					var pSum21 = pVal211 + p14600 + pVal213;
+					var pSum21 = pVal211 + p14600 - pVal213;
 					$("#pSum21").text(comma(pSum21));
 					
 					var pVal221 = 0;
