@@ -31,9 +31,9 @@ import com.kh.jaga.company.model.vo.TypeOfBiz;
 import com.kh.jaga.companyInnerId.model.vo.ComInIdVo;
 
 /**
- * @author 주석을 달아주세용
- * @comment 유지연님.. 언제 이걸 발견하는지 기다리겠습니다 ..데헷
- * @createDate 1994. 09. 23. 
+ * @author 유지연
+ * @comment 유지연님.. 언제 이걸 발견하는지 기다리겠습니다 ..ㅎㅎ 여기는 회사 등록 및 로그인 페이지!
+ * @createDate 2020.3월즈음
  */
 @Controller
 @SessionAttributes({"loginCompany","loginEmp"})
@@ -67,7 +67,6 @@ public class CompanyController {
 			
 			ComInIdVo loginEmp = cs.loginEmp(empData);
 			
-//			System.out.println(loginEmp);
 			if(passwordEncoder.matches(companyPwd, loginEmp.getPwd())) {
 				//로그인 성공
 				model.addAttribute("loginEmp", loginEmp);
@@ -81,7 +80,6 @@ public class CompanyController {
 					e.printStackTrace();
 				}
 
-				
 				return "redirect:gomain.co";
 
 			}else {
@@ -95,7 +93,6 @@ public class CompanyController {
 					
 					return "common/errorPage";
 				}
-				
 			}
 			
 
@@ -116,11 +113,7 @@ public class CompanyController {
 				
 				return "common/errorPage";
 			}
-			
-			
 		}
-		
-		
 		
 	}//method
 	
@@ -208,9 +201,9 @@ public class CompanyController {
 		PrintWriter out;
 		try {
 			out = response.getWriter();
-			out.print(msg);
+			out.print(msg); 
 			out.flush();
-			out.close();
+			out.close(); 
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

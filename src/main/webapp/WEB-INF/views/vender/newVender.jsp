@@ -1085,9 +1085,7 @@ border-radius: 5px;
 			<td><b id="account-income-num"> 입금 계좌 번호</b>
 				<b id="bank">은행</b>
 				<input type="text" class="bank-code-surr" id="bankCode" name="bankCode">
-				<button type="button" id="searchBtn2"><img alt="" src="${contextPath}/resources/images/search.PNG" width="20px" height="20px">
-								</button>
-
+				<button type="button" id="searchBtn2"><img alt="" src="${contextPath}/resources/images/search.PNG" width="20px" height="20px"></button>
 				<input type="text" class="bank-code-name-surr" id="bankName" name="bankName">
 			</td>
 			
@@ -1166,6 +1164,9 @@ border-radius: 5px;
 	          			<th>은행명</th>
 	          		</tr>
           		</thead>
+          	<tbody>
+          	
+          	</tbody>
           	</table>
         </div>
         <div class="modal-footer">
@@ -1205,7 +1206,7 @@ function sample2_execDaumPostcode() {
 					} else { // 사용자가 지번 주소를 선택했을 경우(J)
 						addr = data.jibunAddress;
 					}
-
+ 
 					// 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
 					if (data.userSelectedType === 'R') {
 						// 법정동명이 있을 경우 추가한다. (법정리는 제외)
@@ -1293,8 +1294,6 @@ function ccc(value){
 }		
 
 
-
-
 /* 은행모달 */
 $("#searchBtn2").click(function(){
 	
@@ -1314,12 +1313,12 @@ $("#searchBtn2").click(function(){
 		                }
 		                return data;} 
 			 },
+			 
 			 {data : "bankName",
 				 "render": function(data, type, row){
 		                if(type=='display'){
 		                    data = '<a href="#" onclick="ccc(this);">' + data + '</a>';
 		                }
-		                console.log(data);
 		                return data;}
 			 }
 		 ]

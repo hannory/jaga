@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
       <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+	  <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <!DOCTYPE html>
 <html>
@@ -14,14 +14,12 @@
 <style>
 
 #emplist{
-
 position: absolute;
 width: 350px;
 height: 800px;
 left: 340px;
 top: 370px;
 border:solid 0px white; 
-
 }
 
 #payList{
@@ -30,7 +28,6 @@ width:700px;
 height:1300px;
 left:700px;
 top:270px;
-
 }
 
 #deduction{
@@ -42,18 +39,15 @@ top:360px;
 }
 
 /* 사각형 테두리 border */
-
 #border{
 position: absolute;
 width: 1350px;
 height: 1500px;
 left: 286px;
 top: 233px;
-
 border: 1px solid #C4C4C4;
 box-sizing: border-box;
 border-radius: 5px;
-
 }
 
 #border2{
@@ -62,7 +56,6 @@ width:330px;
 height:1500px;
 left:286px;
 top:233px;
-
 border:1px solid #C4C4C4;
 box-sizing: border-box;
 border-radius:5px;
@@ -76,13 +69,11 @@ width: 213px;
 height: 42px;
 left: 303px;
 top: 74px;
-
 font-family: Roboto;
 font-style: normal;
 font-weight: normal;
 font-size: 33px;
 line-height: 35px;
-
 color: #000000;
 }
 
@@ -93,43 +84,37 @@ width: 120px;
 height: 42px;
 left: 304px;
 top: 148px;
-
 font-family: Roboto;
 font-style: normal;
 font-weight: normal;
 font-size: 23px;
 line-height: 23px;
-
 color: #000000;
 }
 
 
 
 /* Line 20 row-employee */
-
 #row-employee{
 position: absolute;
 width: 120px;
 left: 304px;
 top: 180px;
-
 border: 2px solid #24574A;
 }
-/* 일용근로자 big-one-imployee */
 
+/* 일용근로자 big-one-imployee */
 #big-one-imployee{
 position: absolute;
 width: 120px;
 height: 42px;
 left: 451px;
 top: 148px;
-
 font-family: Roboto;
 font-style: normal;
 font-weight: normal;
 font-size: 23px;
 line-height: 23px;
-
 color: #5A5A5A;
 }
 
@@ -141,43 +126,36 @@ width: 120px;
 height: 42px;
 left: 599px;
 top: 148px;
-
 font-family: Roboto;
 font-style: normal;
 font-weight: normal;
 font-size: 23px;
 line-height: 23px;
-
 color: #5A5A5A;
-
 }
-/* 일반근로자 - 신규추가 employee */
 
+/* 일반근로자 - 신규추가 employee */
 #employee{
 position: absolute;
 width: 330px;
 height: 30px;
 left: 453px;
 top: 100px;
-
 font-family: Roboto;
 font-style: normal;
 font-weight: normal;
 font-size: 23px;
 line-height: 23px;
-
 color: #000000;
-
 }
-/* 저장하기 save*/
 
+/* 저장하기 save*/
 #save{
 position: absolute;
 width: 82px;
 height: 29px;
 left: 1180px;
 top: 183px;
-
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
@@ -186,67 +164,54 @@ line-height: 14px;
 display: flex;
 align-items: center;
 text-align: center;
-
 color: #FFFFFF;
-
 }
 
 
 /*저장하기버튼 save-surr */
-
 #save-surr{
 position: absolute;
 width: 90px;
 height: 29px;
 left: 1180px;
 top: 183px;
-
 background: #296355;
 border-radius: 5px;
 }
 
 /* * 기본 정보 basic-info*/ */
 #basic-info{
-
-
 position: auto;
 width: 67px;
 height: 25px;
 left: 547px;
 top: 301px;
-
 font-family: Roboto;
 font-style: normal;
 font-weight: normal;
 font-size: 19px;
 line-height: 19px;
-
 color: #000000;
-
 }
 
 
 #searchdiv{
 position:absolute;
-width:600px;
+width:700px;
 height:100px;
 left:340px;
 top:300px;
 }
 
 #searchempBox{
-left: 370px;
+left: 360px;
 top:300px;
 border-radius:5px;
-
 }
 
 #searchBtn{
-
 left:440px;
 top:270px;
-
-
 }
 
 
@@ -272,12 +237,12 @@ top:230px;
 left:1600px;
 }
 
+/* 모달(담당부서) */
 .empTempRow:hover {
-	/* 모달(담당부서) */
-	background: gray;
-	opacity: 30%;
-	color: white;
-	}
+background: gray;
+opacity: 30%;
+color: white;
+}
 
 </style>
 <body>
@@ -285,20 +250,20 @@ left:1600px;
 		<div id="main">
 	<div class="container-fluid">
 	
-	
  <div id="main">
-<div id="employee-manage">급여자료입력</div>
-<div id="big-employee">일반근로자</div>
-<div id="row-employee"></div>
-<div id="big-one-imployee"><a href="BPaymentList.bp">사업소득자</a></div>
-<!-- <div id="big-income-employee">사업소득자</div> -->
-<div id="border2"></div>
+	<div id="employee-manage">급여자료입력</div>
+	<div id="big-employee">일반근로자</div>
+	<div id="row-employee"></div>
+	<div id="big-one-imployee"><a href="BPaymentList.bp">사업소득자</a></div>
+	<!-- <div id="big-income-employee">사업소득자</div> -->
+	<div id="border2"></div>
 
 	<div id="searchdiv">
+	<input type="text" id="searchempBox"> 
+	<button id="searchBtn" onclick="searchemp()"><img alt="" src="${contextPath}/resources/images/search.PNG" width="20px" height="20px">
+	</button>
+	</div> 
 
-<input type="text" id="searchempBox"> <div id="searchBtn" onclick="searchemp()"><img alt="" src="${contextPath}/resources/images/search.PNG" width="20px" height="20px">
-								</div>
-</div>
  	<span id="emplist">
 	 <table id="listArea2">
 	<tr id="trempHead">
@@ -315,19 +280,12 @@ left:1600px;
 	</table>	 
 	</span> 
 	
-	
-	
 	 <script>
 	$(function(){
-		$("#listArea2 td")./* mouseenter(function(){ */
-		/* 	$(this).parent().css({"background":"#F0F0F0","cursor":"pointer"}); */
-/* 		}).mouseout(function(){
-			$(this).parent().css("background","white"); */
-	/* 	}). */click(function(){
+		$("#listArea2 td").click(function(){
 			$("#listArea2 td").parent().css("background", "white");
 			$(this).parent().css("background","#CAD6D3");
 			var employeeCode2 =$(this).parent().children().eq(2).text();
-/* 			console.log(employeeCode2); */
 			$("#abc").val(employeeCode2);
 /* 			location.href="${contextPath}/employeeinsert.emp?employeeCode="+employeeCode; */
         });
@@ -340,7 +298,6 @@ left:1600px;
 		$("#inputemp").val(selectedempCode); 
 		console.log("1번"+selectedempCode);
 		console.log("2번"+selectedempName);
-/* 		closeModal(); */
 	}
 	$('#searchempBox').keyup(function(e){
 		var searchValue=e.target.value;
@@ -355,24 +312,35 @@ left:1600px;
 		
 		console.log("결과"+temp);
 		
-	 	var listemp=listempTemp[0]; 
+/* 	 	var listemp=listempTemp[1]; 
 		console.log("서치밸류"+searchValue)
  		console.log("영번째 인덱스"+listemp)
+		 */
+ 		
+ 		for(var i2=0; i2<listempTemp.length; i2++){
+ 			var listemp=listempTemp[i2];
+ 			console.log(listemp+"분리했다")
+ 		}
 		
+		console.log("서치밸류"+searchValue)
+
 		if(searchValue.length!=0){
 
 			$empDefaultRow.detach();
 			
+			console.log("여기다여기listemp"+listemp);
+	
  			for (var i = 0; i < listemp.length; i++) { 
-				if (listemp[i].employeeName.includes(searchValue) 
+			 	if (listemp[i].employeeName.includes(searchValue) 
 						|| listemp[i].employeeCode.includes(searchValue)) {
 					var tempempName = listemp[i].employeeName;
 					var tempempCode = listemp[i].employeeCode;
 					console.log("템프이엠피네임@@@"+tempempName);
-					console.log("템프이엠피코드@@@"+tempempCode);
+					console.log("템프이엠피코드@@@"+tempempCode); 
+
 					 $(".empTempRow").detach(); 
 					
-					$("#trempHead")
+						$("#trempHead")
 							.after(
 									"<tr class='empTempRow' onclick='selectemp(this)'><td>"
 									+ tempempName
@@ -396,25 +364,12 @@ left:1600px;
 		}
 	});
 
-	
 	</script>
 	
 	<script>
 	function searchemp() {
 		alert("근로자검색 검색 버튼 ");
 	}
-
-/* 	$(function() {
-		$("#inputDept").focus(function(e) {
-			//일단 수동으로 입력 가능하게 ...
-			/* e.target.blur();
-			showModalDept(); */
-
-/* 		});
-	}); */
-	
-	
-	
 	</script>
     
 
@@ -589,7 +544,6 @@ left:1600px;
 	</span>
 	</form>
 	
-	
 </div>
 
 	</div>
@@ -602,27 +556,7 @@ left:1600px;
 	</main>
 	<jsp:include page="../common/menubar2.jsp" />
 	
-
- <script>
-/*   $("#form1").submit(function(){
-	 $("#salary").val(uncomma($("#salary").val()));
-	 $("#bonus").val(uncomma($("#bonus").val()));
-	 $("#meals").val(uncomma($("#meals").val()));
-	 $("#nightPay").val(uncomma($("#nightPay").val()));
-	 $("#monthlyPay").val(uncomma($("#monthlyPay").val()));
-	 $("#drivingSubsidies").val(uncomma($("#drivingSubsidies").val()));
-	 $("#positionPay").val(uncomma($("#positionPay").val()));
-	 $("#taxableIncome").val(uncomma($("#taxableIncome").val()));
-	 $("#nontaxableIncome").val(uncomma($("#nontaxableIncome").val()));
-	 $("#totalPayment").val(uncomma($("#nontaxableIncome").val()));
-
-	 
- })  */
- </script>
-	
-	
-	
-		<script>
+	<script>
 	$.datepicker.setDefaults({
 		showOn:"both",
 		buttonImageOnly:true,
@@ -635,8 +569,6 @@ left:1600px;
 		$("img.ui-datepicker-trigger")
 		.attr("style","margin-left:5px; vertical-align:middle; cursor:Pointer; width:1px; height:1px");
 	});
-	
-	
 	</script>
 	
 	
@@ -659,7 +591,6 @@ left:1600px;
 		salarybonus=Number($("#salary").val())+Number($("#bonus").val());
 		$("#taxableIncome").val(salarybonus);
 		$("#totalPayment").val(salarybonus);
-		
 	})
 			
 	$("#meals").keyup(function(key){
@@ -687,7 +618,6 @@ left:1600px;
 		if(m>100000){
 			$("#nontaxableIncome").val(100000);
 		}
-		
 	})
 	
 	$("#nightPay").keyup(function(key){
@@ -713,7 +643,6 @@ left:1600px;
  		$("#nontaxableIncome").val(100000); 
 		}
 		$("#totalPayment").val(sbmn);
-
 	})
 		
 	$("#monthlyPay").keyup(function(key){
@@ -803,23 +732,18 @@ left:1600px;
 		/*과세sbnmp*/
     	sbnmp=Number(sbnm)+Number($("#positionPay").val());
 		
-    	
 		$("#taxableIncome").val(sbnmp);
 		$("#totalPayment").val(sbmnmdp);
 		$("#employmentInsurance").val(Math.round(sbmnmdp*0.08));
  		$("#totalDeduction").val(Math.round(sbmnmdp*0.08));
- 		
- 		var employementInsurance= $("#employmentInsurance").val(Math.round(sbmnmdp*0.08));
 
+ 		var employementInsurance= $("#employmentInsurance").val(Math.round(sbmnmdp*0.08));
     })
     
 
          /*국민연금 입력*/
-/*          nationalPension */
- 
  			$("#nationalPension").keyup(function(key){
  				
- 			
         	var n=0;
     		var employementInsurance= Number($("#employmentInsurance").val());
         	var n= Number($("#nationalPension").val());
@@ -851,8 +775,6 @@ left:1600px;
             	$("#totalDeduction").val(n+employementInsurance+h+l);
             })
 			
-            
-            
              $("#incomeTax").click(function(){
              	var h=0;
             	var n=0;
@@ -864,10 +786,9 @@ left:1600px;
             	
             	console.log("incomeTax 클릭");
             	
-            	
             	taxableIncome = ($("#taxableIncome").val()*0.001);
-/*             	taxableIncome=taxableIncome2.substring(taxableIncome2.length()-3, taxableIncome2.length());
- */
+				/*taxableIncome=taxableIncome2.substring(taxableIncome2.length()-3, taxableIncome2.length());*/
+ 
             	
             	$.ajax({
             		url:"selectIncomeTax.emp",
@@ -884,53 +805,37 @@ left:1600px;
             				
 							$("#totalDeduction").val(n+employementInsurance+h+l+i);
             			},
-            			
-            		error : function(status) {
+
+            			error : function(status) {
 					console.log(status);
 				}
             })
-    			
-  
             	}) 
             	
             	
             	/*지방소득세*/
             	$("#localIncomeTax").click(function(key){
-            		
-            		
-            		
-            		
             	var	i= $("#incomeTax").val();
-					
             	var lo= Number(i*0.1);
-            	
             	$("#localIncomeTax").val(Math.round(lo/10)*10);
             	
             	/*차인지급액: 총지급액-공제총액*/
 				var totalPayment = Number($("#totalPayment").val());
-/* 				var differencePymt = Number($("#differencePymt").val()); */
 				var totalDeduction=Number($("#totalDeduction").val());
 				$("#totalDeduction").val(totalDeduction+lo);
-				
             	$("#differencePymt").val(totalPayment-totalDeduction);
             	})
-            	
-
-    
-    
-	
 	</script>
+	
 <!-- 	
-	
 	<script>
-	
 	function comma(str) {
 		str = String(str);
 		return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, "$1,");
 	}
 	
 	/* 콤마 등 숫자 이외의 입력값 제거 */
-/* 	function uncomma(str) {
+	/* 	function uncomma(str) {
 		str = String(str);
 		return parseInt(str.replace(/[^\d]+/g, ""));
 	} */
@@ -947,9 +852,7 @@ left:1600px;
      var str2=  str.replace(/[^\d]+/g, "");
      var str3=Number(str2)
        return str3;
-       
     }
-	
 	</script> -->
 </body>
 </html>

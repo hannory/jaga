@@ -1,6 +1,5 @@
 package com.kh.jaga.vender.controller;
 
-import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,17 +14,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonIOException;
 import com.kh.jaga.company.model.vo.Company;
-import com.kh.jaga.company.model.vo.TypeOfBiz;
 import com.kh.jaga.vender.model.service.VenderService;
 import com.kh.jaga.vender.model.vo.Vender;
 
 @Controller
  @SessionAttributes("loginCompany") 
 public class VenderController {
-	
+	 
 	@Autowired
 	private VenderService vs;
 	
@@ -36,7 +32,7 @@ public class VenderController {
 		vs.insertVender(v);
 		
 		return "redirect:venderList.vi";
-		
+		 
 	}
 	
 	@RequestMapping("venderList.vi")
@@ -77,7 +73,7 @@ public class VenderController {
 	  }
 	  
 	  @GetMapping("bankSearch.ve")
-/*	  public ModelAndView searchBank(ModelAndView mv, HttpServletRequest request) {
+	  public ModelAndView searchBank(ModelAndView mv, HttpServletRequest request) {
 
 			
 			List<Vender> list =null;
@@ -90,33 +86,33 @@ public class VenderController {
 			
 			System.out.println("업종코드 출력되니"+list);
 			return mv;
-	  }*/
+	  }
 
-	  public void searchBank(HttpServletRequest request,HttpServletResponse response, Model m) {
-		/*
-		 * Company com=(Company)request.getSession().getAttribute("loginCompany");
-		 * String comCode=com.getCompanyCode();
-		 */
-		  
-		  List<Vender> list =null;
-		  
-		  list=vs.selectBankList();
-		  
-		  m.addAttribute("list", list);
-		  
-		  
-		  try {
-			  response.setContentType("application/json");
-			 System.out.println("컨트롤러은행은행"+list); 
-			String jList = new Gson().toJson(list);
-			 System.out.println("컨트롤러은행리스트는요2"+list); 
-
-		} catch (JsonIOException e) {
-			e.printStackTrace();
-		} 
-		  
+//	  public void searchBank(HttpServletRequest request,HttpServletResponse response, Model m) {
+//		/*
+//		 * Company com=(Company)request.getSession().getAttribute("loginCompany");
+//		 * String comCode=com.getCompanyCode();
+//		 */
+//		  
+//		  List<Vender> list =null;
+//		  
+//		  list=vs.selectBankList();
+//		  
+//		  m.addAttribute("list", list);
+//		  
+//		  
+//		  try {
+//			  response.setContentType("application/json");
+//			 System.out.println("컨트롤러은행은행"+list); 
+//			String jList = new Gson().toJson(list);
+//			 System.out.println("컨트롤러은행리스트는요2"+list); 
+//
+//		} catch (JsonIOException e) {
+//			e.printStackTrace();
+//		} 
+//		  
 		  
 }
 
-}
+
 

@@ -24,11 +24,13 @@
 <style>
 
 	.main{
-		height:1900px;
-		width:1360px;
+		height:1500px;
+		width:1300px;
 		background-color:white;
 		margin-left:auto;
 		margin-right:auto;
+		border: 1px solid #C4C4C4;
+		border:gray;
 	}
 
 	.innerLine{
@@ -43,13 +45,13 @@
 	}
 
 	.firstLine{
-		width:200px;
+		width:170px;
 		height:50px;
 		font-size:16px;
 	}
 
 	.secondLine{
-		width: 400px;
+		width: 420px;
 		height:50px;
 		font-size:20px;
 	}
@@ -67,7 +69,7 @@
 
 	#userId{
 		width:370px;
-		height:30px;
+		height:40px;
 		background: #FFFFFF;
 		border: 1px solid #C4C4C4;
 		box-sizing: border-box;
@@ -76,7 +78,7 @@
 	
 	#userPwd{
 		width:370px;
-		height:30px;
+		height:40px;
 		background: #FFFFFF;
 		border: 1px solid #C4C4C4;
 		box-sizing: border-box;
@@ -85,7 +87,7 @@
 	
 	#userPwd2{
 		width:370px;
-	    height:30px;
+	    height:40px;
 	    background: #FFFFFF;
 		border: 1px solid #C4C4C4;
 		box-sizing: border-box;
@@ -94,7 +96,7 @@
 	
 	#phone{
 		width:370px;
-	    height:30px;
+	    height:40px;
 	    background: #FFFFFF;
 		border: 1px solid #C4C4C4;
 		box-sizing: border-box;
@@ -103,7 +105,7 @@
 	
 	#typeOfBizCode{
 		width:100px;
-	    height:30px;
+	    height:40px;
 	    background: #FFFFFF;
 		border: 1px solid #C4C4C4;
 		box-sizing: border-box;
@@ -112,7 +114,7 @@
 	
 	#sellTargetName{
 		width:200px;
-	    height:30px;
+	    height:40px;
 	    background: #FFFFFF;
 		border: 1px solid #C4C4C4;
 		box-sizing: border-box;
@@ -121,7 +123,7 @@
 	
 	#userName{
 		width:370px;
-		height:30px;		
+		height:40px;		
 		background: #FFFFFF;
 		border: 1px solid #C4C4C4;
 		box-sizing: border-box;
@@ -131,7 +133,7 @@
 
 	#email1{
 		width:370px;
-		height:30px;
+		height:40px;
 		background: #FFFFFF;
 		border: 1px solid #C4C4C4;
 		box-sizing: border-box;
@@ -140,7 +142,7 @@
 	
 	#email2{
 		width:150px;
-		height:30px;
+		height:40px;
 		background: #FFFFFF;
 		border: 1px solid #C4C4C4;
 		box-sizing: border-box;
@@ -149,7 +151,7 @@
 	
 	#gongsi{
 		width:370px;
-		height:30px;
+		height:40px;
 		background: #FFFFFF;
 		border: 1px solid #C4C4C4;
 		box-sizing: border-box;
@@ -158,7 +160,7 @@
 		
 	#inputBizNum{
 		width:370px;
-		height:30px;
+		height:40px;
 		background: #FFFFFF;
 		border: 1px solid #C4C4C4;
 		box-sizing: border-box;
@@ -167,7 +169,7 @@
 	
 	#inputCorpNum{
 		width:370px;
-		height:30px;
+		height:40px;
 		background: #FFFFFF;
 		border: 1px solid #C4C4C4;
 		box-sizing: border-box;
@@ -176,7 +178,7 @@
 	
 	#inputCorpName{
 		width:370px;
-		height:30px;
+		height:40px;
 		background: #FFFFFF;
 		border: 1px solid #C4C4C4;
 		box-sizing: border-box;
@@ -185,7 +187,7 @@
 	
 	#inputCeoName{
 		width:370px;
-		height:30px;
+		height:40px;
 		background: #FFFFFF;
 		border: 1px solid #C4C4C4;
 		box-sizing: border-box;
@@ -194,7 +196,7 @@
 	
 	#postcode{
 		width:90px;
-		height:30px;
+		height:40px;
 		background: #FFFFFF;
 		border: 1px solid #C4C4C4;
 		box-sizing: border-box;
@@ -203,7 +205,7 @@
 	
 	#address1{
 		width:370px;
-		height:30px;
+		height:40px;
 		background: #FFFFFF;
 		border: 1px solid #C4C4C4;
 		box-sizing: border-box;
@@ -212,7 +214,7 @@
 	
 	#address2{
 		width:370px;
-		height:30px;
+		height:40px;
 		background: #FFFFFF;
 		border: 1px solid #C4C4C4;
 		box-sizing: border-box;
@@ -221,7 +223,7 @@
 	
 	#empName{ 
 		width:370px;
-		height:30px;
+		height:40px;
 		background: #FFFFFF;
 		border: 1px solid #C4C4C4;
 		box-sizing: border-box;
@@ -230,7 +232,7 @@
 	
 	#personalNum{
 		width:370px;
-		height:30px;
+		height:40px;
 		background: #FFFFFF;
 		border: 1px solid #C4C4C4;
 		box-sizing: border-box;
@@ -314,14 +316,24 @@
 
 	#datepicker{
 		width:150px;
-		height:25px;
+		height:40px;
 		background: #FFFFFF;
 		border: 1px solid #C4C4C4;
 		box-sizing: border-box;
 		border-radius: 5px;
 	}
 
-
+	#okok{
+		width:120px;
+		background-color:#1B5748;
+		border-color:black;
+		border:0;
+		height:30px;
+		color:white;
+		border: 1px solid #C4C4C4;
+		box-sizing: border-box;
+		border-radius: 5px;	
+	}
 
 /* The Modal (background) */
         .modal {
@@ -391,8 +403,8 @@
 	}
 	
 	#searchBtn2{
-	width:34px;
-	height:36px;
+/* 	width:34px;
+	height:36px; */
 	}
 </style>
 </head>
@@ -431,7 +443,7 @@
 		
 		<tr>
 			<td class="firstLine"><b>아이디</b></td>
-			<td class="secondLine"><input type="text" maxlength="12" name="companyId" id="userId" placeholder="6~12자 영문 소문자, 숫자 입력"></td>
+			<td class="secondLine"><input type="text" maxlength="12" name="companyId" id="userId" placeholder=" 6~12자 영문 소문자, 숫자 입력"></td>
 			<td class="thirdLine"><button type="button" id="idCheck">중복확인</button></td>
 			<td></td>
 		</tr>
@@ -446,7 +458,7 @@
 		<tr> 
 			<td class="firstLine"><b>비밀번호</b></td>
 			<td class="secondLine">
-			<input type="password" maxlength="13" name="companyPwd" id="userPwd" placeholder="6~16자 영문, 숫자, 특수문자 입력">
+			<input type="password" maxlength="13" name="companyPwd" id="userPwd" placeholder=" 6~16자 영문, 숫자, 특수문자 입력">
 			</td>
 			<td class="thirdLine"></td>	
 		</tr>
@@ -473,7 +485,7 @@
 		<tr>
             <td class="firstLine"><b>이메일</b></td>
             <td class="secondLine">
-           	<input type="text" maxlength="13" name="email" id="email1" placeholder="직접입력가능">
+           	<input type="text" maxlength="13" name="email" id="email1" placeholder=" 직접입력가능">
          	</td>
 
           	<td> 
@@ -507,7 +519,7 @@
         <tr>
         	<td class="firstLine"><b>전화번호</b></td>
         	<td class="secondLine">
-        	<input type="tel" maxlength="30" name="phone" id="phone" placeholder="-입력">
+        	<input type="tel" maxlength="30" name="phone" id="phone" placeholder=" -입력">
         	</td>
         	<td class="thirdLine"></td>
         </tr>
@@ -536,7 +548,7 @@
          <tr class="licenseTriger">
                <td class="firstLine"><b>사업자 등록번호</b></td>
                <td class="secondLine">
-               <input type="text" id="inputBizNum" maxlength="13" name="bizNum" placeholder="사업자 등록번호를 입력해주세요 -포함입력">
+               <input type="text" id="inputBizNum" maxlength="13" name="bizNum" placeholder=" 사업자 등록번호를 입력해주세요 -포함입력">
                </td>
                <td class="thirdLine"><label id="nnResult"></label></td>
          </tr>
@@ -571,7 +583,7 @@
 			
         <tr class="licenseTriger">
                <td class="firstLine"><b>회사명(상호) </b></td>
-               <td class="secondLine"><input type="text" id="inputCorpName" name="bizName" placeholder="회사명(상호)을 입력해주세요"></td>
+               <td class="secondLine"><input type="text" id="inputCorpName" name="bizName" placeholder=" 회사명(상호)을 입력해주세요"></td>
                <td class="thirdLine"></td>
         </tr>
         
@@ -584,7 +596,7 @@
 			
          <tr class="licenseTriger">
                <td class="firstLine"><b>대표자명</b></td>
-               <td class="secondLine"><input type="text" id="inputCeoName" name="bossName" placeholder="대표자명을 입력해주세요"></td>
+               <td class="secondLine"><input type="text" id="inputCeoName" name="bossName" placeholder=" 대표자명을 입력해주세요"></td>
                <td class="thirdLine"></td>
         </tr>
             
@@ -613,27 +625,27 @@
 		<tr>
                <td class="firstLine"><b>회사/점포주소</b></td>
                <td class="secondLine">
-               <input type="text" id="postcode" name="postcode" placeholder="우편번호">
-               <input type="text" id="address1" name="bizLocation" placeholder="주소">
-               </td>
+               <input type="text" id="postcode" name="postcode" placeholder=" 우편번호">
+               <input type="text" id="address1" name="bizLocation" placeholder=" 주소">
+               </td> 
                
                <td class="thirdLine">
-               <input type="button" onclick="sample2_execDaumPostcode()" id="location-btn" value="주소 검색">
+               <input type="button" onclick="sample2_execDaumPostcode()" id="location-btn" value=" 주소 검색">
                </td>
           </tr>
             
            <tr class="licenseTriger">
                <td class="firstLine"></td>
-               <td class="secondLine"><input type="hidden" id="address2" name="address1" placeholder="상세주소"></td>
+               <td class="secondLine"><input type="hidden" id="address2" name="address1" placeholder=" 상세주소"></td>
                <td class="thirdLine"></td>
            </tr>
             
             
  		    <tr>
                 <td ><b>업종코드</b></td>
-              	 <td><input type="text" id="typeOfBizCode" name="bizType" placeholder="업종코드"> &nbsp;
+              	 <td><input type="text" id="typeOfBizCode" name="bizType" placeholder=" 업종코드"> &nbsp;
                  <button type="button" id="searchBtn2"> <img alt="" src="${contextPath}/resources/images/search.PNG" width="24px" height="24px"></button> &nbsp;
-				 <input type="text" id="sellTargetName" name="sellTargetName" placeholder="업종명"></td>
+				 <input type="text" id="sellTargetName" name="sellTargetName" placeholder=" 업종명"></td>
            </tr>	
 			
 		<tr>
@@ -645,9 +657,9 @@
 		
 		</table>
 		</div>
-		<div style="margin-left:500px; margin-top:80px">
-			<button type="reset">작성취소</button>
-			<button type="submit">가입하기</button>
+		<div style="margin-left:450px; margin-top:150px">
+			<button type="reset" id="okok">가입취소</button>
+			<button type="submit" id="okok">가입하기</button>
 		</div>
 		</form>
 		</div>
@@ -740,16 +752,16 @@
 					var spe = pw.search(/[`~!@@#$%^&*|₩₩₩;:₩/?]/gi); 
 					
 					if(pw.length<6||pw.length>16){ 
-						msg = "6자리 ~ 16자리 이내로 입력해주세요."; 
+						msg = " 6자리 ~ 16자리 이내로 입력해주세요."; 
 						$("#userPwdCheck").css("color", "red");
 					}else if(pw.search(/\s/) != -1){
-						msg = "비밀번호는 공백 없이 입력해주세요."; 
+						msg = " 비밀번호는 공백 없이 입력해주세요."; 
 						$("#userPwdCheck").css("color", "red");
 					}else if(num < 0 || eng < 0 || spe < 0 ){ 
-						msg = "영문,숫자, 특수문자를 혼합하여 입력해주세요."; 
+						msg = " 영문,숫자, 특수문자를 혼합하여 입력해주세요."; 
 						$("#userPwdCheck").css("color", "red");
 					}else { 
-						msg = "유효한 비밀번호 입니다."; 
+						msg = " 유효한 비밀번호 입니다."; 
 						$("#userPwdCheck").css("color", "green");
 					}
 					$("#userPwdCheck").text(msg);
@@ -763,10 +775,10 @@
 		var msg='';
 		
 		if(pw==pw2){
-			msg="비밀번호가 일치합니다.";
+			msg=" 비밀번호가 일치합니다.";
 			$("#pwdResult").css("color","green");
 		}else{
-			msg="비밀번호가 일치하지 않습니다."
+			msg=" 비밀번호가 일치하지 않습니다."
 			$("#pwdResult").css("color","red");
 			
 		}
@@ -909,7 +921,7 @@
 	}		
 
 	
-	/* 거래처모달 */
+	/* 거래처모달 */ 
 			$("#searchBtn2").click(function(){
 				
 				 $("#typeofbizTable").dataTable({

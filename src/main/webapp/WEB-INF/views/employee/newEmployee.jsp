@@ -1556,21 +1556,18 @@ box-sizing: border-box;
 <div id="employee-manage">직원관리</div>
 <div id="big-employee">일반근로자</div>
 <div id="row-employee"></div>
-<div id="big-one-imployee"> <a href="BPaymentList.bp">사업소득자</a></div>
+<div id="big-one-imployee"> <a href="businessEmpList.be">사업소득자</a></div>
 <!-- <div id="big-income-employee">사업소득자</div> -->
 <div id="border2"></div>
 <!-- <input type="search" id="search-surr"> -->
 
 <form action="selectEmpList.emp" method="POST">
 <div id="searchdiv">
-
 <input type="text" id="search"> <button type="button" id="searchBtn"><img alt="" src="${contextPath}/resources/images/search.PNG" width="20px" height="20px">
-								</button>
 </div>
  <script>
 /*  $("#search").keyup(
 	function(e){
-		
 	}		 
  ) */
  </script>
@@ -1765,7 +1762,7 @@ td><button id="leaveReason-surr" style="color:white; font-size:6px;">퇴사사�
 <b id="account-num">계좌번호</b>
 <input type="text" id="account-num-surr" name="accountNum">
 </td>
-</tr>
+</tr> 
 
 <tr>
 <td>
