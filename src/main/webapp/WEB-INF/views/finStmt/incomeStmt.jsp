@@ -105,6 +105,27 @@
     	height: 578px;
     	padding-top: 0px !important;
     }
+    #modal-slip {
+    	display: none;
+    	height: 202px;	/* 194px */
+    }
+    #modal-slip > div {
+    	width: 1115px;
+    	padding-left: 16px;
+    	padding-right: 16px;
+    }
+    #modal-slip table {
+    	width: 100%;
+    }
+    #modal-slip td {
+		border: 1px solid #a6a6a6;
+	}
+    .text-center {
+    	text-align: center;
+    }
+    .text-left {
+    	padding-left: 2px;
+    }
 	#loading-div {
 	    width: 100%;  
 	    height: 100%;  
@@ -764,10 +785,6 @@
 				var accountCode = $(this).children('span').attr('id').substring(1,6);
 				var curPast = $(this).children('span').attr('id').substring(0,1);
 				
-				console.log("accountCode : " + accountCode);
-				console.log("curPast : " + curPast);
-				console.log("this text : " + $(this).text());
-				
 				$("#modal-account-code").val(accountCode);
 				
 				var fromDate = "";
@@ -906,8 +923,8 @@
 								monthCheck += gap;
 							}
 							
-							//전표별 값 입력
-							var $tr = $("<tr>");
+							//분개별 값 입력
+							var $tr = $("<tr>").attr('class', 'journal');
 							var $dateTd = $("<td>").text((("0") + month).slice(-2) + "-" + date).css("text-align", "center");
 							var $dateSlipCodeTd = $("<td>").text(value.dateSlipCode).css("text-align", "center");
 							var $briefTd = $("<td>").text(value.brief);
@@ -962,6 +979,97 @@
 				});
 			}
 			
+		});
+		
+		//원장 모델에서 특정 분개 더블 클릭 시 처리
+		$(document).on("dblclick", '.journal', function() {
+			
+			var $tableBody = $("#modal-slip-table tbody");
+			$tableBody.html('');
+			
+		
+			
+			var datepicker3 = $("#datepicker3").val();
+			var journalYear = datepicker3.substring(0, 4);
+
+			var journalDate = $(this).children('td:first-child').text().split("-");
+			var dateSlipCode = $(this).children('td:nth-child(2)').text();
+			
+			var clicks = $(this).data('clicks');
+			
+			if(clicks) {
+				$(".modal-body").css("height", "578px");
+				$("#modal-slip").hide();
+			} else {
+				$(".modal-body").css("height", "376px");	/* 384px */
+				$("#modal-slip").show();
+			}
+			
+			$(this).data('clicks', !clicks);
+			
+			var rowNum = 1;
+			
+			$.ajax({
+				url : "selectSlipByJournal.fs",
+				type : "get",
+				data : {
+					year : journalYear,
+					month : journalDate[0],
+					date : journalDate[1],
+					dateSlipCode : dateSlipCode
+				},
+				success : function(data) {
+					
+					if(data[0].dateSlipCode.substring(0,1) == 5) {
+						$("#slip-category").text("매입매출");
+					} else {
+						$("#slip-category").text("일반");
+					}
+					
+					$.each(data, function(index, value) {
+						console.log("계정과목" + value.accountTitle);
+						
+						var $tr = $("<tr>");
+						var $rowNumTd = $("<td>").text(rowNum).attr("class", "text-center");
+						var $monthTd = $("<td>").text(journalDate[0]).attr("class", "text-center");
+						var $dateTd = $("<td>").text(journalDate[1]).attr("class", "text-center");
+						var $dateSlipCodeTd = $("<td>").text(value.dateSlipCode).attr("class", "text-center");
+						var $debitCreditTd = $("<td>").text(value.debitCredit).attr("class", "text-center");
+						var $accountCodeTd = $("<td>").text(value.accountCode).attr("class", "text-center").css("width", "5%");
+						var $accountTitleTd = $("<td>").text(value.accountTitle);
+						var $venderCodeTd = $("<td>").text(value.venderCode).attr("class", "text-center").css("width", "5%");
+						var $venderNameTd = $("<td>").text(value.venderName);
+						
+						if(value.debitCredit == '차변') {
+							var $debitTd = $("<td>").text(comma(value.price)).css("text-align", "right");
+							var $creditTd = $("<td>");
+						} else {
+							var $debitTd = $("<td>");
+							var $creditTd = $("<td>").text(comma(value.price)).css("text-align", "right");
+						}
+						
+						var $briefTd = $("<td>").text(value.brief).css("padding-left", "2px");
+						
+						$tr.append($rowNumTd);
+						$tr.append($monthTd);
+						$tr.append($dateTd);
+						$tr.append($dateSlipCodeTd);
+						$tr.append($debitCreditTd);
+						$tr.append($accountCodeTd);
+						$tr.append($accountTitleTd);
+						$tr.append($venderCodeTd);
+						$tr.append($venderNameTd);
+						$tr.append($debitTd);
+						$tr.append($creditTd);
+						$tr.append($briefTd);
+						$tableBody.append($tr);
+						
+					});
+				},
+				error : function(status) {
+					console.log(status);
+				}
+			})
 		});
 		
 		//저장버튼 클릭시 
@@ -1177,7 +1285,31 @@
 			        <div class="modal-footer">
 			          <button type="button" class="btn btn-default" data-dismiss="modal" style="font-weight: bold; color: #1B5748;">Close</button>
 			        </div>
-				</div>        
+				</div>   
+				<div id="modal-slip">
+		        	<div>
+		        		<hr style="border:solid 2px #1B5748; margin-top:14px; margin-bottom:10px;">
+			        	<div style="padding-bottom:2px;"><label class="normal-label" id="slip-category"></label>전표</div>
+			        	<table id="modal-slip-table">
+			        		<thead>
+		        				<tr>
+		        					<td class="modal-head" style="width:2%;"></td>
+				        			<td class="modal-head" style="width:3%;">월</td>
+				        			<td class="modal-head" style="width:3%;">일</td>
+				        			<td class="modal-head" style="width:5%;">번호</td>
+				        			<td class="modal-head" style="width:4%;">구분</td>
+				        			<td class="modal-head" colspan="2" style="width:15%;">계정과목</td>
+				        			<td class="modal-head" colspan="2" style="width:18%;">거래처</td>
+				        			<td class="modal-head" style="width:15%;">차변</td>
+				        			<td class="modal-head" style="width:15%;">대변</td>
+				        			<td class="modal-head" style="widht:20%;">적요</td>
+				        		</tr>
+			        		</thead>
+			        		<tbody>
+			        		</tbody>
+			        	</table>
+		        	</div>
+		        </div>     
 	        </div>
 		</div>
 	</div>

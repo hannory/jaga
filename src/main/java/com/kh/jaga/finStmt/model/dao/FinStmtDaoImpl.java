@@ -159,6 +159,14 @@ public class FinStmtDaoImpl implements FinStmtDao {
 		return sqlSession.update("FinStmt.insertLastIncomeStmt", is);
 	}
 
+	@Override
+	public ArrayList selectSlipByJournal(SqlSessionTemplate sqlSession, FinStmtAccount fsa) {
+
+		//ArrayList list = (ArrayList) sqlSession.selectList("FinStmt.selectSlipByJournal", fsa);
+		
+		return (ArrayList) sqlSession.selectList("FinStmt.selectSlipByJournal", fsa);
+	}
+
 
 }
 
