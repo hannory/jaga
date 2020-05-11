@@ -28,6 +28,13 @@
 		display: none;
 		border:1px solid red; 
 		color:red;
+		border-radius: 5px;
+	}
+	.green-btn {
+		background-color: #24574A;
+		border-radius: 5px;
+		color: white;
+		border-width: 0px;
 	}
 	.normal-label {
 		margin:0px;
@@ -65,6 +72,10 @@
 	}
 	.table-content {
 		text-align:right;
+		cursor: pointer;
+	}
+	.journal {
+		cursor: pointer;
 	}
 	#contentTable tr:hover:not(.table-head-tr) {
 		background: #DDEBF7;
@@ -163,7 +174,7 @@
 						<td style="width:150px;">조회기간 : </td>
 						<td>
 							<input type="text" id="datepicker">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							<button onclick="return dateSearch();">검색</button></td>
+							<button class="green-btn" onclick="return dateSearch();">검색</button></td>
 					</tr>
 				</table>
 			</ol>
@@ -174,7 +185,7 @@
 						&nbsp;&nbsp;&nbsp;&nbsp;		
 						<!-- <button type="button" id="saveBtn" onclick="saveMfrgStmt();">저장</button>
 						&nbsp;&nbsp; -->
-						<button type="button" id="closeBtn" onclick="closeMfrgStmt();">마감</button>
+						<button type="button" class="green-btn" id="closeBtn" onclick="closeMfrgStmt();">마감</button>
 						<input type="hidden" id="closing" name="closing">
 						<button type="button" id="cancleBtn" onclick="cancleClosing();">마감 취소</button>
 					</td>
