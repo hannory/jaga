@@ -820,11 +820,11 @@ color: white;
             	var lo= Number(i*0.1);
             	$("#localIncomeTax").val(Math.round(lo/10)*10);
             	var lo2= $("#localIncomeTax").val();
-            	
+            	var lo3= Number(lo2);
             	/*차인지급액: 총지급액-공제총액*/
 				var totalPayment = Number($("#totalPayment").val());
 				var totalDeduction=Number($("#totalDeduction").val());
-				$("#totalDeduction").val(totalDeduction+lo);
+				$("#totalDeduction").val(totalDeduction+lo3);
             	$("#differencePymt").val(totalPayment-totalDeduction-lo2);
             	})
 	</script>
