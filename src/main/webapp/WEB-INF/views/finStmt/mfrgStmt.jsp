@@ -32,6 +32,13 @@
 		display: none;
 		border:1px solid red; 
 		color:red;
+		border-radius: 5px;
+	}
+	.green-btn {
+		background-color: #24574A;
+		border-radius: 5px;
+		color: white;
+		border-width: 0px;
 	}
 	#closingMsg{
 		display: none;
@@ -67,7 +74,11 @@
 		padding-left:61px;
 	}
 	.table-content {
-		text-align: right;
+		text-align:right;
+		cursor: pointer;
+	}
+	.journal {
+		cursor: pointer;
 	}
 	#inputNum {
 		text-align:right;
@@ -186,7 +197,7 @@
 								<option id="nov">11</option>
 								<option id="dec">12</option>
 							</select> 월&nbsp;&nbsp;&nbsp;&nbsp;
-							<button onclick="return dateSearch();">검색</button></td>
+							<button class="green-btn" onclick="return dateSearch();">검색</button></td>
 					</tr>
 				</table>
 			</ol>
@@ -195,9 +206,9 @@
 					<td>
 						<span style="margin-bottom:10px; color:red;"><img src="${ contextPath }/resources/images/pencil.PNG"><label class="normal-lable" id="requestMsg">기말원재료재고액을 입력하세요</label></span>
 						&nbsp;&nbsp;&nbsp;&nbsp;		
-						<button type="button" id="saveBtn" onclick="saveMfrgStmt();">저장</button>
+						<button type="button" class="green-btn" id="saveBtn" onclick="saveMfrgStmt();">저장</button>
 						&nbsp;&nbsp;
-						<button type="button" id="closeBtn" onclick="closeMfrgStmt();">마감</button>
+						<button type="button" class="green-btn" id="closeBtn" onclick="closeMfrgStmt();">마감</button>
 						<input type="hidden" id="closing" name="closing">
 						<button type="button" id="cancleBtn" onclick="cancleClosing();">마감 취소</button>
 					</td>

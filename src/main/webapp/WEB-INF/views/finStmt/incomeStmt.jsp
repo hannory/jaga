@@ -57,6 +57,10 @@
 	}
 	.table-content {
 		text-align:right;
+		cursor: pointer;
+	}
+	.journal {
+		cursor: pointer;
 	}
 	#contentTable tr:hover:not(.table-head-tr) {
 		background: #DDEBF7;
@@ -73,6 +77,12 @@
 		height:30px;
 		padding:1px;
 		padding-right:3px;
+	}
+	.green-btn {
+		background-color: #24574A;
+		border-radius: 5px;
+		color: white;
+		border-width: 0px;
 	}
 	#inputNum {
 		text-align:right;
@@ -187,7 +197,7 @@
 								<option id="nov">11</option>
 								<option id="dec">12</option>
 							</select> 월&nbsp;&nbsp;&nbsp;&nbsp;
-							<button onclick="return dateSearch();">검색</button></td>
+							<button class="green-btn" onclick="return dateSearch();">검색</button></td>
 					</tr>
 				</table>
 			</ol>
@@ -196,11 +206,11 @@
 					<td>
 						<span style="margin-bottom:10px; color:red;"><img src="${ contextPath }/resources/images/pencil.PNG">기말상품재고액을 입력하세요</span>
 						&nbsp;&nbsp;&nbsp;&nbsp;		
-						<button type="button" id="saveBtn" onclick="saveIncomeStmt();">저장</button>
+						<button type="button" class="green-btn" id="saveBtn" onclick="saveIncomeStmt();">저장</button>
 						&nbsp;&nbsp;
-						<button type="button" id="closeBtn" onclick="insertIncomeStmt();">마감</button>
+						<button type="button" class="green-btn" id="closeBtn" onclick="insertIncomeStmt();">마감</button>
 						<input type="hidden" id="closing" name="closing">
-						<button type="button" id="cancleBtn" onclick="cancleClosing();">마감 취소</button>
+						<button type="button" id="cancleBtn" onclick="cancleClosing();" style="border-radius:5px;">마감 취소</button>
 					</td>
 					<td align="right">
 						<span id="closingMsg">당기 <label class="normal-label" id="closingNum"></label>번째 마감 후 재수정 중</span>

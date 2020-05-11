@@ -51,6 +51,12 @@
 	.table-subTitle {
 		background:#d3ede6;
 	}
+	.table-content {
+		cursor: pointer;
+	}
+	.journal {
+		cursor: pointer;
+	}
 	#contentTable tr:hover:not(.table-head-tr) {
 		background: #DDEBF7;
 		box-shadow: inset 0 -4px 0 #b4e6f8;
@@ -66,6 +72,12 @@
 		height:30px;
 		padding:1px;
 		padding-right:3px;
+	}
+	.green-btn {
+		background-color: #24574A;
+		border-radius: 5px;
+		color: white;
+		border-width: 0px;
 	}
 	#main-table {
 		display: none;
@@ -158,7 +170,7 @@
 						<td style="width:150px;">조회기간 : </td>
 						<td>
 							<input type="text" id="datepicker">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							<button onclick="return dateSearch();">검색</button></td>
+							<button class="green-btn" onclick="return dateSearch();">검색</button></td>
 					</tr>
 				</table>
 			</ol>
