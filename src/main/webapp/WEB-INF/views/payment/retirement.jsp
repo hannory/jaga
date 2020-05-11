@@ -156,13 +156,22 @@ main tr {
 #salaryTable {
 	width: 60%;
 }
+#salaryTable tbody td{
+	text-align: right;
+	padding-right: 5px;
+}
 
 #salaryTable th {
 	background: #D9E3E3;
 	text-align: center;
 }
+
 #salaryTable2 {
 	width: 70%;
+}
+#salaryTable2 tbody td{
+	text-align: right;
+	padding-right: 5px;
 }
 
 #salaryTable2 th {
@@ -172,6 +181,14 @@ main tr {
 
 #bonustable {
 	width: 100%;
+}
+#bonustable tbody td{
+	text-align: center;
+}
+
+#bonustable tbody td:nth-child(3){
+	text-align: right;
+	padding-right: 5px;
 }
 
 #caculTable {
@@ -190,6 +207,11 @@ main tr {
 
 #calculDateTable {
 	width: 100%;
+}
+
+#caculTable input {
+	text-align: left;
+	padding-left: 5px;
 }
 
 #boundary {
@@ -221,6 +243,8 @@ input {
 	border-bottom-left-radius: 5px;
 	border-bottom-right-radius: 5px;
 	border: 1px solid lightgray;
+	text-align: right;
+	padding-right: 5px;
 }
 
 #bonustable th {
@@ -267,13 +291,34 @@ input {
 	border-bottom-left-radius: 5px;
 	border-bottom-right-radius: 5px;
 }
+#subBtn{
+	background: #296355;
+	color: white;
+	border: 1px solid #296355;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	float: right;
+}
 
 #taxArea {
 	display: none;
 }
+
 #bonusArea {
 	display: none;
 }
+
+#infoTable input {
+	text-align: center;
+}
+
+#retirePayTable td:nth-child(2){
+	text-align: right;
+	padding-right: 5px;
+}
+
 </style>
 </head>
 <body>
@@ -313,14 +358,16 @@ input {
 				</div>
 				<form action="insertRetirement.rt" method="post">
 				<input type="hidden" id="empCode" name="employeeCode">
+				<input type="hidden" id="pymtDate" name="pymtDate">
 				<div id="wrapp2">
-				<button>확인</button>
+				
 					<table id="infoTable">
 						<tr>
 							<th>입사(정산시작)일</th>
 							<td><input type="text" name="startDate" id="startDate"></td>
 							<th>퇴사(정산종료)일</th>
-							<td colspan="3"><input type="text" name="endDate" id="endDate"></td>
+							<td colspan="2"><input type="text" name="endDate" id="endDate"></td>
+							<td><button id="subBtn">저장</button></td>
 						</tr>
 						<tr>
 							<th>근속기간</th>
@@ -332,8 +379,8 @@ input {
 						</tr>
 						<tr>
 							<th>실제 년/월/일별 근무월수</th>
-							<td colspan="5"><input type="text" id="allYear">&nbsp;년/ <input
-								type="text" id="allMonth">&nbsp;개월/ <input type="text" id="allDay">&nbsp;일
+							<td colspan="5"><input type="text" id="allYear" style="width:50px;">&nbsp;년/ <input
+								type="text" id="allMonth" style="width:50px;">&nbsp;개월/ <input type="text" id="allDay" style="width:50px;">&nbsp;일
 							</td>
 						</tr>
 					</table>
@@ -347,12 +394,14 @@ input {
 						<table id="retireTable">
 							<tr>
 								<th rowspan="2">급여산정</th>
-								<td colspan="3">①기간 <input type="text" name="totalSalaryStart" id="totalSalaryStart"> ~ <input
-									type="text" name="totalSalaryEnd" id="totalSalaryEnd"></td>
+								<td colspan="3">①기간 <input type="text" name="totalSalaryStart" id="totalSalaryStart" style="text-align:center;"> ~ <input
+									type="text" name="totalSalaryEnd" id="totalSalaryEnd" style="text-align:center;"></td>
 							</tr>
 							<tr>
-								<td colspan="3">②산정계 <input type="text" id="totalSalary" name="totalSalary"> = (급여) <input
-									type="text" name="salary" id="salary"> + (상여) <input type="text" id="bonus" name="bonus">
+								<td colspan="3">
+									②산정계 <input type="text" id="totalSalary" name="totalSalary">
+									 = (급여) <input type="text" name="salary" id="salary">
+									  + (상여) <input type="text" id="bonus" name="bonus">
 								</td>
 							</tr>
 							<tr>
@@ -698,6 +747,8 @@ input {
 							</table>
 						</div>
 						<div id="wrapp7">
+						<input type="hidden" name="beforeLongevity" id="beforeLongevity">
+						<input type="hidden" name="afterLongevity" id="afterLongevity">
 							<table id="calculDateTable" border="1">
 								<tr>
 									<th style="background: #24574A; color: white;">근속연수 계산</th>
@@ -890,6 +941,15 @@ input {
 				$(str).val($(str).val().replace('+', '000'));
 			    $(str).val(comma(uncomma($(str).val())));
 			}
+			
+			/* 폼전송시 콤마 빼기++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++= */
+			$("form").submit(function(){
+				$("input").not("#infoTable").not("#totalSalaryStart").not("#totalSalaryEnd").each(function(){
+					$(this).val(uncomma($(this).val()));
+				});
+			});
+			
+			/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 		
 			var empCode = null;
 			$(function(){
@@ -960,7 +1020,7 @@ input {
 					success:function(data){
 						var info = data.info;
 						var r = data.retirement;
-						console.log(r);
+						$("input").attr("readonly", true);
 						
 						$("#empCode").val(info.employeeCode);
 						$("#startDate").val(info.enrollDate);
@@ -987,8 +1047,12 @@ input {
 						$("#account4").val(comma(data.salaryAvg) + " = " + comma(info.sumAllSalary+info.avgBonus) + " / 3");
 						$("#account5").val(comma(data.anticipateRtm) + " = " + comma(data.salaryAvg) + " * " + info.allDay + " / 365");
 						
-						$("#bonustable tfoot th:nth-child(2)").text(comma(info.sumBonus));
+						$("#bonustable tfoot th:nth-child(3)").text(comma(info.sumBonus)).css("text-align", "right").css("padding-right", "5px");
 						$("#retirePayTable tr:nth-child(2) td:nth-child(2)").text(comma(data.anticipateRtm));
+						$("#retirePayTable tr:nth-child(5) td:nth-child(2)").text(comma(data.anticipateRtm));
+						$("#afterLongevity").val(info.ttAYear);
+						$("#beforeLongevity").val(info.ttBAllAllYear);
+						$("#pymtDate").val(info.leaveDate);
 						
 						$("#calculDateTable td").html("1. 전체 근속연수<br> " 
 								+ info.ttAll + " 개월 = " 	+ info.ttAllYear + "년 " + info.ttAllMonth + " 개월 = " + info.ttAllAllYear 
@@ -1043,10 +1107,10 @@ input {
 							$("#salaryTable2 tr:nth-child(2) th:nth-child(4)").text(info.retirementDTO2[2].thisMonthLastday);
 							$("#salaryTable2 tr:nth-child(2) th:nth-child(5)").text(info.retirementDTO2[3].thisMonthLastday);
 							
-							$("#salaryTable2 tr:nth-child(3) th:nth-child(2)").text(info.lastThree);
-							$("#salaryTable2 tr:nth-child(3) th:nth-child(3)").text(info.retirementDTO2[1].thisMonthLastday.substr(8,2)-info.retirementDTO2[1].thisMonthFirstday.substr(8,2));
-							$("#salaryTable2 tr:nth-child(3) th:nth-child(4)").text(info.retirementDTO2[2].thisMonthLastday.substr(8,2)-info.retirementDTO2[1].thisMonthFirstday.substr(8,2));
-							$("#salaryTable2 tr:nth-child(3) th:nth-child(5)").text(info.retirementDTO2[3].thisMonthLastday.substr(8,2)-info.retirementDTO2[1].thisMonthFirstday.substr(8,2));
+							$("#salaryTable2 tr:nth-child(3) th:nth-child(2)").text(info.lastThree+1);
+							$("#salaryTable2 tr:nth-child(3) th:nth-child(3)").text(info.retirementDTO2[1].thisMonthLastday.substr(8,2)-info.retirementDTO2[1].thisMonthFirstday.substr(8,2)+1);
+							$("#salaryTable2 tr:nth-child(3) th:nth-child(4)").text(info.retirementDTO2[2].thisMonthLastday.substr(8,2)-info.retirementDTO2[1].thisMonthFirstday.substr(8,2)+1);
+							$("#salaryTable2 tr:nth-child(3) th:nth-child(5)").text(info.retirementDTO2[3].thisMonthLastday.substr(8,2)-info.retirementDTO2[1].thisMonthFirstday.substr(8,2)+1);
 							
 							$("#salaryTable2 tr:nth-child(4) td:nth-child(2)").text(comma(info.retirementDTO2[0].salary));
 							$("#salaryTable2 tr:nth-child(4) td:nth-child(3)").text(comma(info.retirementDTO2[1].salary));

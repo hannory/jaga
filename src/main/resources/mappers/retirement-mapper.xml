@@ -234,4 +234,23 @@
 	]]>
 	</select>
 
+	<insert id="insertRetiremnet" parameterType="Retirement">
+		INSERT INTO RETIREMENT_PAY_INFO
+		VALUES(SEQ_RTM_CODE.NEXTVAL, #{employeeCode}, #{startDate}, #{endDate}, #{pymtDate}
+			, #{totalSalary}, #{salary}, #{bonus}, #{salaryAvg}, #{anticipateRtm}
+			, #{totalSalaryStart}, #{totalSalaryEnd}, #{longevity}, #{beforeLongevity}, #{beforeLongevity})
+	</insert>
+	
+	<insert id="insertRetirementTax" parameterType="RetirementTaxAf">
+		INSERT INTO RETIREMENT_TAX
+		VALUES(#{incomeTax}, #{localIncomeTax}, #{rtmBf}, #{rtmDecliningBf}
+			, #{longevityDdcBf}, #{rtmStdTaxBf}, #{rtmAf}, #{longevityDdcAf}, #{exchangePymtAf}
+			, #{exchPymtDdcAf}, #{retireStdTaxAf}, #{exchCalculTaxAf}, #{calculTaxAf}, #{rtmCalculTax}, SEQ_RTM_CODE.CURRVAL
+			, #{rtmYear}, #{realRetirement})
+	</insert>
+	
+	<insert id="insertRetirementTaxAf">
+		INSERT INTO RETIREMENT_TAX_AF
+		VALUES(SEQ_RTM_CODE.CURRVAL, #{beforeLongevity}, #{afterLongevity}, #{calculSum}, #{calculCode})
+	</insert>
 </mapper>

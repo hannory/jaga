@@ -85,11 +85,17 @@ input {
 					</form>
 					<br>
 					<table id="empList" style="text-align: center;">
-						<tr>
-							<td><input type="checkbox" id="checkk"></td>
-							<td>10001</td>
-							<td>최새우</td>
-						</tr>
+						<c:forEach var="e" items="${ empList }" >
+							<tr>
+								<td><input type="checkbox" id="checkk"></td>
+								<td>
+								<a href="#" onclick="detail('${e.employeeCode}')"><c:out value="${ e.employeeNum }"/></a>
+								</td>
+								<td>
+								<a href="#" onclick="detail('${e.employeeCode}')"><c:out value="${ e.employeeName }"/></a>
+								</td>
+							</tr>				
+						</c:forEach>
 					</table>
 
 				</div>

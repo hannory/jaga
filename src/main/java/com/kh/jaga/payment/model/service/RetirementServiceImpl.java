@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.jaga.employee.model.vo.Employee;
 import com.kh.jaga.payment.model.dao.RetirementDao;
+import com.kh.jaga.payment.model.vo.Retirement;
 import com.kh.jaga.payment.model.vo.RetirementDTO;
 import com.kh.jaga.payment.model.vo.RetirementDTO2;
 
@@ -31,6 +32,23 @@ public class RetirementServiceImpl implements RetirementService {
 	@Override
 	public List<RetirementDTO2> selectRetireBonus(String empCode) {
 		return rd.selectRetireBonus(sqlSession, empCode);
+	}
+
+	@Override
+	public int insertRetirement(Retirement r) {
+		int result1 = rd.insertRetirement(sqlSession, r);
+		
+		int result2 = 0;
+		int result3 = 0;
+		
+		if(result1 > 0) {
+			result2 = rd.insertRetirementTax(sqlSession, r);
+			if(result3 > 0) {
+				result3 = rd.insertRetirementTaxAf(sqlSession, r.getRtaList());
+			}
+		}
+		
+		return result3;
 	}
 
 }

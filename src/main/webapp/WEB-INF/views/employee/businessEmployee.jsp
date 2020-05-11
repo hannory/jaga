@@ -61,7 +61,7 @@
 		border-top-right-radius: 5px;
 		border-bottom-left-radius: 5px;
 		border-bottom-right-radius: 5px;
-		
+		float: right;
 	}
 	
 	#wrapp2 td{
@@ -148,6 +148,18 @@
 		border: 1px solid gray;
 		padding-left: 5px;
 	}
+	
+	#cateSelectTable td:nth-child(2){
+		border-bottom: 5px solid #296355;
+	}
+	
+	#cateSelectTable{
+		width: 15%;
+		heigh: 100px;
+		font-size: 20px;
+		text-align: center;
+		margin: 30px;
+	}
 </style>
 </head>
 <body>
@@ -159,6 +171,14 @@
 	<main>
 		<div class="container-fluid">
 		<h2 class="mt-4">직원관리</h2>
+		<div>
+			<table id="cateSelectTable">
+				<tr>
+					<td onclick="location.href='selectEmpList.emp'" style="cursor: pointer;">일반근로자</td>
+					<td>사업소득자</td>
+				</tr>
+			</table>			
+		</div>
 		<div class="card mb-4">
 			<div class="card-body">
 				<div id="wrapp1">

@@ -19,6 +19,7 @@ public class TaxInvoicePrintDTO {
     private String bizNum;			//사업자등록번호
     private String sellWayName; 	//업태
     private String sellTargetName; 	//종목
+    private String item;
     private int year;
     private int month;
     private int date;
@@ -29,7 +30,7 @@ public class TaxInvoicePrintDTO {
 	public TaxInvoicePrintDTO(String slipCode, String slipDate, String supplyValue, String valueTax, String bizRegNum,
 			String venderName, String venderBossName, String sellWay, String sellTarget, String venderAddress,
 			String bizName, String bossName, String bizLocation, String bizNum, String sellWayName,
-			String sellTargetName, int year, int month, int date, BigDecimal supplyDeaga) {
+			String sellTargetName, String item, int year, int month, int date, BigDecimal supplyDeaga) {
 		super();
 		this.slipCode = slipCode;
 		this.slipDate = slipDate;
@@ -47,6 +48,7 @@ public class TaxInvoicePrintDTO {
 		this.bizNum = bizNum;
 		this.sellWayName = sellWayName;
 		this.sellTargetName = sellTargetName;
+		this.item = item;
 		this.year = year;
 		this.month = month;
 		this.date = date;
@@ -181,6 +183,14 @@ public class TaxInvoicePrintDTO {
 		this.sellTargetName = sellTargetName;
 	}
 
+	public String getItem() {
+		return item;
+	}
+
+	public void setItem(String item) {
+		this.item = item;
+	}
+
 	public int getYear() {
 		return year;
 	}
@@ -220,10 +230,9 @@ public class TaxInvoicePrintDTO {
 				+ ", venderBossName=" + venderBossName + ", sellWay=" + sellWay + ", sellTarget=" + sellTarget
 				+ ", venderAddress=" + venderAddress + ", bizName=" + bizName + ", bossName=" + bossName
 				+ ", bizLocation=" + bizLocation + ", bizNum=" + bizNum + ", sellWayName=" + sellWayName
-				+ ", sellTargetName=" + sellTargetName + ", year=" + year + ", month=" + month + ", date=" + date
-				+ ", supplyDeaga=" + supplyDeaga + "]";
+				+ ", sellTargetName=" + sellTargetName + ", item=" + item + ", year=" + year + ", month=" + month
+				+ ", date=" + date + ", supplyDeaga=" + supplyDeaga + "]";
 	}
 
-    
     
 }

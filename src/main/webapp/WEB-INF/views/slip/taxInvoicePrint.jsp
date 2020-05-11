@@ -81,7 +81,7 @@
 			<th colspan="3">업태</th>
 			<td colspan="6"><c:out value="${ info.sellWayName }"/></td>
 			<th>종목</th>
-			<td colspan="5"><c:out value="가방"/></td>
+			<td colspan="5"><c:out value="가구제작"/></td>
 			<th colspan="3">업태</th>
 			<td colspan="6"><c:out value="${ info.sellWay }"/></td>
 			<th>종목</th>
@@ -162,7 +162,7 @@
 		<tr>
 			<td><c:out value="${ info.month }"/></td>
 			<td><c:out value="${ info.date }"/></td>
-			<td colspan="7">상품</td>
+			<td colspan="7"><c:out value="${ info.item }"></c:out></td>
 			<td colspan="3"></td>
 			<td colspan="3"></td>
 			<td colspan="4"></td>
@@ -253,7 +253,7 @@
 			<th colspan="3">업태</th>
 			<td colspan="6"><c:out value="${ info.sellWayName }"/></td>
 			<th>종목</th>
-			<td colspan="5"><c:out value="가방"/></td>
+			<td colspan="5"><c:out value="가구제작"/></td>
 			<th colspan="3">업태</th>
 			<td colspan="6"><c:out value="${ info.sellWay }"/></td>
 			<th>종목</th>
@@ -334,7 +334,7 @@
 		<tr>
 			<td><c:out value="${ info.month }"/></td>
 			<td><c:out value="${ info.date }"/></td>
-			<td colspan="7">상품</td>
+			<td colspan="7"><c:out value="${ info.item }"/></td>
 			<td colspan="3"></td>
 			<td colspan="3"></td>
 			<td colspan="4"></td>

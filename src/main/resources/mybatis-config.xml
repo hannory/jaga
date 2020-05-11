@@ -31,6 +31,8 @@
 	    <typeAlias type="com.kh.jaga.employee.model.vo.BusinessEmp" alias="BusinessEmp"/> 
 	    <typeAlias type="com.kh.jaga.employee.model.vo.BusinessEmp2" alias="BusinessEmp2"/> 
 	    <typeAlias type="com.kh.jaga.payment.model.vo.BusinessPayment" alias="BusinessPayment"/> 
+	    <typeAlias type="com.kh.jaga.payment.model.vo.Retirement" alias="Retirement"/> 
+	    <typeAlias type="com.kh.jaga.payment.model.vo.RetirementTaxAf" alias="RetirementTaxAf"/> 
 	    <typeAlias type="com.kh.jaga.payment.model.vo.RetirementDTO" alias="RetirementDTO"/> 
 	    <typeAlias type="com.kh.jaga.payment.model.vo.RetirementDTO2" alias="RetirementDTO2"/> 
 	    <typeAlias type="com.kh.jaga.finStmt.model.vo.FinStmtAccount" alias="FinStmtAccount"/>  

@@ -63,9 +63,18 @@
 		display:none;
 	} 
 	
+	tbody[class*=listBody] tr:hover {
+		cursor: pointer;
+	}
+	
 	#tbody1 {
 		background: #D9E3E3;
 		
+	}
+	
+	
+	main td {
+		height: 30px;
 	}
 </style>
 </head>
