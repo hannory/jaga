@@ -84,6 +84,10 @@
 		cursor:pointer;
 	}
 	
+	.table-center td{
+		height:33px;
+	}
+	
 	
 	
 	
@@ -388,7 +392,7 @@
 					<td onclick="reportTypeClick(2)" class="cursorPointer">2. 간편장부</td>
 					<td onclick="reportTypeClick(3)" class="cursorPointer">3. 추계 - 기준</td>
 					<td onclick="reportTypeClick(4)" class="cursorPointer">4. 추계 - 단순</td>
-					<td onclick="reportTypeClick(5)" style="width:15%;" class="cursorPointer">5. 성실신고확인</td>
+					<td onclick="reportTypeClick(5)" style="width:160px;" class="cursorPointer">5. 성실신고확인</td>
 				</tr>
 				
 				<script>

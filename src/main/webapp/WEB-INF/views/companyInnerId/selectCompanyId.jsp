@@ -39,6 +39,10 @@
 	.div-menuTap-no:hover{
 		opacity:80%;
 	}
+	
+	#tableMain td{
+		height:33px;
+	}
 </style>
 </head>
 <body>
@@ -82,9 +86,9 @@
 			
 		</script>
 		<form action="" method="post">
-		<table border="1" style="width:80%; text-align:center;">
+		<table id="tableMain" border="1" style="width:80%; text-align:center;">
 		
-			<tr style="background:#24574A; height:20px;">
+			<tr style="background:#24574A; color:white; height:33px;">
 				<td style="width:10%">번호</td>
 				<td style="width:20%">아이디</td>
 				<td style="width:30%">이메일</td>
@@ -100,7 +104,7 @@
 				<td><c:out value="${ target.email }"></c:out></td>
 				<td><c:out value="${ target.name }"></c:out></td>
 				<td><c:out value="${ target.positionCode }"></c:out></td>
-				<td><button>정보수정</button></td>
+				<td><button style="background:#24574A; color:white; border-radius:5px; border:1px solid white;">정보수정</button></td>
 			</tr>
 			</c:forEach>
 			
@@ -108,7 +112,9 @@
 		</table>
 		</form>
 		
-		<div class="page-area" style="margin-left:350px; margin-top:30px;">
+		<div class="page-area" style="margin-left:420px; margin-top:30px;">
+			
+			<button style="background:#24574A; width:35px; height:35px; border:3px solid #24574A; background:white; color:black;"><a href="${ pagePath }"><span><c:out value="<"></c:out></span></a></button>
 			
 			<c:forEach begin="${ pi.startPage }" end="${ pi.endPage }" step="1" var="n">
 				
@@ -123,10 +129,9 @@
 					<button style="background:#24574A; width:35px; height:35px; border:3px solid #24574A; background:white; color:black;"><b><span><c:out value="${ n }"></c:out></span></b></button>
 				</c:if>
 				
-				
-				
 			</c:forEach>
-			
+
+			<button style="background:#24574A; width:35px; height:35px; border:3px solid #24574A; background:white; color:black;"><a href="${ pagePath }"><span><c:out value=">"></c:out></span></a></button>
 			
 		</div>
 		

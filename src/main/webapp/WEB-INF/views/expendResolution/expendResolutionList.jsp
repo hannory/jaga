@@ -9,6 +9,7 @@
 <title>자가 경리</title>
 <style>
 
+	
 	.div-menuTap{
 		display: inline-block;
 		background: #24574A;
@@ -65,6 +66,13 @@
 		margin-top: 50px;
 		border: 1px solid white;
 }
+
+
+
+	#tableMain td{
+		height:33px; 
+	}
+	
 	
 </style>
 </head>
@@ -146,7 +154,7 @@
    			</table>
    			
    			<div style="width:220px; height:50px; float:right; margin-top:-100px; margin-right:5%;">
-   				<div id="" class="colorGreen cursorPointer" style="border-radius:5px; display:inline-block; width:30%; height:30px%; line-height:30px; margin-top:5%;" onclick="apprOk();">승인</div>
+   				<div id="" class="colorGreen cursorPointer" style="border-radius:5px; display:inline-block; width:30%; height:30px; line-height:30px; margin-top:5%;" onclick="apprOk();">승인</div>
    				<div id="" class="colorGreen cursorPointer" style="border-radius:5px; display:inline-block; width:30%; height:30px; line-height:30px; margin-top:10%;" onclick="apprNo();">반려</div>
    			</div>
    			
@@ -299,9 +307,9 @@
 			}
 		</script>
 		<form action="" method="post">
-		<table border="1" style="width:80%; text-align:center;">
+		<table id="tableMain" border="1" style="width:80%; text-align:center;">
 		
-			<tr style="background:#24574A; color:white; height:20px;">
+			<tr style="background:#24574A; color:white; height:33px;">
 				<td style="width:8%">담당자</td>
 				<td style="width:15%">발의일</td>
 				<td style="width:15%">지출일</td>

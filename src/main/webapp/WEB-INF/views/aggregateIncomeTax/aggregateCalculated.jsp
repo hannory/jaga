@@ -221,8 +221,8 @@
 		<!-- 초록색 탭메뉴 만들기 -->
 		<div id="tabMenu01" class="tapMenu" onclick="tap01click()">세액계산</div>
 		<div id="tabMenu02" class="tapMenu" onclick="tap02click()" style="opacity:50%;">기납부 세액 명세서</div>
-		<div id="selectExistingData" onclick="selectExistingData();" class="cursorPointer tapMenu" style="height:30px; line-height:30px; border-radius:7px; margin-left:420px; background:white; color:black; border:2px solid #24574A;"><strong>불러오기</strong></div>
-		<div id="savePrePaid" onclick="savePrePaid();" class="cursorPointer tapMenu" style="height:30px; line-height:30px; border-radius:7px; margin-left:280px; background:white; color:black; display:none; border:2px solid #24574A;"><strong>입력하기</strong></div>
+		<div id="selectExistingData" onclick="selectExistingData();" class="cursorPointer tapMenu" style="height:30px; line-height:30px; border-radius:7px; margin-left:405px; background:white; color:gray; border:2px solid #24574A;"><strong>불러오기</strong></div>
+		<div id="savePrePaid" onclick="savePrePaid();" class="cursorPointer tapMenu" style="height:30px; line-height:30px; border-radius:7px; margin-left:280px; background:white; color:gray; display:none; border:2px solid #24574A;"><strong>입력하기</strong></div>
 		<!-- //초록색 탭메뉴 만들기 끝-->
 		
 		<script>
