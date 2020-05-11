@@ -32,14 +32,14 @@
 	}
 	input{
 		width:200px;
-		border-radius:10px;
+		border-radius:5px;
 	}
 	select{
-		border-radius:10px;
+		border-radius:5px;
 	}
 	.div-box-area{
 		/* background:red; */
-		width:85%;
+		width:95%;
 		height:50%;
 		border:1px solid #C9CACE;
 	}
@@ -49,12 +49,12 @@
 	}
 	.div-subjectName{
 		text-align:center;
-		border-radius:10px;
+		border-radius:5px;
 		border:2px solid #24574A;
 	}
 	.formBtn{
 		width:100px;
-		border-radius:10px;
+		border-radius:5px;
 		border:1px solid #24574A;
 	}
 	.div-menuTap-no{
