@@ -9,6 +9,7 @@
 <style>
 	input{
 		border:none;
+		text-align:right;
 	}
 
 	.div-top4menuWrapper{
@@ -945,8 +946,8 @@
 		<!-- footer -->
 		<div class="card mb-4">
 			<div class="card-body">
-				도움말입니다. 읽어주세요*^^*
-				<h1>${ test }ㅋㅋㅋ</h1>
+				구분에 해당하는 금액을 기준금액란에 입력<br>
+				가산세는 과세표준과 별개로 확인됨
 			</div>
 		</div>
 		<!-- ///footer -->

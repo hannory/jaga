@@ -20,6 +20,7 @@ import com.kh.jaga.aggregateIncomeTax.model.dto.AggregateCalculatedDto;
 import com.kh.jaga.aggregateIncomeTax.model.dto.AmountDataDto;
 import com.kh.jaga.aggregateIncomeTax.model.dto.DeductStmtDto;
 import com.kh.jaga.aggregateIncomeTax.model.dto.IncomeAmountStmtDto;
+import com.kh.jaga.aggregateIncomeTax.model.dto.PaidTaxStmtDto;
 import com.kh.jaga.aggregateIncomeTax.model.service.AggregateService;
 
 /**
@@ -277,12 +278,16 @@ public class AggregateController {
 	
 	
 	
+	//기존 데이터 불러오기 (종소세 계산서)	//이거하고 자야지..
 	@RequestMapping("selectExistingData.aggregate")
 	public void selectExistingData(HttpServletResponse response,
 			String yearOfAttr,
 			String comCode){
 		
-		System.out.println("ajax가 호출한 selectExistingData 메소드");
+		System.out.println("ajax가 selectExistingData 메소드 호출함 ...");
+		System.out.println("뷰에서 온 값들 ::: ");
+		System.out.println("yearOfAttr : " + yearOfAttr);
+		System.out.println("comCode : " + comCode);
 		
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("comCode", comCode);
@@ -292,15 +297,47 @@ public class AggregateController {
 		System.out.println("조회된 dto :::");
 		System.out.println(dto);
 		
+		try {
+			response.getWriter().print(new Gson().toJson(dto));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}//method
+	
+	
+	
+	
+	
+	
+	@RequestMapping("savePrePaid.aggregate")
+	public void savePrePaid(HttpServletResponse response, PaidTaxStmtDto dto ) {
+		
+		System.out.println("ajax가 savePrePaid 호출함...");
+		System.out.println("전달받은 dto ::: " + dto);
+		
+		int result = service.insertPrePaid(dto);
+		
+		System.out.println("인서트 결과 result : " + result);
+		
+		String resultCode = "";
+		if(result > 0) {
+			System.out.println("입력 성공");
+			resultCode = "ok";
+		}else {
+			System.out.println("입력 실패");
+			resultCode ="fail";
+		}
 		
 		
 		
 		try {
-			response.getWriter().print("valueFromJAVA");
+			response.getWriter().print(resultCode);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
+		
+	}//method
+	
 	
 	
 	

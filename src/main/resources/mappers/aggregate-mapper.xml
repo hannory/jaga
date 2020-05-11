@@ -451,13 +451,15 @@
   		STMT_NO,
   		COM_CODE,
   		CREATE_DATE,
-  		TOTAL_DEDUCT
+  		TOTAL_DEDUCT,
+  		YEAR_OF_ATTR
   	)
   	VALUES(
   		SEQ_DEDUCT_STMT.NEXTVAL,
   		#{comCode},
   		SYSDATE,
-  		#{totalDeduct}
+  		#{totalDeduct},
+  		#{yearOfAttr}
   	)
   </select>
   
@@ -469,13 +471,245 @@
   
   
   
-  <!-- 종합소득 계산서 값 가져오는 쿼리문 -->
+  <!-- 종합소득 계산서 값 가져오는 쿼리문 --><!-- 마지막 쿼리 ㅎㅎ -->
   <select id="selectExistingData" parameterType="java.util.Map" resultType="com.kh.jaga.aggregateIncomeTax.model.dto.AggregateCalculatedDto">
   
-  	SELECT SYSDATE
-  	FROM DUAL
+  	SELECT
+(
+    SELECT TOTAL_INCOME
+    FROM
+        (
+        SELECT TOTAL_INCOME, ZZZ, ROWNUM RNUM
+        FROM
+            (
+            SELECT TOTAL_INCOME, TO_NUMBER(DOCUMENT_NO) AS ZZZ
+            FROM INCOME_AMOUNT_STATEMENT
+            WHERE COM_CODE = #{comCode}
+            AND     YEAR_OF_ATTR = #{yearOfAttr}
+            AND     INCOME_TYPE_CODE = '40'
+            ORDER BY ZZZ DESC
+            )
+        )
+    WHERE RNUM = 1
+)
++
+(
+    SELECT TOTAL_INCOME
+    FROM
+        (
+        SELECT TOTAL_INCOME, ZZZ, ROWNUM RNUM
+        FROM
+            (
+            SELECT TOTAL_INCOME, TO_NUMBER(DOCUMENT_NO) AS ZZZ
+            FROM INCOME_AMOUNT_STATEMENT
+            WHERE COM_CODE = #{comCode}
+            AND     YEAR_OF_ATTR = #{yearOfAttr}
+            AND     INCOME_TYPE_CODE = '51'
+            ORDER BY ZZZ DESC
+            )
+        )
+    WHERE RNUM = 1
+) AS V101 --까지 종합소득금액
+,
+(
+    SELECT  TOTAL_DEDUCT
+    FROM
+    (
+        SELECT TOTAL_DEDUCT, ZZZ, COM_CODE, ROWNUM RNUM
+        FROM
+            (
+                SELECT TOTAL_DEDUCT, TO_NUMBER(STMT_NO) AS ZZZ, COM_CODE
+                FROM DEDUCT_STMT
+                WHERE COM_CODE = #{comCode}
+                AND     YEAR_OF_ATTR = #{yearOfAttr}
+                ORDER BY ZZZ DESC
+            )
+        
+    )
+    WHERE RNUM = 1
+) AS V102 --까지 소득공제계
+,
+(
+        (
+        SELECT TOTAL_INCOME
+        FROM
+            (
+            SELECT TOTAL_INCOME, ZZZ, ROWNUM RNUM
+            FROM
+                (
+                SELECT TOTAL_INCOME, TO_NUMBER(DOCUMENT_NO) AS ZZZ
+                FROM INCOME_AMOUNT_STATEMENT
+                WHERE COM_CODE = #{comCode}
+                AND     YEAR_OF_ATTR = #{yearOfAttr}
+                AND     INCOME_TYPE_CODE = '40'
+                ORDER BY ZZZ DESC
+                )
+            )
+        WHERE RNUM = 1
+    )
+    +
+    (
+        SELECT TOTAL_INCOME
+        FROM
+            (
+            SELECT TOTAL_INCOME, ZZZ, ROWNUM RNUM
+            FROM
+                (
+                SELECT TOTAL_INCOME, TO_NUMBER(DOCUMENT_NO) AS ZZZ
+                FROM INCOME_AMOUNT_STATEMENT
+                WHERE COM_CODE = #{comCode}
+                AND     YEAR_OF_ATTR = #{yearOfAttr}
+                AND     INCOME_TYPE_CODE = '51'
+                ORDER BY ZZZ DESC
+                )
+            )
+        WHERE RNUM = 1
+    ) 
+    - 
+    (
+        SELECT  TOTAL_DEDUCT
+        FROM
+        (
+            SELECT TOTAL_DEDUCT, ZZZ, COM_CODE, ROWNUM RNUM
+            FROM
+                (
+                    SELECT TOTAL_DEDUCT, TO_NUMBER(STMT_NO) AS ZZZ, COM_CODE
+                    FROM DEDUCT_STMT
+                    WHERE COM_CODE = #{comCode}
+                    AND     YEAR_OF_ATTR = #{yearOfAttr}
+                    ORDER BY ZZZ DESC
+                )
+            
+        )
+        WHERE RNUM = 1
+    )
+) AS V103
+,
+(
+ 'VALUE_FROM_ORACLE'
+) AS V104
+,
+(
+    SELECT TOTAL_DEDUCT
+    FROM
+    (
+        SELECT ZZZ, COM_CODE, TOTAL_DEDUCT, YEAR_OF_ATTR, CREATE_DATE, ROWNUM RNUM
+        FROM
+        (
+            SELECT TO_NUMBER(STMT_NO) AS ZZZ, COM_CODE, TOTAL_DEDUCT, YEAR_OF_ATTR, CREATE_DATE
+            FROM DEDUCT_STMT
+            WHERE YEAR_OF_ATTR = #{yearOfAttr}
+            AND     COM_CODE = #{comCode}
+            ORDER BY ZZZ DESC
+        )
+    )
+    WHERE RNUM = 1
+) AS V107
+,
+(
+    SELECT SUM_RIGHT
+    FROM 
+    (
+        SELECT ZZZ, SUM_RIGHT, ROWNUM RNUM
+        FROM
+        (
+            SELECT TO_NUMBER(STMT_NO) AS ZZZ, SUM_RIGHT
+            FROM ADDED_TAX_STMT
+            WHERE COM_CODE = #{comCode}
+            AND     ATTR_YEAR = #{yearOfAttr}
+            ORDER BY ZZZ DESC
+        )
+    )
+    WHERE RNUM = 1
+) AS V109
+,
+(
+   SELECT TOTAL_PAID_INCOME
+   FROM
+   (
+       SELECT TOTAL_PAID_INCOME, ROWNUM RNUM
+       FROM
+       (
+            SELECT TO_NUMBER(DOCUMENT_NO) AS ZZZ, COM_CODE, YEAR_OF_ATTR, TOTLA_PAID_INCOME AS TOTAL_PAID_INCOME
+            FROM PAID_TAX_STATEMENT
+            WHERE COM_CODE = #{comCode}
+            AND     YEAR_OF_ATTR = #{yearOfAttr}
+            ORDER BY ZZZ DESC
+       )
+   )
+   WHERE RNUM = 1
+) AS V112
+
+FROM DUAL
   	
   </select>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <insert id="insertPrePaid" parameterType="com.kh.jaga.aggregateIncomeTax.model.dto.PaidTaxStmtDto">
+  
+  	INSERT INTO PAID_TAX_STATEMENT(
+	  	DOCUMENT_NO,
+		YEAR_OF_ATTR,
+		TOTLA_PAID_INCOME,
+		COM_CODE
+  	)
+  	VALUES(
+	  	SEQ_PAID_TAX_STATEMENT.NEXTVAL,
+		#{yearOfAttr},
+		#{totalPaidIncome},
+		#{comCode}
+  	)
+  	
+  	
+  	
+  
+  	
+  </insert>
+  
+  
+  
+  <!-- 
+  	INSERT INTO PAID_TAX_STATEMENT(
+	  	DOCUMENT_NO,
+		YEAR_OF_ATTR,
+		PAID_TAX,
+		PAYMENT_OF_EXPECTED_RETURN,
+		TAX_OF_EXPECTED_RETURN,
+		OCCASINAL_TAX,
+		INTEREST_INCOME,
+		DIVIDEND_INCOME,
+		BIZ_INCOME,
+		WORK_INCOME,
+		ANNUITY_INCOME,
+		ETC_INCOME,
+		TOTLA_PAID_INCOME,
+		COM_CODE
+  	)
+  	VALUES(
+	  	SEQ_PAID_TAX_STATEMENT,
+		#{yearOfAttr},
+		Null,
+		null,
+		null,
+		null,
+		null,
+		null,
+		null,
+		null,
+		null,
+		null,
+		#{totalPaidIncome},
+		#{comCode}
+  	)
+   -->
   
   
   

@@ -9,6 +9,7 @@ import com.kh.jaga.aggregateIncomeTax.model.dto.AggregateCalculatedDto;
 import com.kh.jaga.aggregateIncomeTax.model.dto.AmountDataDto;
 import com.kh.jaga.aggregateIncomeTax.model.dto.DeductStmtDto;
 import com.kh.jaga.aggregateIncomeTax.model.dto.IncomeAmountStmtDto;
+import com.kh.jaga.aggregateIncomeTax.model.dto.PaidTaxStmtDto;
 import com.kh.jaga.aggregateIncomeTax.model.vo.BizCodeVo;
 import com.kh.jaga.finStmt.model.vo.IncomeStmt;
 
@@ -27,6 +28,8 @@ public interface AggregateService {
 	AggregateCalculatedDto selectExistingData(HashMap<String, String> map);
 
 	int insertDeduct(DeductStmtDto dto);
+
+	int insertPrePaid(PaidTaxStmtDto dto);
 
 
 }
