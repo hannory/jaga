@@ -110,6 +110,7 @@
 			display: none;
 			border:1px solid red; 
 			color:red;
+			margin-left:-85px;
 		}
 		#termDiv{
    			width:80px; 
@@ -149,6 +150,33 @@
 		 .numberArea{
    			text-align: right;
    		}
+   		#deadlineBtn{
+   		width:50px; 
+   		height:30px; 
+   		background:#24574A; 
+   		border:none; 
+   		color:white; 
+   		border-radius:5px;
+   		}
+   		.bu{
+   		
+   		width:50px; 
+   		height:30px; 
+   		background:#24574A; 
+   		border:none; 
+   		color:white; 
+   		border-radius:5px;
+   		
+   		}
+   		#report{
+   		width:130px; 
+   		height:30px; 
+   		background:#24574A; 
+   		border:none; 
+   		color:white; 
+   		border-radius:5px;
+   		
+   		}
     </style>
 </head>
 <body>
@@ -185,8 +213,8 @@
             		<option value="12">12</option>
             	</select> 
             </li>
-			<li><input type="button" onclick="search_cis()" value="조회"></li>
-			<li><input type="button" name="report" value="신고서미리보기" onclick="print()"></li>	
+			<li><input type="button" class="bu" onclick="search_cis()" value="조회"></li>
+			<li><input type="button" id="report" name="report" value="신고서미리보기" onclick="print()"></li>	
 		</ol>
 		
 		
@@ -902,9 +930,7 @@
         <tr>
            <td colspan="9">
             <!-- 코드영역 -->
-                <div id="Tex_bill_code">
-                     <p class="Tex_bill_code_p">[확인]전성일자가 없는 거래는 전자세금계산서 발급분으로 반영 되므로 국세청 e세로 전송 세금계산서와 반드시 확인합니다.</p>
-                </div>
+                
             </td>
         </tr>
         
@@ -1244,9 +1270,7 @@
         <!-- 상세리스트끝 -->
         <tr>
             <td colspan="9">
-                 <div id="Tex_bill_code">
-                    <p class="Tex_bill_code_p">[확인]전성일자가 없는 거래는 전자세금계산서 발급분으로 반영 되므로 국세청 e세로 전송 세금계산서와 반드시 확인합니다.</p>
-                </div>
+               
             </td>
         </tr>
         

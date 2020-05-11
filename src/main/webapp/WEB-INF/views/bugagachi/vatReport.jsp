@@ -129,6 +129,7 @@
 			display: none;
 			border:1px solid red; 
 			color:red;
+			/* margin-left:-45px; */
 		}
    		#vat_mainDiv{
    			width: 50%; 
@@ -182,6 +183,33 @@
 		    left: 50%; 
 		    z-index: 100; 
 		 }
+		 .bu{
+   		
+   		width:50px; 
+   		height:30px; 
+   		background:#24574A; 
+   		border:none; 
+   		color:white; 
+   		border-radius:5px;
+   		
+   		}
+   		#report{
+   		width:130px; 
+   		height:30px; 
+   		background:#24574A; 
+   		border:none; 
+   		color:white; 
+   		border-radius:5px;
+   		
+   		}
+   		#deadlineBtns{
+   		width:50px; 
+   		height:30px; 
+   		background:#24574A; 
+   		border:none; 
+   		color:white; 
+   		border-radius:5px;
+   		}
     </style>
 </head>
 <body>
@@ -224,10 +252,10 @@
             		<option value="12">12</option>
             	</select> 
             </li>
-			<li><input type="button" onclick="search_cis()" value="조회"></li>
+			<li><input type="button" class="bu" onclick="search_cis()" value="조회"></li>
 			<li>부가율: <input type="text" id="vatRate" name="vatRate" readonly style="width: 50px;">
 			<input type="text" name="vatRateDiv" readonly  style="width: 50px; background-color:#D9EAD3 "> </li>
-			<li><input type="button" name="report" value="신고서미리보기" onclick="pri_VATReport()"></li>
+			<li><input type="button" id="report" name="report" value="신고서미리보기" onclick="pri_VATReport()"></li>
 			
 		</ol>
 		
@@ -245,12 +273,8 @@
      }
 	/* 마감취소 */
 	function cencelDeadline(){
-		console.log(vatCode+" ? "+comCode);	
-		console.log($("#form1"));
 		swit=1;
 		$("#form1").prop("action", "updatdDeadLineCen.vat");
-		console.log($("#form1"));
-		alert("왜안돼 ㅅㅂ");
 		var vatCode=$("#vatCode").val();
 		var comCode=$("#comCode").val();
 	}
@@ -303,6 +327,7 @@
 	 				/* 부가율 넣어주기 */
 	 				$("#vatRate").val(vat.valueRate);
 	 				$("#vatCode").val(vat.vatCode);
+	 				$("#termDiv").val(vat.termDiv);
 	 				
 	 				/* 다 를 여기서 계산해줘야함(가 9 -나 17) */
 	 				for(var i=1;i<=85;i++){

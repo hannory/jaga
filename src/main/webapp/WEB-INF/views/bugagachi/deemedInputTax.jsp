@@ -162,6 +162,7 @@
 			display: none;
 			border:1px solid red; 
 			color:red;
+			margin-left:-85px;
 		}
 		#termDiv{
    			width:80px; 
@@ -170,6 +171,33 @@
 		.men_ga td{
 			border:1px solid #C9CACE;
 		}
+		.bu{
+   		
+   		width:50px; 
+   		height:30px; 
+   		background:#24574A; 
+   		border:none; 
+   		color:white; 
+   		border-radius:5px;
+   		
+   		}
+   		#report{
+   		width:130px; 
+   		height:30px; 
+   		background:#24574A; 
+   		border:none; 
+   		color:white; 
+   		border-radius:5px;
+   		
+   		}
+   		#deadlineBtn{
+   		width:50px; 
+   		height:30px; 
+   		background:#24574A; 
+   		border:none; 
+   		color:white; 
+   		border-radius:5px;
+   		}
     </style>
 </head>
 <body>
@@ -199,8 +227,8 @@
             		<option value="12">12</option>
             	</select> 
             </li>
-			<li><input type="button" onclick="search_cis()" value="조회"></li>
-            <li><input type="button" name="report" value="신고서미리보기"></li>
+			<li><input type="button" class="bu" onclick="search_cis()" value="조회"></li>
+            <li><input type="button" id="report" name="report" value="신고서미리보기"></li>
 			
 		</ol>
 		
@@ -488,18 +516,18 @@
 						var priceCountCard=0;	//매입가액 카드
 						var deemTaxCountCard=0;	//의제매입세액 카드
 						for(var key in deemSlip){
-							
-							if(deemSlip[key].evidenceCode=='20'){//계산서
-								proCountBill++;//매임처수
-								countBill=countBill+deemSlip[key].count1;//건수
-								priceCountBill=priceCountBill+deemSlip[key].purchasePrice;
-								
-							}else if(deemSlip[key].evidenceCode=='60'){//신용카드
-								proCountCard++;
-								countCard=countCard+deemSlip[key].count1;
-								priceCountCard=priceCountCard+deemSlip[key].purchasePrice;
+							if(deemSlip[key].bizRegNum.length<=12){
+								if(deemSlip[key].evidenceCode=='20'){//계산서
+									proCountBill++;//매임처수
+									countBill=countBill+deemSlip[key].count1;//건수
+									priceCountBill=priceCountBill+deemSlip[key].purchasePrice;
+									
+								}else if(deemSlip[key].evidenceCode=='60'){//신용카드
+									proCountCard++;
+									countCard=countCard+deemSlip[key].count1;
+									priceCountCard=priceCountCard+deemSlip[key].purchasePrice;
+								}
 							}
-							
 						}
 						deemTaxCountBill=Math.floor(priceCountBill*(8/108));
 						deemTaxCountCard=Math.floor(priceCountCard*(8/108));
