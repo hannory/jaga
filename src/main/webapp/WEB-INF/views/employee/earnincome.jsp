@@ -32,10 +32,10 @@ top:270px;
 
 #deduction{
 position:absolute;
-width:500px;
+width:450px;
 height:1300px;
 left: 1100px;
-top:360px;
+top:380px;
 }
 
 /* 사각형 테두리 border */
@@ -233,7 +233,7 @@ border-radius: 5px;
 } 
 
 #okay{
-top:230px;
+top:190px;
 left:1600px;
 }
 

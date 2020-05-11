@@ -4,18 +4,23 @@
     
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-      <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
-  
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+<script src="${ contextPath }/resources/js/scripts.js"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
+<script src="${ contextPath }/resources/demo/datatables-demo.js"></script>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
 </head>
 
 <style>
@@ -1039,7 +1044,7 @@ border-radius: 5px;
 		
 		<tr>
 			<td><b id="biz-num"> 사업자등록번호 / 주민번호 / 계좌번호 / 카드번호  </b>
-			<input type="text" name="bizRegNum" id="biz-reg-num-surr" placeholder="사업자/주민 등록번호의 경우 -로 입력">
+			<input type="text" name="bizRegNum" id="biz-reg-num-surr" placeholder=" 사업자/주민 등록번호의 경우 -로 입력">
 			<!-- <button>사업자등록상태조회</button></td> -->
 		</tr>
 
@@ -1059,10 +1064,10 @@ border-radius: 5px;
 			
 		<tr>
 			<td><b id="address"> 주소</b>
-			<input type="text" name="postcode" placeholder="우편번호" id="vender-address1-surr">
+			<input type="text" name="postcode" placeholder=" 우편번호" id="vender-address1-surr">
 			<td><input type="button" onclick="sample2_execDaumPostcode()" id="addressbtn" value="검색"></td>
-			<td><input type="text" id="vender-address2-surr" name="venderAddress" placeholder="주소"></td>
-		  <td class="secondLine"><input type="hidden" id="address2" name="address1" placeholder="상세주소"></td>
+			<td><input type="text" id="vender-address2-surr" name="venderAddress" placeholder=" 주소"></td>
+		  <td class="secondLine"><input type="hidden" id="address2" name="address1" placeholder=" 상세주소"></td>
 		</tr>
 
 		<tr>
@@ -1096,7 +1101,6 @@ border-radius: 5px;
 		</tr>
 		
 			<script>
-			
 			$("#vendertype-surr").change(function(){ 
 		
 			if($("#vendertype-surr").val()=="2"){
@@ -1112,12 +1116,11 @@ border-radius: 5px;
 			} 
 
 			}); 
-			
 			</script>
 		
 		<tr>
 			<td><b id="com-manage-tel"> 업체담당자연락처 </b>
-				<input type="text" name="comManagerTel" id="com-manager1-tel-surr" placeholder="숫자만 입력">
+				<input type="text" name="comManagerTel" id="com-manager1-tel-surr" placeholder=" 숫자만 입력">
 
 			</td>
 		 <td><input type="hidden" value="${sessionScope.loginCompany.companyCode}" name="comCode" id="comCode"></td> 
@@ -1142,10 +1145,7 @@ border-radius: 5px;
 
 		</form>
 		<div style="height: 100vh;"></div>
-		<div class="card mb-4">
-			<div class="card-body">When scrolling, the navigation stays at
-				the top of the page. This is the end of the static navigation demo.</div>
-		</div>
+
 	</main>
       <!-- Modal 은행코드 -->
   <div class="modal fade" id="bankModal" role="dialog">
@@ -1271,11 +1271,9 @@ function initLayerPosition() {
 	element_layer.style.top = (((window.innerHeight || document.documentElement.clientHeight) - height) / 2 - borderWidth)
 			+ 'px';
 };
-
 </script>
 
 <script>
-
 var bankCode;//출금/입금계정과목
 var bankName;
 function ccc(value){
@@ -1293,14 +1291,13 @@ function ccc(value){
 	$("div#bankModal").modal("hide");
 }		
 
-
 /* 은행모달 */
 $("#searchBtn2").click(function(){
 	
 	$("#bankTable").dataTable({
  	/* 	destroy: true,  */
 		 ajax:{
-				'url':'bankSearch.ve',
+				'url':'bankSearch.vi',
 				'type':'get'
 			},
 		 
@@ -1333,5 +1330,6 @@ $("#searchBtn2").click(function(){
 </div>
 
 	<jsp:include page="../common/menubar2.jsp" />
+	
 </body>
 </html>

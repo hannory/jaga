@@ -12,7 +12,7 @@
 
 #table-total{
 position: absolute;
-width: 1000px;
+width: 1400px;
 height: 1000px;
 left: 270px;
 top: 139px;
@@ -442,7 +442,7 @@ border-radius: 5px;
 
 #enroll{
 position: absolute;
-left: 1295px;
+left: 1290px;
 top: 200px;
 
 background: #FFFFFF;
@@ -458,8 +458,8 @@ border-radius: 5px;
 	<div id="main">
 	<div class="container-fluid">
 		<h2 class="mt-4">계정과목등록</h2>
-		<ol class="breadcrumb mb-4">
-		</ol>
+<!-- 		<ol class="breadcrumb mb-4"> -->
+<!-- 		</ol> -->
 
 		 
 		<div id= "table1">
@@ -586,10 +586,7 @@ border-radius: 5px;
 	</div>
 			
 		<div style="height: 100vh;"></div>
-		<div class="card mb-4">
-			<div class="card-body">When scrolling, the navigation stays at
-				the top of the page. This is the end of the static navigation demo.</div>
-		</div>
+
 	</main>
 	<jsp:include page="../common/menubar2.jsp" />
 </body>

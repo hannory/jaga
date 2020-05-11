@@ -1,5 +1,6 @@
 package com.kh.jaga.vender.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
 import com.kh.jaga.company.model.vo.Company;
 import com.kh.jaga.vender.model.service.VenderService;
 import com.kh.jaga.vender.model.vo.Vender;
@@ -72,21 +74,22 @@ public class VenderController {
 	 
 	  }
 	  
-	  @GetMapping("bankSearch.ve")
-	  public ModelAndView searchBank(ModelAndView mv, HttpServletRequest request) {
+	  @GetMapping("bankSearch.vi")
+/*	  public ModelAndView searchBank(ModelAndView mv, HttpServletRequest request) {
 
 			
 			List<Vender> list =null;
 			  
 			  list=vs.selectBankList();
 			
-			System.out.println("업종코드 출력되니1"+list);
+			System.out.println("은행코드 출력되니1"+list);
 			mv.addObject("data",list);
 			mv.setViewName("jsonView");
 			
-			System.out.println("업종코드 출력되니"+list);
+			System.out.println("은행코드 출력되니"+list);
 			return mv;
-	  }
+			
+	  }*/
 
 //	  public void searchBank(HttpServletRequest request,HttpServletResponse response, Model m) {
 //		/*
@@ -111,8 +114,26 @@ public class VenderController {
 //			e.printStackTrace();
 //		} 
 //		  
+//		  
+	  public void searchBank(Model m, HttpServletRequest request, HttpServletResponse response) {
+		  List<Vender> data = null;
+		  data= vs.selectBankList();
 		  
+		  request.setAttribute("data", data);
+		  response.setContentType("application/json");
+		  response.setCharacterEncoding("UTF-8");
+		  
+		  String gson = new Gson().toJson(data);
+		  
+		  try {
+			  response.getWriter().write(gson);
+			  
+		  }catch(IOException e) {
+			  e.printStackTrace();
+		  }
+	  }
 }
+
 
 
 

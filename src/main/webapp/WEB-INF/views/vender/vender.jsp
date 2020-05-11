@@ -1126,10 +1126,7 @@ border-radius: 5px;
 	</c:if>
 		</form>
 		<div style="height: 100vh;"></div>
-		<div class="card mb-4">
-			<div class="card-body">When scrolling, the navigation stays at
-				the top of the page. This is the end of the static navigation demo.</div>
-		</div>
+
 	</main>
       <!-- Modal 은행코드 -->
   <div class="modal fade" id="bankModal" role="dialog">

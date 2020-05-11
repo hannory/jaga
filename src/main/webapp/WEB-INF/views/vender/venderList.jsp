@@ -13,9 +13,9 @@
 
     /*  거래처 리스트 전체 컨테이너 */
     .vender-list-main-contain {
-        width:1380px;
+        width:1400px;
         height:1300px;
-        margin-left:30px;
+        margin-left:40px;
     }
 
  
@@ -24,7 +24,7 @@
 
         width:1300px;
         height: auto;
-        margin-left:50px;
+        margin-left:30px;
         margin-top:10px;
         float:left;
 /*         
@@ -159,17 +159,12 @@ background:white;
 
                 </tbody>
               </table>
-              
-              </div>
         </div>
+              
         
-        <div id="space"></div>
+        	<div style="height: 100vh;"></div>
         
-    		<div style="height: 100vh;"></div>
-		<div class="card mb-4">
-			<div class="card-body">When scrolling, the navigation stays at
-				the top of the page. This is the end of the static navigation demo.</div>
-		</div>
+              </div>
 		</div>
 		</div>
 		</div>
@@ -178,6 +173,7 @@ background:white;
 		</div>
 		</div>
 		
+        <div id="space"></div>
 	</main>
 	<jsp:include page="../common/menubar2.jsp" />
     

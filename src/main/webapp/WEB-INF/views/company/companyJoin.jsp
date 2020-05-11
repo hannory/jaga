@@ -33,6 +33,9 @@
 		border:gray;
 	}
 
+	a{
+	color:black;
+	}
 	.innerLine{
 		width:900px;
 		height:1px;
@@ -923,8 +926,8 @@
 	
 	/* 거래처모달 */ 
 			$("#searchBtn2").click(function(){
-				
-				 $("#typeofbizTable").dataTable({
+
+				$("#typeofbizTable").dataTable({
 
 					 ajax:{
 							'url':'biztypeSearch.lo',
