@@ -346,6 +346,23 @@ public class FinStmtController {
 		}		
 		
 	}
+	
+	@RequestMapping("selectSlipByJournal.fs")
+	public void selectSlipByJournal(FinStmtAccount fsa, HttpServletRequest request, HttpServletResponse response) {
+		fsa.setComCode(((Company)request.getSession().getAttribute("loginCompany")).getCompanyCode());
+		
+		ArrayList list = fss.selectSlipByJournal(fsa);
+		
+		response.setContentType("application/json");
+		
+		try {
+			new Gson().toJson(list, response.getWriter());
+		} catch (JsonIOException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }
 
 

@@ -39,4 +39,6 @@ public interface FinStmtService {
 	HashMap selectCompTrialBal(FinStmtAccount fsa);
 
 	ArrayList<FinStmtAccount> selectSlipByDate(FinStmtAccount fsa);
+
+	ArrayList selectSlipByJournal(FinStmtAccount fsa);
 }

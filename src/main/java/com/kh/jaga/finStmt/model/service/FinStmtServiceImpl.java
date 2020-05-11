@@ -1091,6 +1091,12 @@ public class FinStmtServiceImpl implements FinStmtService {
 		return hmap;
 	}
 
+	@Override
+	public ArrayList selectSlipByJournal(FinStmtAccount fsa) {
+		
+		return fsd.selectSlipByJournal(sqlSession, fsa);
+	}
+
 
 }
 

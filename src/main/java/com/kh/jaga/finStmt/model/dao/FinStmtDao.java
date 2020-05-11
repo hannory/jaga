@@ -56,4 +56,6 @@ public interface FinStmtDao {
 
 	ArrayList selectSlipByDate(SqlSessionTemplate sqlSession, FinStmtAccount fsa);
 
+	ArrayList selectSlipByJournal(SqlSessionTemplate sqlSession, FinStmtAccount fsa);
+
 }
