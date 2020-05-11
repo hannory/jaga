@@ -6,9 +6,10 @@ public class DeemSlip {
 
 	private String DeemSlipCode;		//의제전표pk
 	private String deemedCode;			//의제매입신고서 코드
-	private String venderCode;			//거래처코드
+	private String venderCode;			//거래처코드	/거래처로 gorupby묶어야하나?
 	private String slipCode;			//전표코드
-	private String venderName;			//거래처이름
+	private String venderName;			//거래처이름	
+	private String item;				//vn품명
 	private String bizRegNum;			//사업자번호
 	private String evidenceCode;		//계산서 가 20, 신카면세가 60 /groupby를 이아이로 하자
 	private int proCount;				//매입처수
@@ -19,7 +20,7 @@ public class DeemSlip {
 	public DeemSlip() {}
 
 	public DeemSlip(String deemSlipCode, String deemedCode, String venderCode, String slipCode, String venderName,
-			String bizRegNum, String evidenceCode, int proCount, int count1, BigDecimal purchasePrice,
+			String item, String bizRegNum, String evidenceCode, int proCount, int count1, BigDecimal purchasePrice,
 			BigDecimal deemTaxPrice) {
 		super();
 		DeemSlipCode = deemSlipCode;
@@ -27,6 +28,7 @@ public class DeemSlip {
 		this.venderCode = venderCode;
 		this.slipCode = slipCode;
 		this.venderName = venderName;
+		this.item = item;
 		this.bizRegNum = bizRegNum;
 		this.evidenceCode = evidenceCode;
 		this.proCount = proCount;
@@ -73,6 +75,14 @@ public class DeemSlip {
 
 	public void setVenderName(String venderName) {
 		this.venderName = venderName;
+	}
+
+	public String getItem() {
+		return item;
+	}
+
+	public void setItem(String item) {
+		this.item = item;
 	}
 
 	public String getBizRegNum() {
@@ -126,10 +136,12 @@ public class DeemSlip {
 	@Override
 	public String toString() {
 		return "DeemSlip [DeemSlipCode=" + DeemSlipCode + ", deemedCode=" + deemedCode + ", venderCode=" + venderCode
-				+ ", slipCode=" + slipCode + ", venderName=" + venderName + ", bizRegNum=" + bizRegNum
-				+ ", evidenceCode=" + evidenceCode + ", proCount=" + proCount + ", count1=" + count1
+				+ ", slipCode=" + slipCode + ", venderName=" + venderName + ", item=" + item + ", bizRegNum="
+				+ bizRegNum + ", evidenceCode=" + evidenceCode + ", proCount=" + proCount + ", count1=" + count1
 				+ ", purchasePrice=" + purchasePrice + ", deemTaxPrice=" + deemTaxPrice + "]";
 	}
+
+	
 
 	
 	

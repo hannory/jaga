@@ -35,32 +35,32 @@ WHERE DEEMED_CODE=#{deemedCode}
 	
 	<select id="selectDeemOther" parameterType="DeemOther" resultType="DeemOther">
 	SELECT DIV_CODE
-      ,ASMT_SUM
-      ,ASMT_SCHEDULED
-      ,ASMT_CONF
-      ,TARGET_RATE
-      ,TARGET_AMT
-      ,CURR_PUR_AMT
-      ,DED_AMT
-      ,DEDTAX_RATE
-      ,DEDTAX_AMT
-      ,DEDTAX_SUM
-      ,DEDTAX_SCHEDULED
-      ,DEDTAX_MONTH
-      ,DED_TAXRATE
-      ,DEEMED_CODE
-      ,ASMT1
-      ,ASMT2
-      ,DEEMED_TYPE
-      ,DEDTAX_TOTSUM
-      ,DEDTAX1
-      ,DEDTAX2_SUM
-      ,DEDTAX2_SCHEDULED
-      ,DEDTAX2_MONTH
-      ,DED_TAX
-      ,YEAR1_AMT_SUM
-      ,YEAR1_AMT1
-      ,YEAR1_AMT2
+			,ASMT_SUM
+			,ASMT_SCHEDULED
+			,ASMT_CONF
+			,TARGET_RATE
+			,TARGET_AMT
+			,CURR_PUR_AMT
+			,DED_AMT
+			,DEDTAX_RATE
+			,DEDTAX_AMT
+			,DEDTAX_SUM
+			,DEDTAX_SCHEDULED
+			,DEDTAX_MONTH
+			,DED_TAXRATE1
+			,DEEMED_CODE
+			,ASMT1
+			,ASMT2
+			,DEEMED_TYPE
+			,DEDTAX_TOTSUM
+			,DEDTAX1
+			,DEDTAX2_SUM
+			,DEDTAX2_SCHEDULED
+			,DEDTAX2_MONTH
+			,DED_TAX_LE
+			,YEAR1_AMT_SUM
+			,YEAR1_AMT1
+			,YEAR1_AMT2
 FROM DF_AGRI_PROD
 WHERE DEEMED_CODE=#{deemedCode}
 	</select>
@@ -79,5 +79,113 @@ WHERE DEEMED_CODE=#{deemedCode}
       ,DEEM_TAX_PRICE
 FROM DEEM_SLIP
 WHERE DEEMED_CODE=#{deemedCode}
+	</select>
+	
+	<update id="updateDeadLineCenDeem" parameterType="Deem">
+	UPDATE DEEMED_INPUT_TAX 
+	SET DEADLINE='N' 
+	WHERE DEEMED_CODE=#{deemedCode} 
+	AND DEADLINE='Y'
+	</update>
+	<update id="updateDeem" parameterType="Deem">
+	UPDATE DEEMED_INPUT_TAX
+	SET DEADLINE='Y'
+	WHERE DEEMED_CODE=#{deemedCode}
+	</update>
+	
+	<select id="selectListDeemSlip" parameterType="java.util.HashMap" resultType="DeemSlip">
+	
+SELECT PURCHASE_PRICE
+	, COUNT1
+	, D.VENDER_CODE AS VENDER_CODE
+	, V.VENDER_NAME AS VENDER_NAME
+	, V.BIZ_REG_NUM AS BIZ_REG_NUM
+	, D.EVIDENCE_CODE AS EVIDENCE_CODE
+	,D.ITEM AS ITEM
+FROM VENDER V
+JOIN (SELECT SUM(J.PRICE) AS PURCHASE_PRICE, COUNT(*) AS COUNT1,VENDER_CODE, S.EVIDENCE_CODE,S.ITEM
+FROM JOURNALIZE J
+JOIN (SELECT SLIP_CODE
+            ,SLIP_DIVISION
+            ,DIVISION
+            ,SLIP_DATE
+            ,EVIDENCE_CODE
+            ,SUPPLY_VALUE
+            ,VALUE_TAX
+            ,DEEMED_STATUS
+            ,RESOLUTION_CODE
+            ,BRIEF
+            ,ITEM
+            ,COM_CODE
+            ,DATE_SLIP_CODE
+        FROM SLIP
+        WHERE DEEMED_STATUS='Y'
+        AND DIVISION='매입'
+        AND COM_CODE=#{Receiption.comCode}
+        AND SLIP_DATE BETWEEN #{Receiption.slipDate} AND#{endDate})S ON(S.SLIP_CODE=J.SLIP_CODE)
+WHERE DEBIT_CREDIT='차변'
+GROUP BY VENDER_CODE, EVIDENCE_CODE,ITEM)D ON(V.VENDER_CODE=D.VENDER_CODE)
+	
+	
+	</select>
+	
+	<insert id="insertDeem" parameterType="Deem">
+	INSERT INTO DEEMED_INPUT_TAX VALUES(SEQ_DEEMED_INPUT_TAX.NEXTVAL,#{vatTerm},'면세농산물',#{yearOfAttr},'N',#{comCode})
+	</insert>
+	<select id="selectDeemedCode" resultType="string">
+	SELECT SEQ_DEEMED_INPUT_TAX.CURRVAL FROM DUAL
+	</select>
+	
+	<insert id="insertDeemSlip" parameterType="DeemSlip">
+	INSERT INTO DEEM_SLIP 
+	VALUES(#{deemedCode},SEQ_DEEM_SLIP.NEXTVAL,
+	#{venderCode},#{slipCode},#{venderName},#{bizRegNum},
+	#{evidenceCode},#{proCount},#{count1},#{purchasePrice},#{deemTaxPrice})
+	</insert>
+	<insert id="insertDeemPro" parameterType="DeemPro">
+	INSERT INTO FARM_FISH_PUR VALUES(SEQ_FARM_FISH_PUR.NEXTVAL,
+	#{numofTxn},#{prodName},#{countFf},#{purchasePrice},#{deemedCode},
+	#{venderCode},#{bizRegNum},#{venderName})
+	</insert>
+	<select id="selectAsmt" parameterType="java.util.HashMap" resultType="bigdecimal">
+	SELECT SUM(SUPPLY_VALUE) 
+  FROM SLIP
+  WHERE COM_CODE=#{Receiption.comCode}
+  AND DIVISION='매출'
+  AND SLIP_DIVISION='매입매출'
+  AND EVIDENCE_CODE IN(10,50,70,90,100)
+  AND SLIP_DATE BETWEEN #{Receiption.slipDate} AND #{endDate}
+	
+	</select>
+	<insert id="insertDeemOther" parameterType="DeemOther">
+	INSERT INTO DF_AGRI_PROD VALUES(SEQ_DF_AGRI_PROD.NEXTVAL,#{asmtSum},#{asmtScheduled},#{asmtConf},#{targetRate},#{targetAmt},#{currPurAmt},#{dedAmt},#{dedtaxRate},#{dedtaxAmt},#{dedtaxSum},#{dedtaxScheduled},#{dedtaxMonth},#{dedTaxrate1},#{deemedCode},#{asmt1},#{asmt2},'면세농산물',#{dedtaxTotsum},#{dedtax1},#{dedtax2Sum},#{dedtax2Scheduled},#{dedtax2Month},#{dedTaxLe},#{year1AmtSum},#{year1Amt1},#{year1Amt2})
+	</insert>
+	
+	<select id="selectFarm" parameterType="java.util.HashMap" resultType="DeemPro">
+	SELECT PURCHASE_PRICE, COUNT1 AS COUNTfF, D.VENDER_CODE,V.VENDER_NAME, V.BIZ_REG_NUM,D.EVIDENCE_CODE,D.ITEM AS PRODNAME
+FROM VENDER V
+JOIN (SELECT SUM(J.PRICE) AS PURCHASE_PRICE, COUNT(*) AS COUNT1,VENDER_CODE, S.EVIDENCE_CODE,S.ITEM
+FROM JOURNALIZE J
+JOIN (SELECT SLIP_CODE
+            ,SLIP_DIVISION
+            ,DIVISION
+            ,SLIP_DATE
+            ,EVIDENCE_CODE
+            ,SUPPLY_VALUE
+            ,VALUE_TAX
+            ,DEEMED_STATUS
+            ,RESOLUTION_CODE
+            ,BRIEF
+            ,ITEM
+            ,COM_CODE
+            ,DATE_SLIP_CODE
+        FROM SLIP
+        WHERE DEEMED_STATUS='Y'
+        AND DIVISION='매입'
+        AND COM_CODE=#{Receiption.comCode}
+        AND SLIP_DATE BETWEEN #{Receiption.slipDate} AND #{endDate})S ON(S.SLIP_CODE=J.SLIP_CODE)
+WHERE DEBIT_CREDIT='차변'
+AND VENDER_CODE = #{DeemPro.venderCode}
+GROUP BY VENDER_CODE, EVIDENCE_CODE,ITEM)D ON(V.VENDER_CODE=D.VENDER_CODE)
 	</select>
   </mapper>
