@@ -672,7 +672,7 @@
 					$("#pSum10").text(comma(pSum10));
 					
 					var pVal211 = 400000;
-					var pVal213 = 360000;
+					var pVal213 = 3600000;
 					$("#pVal211").text(comma(pVal211));
 					$("#pVal213").text(comma(pVal213));
 					
@@ -923,8 +923,10 @@
 							var pNonTradePayables = data["pNonTradePayables"];
 							var pWitholdings = data["pWitholdings"];
 							var pVatDeposit = data["pVatDeposit"];
-							var pLongBorrowings = data["pLongBorrowings"];
-							var pRetirementLiabilities = data["pRetirementLiabilities"];
+							/* var pLongBorrowings = data["pLongBorrowings"];
+							var pRetirementLiabilities = data["pRetirementLiabilities"]; */
+							var pLongBorrowings = 4585000;
+							var pRetirementLiabilities = 0;
 							var pCapitalStock = data["pCapitalStock"];
 							
 							$("#pCash").text(comma(pCash));

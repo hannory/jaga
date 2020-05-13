@@ -622,7 +622,7 @@
 					$("#pSum10").text(comma(pSum10));
 					
 					var pVal211 = 400000;
-					var pVal213 = 360000;
+					var pVal213 = 3600000;
 					$("#pVal211").text(comma(pVal211));
 					$("#pVal213").text(comma(pVal213));
 					
