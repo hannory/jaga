@@ -218,19 +218,22 @@ public class FinStmtServiceImpl implements FinStmtService {
 		ArrayList<Integer> accountArr = new ArrayList<Integer>();
 		
 		//재무상태표 ------------------자산
+		//현금과 현금성 자산
 		if(accountClass.equals("Cash")) {
-			accountArr.add(10100);
-			accountArr.add(10200);
-			accountArr.add(10300);
-			accountArr.add(10400);
+			accountArr.add(10100);		//현금
+			accountArr.add(10200);		//당좌예금
+			accountArr.add(10300);		//보통예끔
+			accountArr.add(10400);		//기타제예금
+		//단기투자자산
 		} else if(accountClass.equals("ShortTermInv")) {
-			accountArr.add(10500);
-			accountArr.add(10600);
-			accountArr.add(10700);
+			accountArr.add(10500);		//정기예적금
+			accountArr.add(10600);		//기타단기금융상품
+			accountArr.add(10700);		//유가증권
+		//매출채권
 		} else if(accountClass.equals("AccountRecievable")) {
-			accountArr.add(10800);
-			accountArr.add(11000);
-			accountArr.add(11200);
+			accountArr.add(10800);		//외상매출금
+			accountArr.add(11000);		//받을어음
+			accountArr.add(11200);		//공사미수금
 		} else if(accountClass.equals("NonTradeRecievable")) {
 			accountArr.add(12000);
 		} else if(accountClass.equals("VatPayment")) {

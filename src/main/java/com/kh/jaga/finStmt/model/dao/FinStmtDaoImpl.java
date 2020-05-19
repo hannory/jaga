@@ -18,12 +18,6 @@ import com.kh.jaga.finStmt.model.vo.MfrgStmt;
 public class FinStmtDaoImpl implements FinStmtDao {
 
 	@Override
-	public int insertIncomeStmt(SqlSessionTemplate sqlSession, IncomeStmt i) {
-		
-		return sqlSession.insert("FinStmt.insertIncomeStmt", i);
-	}
-
-	@Override
 	public ArrayList selectSlip(SqlSessionTemplate sqlSession, FinStmtAccount fsa) {
 		
 		ArrayList list = (ArrayList) sqlSession.selectList("FinStmt.selectSlip", fsa);
@@ -139,6 +133,12 @@ public class FinStmtDaoImpl implements FinStmtDao {
 	public int updateIncomeStmt(SqlSessionTemplate sqlSession, IncomeStmt is) {
 		
 		return sqlSession.update("FinStmt.updateIncomeStmt", is);
+	}
+	
+	@Override
+	public int insertIncomeStmt(SqlSessionTemplate sqlSession, IncomeStmt i) {
+		
+		return sqlSession.insert("FinStmt.insertIncomeStmt", i);
 	}
 
 	@Override
