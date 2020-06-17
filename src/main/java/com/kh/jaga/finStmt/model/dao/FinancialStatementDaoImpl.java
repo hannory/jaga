@@ -15,7 +15,7 @@ import com.kh.jaga.finStmt.model.vo.FinStmtAccount;
 import com.kh.jaga.finStmt.model.vo.MfrgStmt;
 
 @Repository
-public class FinStmtDaoImpl implements FinStmtDao {
+public class FinancialStatementDaoImpl implements FinancialStatementDao {
 
 	@Override
 	public ArrayList selectSlip(SqlSessionTemplate sqlSession, FinStmtAccount fsa) {

@@ -153,9 +153,6 @@
 </head>
 <body>
 	<jsp:include page="../common/menubar.jsp" />
-	<%-- <c:set var="contextPath"
-		value="${ pageContext.servletContext.contextPath }"
-		scope="application" /> --%>
 	<div id="loading-div">
         <img id="loading-image" src="${ contextPath }/resources/images/loading36.gif" alt="Loading..." />
     </div>

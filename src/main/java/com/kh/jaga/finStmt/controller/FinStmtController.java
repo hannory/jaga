@@ -20,7 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
 import com.kh.jaga.company.model.vo.Company;
-import com.kh.jaga.finStmt.model.service.FinStmtService;
+import com.kh.jaga.finStmt.model.service.FinancialStatementService;
 import com.kh.jaga.finStmt.model.vo.FinStmtAccount;
 import com.kh.jaga.finStmt.model.vo.IncomeStmt;
 import com.kh.jaga.finStmt.model.vo.FinStmtAccount;
@@ -36,7 +36,7 @@ import net.sf.json.JSONObject;
 @Controller
 public class FinStmtController {
 	@Autowired
-	private FinStmtService fss;
+	private FinancialStatementService fss;
 	@Autowired
 	private FinStmtAccount fsa;
 	

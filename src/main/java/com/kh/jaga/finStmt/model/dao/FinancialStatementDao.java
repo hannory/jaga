@@ -10,7 +10,7 @@ import com.kh.jaga.finStmt.model.vo.IncomeStmt;
 import com.kh.jaga.finStmt.model.vo.FinStmtAccount;
 import com.kh.jaga.finStmt.model.vo.MfrgStmt;
 
-public interface FinStmtDao {
+public interface FinancialStatementDao {
 
 	int insertIncomeStmt(SqlSessionTemplate sqlSession, IncomeStmt i);
 

@@ -8,7 +8,7 @@ import com.kh.jaga.finStmt.model.vo.IncomeStmt;
 import com.kh.jaga.finStmt.model.vo.FinStmtAccount;
 import com.kh.jaga.finStmt.model.vo.MfrgStmt;
 
-public interface FinStmtService {
+public interface FinancialStatementService {
 
 	int insertIncomeStmt(IncomeStmt i);
 

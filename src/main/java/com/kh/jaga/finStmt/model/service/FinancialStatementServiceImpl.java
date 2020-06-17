@@ -14,17 +14,17 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.kh.jaga.finStmt.model.dao.FinStmtDao;
-import com.kh.jaga.finStmt.model.dao.FinStmtDaoImpl;
+import com.kh.jaga.finStmt.model.dao.FinancialStatementDao;
+import com.kh.jaga.finStmt.model.dao.FinancialStatementDaoImpl;
 import com.kh.jaga.finStmt.model.vo.FinStmtAccount;
 import com.kh.jaga.finStmt.model.vo.IncomeStmt;
 import com.kh.jaga.finStmt.model.vo.FinStmtAccount;
 import com.kh.jaga.finStmt.model.vo.MfrgStmt;
 
 @Service
-public class FinStmtServiceImpl implements FinStmtService {
+public class FinancialStatementServiceImpl implements FinancialStatementService {
 	@Autowired
-	private FinStmtDao fsd;
+	private FinancialStatementDao fsd;
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	@Autowired
